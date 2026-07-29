@@ -1,6 +1,6 @@
-/* NEXLAB Beta 0.26.41 — navegação Push sincronizada com a prontidão real do aplicativo. */
+/* NEXLAB Beta 0.26.43 — navegação Push sincronizada com a prontidão real do aplicativo. */
 (()=>{
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.41',revision:'beta-0-26-41-marketing-single-create-action',homologationRevision:'beta-0-26-41-marketing-single-create-action'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.43',revision:'beta-0-26-43-central-atividades-operacional',homologationRevision:'beta-0-26-43-central-atividades-operacional'});
   if(globalThis.__NEXLAB_PUSH_NAVIGATION__?.version===BUILD.version)return;
   const VERSION=BUILD.version;
   const BUILD_REVISION=BUILD.revision;
