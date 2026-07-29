@@ -1,12 +1,12 @@
 (function(){
   'use strict';
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.39',revision:'beta-0-26-39-version-labels-chronology-rpc-governance',homologationRevision:'beta-0-26-39-version-labels-chronology-rpc-governance'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.40',revision:'beta-0-26-40-marketing-mobile-compact-calendar',homologationRevision:'beta-0-26-40-marketing-mobile-compact-calendar'});
   const VERSION=BUILD.version;
   const BUILD_REVISION=BUILD.revision;
-  const REVISION=BUILD.homologationRevision||'beta-0-26-39-version-labels-chronology-rpc-governance';
+  const REVISION=BUILD.homologationRevision||'beta-0-26-40-marketing-mobile-compact-calendar';
   if(globalThis.__NEXLAB_DEVICE_HOMOLOGATION__?.revision===REVISION)return;
   const EVIDENCE_KEY='nexlab:device-homologation:'+VERSION+':'+BUILD_REVISION;
-  const RPC='nexlab_record_device_homologation_v02639';
+  const RPC='nexlab_record_device_homologation_v02640';
   const flag=(name)=>{try{return new URL(location.href).searchParams.get(name)==='1';}catch{return false;}};
   const syncRequested=()=>flag('nexlabHomologationSync');
   const pushTestRequested=()=>flag('nexlabPushTest');

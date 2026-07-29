@@ -2,8 +2,8 @@
   'use strict';
 
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({
-    version:'0.26.39',
-    revision:'beta-0-26-39-version-labels-chronology-rpc-governance'
+    version:'0.26.40',
+    revision:'beta-0-26-40-marketing-mobile-compact-calendar'
   });
   if(globalThis.__NEXLAB_PUSH_CONSENT__?.revision===BUILD.revision)return;
 

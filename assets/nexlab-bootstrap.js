@@ -2,7 +2,7 @@
   if (window.__NEXLAB_BOOTSTRAP_V26_7__) return;
   window.__NEXLAB_BOOTSTRAP_V26_7__ = true;
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.39',release:'Beta',revision:'beta-0-26-39-version-labels-chronology-rpc-governance',assetRevision:'app-beta-0-26-39-version-labels-chronology-rpc-governance',cacheName:'nexlab-beta-0-26-39-version-labels-chronology-rpc-governance',generatedAt:'2026-07-29T19:46:00Z'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.40',release:'Beta',revision:'beta-0-26-40-marketing-mobile-compact-calendar',assetRevision:'app-beta-0-26-40-marketing-mobile-compact-calendar',cacheName:'nexlab-beta-0-26-40-marketing-mobile-compact-calendar',generatedAt:'2026-07-29T20:38:44Z'});
   const APP_VERSION = BUILD_IDENTITY.version;
   const APP_RELEASE = BUILD_IDENTITY.release;
   const APP_REVISION = BUILD_IDENTITY.revision;
@@ -293,8 +293,8 @@
 
 
   const OBSERVABILITY_VERSION = APP_VERSION;
-  const OBSERVABILITY_QUEUE_KEY = 'nexlab:observability:queue:v0.26.39';
-  const OBSERVABILITY_DEDUP_KEY = 'nexlab:observability:dedup:v0.26.39';
+  const OBSERVABILITY_QUEUE_KEY = 'nexlab:observability:queue:v0.26.40';
+  const OBSERVABILITY_DEDUP_KEY = 'nexlab:observability:dedup:v0.26.40';
   const OBSERVABILITY_RPC = 'nexlab_record_client_error_v26_7_4';
   const OBSERVABILITY_MAX_QUEUE = 20;
   const OBSERVABILITY_DEDUP_MS = 5 * 60 * 1000;
@@ -634,8 +634,8 @@
   }
 
 
-  const USER_ERROR_CONTEXT_KEY = 'nexlab:feedback-assist:context:v0.26.39';
-  const USER_ERROR_STATE_KEY = 'nexlab:user-error-state:v0.26.39';
+  const USER_ERROR_CONTEXT_KEY = 'nexlab:feedback-assist:context:v0.26.40';
+  const USER_ERROR_STATE_KEY = 'nexlab:user-error-state:v0.26.40';
   const USER_ERROR_MESSAGE = 'Erro, tente novamente. Se o erro persistir, informe o problema no Feedback para ser corrigido.';
   const USER_ERROR_REPEAT_MS = 90 * 1000;
   const USER_ERROR_BURST_MS = 5 * 60 * 1000;
@@ -939,7 +939,7 @@
     }
   } catch {}
 
-  const PERFORMANCE_ALERT_STATE_KEY = 'nexlab:performance-alert-state:v0.26.39';
+  const PERFORMANCE_ALERT_STATE_KEY = 'nexlab:performance-alert-state:v0.26.40';
   const PERFORMANCE_ALERT_MIN_INTERVAL_MS = 10 * 60 * 1000;
   let performanceAlertState = observabilityReadJson(PERFORMANCE_ALERT_STATE_KEY, {
     degraded: false,
@@ -1041,7 +1041,7 @@
     performanceState.capturedAt = new Date().toISOString();
     window.__NEXLAB_PERFORMANCE__ = Object.freeze({ ...performanceState });
     try {
-      sessionStorage.setItem('nexlab:performance:v0.26.39', JSON.stringify(performanceState));
+      sessionStorage.setItem('nexlab:performance:v0.26.40', JSON.stringify(performanceState));
     } catch {}
     emit('nexlab:performance-metrics', { ...performanceState });
   }
@@ -1148,19 +1148,19 @@
   });
 })();
 
-/* NEXLAB Beta 0.26.39 — recursos pós-abertura com nova tentativa controlada. */
+/* NEXLAB Beta 0.26.40 — recursos pós-abertura com nova tentativa controlada. */
 (function(){
   'use strict';
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||{};
-  const VERSION=BUILD.version||'0.26.39';
-  const REVISION=BUILD.revision||'beta-0-26-39-version-labels-chronology-rpc-governance';
+  const VERSION=BUILD.version||'0.26.40';
+  const REVISION=BUILD.revision||'beta-0-26-40-marketing-mobile-compact-calendar';
   if(globalThis.__NEXLAB_POST_STARTUP__?.revision===REVISION)return;
   const MAX_ATTEMPTS=3;
   const sources=(BUILD.resources?.postStartup||[
     'assets/nexlab-vapid-rotation.js',
     'assets/nexlab-push-consent.js',
     'assets/nexlab-feedback-evidence.js'
-  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-39-version-labels-chronology-rpc-governance'));
+  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-40-marketing-mobile-compact-calendar'));
   const state={version:VERSION,revision:REVISION,status:'scheduled',loaded:[],errors:[],attempts:{},lastReason:'',startedAt:null,completedAt:null};
   const sourceState=new Map(sources.map(src=>[src,{status:'pending',attempts:0,lastError:''}]));
   let active=null;

@@ -1,5 +1,5 @@
 importScripts('./assets/nexlab-release-identity.js');
-const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.39',release:'Beta',revision:'beta-0-26-39-version-labels-chronology-rpc-governance',assetRevision:'app-beta-0-26-39-version-labels-chronology-rpc-governance',cacheName:'nexlab-beta-0-26-39-version-labels-chronology-rpc-governance',generatedAt:'2026-07-29T19:46:00Z'});
+const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.40',release:'Beta',revision:'beta-0-26-40-marketing-mobile-compact-calendar',assetRevision:'app-beta-0-26-40-marketing-mobile-compact-calendar',cacheName:'nexlab-beta-0-26-40-marketing-mobile-compact-calendar',generatedAt:'2026-07-29T20:38:44Z'});
 const APP_VERSION=BUILD_IDENTITY.version;
 const APP_RELEASE=BUILD_IDENTITY.release;
 const APP_REVISION=BUILD_IDENTITY.revision;
@@ -435,8 +435,8 @@ self.addEventListener('push',(event)=>{
   const url=safePushDestination(source.url,targetTab,notificationId,entityId,entityType,'');
   event.waitUntil(self.registration.showNotification(String(payload.title||'NEXLAB').slice(0,120),{
     body:String(payload.body||'Você recebeu uma nova notificação.').slice(0,500),
-    icon:'./icons/nexlab-192.png?v=brand-r39',
-    badge:'./icons/nexlab-192.png?v=brand-r39',
+    icon:'./icons/nexlab-192.png?v=brand-r40',
+    badge:'./icons/nexlab-192.png?v=brand-r40',
     tag:String(payload.tag||`nexlab-${notificationId||Date.now()}`).slice(0,160),
     data:{url,targetTab,notificationId,entityId,entityType}
   }));
