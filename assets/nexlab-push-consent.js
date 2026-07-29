@@ -2,8 +2,8 @@
   'use strict';
 
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({
-    version:'0.26.40',
-    revision:'beta-0-26-40-marketing-mobile-compact-calendar'
+    version:'0.26.41',
+    revision:'beta-0-26-41-marketing-single-create-action'
   });
   if(globalThis.__NEXLAB_PUSH_CONSENT__?.revision===BUILD.revision)return;
 

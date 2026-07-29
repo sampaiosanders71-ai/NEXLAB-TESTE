@@ -1,6 +1,6 @@
-/* NEXLAB Beta 0.26.40 — navegação Push sincronizada com a prontidão real do aplicativo. */
+/* NEXLAB Beta 0.26.41 — navegação Push sincronizada com a prontidão real do aplicativo. */
 (()=>{
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.40',revision:'beta-0-26-40-marketing-mobile-compact-calendar',homologationRevision:'beta-0-26-40-marketing-mobile-compact-calendar'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.41',revision:'beta-0-26-41-marketing-single-create-action',homologationRevision:'beta-0-26-41-marketing-single-create-action'});
   if(globalThis.__NEXLAB_PUSH_NAVIGATION__?.version===BUILD.version)return;
   const VERSION=BUILD.version;
   const BUILD_REVISION=BUILD.revision;

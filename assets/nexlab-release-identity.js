@@ -1,15 +1,15 @@
 (function(root){
   'use strict';
   const identity=Object.freeze({
-    version:'0.26.40',
-    displayVersion:'NEXLAB Beta 0.26.40',
+    version:'0.26.41',
+    displayVersion:'NEXLAB Beta 0.26.41',
     release:'Beta',
     channel:'beta',
-    revision:'beta-0-26-40-marketing-mobile-compact-calendar',
-    homologationRevision:'beta-0-26-40-marketing-mobile-compact-calendar',
-    assetRevision:'app-beta-0-26-40-marketing-mobile-compact-calendar',
-    cacheName:'nexlab-beta-0-26-40-marketing-mobile-compact-calendar',
-    generatedAt:'2026-07-29T20:38:44Z',
+    revision:'beta-0-26-41-marketing-single-create-action',
+    homologationRevision:'beta-0-26-41-marketing-single-create-action',
+    assetRevision:'app-beta-0-26-41-marketing-single-create-action',
+    cacheName:'nexlab-beta-0-26-41-marketing-single-create-action',
+    generatedAt:'2026-07-29T21:15:00Z',
     resources:Object.freeze({
       entry:Object.freeze({main:'assets/index-beta-0-26-12.js',vendor:'assets/nexlab-vendor-beta-0-26-12.js',shared:'assets/nexlab-app-shared-beta-0-26-12.js',feature:'assets/nexlab-feature-modules-beta-0-26-12.js',export:'assets/nexlab-export-vendor-beta-0-26-12.js'}),
       initial:Object.freeze([
