@@ -1,12 +1,12 @@
-/* NEXLAB Beta 0.26.43 — navegação Push sincronizada com a prontidão real do aplicativo. */
+/* NEXLAB Beta 0.26.44 — navegação Push sincronizada com a prontidão real do aplicativo. */
 (()=>{
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.43',revision:'beta-0-26-43-central-atividades-operacional',homologationRevision:'beta-0-26-43-central-atividades-operacional'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.44',revision:'beta-0-26-44-atividades-sistema-unificadas',homologationRevision:'beta-0-26-44-atividades-sistema-unificadas'});
   if(globalThis.__NEXLAB_PUSH_NAVIGATION__?.version===BUILD.version)return;
   const VERSION=BUILD.version;
   const BUILD_REVISION=BUILD.revision;
   const HOMOLOGATION_REVISION=BUILD.homologationRevision||BUILD_REVISION;
   const EVIDENCE_KEY='nexlab:device-homologation:'+VERSION+':'+BUILD_REVISION;
-  const ALLOWED_TABS=new Set(['dashboard','pendencias','agenda','notificacoes','participantes','permissoes','equipes','perfil','projetos','inventario','patrimonio','estoque','reserva','marketing','eventos','mural','feedback','relatorios','saude-sistema','logs']);
+  const ALLOWED_TABS=new Set(['dashboard','pendencias','agenda','notificacoes','participantes','permissoes','equipes','perfil','projetos','inventario','patrimonio','estoque','reserva','marketing','eventos','mural','feedback','relatorios','saude-sistema','logs','atividades-sistema']);
   const RECENT_TTL_MS=10000;
   const CONFIRM_TIMEOUT_MS=4500;
   const MAX_DELIVERY_ATTEMPTS=2;
