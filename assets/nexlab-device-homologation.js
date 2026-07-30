@@ -1,12 +1,12 @@
 (function(){
   'use strict';
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.46',revision:'beta-0-26-46-inventario-cabecalho-unico',homologationRevision:'beta-0-26-46-inventario-cabecalho-unico'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.47',revision:'beta-0-26-47-projetos-resumo-compacto',homologationRevision:'beta-0-26-47-projetos-resumo-compacto'});
   const VERSION=BUILD.version;
   const BUILD_REVISION=BUILD.revision;
-  const REVISION=BUILD.homologationRevision||'beta-0-26-46-inventario-cabecalho-unico';
+  const REVISION=BUILD.homologationRevision||'beta-0-26-47-projetos-resumo-compacto';
   if(globalThis.__NEXLAB_DEVICE_HOMOLOGATION__?.revision===REVISION)return;
   const EVIDENCE_KEY='nexlab:device-homologation:'+VERSION+':'+BUILD_REVISION;
-  const RPC='nexlab_record_device_homologation_v02646';
+  const RPC='nexlab_record_device_homologation_v02647';
   const flag=(name)=>{try{return new URL(location.href).searchParams.get(name)==='1';}catch{return false;}};
   const syncRequested=()=>flag('nexlabHomologationSync');
   const pushTestRequested=()=>flag('nexlabPushTest');

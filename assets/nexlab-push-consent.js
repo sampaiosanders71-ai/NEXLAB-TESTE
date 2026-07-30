@@ -2,8 +2,8 @@
   'use strict';
 
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({
-    version:'0.26.46',
-    revision:'beta-0-26-46-inventario-cabecalho-unico'
+    version:'0.26.47',
+    revision:'beta-0-26-47-projetos-resumo-compacto'
   });
   if(globalThis.__NEXLAB_PUSH_CONSENT__?.revision===BUILD.revision)return;
 
