@@ -6146,7 +6146,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
 .nexlab-prompt-field[data-mode="code"]{font-size:22px;font-weight:900;letter-spacing:.35em;text-align:center;font-variant-numeric:tabular-nums;}
 
 
-/* Beta 0.26.44 — aviso global de erro e Feedback assistido */
+/* Beta 0.26.45 — aviso global de erro e Feedback assistido */
 .nexlab-user-error-backdrop{
   position:fixed;inset:0;z-index:2147483100;display:flex;align-items:center;justify-content:center;
   padding:18px;background:rgba(2,8,23,.62);backdrop-filter:blur(10px);
@@ -6184,7 +6184,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   .nexlab-v261-partial-actions{width:100%;display:grid;grid-template-columns:1fr 1fr;}
 }
 
-/* Beta 0.26.44 — consentimento guiado de notificações Push */
+/* Beta 0.26.45 — consentimento guiado de notificações Push */
 html.nexlab-push-consent-open,
 html.nexlab-push-consent-open body{overflow:hidden}
 .nexlab-push-consent-overlay{position:fixed;inset:0;z-index:2147483300;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(2,12,27,.66);backdrop-filter:blur(8px)}
@@ -6204,7 +6204,7 @@ html.nexlab-push-consent-open body{overflow:hidden}
 @media(max-width:520px){.nexlab-push-consent-overlay{align-items:flex-end;padding:12px}.nexlab-push-consent-dialog{padding:23px 20px;border-radius:24px}.nexlab-push-consent-actions{display:grid;grid-template-columns:1fr}.nexlab-push-consent-actions button{width:100%}.nexlab-push-consent-primary{grid-row:1}.nexlab-push-consent-secondary{grid-row:2}}
 @media(prefers-reduced-motion:reduce){.nexlab-push-consent-actions button{transition:none}}
 
-/* Beta 0.26.44 — evidências visuais privadas e restritas ao Feedback */
+/* Beta 0.26.45 — evidências visuais privadas e restritas ao Feedback */
 .nexlab-evidence-uploader{border:1px solid #dbe3ef;border-radius:18px;padding:16px;background:#f8fafc;display:grid;gap:12px}
 .nexlab-evidence-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
 .nexlab-evidence-heading h4{margin:0;color:#0e1f3d;font-size:.85rem;font-weight:850}
@@ -6228,7 +6228,7 @@ html.nexlab-push-consent-open body{overflow:hidden}
 .nexlab-evidence-global-status{position:fixed;right:18px;bottom:18px;z-index:10050;max-width:min(420px,calc(100vw - 36px));border-radius:14px;padding:12px 14px;background:#0e1f3d;color:#fff;box-shadow:0 16px 38px rgba(15,23,42,.25);font-size:.76rem;font-weight:750;line-height:1.45}.nexlab-evidence-global-status[data-type="error"]{background:#8f1d1d}.nexlab-evidence-global-status[data-type="success"]{background:#12633d}
 @media(max-width:640px){.nexlab-evidence-heading,.nexlab-evidence-admin-item{align-items:stretch}.nexlab-evidence-admin-actions{width:100%}.nexlab-evidence-admin-actions button{flex:1}.nexlab-evidence-global-status{left:18px;right:18px}}
 
-/* Beta 0.26.44 — clareza visual, campos consistentes e ajuda contextual */
+/* Beta 0.26.45 — clareza visual, campos consistentes e ajuda contextual */
 .nexlab-module-help-host{position:relative!important;padding-right:2.55rem!important;}
 .nexlab-module-help-button{
   position:absolute!important;top:.38rem!important;right:.38rem!important;z-index:8!important;
@@ -6301,7 +6301,7 @@ main :where(input,textarea)::placeholder{color:#7C8A9E!important;opacity:1!impor
   .nexlab-module-help-body{padding:1rem 1rem calc(1.2rem + env(safe-area-inset-bottom));}
 }
 
-/* Beta 0.26.44 — fluxo único e simplificado de criação no Marketing */
+/* Beta 0.26.45 — fluxo único e simplificado de criação no Marketing */
 .nexlab-marketing-reset .nexlab-mkt-day[data-nexlab-create-enabled="true"]{
   cursor:pointer;
   transition:background-color .15s ease,border-color .15s ease,box-shadow .15s ease;
@@ -6339,7 +6339,7 @@ main :where(input,textarea)::placeholder{color:#7C8A9E!important;opacity:1!impor
 }
 
 
-/* NEXLAB Beta 0.26.44 — Central de Atividades compacta e responsiva */
+/* NEXLAB Beta 0.26.45 — Central de Atividades compacta e responsiva */
 .nexlab-activity-toolbar{
   display:grid !important;
   grid-template-columns:minmax(20rem,1fr) minmax(11.75rem,13.25rem) auto !important;
@@ -6409,10 +6409,10 @@ main :where(input,textarea)::placeholder{color:#7C8A9E!important;opacity:1!impor
   .nexlab-activity-source-filter,.nexlab-activity-selection-toggle{width:100%}
 }
 
-/* Beta 0.26.44 — Usuários usam somente avatar; evidências são exclusivas do Feedback. */
+/* Beta 0.26.45 — Usuários usam somente avatar; evidências são exclusivas do Feedback. */
 body:not([data-nexlab-page="feedback"]) .nexlab-evidence-admin{display:none!important;}
 
-/* NEXLAB Beta 0.26.44 — calendário mensal compacto da Agenda no celular. */
+/* NEXLAB Beta 0.26.45 — calendário mensal compacto da Agenda no celular. */
 @media (max-width: 767px){
   [aria-label="Calendário mensal da Agenda"] .grid.grid-cols-7 button{
     -webkit-tap-highlight-color: transparent;
@@ -6420,7 +6420,7 @@ body:not([data-nexlab-page="feedback"]) .nexlab-evidence-admin{display:none!impo
   }
 }
 
-/* NEXLAB Beta 0.26.44 — Agenda de Marketing compacta no celular */
+/* NEXLAB Beta 0.26.45 — Agenda de Marketing compacta no celular */
 .nexlab-marketing-reset .nexlab-mkt-mobile-calendar{display:none!important;}
 @media(max-width:720px){
   body[data-nexlab-page='marketing'] .nexlab-marketing-reset .nexlab-mkt-agenda{
@@ -6681,7 +6681,7 @@ body:not([data-nexlab-page="feedback"]) .nexlab-evidence-admin{display:none!impo
 }
 
 
-/* NEXLAB Beta 0.26.44 — Atividades do Sistema unificadas */
+/* NEXLAB Beta 0.26.45 — Atividades do Sistema unificadas */
 .nexlab-system-activities__tabs{
   display:flex;gap:.5rem;overflow-x:auto;padding:.35rem;
   border:1px solid rgb(226 232 240);border-radius:1rem;background:rgb(248 250 252);
@@ -6722,4 +6722,157 @@ body:not([data-nexlab-page="feedback"]) .nexlab-evidence-admin{display:none!impo
   .nexlab-system-activities__metric strong{font-size:.9rem}
   .nexlab-system-activities__shortcut{align-items:flex-start;flex-wrap:wrap}
   .nexlab-system-activities__shortcut button{width:100%}
+}
+
+
+/* NEXLAB Beta 0.26.45 — cabeçalhos escuros padronizados em todos os módulos */
+body:not([data-nexlab-page="dashboard"]) main .module-header,
+body[data-nexlab-page="marketing"] main .nexlab-mkt-hero,
+body[data-nexlab-page="inventario"] main .nexlab-inventory-switcher,
+body[data-nexlab-page="notificacoes"] main .nexlab-notifications-module-header{
+  position:relative!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(circle at 0% 0%,rgba(142,209,26,.18),transparent 16rem),
+    radial-gradient(circle at 100% 0%,rgba(255,138,0,.17),transparent 17rem),
+    linear-gradient(135deg,#07162D 0%,#0E1F3D 58%,#08265E 100%)!important;
+  border:1px solid rgba(255,255,255,.10)!important;
+  color:#fff!important;
+  box-shadow:0 18px 42px rgba(7,22,45,.18)!important;
+}
+body:not([data-nexlab-page="dashboard"]) main .module-header::before{
+  display:none!important;
+}
+body:not([data-nexlab-page="dashboard"]) main .module-header::after,
+body[data-nexlab-page="marketing"] main .nexlab-mkt-hero::after,
+body[data-nexlab-page="inventario"] main .nexlab-inventory-switcher::after,
+body[data-nexlab-page="notificacoes"] main .nexlab-notifications-module-header::after{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;
+  right:0!important;
+  bottom:0!important;
+  height:4px!important;
+  background:linear-gradient(90deg,var(--nexlab-green),var(--nexlab-orange),var(--nexlab-blue))!important;
+  pointer-events:none!important;
+}
+body:not([data-nexlab-page="dashboard"]) main .module-header .module-title,
+body:not([data-nexlab-page="dashboard"]) main .module-header .module-header__copy h1,
+body:not([data-nexlab-page="dashboard"]) main .module-header .module-header__copy h2,
+body:not([data-nexlab-page="dashboard"]) main .module-header .module-header__copy h3{
+  color:#fff!important;
+}
+body:not([data-nexlab-page="dashboard"]) main .module-header .module-eyebrow{
+  color:#FDBA74!important;
+}
+body:not([data-nexlab-page="dashboard"]) main .module-header .module-description{
+  color:#CBD5E1!important;
+}
+body:not([data-nexlab-page="dashboard"]) main .module-header .module-header__icon{
+  background:rgba(255,255,255,.10)!important;
+  border-color:rgba(255,255,255,.16)!important;
+  color:#fff!important;
+}
+body:not([data-nexlab-page="dashboard"]) main .module-header .module-header__icon svg{
+  color:#fff!important;
+  stroke:#fff!important;
+}
+body:not([data-nexlab-page="dashboard"]) main .module-header .module-actions button:not([class*="bg-orange"]):not([class*="bg-red"]):not([class*="bg-blue"]):not([class*="bg-green"]):not([class*="bg-lime"]),
+body[data-nexlab-page="notificacoes"] main .nexlab-notifications-module-header button:not([class*="bg-orange"]):not([class*="bg-red"]):not([class*="bg-blue"]):not([class*="bg-green"]):not([class*="bg-lime"]){
+  background:rgba(255,255,255,.09)!important;
+  border-color:rgba(255,255,255,.18)!important;
+  color:#fff!important;
+  box-shadow:none!important;
+}
+body:not([data-nexlab-page="dashboard"]) main .module-header .module-actions button:not([disabled]):hover,
+body[data-nexlab-page="notificacoes"] main .nexlab-notifications-module-header button:not([disabled]):hover{
+  background:rgba(255,255,255,.15)!important;
+  border-color:rgba(255,255,255,.28)!important;
+}
+body:not([data-nexlab-page="dashboard"]) main .module-header .module-actions button :where(span,svg),
+body[data-nexlab-page="notificacoes"] main .nexlab-notifications-module-header button :where(span,svg){
+  color:inherit!important;
+  stroke:currentColor!important;
+}
+body:not([data-nexlab-page="dashboard"]) main .module-header .nexlab-module-help-button{
+  background:transparent!important;
+  color:#FDBA74!important;
+  border-color:#FDBA74!important;
+  box-shadow:none!important;
+}
+body:not([data-nexlab-page="dashboard"]) main .module-header .nexlab-module-help-button:hover{
+  background:rgba(249,115,22,.12)!important;
+  color:#FED7AA!important;
+  border-color:#FED7AA!important;
+}
+
+/* Marketing */
+body[data-nexlab-page="marketing"] main .nexlab-mkt-hero::before{
+  display:none!important;
+}
+body[data-nexlab-page="marketing"] main .nexlab-mkt-hero-copy span{
+  color:#FDBA74!important;
+}
+body[data-nexlab-page="marketing"] main .nexlab-mkt-hero-copy h1{
+  color:#fff!important;
+}
+body[data-nexlab-page="marketing"] main .nexlab-mkt-hero-copy p{
+  color:#CBD5E1!important;
+}
+body[data-nexlab-page="marketing"] main .nexlab-mkt-primary-btn{
+  background:linear-gradient(135deg,var(--nexlab-orange),#FF6B1A)!important;
+  color:#fff!important;
+  box-shadow:0 8px 22px rgba(249,115,22,.25)!important;
+}
+
+/* Estoque e Patrimônio */
+body[data-nexlab-page="inventario"] main .nexlab-inventory-copy span{
+  color:#FDBA74!important;
+}
+body[data-nexlab-page="inventario"] main .nexlab-inventory-copy h1{
+  color:#fff!important;
+}
+body[data-nexlab-page="inventario"] main .nexlab-inventory-copy p{
+  color:#CBD5E1!important;
+}
+body[data-nexlab-page="inventario"] main .nexlab-inventory-tabs{
+  background:rgba(255,255,255,.08)!important;
+  border-color:rgba(255,255,255,.16)!important;
+}
+body[data-nexlab-page="inventario"] main .nexlab-inventory-tab{
+  color:#CBD5E1!important;
+  box-shadow:none!important;
+}
+body[data-nexlab-page="inventario"] main .nexlab-inventory-tab:hover{
+  background:rgba(255,255,255,.10)!important;
+  color:#fff!important;
+}
+body[data-nexlab-page="inventario"] main .nexlab-inventory-tab.is-active{
+  background:linear-gradient(135deg,var(--nexlab-orange),#FF6B1A)!important;
+  color:#fff!important;
+  box-shadow:0 6px 18px rgba(249,115,22,.24)!important;
+}
+
+/* Notificações */
+body[data-nexlab-page="notificacoes"] main .nexlab-notifications-module-header{
+  padding:1.25rem 1.35rem!important;
+  border-radius:1.4rem!important;
+}
+body[data-nexlab-page="notificacoes"] main .nexlab-notifications-module-header h1{
+  color:#fff!important;
+}
+body[data-nexlab-page="notificacoes"] main .nexlab-notifications-module-header p{
+  color:#CBD5E1!important;
+}
+
+@media(max-width:767px){
+  body:not([data-nexlab-page="dashboard"]) main .module-header,
+  body[data-nexlab-page="marketing"] main .nexlab-mkt-hero,
+  body[data-nexlab-page="inventario"] main .nexlab-inventory-switcher,
+  body[data-nexlab-page="notificacoes"] main .nexlab-notifications-module-header{
+    border-radius:1.15rem!important;
+  }
+  body[data-nexlab-page="notificacoes"] main .nexlab-notifications-module-header{
+    padding:1rem!important;
+  }
 }

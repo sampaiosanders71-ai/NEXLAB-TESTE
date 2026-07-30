@@ -1,15 +1,15 @@
 (function(root){
   'use strict';
   const identity=Object.freeze({
-    version:'0.26.44',
-    displayVersion:'NEXLAB Beta 0.26.44',
+    version:'0.26.45',
+    displayVersion:'NEXLAB Beta 0.26.45',
     release:'Beta',
     channel:'beta',
-    revision:'beta-0-26-44-atividades-sistema-unificadas',
-    homologationRevision:'beta-0-26-44-atividades-sistema-unificadas',
-    assetRevision:'app-beta-0-26-44-atividades-sistema-unificadas',
-    cacheName:'nexlab-beta-0-26-44-atividades-sistema-unificadas',
-    generatedAt:'2026-07-29T22:25:00Z',
+    revision:'beta-0-26-45-cabecalhos-escuros-modulos',
+    homologationRevision:'beta-0-26-45-cabecalhos-escuros-modulos',
+    assetRevision:'app-beta-0-26-45-cabecalhos-escuros-modulos',
+    cacheName:'nexlab-beta-0-26-45-cabecalhos-escuros-modulos',
+    generatedAt:'2026-07-30T00:04:01Z',
     resources:Object.freeze({
       entry:Object.freeze({main:'assets/index-beta-0-26-12.js',vendor:'assets/nexlab-vendor-beta-0-26-12.js',shared:'assets/nexlab-app-shared-beta-0-26-12.js',feature:'assets/nexlab-feature-modules-beta-0-26-12.js',export:'assets/nexlab-export-vendor-beta-0-26-12.js'}),
       initial:Object.freeze([
