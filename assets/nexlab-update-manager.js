@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.45',release:'Beta',revision:'beta-0-26-45-cabecalhos-escuros-modulos',generatedAt:'2026-07-30T00:04:01Z',cacheName:'nexlab-beta-0-26-45-cabecalhos-escuros-modulos'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.46',release:'Beta',revision:'beta-0-26-46-inventario-cabecalho-unico',generatedAt:'2026-07-30T00:30:00Z',cacheName:'nexlab-beta-0-26-46-inventario-cabecalho-unico'});
   const CURRENT_VERSION = BUILD_IDENTITY.version;
   const CURRENT_RELEASE = BUILD_IDENTITY.release;
   const CURRENT_REVISION = BUILD_IDENTITY.revision;
