@@ -2,7 +2,7 @@
   if (window.__NEXLAB_BOOTSTRAP_V26_7__) return;
   window.__NEXLAB_BOOTSTRAP_V26_7__ = true;
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.49',release:'Beta',revision:'beta-0-26-49-convite-link-compartilhavel',assetRevision:'app-beta-0-26-49-convite-link-compartilhavel',cacheName:'nexlab-beta-0-26-49-convite-link-compartilhavel',generatedAt:'2026-07-30T03:05:00Z'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.51',release:'Beta',revision:'beta-0-26-51-exclusao-usuarios-cascata-completa',assetRevision:'app-beta-0-26-51-exclusao-usuarios-cascata-completa',cacheName:'nexlab-beta-0-26-51-exclusao-usuarios-cascata-completa',generatedAt:'2026-08-01T13:46:28Z'});
   const APP_VERSION = BUILD_IDENTITY.version;
   const APP_RELEASE = BUILD_IDENTITY.release;
   const APP_REVISION = BUILD_IDENTITY.revision;
@@ -293,8 +293,8 @@
 
 
   const OBSERVABILITY_VERSION = APP_VERSION;
-  const OBSERVABILITY_QUEUE_KEY = 'nexlab:observability:queue:v0.26.49';
-  const OBSERVABILITY_DEDUP_KEY = 'nexlab:observability:dedup:v0.26.49';
+  const OBSERVABILITY_QUEUE_KEY = 'nexlab:observability:queue:v0.26.51';
+  const OBSERVABILITY_DEDUP_KEY = 'nexlab:observability:dedup:v0.26.51';
   const OBSERVABILITY_RPC = 'nexlab_record_client_error_v26_7_4';
   const OBSERVABILITY_MAX_QUEUE = 20;
   const OBSERVABILITY_DEDUP_MS = 5 * 60 * 1000;
@@ -634,8 +634,8 @@
   }
 
 
-  const USER_ERROR_CONTEXT_KEY = 'nexlab:feedback-assist:context:v0.26.49';
-  const USER_ERROR_STATE_KEY = 'nexlab:user-error-state:v0.26.49';
+  const USER_ERROR_CONTEXT_KEY = 'nexlab:feedback-assist:context:v0.26.51';
+  const USER_ERROR_STATE_KEY = 'nexlab:user-error-state:v0.26.51';
   const USER_ERROR_MESSAGE = 'Erro, tente novamente. Se o erro persistir, informe o problema no Feedback para ser corrigido.';
   const USER_ERROR_REPEAT_MS = 90 * 1000;
   const USER_ERROR_BURST_MS = 5 * 60 * 1000;
@@ -764,6 +764,39 @@
     return userErrorNotify(raw, fingerprint);
   }
 
+  async function nexlabFunctionErrorMessageV02651(error, fallback){
+    const fallbackMessage = observabilitySanitize(fallback || 'Não foi possível concluir a operação.', 500)
+      || 'Não foi possível concluir a operação.';
+    const directMessage = observabilitySanitize(error?.message || '', 500);
+    const context = error?.context;
+    let payload = null;
+
+    if (context && (typeof context.json === 'function' || typeof context.text === 'function')) {
+      try {
+        const response = typeof context.clone === 'function' ? context.clone() : context;
+        const contentType = String(response.headers?.get?.('content-type') || '').toLowerCase();
+        if (contentType.includes('application/json') && typeof response.json === 'function') {
+          payload = await response.json();
+        } else if (typeof response.text === 'function') {
+          const rawText = await response.text();
+          try { payload = JSON.parse(rawText); }
+          catch { payload = rawText; }
+        }
+      } catch {}
+    }
+
+    const serverMessage = payload && typeof payload === 'object'
+      ? observabilitySanitize(payload.message || payload.error || '', 500)
+      : observabilitySanitize(payload || '', 500);
+    if (serverMessage) return serverMessage;
+
+    if (directMessage && !/edge function returned a non-2xx status code/i.test(directMessage)) {
+      return directMessage;
+    }
+    return fallbackMessage;
+  }
+
+  window.nexlabFunctionErrorMessage = nexlabFunctionErrorMessageV02651;
   window.nexlabReportUserError = reportDetectedUserError;
   window.__NEXLAB_ERROR_ASSIST__ = Object.freeze({
     version: APP_VERSION,
@@ -939,7 +972,7 @@
     }
   } catch {}
 
-  const PERFORMANCE_ALERT_STATE_KEY = 'nexlab:performance-alert-state:v0.26.49';
+  const PERFORMANCE_ALERT_STATE_KEY = 'nexlab:performance-alert-state:v0.26.51';
   const PERFORMANCE_ALERT_MIN_INTERVAL_MS = 10 * 60 * 1000;
   let performanceAlertState = observabilityReadJson(PERFORMANCE_ALERT_STATE_KEY, {
     degraded: false,
@@ -1041,7 +1074,7 @@
     performanceState.capturedAt = new Date().toISOString();
     window.__NEXLAB_PERFORMANCE__ = Object.freeze({ ...performanceState });
     try {
-      sessionStorage.setItem('nexlab:performance:v0.26.49', JSON.stringify(performanceState));
+      sessionStorage.setItem('nexlab:performance:v0.26.51', JSON.stringify(performanceState));
     } catch {}
     emit('nexlab:performance-metrics', { ...performanceState });
   }
@@ -1148,19 +1181,19 @@
   });
 })();
 
-/* NEXLAB Beta 0.26.49 — recursos pós-abertura com nova tentativa controlada. */
+/* NEXLAB Beta 0.26.51 — recursos pós-abertura com nova tentativa controlada. */
 (function(){
   'use strict';
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||{};
-  const VERSION=BUILD.version||'0.26.49';
-  const REVISION=BUILD.revision||'beta-0-26-49-convite-link-compartilhavel';
+  const VERSION=BUILD.version||'0.26.51';
+  const REVISION=BUILD.revision||'beta-0-26-51-exclusao-usuarios-cascata-completa';
   if(globalThis.__NEXLAB_POST_STARTUP__?.revision===REVISION)return;
   const MAX_ATTEMPTS=3;
   const sources=(BUILD.resources?.postStartup||[
     'assets/nexlab-vapid-rotation.js',
     'assets/nexlab-push-consent.js',
     'assets/nexlab-feedback-evidence.js'
-  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-49-convite-link-compartilhavel'));
+  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-51-exclusao-usuarios-cascata-completa'));
   const state={version:VERSION,revision:REVISION,status:'scheduled',loaded:[],errors:[],attempts:{},lastReason:'',startedAt:null,completedAt:null};
   const sourceState=new Map(sources.map(src=>[src,{status:'pending',attempts:0,lastError:''}]));
   let active=null;

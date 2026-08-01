@@ -1,15 +1,15 @@
 (function(root){
   'use strict';
   const identity=Object.freeze({
-    version:'0.26.49',
-    displayVersion:'NEXLAB Beta 0.26.49',
+    version:'0.26.51',
+    displayVersion:'NEXLAB Beta 0.26.51',
     release:'Beta',
     channel:'beta',
-    revision:'beta-0-26-49-convite-link-compartilhavel',
-    homologationRevision:'beta-0-26-49-convite-link-compartilhavel',
-    assetRevision:'app-beta-0-26-49-convite-link-compartilhavel',
-    cacheName:'nexlab-beta-0-26-49-convite-link-compartilhavel',
-    generatedAt:'2026-07-30T03:05:00Z',
+    revision:'beta-0-26-51-exclusao-usuarios-cascata-completa',
+    homologationRevision:'beta-0-26-51-exclusao-usuarios-cascata-completa',
+    assetRevision:'app-beta-0-26-51-exclusao-usuarios-cascata-completa',
+    cacheName:'nexlab-beta-0-26-51-exclusao-usuarios-cascata-completa',
+    generatedAt:'2026-08-01T13:46:28Z',
     resources:Object.freeze({
       entry:Object.freeze({main:'assets/index-beta-0-26-12.js',vendor:'assets/nexlab-vendor-beta-0-26-12.js',shared:'assets/nexlab-app-shared-beta-0-26-12.js',feature:'assets/nexlab-feature-modules-beta-0-26-12.js',export:'assets/nexlab-export-vendor-beta-0-26-12.js'}),
       initial:Object.freeze([
