@@ -1,0 +1,58 @@
+{
+  "format": "NEXLAB_COORDINATOR_VALIDATION_SCRIPT",
+  "format_version": "1.0",
+  "app_version": "0.26.54",
+  "title": "Roteiro de validação dos Coordenadores",
+  "minimum_coordinator_approvals_per_item": 1,
+  "promotion_rules": {
+    "all_required_items_approved": true,
+    "no_adjustment_or_blocking_reviews": true,
+    "permission_matrix_complete": true,
+    "test_environment_clean": true,
+    "publication_keeps_beta_status": true
+  },
+  "items": [
+    {
+      "item_key": "volunteer_profile",
+      "title": "Perfil Voluntário",
+      "test_steps": ["Solicitar cadastro como Voluntário", "Aprovar a solicitação", "Confirmar supervisor e período", "Revisar os módulos disponíveis"],
+      "expected_result": "Acesso restrito, vínculo válido e ausência de funções administrativas."
+    },
+    {
+      "item_key": "temporary_users",
+      "title": "Usuários temporários",
+      "test_steps": ["Criar o cenário", "Baixar credenciais", "Entrar com perfis diferentes", "Limpar o cenário"],
+      "expected_result": "Sete contas rastreadas, temporárias e removíveis sem afetar usuários normais."
+    },
+    {
+      "item_key": "fictional_data",
+      "title": "Dados fictícios e limpeza",
+      "test_steps": ["Criar dados fictícios", "Revisar os módulos", "Confirmar a marcação [TESTE]", "Executar a limpeza"],
+      "expected_result": "Somente os dados vinculados à execução são removidos."
+    },
+    {
+      "item_key": "profile_preview",
+      "title": "Visualização como perfil",
+      "test_steps": ["Selecionar perfis", "Confirmar a faixa de simulação", "Tentar criar, editar e excluir"],
+      "expected_result": "A interface é simulada e todas as mutações permanecem bloqueadas."
+    },
+    {
+      "item_key": "permission_kanban",
+      "title": "Kanban de permissões",
+      "test_steps": ["Mover permissões", "Revisar dependências", "Salvar com motivo e senha", "Reabrir a matriz"],
+      "expected_result": "Alterações persistem sem romper regras protegidas ou a matriz de 250 combinações."
+    },
+    {
+      "item_key": "security_export",
+      "title": "Exportação de segurança",
+      "test_steps": ["Gerar snapshot", "Abrir o JSON", "Confirmar sanitização", "Verificar auditoria e hash"],
+      "expected_result": "O arquivo não contém dados sensíveis e possui evidências de integridade."
+    },
+    {
+      "item_key": "regression_review",
+      "title": "Revisão geral e regressão",
+      "test_steps": ["Executar Revisar versão", "Testar em computador", "Testar em celular", "Revisar módulos antigos", "Finalizar sem cenário ativo"],
+      "expected_result": "Nenhuma regressão bloqueante ou resíduo de teste permanece."
+    }
+  ]
+}

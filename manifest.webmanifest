@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "NEXLAB Beta 0.26.52",
+  "name": "NEXLAB Beta 0.26.54",
   "short_name": "NEXLAB",
-  "description": "Gestão interna do Coworking Space UEMA Timon — Beta 0.26.52 com perfil Voluntário e ambiente de testes controlado.",
+  "description": "Gestão interna do Coworking Space UEMA Timon — Beta 0.26.54 com validação dos Coordenadores e promoção seletiva.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

@@ -1,19 +1,20 @@
 (function(root){
   'use strict';
   const identity=Object.freeze({
-    version:'0.26.52',
-    displayVersion:'NEXLAB Beta 0.26.52',
+    version:'0.26.54',
+    displayVersion:'NEXLAB Beta 0.26.54',
     release:'Beta',
     channel:'beta',
-    revision:'beta-0-26-52-voluntario-ambiente-testes-controlado',
-    homologationRevision:'beta-0-26-52-voluntario-ambiente-testes-controlado',
-    assetRevision:'app-beta-0-26-52-voluntario-ambiente-testes-controlado',
-    cacheName:'nexlab-beta-0-26-52-voluntario-ambiente-testes-controlado',
-    generatedAt:'2026-08-02T02:11:45Z',
+    revision:'beta-0-26-54-validacao-coordenadores-promocao-seletiva',
+    homologationRevision:'beta-0-26-54-validacao-coordenadores-promocao-seletiva',
+    assetRevision:'app-beta-0-26-54-validacao-coordenadores-promocao-seletiva',
+    cacheName:'nexlab-beta-0-26-54-validacao-coordenadores-promocao-seletiva',
+    generatedAt:'2026-08-02T03:19:45Z',
     resources:Object.freeze({
       entry:Object.freeze({main:'assets/index-beta-0-26-12.js',vendor:'assets/nexlab-vendor-beta-0-26-12.js',shared:'assets/nexlab-app-shared-beta-0-26-12.js',feature:'assets/nexlab-feature-modules-beta-0-26-12.js',export:'assets/nexlab-export-vendor-beta-0-26-12.js'}),
       initial:Object.freeze([
         'assets/nexlab-release-identity.js',
+        'assets/nexlab-profile-preview.js',
         'assets/nexlab-bootstrap.js',
         'assets/nexlab-dialogs.js',
         'assets/nexlab-realtime-core-beta-0-26-12.js',
@@ -26,7 +27,9 @@
         'assets/nexlab-app-shared-beta-0-26-12.js',
         'assets/nexlab-visual.js',
         'assets/nexlab-auth-security.js',
-        'assets/nexlab-test-environment.js'
+        'assets/nexlab-test-environment.js',
+        'assets/nexlab-coordinator-validation.js',
+        'assets/nexlab-admin-homologation.js'
       ]),
       lazy:Object.freeze([
         'assets/nexlab-feature-modules-beta-0-26-12.js',
@@ -44,6 +47,8 @@
         'offline.html',
         'manifest.webmanifest',
         'assets/nexlab-release-identity.js',
+        'assets/nexlab-profile-preview.js',
+        'assets/nexlab-coordinator-validation.js',
         'assets/index-beta-0-26-12.js',
         'assets/nexlab-vendor-beta-0-26-12.js',
         'assets/nexlab-app-shared-beta-0-26-12.js',
@@ -63,6 +68,8 @@
         'assets/nexlab-device-homologation.js',
         'assets/nexlab-auth-security.js',
         'assets/nexlab-test-environment.js',
+        'assets/nexlab-coordinator-validation.js',
+        'assets/nexlab-admin-homologation.js',
         'assets/nexlab-vapid-rotation.js',
         'assets/nexlab-push-consent.js',
         'assets/nexlab-feedback-evidence.js'
@@ -72,6 +79,7 @@
         'assets/nexlab-export-vendor-beta-0-26-12.js',
         'assets/nexlab-pwa-readiness.js',
         'pwa-check.html',
+        'validation-plan.json',
         'icons/apple-touch-icon.png',
         'icons/nexlab-maskable-192.png',
         'icons/nexlab-512.png',
@@ -101,6 +109,7 @@
         'offline.html',
         'manifest.webmanifest',
         'assets/nexlab-release-identity.js',
+        'assets/nexlab-profile-preview.js',
         'assets/index-beta-0-26-12.js',
         'assets/nexlab-vendor-beta-0-26-12.js',
         'assets/nexlab-app-shared-beta-0-26-12.js',

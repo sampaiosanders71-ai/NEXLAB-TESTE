@@ -1,6 +1,6 @@
 (()=>{
 'use strict';
-const VERSION='0.26.52';
+const VERSION='0.26.54';
 const BASE='https://eahldhabwulnwhuwrhvc.supabase.co';
 const KEY='sb_publishable_hr-WTQUBbBE0Ei3Lr2hkhQ_XSKG_PXa';
 let credentials=[];
@@ -38,6 +38,7 @@ function open(){
  create.onclick=async()=>{const ok=window.nexlabConfirm?await window.nexlabConfirm('Criar sete contas temporárias e dados fictícios no Supabase oficial?'):confirm('Criar o cenário de teste?');if(!ok)return;busy(true);msg('Criando contas e dados de teste...');try{const data=await call('create',{durationDays:Number(days.value||14)});credentials=Array.isArray(data.credentials)?data.credentials:[];tbody.innerHTML='';for(const c of credentials){const tr=document.createElement('tr');for(const value of [c.kind,c.email,c.password]){const td=document.createElement('td');const el=value===c.password?document.createElement('code'):document.createElement('span');el.textContent=String(value||'');td.appendChild(el);tr.appendChild(td)}tbody.appendChild(tr)}credBox.classList.toggle('nexlab-test-hidden',!credentials.length);down.classList.toggle('nexlab-test-hidden',!credentials.length);msg('Cenário criado. Baixe as credenciais antes de fechar esta janela.','ok');await refresh()}catch(e){msg(e.message,'error');busy(false)}};
  clean.onclick=async()=>{const ok=window.nexlabConfirm?await window.nexlabConfirm('Remover todas as contas e dados vinculados ao cenário [TESTE]?'):confirm('Limpar o cenário de teste?');if(!ok)return;busy(true);msg('Limpando o cenário de teste...');try{await call('clean');credentials=[];credBox.classList.add('nexlab-test-hidden');down.classList.add('nexlab-test-hidden');msg('Cenário removido com sucesso.','ok');await refresh()}catch(e){msg(e.message,'error');busy(false)}};down.onclick=download;
 }
-async function mount(){if(document.getElementById('nexlab-test-trigger')||!await isAdmin())return;const b=document.createElement('button');b.id='nexlab-test-trigger';b.type='button';b.title='Gerenciar contas e dados de teste';b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3h6M10 9V3m4 6V3M8 9h8l3 9a2 2 0 0 1-2 3H7a2 2 0 0 1-2-3l3-9Z"/><path d="M8 15h8"/></svg><span>Ambiente de teste</span>';b.onclick=open;document.body.appendChild(b)}
+window.NexlabTestEnvironment=Object.freeze({open,call});
+async function mount(){if(window.NexlabAdminHomologation||document.getElementById('nexlab-test-trigger')||!await isAdmin())return;const b=document.createElement('button');b.id='nexlab-test-trigger';b.type='button';b.title='Gerenciar contas e dados de teste';b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3h6M10 9V3m4 6V3M8 9h8l3 9a2 2 0 0 1-2 3H7a2 2 0 0 1-2-3l3-9Z"/><path d="M8 15h8"/></svg><span>Ambiente de teste</span>';b.onclick=open;document.body.appendChild(b)}
 window.addEventListener('nexlab:auth-ready',()=>setTimeout(mount,500));setTimeout(mount,2500);setInterval(()=>{if(!document.getElementById('nexlab-test-trigger'))mount()},12000);
 })();
