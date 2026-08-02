@@ -2,8 +2,8 @@
   'use strict';
 
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({
-    version:'0.26.54',
-    revision:'beta-0-26-54-validacao-coordenadores-promocao-seletiva'
+    version:'0.26.60',
+    revision:'beta-0-26-60-limpeza-compatibilidades-antigas'
   });
   if(globalThis.__NEXLAB_PUSH_CONSENT__?.revision===BUILD.revision)return;
 

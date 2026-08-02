@@ -1,7 +1,7 @@
 {
   "format": "NEXLAB_COORDINATOR_VALIDATION_SCRIPT",
   "format_version": "1.0",
-  "app_version": "0.26.54",
+  "app_version": "0.26.60",
   "title": "Roteiro de validação dos Coordenadores",
   "minimum_coordinator_approvals_per_item": 1,
   "promotion_rules": {
@@ -15,44 +15,89 @@
     {
       "item_key": "volunteer_profile",
       "title": "Perfil Voluntário",
-      "test_steps": ["Solicitar cadastro como Voluntário", "Aprovar a solicitação", "Confirmar supervisor e período", "Revisar os módulos disponíveis"],
+      "test_steps": [
+        "Solicitar cadastro como Voluntário",
+        "Aprovar a solicitação",
+        "Confirmar supervisor e período",
+        "Revisar os módulos disponíveis"
+      ],
       "expected_result": "Acesso restrito, vínculo válido e ausência de funções administrativas."
     },
     {
       "item_key": "temporary_users",
       "title": "Usuários temporários",
-      "test_steps": ["Criar o cenário", "Baixar credenciais", "Entrar com perfis diferentes", "Limpar o cenário"],
+      "test_steps": [
+        "Criar o cenário",
+        "Baixar credenciais",
+        "Entrar com perfis diferentes",
+        "Limpar o cenário"
+      ],
       "expected_result": "Sete contas rastreadas, temporárias e removíveis sem afetar usuários normais."
     },
     {
       "item_key": "fictional_data",
       "title": "Dados fictícios e limpeza",
-      "test_steps": ["Criar dados fictícios", "Revisar os módulos", "Confirmar a marcação [TESTE]", "Executar a limpeza"],
+      "test_steps": [
+        "Criar dados fictícios",
+        "Revisar os módulos",
+        "Confirmar a marcação [TESTE]",
+        "Executar a limpeza"
+      ],
       "expected_result": "Somente os dados vinculados à execução são removidos."
     },
     {
       "item_key": "profile_preview",
       "title": "Visualização como perfil",
-      "test_steps": ["Selecionar perfis", "Confirmar a faixa de simulação", "Tentar criar, editar e excluir"],
-      "expected_result": "A interface é simulada e todas as mutações permanecem bloqueadas."
+      "test_steps": [
+        "Abrir a visualização como Administrador",
+        "Abrir a visualização como Coordenador",
+        "Confirmar que Coordenador não pode simular Administrador",
+        "Tentar alteração REST, RPC desconhecida e Edge Function",
+        "Confirmar bloqueio sem modificar dados"
+      ],
+      "expected_result": "Somente consultas explicitamente permitidas passam; toda escrita é bloqueada também em domínio próprio."
     },
     {
       "item_key": "permission_kanban",
       "title": "Kanban de permissões",
-      "test_steps": ["Mover permissões", "Revisar dependências", "Salvar com motivo e senha", "Reabrir a matriz"],
-      "expected_result": "Alterações persistem sem romper regras protegidas ou a matriz de 250 combinações."
+      "test_steps": [
+        "Alterar permissões padrão de um perfil",
+        "Selecionar um usuário não administrativo",
+        "Conceder e revogar permissões individuais",
+        "Restaurar o padrão do perfil",
+        "Confirmar dependências, proteções e incompatibilidades"
+      ],
+      "expected_result": "Perfis e usuários são administrados com herança, exceções, dependências e auditoria preservadas."
     },
     {
       "item_key": "security_export",
       "title": "Exportação de segurança",
-      "test_steps": ["Gerar snapshot", "Abrir o JSON", "Confirmar sanitização", "Verificar auditoria e hash"],
+      "test_steps": [
+        "Gerar snapshot",
+        "Abrir o JSON",
+        "Confirmar sanitização",
+        "Verificar auditoria e hash"
+      ],
       "expected_result": "O arquivo não contém dados sensíveis e possui evidências de integridade."
     },
     {
       "item_key": "regression_review",
       "title": "Revisão geral e regressão",
-      "test_steps": ["Executar Revisar versão", "Testar em computador", "Testar em celular", "Revisar módulos antigos", "Finalizar sem cenário ativo"],
-      "expected_result": "Nenhuma regressão bloqueante ou resíduo de teste permanece."
+      "test_steps": [
+        "Executar Revisar versão",
+        "Confirmar os testes funcionais do bloqueio e do Kanban",
+        "Testar nomes contendo caracteres HTML no banner e no Kanban",
+        "Confirmar o teste do registro explícito de RPCs",
+        "Testar em computador",
+        "Testar em celular",
+        "Finalizar sem cenário de teste ativo",
+        "Abrir pwa-check.html e aprovar o contrato técnico do Dashboard",
+        "Aquecer módulos opcionais, desligar a rede e reabrir o aplicativo",
+        "Confirmar que o runtime ativo usa apenas nomes nexlab-runtime-*",
+        "Confirmar ausência dos bundles Beta 0.26.11, Beta 0.26.12 e RC17 no pacote"
+      ],
+      "expected_result": "Cache offline íntegro, Dashboard consolidado validado e runtime sem referências ativas a bundles históricos."
     }
-  ]
+  ],
+  "release_title": "Beta 0.26.60 — limpeza final de compatibilidades antigas"
 }

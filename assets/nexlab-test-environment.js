@@ -1,9 +1,11 @@
 (()=>{
 'use strict';
-const VERSION='0.26.54';
+const VERSION='0.26.60';
 const BASE='https://eahldhabwulnwhuwrhvc.supabase.co';
 const KEY='sb_publishable_hr-WTQUBbBE0Ei3Lr2hkhQ_XSKG_PXa';
 let credentials=[];
+let currentOverlay=null;
+let currentRole='';
 const style=document.createElement('style');
 style.textContent=`
 #nexlab-test-trigger{position:fixed;right:18px;bottom:86px;z-index:10040;border:0;border-radius:999px;background:#0f172a;color:#fff;padding:11px 15px;box-shadow:0 14px 38px rgba(15,23,42,.28);font:700 12px/1.2 Arial,sans-serif;cursor:pointer;display:flex;gap:8px;align-items:center}
@@ -26,11 +28,13 @@ async function call(action,extra={}){const t=token();if(!t)throw new Error('Sess
 async function isAdmin(){const t=token();if(!t)return false;try{const u=await fetch(`${BASE}/auth/v1/user`,{headers:{apikey:KEY,Authorization:`Bearer ${t}`},cache:'no-store'}).then(r=>r.ok?r.json():null);if(!u?.id)return false;const rows=await fetch(`${BASE}/rest/v1/profiles?id=eq.${encodeURIComponent(u.id)}&select=role,ativo`,{headers:{apikey:KEY,Authorization:`Bearer ${t}`},cache:'no-store'}).then(r=>r.ok?r.json():[]);const p=rows?.[0];return p&&p.ativo!==false&&['admin','administrador'].includes(String(p.role||'').toLowerCase())}catch{return false}}
 function fmt(value){if(!value)return'—';const d=new Date(value);return Number.isNaN(d.getTime())?String(value):d.toLocaleString('pt-BR')}
 function download(){if(!credentials.length)return;const blob=new Blob([JSON.stringify({app:'NEXLAB',version:VERSION,generatedAt:new Date().toISOString(),warning:'Credenciais temporárias. Não compartilhe fora da equipe de testes.',accounts:credentials},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`NEXLAB_CREDENCIAIS_TESTE_${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500)}
-function open(){
- const overlay=document.createElement('div');overlay.className='nexlab-test-overlay';
+async function open(){
+ if(!await isAdmin()){credentials=[];document.querySelectorAll('.nexlab-test-overlay').forEach(node=>node.remove());return;}
+ if(currentOverlay?.isConnected){currentOverlay.querySelector('.nexlab-test-dialog')?.focus();return;}
+ const overlay=document.createElement('div');overlay.className='nexlab-test-overlay';overlay.dataset.nexlabAdminSurface='test-environment';currentOverlay=overlay;
  overlay.innerHTML=`<section class="nexlab-test-dialog" role="dialog" aria-modal="true" aria-labelledby="nexlab-test-title"><header class="nexlab-test-head"><div><h2 id="nexlab-test-title">Ambiente de teste</h2><p>Contas temporárias e dados fictícios vinculados ao Supabase oficial.</p></div><button class="nexlab-test-close" type="button" aria-label="Fechar">×</button></header><div class="nexlab-test-body"><div class="nexlab-test-warning"><strong>Atenção:</strong> este recurso utiliza o banco oficial. Todos os registros gerados recebem identificação <strong>[TESTE]</strong> e um identificador de execução para limpeza controlada.</div><div class="nexlab-test-status"><strong>Consultando o cenário...</strong><span>Aguarde.</span></div><div class="nexlab-test-actions"><label>Validade em dias<input class="nexlab-test-days" type="number" min="1" max="30" value="14"></label><button class="nexlab-test-btn nexlab-test-primary" type="button" data-action="create">Criar cenário</button><button class="nexlab-test-btn nexlab-test-danger" type="button" data-action="clean">Limpar cenário</button><button class="nexlab-test-btn nexlab-test-secondary nexlab-test-hidden" type="button" data-action="download">Baixar credenciais</button></div><div class="nexlab-test-message"></div><div class="nexlab-test-credentials nexlab-test-hidden"><h3>Credenciais geradas nesta sessão</h3><div class="nexlab-test-table-wrap"><table class="nexlab-test-table"><thead><tr><th>Perfil</th><th>E-mail</th><th>Senha</th></tr></thead><tbody></tbody></table></div><small>As senhas não ficam armazenadas pelo painel. Baixe o arquivo antes de fechar.</small></div></div></section>`;
  document.body.appendChild(overlay);
- const close=()=>{credentials=[];overlay.remove()};overlay.querySelector('.nexlab-test-close').onclick=close;overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
+ const close=()=>{credentials=[];if(currentOverlay===overlay)currentOverlay=null;overlay.remove()};overlay.querySelector('.nexlab-test-close').onclick=close;overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
  const statusBox=overlay.querySelector('.nexlab-test-status'),message=overlay.querySelector('.nexlab-test-message'),create=overlay.querySelector('[data-action="create"]'),clean=overlay.querySelector('[data-action="clean"]'),down=overlay.querySelector('[data-action="download"]'),days=overlay.querySelector('.nexlab-test-days'),credBox=overlay.querySelector('.nexlab-test-credentials'),tbody=overlay.querySelector('tbody');
  const busy=v=>{create.disabled=v;clean.disabled=v};const msg=(t,type='')=>{message.textContent=t;message.className=`nexlab-test-message ${type?`is-${type}`:''}`};
  const renderStatus=data=>{const run=data?.run;if(!run){statusBox.innerHTML='<strong>Nenhum cenário ativo</strong><span>As contas e os dados fictícios ainda não foram criados.</span>';create.disabled=false;clean.disabled=true;return}const total=Object.values(data.counts||{}).reduce((a,b)=>a+Number(b||0),0);statusBox.innerHTML='';const a=document.createElement('strong');a.textContent=`Cenário ${String(run.status||'').toUpperCase()}`;const b=document.createElement('span');b.textContent=`Criado em ${fmt(run.created_at)} • Expira em ${fmt(run.expires_at)} • ${total} registros rastreados`;statusBox.append(a,b);create.disabled=true;clean.disabled=false};
@@ -38,7 +42,13 @@ function open(){
  create.onclick=async()=>{const ok=window.nexlabConfirm?await window.nexlabConfirm('Criar sete contas temporárias e dados fictícios no Supabase oficial?'):confirm('Criar o cenário de teste?');if(!ok)return;busy(true);msg('Criando contas e dados de teste...');try{const data=await call('create',{durationDays:Number(days.value||14)});credentials=Array.isArray(data.credentials)?data.credentials:[];tbody.innerHTML='';for(const c of credentials){const tr=document.createElement('tr');for(const value of [c.kind,c.email,c.password]){const td=document.createElement('td');const el=value===c.password?document.createElement('code'):document.createElement('span');el.textContent=String(value||'');td.appendChild(el);tr.appendChild(td)}tbody.appendChild(tr)}credBox.classList.toggle('nexlab-test-hidden',!credentials.length);down.classList.toggle('nexlab-test-hidden',!credentials.length);msg('Cenário criado. Baixe as credenciais antes de fechar esta janela.','ok');await refresh()}catch(e){msg(e.message,'error');busy(false)}};
  clean.onclick=async()=>{const ok=window.nexlabConfirm?await window.nexlabConfirm('Remover todas as contas e dados vinculados ao cenário [TESTE]?'):confirm('Limpar o cenário de teste?');if(!ok)return;busy(true);msg('Limpando o cenário de teste...');try{await call('clean');credentials=[];credBox.classList.add('nexlab-test-hidden');down.classList.add('nexlab-test-hidden');msg('Cenário removido com sucesso.','ok');await refresh()}catch(e){msg(e.message,'error');busy(false)}};down.onclick=download;
 }
-window.NexlabTestEnvironment=Object.freeze({open,call});
+function closeForSessionChange(){credentials=[];currentOverlay=null;document.querySelectorAll('#nexlab-test-trigger,.nexlab-test-overlay').forEach(node=>node.remove());}
+window.NexlabTestEnvironment=Object.freeze({open,call,close:closeForSessionChange});
 async function mount(){if(window.NexlabAdminHomologation||document.getElementById('nexlab-test-trigger')||!await isAdmin())return;const b=document.createElement('button');b.id='nexlab-test-trigger';b.type='button';b.title='Gerenciar contas e dados de teste';b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3h6M10 9V3m4 6V3M8 9h8l3 9a2 2 0 0 1-2 3H7a2 2 0 0 1-2-3l3-9Z"/><path d="M8 15h8"/></svg><span>Ambiente de teste</span>';b.onclick=open;document.body.appendChild(b)}
-window.addEventListener('nexlab:auth-ready',()=>setTimeout(mount,500));setTimeout(mount,2500);setInterval(()=>{if(!document.getElementById('nexlab-test-trigger'))mount()},12000);
+window.addEventListener('nexlab:auth-ready',()=>setTimeout(mount,500));
+window.addEventListener('nexlab:session-reset',closeForSessionChange);
+window.addEventListener('nexlab:administrative-ui-synced',event=>{currentRole=String(event.detail?.role||'').toLowerCase();if(!['admin','administrador'].includes(currentRole))closeForSessionChange();else setTimeout(mount,150);});
+// Uma falha transitória de rede não fecha o painel nem apaga credenciais exibidas.
+window.addEventListener('nexlab:administrative-ui-verification-unavailable',()=>{});
+setTimeout(mount,2500);setInterval(()=>{if(!document.getElementById('nexlab-test-trigger')&&!window.__NEXLAB_PROFILE_PREVIEW__?.active)mount()},12000);
 })();

@@ -1,17 +1,17 @@
 (function(){
   'use strict';
-  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.54',release:'Beta',revision:'beta-0-26-54-validacao-coordenadores-promocao-seletiva',assetRevision:'app-beta-0-26-54-validacao-coordenadores-promocao-seletiva',cacheName:'nexlab-beta-0-26-54-validacao-coordenadores-promocao-seletiva'});
+  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.60',release:'Beta',revision:'beta-0-26-60-limpeza-compatibilidades-antigas',assetRevision:'app-beta-0-26-60-limpeza-compatibilidades-antigas',cacheName:'nexlab-beta-0-26-60-limpeza-compatibilidades-antigas'});
   if (window.__NEXLAB_PWA_READINESS__?.revision === BUILD_IDENTITY.revision) return;
 
   const VERSION=BUILD_IDENTITY.version;
   const RELEASE=BUILD_IDENTITY.release;
   const REVISION=BUILD_IDENTITY.revision;
-  const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-54-validacao-coordenadores-promocao-seletiva';
+  const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-60-limpeza-compatibilidades-antigas';
   const ASSET_REVISION=BUILD_IDENTITY.assetRevision;
   const CACHE_NAME=BUILD_IDENTITY.cacheName;
   const STORAGE_KEY='nexlab:pwa-readiness:'+VERSION;
   const DEVICE_EVIDENCE_KEY='nexlab:device-homologation:'+VERSION+':'+REVISION;
-  const RESOURCE_ENTRY=BUILD_IDENTITY.resources?.entry||Object.freeze({main:'assets/index-beta-0-26-12.js',vendor:'assets/nexlab-vendor-beta-0-26-12.js',shared:'assets/nexlab-app-shared-beta-0-26-12.js',feature:'assets/nexlab-feature-modules-beta-0-26-12.js',export:'assets/nexlab-export-vendor-beta-0-26-12.js'});
+  const RESOURCE_ENTRY=BUILD_IDENTITY.resources?.entry||Object.freeze({main:'assets/nexlab-runtime-app.js',vendor:'assets/nexlab-runtime-vendor.js',shared:'assets/nexlab-runtime-shared.js',feature:'assets/nexlab-runtime-features.js',export:'assets/nexlab-runtime-export.js'});
   const RESOURCE_POLICY=BUILD_IDENTITY.pwa||Object.freeze({mandatoryShell:[],functional:[],optional:[],compatibility:[],offlineProbe:[]});
   const uniquePaths=(values)=>[...new Set((values||[]).map(value=>String(value||'').replace(/^\.\//,'')).filter(Boolean))];
   const EXPECTED_CORE=uniquePaths(RESOURCE_POLICY.mandatoryShell);

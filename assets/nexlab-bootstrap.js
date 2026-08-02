@@ -2,7 +2,7 @@
   if (window.__NEXLAB_BOOTSTRAP_V26_7__) return;
   window.__NEXLAB_BOOTSTRAP_V26_7__ = true;
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.54',release:'Beta',revision:'beta-0-26-54-validacao-coordenadores-promocao-seletiva',assetRevision:'app-beta-0-26-54-validacao-coordenadores-promocao-seletiva',cacheName:'nexlab-beta-0-26-54-validacao-coordenadores-promocao-seletiva',generatedAt:'2026-08-02T03:19:45Z'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.60',release:'Beta',revision:'beta-0-26-60-limpeza-compatibilidades-antigas',assetRevision:'app-beta-0-26-60-limpeza-compatibilidades-antigas',cacheName:'nexlab-beta-0-26-60-limpeza-compatibilidades-antigas',generatedAt:'2026-08-02T20:22:00Z'});
   const APP_VERSION = BUILD_IDENTITY.version;
   const APP_RELEASE = BUILD_IDENTITY.release;
   const APP_REVISION = BUILD_IDENTITY.revision;
@@ -18,8 +18,10 @@
   const SUPABASE_RE = /https:\/\/[a-z0-9.-]+\.supabase\.co/i;
   const MUTATING_METHOD_RE = /^(POST|PUT|PATCH|DELETE)$/i;
   const READ_METHOD_RE = /^(GET|HEAD|OPTIONS)$/i;
-  const READ_ONLY_RPC_NAME_RE = /^(?:get_|nexlab_(?:get_|list_|check_|resolve_|prepare_|export_|notification_summary_))/i;
-  const BACKGROUND_RPC_NAME_RE = /^(?:nexlab_record_client_error_v26_7(?:_4)?|record_security_audit)$/i;
+  const RPC_REGISTRY = window.__NEXLAB_RPC_REGISTRY__ || Object.freeze({readOnly:[],mutating:[],background:[],classifyRpc:()=> 'unknown',isKnownRpc:()=>false,selfTest:()=>({ok:false,cases:[],counts:{}})});
+  const READ_ONLY_RPC_NAMES = new Set(RPC_REGISTRY.readOnly || []);
+  const MUTATING_RPC_NAMES = new Set(RPC_REGISTRY.mutating || []);
+  const BACKGROUND_RPC_NAMES = new Set(RPC_REGISTRY.background || []);
 
   function rpcNameFromTarget(target){
     try {
@@ -37,14 +39,24 @@
     let pathname = '';
     try { pathname = new URL(target, location.href).pathname; } catch { pathname = String(target || ''); }
     const authRequest = /\/auth\/v1\//i.test(pathname);
-    const readOnly = !authRequest && (READ_METHOD_RE.test(normalizedMethod) || Boolean(rpcName && READ_ONLY_RPC_NAME_RE.test(rpcName)));
-    const background = authRequest || Boolean(rpcName && BACKGROUND_RPC_NAME_RE.test(rpcName));
-    return Object.freeze({ rpcName, authRequest, readOnly, background, mutating: MUTATING_METHOD_RE.test(normalizedMethod) && !readOnly && !background });
+    const rpcKind = rpcName ? RPC_REGISTRY.classifyRpc(rpcName) : 'none';
+    const readOnly = !authRequest && (READ_METHOD_RE.test(normalizedMethod) || rpcKind === 'read');
+    const background = authRequest || rpcKind === 'background';
+    const explicitMutation = rpcKind === 'mutation';
+    const unknownRpc = Boolean(rpcName && rpcKind === 'unknown');
+    const mutating = MUTATING_METHOD_RE.test(normalizedMethod) && !readOnly && !background;
+    return Object.freeze({ rpcName, rpcKind, authRequest, readOnly, background, explicitMutation, unknownRpc, mutating });
   }
 
   window.__NEXLAB_REQUEST_CLASSIFIER__ = Object.freeze({
+    version: APP_VERSION,
+    policy: 'explicit-default-mutation',
     classify: (target, method = 'GET') => classifySupabaseRequest(target, method),
-    isReadOnlyRpc: (name) => READ_ONLY_RPC_NAME_RE.test(String(name || ''))
+    isReadOnlyRpc: (name) => READ_ONLY_RPC_NAMES.has(String(name || '')),
+    isMutatingRpc: (name) => MUTATING_RPC_NAMES.has(String(name || '')),
+    isBackgroundRpc: (name) => BACKGROUND_RPC_NAMES.has(String(name || '')),
+    isKnownRpc: (name) => RPC_REGISTRY.isKnownRpc(String(name || '')),
+    selfTest: () => RPC_REGISTRY.selfTest()
   });
   let readCacheGeneration = 0;
 
@@ -293,8 +305,8 @@
 
 
   const OBSERVABILITY_VERSION = APP_VERSION;
-  const OBSERVABILITY_QUEUE_KEY = 'nexlab:observability:queue:v0.26.54';
-  const OBSERVABILITY_DEDUP_KEY = 'nexlab:observability:dedup:v0.26.54';
+  const OBSERVABILITY_QUEUE_KEY = 'nexlab:observability:queue:v0.26.60';
+  const OBSERVABILITY_DEDUP_KEY = 'nexlab:observability:dedup:v0.26.60';
   const OBSERVABILITY_RPC = 'nexlab_record_client_error_v26_7_4';
   const OBSERVABILITY_MAX_QUEUE = 20;
   const OBSERVABILITY_DEDUP_MS = 5 * 60 * 1000;
@@ -634,8 +646,8 @@
   }
 
 
-  const USER_ERROR_CONTEXT_KEY = 'nexlab:feedback-assist:context:v0.26.54';
-  const USER_ERROR_STATE_KEY = 'nexlab:user-error-state:v0.26.54';
+  const USER_ERROR_CONTEXT_KEY = 'nexlab:feedback-assist:context:v0.26.60';
+  const USER_ERROR_STATE_KEY = 'nexlab:user-error-state:v0.26.60';
   const USER_ERROR_MESSAGE = 'Erro, tente novamente. Se o erro persistir, informe o problema no Feedback para ser corrigido.';
   const USER_ERROR_REPEAT_MS = 90 * 1000;
   const USER_ERROR_BURST_MS = 5 * 60 * 1000;
@@ -972,30 +984,30 @@
     }
   } catch {}
 
-  const PERFORMANCE_ALERT_STATE_KEY = 'nexlab:performance-alert-state:v0.26.54';
+  const PERFORMANCE_ALERT_STATE_KEY = 'nexlab:performance-alert-state:v0.26.60';
   const PERFORMANCE_ALERT_MIN_INTERVAL_MS = 10 * 60 * 1000;
-  let performanceAlertState = observabilityReadJson(PERFORMANCE_ALERT_STATE_KEY, {
+  let performanceAlertState = (()=>{try{return JSON.parse(localStorage.getItem(PERFORMANCE_ALERT_STATE_KEY)||'null');}catch{return null;}})() || {
     degraded: false,
     lastAlertAt: 0,
     categories: []
-  });
+  };
   if (!performanceAlertState || typeof performanceAlertState !== 'object') {
     performanceAlertState = { degraded: false, lastAlertAt: 0, categories: [] };
   }
 
   function persistPerformanceAlertState(){
     try {
-      sessionStorage.setItem(PERFORMANCE_ALERT_STATE_KEY, JSON.stringify(performanceAlertState));
+      localStorage.setItem(PERFORMANCE_ALERT_STATE_KEY, JSON.stringify(performanceAlertState));
     } catch {}
   }
 
   window.addEventListener('nexlab:performance-metrics', (event) => {
     const metrics = event.detail || {};
     const categories = [];
-    if (Number(metrics.lcpMs || 0) > 4000) categories.push('lcp');
-    if (Number(metrics.navigationMs || 0) > 6000) categories.push('navigation');
-    if (Number(metrics.longestTaskMs || 0) > 1000) categories.push('long-task-duration');
-    if (Number(metrics.longTasks || 0) > 12) categories.push('long-task-count');
+    if (Number(metrics.lcpMs || 0) > 5000) categories.push('lcp');
+    if (Number(metrics.navigationMs || 0) > 8000) categories.push('navigation');
+    if (Number(metrics.longestTaskMs || 0) > 2000) categories.push('long-task-duration');
+    if (Number(metrics.longTasks || 0) > 20 && Number(metrics.longestTaskMs || 0) > 500) categories.push('long-task-count');
 
     if (!categories.length) {
       performanceAlertState.degraded = false;
@@ -1029,7 +1041,7 @@
       severity: 'warning',
       module: 'global',
       page: 'global',
-      fingerprint: `performance-global-${newCategories.sort().join('-')}`,
+      fingerprint: 'performance-global-v02656',
       message: 'Degradação de desempenho global detectada no carregamento do aplicativo.',
       metadata: {
         component: 'global-page-load',
@@ -1045,6 +1057,15 @@
         loadedChunkCount: Number(metrics.loadedChunkCount || 0)
       }
     });
+  });
+
+  window.addEventListener('nexlab:dashboard-bundle-metrics',(event)=>{
+    const detail=event.detail||{};
+    window.__NEXLAB_DASHBOARD_BUNDLE_METRICS__=Object.freeze({...detail});
+    try{sessionStorage.setItem('nexlab:dashboard-bundle:v0.26.60',JSON.stringify(detail));}catch{}
+    if(Number(detail.total_ms||0)>5000||Number(detail.failed_section_count||0)>0){
+      observabilityQueueEvent({source:'dashboard-bundle',severity:Number(detail.failed_section_count||0)>0?'warning':'info',module:'dashboard',page:'dashboard',fingerprint:'dashboard-bundle-v02656',message:Number(detail.failed_section_count||0)>0?'O pacote consolidado do Dashboard concluiu com seções indisponíveis.':'O pacote consolidado do Dashboard excedeu cinco segundos.',metadata:{...detail}});
+    }
   });
 
   window.addEventListener('online', observabilityFlush);
@@ -1074,7 +1095,7 @@
     performanceState.capturedAt = new Date().toISOString();
     window.__NEXLAB_PERFORMANCE__ = Object.freeze({ ...performanceState });
     try {
-      sessionStorage.setItem('nexlab:performance:v0.26.54', JSON.stringify(performanceState));
+      sessionStorage.setItem('nexlab:performance:v0.26.60', JSON.stringify(performanceState));
     } catch {}
     emit('nexlab:performance-metrics', { ...performanceState });
   }
@@ -1181,19 +1202,19 @@
   });
 })();
 
-/* NEXLAB Beta 0.26.54 — recursos pós-abertura com nova tentativa controlada. */
+/* NEXLAB Beta 0.26.60 — recursos pós-abertura com nova tentativa controlada. */
 (function(){
   'use strict';
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||{};
-  const VERSION=BUILD.version||'0.26.54';
-  const REVISION=BUILD.revision||'beta-0-26-54-validacao-coordenadores-promocao-seletiva';
+  const VERSION=BUILD.version||'0.26.60';
+  const REVISION=BUILD.revision||'beta-0-26-60-limpeza-compatibilidades-antigas';
   if(globalThis.__NEXLAB_POST_STARTUP__?.revision===REVISION)return;
   const MAX_ATTEMPTS=3;
   const sources=(BUILD.resources?.postStartup||[
     'assets/nexlab-vapid-rotation.js',
     'assets/nexlab-push-consent.js',
     'assets/nexlab-feedback-evidence.js'
-  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-54-validacao-coordenadores-promocao-seletiva'));
+  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-60-limpeza-compatibilidades-antigas'));
   const state={version:VERSION,revision:REVISION,status:'scheduled',loaded:[],errors:[],attempts:{},lastReason:'',startedAt:null,completedAt:null};
   const sourceState=new Map(sources.map(src=>[src,{status:'pending',attempts:0,lastError:''}]));
   let active=null;

@@ -1,5 +1,5 @@
 importScripts('./assets/nexlab-release-identity.js');
-const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.54',release:'Beta',revision:'beta-0-26-54-validacao-coordenadores-promocao-seletiva',assetRevision:'app-beta-0-26-54-validacao-coordenadores-promocao-seletiva',cacheName:'nexlab-beta-0-26-54-validacao-coordenadores-promocao-seletiva',generatedAt:'2026-08-02T03:19:45Z'});
+const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.60',release:'Beta',revision:'beta-0-26-60-limpeza-compatibilidades-antigas',assetRevision:'app-beta-0-26-60-limpeza-compatibilidades-antigas',cacheName:'nexlab-beta-0-26-60-limpeza-compatibilidades-antigas',generatedAt:'2026-08-02T20:22:00Z'});
 const APP_VERSION=BUILD_IDENTITY.version;
 const APP_RELEASE=BUILD_IDENTITY.release;
 const APP_REVISION=BUILD_IDENTITY.revision;
@@ -9,7 +9,7 @@ const CACHE_NAME=BUILD_IDENTITY.cacheName;
 const CACHE_PREFIX='nexlab-';
 const NETWORK_TIMEOUT_MS=3500;
 const APP_ENTRY_NETWORK_TIMEOUT_MS=1800;
-const RESOURCE_ENTRY=BUILD_IDENTITY.resources?.entry||Object.freeze({main:'assets/index-beta-0-26-12.js',vendor:'assets/nexlab-vendor-beta-0-26-12.js',shared:'assets/nexlab-app-shared-beta-0-26-12.js',feature:'assets/nexlab-feature-modules-beta-0-26-12.js',export:'assets/nexlab-export-vendor-beta-0-26-12.js'});
+const RESOURCE_ENTRY=BUILD_IDENTITY.resources?.entry||Object.freeze({main:'assets/nexlab-runtime-app.js',vendor:'assets/nexlab-runtime-vendor.js',shared:'assets/nexlab-runtime-shared.js',feature:'assets/nexlab-runtime-features.js',export:'assets/nexlab-runtime-export.js'});
 const RESOURCE_POLICY=BUILD_IDENTITY.pwa||Object.freeze({mandatoryShell:[],functional:[],optional:[],compatibility:[],offlineProbe:[]});
 const MAIN_BUNDLE=RESOURCE_ENTRY.main.split('/').pop();
 const VENDOR_BUNDLE=RESOURCE_ENTRY.vendor.split('/').pop();
@@ -72,9 +72,9 @@ async function validatePreviousCache(cacheName){
     const html=await indexResponse.clone().text();
     if(!/<div[^>]+id=["']root["']/i.test(html)||!/name=["']nexlab-version["']/i.test(html))return false;
     const version=(html.match(/name=["']nexlab-version["'][^>]*content=["']([^"']+)/i)||html.match(/content=["']([^"']+)["'][^>]*name=["']nexlab-version["']/i))?.[1]||'';
-    const main=extractShellReference(html,/assets\/index-(?:beta|R56)[^"'?]+\.js/i);
-    const vendor=extractShellReference(html,/assets\/nexlab-vendor-[^"'?]+\.js/i);
-    const shared=extractShellReference(html,/assets\/nexlab-app-shared-[^"'?]+\.js/i);
+    const main=extractShellReference(html,/assets\/(?:nexlab-runtime-app|index-[^"'?]+)\.js/i);
+    const vendor=extractShellReference(html,/assets\/(?:nexlab-runtime-vendor|nexlab-vendor-[^"'?]+)\.js/i);
+    const shared=extractShellReference(html,/assets\/(?:nexlab-runtime-shared|nexlab-app-shared-[^"'?]+)\.js/i);
     const identity=extractShellReference(html,/assets\/nexlab-release-identity\.js/i);
     const manifest=extractShellReference(html,/manifest\.webmanifest/i);
     if(!main||!vendor||!shared||!identity||!manifest)return false;
