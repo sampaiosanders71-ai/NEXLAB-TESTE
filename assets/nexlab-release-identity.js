@@ -1,15 +1,15 @@
 (function(root){
   'use strict';
   const identity=Object.freeze({
-    version:'0.26.51',
-    displayVersion:'NEXLAB Beta 0.26.51',
+    version:'0.26.52',
+    displayVersion:'NEXLAB Beta 0.26.52',
     release:'Beta',
     channel:'beta',
-    revision:'beta-0-26-51-exclusao-usuarios-cascata-completa',
-    homologationRevision:'beta-0-26-51-exclusao-usuarios-cascata-completa',
-    assetRevision:'app-beta-0-26-51-exclusao-usuarios-cascata-completa',
-    cacheName:'nexlab-beta-0-26-51-exclusao-usuarios-cascata-completa',
-    generatedAt:'2026-08-01T13:46:28Z',
+    revision:'beta-0-26-52-voluntario-ambiente-testes-controlado',
+    homologationRevision:'beta-0-26-52-voluntario-ambiente-testes-controlado',
+    assetRevision:'app-beta-0-26-52-voluntario-ambiente-testes-controlado',
+    cacheName:'nexlab-beta-0-26-52-voluntario-ambiente-testes-controlado',
+    generatedAt:'2026-08-02T02:11:45Z',
     resources:Object.freeze({
       entry:Object.freeze({main:'assets/index-beta-0-26-12.js',vendor:'assets/nexlab-vendor-beta-0-26-12.js',shared:'assets/nexlab-app-shared-beta-0-26-12.js',feature:'assets/nexlab-feature-modules-beta-0-26-12.js',export:'assets/nexlab-export-vendor-beta-0-26-12.js'}),
       initial:Object.freeze([
@@ -25,7 +25,8 @@
         'assets/nexlab-vendor-beta-0-26-12.js',
         'assets/nexlab-app-shared-beta-0-26-12.js',
         'assets/nexlab-visual.js',
-        'assets/nexlab-auth-security.js'
+        'assets/nexlab-auth-security.js',
+        'assets/nexlab-test-environment.js'
       ]),
       lazy:Object.freeze([
         'assets/nexlab-feature-modules-beta-0-26-12.js',
@@ -61,6 +62,7 @@
         'assets/nexlab-push-navigation.js',
         'assets/nexlab-device-homologation.js',
         'assets/nexlab-auth-security.js',
+        'assets/nexlab-test-environment.js',
         'assets/nexlab-vapid-rotation.js',
         'assets/nexlab-push-consent.js',
         'assets/nexlab-feedback-evidence.js'

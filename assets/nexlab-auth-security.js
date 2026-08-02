@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.51',revision:'beta-0-26-51-exclusao-usuarios-cascata-completa'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.52',revision:'beta-0-26-52-voluntario-ambiente-testes-controlado'});
   if(globalThis.__NEXLAB_AUTH_SECURITY__?.revision===BUILD.revision)return;
 
   const CARD_ID='nexlab-auth-security-card';
