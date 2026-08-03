@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const ID=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.60',release:'Beta',revision:'beta-0-26-60-limpeza-compatibilidades-antigas'});
+  const ID=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.63',release:'Beta',revision:'beta-0-26-63-homologacao-funcional-pwa-supabase'});
   if(globalThis.__NEXLAB_REALTIME_CORE__?.revision===ID.revision)return;
 
   const VERSION=ID.version;

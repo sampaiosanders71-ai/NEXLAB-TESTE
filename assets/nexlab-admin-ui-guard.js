@@ -1,9 +1,10 @@
 (function(){
   'use strict';
-  const VERSION='0.26.60';
-  const PROJECT_REF='eahldhabwulnwhuwrhvc';
-  const BASE=`https://${PROJECT_REF}.supabase.co`;
-  const KEY='sb_publishable_hr-WTQUBbBE0Ei3Lr2hkhQ_XSKG_PXa';
+  const VERSION='0.26.63';
+  const CONFIG=window.__NEXLAB_CONFIG__?.assert?.()||(()=>{throw new Error('Configuração central do NEXLAB não carregada.');})();
+  const PROJECT_REF=CONFIG.projectRef;
+  const BASE=CONFIG.supabaseUrl;
+  const KEY=CONFIG.supabaseAnonKey;
   const TRIGGER_SELECTOR='#nexlab-admin-tools-trigger,#nexlab-validation-trigger,#nexlab-coordinator-preview-trigger,#nexlab-test-trigger';
   const OVERLAY_SELECTOR='.nexlab-admin-overlay,.nexlab-validation-overlay,.nexlab-test-overlay';
   const overlays=new Set();
@@ -13,14 +14,8 @@
   let lastRole='';
   let lastVerification='unknown';
 
-  function authToken(){
-    for(let i=0;i<localStorage.length;i+=1){
-      const key=localStorage.key(i)||'';
-      if(!key.startsWith(`sb-${PROJECT_REF}-auth-token`))continue;
-      try{const value=JSON.parse(localStorage.getItem(key)||'null');const token=value?.access_token||value?.currentSession?.access_token;if(token)return token;}catch{}
-    }
-    return '';
-  }
+  function authToken(){return CONFIG.getAccessToken();}
+
   function jwtSubject(jwt){
     try{const body=jwt.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');const padded=body.padEnd(Math.ceil(body.length/4)*4,'=');const payload=JSON.parse(decodeURIComponent(Array.from(atob(padded),c=>`%${c.charCodeAt(0).toString(16).padStart(2,'0')}`).join('')));return String(payload?.sub||'');}catch{return '';}
   }

@@ -1,7 +1,7 @@
 {
   "format": "NEXLAB_COORDINATOR_VALIDATION_SCRIPT",
   "format_version": "1.0",
-  "app_version": "0.26.60",
+  "app_version": "0.26.63",
   "title": "Roteiro de validação dos Coordenadores",
   "minimum_coordinator_approvals_per_item": 1,
   "promotion_rules": {
@@ -27,12 +27,13 @@
       "item_key": "temporary_users",
       "title": "Usuários temporários",
       "test_steps": [
+        "Abrir o botão Ambiente de teste",
+        "Confirmar que não há atalhos de Permissões, visualização ou promoção nessa tela",
         "Criar o cenário",
         "Baixar credenciais",
-        "Entrar com perfis diferentes",
         "Limpar o cenário"
       ],
-      "expected_result": "Sete contas rastreadas, temporárias e removíveis sem afetar usuários normais."
+      "expected_result": "A tela contém somente criação, consulta e limpeza de contas e registros fictícios rastreados."
     },
     {
       "item_key": "fictional_data",
@@ -59,15 +60,17 @@
     },
     {
       "item_key": "permission_kanban",
-      "title": "Kanban de permissões",
+      "title": "Matriz visual de permissões",
       "test_steps": [
-        "Alterar permissões padrão de um perfil",
-        "Selecionar um usuário não administrativo",
-        "Conceder e revogar permissões individuais",
-        "Restaurar o padrão do perfil",
-        "Confirmar dependências, proteções e incompatibilidades"
+        "Abrir Padrões por perfil no módulo Permissões",
+        "Selecionar cada perfil pelo seletor",
+        "Arrastar cards entre Permitido e Opções",
+        "Selecionar um card e conferir a descrição lateral",
+        "Salvar com motivo e senha administrativa",
+        "Abrir Exceções por usuário e repetir concessão, bloqueio e restauração",
+        "Testar também os botões + e − em celular ou teclado"
       ],
-      "expected_result": "Perfis e usuários são administrados com herança, exceções, dependências e auditoria preservadas."
+      "expected_result": "Cards permanecem compactos, não alargam colunas, Opções contém somente permissões ainda não permitidas e as alterações preservam herança, exceções e auditoria."
     },
     {
       "item_key": "security_export",
@@ -94,10 +97,53 @@
         "Abrir pwa-check.html e aprovar o contrato técnico do Dashboard",
         "Aquecer módulos opcionais, desligar a rede e reabrir o aplicativo",
         "Confirmar que o runtime ativo usa apenas nomes nexlab-runtime-*",
-        "Confirmar ausência dos bundles Beta 0.26.11, Beta 0.26.12 e RC17 no pacote"
+        "Confirmar ausência dos bundles Beta 0.26.11, Beta 0.26.12 e RC17 no pacote",
+        "Confirmar que o botão flutuante abre diretamente o Ambiente de teste",
+        "Confirmar que o antigo Kanban de homologação não aparece na interface",
+        "Verificar cards compactos em desktop e celular sem rolagem horizontal da página",
+        "Confirmar que assets/nexlab-config.js é carregado antes de qualquer consumidor do Supabase",
+        "Confirmar que URL, chave pública, project ref e prefixo de autenticação não estão duplicados fora do arquivo central",
+        "Remover temporariamente o arquivo de configuração em ambiente local e confirmar bloqueio seguro da inicialização"
       ],
       "expected_result": "Cache offline íntegro, Dashboard consolidado validado e runtime sem referências ativas a bundles históricos."
     }
   ],
-  "release_title": "Beta 0.26.60 — limpeza final de compatibilidades antigas"
+  "release_title": "Beta 0.26.63 — homologação funcional, PWA e diagnóstico Supabase",
+  "generated_at": "2026-08-03T02:35:00Z",
+  "execution_4_functional_homologation": {
+    "status": "backend_passed_ui_pending",
+    "controlled_test_run": "completed_and_cleaned",
+    "profiles_tested": [
+      "admin",
+      "coordenador",
+      "bolsista",
+      "coworking_junior",
+      "voluntario",
+      "pendente",
+      "inativo"
+    ],
+    "dashboard_contract": "passed_for_approved_profiles",
+    "permission_matrix": "admin_only_confirmed",
+    "pending_and_inactive_access_guard": "passed",
+    "browser_ui": "pending_after_publication"
+  },
+  "execution_5_pwa_homologation": {
+    "status": "technical_ready_physical_pending",
+    "record_rpc": "nexlab_record_device_homologation_v02663",
+    "required_evidence": [
+      "installed_launch",
+      "update_activation",
+      "offline_navigation",
+      "push_display",
+      "push_destination"
+    ],
+    "physical_device": "pending_after_publication"
+  },
+  "execution_6_external_supabase": {
+    "status": "diagnosed_external_actions_pending",
+    "leaked_password_protection": "disabled_requires_dashboard",
+    "smtp": "not_exposed_by_connector_requires_dashboard_verification",
+    "pg_net": "0.20.3_non_relocatable_platform_owned_public_schema",
+    "legacy_r49_edge_function": "active_orphan_deployment_requires_management_deletion"
+  }
 }

@@ -1,5 +1,5 @@
 importScripts('./assets/nexlab-release-identity.js');
-const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.60',release:'Beta',revision:'beta-0-26-60-limpeza-compatibilidades-antigas',assetRevision:'app-beta-0-26-60-limpeza-compatibilidades-antigas',cacheName:'nexlab-beta-0-26-60-limpeza-compatibilidades-antigas',generatedAt:'2026-08-02T20:22:00Z'});
+const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.63',release:'Beta',revision:'beta-0-26-63-homologacao-funcional-pwa-supabase',assetRevision:'app-beta-0-26-63-homologacao-funcional-pwa-supabase',cacheName:'nexlab-beta-0-26-63-homologacao-funcional-pwa-supabase',generatedAt:'2026-08-03T02:35:00Z'});
 const APP_VERSION=BUILD_IDENTITY.version;
 const APP_RELEASE=BUILD_IDENTITY.release;
 const APP_REVISION=BUILD_IDENTITY.revision;

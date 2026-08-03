@@ -1,10 +1,11 @@
 (function(){
   'use strict';
 
-  const VERSION='0.26.60';
-  const PROJECT_REF='eahldhabwulnwhuwrhvc';
-  const BASE=`https://${PROJECT_REF}.supabase.co`;
-  const KEY='sb_publishable_hr-WTQUBbBE0Ei3Lr2hkhQ_XSKG_PXa';
+  const VERSION='0.26.63';
+  const CONFIG=window.__NEXLAB_CONFIG__?.assert?.()||(()=>{throw new Error('Configuração central do NEXLAB não carregada.');})();
+  const PROJECT_REF=CONFIG.projectRef;
+  const BASE=CONFIG.supabaseUrl;
+  const KEY=CONFIG.supabaseAnonKey;
   const ROLE_LABELS={admin:'Administrador',administrador:'Administrador',coordenador:'Coordenador',bolsista:'Bolsista',voluntario:'Voluntário',coworking_junior:'Coworking Júnior'};
   const ROLE_ORDER=['admin','coordenador','bolsista','voluntario','coworking_junior'];
   let matrixCache=null;
@@ -43,18 +44,7 @@
   `;
   document.head.appendChild(style);
 
-  function authToken(){
-    for(let i=0;i<localStorage.length;i+=1){
-      const key=localStorage.key(i)||'';
-      if(!key.startsWith(`sb-${PROJECT_REF}-auth-token`))continue;
-      try{
-        const value=JSON.parse(localStorage.getItem(key)||'null');
-        const token=value?.access_token||value?.currentSession?.access_token;
-        if(token)return token;
-      }catch{}
-    }
-    return '';
-  }
+  function authToken(){return CONFIG.getAccessToken();}
 
   function jwtSubject(jwt){
     try{
@@ -436,7 +426,7 @@
 
   async function openSecurityExport(){
     const {body}=createDialog('Exportação de segurança','Gere um snapshot sanitizado e auditado da configuração atual. Dados pessoais protegidos, credenciais e segredos não são incluídos.');
-    const purpose=document.createElement('label');purpose.className='nexlab-admin-field';purpose.innerHTML='<span>Finalidade da exportação</span><textarea>Homologação da Beta 0.26.60 e conferência das configurações de segurança.</textarea>';body.appendChild(purpose);
+    const purpose=document.createElement('label');purpose.className='nexlab-admin-field';purpose.innerHTML='<span>Finalidade da exportação</span><textarea>Homologação da Beta 0.26.63 e conferência das configurações de segurança.</textarea>';body.appendChild(purpose);
     body.appendChild(messageBox('O arquivo registra perfis apenas por contagem e função. A auditoria recente usa identificadores técnicos, sem e-mail, telefone, CPF, data de nascimento ou conteúdo pessoal.'));
     const actions=document.createElement('div');actions.className='nexlab-admin-actions';actions.innerHTML='<button type="button" class="nexlab-admin-btn nexlab-admin-primary">Gerar e baixar snapshot</button>';body.appendChild(actions);
     const output=document.createElement('div');body.appendChild(output);const button=actions.querySelector('button');
@@ -470,7 +460,7 @@
         fetch(`./manifest.webmanifest?review=${Date.now()}`,{cache:'no-store'}).then(response=>response.ok?response.json():null),
         loadMatrix(true),
         window.NexlabTestEnvironment?.call?window.NexlabTestEnvironment.call('status'):Promise.resolve(null),
-        rpc('nexlab_get_homologation_diagnostics_v02657'),
+        rpc('nexlab_get_homologation_diagnostics_v02663'),
         loadPreviewData()
       ]);
       [release,manifest,matrix,testStatus,diagnostics,previewData]=results.map(result=>result.status==='fulfilled'?result.value:null);
@@ -502,21 +492,9 @@
   }
 
   function openSuite(){
-    const {body}=createDialog('Ferramentas de homologação','Recursos administrativos da Beta 0.26.60 para testar perfis, validar permissões e preparar a homologação.');
-    const grid=document.createElement('div');grid.className='nexlab-admin-grid';
-    const tools=[
-      ['🧪','Ambiente de teste','Crie ou limpe as sete contas temporárias e os dados fictícios rastreados.',()=>window.NexlabTestEnvironment?.open?.()],
-      ['👁','Visualizar como perfil','Abra uma simulação somente leitura por perfil padrão ou usuário específico.',openProfilePreview],
-      ['▦','Kanban de permissões','Organize permissões de perfis e exceções individuais com dependências e auditoria.',openPermissionKanban],
-      ['⬇','Exportar segurança','Baixe um snapshot sanitizado, auditado e protegido por SHA-256.',openSecurityExport],
-      ['✓','Revisar versão','Execute testes funcionais da visualização, Kanban, matriz, PWA e Supabase.',openReleaseReview],
-      ['☑','Validação dos coordenadores','Abra o roteiro, acompanhe aprovações e registre pedidos de ajuste por item.',()=>window.NexlabCoordinatorValidation?.openValidation?.()],
-      ['⇧','Promoção seletiva','Gere o manifesto oficial somente depois das aprovações e verificações técnicas.',()=>window.NexlabCoordinatorValidation?.openPromotion?.()]
-    ];
-    for(const [icon,title,description,handler] of tools){
-      const button=document.createElement('button');button.type='button';button.className='nexlab-admin-tool';button.innerHTML='<span class="nexlab-admin-tool-icon"></span><span><h3></h3><p></p></span>';button.querySelector('.nexlab-admin-tool-icon').textContent=icon;button.querySelector('h3').textContent=title;button.querySelector('p').textContent=description;button.onclick=handler;grid.appendChild(button);
-    }
-    body.appendChild(grid);body.appendChild(messageBox(`Versão ativa: NEXLAB Beta ${VERSION}. Todas as ações de alteração continuam sujeitas às permissões e confirmações do Supabase oficial.`));
+    if(window.NexlabTestEnvironment?.open){window.NexlabTestEnvironment.open();return;}
+    const {body}=createDialog('Ambiente de teste','Crie ou limpe contas temporárias e registros fictícios rastreados.');
+    body.appendChild(messageBox('O módulo de dados fictícios ainda está carregando. Feche esta janela e tente novamente em alguns segundos.','nexlab-admin-warning'));
   }
 
   function removeAdminUi(){document.getElementById('nexlab-admin-tools-trigger')?.remove();document.querySelectorAll('.nexlab-admin-overlay').forEach(node=>node.remove());}
@@ -526,7 +504,7 @@
     const profile=await currentAdmin();if(!profile){removeAdminUi();return;}
     document.getElementById('nexlab-test-trigger')?.remove();
     if(existing)return;
-    const button=document.createElement('button');button.id='nexlab-admin-tools-trigger';button.type='button';button.title='Ferramentas administrativas de homologação';button.setAttribute('aria-label','Abrir ferramentas administrativas de homologação');button.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.64 5.64l2.12 2.12m8.48 8.48 2.12 2.12m0-12.72-2.12 2.12M7.76 16.24l-2.12 2.12"/><circle cx="12" cy="12" r="4"/></svg><span>Homologação</span>';button.onclick=openSuite;document.body.appendChild(button);
+    const button=document.createElement('button');button.id='nexlab-admin-tools-trigger';button.type='button';button.title='Criar ou limpar registros fictícios';button.setAttribute('aria-label','Abrir ambiente de teste');button.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3h6M10 9V3m4 6V3M8 9h8l3 9a2 2 0 0 1-2 3H7a2 2 0 0 1-2-3l3-9Z"/><path d="M8 15h8"/></svg><span>Ambiente de teste</span>';button.onclick=openSuite;document.body.appendChild(button);
   }
 
   window.NexlabAdminHomologation=Object.freeze({version:VERSION,open:openSuite,openProfilePreview,openPermissionKanban,openSecurityExport,openReleaseReview,openCoordinatorValidation:()=>window.NexlabCoordinatorValidation?.openValidation?.(),openPromotion:()=>window.NexlabCoordinatorValidation?.openPromotion?.()});
