@@ -5,8 +5,8 @@
 
   const PARAM='nexlab_preview';
   const STORAGE_PREFIX='nexlab-preview:';
-  const PROJECT_REF='eahldhabwulnwhuwrhvc';
-  const DEFAULT_BACKEND_ORIGIN=`https://${PROJECT_REF}.supabase.co`;
+  const CONFIG=window.__NEXLAB_CONFIG__?.assert?.()||(()=>{throw new Error('Configuração central do NEXLAB não carregada.');})();
+  const DEFAULT_BACKEND_ORIGIN=CONFIG.supabaseUrl;
 
   const RPC_REGISTRY=globalThis.__NEXLAB_RPC_REGISTRY__||null;
   const READ_ONLY_RPCS=new Set(RPC_REGISTRY?.readOnly||[]);
@@ -80,7 +80,7 @@
   }
 
   window.NexlabProfilePreviewGuard=Object.freeze({
-    version:'0.26.61',
+    version:'0.26.64',
     classifyRequest,
     selfTest,
     readOnlyRpcs:Object.freeze([...READ_ONLY_RPCS]),
@@ -91,18 +91,7 @@
   const previewToken=url.searchParams.get(PARAM);
   if(!previewToken)return;
 
-  function readAuthToken(){
-    for(let i=0;i<localStorage.length;i+=1){
-      const key=localStorage.key(i)||'';
-      if(!key.startsWith(`sb-${PROJECT_REF}-auth-token`))continue;
-      try{
-        const value=JSON.parse(localStorage.getItem(key)||'null');
-        const access=value?.access_token||value?.currentSession?.access_token;
-        if(access)return access;
-      }catch{}
-    }
-    return '';
-  }
+  function readAuthToken(){return CONFIG.getAccessToken();}
 
   function jwtSubject(jwt){
     try{

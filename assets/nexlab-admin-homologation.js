@@ -1,10 +1,11 @@
 (function(){
   'use strict';
 
-  const VERSION='0.26.61';
-  const PROJECT_REF='eahldhabwulnwhuwrhvc';
-  const BASE=`https://${PROJECT_REF}.supabase.co`;
-  const KEY='sb_publishable_hr-WTQUBbBE0Ei3Lr2hkhQ_XSKG_PXa';
+  const VERSION='0.26.64';
+  const CONFIG=window.__NEXLAB_CONFIG__?.assert?.()||(()=>{throw new Error('Configuração central do NEXLAB não carregada.');})();
+  const PROJECT_REF=CONFIG.projectRef;
+  const BASE=CONFIG.supabaseUrl;
+  const KEY=CONFIG.supabaseAnonKey;
   const ROLE_LABELS={admin:'Administrador',administrador:'Administrador',coordenador:'Coordenador',bolsista:'Bolsista',voluntario:'Voluntário',coworking_junior:'Coworking Júnior'};
   const ROLE_ORDER=['admin','coordenador','bolsista','voluntario','coworking_junior'];
   let matrixCache=null;
@@ -43,18 +44,7 @@
   `;
   document.head.appendChild(style);
 
-  function authToken(){
-    for(let i=0;i<localStorage.length;i+=1){
-      const key=localStorage.key(i)||'';
-      if(!key.startsWith(`sb-${PROJECT_REF}-auth-token`))continue;
-      try{
-        const value=JSON.parse(localStorage.getItem(key)||'null');
-        const token=value?.access_token||value?.currentSession?.access_token;
-        if(token)return token;
-      }catch{}
-    }
-    return '';
-  }
+  function authToken(){return CONFIG.getAccessToken();}
 
   function jwtSubject(jwt){
     try{
@@ -436,7 +426,7 @@
 
   async function openSecurityExport(){
     const {body}=createDialog('Exportação de segurança','Gere um snapshot sanitizado e auditado da configuração atual. Dados pessoais protegidos, credenciais e segredos não são incluídos.');
-    const purpose=document.createElement('label');purpose.className='nexlab-admin-field';purpose.innerHTML='<span>Finalidade da exportação</span><textarea>Homologação da Beta 0.26.61 e conferência das configurações de segurança.</textarea>';body.appendChild(purpose);
+    const purpose=document.createElement('label');purpose.className='nexlab-admin-field';purpose.innerHTML='<span>Finalidade da exportação</span><textarea>Homologação da Beta 0.26.64 e conferência das configurações de segurança.</textarea>';body.appendChild(purpose);
     body.appendChild(messageBox('O arquivo registra perfis apenas por contagem e função. A auditoria recente usa identificadores técnicos, sem e-mail, telefone, CPF, data de nascimento ou conteúdo pessoal.'));
     const actions=document.createElement('div');actions.className='nexlab-admin-actions';actions.innerHTML='<button type="button" class="nexlab-admin-btn nexlab-admin-primary">Gerar e baixar snapshot</button>';body.appendChild(actions);
     const output=document.createElement('div');body.appendChild(output);const button=actions.querySelector('button');
@@ -470,7 +460,7 @@
         fetch(`./manifest.webmanifest?review=${Date.now()}`,{cache:'no-store'}).then(response=>response.ok?response.json():null),
         loadMatrix(true),
         window.NexlabTestEnvironment?.call?window.NexlabTestEnvironment.call('status'):Promise.resolve(null),
-        rpc('nexlab_get_homologation_diagnostics_v02657'),
+        rpc('nexlab_get_homologation_diagnostics_v02664'),
         loadPreviewData()
       ]);
       [release,manifest,matrix,testStatus,diagnostics,previewData]=results.map(result=>result.status==='fulfilled'?result.value:null);

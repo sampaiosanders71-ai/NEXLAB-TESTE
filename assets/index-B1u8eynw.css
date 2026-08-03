@@ -60,24 +60,24 @@ html body aside img.nexlab-sidebar-logo{
   filter:none !important;
 }
 
-/* NEXLAB Beta 0.26.61 — Matriz visual compacta */
-.permission-matrix-v02661{gap:1rem!important}
-.permission-matrix-v02661 .module-header{background:linear-gradient(135deg,#07162d 0%,#0e1f3d 58%,#10275b 100%)!important;color:#fff!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:1.45rem!important;box-shadow:0 18px 40px rgba(2,18,48,.2)!important;overflow:hidden!important}
-.permission-matrix-v02661 .module-header:after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#8ed11a,#ff8a00,#0a6bff)}
-.permission-matrix-v02661 .module-header :where(h1,p,span,svg){color:#fff!important}
-.permission-matrix-v02661 .module-header__icon{background:rgba(255,255,255,.09)!important;border-color:rgba(255,255,255,.14)!important;color:#fff!important}
+/* NEXLAB Beta 0.26.64 — Matriz visual compacta */
+.permission-matrix-v02664{gap:1rem!important}
+.permission-matrix-v02664 .module-header{background:linear-gradient(135deg,#07162d 0%,#0e1f3d 58%,#10275b 100%)!important;color:#fff!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:1.45rem!important;box-shadow:0 18px 40px rgba(2,18,48,.2)!important;overflow:hidden!important}
+.permission-matrix-v02664 .module-header:after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#8ed11a,#ff8a00,#0a6bff)}
+.permission-matrix-v02664 .module-header :where(h1,p,span,svg){color:#fff!important}
+.permission-matrix-v02664 .module-header__icon{background:rgba(255,255,255,.09)!important;border-color:rgba(255,255,255,.14)!important;color:#fff!important}
 .permission-header-icon{font-size:1.25rem;line-height:1}
 .permission-header-actions{display:flex;align-items:center;gap:.55rem}
 .permission-refresh-button{display:inline-flex;align-items:center;gap:.45rem;border:0;border-radius:999px;padding:.72rem 1rem;background:rgba(255,255,255,.18);color:#fff;font-size:.72rem;font-weight:850;cursor:pointer}
 .permission-refresh-button:hover{background:rgba(255,255,255,.26)}
 .permission-refresh-button:disabled{opacity:.55;cursor:wait}
 .permission-help-button{display:grid;place-items:center;width:2.25rem;height:2.25rem;border:1px solid rgba(255,190,105,.65);border-radius:999px;background:transparent;color:#fff;font-weight:900;cursor:pointer}
-.permission-metrics-v02661{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:0!important;background:#fff;border:1px solid #d7dee8;border-radius:1.4rem;padding:.2rem .4rem;overflow:hidden;box-shadow:0 8px 24px rgba(15,23,42,.06)}
-.permission-metrics-v02661 .compact-metric{border:0!important;border-radius:0!important;box-shadow:none!important;background:#fff!important;min-width:0;padding:1rem 1.15rem!important}
-.permission-metrics-v02661 .compact-metric:not(:last-child){border-right:1px solid #edf1f5!important}
-.permission-matrix-v02661 .permission-tabs{border:1px solid #0b2a63;background:#e8ebef;border-radius:999px;padding:.3rem;gap:.25rem}
-.permission-matrix-v02661 .permission-tab{border-radius:999px;padding:.75rem 1.25rem;color:#0b2a63}
-.permission-matrix-v02661 .permission-tab.is-active{background:#062a50;color:#fff;box-shadow:none}
+.permission-metrics-v02664{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:0!important;background:#fff;border:1px solid #d7dee8;border-radius:1.4rem;padding:.2rem .4rem;overflow:hidden;box-shadow:0 8px 24px rgba(15,23,42,.06)}
+.permission-metrics-v02664 .compact-metric{border:0!important;border-radius:0!important;box-shadow:none!important;background:#fff!important;min-width:0;padding:1rem 1.15rem!important}
+.permission-metrics-v02664 .compact-metric:not(:last-child){border-right:1px solid #edf1f5!important}
+.permission-matrix-v02664 .permission-tabs{border:1px solid #0b2a63;background:#e8ebef;border-radius:999px;padding:.3rem;gap:.25rem}
+.permission-matrix-v02664 .permission-tab{border-radius:999px;padding:.75rem 1.25rem;color:#0b2a63}
+.permission-matrix-v02664 .permission-tab.is-active{background:#062a50;color:#fff;box-shadow:none}
 .permission-board-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(18rem,24rem);gap:1rem;align-items:start}
 .permission-board-main,.permission-description-panel{background:#fff;border:1px solid #d7dee8;border-radius:1.55rem;box-shadow:0 12px 32px rgba(15,23,42,.07)}
 .permission-board-main{padding:1.15rem;display:grid;gap:1rem;min-width:0}
@@ -116,8 +116,8 @@ html body aside img.nexlab-sidebar-logo{
 .tone-blocked .permission-chip-move{background:#ef4444;color:#fff}
 .permission-zone-empty{margin:auto;color:#94a3b8;font-size:.68rem;line-height:1.5;text-align:center;padding:1rem}
 .permission-save-panel{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem;align-items:end;border-top:1px solid #edf1f5;padding-top:1rem}
-.permission-reason-v02661{margin:0!important}
-.permission-reason-v02661 textarea{min-height:4.8rem!important}
+.permission-reason-v02664{margin:0!important}
+.permission-reason-v02664 textarea{min-height:4.8rem!important}
 .permission-save-actions{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 .permission-save-actions .permission-primary-button,.permission-save-actions .permission-secondary-button{width:auto;min-width:10rem;margin:0}
 .permission-description-panel{position:sticky;top:1rem;padding:1rem;min-height:26rem}
@@ -134,6 +134,6 @@ html body aside img.nexlab-sidebar-logo{
 .permission-description-empty{color:#94a3b8}
 .permission-description-empty span{font-size:2rem;color:#cbd5e1}
 .permission-description-empty p{max-width:15rem;font-size:.76rem;line-height:1.55}
-.permission-history-v02661{margin-top:0}
-@media(max-width:1000px){.permission-board-layout{grid-template-columns:1fr}.permission-description-panel{position:static;min-height:0}.permission-description-content,.permission-description-empty{min-height:12rem}.permission-metrics-v02661{grid-template-columns:repeat(2,minmax(0,1fr))!important}.permission-metrics-v02661 .compact-metric:nth-child(2){border-right:0!important}.permission-metrics-v02661 .compact-metric:nth-child(-n+2){border-bottom:1px solid #edf1f5!important}}
-@media(max-width:640px){.permission-metrics-v02661{grid-template-columns:1fr!important}.permission-metrics-v02661 .compact-metric{border-right:0!important;border-bottom:1px solid #edf1f5!important}.permission-metrics-v02661 .compact-metric:last-child{border-bottom:0!important}.permission-board-main{padding:.85rem}.permission-context-row{align-items:stretch}.permission-context-field{width:100%}.permission-context-summary{align-items:flex-start;text-align:left}.permission-chip-cloud{display:grid;grid-template-columns:1fr}.permission-compact-chip{max-width:none;width:100%;border-radius:1rem}.permission-save-panel{grid-template-columns:1fr}.permission-save-actions{justify-content:stretch}.permission-save-actions .permission-primary-button,.permission-save-actions .permission-secondary-button{width:100%}.permission-header-actions{flex-wrap:wrap;justify-content:flex-end}}
+.permission-history-v02664{margin-top:0}
+@media(max-width:1000px){.permission-board-layout{grid-template-columns:1fr}.permission-description-panel{position:static;min-height:0}.permission-description-content,.permission-description-empty{min-height:12rem}.permission-metrics-v02664{grid-template-columns:repeat(2,minmax(0,1fr))!important}.permission-metrics-v02664 .compact-metric:nth-child(2){border-right:0!important}.permission-metrics-v02664 .compact-metric:nth-child(-n+2){border-bottom:1px solid #edf1f5!important}}
+@media(max-width:640px){.permission-metrics-v02664{grid-template-columns:1fr!important}.permission-metrics-v02664 .compact-metric{border-right:0!important;border-bottom:1px solid #edf1f5!important}.permission-metrics-v02664 .compact-metric:last-child{border-bottom:0!important}.permission-board-main{padding:.85rem}.permission-context-row{align-items:stretch}.permission-context-field{width:100%}.permission-context-summary{align-items:flex-start;text-align:left}.permission-chip-cloud{display:grid;grid-template-columns:1fr}.permission-compact-chip{max-width:none;width:100%;border-radius:1rem}.permission-save-panel{grid-template-columns:1fr}.permission-save-actions{justify-content:stretch}.permission-save-actions .permission-primary-button,.permission-save-actions .permission-secondary-button{width:100%}.permission-header-actions{flex-wrap:wrap;justify-content:flex-end}}

@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "NEXLAB Beta 0.26.61",
+  "name": "NEXLAB Beta 0.26.64",
   "short_name": "NEXLAB",
-  "description": "Gestão interna do Coworking Space UEMA Timon — matriz de permissões visual compacta e ambiente de teste isolado.",
+  "description": "Gestão interna do Coworking Space UEMA Timon — correção do layout e cache do módulo de Permissões.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

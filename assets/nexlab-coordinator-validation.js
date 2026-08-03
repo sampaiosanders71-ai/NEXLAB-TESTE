@@ -1,10 +1,11 @@
 (function(){
   'use strict';
 
-  const VERSION='0.26.61';
-  const PROJECT_REF='eahldhabwulnwhuwrhvc';
-  const BASE=`https://${PROJECT_REF}.supabase.co`;
-  const KEY='sb_publishable_hr-WTQUBbBE0Ei3Lr2hkhQ_XSKG_PXa';
+  const VERSION='0.26.64';
+  const CONFIG=window.__NEXLAB_CONFIG__?.assert?.()||(()=>{throw new Error('Configuração central do NEXLAB não carregada.');})();
+  const PROJECT_REF=CONFIG.projectRef;
+  const BASE=CONFIG.supabaseUrl;
+  const KEY=CONFIG.supabaseAnonKey;
   let cachedProfile=null;
   let cachedAt=0;
 
@@ -25,14 +26,8 @@
   `;
   document.head.appendChild(style);
 
-  function authToken(){
-    for(let i=0;i<localStorage.length;i+=1){
-      const key=localStorage.key(i)||'';
-      if(!key.startsWith(`sb-${PROJECT_REF}-auth-token`))continue;
-      try{const value=JSON.parse(localStorage.getItem(key)||'null');const token=value?.access_token||value?.currentSession?.access_token;if(token)return token;}catch{}
-    }
-    return '';
-  }
+  function authToken(){return CONFIG.getAccessToken();}
+
   function jwtSubject(jwt){
     try{const body=jwt.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');const padded=body.padEnd(Math.ceil(body.length/4)*4,'=');const payload=JSON.parse(decodeURIComponent(Array.from(atob(padded),c=>`%${c.charCodeAt(0).toString(16).padStart(2,'0')}`).join('')));return String(payload?.sub||'');}catch{return '';}
   }
@@ -63,7 +58,7 @@
   function validationScript(state){return {format:'NEXLAB_COORDINATOR_VALIDATION_SCRIPT',format_version:'1.0',app_version:VERSION,generated_at:new Date().toISOString(),cycle:state.cycle,items:state.items.map(item=>({item_key:item.item_key,title:item.title,description:item.description,test_steps:item.test_steps,expected_result:item.expected_result,required:item.required}))};}
 
   async function openValidation(options={}){
-    const {body}=dialog('Validação dos coordenadores','Roteiro oficial de homologação da Beta 0.26.61. Cada item obrigatório precisa de aprovação registrada por Coordenador.');
+    const {body}=dialog('Validação dos coordenadores','Roteiro oficial de homologação da Beta 0.26.64. Cada item obrigatório precisa de aprovação registrada por Coordenador.');
     const loading=note('Carregando ciclo de validação...');body.appendChild(loading);
     try{
       let state=await rpc('nexlab_get_validation_cycle_v02657');loading.remove();
