@@ -1,9 +1,8 @@
 (()=>{
 'use strict';
-const VERSION='0.26.63';
-const CONFIG=window.__NEXLAB_CONFIG__?.assert?.()||(()=>{throw new Error('Configuração central do NEXLAB não carregada.');})();
-const BASE=CONFIG.supabaseUrl;
-const KEY=CONFIG.supabaseAnonKey;
+const VERSION='0.26.61';
+const BASE='https://eahldhabwulnwhuwrhvc.supabase.co';
+const KEY='sb_publishable_hr-WTQUBbBE0Ei3Lr2hkhQ_XSKG_PXa';
 let credentials=[];
 let currentOverlay=null;
 let currentRole='';
@@ -24,7 +23,7 @@ style.textContent=`
 @media(max-width:640px){#nexlab-test-trigger{right:14px;bottom:78px;padding:12px}#nexlab-test-trigger span{display:none}.nexlab-test-overlay{padding:0}.nexlab-test-dialog{max-height:100vh;height:100%;border-radius:0}.nexlab-test-head,.nexlab-test-body{padding-left:18px;padding-right:18px}}
 `;
 document.head.appendChild(style);
-function token(){return CONFIG.getAccessToken();}
+function token(){for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i)||'';if(k.startsWith('sb-eahldhabwulnwhuwrhvc-auth-token')){try{const v=JSON.parse(localStorage.getItem(k)||'null');const t=v?.access_token||v?.currentSession?.access_token;if(t)return t}catch{}}}return null}
 async function call(action,extra={}){const t=token();if(!t)throw new Error('Sessão não encontrada. Entre novamente no NEXLAB.');const r=await fetch(`${BASE}/functions/v1/nexlab-test-environment`,{method:'POST',headers:{apikey:KEY,Authorization:`Bearer ${t}`,'Content-Type':'application/json'},body:JSON.stringify({action,...extra}),cache:'no-store'});let data={};try{data=await r.json()}catch{}if(!r.ok||data?.ok===false)throw new Error(data?.message||`Falha HTTP ${r.status}.`);return data}
 async function isAdmin(){const t=token();if(!t)return false;try{const u=await fetch(`${BASE}/auth/v1/user`,{headers:{apikey:KEY,Authorization:`Bearer ${t}`},cache:'no-store'}).then(r=>r.ok?r.json():null);if(!u?.id)return false;const rows=await fetch(`${BASE}/rest/v1/profiles?id=eq.${encodeURIComponent(u.id)}&select=role,ativo`,{headers:{apikey:KEY,Authorization:`Bearer ${t}`},cache:'no-store'}).then(r=>r.ok?r.json():[]);const p=rows?.[0];return p&&p.ativo!==false&&['admin','administrador'].includes(String(p.role||'').toLowerCase())}catch{return false}}
 function fmt(value){if(!value)return'—';const d=new Date(value);return Number.isNaN(d.getTime())?String(value):d.toLocaleString('pt-BR')}

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#0B2A63" />
     <meta name="application-name" content="NEXLAB" />
-    <meta name="nexlab-version" content="0.26.63" />
+    <meta name="nexlab-version" content="0.26.61" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -13,7 +13,7 @@
     <meta name="description" content="Gestão interna do Coworking Space UEMA Timon — homologação técnica offline e Dashboard com transição segura de artefatos." />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.supabase.co; font-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.r2.cloudflarestorage.com; worker-src 'self'; manifest-src 'self'; media-src 'none';" />
-    <title>NEXLAB Beta 0.26.63</title>
+    <title>NEXLAB Beta 0.26.61</title>
     <style id="nexlab-startup-shell-style">
       html,body,#root{min-height:100%;margin:0}body{background:#f5f6f8;color:#10233f;font-family:Arial,sans-serif}
       .nexlab-startup-shell{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px;box-sizing:border-box;text-align:center}
@@ -25,33 +25,34 @@
       .nexlab-startup-recovery.is-visible{display:block}.nexlab-startup-retry{display:inline-block;margin-top:10px;padding:10px 16px;border-radius:10px;background:#0b2a63;color:#fff;text-decoration:none;font-weight:700}
       @keyframes nexlabStartupSpin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.nexlab-startup-spinner{animation:none}}
     </style>
-    <!-- NEXLAB Beta 0.26.63: registro explícito de RPCs, bloqueio seguro por padrão e nomes de usuários sem injeção de HTML. -->
+    <!-- NEXLAB Beta 0.26.61: registro explícito de RPCs, bloqueio seguro por padrão e nomes de usuários sem injeção de HTML. -->
     <link rel="icon" type="image/png" sizes="192x192" href="./icons/nexlab-favicon-rounded.png?v=brand-r50" />
     <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png?v=brand-r50" />
-    <script src="./assets/nexlab-config.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script src="./assets/nexlab-release-identity.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script src="./assets/nexlab-rpc-registry.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script src="./assets/nexlab-profile-preview.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script defer src="./assets/nexlab-admin-ui-guard.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <link rel="manifest" href="./manifest.webmanifest?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase" />
-<link rel="modulepreload" href="./assets/nexlab-runtime-vendor.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase" />
-    <link rel="modulepreload" href="./assets/nexlab-runtime-shared.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase" />
+    <script src="./assets/nexlab-release-identity.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <script src="./assets/nexlab-rpc-registry.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <script src="./assets/nexlab-profile-preview.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <script defer src="./assets/nexlab-admin-ui-guard.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <link rel="manifest" href="./manifest.webmanifest?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado" />
+    <link rel="dns-prefetch" href="//eahldhabwulnwhuwrhvc.supabase.co" />
+    <link rel="preconnect" href="https://eahldhabwulnwhuwrhvc.supabase.co" crossorigin />
+    <link rel="modulepreload" href="./assets/nexlab-runtime-vendor.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado" />
+    <link rel="modulepreload" href="./assets/nexlab-runtime-shared.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado" />
     <link rel="stylesheet" crossorigin href="./assets/index-B1u8eynw.css?v=brand-r50" />
-    <link rel="stylesheet" href="./assets/nexlab-visual.css?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase" />
-    <script src="./assets/nexlab-bootstrap.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script src="./assets/nexlab-dialogs.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script src="./assets/nexlab-runtime-realtime-core.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script defer src="./assets/nexlab-update-manager.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script src="./assets/nexlab-runtime-realtime-hub.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script defer src="./assets/nexlab-push-navigation.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script defer src="./assets/nexlab-device-homologation.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script type="module" crossorigin src="./assets/nexlab-runtime-app.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script defer src="./assets/nexlab-visual.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
+    <link rel="stylesheet" href="./assets/nexlab-visual.css?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado" />
+    <script src="./assets/nexlab-bootstrap.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <script src="./assets/nexlab-dialogs.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <script src="./assets/nexlab-runtime-realtime-core.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <script defer src="./assets/nexlab-update-manager.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <script src="./assets/nexlab-runtime-realtime-hub.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <script defer src="./assets/nexlab-push-navigation.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <script defer src="./assets/nexlab-device-homologation.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <script type="module" crossorigin src="./assets/nexlab-runtime-app.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <script defer src="./assets/nexlab-visual.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
     <!-- Recursos não críticos são ativados após a primeira renderização. -->
-    <script defer src="./assets/nexlab-auth-security.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script defer src="./assets/nexlab-test-environment.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script defer src="./assets/nexlab-coordinator-validation.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
-    <script defer src="./assets/nexlab-admin-homologation.js?v=app-beta-0-26-63-homologacao-funcional-pwa-supabase"></script>
+    <script defer src="./assets/nexlab-auth-security.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <script defer src="./assets/nexlab-test-environment.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <script defer src="./assets/nexlab-coordinator-validation.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
+    <script defer src="./assets/nexlab-admin-homologation.js?v=app-beta-0-26-61-matriz-permissoes-visual-ambiente-teste-isolado"></script>
   </head>
   <body>
     <div id="root">
