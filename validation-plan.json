@@ -1,7 +1,7 @@
 {
   "format": "NEXLAB_COORDINATOR_VALIDATION_SCRIPT",
   "format_version": "1.0",
-  "app_version": "0.26.64",
+  "app_version": "0.26.67",
   "title": "Roteiro de validação dos Coordenadores",
   "minimum_coordinator_approvals_per_item": 1,
   "promotion_rules": {
@@ -106,13 +106,25 @@
         "Remover temporariamente o arquivo de configuração em ambiente local e confirmar bloqueio seguro da inicialização",
         "Confirmar que o CSS principal usa a revisão atual do aplicativo, sem o parâmetro brand-r50",
         "Confirmar que nexlab-permissions-v02664.css está no shell obrigatório e no teste offline",
-        "Confirmar por estilo computado que o quadro de Permissões usa grid, cards e painel de descrição"
+        "Confirmar por estilo computado que o quadro de Permissões usa grid, cards e painel de descrição",
+        "Confirmar a ordem Ideia, Análise, Aprovado, Em andamento, Finalizado e Arquivado",
+        "Confirmar que Planejamento não aparece como status e registros legados são normalizados para Em andamento",
+        "Confirmar seis indicadores compactos e clicáveis abaixo do banner de Projetos",
+        "Confirmar busca, prioridade, responsável, equipe, prazo e alternância Quadro/Tabela",
+        "Confirmar seis colunas do Kanban com rolagem horizontal e drag and drop persistente",
+        "Confirmar que cada card mostra somente título, prioridade e responsável",
+        "Confirmar modal amplo com subtarefas na lateral e layout de uma coluna no celular",
+        "Confirmar tabela com Projeto, Etapa, Prioridade, Responsável, Prazo e Ações",
+        "Confirmar Editar e Mais ações no cabeçalho do modal sem quebrar permissões",
+        "Confirmar que dados antigos em cache com planejamento aparecem em Em andamento",
+        "Confirmar desempate estável na ordenação por prazo",
+        "Confirmar que o banco aceita somente as seis etapas oficiais após a normalização de compatibilidade"
       ],
       "expected_result": "Cache offline íntegro, Dashboard consolidado validado e runtime sem referências ativas a bundles históricos."
     }
   ],
-  "release_title": "Beta 0.26.64 — correção visual e de cache do módulo de Permissões",
-  "generated_at": "2026-08-03T03:10:00Z",
+  "release_title": "Beta 0.26.67 — Projetos: validação final e correções de regressão",
+  "generated_at": "2026-08-04T04:26:00Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
     "controlled_test_run": "completed_and_cleaned",
@@ -132,7 +144,7 @@
   },
   "execution_5_pwa_homologation": {
     "status": "technical_ready_physical_pending",
-    "record_rpc": "nexlab_record_device_homologation_v02664",
+    "record_rpc": "nexlab_record_device_homologation_v02667",
     "required_evidence": [
       "installed_launch",
       "update_activation",
@@ -148,5 +160,26 @@
     "smtp": "not_exposed_by_connector_requires_dashboard_verification",
     "pg_net": "0.20.3_non_relocatable_platform_owned_public_schema",
     "legacy_r49_edge_function": "active_orphan_deployment_requires_management_deletion"
+  },
+  "execution_8_final_validation": {
+    "status": "static_and_database_contracts_passed_publication_device_confirmation_pending",
+    "creation_editing_backend_contracts": "rpc_presence_and_database_contract_verified",
+    "status_contract": [
+      "ideia",
+      "analise",
+      "aprovacao",
+      "execucao",
+      "finalizado",
+      "arquivado"
+    ],
+    "legacy_cache_normalization": "planejamento_to_execucao_before_render",
+    "legacy_database_normalization": "trigger_and_rpc_input_normalization",
+    "database_constraint_exact_six_statuses": true,
+    "deadline_sort_tiebreaker_fixed": true,
+    "kanban_accessible_region": true,
+    "filters_table_modal_responsive_static_contracts": "passed",
+    "pwa_shell_and_hashes": "passed",
+    "real_authenticated_browser": "pending_after_publication",
+    "physical_drag_and_mobile": "pending_after_publication"
   }
 }

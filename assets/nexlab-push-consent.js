@@ -2,8 +2,8 @@
   'use strict';
 
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({
-    version:'0.26.64',
-    revision:'beta-0-26-64-correcao-visual-permissoes-cache-css'
+    version:'0.26.67',
+    revision:'beta-0-26-67-projetos-validacao-final-regressoes'
   });
   if(globalThis.__NEXLAB_PUSH_CONSENT__?.revision===BUILD.revision)return;
 

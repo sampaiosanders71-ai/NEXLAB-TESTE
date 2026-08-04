@@ -80,7 +80,7 @@
   }
 
   window.NexlabProfilePreviewGuard=Object.freeze({
-    version:'0.26.64',
+    version:'0.26.67',
     classifyRequest,
     selfTest,
     readOnlyRpcs:Object.freeze([...READ_ONLY_RPCS]),

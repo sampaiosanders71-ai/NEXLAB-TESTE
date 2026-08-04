@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const ID=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.64',release:'Beta',revision:'beta-0-26-64-correcao-visual-permissoes-cache-css'});
+  const ID=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.67',release:'Beta',revision:'beta-0-26-67-projetos-validacao-final-regressoes'});
   if(globalThis.__NEXLAB_REALTIME_CORE__?.revision===ID.revision)return;
 
   const VERSION=ID.version;

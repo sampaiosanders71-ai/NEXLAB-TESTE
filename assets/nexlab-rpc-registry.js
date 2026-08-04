@@ -21,7 +21,7 @@
       "nexlab_get_dashboard_summary_v2690",
       "nexlab_get_general_report_v26320",
       "nexlab_get_health_observability_v26220",
-      "nexlab_get_homologation_diagnostics_v02664",
+      "nexlab_get_homologation_diagnostics_v02667",
       "nexlab_get_meeting_responses_v263038",
       "nexlab_get_operational_bookings_v26312",
       "nexlab_get_operational_report_v26350",
@@ -107,7 +107,7 @@
       "nexlab_move_project_v2690",
       "nexlab_notification_bulk_action_v2702",
       "nexlab_quarantine_test_profiles",
-      "nexlab_record_device_homologation_v02664",
+      "nexlab_record_device_homologation_v02667",
       "nexlab_record_production_snapshot",
       "nexlab_record_report_export",
       "nexlab_respond_meeting_invitation_v263042",
@@ -146,7 +146,7 @@
       "nexlab_record_client_error",
       "nexlab_record_client_error_v26_7",
       "nexlab_record_client_error_v26_7_4",
-      "nexlab_record_device_homologation_v02664",
+      "nexlab_record_device_homologation_v02667",
       "nexlab_record_production_snapshot"
   ]);
   const SIMULATED_PERMISSION=Object.freeze([
@@ -201,7 +201,7 @@
   }
 
   const registry=Object.freeze({
-    version:'0.26.64',
+    version:'0.26.67',
     policy:'explicit-default-mutation',
     readOnly:READ_ONLY,
     mutating:MUTATING,

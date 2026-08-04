@@ -1,12 +1,12 @@
 (function(){
   'use strict';
-  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.64',release:'Beta',revision:'beta-0-26-64-correcao-visual-permissoes-cache-css',assetRevision:'app-beta-0-26-64-correcao-visual-permissoes-cache-css',cacheName:'nexlab-beta-0-26-64-correcao-visual-permissoes-cache-css'});
+  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.67',release:'Beta',revision:'beta-0-26-67-projetos-validacao-final-regressoes',assetRevision:'app-beta-0-26-67-projetos-validacao-final-regressoes',cacheName:'nexlab-beta-0-26-67-projetos-validacao-final-regressoes'});
   if (window.__NEXLAB_PWA_READINESS__?.revision === BUILD_IDENTITY.revision) return;
 
   const VERSION=BUILD_IDENTITY.version;
   const RELEASE=BUILD_IDENTITY.release;
   const REVISION=BUILD_IDENTITY.revision;
-  const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-64-correcao-visual-permissoes-cache-css';
+  const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-67-projetos-validacao-final-regressoes';
   const ASSET_REVISION=BUILD_IDENTITY.assetRevision;
   const CACHE_NAME=BUILD_IDENTITY.cacheName;
   const STORAGE_KEY='nexlab:pwa-readiness:'+VERSION;

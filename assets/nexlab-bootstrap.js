@@ -2,7 +2,7 @@
   if (window.__NEXLAB_BOOTSTRAP_V26_7__) return;
   window.__NEXLAB_BOOTSTRAP_V26_7__ = true;
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.64',release:'Beta',revision:'beta-0-26-64-correcao-visual-permissoes-cache-css',assetRevision:'app-beta-0-26-64-correcao-visual-permissoes-cache-css',cacheName:'nexlab-beta-0-26-64-correcao-visual-permissoes-cache-css',generatedAt:'2026-08-03T03:10:00Z'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.67',release:'Beta',revision:'beta-0-26-67-projetos-validacao-final-regressoes',assetRevision:'app-beta-0-26-67-projetos-validacao-final-regressoes',cacheName:'nexlab-beta-0-26-67-projetos-validacao-final-regressoes',generatedAt:'2026-08-04T04:07:57Z'});
   const APP_VERSION = BUILD_IDENTITY.version;
   const APP_RELEASE = BUILD_IDENTITY.release;
   const APP_REVISION = BUILD_IDENTITY.revision;
@@ -305,8 +305,8 @@
 
 
   const OBSERVABILITY_VERSION = APP_VERSION;
-  const OBSERVABILITY_QUEUE_KEY = 'nexlab:observability:queue:v0.26.64';
-  const OBSERVABILITY_DEDUP_KEY = 'nexlab:observability:dedup:v0.26.64';
+  const OBSERVABILITY_QUEUE_KEY = 'nexlab:observability:queue:v0.26.67';
+  const OBSERVABILITY_DEDUP_KEY = 'nexlab:observability:dedup:v0.26.67';
   const OBSERVABILITY_RPC = 'nexlab_record_client_error_v26_7_4';
   const OBSERVABILITY_MAX_QUEUE = 20;
   const OBSERVABILITY_DEDUP_MS = 5 * 60 * 1000;
@@ -637,8 +637,8 @@
   }
 
 
-  const USER_ERROR_CONTEXT_KEY = 'nexlab:feedback-assist:context:v0.26.64';
-  const USER_ERROR_STATE_KEY = 'nexlab:user-error-state:v0.26.64';
+  const USER_ERROR_CONTEXT_KEY = 'nexlab:feedback-assist:context:v0.26.67';
+  const USER_ERROR_STATE_KEY = 'nexlab:user-error-state:v0.26.67';
   const USER_ERROR_MESSAGE = 'Erro, tente novamente. Se o erro persistir, informe o problema no Feedback para ser corrigido.';
   const USER_ERROR_REPEAT_MS = 90 * 1000;
   const USER_ERROR_BURST_MS = 5 * 60 * 1000;
@@ -975,7 +975,7 @@
     }
   } catch {}
 
-  const PERFORMANCE_ALERT_STATE_KEY = 'nexlab:performance-alert-state:v0.26.64';
+  const PERFORMANCE_ALERT_STATE_KEY = 'nexlab:performance-alert-state:v0.26.67';
   const PERFORMANCE_ALERT_MIN_INTERVAL_MS = 10 * 60 * 1000;
   let performanceAlertState = (()=>{try{return JSON.parse(localStorage.getItem(PERFORMANCE_ALERT_STATE_KEY)||'null');}catch{return null;}})() || {
     degraded: false,
@@ -1053,7 +1053,7 @@
   window.addEventListener('nexlab:dashboard-bundle-metrics',(event)=>{
     const detail=event.detail||{};
     window.__NEXLAB_DASHBOARD_BUNDLE_METRICS__=Object.freeze({...detail});
-    try{sessionStorage.setItem('nexlab:dashboard-bundle:v0.26.64',JSON.stringify(detail));}catch{}
+    try{sessionStorage.setItem('nexlab:dashboard-bundle:v0.26.67',JSON.stringify(detail));}catch{}
     if(Number(detail.total_ms||0)>5000||Number(detail.failed_section_count||0)>0){
       observabilityQueueEvent({source:'dashboard-bundle',severity:Number(detail.failed_section_count||0)>0?'warning':'info',module:'dashboard',page:'dashboard',fingerprint:'dashboard-bundle-v02656',message:Number(detail.failed_section_count||0)>0?'O pacote consolidado do Dashboard concluiu com seções indisponíveis.':'O pacote consolidado do Dashboard excedeu cinco segundos.',metadata:{...detail}});
     }
@@ -1086,7 +1086,7 @@
     performanceState.capturedAt = new Date().toISOString();
     window.__NEXLAB_PERFORMANCE__ = Object.freeze({ ...performanceState });
     try {
-      sessionStorage.setItem('nexlab:performance:v0.26.64', JSON.stringify(performanceState));
+      sessionStorage.setItem('nexlab:performance:v0.26.67', JSON.stringify(performanceState));
     } catch {}
     emit('nexlab:performance-metrics', { ...performanceState });
   }
@@ -1193,19 +1193,19 @@
   });
 })();
 
-/* NEXLAB Beta 0.26.64 — recursos pós-abertura com nova tentativa controlada. */
+/* NEXLAB Beta 0.26.67 — recursos pós-abertura com nova tentativa controlada. */
 (function(){
   'use strict';
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||{};
-  const VERSION=BUILD.version||'0.26.64';
-  const REVISION=BUILD.revision||'beta-0-26-64-correcao-visual-permissoes-cache-css';
+  const VERSION=BUILD.version||'0.26.67';
+  const REVISION=BUILD.revision||'beta-0-26-67-projetos-validacao-final-regressoes';
   if(globalThis.__NEXLAB_POST_STARTUP__?.revision===REVISION)return;
   const MAX_ATTEMPTS=3;
   const sources=(BUILD.resources?.postStartup||[
     'assets/nexlab-vapid-rotation.js',
     'assets/nexlab-push-consent.js',
     'assets/nexlab-feedback-evidence.js'
-  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-64-correcao-visual-permissoes-cache-css'));
+  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-67-projetos-validacao-final-regressoes'));
   const state={version:VERSION,revision:REVISION,status:'scheduled',loaded:[],errors:[],attempts:{},lastReason:'',startedAt:null,completedAt:null};
   const sourceState=new Map(sources.map(src=>[src,{status:'pending',attempts:0,lastError:''}]));
   let active=null;
