@@ -107,7 +107,7 @@
       "nexlab_move_project_v2690",
       "nexlab_notification_bulk_action_v2702",
       "nexlab_quarantine_test_profiles",
-      "nexlab_record_device_homologation_v02667",
+      "nexlab_record_device_homologation_v02670",
       "nexlab_record_production_snapshot",
       "nexlab_record_report_export",
       "nexlab_respond_meeting_invitation_v263042",
@@ -146,7 +146,7 @@
       "nexlab_record_client_error",
       "nexlab_record_client_error_v26_7",
       "nexlab_record_client_error_v26_7_4",
-      "nexlab_record_device_homologation_v02667",
+      "nexlab_record_device_homologation_v02670",
       "nexlab_record_production_snapshot"
   ]);
   const SIMULATED_PERMISSION=Object.freeze([
@@ -201,7 +201,7 @@
   }
 
   const registry=Object.freeze({
-    version:'0.26.67',
+    version:'0.26.70',
     policy:'explicit-default-mutation',
     readOnly:READ_ONLY,
     mutating:MUTATING,

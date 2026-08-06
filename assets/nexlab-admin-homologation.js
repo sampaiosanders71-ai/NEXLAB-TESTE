@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const VERSION='0.26.67';
+  const VERSION='0.26.70';
   const CONFIG=window.__NEXLAB_CONFIG__?.assert?.()||(()=>{throw new Error('Configuração central do NEXLAB não carregada.');})();
   const PROJECT_REF=CONFIG.projectRef;
   const BASE=CONFIG.supabaseUrl;
@@ -426,7 +426,7 @@
 
   async function openSecurityExport(){
     const {body}=createDialog('Exportação de segurança','Gere um snapshot sanitizado e auditado da configuração atual. Dados pessoais protegidos, credenciais e segredos não são incluídos.');
-    const purpose=document.createElement('label');purpose.className='nexlab-admin-field';purpose.innerHTML='<span>Finalidade da exportação</span><textarea>Homologação da Beta 0.26.67 e conferência das configurações de segurança.</textarea>';body.appendChild(purpose);
+    const purpose=document.createElement('label');purpose.className='nexlab-admin-field';purpose.innerHTML='<span>Finalidade da exportação</span><textarea>Homologação da Beta 0.26.70 e conferência das configurações de segurança.</textarea>';body.appendChild(purpose);
     body.appendChild(messageBox('O arquivo registra perfis apenas por contagem e função. A auditoria recente usa identificadores técnicos, sem e-mail, telefone, CPF, data de nascimento ou conteúdo pessoal.'));
     const actions=document.createElement('div');actions.className='nexlab-admin-actions';actions.innerHTML='<button type="button" class="nexlab-admin-btn nexlab-admin-primary">Gerar e baixar snapshot</button>';body.appendChild(actions);
     const output=document.createElement('div');body.appendChild(output);const button=actions.querySelector('button');

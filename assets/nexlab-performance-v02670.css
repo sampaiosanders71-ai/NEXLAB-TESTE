@@ -1,0 +1,21 @@
+/* NEXLAB Beta 0.26.70 — Volume e desempenho */
+:root{--nexlab-content-intrinsic-card:260px;--nexlab-content-intrinsic-row:58px}
+.nexlab-performance-managed{contain:layout style paint;content-visibility:auto;contain-intrinsic-size:auto var(--nexlab-content-intrinsic-card)}
+.nexlab-performance-row{content-visibility:auto;contain-intrinsic-size:auto var(--nexlab-content-intrinsic-row)}
+.nexlab-volume-hidden{display:none!important}
+.nexlab-volume-load-more-wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.7rem;padding:.75rem 0 .25rem;color:#64748b;font-size:.72rem;font-weight:700}
+.nexlab-volume-load-more{min-height:42px;padding:.65rem 1rem;border:1px solid #d6dee9;border-radius:12px;background:#fff;color:#16345f;font-size:.75rem;font-weight:800;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.nexlab-volume-load-more:hover,.nexlab-volume-load-more:focus-visible{border-color:#f59e0b;background:#fffaf2;outline:2px solid transparent}
+.nexlab-volume-load-more:focus-visible{box-shadow:0 0 0 3px rgba(245,158,11,.22)}
+[data-nexlab-low-power="true"] *{scroll-behavior:auto!important}
+[data-nexlab-low-power="true"] .compact-card,[data-nexlab-low-power="true"] .module-shell article{box-shadow:none!important}
+[data-nexlab-low-power="true"] .backdrop-blur-sm,[data-nexlab-low-power="true"] [class*="backdrop-blur"]{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+[data-nexlab-performance-degraded="true"] .animate-pulse,[data-nexlab-performance-degraded="true"] .animate-bounce{animation:none!important}
+.nexlab-project-kanban__column{content-visibility:auto;contain-intrinsic-size:340px 620px}
+.project-table-v2690 tbody tr,.project-table-v02667 tbody tr,.nexlab-activity-list>*{content-visibility:auto;contain-intrinsic-size:auto 58px}
+@media(max-width:640px){
+  :root{--nexlab-content-intrinsic-card:300px}
+  .nexlab-volume-load-more-wrap{position:relative;z-index:1;padding-bottom:1rem}
+  [data-nexlab-low-power="true"] *{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.animate-pulse,.animate-bounce{animation:none!important}}

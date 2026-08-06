@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const VERSION='0.26.67';
+  const VERSION='0.26.70';
   const CONFIG=window.__NEXLAB_CONFIG__?.assert?.()||(()=>{throw new Error('Configuração central do NEXLAB não carregada.');})();
   const PROJECT_REF=CONFIG.projectRef;
   const BASE=CONFIG.supabaseUrl;
@@ -58,7 +58,7 @@
   function validationScript(state){return {format:'NEXLAB_COORDINATOR_VALIDATION_SCRIPT',format_version:'1.0',app_version:VERSION,generated_at:new Date().toISOString(),cycle:state.cycle,items:state.items.map(item=>({item_key:item.item_key,title:item.title,description:item.description,test_steps:item.test_steps,expected_result:item.expected_result,required:item.required}))};}
 
   async function openValidation(options={}){
-    const {body}=dialog('Validação dos coordenadores','Roteiro oficial de homologação da Beta 0.26.67. Cada item obrigatório precisa de aprovação registrada por Coordenador.');
+    const {body}=dialog('Validação dos coordenadores','Roteiro oficial de homologação da Beta 0.26.70. Cada item obrigatório precisa de aprovação registrada por Coordenador.');
     const loading=note('Carregando ciclo de validação...');body.appendChild(loading);
     try{
       let state=await rpc('nexlab_get_validation_cycle_v02657');loading.remove();

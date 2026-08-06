@@ -1,7 +1,7 @@
 {
   "format": "NEXLAB_COORDINATOR_VALIDATION_SCRIPT",
   "format_version": "1.0",
-  "app_version": "0.26.67",
+  "app_version": "0.26.70",
   "title": "Roteiro de validação dos Coordenadores",
   "minimum_coordinator_approvals_per_item": 1,
   "promotion_rules": {
@@ -118,13 +118,19 @@
         "Confirmar Editar e Mais ações no cabeçalho do modal sem quebrar permissões",
         "Confirmar que dados antigos em cache com planejamento aparecem em Em andamento",
         "Confirmar desempate estável na ordenação por prazo",
-        "Confirmar que o banco aceita somente as seis etapas oficiais após a normalização de compatibilidade"
+        "Confirmar que o banco aceita somente as seis etapas oficiais após a normalização de compatibilidade",
+        "Confirmar carregamento inicial de 12 eventos com botão Carregar mais eventos",
+        "Confirmar carregamento inicial de 12 publicações e 12 feedbacks",
+        "Confirmar revelação progressiva das colunas do Kanban e tabelas extensas",
+        "Validar Estoque, Patrimônio, Agendamentos, Marketing e Atividades com o cenário fictício completo",
+        "Confirmar que a Central de Notificações permanece paginada no servidor em lotes de 20",
+        "Confirmar ausência de entregas externas elegíveis no cenário fictício"
       ],
       "expected_result": "Cache offline íntegro, Dashboard consolidado validado e runtime sem referências ativas a bundles históricos."
     }
   ],
-  "release_title": "Beta 0.26.67 — Projetos: validação final e correções de regressão",
-  "generated_at": "2026-08-04T04:26:00Z",
+  "release_title": "Beta 0.26.70 — Volume e desempenho",
+  "generated_at": "2026-08-06T00:41:52Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
     "controlled_test_run": "completed_and_cleaned",
@@ -144,7 +150,7 @@
   },
   "execution_5_pwa_homologation": {
     "status": "technical_ready_physical_pending",
-    "record_rpc": "nexlab_record_device_homologation_v02667",
+    "record_rpc": "nexlab_record_device_homologation_v02670",
     "required_evidence": [
       "installed_launch",
       "update_activation",
@@ -180,6 +186,35 @@
     "filters_table_modal_responsive_static_contracts": "passed",
     "pwa_shell_and_hashes": "passed",
     "real_authenticated_browser": "pending_after_publication",
-    "physical_drag_and_mobile": "pending_after_publication"
-  }
+    "physical_drag_and_mobile": "pending_after_publication",
+    "mobile_dashboard_hotfix": "pending_physical_confirmation_after_publication"
+  },
+  "responsive_global_checks": [
+    "viewport_360x800",
+    "viewport_393x873",
+    "viewport_412x915",
+    "landscape_short_height",
+    "visual_viewport_keyboard",
+    "safe_area_top_bottom",
+    "action_menu_collision",
+    "modal_single_scroll",
+    "table_horizontal_region",
+    "long_text_containment",
+    "touch_target_minimum",
+    "orientation_change"
+  ],
+  "volume_performance_checks": [
+    "events_progressive_render_12",
+    "board_progressive_render_12",
+    "feedback_progressive_render_12",
+    "kanban_runtime_reveal_8_mobile",
+    "project_table_runtime_reveal_20_mobile",
+    "content_visibility_cards_rows",
+    "low_power_mode",
+    "lazy_image_decoding",
+    "long_task_degradation_guard",
+    "notification_server_pagination_preserved",
+    "demo_dataset_full_volume",
+    "no_operational_data_removed"
+  ]
 }
