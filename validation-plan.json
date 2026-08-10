@@ -1,7 +1,7 @@
 {
   "format": "NEXLAB_COORDINATOR_VALIDATION_SCRIPT",
   "format_version": "1.0",
-  "app_version": "0.26.70",
+  "app_version": "0.26.73",
   "title": "Roteiro de validação dos Coordenadores",
   "minimum_coordinator_approvals_per_item": 1,
   "promotion_rules": {
@@ -9,7 +9,12 @@
     "no_adjustment_or_blocking_reviews": true,
     "permission_matrix_complete": true,
     "test_environment_clean": true,
-    "publication_keeps_beta_status": true
+    "publication_keeps_beta_status": true,
+    "exact_physical_device_receipt_required": true,
+    "exact_version_revision_match_required": true,
+    "physical_receipt_max_age_days": 14,
+    "manual_override_allowed": false,
+    "official_promotion_blocked_without_receipt": true
   },
   "items": [
     {
@@ -118,19 +123,13 @@
         "Confirmar Editar e Mais ações no cabeçalho do modal sem quebrar permissões",
         "Confirmar que dados antigos em cache com planejamento aparecem em Em andamento",
         "Confirmar desempate estável na ordenação por prazo",
-        "Confirmar que o banco aceita somente as seis etapas oficiais após a normalização de compatibilidade",
-        "Confirmar carregamento inicial de 12 eventos com botão Carregar mais eventos",
-        "Confirmar carregamento inicial de 12 publicações e 12 feedbacks",
-        "Confirmar revelação progressiva das colunas do Kanban e tabelas extensas",
-        "Validar Estoque, Patrimônio, Agendamentos, Marketing e Atividades com o cenário fictício completo",
-        "Confirmar que a Central de Notificações permanece paginada no servidor em lotes de 20",
-        "Confirmar ausência de entregas externas elegíveis no cenário fictício"
+        "Confirmar que o banco aceita somente as seis etapas oficiais após a normalização de compatibilidade"
       ],
       "expected_result": "Cache offline íntegro, Dashboard consolidado validado e runtime sem referências ativas a bundles históricos."
     }
   ],
-  "release_title": "Beta 0.26.70 — Volume e desempenho",
-  "generated_at": "2026-08-06T00:41:52Z",
+  "release_title": "Beta 0.26.73 — Gate de homologação física",
+  "generated_at": "2026-08-08T21:35:00Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
     "controlled_test_run": "completed_and_cleaned",
@@ -150,7 +149,7 @@
   },
   "execution_5_pwa_homologation": {
     "status": "technical_ready_physical_pending",
-    "record_rpc": "nexlab_record_device_homologation_v02670",
+    "record_rpc": "nexlab_record_device_homologation_v02673",
     "required_evidence": [
       "installed_launch",
       "update_activation",
@@ -158,7 +157,7 @@
       "push_display",
       "push_destination"
     ],
-    "physical_device": "pending_after_publication"
+    "physical_device": "required_before_official_promotion"
   },
   "execution_6_external_supabase": {
     "status": "diagnosed_external_actions_pending",
@@ -203,18 +202,53 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "volume_performance_checks": [
-    "events_progressive_render_12",
-    "board_progressive_render_12",
-    "feedback_progressive_render_12",
-    "kanban_runtime_reveal_8_mobile",
-    "project_table_runtime_reveal_20_mobile",
-    "content_visibility_cards_rows",
-    "low_power_mode",
-    "lazy_image_decoding",
-    "long_task_degradation_guard",
-    "notification_server_pagination_preserved",
-    "demo_dataset_full_volume",
-    "no_operational_data_removed"
-  ]
+  "revision": "beta-0-26-73-gate-homologacao-fisica",
+  "structural_recovery": {
+    "base_release": "0.26.69",
+    "rejected_release": "0.26.70",
+    "purge_previous_caches": true,
+    "runtime_features_esm_required": true,
+    "runtime_dom_manipulator_forbidden": true,
+    "mural_archive_transaction_required": true
+  },
+  "esm_module_gate": {
+    "required_for_publication": true,
+    "parser": "node:vm.SourceTextModule",
+    "all_public_js_must_parse": true,
+    "module_graph_must_link": true,
+    "individual_feature_facades": 17,
+    "failure_blocks_package": true
+  },
+  "module_recovery": {
+    "structural_errors": [
+      "SyntaxError",
+      "Unexpected token",
+      "missing named export",
+      "dynamic import failure",
+      "ChunkLoadError"
+    ],
+    "automatic_cache_purge_once": true,
+    "service_worker_update_once": true,
+    "same_revision_retry_guard_ms": 120000,
+    "manual_recovery_after_guard": true,
+    "user_data_deleted": false
+  },
+  "targeted_retest_0_26_72": {
+    "participants": "facade_link_and_rpc_contract",
+    "pending": "facade_link_and_rpc_contract",
+    "agenda": "facade_link_and_rpc_contract",
+    "dashboard": "root_module_graph_and_dashboard_loader_contract",
+    "physical_authenticated_browser": "pending_after_publication"
+  },
+  "execution_9_publication_gate": {
+    "status": "blocked_pending_real_physical_receipt",
+    "gate_rpc": "nexlab_get_release_publish_gate_v02673",
+    "assert_rpc": "nexlab_assert_release_publishable_v02673",
+    "candidate_deployment": "allowed_only_to_collect_real_device_evidence",
+    "official_promotion": "blocked_until_exact_receipt",
+    "manual_override_allowed": false,
+    "required_version": "0.26.73",
+    "required_revision": "beta-0-26-73-gate-homologacao-fisica",
+    "receipt_max_age_days": 14
+  }
 }

@@ -1,5 +1,5 @@
 importScripts('./assets/nexlab-release-identity.js');
-const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.70',release:'Beta',revision:'beta-0-26-70-volume-desempenho',assetRevision:'app-beta-0-26-70-volume-desempenho',cacheName:'nexlab-beta-0-26-70-volume-desempenho',generatedAt:'2026-08-06T00:43:06Z'});
+const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.73',release:'Beta',revision:'beta-0-26-73-gate-homologacao-fisica',assetRevision:'app-beta-0-26-73-gate-homologacao-fisica',cacheName:'nexlab-beta-0-26-73-gate-homologacao-fisica',generatedAt:'2026-08-08T21:35:00Z'});
 const APP_VERSION=BUILD_IDENTITY.version;
 const APP_RELEASE=BUILD_IDENTITY.release;
 const APP_REVISION=BUILD_IDENTITY.revision;
@@ -7,6 +7,7 @@ const GENERATED_AT=BUILD_IDENTITY.generatedAt;
 const ASSET_REVISION=BUILD_IDENTITY.assetRevision;
 const CACHE_NAME=BUILD_IDENTITY.cacheName;
 const CACHE_PREFIX='nexlab-';
+const STRUCTURAL_RECOVERY_PURGE_PREVIOUS_CACHES=true;
 const NETWORK_TIMEOUT_MS=3500;
 const APP_ENTRY_NETWORK_TIMEOUT_MS=1800;
 const RESOURCE_ENTRY=BUILD_IDENTITY.resources?.entry||Object.freeze({main:'assets/nexlab-runtime-app.js',vendor:'assets/nexlab-runtime-vendor.js',shared:'assets/nexlab-runtime-shared.js',feature:'assets/nexlab-runtime-features.js',export:'assets/nexlab-runtime-export.js'});
@@ -46,6 +47,7 @@ async function currentCacheMatch(request,options={}){
 }
 
 async function retainedCacheName(){
+  if(STRUCTURAL_RECOVERY_PURGE_PREVIOUS_CACHES)return null;
   if(retainedPreviousCacheName)return retainedPreviousCacheName;
   const keys=(await caches.keys()).filter(key=>key.startsWith(CACHE_PREFIX)&&key!==CACHE_NAME&&key!==INSTALL_CACHE_NAME).sort(compareCacheVersions);
   retainedPreviousCacheName=keys.length?keys[keys.length-1]:null;
@@ -240,13 +242,10 @@ self.addEventListener('activate',(event)=>{
   event.waitUntil((async()=>{
     const keys=await caches.keys();
     const previousCaches=keys.filter(key=>key.startsWith(CACHE_PREFIX)&&key!==CACHE_NAME&&key!==INSTALL_CACHE_NAME).sort(compareCacheVersions);
-    let retainedPrevious=null;
-    for(const cacheName of [...previousCaches].reverse()){
-      if(await validatePreviousCache(cacheName)){retainedPrevious=cacheName;break;}
-    }
-    retainedPreviousCacheName=retainedPrevious;
-    const obsoleteCaches=previousCaches.filter(key=>key!==retainedPrevious);
-    await Promise.all(obsoleteCaches.map(key=>caches.delete(key)));
+    // Structural recovery: remove every older NEXLAB cache, including the invalid 0.26.70 bundle.
+    const retainedPrevious=null;
+    retainedPreviousCacheName=null;
+    await Promise.all(previousCaches.map(key=>caches.delete(key)));
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
     for(const client of clients){

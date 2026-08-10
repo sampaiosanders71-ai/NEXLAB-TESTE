@@ -1,6 +1,6 @@
-/* NEXLAB Beta 0.26.70 — navegação Push sincronizada com a prontidão real do aplicativo. */
+/* NEXLAB Beta 0.26.73 — navegação Push sincronizada com a prontidão real do aplicativo. */
 (()=>{
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.70',revision:'beta-0-26-70-volume-desempenho',homologationRevision:'beta-0-26-70-volume-desempenho'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.73',revision:'beta-0-26-73-gate-homologacao-fisica',homologationRevision:'beta-0-26-73-gate-homologacao-fisica'});
   if(globalThis.__NEXLAB_PUSH_NAVIGATION__?.version===BUILD.version)return;
   const VERSION=BUILD.version;
   const BUILD_REVISION=BUILD.revision;

@@ -1,12 +1,12 @@
 (function(){
   'use strict';
-  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.70',release:'Beta',revision:'beta-0-26-70-volume-desempenho',assetRevision:'app-beta-0-26-70-volume-desempenho',cacheName:'nexlab-beta-0-26-70-volume-desempenho'});
+  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.73',release:'Beta',revision:'beta-0-26-73-gate-homologacao-fisica',assetRevision:'app-beta-0-26-73-gate-homologacao-fisica',cacheName:'nexlab-beta-0-26-73-gate-homologacao-fisica'});
   if (window.__NEXLAB_PWA_READINESS__?.revision === BUILD_IDENTITY.revision) return;
 
   const VERSION=BUILD_IDENTITY.version;
   const RELEASE=BUILD_IDENTITY.release;
   const REVISION=BUILD_IDENTITY.revision;
-  const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-70-volume-desempenho';
+  const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-73-gate-homologacao-fisica';
   const ASSET_REVISION=BUILD_IDENTITY.assetRevision;
   const CACHE_NAME=BUILD_IDENTITY.cacheName;
   const STORAGE_KEY='nexlab:pwa-readiness:'+VERSION;
@@ -19,6 +19,7 @@
   const EXPECTED_OPTIONAL=uniquePaths([...(RESOURCE_POLICY.functional||[]),...(RESOURCE_POLICY.optional||[]),...(RESOURCE_POLICY.compatibility||[])]);
   const OPTIONAL_WARM=uniquePaths(BUILD_IDENTITY.resources?.lazy||[]);
   const EXPECTED_LAZY_MODULES=['TeamsModule','ParticipantsModule','PermissionsModule','UsersModule','ProjectsModule','ProfileModule','FeedbackModuleLegacy','AssetsModule','StockModule','BookingsModule','MarketingModule','EventsModule','BoardModule','LogsModule','ReportsModule','PendingModule','AgendaModule'];
+  const MODULE_FACADES=Object.freeze({"TeamsModule":"assets/modules/teams.js","ParticipantsModule":"assets/modules/participants.js","PermissionsModule":"assets/modules/permissions.js","UsersModule":"assets/modules/users.js","ProjectsModule":"assets/modules/projects.js","ProfileModule":"assets/modules/profile.js","FeedbackModuleLegacy":"assets/modules/feedback.js","AssetsModule":"assets/modules/assets.js","StockModule":"assets/modules/stock.js","BookingsModule":"assets/modules/bookings.js","MarketingModule":"assets/modules/marketing.js","EventsModule":"assets/modules/events.js","BoardModule":"assets/modules/board.js","LogsModule":"assets/modules/logs.js","ReportsModule":"assets/modules/reports.js","PendingModule":"assets/modules/pending.js","AgendaModule":"assets/modules/agenda.js"});
   const OFFLINE_PROBE=uniquePaths(RESOURCE_POLICY.offlineProbe||RESOURCE_POLICY.mandatoryShell);
 
   const absolute=(value)=>new URL(value,document.baseURI).href;
@@ -154,21 +155,22 @@
     return results;
   }
   async function verifyRuntimeModules(){
-    const result={ok:false,featureOk:false,exportOk:false,expected:EXPECTED_LAZY_MODULES.length,opened:[],missing:[],errors:[],featureImportMs:0,exportImportMs:0};
-    try{
-      const featureUrl=absolute('./'+RESOURCE_ENTRY.feature+'?v='+encodeURIComponent(ASSET_REVISION));
-      const featureStarted=performance.now();
-      const featureModule=await Promise.race([import(featureUrl),timeout(20000)]);
-      result.featureImportMs=Math.round((performance.now()-featureStarted)*10)/10;
-      for(const name of EXPECTED_LAZY_MODULES){
-        try{
-          const resolved={default:featureModule?.[name]};
-          if(typeof resolved.default!=='function')throw new Error('Exportação ausente ou inválida.');
-          result.opened.push(name);
-        }catch(error){result.missing.push(name);result.errors.push({module:name,message:String(error?.message||error)});}
-      }
-      result.featureOk=result.opened.length===EXPECTED_LAZY_MODULES.length&&result.missing.length===0;
-    }catch(error){result.errors.push({module:'feature-bundle',message:String(error?.message||error)});}
+    const result={ok:false,featureOk:false,exportOk:false,expected:EXPECTED_LAZY_MODULES.length,opened:[],missing:[],errors:[],moduleImports:[],featureImportMs:0,exportImportMs:0};
+    const featureStarted=performance.now();
+    for(const name of EXPECTED_LAZY_MODULES){
+      const facade=MODULE_FACADES[name];
+      const started=performance.now();
+      try{
+        if(!facade)throw new Error('Facade ESM não registrada.');
+        const facadeUrl=absolute('./'+facade+'?v='+encodeURIComponent(ASSET_REVISION));
+        const imported=await Promise.race([import(facadeUrl),timeout(20000)]);
+        const elapsed=Math.round((performance.now()-started)*10)/10;
+        if(typeof imported?.default!=='function'&&typeof imported?.default!=='object')throw new Error('Exportação default ausente ou inválida.');
+        result.opened.push(name);result.moduleImports.push({module:name,path:facade,ok:true,ms:elapsed});
+      }catch(error){const elapsed=Math.round((performance.now()-started)*10)/10;result.missing.push(name);result.errors.push({module:name,message:String(error?.message||error)});result.moduleImports.push({module:name,path:facade||'',ok:false,ms:elapsed,message:String(error?.message||error)});}
+    }
+    result.featureImportMs=Math.round((performance.now()-featureStarted)*10)/10;
+    result.featureOk=result.opened.length===EXPECTED_LAZY_MODULES.length&&result.missing.length===0;
     try{
       const exportUrl=absolute('./'+RESOURCE_ENTRY.export+'?v='+encodeURIComponent(ASSET_REVISION));
       const exportStarted=performance.now();
@@ -252,7 +254,7 @@
     const checks={...technicalChecks,installedEvidence:objective.installedLaunch,updateActivationEvidence:objective.updateActivation,offlineNavigationEvidence:objective.offlineNavigation,pushDisplayedEvidence:objective.pushDisplayed,pushDestinationEvidence:objective.pushDestination,serverReceiptEvidence:objective.serverReceipt};
     const objectiveBlocking=['installedEvidence','updateActivationEvidence','offlineNavigationEvidence','pushDisplayedEvidence','pushDestinationEvidence','serverReceiptEvidence'];
     const readyForInstalledPresentation=technicalReady&&objectiveBlocking.every(key=>checks[key]===true);
-    const result={version:VERSION,release:RELEASE,revision:REVISION,cacheName:CACHE_NAME,ok:technicalReady,performance:performanceProbe,readyForInstalledPresentation,blockingChecks:technicalBlocking,installedBlockingChecks:[...technicalBlocking,...objectiveBlocking],checks,runtimeModules,objectiveEvidence:objective,display,manifest,serviceWorker,cache,releaseFile:{ok:releaseFile.ok,status:releaseFile.status,identityOk:releaseFile.identityOk,size:releaseFile.size,sha256:releaseFile.sha256},offlinePage,capturedAt:new Date().toISOString(),manualConfirmationRequired:!readyForInstalledPresentation,guidance:readyForInstalledPresentation?'Homologação técnica e evidências automáticas concluídas.':'A aprovação exige importação real dos módulos no navegador, evidências automáticas de atualização confirmada, instalação, navegação offline e abertura correta de um Push; marcações manuais não aprovam a homologação.'};
+    const result={version:VERSION,release:RELEASE,revision:REVISION,cacheName:CACHE_NAME,ok:technicalReady,performance:performanceProbe,readyForInstalledPresentation,blockingChecks:technicalBlocking,installedBlockingChecks:[...technicalBlocking,...objectiveBlocking],checks,runtimeModules,objectiveEvidence:objective,display,manifest,serviceWorker,cache,releaseFile:{ok:releaseFile.ok,status:releaseFile.status,identityOk:releaseFile.identityOk,size:releaseFile.size,sha256:releaseFile.sha256},offlinePage,capturedAt:new Date().toISOString(),manualConfirmationRequired:!readyForInstalledPresentation,guidance:readyForInstalledPresentation?'Homologação técnica e recibo físico desta revisão concluídos; o gate de promoção pode ser liberado.':'A aprovação exige importação real dos módulos no navegador, evidências automáticas de atualização confirmada, instalação, navegação offline e abertura correta de um Push; marcações manuais não aprovam a homologação.'};
     try{localStorage.setItem(STORAGE_KEY,JSON.stringify(result));}catch{}
     window.__NEXLAB_PWA_LAST_RESULT__=Object.freeze(result);
     window.dispatchEvent(new CustomEvent('nexlab:pwa-readiness-complete',{detail:result}));
