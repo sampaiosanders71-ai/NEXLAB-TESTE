@@ -1,6 +1,6 @@
 (()=>{
 'use strict';
-const VERSION='0.26.73';
+const VERSION='0.26.74';
 const CONFIG=window.__NEXLAB_CONFIG__?.assert?.()||(()=>{throw new Error('Configuração central do NEXLAB não carregada.');})();
 const BASE=CONFIG.supabaseUrl;
 const KEY=CONFIG.supabaseAnonKey;

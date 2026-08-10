@@ -201,7 +201,7 @@
   }
 
   const registry=Object.freeze({
-    version:'0.26.73',
+    version:'0.26.74',
     policy:'explicit-default-mutation',
     readOnly:READ_ONLY,
     mutating:MUTATING,

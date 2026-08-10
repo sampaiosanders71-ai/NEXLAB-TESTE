@@ -2,8 +2,8 @@
   'use strict';
 
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({
-    version:'0.26.73',
-    revision:'beta-0-26-73-gate-homologacao-fisica'
+    version:'0.26.74',
+    revision:'beta-0-26-74-inventario-rolagem-formularios'
   });
   if(globalThis.__NEXLAB_PUSH_CONSENT__?.revision===BUILD.revision)return;
 

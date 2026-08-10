@@ -2,7 +2,7 @@
   'use strict';
   if(root.__NEXLAB_CONFIG__?.valid)return;
 
-  const VERSION='0.26.73';
+  const VERSION='0.26.74';
   const SUPABASE_URL='https://eahldhabwulnwhuwrhvc.supabase.co';
   const SUPABASE_ANON_KEY='sb_publishable_hr-WTQUBbBE0Ei3Lr2hkhQ_XSKG_PXa';
   const VAPID_PUBLIC_KEY='BIwuvqKRH2PipAjpAMTwmVM6kUgN0XycoLCD99uuKJQcO3e0rXWZWBNBaMZaqFxGHBL90aKQrTbMZaNLb_xblLE';

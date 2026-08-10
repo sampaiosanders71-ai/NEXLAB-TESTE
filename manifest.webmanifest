@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "NEXLAB Beta 0.26.73",
+  "name": "NEXLAB Beta 0.26.74",
   "short_name": "NEXLAB",
-  "description": "Gestão interna do Coworking Space UEMA Timon — hotfix móvel, Dashboard e ações responsivas.",
+  "description": "NEXLAB Beta 0.26.74 — Estoque e Patrimônio com rolagem visível e formulários internos roláveis.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

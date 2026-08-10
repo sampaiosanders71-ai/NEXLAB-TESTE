@@ -1,5 +1,5 @@
 importScripts('./assets/nexlab-release-identity.js');
-const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.73',release:'Beta',revision:'beta-0-26-73-gate-homologacao-fisica',assetRevision:'app-beta-0-26-73-gate-homologacao-fisica',cacheName:'nexlab-beta-0-26-73-gate-homologacao-fisica',generatedAt:'2026-08-08T21:35:00Z'});
+const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.74',release:'Beta',revision:'beta-0-26-74-inventario-rolagem-formularios',assetRevision:'app-beta-0-26-74-inventario-rolagem-formularios',cacheName:'nexlab-beta-0-26-74-inventario-rolagem-formularios',generatedAt:'2026-08-10T21:30:00Z'});
 const APP_VERSION=BUILD_IDENTITY.version;
 const APP_RELEASE=BUILD_IDENTITY.release;
 const APP_REVISION=BUILD_IDENTITY.revision;
