@@ -1,7 +1,7 @@
 {
   "format": "NEXLAB_COORDINATOR_VALIDATION_SCRIPT",
   "format_version": "1.0",
-  "app_version": "0.26.74",
+  "app_version": "0.26.77",
   "title": "Roteiro de validação dos Coordenadores",
   "minimum_coordinator_approvals_per_item": 1,
   "promotion_rules": {
@@ -128,8 +128,8 @@
       "expected_result": "Cache offline íntegro, Dashboard consolidado validado e runtime sem referências ativas a bundles históricos."
     }
   ],
-  "release_title": "Beta 0.26.74 — Estoque e patrimônio — rolagem e formulários",
-  "generated_at": "2026-08-10T21:30:00Z",
+  "release_title": "Beta 0.26.77 — Consistência e estados da Central de Atividades",
+  "generated_at": "2026-08-11T14:52:19Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
     "controlled_test_run": "completed_and_cleaned",
@@ -149,7 +149,7 @@
   },
   "execution_5_pwa_homologation": {
     "status": "technical_ready_physical_pending",
-    "record_rpc": "nexlab_record_device_homologation_v02674",
+    "record_rpc": "nexlab_record_device_homologation_v02677",
     "required_evidence": [
       "installed_launch",
       "update_activation",
@@ -202,7 +202,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-74-inventario-rolagem-formularios",
+  "revision": "beta-0-26-77-telemetria-taxonomia-usabilidade-atividades",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -242,13 +242,58 @@
   },
   "execution_9_publication_gate": {
     "status": "blocked_pending_real_physical_receipt",
-    "gate_rpc": "nexlab_get_release_publish_gate_v02674",
-    "assert_rpc": "nexlab_assert_release_publishable_v02674",
+    "gate_rpc": "nexlab_get_release_publish_gate_v02677",
+    "assert_rpc": "nexlab_assert_release_publishable_v02677",
     "candidate_deployment": "allowed_only_to_collect_real_device_evidence",
     "official_promotion": "blocked_until_exact_receipt",
     "manual_override_allowed": false,
-    "required_version": "0.26.74",
-    "required_revision": "beta-0-26-74-inventario-rolagem-formularios",
+    "required_version": "0.26.77",
+    "required_revision": "beta-0-26-77-telemetria-taxonomia-usabilidade-atividades",
     "receipt_max_age_days": 14
+  },
+  "activity_system_consistency_0_26_76": {
+    "semantic_deduplication": true,
+    "duplicate_operational_rows_removed": 12,
+    "source_logs_preserved": true,
+    "security_audit_preserved": true,
+    "dynamic_activity_version": true,
+    "activity_version_source": "database_current_beta",
+    "distinct_loading_error_empty_states": true,
+    "retry_after_load_error": true,
+    "overview_uses_real_production_readiness": true,
+    "list_rpc": "nexlab_list_operational_activity_v02676",
+    "physical_confirmation_required": true
+  },
+  "activity_system_usability_0_26_77": {
+    "telemetry_context": "atividades-sistema",
+    "legacy_route_aliases": {
+      "logs": "activities",
+      "saude-sistema": "health"
+    },
+    "list_rpc": "nexlab_list_operational_activity_v02677",
+    "server_filters": [
+      "search",
+      "module",
+      "actor",
+      "category",
+      "entity",
+      "date_from",
+      "date_to"
+    ],
+    "taxonomy_version": "0.26.77",
+    "change_summary": true,
+    "details_panel": true,
+    "valid_icon_registry_only": true,
+    "tab_accessibility": [
+      "aria-controls",
+      "aria-labelledby",
+      "tabpanel",
+      "roving-tabindex",
+      "ArrowLeft",
+      "ArrowRight",
+      "Home",
+      "End"
+    ],
+    "physical_confirmation_required": true
   }
 }

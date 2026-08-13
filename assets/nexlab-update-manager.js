@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.74',release:'Beta',revision:'beta-0-26-74-inventario-rolagem-formularios',generatedAt:'2026-08-06T00:12:53Z',cacheName:'nexlab-beta-0-26-74-inventario-rolagem-formularios'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.77',release:'Beta',revision:'beta-0-26-77-telemetria-taxonomia-usabilidade-atividades',generatedAt:'2026-08-13T12:20:00Z',cacheName:'nexlab-beta-0-26-77-telemetria-taxonomia-usabilidade-atividades'});
   const CURRENT_VERSION = BUILD_IDENTITY.version;
   const CURRENT_RELEASE = BUILD_IDENTITY.release;
   const CURRENT_REVISION = BUILD_IDENTITY.revision;

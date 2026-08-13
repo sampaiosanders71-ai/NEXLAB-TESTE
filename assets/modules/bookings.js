@@ -1,2 +1,2 @@
-/* NEXLAB 0.26.74 — facade ESM: BookingsModule. */
-export { BookingsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-74-inventario-rolagem-formularios";
+/* NEXLAB 0.26.77 — facade ESM: BookingsModule. */
+export { BookingsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-77-telemetria-taxonomia-usabilidade-atividades";

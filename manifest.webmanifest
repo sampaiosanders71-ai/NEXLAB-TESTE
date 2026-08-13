@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "NEXLAB Beta 0.26.74",
+  "name": "NEXLAB Beta 0.26.77",
   "short_name": "NEXLAB",
-  "description": "NEXLAB Beta 0.26.74 — Estoque e Patrimônio com rolagem visível e formulários internos roláveis.",
+  "description": "NEXLAB Beta 0.26.77 — Telemetria, taxonomia, filtros avançados, detalhes de alteração e acessibilidade da Central de Atividades.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

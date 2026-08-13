@@ -22,6 +22,7 @@
       "nexlab_get_general_report_v26320",
       "nexlab_get_health_observability_v26220",
       "nexlab_get_homologation_diagnostics_v02667",
+      "nexlab_get_homologation_diagnostics_v02677",
       "nexlab_get_meeting_responses_v263038",
       "nexlab_get_operational_bookings_v26312",
       "nexlab_get_operational_report_v26350",
@@ -30,6 +31,7 @@
       "nexlab_get_permission_matrix_v02652",
       "nexlab_get_privacy_status",
       "nexlab_get_production_readiness",
+      "nexlab_get_release_publish_gate_v02677",
       "nexlab_get_production_snapshots_v26210",
       "nexlab_get_profile_preview_data_v02655",
       "nexlab_get_project_workspace_v2690",
@@ -53,6 +55,8 @@
       "nexlab_list_data_requests",
       "nexlab_list_notifications_v26190",
       "nexlab_list_operational_activity_v02643",
+      "nexlab_list_operational_activity_v02676",
+      "nexlab_list_operational_activity_v02677",
       "nexlab_list_profiles_visible_v26311",
       "nexlab_notification_summary_v26190",
       "nexlab_prepare_project_delete_v2690",
@@ -80,6 +84,7 @@
       "nexlab_admin_save_role_permissions_v02652",
       "nexlab_admin_save_user_permissions_v02655",
       "nexlab_admin_save_user_permissions_v263036",
+      "nexlab_assert_release_publishable_v02677",
       "nexlab_archive_meeting_v26160",
       "nexlab_archive_reservation_v26160",
       "nexlab_archive_team_v2680",
@@ -108,6 +113,7 @@
       "nexlab_notification_bulk_action_v2702",
       "nexlab_quarantine_test_profiles",
       "nexlab_record_device_homologation_v02668",
+      "nexlab_record_device_homologation_v02677",
       "nexlab_record_production_snapshot",
       "nexlab_record_report_export",
       "nexlab_respond_meeting_invitation_v263042",
@@ -147,6 +153,7 @@
       "nexlab_record_client_error_v26_7",
       "nexlab_record_client_error_v26_7_4",
       "nexlab_record_device_homologation_v02668",
+      "nexlab_record_device_homologation_v02677",
       "nexlab_record_production_snapshot"
   ]);
   const SIMULATED_PERMISSION=Object.freeze([
@@ -201,7 +208,7 @@
   }
 
   const registry=Object.freeze({
-    version:'0.26.74',
+    version:'0.26.77',
     policy:'explicit-default-mutation',
     readOnly:READ_ONLY,
     mutating:MUTATING,

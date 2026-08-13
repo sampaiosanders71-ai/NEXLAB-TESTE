@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.74',revision:'beta-0-26-74-inventario-rolagem-formularios'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.77',revision:'beta-0-26-77-telemetria-taxonomia-usabilidade-atividades'});
   if(globalThis.__NEXLAB_AUTH_SECURITY__?.revision===BUILD.revision)return;
 
   const CARD_ID='nexlab-auth-security-card';

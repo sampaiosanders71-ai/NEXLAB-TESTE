@@ -1,5 +1,5 @@
 importScripts('./assets/nexlab-release-identity.js');
-const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.74',release:'Beta',revision:'beta-0-26-74-inventario-rolagem-formularios',assetRevision:'app-beta-0-26-74-inventario-rolagem-formularios',cacheName:'nexlab-beta-0-26-74-inventario-rolagem-formularios',generatedAt:'2026-08-10T21:30:00Z'});
+const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.77',release:'Beta',revision:'beta-0-26-77-telemetria-taxonomia-usabilidade-atividades',assetRevision:'app-beta-0-26-77-telemetria-taxonomia-usabilidade-atividades',cacheName:'nexlab-beta-0-26-77-telemetria-taxonomia-usabilidade-atividades',generatedAt:'2026-08-13T12:20:00Z'});
 const APP_VERSION=BUILD_IDENTITY.version;
 const APP_RELEASE=BUILD_IDENTITY.release;
 const APP_REVISION=BUILD_IDENTITY.revision;
@@ -17,7 +17,7 @@ const VENDOR_BUNDLE=RESOURCE_ENTRY.vendor.split('/').pop();
 const SHARED_BUNDLE=RESOURCE_ENTRY.shared.split('/').pop();
 const FEATURE_BUNDLE=RESOURCE_ENTRY.feature.split('/').pop();
 const EXPORT_BUNDLE=RESOURCE_ENTRY.export.split('/').pop();
-const ALLOWED_TABS=new Set(['dashboard','pendencias','agenda','notificacoes','participantes','permissoes','equipes','perfil','projetos','inventario','patrimonio','estoque','reserva','marketing','eventos','mural','feedback','relatorios','saude-sistema','logs']);
+const ALLOWED_TABS=new Set(['dashboard','pendencias','agenda','notificacoes','participantes','permissoes','equipes','perfil','projetos','inventario','patrimonio','estoque','reserva','marketing','eventos','mural','feedback','relatorios','saude-sistema','logs','atividades-sistema']);
 const normalizePolicyPath=(value)=>String(value||'').replace(/^\.\//,'');
 const versionedPolicyUrl=(value)=>{
   const path=normalizePolicyPath(value);

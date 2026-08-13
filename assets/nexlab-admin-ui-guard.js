@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const VERSION='0.26.74';
+  const VERSION='0.26.77';
   const CONFIG=window.__NEXLAB_CONFIG__?.assert?.()||(()=>{throw new Error('Configuração central do NEXLAB não carregada.');})();
   const PROJECT_REF=CONFIG.projectRef;
   const BASE=CONFIG.supabaseUrl;
