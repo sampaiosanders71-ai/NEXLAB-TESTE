@@ -1,5 +1,5 @@
 importScripts('./assets/nexlab-release-identity.js');
-const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.77',release:'Beta',revision:'beta-0-26-77-telemetria-taxonomia-usabilidade-atividades',assetRevision:'app-beta-0-26-77-telemetria-taxonomia-usabilidade-atividades',cacheName:'nexlab-beta-0-26-77-telemetria-taxonomia-usabilidade-atividades',generatedAt:'2026-08-13T12:20:00Z'});
+const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.79',release:'Beta',revision:'beta-0-26-79-consistencia-seguranca',assetRevision:'app-beta-0-26-79-consistencia-seguranca',cacheName:'nexlab-beta-0-26-79-consistencia-seguranca',generatedAt:'2026-08-13T12:20:00Z'});
 const APP_VERSION=BUILD_IDENTITY.version;
 const APP_RELEASE=BUILD_IDENTITY.release;
 const APP_REVISION=BUILD_IDENTITY.revision;

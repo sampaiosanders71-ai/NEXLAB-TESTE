@@ -1,7 +1,7 @@
 (function(){
   'use strict';
   if(globalThis.__NEXLAB_RESPONSIVE_V02671__)return;
-  globalThis.__NEXLAB_RESPONSIVE_V02671__=Object.freeze({version:'0.26.77'});
+  globalThis.__NEXLAB_RESPONSIVE_V02671__=Object.freeze({version:'0.26.79'});
 
   const root=document.documentElement;
   let activeMenu=null;

@@ -1,4 +1,4 @@
-/* NEXLAB Beta 0.26.77 — Projetos: estrutura, resumo e filtros. */
+/* NEXLAB Beta 0.26.79 — Projetos: estrutura, resumo e filtros. */
 .project-status-overview-v02667{
   display:grid;gap:.8rem;padding:.9rem;border:1px solid rgba(148,163,184,.26);
   border-radius:1.25rem;background:rgba(255,255,255,.94);box-shadow:0 10px 28px rgba(15,23,42,.045)
@@ -68,7 +68,7 @@
 }
 
 
-/* NEXLAB Beta 0.26.77 — Projetos: Kanban, cards, detalhes, tabela e responsividade. */
+/* NEXLAB Beta 0.26.79 — Projetos: Kanban, cards, detalhes, tabela e responsividade. */
 .projects-module-v02667{min-width:0;overflow:visible}
 .projects-module-v02667 .nexlab-project-kanban-hint{margin:.15rem 0 .45rem;padding:.65rem .8rem;border-radius:.9rem;background:#f8fafc;font-size:.67rem}
 .projects-module-v02667 .nexlab-project-kanban{gap:.85rem;padding:.15rem .12rem 1rem;scroll-padding-inline:.12rem}
@@ -195,7 +195,7 @@
   .project-card-v02667,.project-details-panel-v02667,.project-details-overall-progress-v02667 span{transition:none!important;animation:none!important}
 }
 
-/* Beta 0.26.77 — etapa 8: contenção, cache legado e acessibilidade. */
+/* Beta 0.26.79 — etapa 8: contenção, cache legado e acessibilidade. */
 .projects-module-v02667{min-width:0;max-width:100%;overflow-x:hidden}
 .projects-module-v02667 .nexlab-project-kanban{max-width:100%;overscroll-behavior-inline:contain;scrollbar-gutter:stable both-edges}
 .project-table-wrap-v2690.project-table-wrap-v02667{min-width:0;max-width:100%;overscroll-behavior-inline:contain}

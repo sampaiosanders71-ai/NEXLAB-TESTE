@@ -2,8 +2,8 @@
   'use strict';
 
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({
-    version:'0.26.77',
-    revision:'beta-0-26-77-telemetria-taxonomia-usabilidade-atividades'
+    version:'0.26.79',
+    revision:'beta-0-26-79-consistencia-seguranca'
   });
   if(globalThis.__NEXLAB_PUSH_CONSENT__?.revision===BUILD.revision)return;
 

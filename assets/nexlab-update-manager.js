@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.77',release:'Beta',revision:'beta-0-26-77-telemetria-taxonomia-usabilidade-atividades',generatedAt:'2026-08-13T12:20:00Z',cacheName:'nexlab-beta-0-26-77-telemetria-taxonomia-usabilidade-atividades'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.79',release:'Beta',revision:'beta-0-26-79-consistencia-seguranca',generatedAt:'2026-08-13T12:20:00Z',cacheName:'nexlab-beta-0-26-79-consistencia-seguranca'});
   const CURRENT_VERSION = BUILD_IDENTITY.version;
   const CURRENT_RELEASE = BUILD_IDENTITY.release;
   const CURRENT_REVISION = BUILD_IDENTITY.revision;

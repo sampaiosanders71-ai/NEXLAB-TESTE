@@ -1,6 +1,6 @@
-/* NEXLAB Beta 0.26.77 — navegação Push sincronizada com a prontidão real do aplicativo. */
+/* NEXLAB Beta 0.26.79 — navegação Push sincronizada com a prontidão real do aplicativo. */
 (()=>{
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.77',revision:'beta-0-26-77-telemetria-taxonomia-usabilidade-atividades',homologationRevision:'beta-0-26-77-telemetria-taxonomia-usabilidade-atividades'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.79',revision:'beta-0-26-79-consistencia-seguranca',homologationRevision:'beta-0-26-79-consistencia-seguranca'});
   if(globalThis.__NEXLAB_PUSH_NAVIGATION__?.version===BUILD.version)return;
   const VERSION=BUILD.version;
   const BUILD_REVISION=BUILD.revision;
