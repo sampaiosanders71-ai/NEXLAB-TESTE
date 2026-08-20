@@ -1,9 +1,9 @@
 (function(root){
   'use strict';
-  const VERSION='0.26.79';
-  const REVISION='beta-0-26-79-consistencia-seguranca';
-  const RPC='nexlab_get_release_publish_gate_v02679';
-  const ASSERT_RPC='nexlab_assert_release_publishable_v02679';
+  const VERSION='0.26.80';
+  const REVISION='beta-0-26-80-cabecalhos-sidebar-responsivos';
+  const RPC='nexlab_get_release_publish_gate_v02680';
+  const ASSERT_RPC='nexlab_assert_release_publishable_v02680';
   const EVIDENCE_KEY='nexlab:device-homologation:'+VERSION+':'+REVISION;
   let state=Object.freeze({version:VERSION,revision:REVISION,publication_allowed:false,reason:'physical_receipt_required',source:'local'});
   function readEvidence(){try{return JSON.parse(localStorage.getItem(EVIDENCE_KEY)||'{}')||{};}catch{return {};}}

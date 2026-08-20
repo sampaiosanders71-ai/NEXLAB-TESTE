@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "NEXLAB Beta 0.26.79",
+  "name": "NEXLAB Beta 0.26.80",
   "short_name": "NEXLAB",
-  "description": "NEXLAB Beta 0.26.79 — Consistência de homologação, segurança dos RPCs e telemetria confiável do worker de notificações.",
+  "description": "NEXLAB Beta 0.26.80 — Correção dos cabeçalhos e da sidebar em celulares, tablets e desktop.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

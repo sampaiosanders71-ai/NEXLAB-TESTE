@@ -2,8 +2,8 @@
   'use strict';
 
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({
-    version:'0.26.79',
-    revision:'beta-0-26-79-consistencia-seguranca'
+    version:'0.26.80',
+    revision:'beta-0-26-80-cabecalhos-sidebar-responsivos'
   });
   if(globalThis.__NEXLAB_PUSH_CONSENT__?.revision===BUILD.revision)return;
 
