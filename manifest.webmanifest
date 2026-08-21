@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "NEXLAB Beta 0.26.80",
+  "name": "NEXLAB Beta 0.26.81",
   "short_name": "NEXLAB",
-  "description": "NEXLAB Beta 0.26.80 — Correção dos cabeçalhos e da sidebar em celulares, tablets e desktop.",
+  "description": "NEXLAB Beta 0.26.81 — Minimização de dados pessoais e remoção do identificador nacional do fluxo de testes.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

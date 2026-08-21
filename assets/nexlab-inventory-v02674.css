@@ -1,4 +1,4 @@
-/* NEXLAB Beta 0.26.80 — Estoque e Patrimônio: rolagem e formulários. */
+/* NEXLAB Beta 0.26.81 — Estoque e Patrimônio: rolagem e formulários. */
 .nexlab-inventory-module{min-height:0;max-width:100%}
 .nexlab-inventory-list-scroll{
   max-height:min(58dvh,48rem);min-height:0;overflow-y:scroll!important;overflow-x:hidden!important;

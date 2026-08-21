@@ -1,12 +1,12 @@
 (function(){
   'use strict';
-  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.80',release:'Beta',revision:'beta-0-26-80-cabecalhos-sidebar-responsivos',assetRevision:'app-beta-0-26-80-cabecalhos-sidebar-responsivos',cacheName:'nexlab-beta-0-26-80-cabecalhos-sidebar-responsivos'});
+  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.81',release:'Beta',revision:'beta-0-26-81-minimizacao-dados-pessoais',assetRevision:'app-beta-0-26-81-minimizacao-dados-pessoais',cacheName:'nexlab-beta-0-26-81-minimizacao-dados-pessoais'});
   if (window.__NEXLAB_PWA_READINESS__?.revision === BUILD_IDENTITY.revision) return;
 
   const VERSION=BUILD_IDENTITY.version;
   const RELEASE=BUILD_IDENTITY.release;
   const REVISION=BUILD_IDENTITY.revision;
-  const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-80-cabecalhos-sidebar-responsivos';
+  const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-81-minimizacao-dados-pessoais';
   const ASSET_REVISION=BUILD_IDENTITY.assetRevision;
   const CACHE_NAME=BUILD_IDENTITY.cacheName;
   const STORAGE_KEY='nexlab:pwa-readiness:'+VERSION;

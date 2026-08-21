@@ -1,2 +1,2 @@
-/* NEXLAB 0.26.80 — facade ESM: ProjectsModule. */
-export { ProjectsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-80-cabecalhos-sidebar-responsivos";
+/* NEXLAB 0.26.81 — facade ESM: ProjectsModule. */
+export { ProjectsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-81-minimizacao-dados-pessoais";
