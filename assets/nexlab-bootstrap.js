@@ -2,7 +2,7 @@
   if (window.__NEXLAB_BOOTSTRAP_V26_7__) return;
   window.__NEXLAB_BOOTSTRAP_V26_7__ = true;
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-notificacoes-mobile-corrigidas',assetRevision:'app-beta-0-26-82-notificacoes-mobile-corrigidas',cacheName:'nexlab-beta-0-26-82-notificacoes-mobile-corrigidas',generatedAt:'2026-08-22T16:56:07Z'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-projetos-detalhes-corrigidos',assetRevision:'app-beta-0-26-82-projetos-detalhes-corrigidos',cacheName:'nexlab-beta-0-26-82-projetos-detalhes-corrigidos',generatedAt:'2026-08-22T17:25:55Z'});
   const APP_VERSION = BUILD_IDENTITY.version;
   const APP_RELEASE = BUILD_IDENTITY.release;
   const APP_REVISION = BUILD_IDENTITY.revision;
@@ -1198,14 +1198,14 @@
   'use strict';
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||{};
   const VERSION=BUILD.version||'0.26.82';
-  const REVISION=BUILD.revision||'beta-0-26-82-notificacoes-mobile-corrigidas';
+  const REVISION=BUILD.revision||'beta-0-26-82-projetos-detalhes-corrigidos';
   if(globalThis.__NEXLAB_POST_STARTUP__?.revision===REVISION)return;
   const MAX_ATTEMPTS=3;
   const sources=(BUILD.resources?.postStartup||[
     'assets/nexlab-vapid-rotation.js',
     'assets/nexlab-push-consent.js',
     'assets/nexlab-feedback-evidence.js'
-  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-82-notificacoes-mobile-corrigidas'));
+  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-82-projetos-detalhes-corrigidos'));
   const state={version:VERSION,revision:REVISION,status:'scheduled',loaded:[],errors:[],attempts:{},lastReason:'',startedAt:null,completedAt:null};
   const sourceState=new Map(sources.map(src=>[src,{status:'pending',attempts:0,lastError:''}]));
   let active=null;

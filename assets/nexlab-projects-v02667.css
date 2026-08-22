@@ -204,3 +204,23 @@
   .projects-module-v02667{overflow-x:clip}
   .projects-module-v02667 .nexlab-project-kanban{scroll-padding-inline:.35rem}
 }
+
+
+/* NEXLAB Beta 0.26.82 — correção de abertura dos detalhes de Projetos. */
+.project-details-overlay-v2690.project-details-overlay-v02667{
+  z-index:2147483000!important;
+  isolation:isolate;
+  pointer-events:auto!important;
+}
+.project-details-panel-v2690.project-details-panel-v02667{
+  position:relative!important;
+  z-index:1;
+  pointer-events:auto!important;
+}
+.project-card-v02667{cursor:pointer;}
+.project-card-v02667 :where(button,select,input,textarea,summary,a){cursor:auto;}
+.project-card-v02667 .project-card-title-button-v2690{cursor:pointer;}
+@media (pointer:coarse){
+  .project-card-v02667{cursor:default;}
+  .nexlab-project-kanban__grip{display:none!important;}
+}

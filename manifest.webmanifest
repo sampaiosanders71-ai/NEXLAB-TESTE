@@ -2,7 +2,7 @@
   "id": "./",
   "name": "NEXLAB Beta 0.26.82",
   "short_name": "NEXLAB",
-  "description": "NEXLAB Beta 0.26.82 — Agenda integrada com calendário mensal responsivo e lista de atividades sincronizada.",
+  "description": "NEXLAB Beta 0.26.82 — correção da abertura e visualização dos detalhes de Projetos, mantendo Agenda e notificações mobile.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
