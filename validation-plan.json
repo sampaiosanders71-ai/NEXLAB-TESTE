@@ -129,8 +129,8 @@
       "expected_result": "Cache offline íntegro, Dashboard consolidado validado e runtime sem referências ativas a bundles históricos."
     }
   ],
-  "release_title": "Beta 0.26.82 — Agenda integrada completa",
-  "generated_at": "2026-08-22T14:31:00Z",
+  "release_title": "Beta 0.26.82 — Agenda integrada final",
+  "generated_at": "2026-08-22T15:52:00Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
     "controlled_test_run": "completed_and_cleaned",
@@ -191,7 +191,9 @@
     "agenda_points_1_8_static_contracts": "passed",
     "agenda_card_expand_shortcut_contract": "passed_static",
     "agenda_responsive_contract": "passed_static_physical_pending",
-    "agenda_physical_device_confirmation": "pending_after_publication"
+    "agenda_physical_device_confirmation": "pending_after_publication",
+    "agenda_module_colored_cards_contract": "passed_static",
+    "agenda_same_day_toggle_contract": "passed_static"
   },
   "responsive_global_checks": [
     "viewport_360x800",
@@ -207,7 +209,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-82-agenda-integrada-completa",
+  "revision": "beta-0-26-82-agenda-integrada-final",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -253,7 +255,7 @@
     "official_promotion": "blocked_until_exact_receipt",
     "manual_override_allowed": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-agenda-integrada-completa",
+    "required_revision": "beta-0-26-82-agenda-integrada-final",
     "receipt_max_age_days": 14
   },
   "activity_system_consistency_0_26_76": {
@@ -337,5 +339,25 @@
     "physical_browser_confirmation_required": true,
     "status": "static_contract_passed_runtime_retest_pending"
   },
-  "execution_5_device_homologation": {}
+  "execution_5_device_homologation": {},
+  "agenda_calendar_refinement_0_26_82": {
+    "month_title_visible_high_contrast": true,
+    "calendar_compacted": true,
+    "calendar_activity_quantities_removed": true,
+    "calendar_indicator_semantics": "one_dot_per_source_module_present_on_day",
+    "calendar_module_groups": {
+      "event": "Eventos",
+      "bookings": "Reservas e Reuniões",
+      "project": "Projetos",
+      "marketing": "Marketing"
+    },
+    "meeting_and_reservation_share_one_module_dot": true,
+    "marketing_campaign_and_marketing_date_share_one_module_dot": true,
+    "physical_visual_confirmation_required": true,
+    "right_list_module_colored_cards": true,
+    "card_color_matches_calendar_module_color": true,
+    "same_day_second_click_restores_month_view": true,
+    "responsive_stack_at_899px": true,
+    "narrow_view_guard_at_359px": true
+  }
 }
