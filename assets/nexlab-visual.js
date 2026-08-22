@@ -442,11 +442,12 @@
   function markDeferredSections(){
     const shell = document.querySelector('main .module-shell');
     if (!shell) return;
+    shell.querySelectorAll('[aria-modal="true"],[role="dialog"],.project-details-overlay-v2690,.nexlab-modal-overlay').forEach((element) => element.classList.remove('nexlab-content-auto'));
     const children = Array.from(shell.children);
     children.forEach((element, index) => {
       if (index < 2) return;
-      if (element.matches('form,dialog,table,[role="table"]')) return;
-      if (element.querySelector(':scope > form,:scope > dialog')) return;
+      if (element.matches('form,dialog,table,[role="table"],[role="dialog"],[aria-modal="true"],.project-details-overlay-v2690,.nexlab-modal-overlay')) return;
+      if (element.querySelector(':scope > form,:scope > dialog,:scope > [role="dialog"],:scope > [aria-modal="true"]')) return;
       const rect = element.getBoundingClientRect();
       if (rect.top > window.innerHeight * 0.85 || rect.height > 500) {
         element.classList.add('nexlab-content-auto');

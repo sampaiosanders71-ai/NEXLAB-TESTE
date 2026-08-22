@@ -251,3 +251,20 @@
     transform:scale(.985);
   }
 }
+
+
+/* NEXLAB Beta 0.26.82 — abertura de Projetos v2: modal nunca pode ser adiado/contido pelo otimizador global. */
+.project-details-overlay-v2690.project-details-overlay-v02667{
+  position:fixed!important;
+  inset:0!important;
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  content-visibility:visible!important;
+  contain:none!important;
+}
+.project-details-overlay-v2690.project-details-overlay-v02667.nexlab-content-auto{
+  content-visibility:visible!important;
+  contain:none!important;
+  contain-intrinsic-size:auto!important;
+}
