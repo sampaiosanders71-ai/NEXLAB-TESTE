@@ -224,3 +224,30 @@
   .project-card-v02667{cursor:default;}
   .nexlab-project-kanban__grip{display:none!important;}
 }
+
+/* NEXLAB Beta 0.26.82 — ações do card e drag touch no Kanban. */
+.projects-module-v02667 .nexlab-project-kanban__grip{
+  display:inline-flex!important;
+  align-items:center;
+  justify-content:center;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+}
+@media (pointer:coarse){
+  .projects-module-v02667 .nexlab-project-kanban__grip{
+    display:inline-flex!important;
+    width:44px!important;
+    min-width:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+    pointer-events:auto!important;
+    touch-action:none!important;
+    cursor:grab;
+  }
+  .projects-module-v02667 .nexlab-project-kanban__grip:active{cursor:grabbing;}
+  .projects-module-v02667 .project-card-v02667.is-dragging{
+    opacity:.72;
+    transform:scale(.985);
+  }
+}

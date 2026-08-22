@@ -1046,8 +1046,8 @@ main .nexlab-agenda-month-title-v02682 h3{
     background:#f7f9fc!important;
     color:#53657e!important;
     text-align:center!important;
-    font-size:7px!important;
-    line-height:1!important;
+    font-size:9px!important;
+    line-height:1.05!important;
     font-weight:900!important;
     letter-spacing:.02em!important;
     white-space:nowrap!important;
@@ -1102,7 +1102,7 @@ main .nexlab-agenda-month-title-v02682 h3{
     margin:0!important;
     padding:0!important;
     border-radius:999px!important;
-    font-size:9px!important;
+    font-size:11px!important;
     line-height:1!important;
     font-weight:900!important;
     white-space:nowrap!important;
@@ -1305,9 +1305,9 @@ main .nexlab-agenda-month-title-v02682 h3{
   .nexlab-agenda-month-nav-v02682{grid-template-columns:42px minmax(0,1fr) 42px!important;padding:4px!important;}
   .nexlab-agenda-month-arrow-v02682{width:42px!important;min-width:42px!important;max-width:42px!important;height:42px!important;min-height:42px!important;}
   .nexlab-agenda-month-title-v02682 h3{font-size:12px!important;}
-  .nexlab-agenda-weekday-v02682{font-size:6px!important;}
+  .nexlab-agenda-weekday-v02682{font-size:8px!important;}
   .nexlab-agenda-day-v02682{min-height:47px!important;padding:3px 2px!important;}
-  .nexlab-agenda-day-number-v02682{width:20px!important;min-width:20px!important;height:20px!important;min-height:20px!important;font-size:8px!important;}
+  .nexlab-agenda-day-number-v02682{width:21px!important;min-width:21px!important;height:21px!important;min-height:21px!important;font-size:10px!important;}
   .nexlab-agenda-activity-summary-v02682{grid-template-columns:28px minmax(0,1fr) auto auto!important;gap:5px!important;}
   .nexlab-agenda-activity-type-v02682{width:28px!important;min-width:28px!important;height:28px!important;min-height:28px!important;}
 }

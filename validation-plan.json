@@ -92,45 +92,28 @@
       "item_key": "regression_review",
       "title": "Revisão geral e regressão",
       "test_steps": [
-        "Executar Revisar versão",
-        "Confirmar os testes funcionais do bloqueio e do Kanban",
-        "Testar nomes contendo caracteres HTML no banner e no Kanban",
-        "Confirmar o teste do registro explícito de RPCs",
-        "Testar em computador",
-        "Testar em celular",
-        "Finalizar sem cenário de teste ativo",
-        "Abrir pwa-check.html e aprovar o contrato técnico do Dashboard",
-        "Aquecer módulos opcionais, desligar a rede e reabrir o aplicativo",
-        "Confirmar que o runtime ativo usa apenas nomes nexlab-runtime-*",
-        "Confirmar ausência dos bundles Beta 0.26.11, Beta 0.26.12 e RC17 no pacote",
-        "Confirmar que o botão flutuante abre diretamente o Ambiente de teste",
-        "Confirmar que o antigo Kanban de homologação não aparece na interface",
-        "Verificar cards compactos em desktop e celular sem rolagem horizontal da página",
-        "Confirmar que assets/nexlab-config.js é carregado antes de qualquer consumidor do Supabase",
-        "Confirmar que URL, chave pública, project ref e prefixo de autenticação não estão duplicados fora do arquivo central",
-        "Remover temporariamente o arquivo de configuração em ambiente local e confirmar bloqueio seguro da inicialização",
-        "Confirmar que o CSS principal usa a revisão atual do aplicativo, sem o parâmetro brand-r50",
-        "Confirmar que nexlab-permissions-v02664.css está no shell obrigatório e no teste offline",
-        "Confirmar por estilo computado que o quadro de Permissões usa grid, cards e painel de descrição",
-        "Confirmar a ordem Ideia, Análise, Aprovado, Em andamento, Finalizado e Arquivado",
-        "Confirmar que Planejamento não aparece como status e registros legados são normalizados para Em andamento",
-        "Confirmar seis indicadores compactos e clicáveis abaixo do banner de Projetos",
-        "Confirmar busca, prioridade, responsável, equipe, prazo e alternância Quadro/Tabela",
-        "Confirmar seis colunas do Kanban com rolagem horizontal e drag and drop persistente",
-        "Confirmar que cada card mostra somente título, prioridade e responsável",
-        "Confirmar modal amplo com subtarefas na lateral e layout de uma coluna no celular",
-        "Confirmar tabela com Projeto, Etapa, Prioridade, Responsável, Prazo e Ações",
-        "Confirmar Editar e Mais ações no cabeçalho do modal sem quebrar permissões",
-        "Confirmar que dados antigos em cache com planejamento aparecem em Em andamento",
-        "Confirmar desempate estável na ordenação por prazo",
-        "Confirmar que o banco aceita somente as seis etapas oficiais após a normalização de compatibilidade",
-        "Confirmar que o cadastro, a ficha do participante e os relatórios não solicitam nem exibem o identificador nacional removido, mantendo a data de nascimento."
+        "Executar Revisar versão e confirmar identidade 0.26.82 com a revisão exata atual.",
+        "Confirmar integridade do shell PWA, manifesto, inventário, hashes, imports locais e ausência de arquivos obrigatórios ausentes.",
+        "Testar navegação por permissões: uma rota negada deve redirecionar para o primeiro módulo realmente permitido, sem assumir Dashboard.",
+        "Confirmar que o contador de Pendências só consulta o backend quando module_pendencias estiver permitido.",
+        "Confirmar que a telemetria registra app_version e build_revision/asset_revision exatas.",
+        "Em Projetos, confirmar as seis etapas oficiais: Ideia, Análise, Aprovado, Em andamento, Finalizado e Arquivado; Planejamento não deve aparecer.",
+        "Em Projetos, confirmar ausência dos antigos seis cards-resumo removidos e preservar busca, filtros, Quadro/Tabela e tabela operacional.",
+        "Em Projetos, tocar/clicar no card deve abrir detalhes; “Ver detalhes” nos três pontos deve abrir o mesmo painel.",
+        "Em Projetos no celular, arrastar pelo grip de 44 px deve mover/reordenar cards sem impedir o toque no restante do card; no desktop, preservar drag nativo.",
+        "Na Agenda, confirmar mês visível, grade mensal de sete colunas e no máximo um ponto por módulo presente em cada dia, sem contadores no calendário.",
+        "Na Agenda, clicar em um dia filtra a lista e clicar novamente no mesmo dia restaura os dias ocupados do mês.",
+        "Na Agenda mobile, confirmar sete colunas, tipografia legível e lista de atividades abaixo do calendário sem rolagem horizontal da página.",
+        "No sino de notificações mobile, confirmar popover dentro da viewport, ações legíveis, cards em largura útil e rolagem interna quando necessário.",
+        "Confirmar que cadastro, perfil e relatórios não solicitam nem exibem o identificador nacional removido, mantendo a data de nascimento.",
+        "Testar os layouts em desktop e celular; finalizar sem cenário de teste ativo.",
+        "Registrar homologação física somente a partir de navegador/aparelho real e somente para a revisão exata atual."
       ],
-      "expected_result": "Cache offline íntegro, Dashboard consolidado validado e runtime sem referências ativas a bundles históricos."
+      "expected_result": "Revisão atual consistente em desktop e celular, sem regressões conhecidas nos fluxos corrigidos; promoção continua bloqueada até recibo físico válido da revisão exata."
     }
   ],
-  "release_title": "Beta 0.26.82 — Projetos: detalhes corrigidos",
-  "generated_at": "2026-08-22T17:25:55Z",
+  "release_title": "Beta 0.26.82 — Auditoria pós-correções concluída",
+  "generated_at": "2026-08-22T18:32:52Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
     "controlled_test_run": "completed_and_cleaned",
@@ -194,7 +177,18 @@
     "agenda_physical_device_confirmation": "pending_after_publication",
     "agenda_module_colored_cards_contract": "passed_static",
     "agenda_same_day_toggle_contract": "passed_static",
-    "agenda_mobile_structural_fix": "passed_static_physical_pending"
+    "agenda_mobile_structural_fix": "passed_static_physical_pending",
+    "mobile_project_drag_pointer_events": "static_passed_physical_pending",
+    "mobile_project_drag_touch_target_px": 44,
+    "permission_fallback_first_allowed_module": true,
+    "pending_counter_permission_guard": true,
+    "telemetry_exact_build_revision_metadata": true,
+    "agenda_hook_recovery_guard": true,
+    "agenda_browser_runtime_retest": "blocked_by_environment_policy_ERR_BLOCKED_BY_ADMINISTRATOR",
+    "agenda_mobile_weekday_font_px": 9,
+    "agenda_mobile_day_font_px": 11,
+    "agenda_narrow_359_weekday_font_px": 8,
+    "agenda_narrow_359_day_font_px": 10
   },
   "responsive_global_checks": [
     "viewport_360x800",
@@ -210,7 +204,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-82-projetos-detalhes-corrigidos",
+  "revision": "beta-0-26-82-auditoria-final",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -256,7 +250,7 @@
     "official_promotion": "blocked_until_exact_receipt",
     "manual_override_allowed": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-projetos-detalhes-corrigidos",
+    "required_revision": "beta-0-26-82-auditoria-final",
     "receipt_max_age_days": 14
   },
   "activity_system_consistency_0_26_76": {
@@ -374,6 +368,63 @@
     "global_responsive_css_fallback": true,
     "inline_critical_structural_fallback": true,
     "horizontal_overflow_forbidden": true,
-    "physical_mobile_confirmation_required": true
-  }
+    "physical_mobile_confirmation_required": true,
+    "mobile_weekday_font_px": 9,
+    "mobile_day_number_font_px": 11,
+    "narrow_359_weekday_font_px": 8,
+    "narrow_359_day_number_font_px": 10,
+    "hook_dispatcher_recovery_guard": true,
+    "runtime_browser_retest": "blocked_by_environment_policy_ERR_BLOCKED_BY_ADMINISTRATOR"
+  },
+  "projects_interaction_fix_0_26_82": {
+    "three_dot_menu_view_details": "static_contract_passed_physical_confirmation_pending",
+    "card_tap_details": "static_contract_passed_physical_confirmation_pending",
+    "mobile_drag_handle_pointer_events": "static_contract_passed_physical_confirmation_pending",
+    "mobile_drag_between_columns": "physical_confirmation_pending",
+    "mobile_reorder_same_column": "physical_confirmation_pending",
+    "desktop_native_drag": "preserved_static_contract",
+    "touch_drag_suppresses_followup_click": true,
+    "workspace_rpc": "nexlab_get_project_workspace_v2690",
+    "mobile_drag_touch_target_px": 44,
+    "legacy_pointer_events_none_overridden": true
+  },
+  "post_audit_fixes_1_5_0_26_82": {
+    "revision": "beta-0-26-82-auditoria-final",
+    "fix_1_project_mobile_drag": {
+      "pointer_events_enabled": true,
+      "touch_action_none": true,
+      "touch_target_px": 44,
+      "desktop_native_drag_preserved": true,
+      "physical_confirmation": "pending"
+    },
+    "fix_2_permission_aware_navigation": {
+      "first_allowed_module_fallback": true,
+      "dashboard_no_longer_unconditional": true,
+      "pending_counter_permission_guard": true,
+      "backend_permission_contract_confirmed": true
+    },
+    "fix_3_exact_revision_telemetry": {
+      "app_version_preserved": "0.26.82",
+      "build_revision_in_metadata": true,
+      "asset_revision_in_metadata": true,
+      "release_in_metadata": true
+    },
+    "fix_4_agenda_hook_error": {
+      "dedicated_error_boundary": true,
+      "single_controlled_recovery_per_revision": true,
+      "infinite_reload_guard": true,
+      "static_validation": "passed",
+      "browser_runtime_retest": "blocked_by_environment_policy_ERR_BLOCKED_BY_ADMINISTRATOR"
+    },
+    "fix_5_agenda_mobile_readability": {
+      "seven_columns_preserved": true,
+      "weekday_font_px": 9,
+      "day_number_font_px": 11,
+      "narrow_359_weekday_font_px": 8,
+      "narrow_359_day_number_font_px": 10,
+      "physical_confirmation": "pending"
+    }
+  },
+  "build_revision": "beta-0-26-82-auditoria-final",
+  "updated_at": "2026-08-22T18:32:52Z"
 }

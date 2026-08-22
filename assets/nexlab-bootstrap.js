@@ -2,7 +2,7 @@
   if (window.__NEXLAB_BOOTSTRAP_V26_7__) return;
   window.__NEXLAB_BOOTSTRAP_V26_7__ = true;
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-projetos-detalhes-corrigidos',assetRevision:'app-beta-0-26-82-projetos-detalhes-corrigidos',cacheName:'nexlab-beta-0-26-82-projetos-detalhes-corrigidos',generatedAt:'2026-08-22T17:25:55Z'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-auditoria-final',assetRevision:'app-beta-0-26-82-auditoria-final',cacheName:'nexlab-beta-0-26-82-auditoria-final',generatedAt:'2026-08-22T18:32:52Z'});
   const APP_VERSION = BUILD_IDENTITY.version;
   const APP_RELEASE = BUILD_IDENTITY.release;
   const APP_REVISION = BUILD_IDENTITY.revision;
@@ -524,7 +524,7 @@
         return fingerprint;
       }
 
-      const metadata = observabilitySanitizeMetadata(input?.metadata);
+      const metadata = observabilitySanitizeMetadata({...((input?.metadata&&typeof input.metadata==="object")?input.metadata:{}),buildRevision:APP_REVISION,release:APP_RELEASE,assetRevision:BUILD_IDENTITY.assetRevision||null});
       const environment = observabilityEnvironment();
       observabilityState.environment = environment;
 
@@ -1198,14 +1198,14 @@
   'use strict';
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||{};
   const VERSION=BUILD.version||'0.26.82';
-  const REVISION=BUILD.revision||'beta-0-26-82-projetos-detalhes-corrigidos';
+  const REVISION=BUILD.revision||'beta-0-26-82-auditoria-final';
   if(globalThis.__NEXLAB_POST_STARTUP__?.revision===REVISION)return;
   const MAX_ATTEMPTS=3;
   const sources=(BUILD.resources?.postStartup||[
     'assets/nexlab-vapid-rotation.js',
     'assets/nexlab-push-consent.js',
     'assets/nexlab-feedback-evidence.js'
-  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-82-projetos-detalhes-corrigidos'));
+  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-82-auditoria-final'));
   const state={version:VERSION,revision:REVISION,status:'scheduled',loaded:[],errors:[],attempts:{},lastReason:'',startedAt:null,completedAt:null};
   const sourceState=new Map(sources.map(src=>[src,{status:'pending',attempts:0,lastError:''}]));
   let active=null;
