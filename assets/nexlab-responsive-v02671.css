@@ -1,4 +1,4 @@
-/* NEXLAB Beta 0.26.81 — Responsividade global. */
+/* NEXLAB Beta 0.26.82 — Responsividade global. */
 :root{
   --nexlab-vvh:100dvh;
   --nexlab-safe-top:env(safe-area-inset-top,0px);
@@ -187,7 +187,7 @@ body[data-nexlab-modal-open="true"] :where(#nexlab-admin-tools-trigger,#nexlab-t
   [data-nexlab-viewport-menu="true"]{scroll-behavior:auto!important}
 }
 
-/* NEXLAB Beta 0.26.81 — correção consolidada de cabeçalhos e Sidebar.
+/* NEXLAB Beta 0.26.82 — correção consolidada de cabeçalhos e Sidebar.
    - Sidebar não depende mais de position:sticky/h-screen em desktop.
    - Drawer móvel usa top/bottom da viewport, preservando safe areas.
    - Cabeçalho do app respeita a área segura superior.

@@ -2,8 +2,8 @@
   'use strict';
 
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({
-    version:'0.26.81',
-    revision:'beta-0-26-81-minimizacao-dados-pessoais'
+    version:'0.26.82',
+    revision:'beta-0-26-82-agenda-integrada-completa'
   });
   if(globalThis.__NEXLAB_PUSH_CONSENT__?.revision===BUILD.revision)return;
 

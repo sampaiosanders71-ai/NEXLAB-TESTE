@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const VERSION='0.26.81';
+  const VERSION='0.26.82';
   const CONFIG=window.__NEXLAB_CONFIG__?.assert?.()||(()=>{throw new Error('Configuração central do NEXLAB não carregada.');})();
   const PROJECT_REF=CONFIG.projectRef;
   const BASE=CONFIG.supabaseUrl;
@@ -426,7 +426,7 @@
 
   async function openSecurityExport(){
     const {body}=createDialog('Exportação de segurança','Gere um snapshot sanitizado e auditado da configuração atual. Dados pessoais protegidos, credenciais e segredos não são incluídos.');
-    const purpose=document.createElement('label');purpose.className='nexlab-admin-field';purpose.innerHTML='<span>Finalidade da exportação</span><textarea>Homologação física da Beta 0.26.81 e conferência do gate de promoção oficial.</textarea>';body.appendChild(purpose);
+    const purpose=document.createElement('label');purpose.className='nexlab-admin-field';purpose.innerHTML='<span>Finalidade da exportação</span><textarea>Homologação física da Beta 0.26.82 e conferência do gate de promoção oficial.</textarea>';body.appendChild(purpose);
     body.appendChild(messageBox('O arquivo registra perfis apenas por contagem e função. A auditoria recente usa identificadores técnicos, sem dados pessoais diretos ou conteúdo pessoal.'));
     const actions=document.createElement('div');actions.className='nexlab-admin-actions';actions.innerHTML='<button type="button" class="nexlab-admin-btn nexlab-admin-primary">Gerar e baixar snapshot</button>';body.appendChild(actions);
     const output=document.createElement('div');body.appendChild(output);const button=actions.querySelector('button');
@@ -460,7 +460,7 @@
         fetch(`./manifest.webmanifest?review=${Date.now()}`,{cache:'no-store'}).then(response=>response.ok?response.json():null),
         loadMatrix(true),
         window.NexlabTestEnvironment?.call?window.NexlabTestEnvironment.call('status'):Promise.resolve(null),
-        rpc('nexlab_get_homologation_diagnostics_v02681'),
+        rpc('nexlab_get_homologation_diagnostics_v02682'),
         loadPreviewData()
       ]);
       [release,manifest,matrix,testStatus,diagnostics,previewData]=results.map(result=>result.status==='fulfilled'?result.value:null);

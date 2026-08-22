@@ -1,7 +1,7 @@
 {
   "format": "NEXLAB_COORDINATOR_VALIDATION_SCRIPT",
   "format_version": "1.0",
-  "app_version": "0.26.81",
+  "app_version": "0.26.82",
   "title": "Roteiro de validação dos Coordenadores",
   "minimum_coordinator_approvals_per_item": 1,
   "promotion_rules": {
@@ -129,8 +129,8 @@
       "expected_result": "Cache offline íntegro, Dashboard consolidado validado e runtime sem referências ativas a bundles históricos."
     }
   ],
-  "release_title": "Beta 0.26.81 — Minimização de dados pessoais",
-  "generated_at": "2026-08-21T21:03:00Z",
+  "release_title": "Beta 0.26.82 — Agenda integrada completa",
+  "generated_at": "2026-08-22T14:31:00Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
     "controlled_test_run": "completed_and_cleaned",
@@ -150,7 +150,7 @@
   },
   "execution_5_pwa_homologation": {
     "status": "technical_ready_physical_pending",
-    "record_rpc": "nexlab_record_device_homologation_v02681",
+    "record_rpc": "nexlab_record_device_homologation_v02682",
     "required_evidence": [
       "installed_launch",
       "update_activation",
@@ -187,7 +187,11 @@
     "pwa_shell_and_hashes": "passed",
     "real_authenticated_browser": "pending_after_publication",
     "physical_drag_and_mobile": "pending_after_publication",
-    "mobile_dashboard_hotfix": "pending_physical_confirmation_after_publication"
+    "mobile_dashboard_hotfix": "pending_physical_confirmation_after_publication",
+    "agenda_points_1_8_static_contracts": "passed",
+    "agenda_card_expand_shortcut_contract": "passed_static",
+    "agenda_responsive_contract": "passed_static_physical_pending",
+    "agenda_physical_device_confirmation": "pending_after_publication"
   },
   "responsive_global_checks": [
     "viewport_360x800",
@@ -203,7 +207,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-81-minimizacao-dados-pessoais",
+  "revision": "beta-0-26-82-agenda-integrada-completa",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -243,13 +247,13 @@
   },
   "execution_9_publication_gate": {
     "status": "blocked_pending_real_physical_receipt",
-    "gate_rpc": "nexlab_get_release_publish_gate_v02681",
-    "assert_rpc": "nexlab_assert_release_publishable_v02681",
+    "gate_rpc": "nexlab_get_release_publish_gate_v02682",
+    "assert_rpc": "nexlab_assert_release_publishable_v02682",
     "candidate_deployment": "allowed_only_to_collect_real_device_evidence",
     "official_promotion": "blocked_until_exact_receipt",
     "manual_override_allowed": false,
-    "required_version": "0.26.81",
-    "required_revision": "beta-0-26-81-minimizacao-dados-pessoais",
+    "required_version": "0.26.82",
+    "required_revision": "beta-0-26-82-agenda-integrada-completa",
     "receipt_max_age_days": 14
   },
   "activity_system_consistency_0_26_76": {
@@ -299,7 +303,7 @@
   },
   "version": null,
   "database_health_0_26_78": {
-    "health_rpc": "nexlab_get_database_health_v02681",
+    "health_rpc": "nexlab_get_database_health_v02682",
     "snapshot_rpc": "get_system_health_snapshot",
     "snapshot_retry_attempts": 2,
     "independent_database_check": true,
@@ -316,7 +320,7 @@
     "physical_browser_confirmation_required": true
   },
   "database_health_0_26_79": {
-    "health_rpc": "nexlab_get_database_health_v02681",
+    "health_rpc": "nexlab_get_database_health_v02682",
     "snapshot_rpc": "get_system_health_snapshot",
     "snapshot_retry_attempts": 2,
     "independent_database_check": true,

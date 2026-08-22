@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "NEXLAB Beta 0.26.81",
+  "name": "NEXLAB Beta 0.26.82",
   "short_name": "NEXLAB",
-  "description": "NEXLAB Beta 0.26.81 — Minimização de dados pessoais e remoção do identificador nacional do fluxo de testes.",
+  "description": "NEXLAB Beta 0.26.82 — Agenda integrada com calendário mensal e lista de atividades sincronizada.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
