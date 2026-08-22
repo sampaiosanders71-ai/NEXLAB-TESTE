@@ -115,7 +115,12 @@ aside#mobile-sidebar [data-active='true']::after{
 
 /* Header */
 header.sticky{background:rgba(255,255,255,.94)!important;border-bottom-color:rgba(14,31,61,.10)!important;box-shadow:0 8px 22px rgba(14,31,61,.05)!important;}
-header.sticky span,header.sticky button,header.sticky .text-slate-700,header.sticky .text-slate-800{color:var(--nexlab-navy)!important;}
+header.sticky > span,
+header.sticky > button,
+header.sticky > .text-slate-700,
+header.sticky > .text-slate-800,
+header.sticky > div:last-child > button,
+header.sticky > div:last-child > .nexlab-notification-hub-v02682 > button{color:var(--nexlab-navy)!important;}
 
 /* Cards e módulos gerais */
 body:not([data-nexlab-page="dashboard"]) main .module-header,
@@ -1548,7 +1553,10 @@ textarea{
     gap:.25rem!important;
   }
 
-  header.sticky button{
+  header.sticky > button,
+  header.sticky > div:last-child > button,
+  header.sticky > div:last-child > .nexlab-notification-hub-v02682 > button,
+  header.sticky .nexlab-global-search-trigger-r55623{
     min-width:var(--nexlab-touch-target)!important;
     min-height:var(--nexlab-touch-target)!important;
     display:inline-flex!important;

@@ -303,7 +303,8 @@ body[data-nexlab-modal-open="true"] :where(#nexlab-admin-tools-trigger,#nexlab-t
     gap:.15rem!important;
     justify-content:flex-end!important;
   }
-  .nexlab-app-header > div:last-child button,
+  .nexlab-app-header > div:last-child > button,
+  .nexlab-app-header > div:last-child > .nexlab-notification-hub-v02682 > button,
   .nexlab-global-search-trigger-r55623{
     box-sizing:border-box!important;
     width:44px!important;
@@ -324,7 +325,8 @@ body[data-nexlab-modal-open="true"] :where(#nexlab-admin-tools-trigger,#nexlab-t
     padding-right:max(.35rem,env(safe-area-inset-right))!important;
   }
   .nexlab-app-header > #mobile-sidebar-trigger,
-  .nexlab-app-header > div:last-child button,
+  .nexlab-app-header > div:last-child > button,
+  .nexlab-app-header > div:last-child > .nexlab-notification-hub-v02682 > button,
   .nexlab-global-search-trigger-r55623{
     width:42px!important;
     min-width:42px!important;
@@ -735,4 +737,121 @@ body[data-nexlab-modal-open="true"] :where(#nexlab-admin-tools-trigger,#nexlab-t
   .nexlab-agenda-day-number-v02682{width:20px!important;min-width:20px!important;height:20px!important;min-height:20px!important;font-size:8px!important;}
   .nexlab-agenda-activity-summary-v02682{grid-template-columns:28px minmax(0,1fr) auto auto!important;gap:5px!important;}
   .nexlab-agenda-activity-type-v02682{width:28px!important;min-width:28px!important;height:28px!important;min-height:28px!important;}
+}
+
+
+/* NEXLAB Beta 0.26.82 — correção estrutural do popover de notificações no mobile. */
+.nexlab-notification-popover-v02682{
+  box-sizing:border-box!important;
+  min-width:0!important;
+}
+.nexlab-notification-popover-v02682 *{
+  box-sizing:border-box;
+}
+.nexlab-notification-popover-v02682 .nexlab-notification-item-v02682{
+  width:100%!important;
+  max-width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:flex-start!important;
+  text-align:left!important;
+  padding:.875rem 1rem!important;
+  gap:.75rem!important;
+  white-space:normal!important;
+}
+.nexlab-notification-popover-v02682 .nexlab-notification-markall-v02682{
+  width:auto!important;
+  max-width:100%!important;
+  height:auto!important;
+  min-width:0!important;
+  min-height:2.5rem!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  padding:.5rem .25rem!important;
+  white-space:normal!important;
+  text-align:right!important;
+}
+.nexlab-notification-popover-v02682 .nexlab-notification-open-center-v02682{
+  width:100%!important;
+  max-width:100%!important;
+  height:auto!important;
+  min-height:2.75rem!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:.65rem .75rem!important;
+  white-space:normal!important;
+  text-align:center!important;
+}
+.nexlab-notification-popover-v02682 .nexlab-notification-popover-header-v02682 button{
+  width:2.5rem!important;
+  min-width:2.5rem!important;
+  max-width:2.5rem!important;
+  height:2.5rem!important;
+  min-height:2.5rem!important;
+  padding:.5rem!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 2.5rem!important;
+}
+@media(max-width:639px){
+  .nexlab-notification-popover-v02682{
+    position:fixed!important;
+    left:max(.75rem,env(safe-area-inset-left))!important;
+    right:max(.75rem,env(safe-area-inset-right))!important;
+    top:calc(4.25rem + env(safe-area-inset-top))!important;
+    width:auto!important;
+    max-width:none!important;
+    max-height:calc(100dvh - 5.25rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))!important;
+    border-radius:1.25rem!important;
+    overflow:hidden!important;
+  }
+  .nexlab-notification-popover-header-v02682{
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:.75rem!important;
+    padding:.875rem 1rem!important;
+  }
+  .nexlab-notification-markall-row-v02682,
+  .nexlab-notification-open-center-row-v02682{
+    width:100%!important;
+    padding:.5rem 1rem!important;
+  }
+  .nexlab-notification-list-v02682{
+    min-height:0!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+    -webkit-overflow-scrolling:touch;
+  }
+  .nexlab-notification-popover-v02682 .nexlab-notification-item-v02682 > span:last-child{
+    min-width:0!important;
+    flex:1 1 auto!important;
+    overflow-wrap:anywhere!important;
+    word-break:normal!important;
+  }
+}
+@media(max-width:420px){
+  .nexlab-notification-popover-v02682{
+    left:max(.5rem,env(safe-area-inset-left))!important;
+    right:max(.5rem,env(safe-area-inset-right))!important;
+    top:calc(4rem + env(safe-area-inset-top))!important;
+    max-height:calc(100dvh - 4.75rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))!important;
+  }
+  .nexlab-notification-popover-header-v02682{
+    padding:.75rem .875rem!important;
+  }
+  .nexlab-notification-markall-row-v02682,
+  .nexlab-notification-open-center-row-v02682{
+    padding:.45rem .875rem!important;
+  }
+  .nexlab-notification-popover-v02682 .nexlab-notification-item-v02682{
+    padding:.75rem .875rem!important;
+    gap:.65rem!important;
+  }
 }

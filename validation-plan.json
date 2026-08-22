@@ -129,8 +129,8 @@
       "expected_result": "Cache offline íntegro, Dashboard consolidado validado e runtime sem referências ativas a bundles históricos."
     }
   ],
-  "release_title": "Beta 0.26.82 — Agenda mobile corrigida",
-  "generated_at": "2026-08-22T16:26:20Z",
+  "release_title": "Beta 0.26.82 — Notificações mobile corrigidas",
+  "generated_at": "2026-08-22T16:56:07Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
     "controlled_test_run": "completed_and_cleaned",
@@ -210,7 +210,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-82-agenda-mobile-corrigida",
+  "revision": "beta-0-26-82-notificacoes-mobile-corrigidas",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -256,7 +256,7 @@
     "official_promotion": "blocked_until_exact_receipt",
     "manual_override_allowed": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-agenda-mobile-corrigida",
+    "required_revision": "beta-0-26-82-notificacoes-mobile-corrigidas",
     "receipt_max_age_days": 14
   },
   "activity_system_consistency_0_26_76": {
