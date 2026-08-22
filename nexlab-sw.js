@@ -1,5 +1,5 @@
 importScripts('./assets/nexlab-release-identity.js');
-const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-agenda-integrada-final',assetRevision:'app-beta-0-26-82-agenda-integrada-final',cacheName:'nexlab-beta-0-26-82-agenda-integrada-final',generatedAt:'2026-08-22T14:31:00Z'});
+const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-agenda-mobile-corrigida',assetRevision:'app-beta-0-26-82-agenda-mobile-corrigida',cacheName:'nexlab-beta-0-26-82-agenda-mobile-corrigida',generatedAt:'2026-08-22T16:26:20Z'});
 const APP_VERSION=BUILD_IDENTITY.version;
 const APP_RELEASE=BUILD_IDENTITY.release;
 const APP_REVISION=BUILD_IDENTITY.revision;
