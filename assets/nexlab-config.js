@@ -76,7 +76,8 @@
       rest:`${SUPABASE_URL}/rest/v1`,
       functions:`${SUPABASE_URL}/functions/v1`,
       storage:`${SUPABASE_URL}/storage/v1`,
-      realtime:`wss://${parsed.hostname}/realtime/v1/websocket`
+      realtime:`wss://${parsed.hostname}/realtime/v1/websocket`,
+      communication:'https://nexlab-communication.sampaiosanders71.workers.dev'
     }),
     readStoredSession,
     getAccessToken,

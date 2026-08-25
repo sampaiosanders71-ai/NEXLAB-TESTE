@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: AgendaModule. */
-export { AgendaModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2";
+export { AgendaModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-conversa-equipes-d1";

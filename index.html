@@ -12,8 +12,8 @@
     <meta name="apple-mobile-web-app-title" content="NEXLAB" />
     <meta name="description" content="Gestão interna do Coworking Space UEMA Timon — projetos, equipes, agenda e operação do laboratório." />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.supabase.co; font-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.r2.cloudflarestorage.com; worker-src 'self'; manifest-src 'self'; media-src 'none';" />
-    <title>NEXLAB Beta 0.26.82 — Fluxo pós-login corrigido</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.supabase.co; font-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.r2.cloudflarestorage.com https://nexlab-communication.sampaiosanders71.workers.dev; worker-src 'self'; manifest-src 'self'; media-src 'none';" />
+    <title>NEXLAB Beta 0.26.82 — Conversa das Equipes</title>
     <style id="nexlab-startup-shell-style">
       html,body,#root{min-height:100%;margin:0}body{background:#f5f6f8;color:#10233f;font-family:Arial,sans-serif}
       .nexlab-startup-shell{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px;box-sizing:border-box;text-align:center}
@@ -28,23 +28,25 @@
     <!-- NEXLAB Beta 0.26.82: Agenda integrada — redesign completo: calendário, lista expansível, atalhos, responsividade e validação. -->
     <link rel="icon" type="image/png" sizes="192x192" href="./icons/nexlab-favicon-rounded.png?v=brand-r50" />
     <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png?v=brand-r50" />
-    <script src="./assets/nexlab-config.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script src="./assets/nexlab-release-identity.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script src="./assets/nexlab-module-recovery.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script src="./assets/nexlab-rpc-registry.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script src="./assets/nexlab-profile-preview.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script defer src="./assets/nexlab-admin-ui-guard.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <link rel="manifest" href="./manifest.webmanifest?v=app-beta-0-26-82-projetos-abertura-corrigida-v2" />
-<link rel="modulepreload" href="./assets/nexlab-runtime-vendor.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2" />
-    <link rel="modulepreload" href="./assets/nexlab-runtime-shared.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2" />
-    <link rel="stylesheet" crossorigin href="./assets/index-B1u8eynw.css?v=app-beta-0-26-82-projetos-abertura-corrigida-v2" />
-    <link rel="stylesheet" href="./assets/nexlab-visual.css?v=app-beta-0-26-82-projetos-abertura-corrigida-v2" />
-    <link rel="stylesheet" href="./assets/nexlab-permissions-v02664.css?v=app-beta-0-26-82-projetos-abertura-corrigida-v2" />
-    <link rel="stylesheet" href="./assets/nexlab-projects-v02667.css?v=app-beta-0-26-82-projetos-abertura-corrigida-v2" />
-    <link rel="stylesheet" href="./assets/nexlab-responsive-v02671.css?v=app-beta-0-26-82-projetos-abertura-corrigida-v2" />
-    <link rel="stylesheet" href="./assets/nexlab-inventory-v02674.css?v=app-beta-0-26-82-projetos-abertura-corrigida-v2" />
-    <link rel="stylesheet" href="./assets/nexlab-activities-v02677.css?v=app-beta-0-26-82-projetos-abertura-corrigida-v2" />
-    <link rel="stylesheet" href="./assets/nexlab-agenda-v02682.css?v=app-beta-0-26-82-projetos-abertura-corrigida-v2" />
+    <script src="./assets/nexlab-config.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script src="./assets/nexlab-release-identity.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script src="./assets/nexlab-module-recovery.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script src="./assets/nexlab-rpc-registry.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script src="./assets/nexlab-profile-preview.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script defer src="./assets/nexlab-admin-ui-guard.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <link rel="manifest" href="./manifest.webmanifest?v=app-beta-0-26-82-conversa-equipes-d1" />
+<link rel="modulepreload" href="./assets/nexlab-runtime-vendor.js?v=app-beta-0-26-82-conversa-equipes-d1" />
+    <link rel="modulepreload" href="./assets/nexlab-runtime-shared.js?v=app-beta-0-26-82-conversa-equipes-d1" />
+    <link rel="stylesheet" crossorigin href="./assets/index-B1u8eynw.css?v=app-beta-0-26-82-conversa-equipes-d1" />
+    <link rel="stylesheet" href="./assets/nexlab-visual.css?v=app-beta-0-26-82-conversa-equipes-d1" />
+    <link rel="stylesheet" href="./assets/nexlab-permissions-v02664.css?v=app-beta-0-26-82-conversa-equipes-d1" />
+    <link rel="stylesheet" href="./assets/nexlab-projects-v02667.css?v=app-beta-0-26-82-conversa-equipes-d1" />
+    <link rel="stylesheet" href="./assets/nexlab-project-comments-v02682.css?v=app-beta-0-26-82-conversa-equipes-d1" />
+    <link rel="stylesheet" href="./assets/nexlab-team-chat-v02682.css?v=app-beta-0-26-82-conversa-equipes-d1" />
+    <link rel="stylesheet" href="./assets/nexlab-responsive-v02671.css?v=app-beta-0-26-82-conversa-equipes-d1" />
+    <link rel="stylesheet" href="./assets/nexlab-inventory-v02674.css?v=app-beta-0-26-82-conversa-equipes-d1" />
+    <link rel="stylesheet" href="./assets/nexlab-activities-v02677.css?v=app-beta-0-26-82-conversa-equipes-d1" />
+    <link rel="stylesheet" href="./assets/nexlab-agenda-v02682.css?v=app-beta-0-26-82-conversa-equipes-d1" />
     <style id="nexlab-agenda-mobile-critical-v02682">
       /* Emergency structural fallback: prevents the monthly Agenda from collapsing into a linear text list on mobile. */
       @media (max-width:767px){
@@ -60,22 +62,24 @@
         .nexlab-agenda-activity-summary-v02682{display:grid!important;grid-template-columns:30px minmax(0,1fr) auto auto!important;min-width:0!important}
       }
     </style>
-    <script src="./assets/nexlab-bootstrap.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script src="./assets/nexlab-dialogs.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script src="./assets/nexlab-runtime-realtime-core.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script defer src="./assets/nexlab-update-manager.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script src="./assets/nexlab-runtime-realtime-hub.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script defer src="./assets/nexlab-push-navigation.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script defer src="./assets/nexlab-device-homologation.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script defer src="./assets/nexlab-release-gate.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script type="module" crossorigin src="./assets/nexlab-runtime-app.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script defer src="./assets/nexlab-visual.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script defer src="./assets/nexlab-responsive-v02671.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
+    <script src="./assets/nexlab-bootstrap.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script src="./assets/nexlab-dialogs.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script src="./assets/nexlab-runtime-realtime-core.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script defer src="./assets/nexlab-update-manager.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script src="./assets/nexlab-runtime-realtime-hub.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script defer src="./assets/nexlab-push-navigation.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script defer src="./assets/nexlab-device-homologation.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script defer src="./assets/nexlab-release-gate.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script type="module" crossorigin src="./assets/nexlab-runtime-app.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script defer src="./assets/nexlab-visual.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script defer src="./assets/nexlab-project-comments-v02682.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script defer src="./assets/nexlab-team-chat-v02682.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script defer src="./assets/nexlab-responsive-v02671.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
     <!-- Recursos não críticos são ativados após a primeira renderização. -->
-    <script defer src="./assets/nexlab-auth-security.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script defer src="./assets/nexlab-test-environment.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script defer src="./assets/nexlab-coordinator-validation.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
-    <script defer src="./assets/nexlab-admin-homologation.js?v=app-beta-0-26-82-projetos-abertura-corrigida-v2"></script>
+    <script defer src="./assets/nexlab-auth-security.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script defer src="./assets/nexlab-test-environment.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script defer src="./assets/nexlab-coordinator-validation.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
+    <script defer src="./assets/nexlab-admin-homologation.js?v=app-beta-0-26-82-conversa-equipes-d1"></script>
   </head>
   <body>
     <div id="root">

@@ -2,7 +2,7 @@
   if (window.__NEXLAB_BOOTSTRAP_V26_7__) return;
   window.__NEXLAB_BOOTSTRAP_V26_7__ = true;
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-projetos-abertura-corrigida-v2',assetRevision:'app-beta-0-26-82-projetos-abertura-corrigida-v2',cacheName:'nexlab-beta-0-26-82-projetos-abertura-corrigida-v2',generatedAt:'2026-08-22T19:17:27Z'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-conversa-equipes-d1',assetRevision:'app-beta-0-26-82-conversa-equipes-d1',cacheName:'nexlab-beta-0-26-82-conversa-equipes-d1',generatedAt:'2026-08-22T19:17:27Z'});
   const APP_VERSION = BUILD_IDENTITY.version;
   const APP_RELEASE = BUILD_IDENTITY.release;
   const APP_REVISION = BUILD_IDENTITY.revision;
@@ -22,6 +22,14 @@
   const READ_ONLY_RPC_NAMES = new Set(RPC_REGISTRY.readOnly || []);
   const MUTATING_RPC_NAMES = new Set(RPC_REGISTRY.mutating || []);
   const BACKGROUND_RPC_NAMES = new Set(RPC_REGISTRY.background || []);
+  // Diagnósticos administrativos podem executar consultas mais pesadas sem representar queda global de conexão.
+  const DIAGNOSTIC_RPC_NAMES = new Set([
+    'get_system_health_snapshot',
+    'nexlab_get_database_health_v02682',
+    'nexlab_get_health_observability_v26220',
+    'nexlab_get_production_readiness',
+    'nexlab_get_production_snapshots_v26210'
+  ]);
 
   function rpcNameFromTarget(target){
     try {
@@ -219,6 +227,7 @@
     const requestClass = isSupabase ? classifySupabaseRequest(target, method) : { readOnly:false, background:false, mutating:false, rpcName:"" };
     const isMutatingSupabase = isSupabase && requestClass.mutating;
     const isReadOnlySupabase = isSupabase && requestClass.readOnly;
+    const isDiagnosticSupabase = isSupabase && DIAGNOSTIC_RPC_NAMES.has(requestClass.rpcName);
     const startedAt = Date.now();
     const requestId = `${startedAt}-${Math.random().toString(36).slice(2,9)}`;
 
@@ -231,7 +240,7 @@
 
     try {
       const deadlineMs = isSupabase
-        ? (requestClass.background ? 7000 : (requestClass.readOnly ? 8000 : 30000))
+        ? (isDiagnosticSupabase ? 25000 : (requestClass.background ? 7000 : (requestClass.readOnly ? 8000 : 30000)))
         : 0;
       const response = deadlineMs
         ? await nexlabFetchWithDeadline(input, init, deadlineMs)
@@ -268,13 +277,16 @@
         emit('nexlab:request-aborted', { method, url: target });
         throw error;
       }
-      if (isSupabase || !navigator.onLine) {
+      if ((isSupabase || !navigator.onLine) && (!isDiagnosticSupabase || navigator.onLine === false)) {
         emit('nexlab:connection-error', {
           title: navigator.onLine ? 'Falha de conexão com o NEXLAB' : 'Você está sem internet',
           message: navigator.onLine ? 'Não foi possível conectar ao Supabase agora. Tente novamente em alguns instantes.' : 'A conexão caiu. O app pode exibir dados já carregados, mas novas alterações dependem de internet.',
           detail: error && error.message ? error.message : 'Erro de rede não identificado.',
           url: target
         });
+      } else if (isDiagnosticSupabase) {
+        // O próprio módulo Saúde do Sistema exibe o diagnóstico parcial; não transformar timeout técnico em queda global.
+        emit('nexlab:diagnostic-request-error', { method, url: target, rpc: requestClass.rpcName, detail: error && error.message ? error.message : 'Falha de diagnóstico.' });
       }
       throw error;
     } finally {
@@ -657,11 +669,17 @@
     } catch {}
   }
 
+  function userErrorExpectedAccessDenial(input){
+    const text = `${input?.message || ''} ${input?.stack || ''}`.toLowerCase();
+    return /(?:não possui acesso|sem permissão|permission denied|not authorized|não autorizado|\b42501\b|\bpgrst301\b)/i.test(text);
+  }
+
   function userErrorExcluded(input){
     const text = `${input?.message || ''} ${input?.stack || ''}`.toLowerCase();
     if (!text.trim()) return true;
     if (isExpectedAbort(input?.error)) return true;
     if (navigator.onLine === false) return true;
+    if (userErrorExpectedAccessDenial(input)) return true;
     return /(?:failed to fetch|networkerror|network request failed|load failed|internet|offline|sem conexão|conexão caiu|http\s*(?:0|401|403|502|503|504)|jwt|token expir|session|sessão expir|não autenticad|autenticação obrigatória|password|senha|dynamic import|dynamically imported module|chunkloaderror|loading chunk|module script|service worker|update available|atualização disponível)/i.test(text);
   }
 
@@ -750,6 +768,17 @@
 
   function reportDetectedUserError(input){
     const raw = input && typeof input === 'object' ? input : { message:String(input || '') };
+    if (userErrorExpectedAccessDenial(raw)) {
+      observabilityQueueEvent({
+        ...raw,
+        severity: 'warning',
+        metadata: {
+          ...(raw.metadata && typeof raw.metadata === 'object' ? raw.metadata : {}),
+          user_notice_shown: false
+        }
+      });
+      return null;
+    }
     if (userErrorExcluded(raw)) return null;
     const moduleName = raw.module || document.body?.dataset?.nexlabPage || '';
     const fingerprint = observabilityHash(
@@ -1201,14 +1230,14 @@
   'use strict';
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||{};
   const VERSION=BUILD.version||'0.26.82';
-  const REVISION=BUILD.revision||'beta-0-26-82-projetos-abertura-corrigida-v2';
+  const REVISION=BUILD.revision||'beta-0-26-82-conversa-equipes-d1';
   if(globalThis.__NEXLAB_POST_STARTUP__?.revision===REVISION)return;
   const MAX_ATTEMPTS=3;
   const sources=(BUILD.resources?.postStartup||[
     'assets/nexlab-vapid-rotation.js',
     'assets/nexlab-push-consent.js',
     'assets/nexlab-feedback-evidence.js'
-  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-82-projetos-abertura-corrigida-v2'));
+  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-82-conversa-equipes-d1'));
   const state={version:VERSION,revision:REVISION,status:'scheduled',loaded:[],errors:[],attempts:{},lastReason:'',startedAt:null,completedAt:null};
   const sourceState=new Map(sources.map(src=>[src,{status:'pending',attempts:0,lastError:''}]));
   let active=null;

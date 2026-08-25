@@ -1,0 +1,331 @@
+(function(){
+  'use strict';
+
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-conversa-equipes-d1'});
+  const REVISION=BUILD.revision;
+  if(globalThis.__NEXLAB_TEAM_CHAT__?.revision===REVISION)return;
+
+  const UUID_RE=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  const PANEL_SELECTOR='.team-details-v2680[data-nexlab-team-id]';
+  const CONTENT_SELECTOR='.team-details-v2680__content';
+  const HEADER_SELECTOR='.team-details-v2680__header';
+  const WORKER_FALLBACK='https://nexlab-communication.sampaiosanders71.workers.dev';
+  const PAGE_SIZE=30;
+  const states=new WeakMap();
+  let profilesPromise=null;
+  let observerScheduled=false;
+  let pendingNotification=null;
+  let notificationPromise=null;
+
+  function client(){return globalThis.__NEXLAB_SUPABASE__||null;}
+  function workerUrl(){return String(globalThis.__NEXLAB_CONFIG__?.endpoints?.communication||WORKER_FALLBACK).replace(/\/+$/,'');}
+  function isUuid(value){return UUID_RE.test(String(value||''));}
+  function clean(value,max=4000){return String(value??'').trim().slice(0,max);}
+  function initials(name){return clean(name,80).split(/\s+/).filter(Boolean).slice(0,2).map(v=>v[0]?.toUpperCase()||'').join('')||'U';}
+  function roleLabel(role){return ({admin:'Admin',administrador:'Admin',coordenador:'Coordenador',bolsista:'Bolsista',voluntario:'Voluntário',coworking_junior:'Coworking Júnior'}[String(role||'').toLowerCase()]||'Usuário');}
+  function formatDate(value){if(!value)return 'Agora';try{return new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(new Date(value));}catch{return '—';}}
+
+  function node(tag,className,text){const el=document.createElement(tag);if(className)el.className=className;if(text!=null)el.textContent=String(text);return el;}
+  function profile(state,id){return state.profiles?.get?.(String(id))||null;}
+  function profileName(state,id){return profile(state,id)?.nome||'Usuário';}
+
+  function toast(message,type='info'){
+    try{globalThis.dispatchEvent(new CustomEvent('nexlab:toast',{detail:{text:message,type}}));}catch{}
+  }
+
+  async function waitClient(timeout=12000){
+    const started=Date.now();
+    while(Date.now()-started<timeout){const c=client();if(c?.auth)return c;await new Promise(resolve=>setTimeout(resolve,80));}
+    throw new Error('Cliente do NEXLAB não ficou disponível.');
+  }
+
+  async function session(){
+    const c=await waitClient();
+    const result=await c.auth.getSession();
+    if(result?.error)throw result.error;
+    const current=result?.data?.session||null;
+    if(!current?.access_token)throw new Error('Sessão expirada. Entre novamente no NEXLAB.');
+    return current;
+  }
+
+  async function api(path,options={},retry=true){
+    const current=await session();
+    const headers=new Headers(options.headers||{});
+    headers.set('Authorization',`Bearer ${current.access_token}`);
+    headers.set('Accept','application/json');
+    if(options.body!=null&&!headers.has('Content-Type'))headers.set('Content-Type','application/json');
+    let response;
+    try{
+      const controller=new AbortController();
+      const timer=setTimeout(()=>controller.abort(),15000);
+      try{response=await fetch(workerUrl()+path,{...options,headers,signal:controller.signal,cache:'no-store'});}finally{clearTimeout(timer);}
+    }catch(error){
+      if(error?.name==='AbortError')throw new Error('O serviço de conversa demorou para responder.');
+      throw new Error(navigator.onLine===false?'Sem conexão com a internet.':'Não foi possível acessar o serviço de conversa.');
+    }
+    if(response.status===401&&retry){try{await client()?.auth?.refreshSession?.();}catch{}return api(path,options,false);}
+    let data=null;try{data=await response.json();}catch{}
+    if(!response.ok){
+      const code=String(data?.error||`http_${response.status}`);
+      const messages={
+        access_denied:'Você não possui acesso à conversa desta equipe.',
+        invalid_or_expired_session:'Sua sessão expirou. Entre novamente.',
+        team_not_found:'Esta equipe não está mais disponível.',
+        invalid_mention_target:'Uma das pessoas mencionadas não possui acesso a esta conversa.',
+        mention_validation_denied:'Não foi possível validar as menções.',
+        text_too_long:'A mensagem excede o limite permitido.',
+        text_required:'Digite uma mensagem antes de enviar.'
+      };
+      const error=new Error(messages[code]||'Não foi possível concluir a ação.');error.code=code;error.status=response.status;throw error;
+    }
+    return data;
+  }
+
+  async function loadProfiles(){
+    if(profilesPromise)return profilesPromise;
+    profilesPromise=(async()=>{
+      const c=await waitClient();
+      const {data,error}=await c.rpc('nexlab_list_profiles_visible_v26311');
+      if(error)throw error;
+      const map=new Map();for(const row of Array.isArray(data)?data:[]){if(row?.id)map.set(String(row.id),row);}return map;
+    })().catch(error=>{profilesPromise=null;console.warn('NEXLAB team chat profiles',error);return new Map();});
+    return profilesPromise;
+  }
+
+  async function loadAccess(state){
+    if(state.accessLoading)return state.accessLoading;
+    state.accessLoading=(async()=>{
+      const c=await waitClient();
+      const [{data,error},profiles,current]=await Promise.all([
+        c.rpc('nexlab_get_communication_access_v1',{p_scope:'team',p_scope_id:state.teamId}),
+        loadProfiles(),session()
+      ]);
+      if(error)throw error;
+      state.access=Array.isArray(data)?data[0]:data;
+      state.profiles=profiles;
+      state.currentUserId=String(current.user?.id||'');
+      syncNavigation(state);renderComposer(state);
+      return state.access;
+    })().catch(error=>{state.accessError=error;console.error('NEXLAB team chat access',error);syncNavigation(state);renderComposer(state);return null;}).finally(()=>{state.accessLoading=null;});
+    return state.accessLoading;
+  }
+
+  function buildTabs(state){
+    const nav=node('nav','nexlab-team-tabs-v055');nav.setAttribute('aria-label','Áreas da equipe');nav.setAttribute('role','tablist');
+    const tabs=[['overview','Visão geral'],['links','Vínculos'],['conversation','Conversa']];
+    for(const [key,label] of tabs){
+      const button=node('button','nexlab-team-tab-v055',label);button.type='button';button.dataset.teamTab=key;button.setAttribute('role','tab');button.setAttribute('aria-selected','false');button.addEventListener('click',()=>activateTab(state,key));nav.appendChild(button);
+    }
+    return nav;
+  }
+
+  function buildConversationPanel(state){
+    const section=node('section','nexlab-team-chat-v055');section.hidden=true;section.setAttribute('aria-label','Conversa da equipe');
+    const head=node('header','nexlab-team-chat-head-v055');
+    const title=node('div');title.append(node('h3','', 'Conversa da equipe'),node('p','', 'Mensagens de texto no contexto desta equipe.'));
+    const refresh=node('button','nexlab-team-chat-refresh-v055','Atualizar');refresh.type='button';refresh.addEventListener('click',()=>loadMessages(state,{force:true}));
+    head.append(title,refresh);
+    const notice=node('div','nexlab-team-chat-message-v055');notice.hidden=true;notice.setAttribute('role','status');
+    const older=node('button','nexlab-team-chat-older-v055','Carregar mensagens anteriores');older.type='button';older.hidden=true;older.addEventListener('click',()=>loadOlder(state));
+    const list=node('div','nexlab-team-chat-list-v055');list.setAttribute('aria-live','polite');
+    const composer=node('div','nexlab-team-chat-composer-slot-v055');
+    section.append(head,notice,older,list,composer);return section;
+  }
+
+  function setInlineMessage(state,message,type='info'){
+    const box=state.chatPanel?.querySelector('.nexlab-team-chat-message-v055');if(!box)return;
+    box.hidden=!message;box.className=`nexlab-team-chat-message-v055 is-${type}`;box.textContent=message||'';
+  }
+
+  function syncNavigation(state){
+    const nav=state.panel.querySelector('.nexlab-team-tabs-v055');if(!nav)return;
+    const chat=nav.querySelector('[data-team-tab="conversation"]');
+    if(chat){const denied=state.access?.can_view_chat===false;chat.disabled=denied;chat.title=denied?'Você não possui acesso à conversa desta equipe.':'';}
+    for(const button of nav.querySelectorAll('[data-team-tab]')){const active=button.dataset.teamTab===state.activeTab;button.classList.toggle('is-active',active);button.setAttribute('aria-selected',String(active));}
+  }
+
+  function classifyAndApply(state){
+    const content=state.panel.querySelector(CONTENT_SELECTOR);state.content=content||null;if(!content)return;
+    const groups={
+      overview:[...content.querySelectorAll(':scope > .team-details-v2680__summary, :scope > .team-details-v2680__members, :scope > .team-workspace-v2680__history')],
+      links:[...content.querySelectorAll(':scope > .team-workspace-v2680__links')]
+    };
+    // Fallback for older DOM shapes.
+    if(!groups.overview.length){for(const selector of ['.team-details-v2680__summary','.team-details-v2680__members','.team-workspace-v2680__history']){const el=content.querySelector(selector);if(el)groups.overview.push(el);}}
+    if(!groups.links.length){const el=content.querySelector('.team-workspace-v2680__links');if(el)groups.links.push(el);}
+    const managed=new Set([...groups.overview,...groups.links]);
+    for(const el of managed){el.hidden=true;}
+    if(state.activeTab==='conversation'){
+      state.chatPanel.hidden=false;content.classList.add('is-team-conversation-v055');
+    }else{
+      state.chatPanel.hidden=true;content.classList.remove('is-team-conversation-v055');
+      for(const el of groups[state.activeTab]||groups.overview)el.hidden=false;
+    }
+    syncNavigation(state);
+  }
+
+  function activateTab(state,key){
+    if(!['overview','links','conversation'].includes(key))key='overview';
+    if(key==='conversation'&&state.access?.can_view_chat===false)return;
+    state.activeTab=key;classifyAndApply(state);
+    if(key==='conversation')void ensureConversationReady(state);
+  }
+
+  async function ensureConversationReady(state){
+    await loadAccess(state);
+    if(state.access?.can_view_chat===false){setInlineMessage(state,'Você não possui acesso à conversa desta equipe.','err');return;}
+    if(!state.loaded&&!state.loading)await loadMessages(state);
+    if(state.targetContentId)highlightTarget(state,state.targetContentId);
+  }
+
+  async function loadMessages(state,{force=false}={}){
+    if(state.loading)return;state.loading=true;
+    const list=state.chatPanel.querySelector('.nexlab-team-chat-list-v055');const refresh=state.chatPanel.querySelector('.nexlab-team-chat-refresh-v055');
+    refresh.disabled=true;refresh.textContent='Atualizando...';if(!state.loaded||force){list.classList.add('is-loading');setInlineMessage(state,'Carregando conversa...','info');}
+    try{
+      const data=await api(`/v1/teams/${encodeURIComponent(state.teamId)}/messages?limit=${PAGE_SIZE}`);
+      state.messages=Array.isArray(data?.messages)?data.messages:[];state.nextCursor=data?.next_cursor||null;state.loaded=true;setInlineMessage(state,'','info');renderMessages(state);syncOlderButton(state);scrollToBottom(state,force?'auto':'instant');if(state.targetContentId)highlightTarget(state,state.targetContentId);
+    }catch(error){console.error('NEXLAB team chat load',error);setInlineMessage(state,error.message||'Não foi possível carregar a conversa.','err');}
+    finally{state.loading=false;list.classList.remove('is-loading');refresh.disabled=false;refresh.textContent='Atualizar';syncOlderButton(state);}
+  }
+
+  async function loadOlder(state){
+    if(state.loading||!state.nextCursor)return;state.loading=true;
+    const older=state.chatPanel.querySelector('.nexlab-team-chat-older-v055');const list=state.chatPanel.querySelector('.nexlab-team-chat-list-v055');const beforeHeight=list.scrollHeight;older.disabled=true;older.textContent='Carregando...';
+    try{
+      const data=await api(`/v1/teams/${encodeURIComponent(state.teamId)}/messages?limit=${PAGE_SIZE}&cursor=${encodeURIComponent(state.nextCursor)}`);
+      const rows=Array.isArray(data?.messages)?data.messages:[];const known=new Set(state.messages.map(row=>String(row.id)));state.messages=[...rows.filter(row=>!known.has(String(row.id))),...state.messages];state.nextCursor=data?.next_cursor||null;renderMessages(state);requestAnimationFrame(()=>{list.scrollTop=Math.max(0,list.scrollHeight-beforeHeight);});
+    }catch(error){setInlineMessage(state,error.message||'Não foi possível carregar mensagens anteriores.','err');}
+    finally{state.loading=false;older.disabled=false;older.textContent='Carregar mensagens anteriores';syncOlderButton(state);}
+  }
+
+  function syncOlderButton(state){const older=state.chatPanel?.querySelector('.nexlab-team-chat-older-v055');if(older)older.hidden=!state.nextCursor;}
+
+  function appendTextWithMentions(container,text){
+    const source=String(text||'');const regex=/@[\p{L}\p{N}_.-]+/gu;let index=0,match;
+    while((match=regex.exec(source))){if(match.index>index)container.appendChild(document.createTextNode(source.slice(index,match.index)));container.appendChild(node('span','nexlab-team-inline-mention-v055',match[0]));index=match.index+match[0].length;}
+    if(index<source.length)container.appendChild(document.createTextNode(source.slice(index)));
+  }
+
+  function renderMessages(state){
+    const list=state.chatPanel.querySelector('.nexlab-team-chat-list-v055');list.replaceChildren();
+    if(!state.messages.length){const empty=node('div','nexlab-team-chat-empty-v055');empty.append(node('span','nexlab-team-chat-empty-icon-v055','💬'),node('strong','', 'Nenhuma mensagem ainda'),node('p','',state.access?.can_send_message?'Envie a primeira mensagem para a equipe.':'Ainda não há mensagens registradas nesta conversa.'));list.appendChild(empty);return;}
+    let lastAuthor='';
+    for(const message of state.messages){
+      const own=String(message.author_id||'')===state.currentUserId;const author=profile(state,message.author_id);const row=node('article',`nexlab-team-chat-row-v055 ${own?'is-own':'is-other'}`);row.dataset.messageId=String(message.id||'');
+      if(!own){const avatar=node('span','nexlab-team-chat-avatar-v055',initials(author?.nome));avatar.title=author?.nome||'Usuário';row.appendChild(avatar);}
+      const wrap=node('div','nexlab-team-chat-bubble-wrap-v055');
+      if(!own&&lastAuthor!==String(message.author_id||'')){const who=node('span','nexlab-team-chat-author-v055',author?.nome||'Usuário');who.title=roleLabel(author?.role);wrap.appendChild(who);}
+      const bubble=node('div','nexlab-team-chat-bubble-v055');const text=node('p','nexlab-team-chat-text-v055');appendTextWithMentions(text,message.message);bubble.appendChild(text);
+      if(Array.isArray(message.mentions)&&message.mentions.length){const mentions=node('div','nexlab-team-chat-mentions-v055');for(const id of message.mentions)mentions.appendChild(node('span','',`@ ${profileName(state,id)}`));bubble.appendChild(mentions);}
+      const meta=node('span','nexlab-team-chat-time-v055',formatDate(message.created_at));bubble.appendChild(meta);wrap.appendChild(bubble);row.appendChild(wrap);list.appendChild(row);lastAuthor=String(message.author_id||'');
+    }
+  }
+
+  function scrollToBottom(state,behavior='smooth'){const list=state.chatPanel?.querySelector('.nexlab-team-chat-list-v055');if(list)requestAnimationFrame(()=>list.scrollTo({top:list.scrollHeight,behavior:behavior==='instant'?'auto':behavior}));}
+
+  function mentionChips(state,selected,onRemove){const wrap=node('div','nexlab-team-composer-chips-v055');for(const id of selected){const chip=node('span','nexlab-team-mention-chip-v055');chip.append(document.createTextNode(`@ ${profileName(state,id)}`));const remove=node('button','','×');remove.type='button';remove.setAttribute('aria-label',`Remover menção a ${profileName(state,id)}`);remove.addEventListener('click',()=>onRemove(id));chip.appendChild(remove);wrap.appendChild(chip);}return wrap;}
+
+  function buildComposer(state){
+    const wrap=node('div','nexlab-team-composer-v055');
+    const tools=node('div','nexlab-team-composer-tools-v055');const plus=node('button','nexlab-team-composer-plus-v055','+');plus.type='button';plus.setAttribute('aria-label','Opções da mensagem');plus.setAttribute('aria-expanded','false');
+    const menu=node('div','nexlab-team-composer-menu-v055');menu.hidden=true;const mentionAction=node('button','','@ Mencionar alguém');mentionAction.type='button';menu.appendChild(mentionAction);tools.append(plus,menu);
+    const inputWrap=node('div','nexlab-team-composer-input-v055');const textarea=node('textarea','');textarea.rows=2;textarea.maxLength=4000;textarea.placeholder='Escreva uma mensagem...';textarea.setAttribute('aria-label','Mensagem para a equipe');
+    const suggestions=node('div','nexlab-team-mention-suggestions-v055');suggestions.hidden=true;inputWrap.append(textarea,suggestions);
+    const send=node('button','nexlab-team-composer-send-v055','Enviar');send.type='button';
+    const selected=new Set();const chipsSlot=node('div','nexlab-team-composer-selected-v055');const counter=node('span','nexlab-team-composer-counter-v055','0/4000');
+
+    const refreshChips=()=>{chipsSlot.replaceChildren();if(selected.size)chipsSlot.appendChild(mentionChips(state,[...selected],id=>{selected.delete(String(id));refreshChips();}));};
+    const hideSuggestions=()=>{suggestions.hidden=true;suggestions.replaceChildren();};
+    const suggestionQuery=()=>{const before=textarea.value.slice(0,textarea.selectionStart??textarea.value.length);const match=before.match(/(?:^|\s)@([^\s@]{0,40})$/u);return match?{query:match[1],start:before.length-match[1].length-1,end:before.length}:null;};
+    const showSuggestions=(force=false)=>{
+      let info=suggestionQuery();if(force&&!info){const pos=textarea.selectionStart??textarea.value.length;const before=textarea.value.slice(0,pos);const prefix=before&& !/\s$/.test(before)?' ':'';textarea.setRangeText(prefix+'@',pos,pos,'end');info=suggestionQuery();}
+      if(!info){hideSuggestions();return;}
+      const q=info.query.toLocaleLowerCase('pt-BR');const rows=[...(state.profiles?.values?.()||[])].filter(row=>row?.id&&String(row.id)!==state.currentUserId&&false!==row.ativo&&clean(row.nome,100).toLocaleLowerCase('pt-BR').includes(q)).slice(0,7);
+      suggestions.replaceChildren();if(!rows.length){suggestions.appendChild(node('p','', 'Nenhuma pessoa encontrada.'));suggestions.hidden=false;return;}
+      for(const row of rows){const button=node('button','',row.nome||'Usuário');button.type='button';button.appendChild(node('small','',roleLabel(row.role)));button.addEventListener('click',()=>{const token='@'+clean(row.nome,80).split(/\s+/)[0];const value=textarea.value;textarea.value=value.slice(0,info.start)+token+' '+value.slice(info.end);selected.add(String(row.id));refreshChips();hideSuggestions();textarea.focus();const pos=info.start+token.length+1;textarea.setSelectionRange(pos,pos);counter.textContent=`${textarea.value.length}/4000`;});suggestions.appendChild(button);}
+      suggestions.hidden=false;
+    };
+
+    plus.addEventListener('click',()=>{menu.hidden=!menu.hidden;plus.setAttribute('aria-expanded',String(!menu.hidden));});
+    mentionAction.addEventListener('click',()=>{menu.hidden=true;plus.setAttribute('aria-expanded','false');textarea.focus();showSuggestions(true);});
+    textarea.addEventListener('input',()=>{counter.textContent=`${textarea.value.length}/4000`;if(!textarea.value.includes('@')&&selected.size){selected.clear();refreshChips();}showSuggestions();});
+    textarea.addEventListener('keyup',event=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(event.key))showSuggestions();});
+    textarea.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send.click();}});
+    textarea.addEventListener('blur',()=>setTimeout(hideSuggestions,180));
+
+    send.addEventListener('click',async()=>{
+      const text=textarea.value.trim();if(!text){textarea.focus();return;}textarea.disabled=send.disabled=plus.disabled=true;send.textContent='Enviando...';
+      try{
+        const data=await api(`/v1/teams/${encodeURIComponent(state.teamId)}/messages`,{method:'POST',body:JSON.stringify({message:text,mentions:[...selected]})});
+        if(data?.message){state.messages.push(data.message);renderMessages(state);textarea.value='';selected.clear();refreshChips();counter.textContent='0/4000';setInlineMessage(state,'','info');scrollToBottom(state);}
+      }catch(error){setInlineMessage(state,error.message||'Não foi possível enviar a mensagem.','err');textarea.focus();}
+      finally{textarea.disabled=send.disabled=plus.disabled=false;send.textContent='Enviar';}
+    });
+
+    const inputRow=node('div','nexlab-team-composer-row-v055');inputRow.append(tools,inputWrap,send);wrap.append(chipsSlot,inputRow,counter);return wrap;
+  }
+
+  function renderComposer(state){
+    const slot=state.chatPanel?.querySelector('.nexlab-team-chat-composer-slot-v055');if(!slot)return;slot.replaceChildren();
+    if(state.accessError){slot.appendChild(node('p','nexlab-team-chat-readonly-v055','Não foi possível verificar sua permissão para enviar mensagens.'));return;}
+    if(!state.access?.can_send_message){slot.appendChild(node('p','nexlab-team-chat-readonly-v055','Você pode acompanhar a conversa, mas não possui permissão para enviar mensagens nesta equipe.'));return;}
+    slot.appendChild(buildComposer(state));
+  }
+
+  function highlightTarget(state,id){
+    if(!id)return;const target=state.chatPanel.querySelector(`[data-message-id="${CSS.escape(id)}"]`);if(!target)return;
+    target.classList.add('is-target');target.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>target.classList.remove('is-target'),3200);state.targetContentId='';
+  }
+
+  async function resolveNotificationTarget(){
+    if(notificationPromise)return notificationPromise;
+    notificationPromise=(async()=>{
+      let notificationId='';try{notificationId=new URL(location.href).searchParams.get('notification')||'';}catch{}
+      if(!isUuid(notificationId)){try{const stored=JSON.parse(sessionStorage.getItem('nexlabNotificationTarget')||'null');notificationId=String(stored?.notificationId||stored?.notification_id||'');}catch{}}
+      if(!isUuid(notificationId))return null;
+      const c=await waitClient();const {data,error}=await c.from('notifications').select('id,target_tab,entity_type,entity_id,metadata').eq('id',notificationId).maybeSingle();if(error||!data)return null;
+      if(String(data.entity_type||'')!=='team'||data.metadata?.open_section!=='conversation'||!isUuid(data.entity_id))return null;
+      return {notificationId,teamId:String(data.entity_id),contentId:String(data.metadata?.communication_content_id||'')};
+    })().catch(()=>null).then(value=>{pendingNotification=value;return value;});
+    return notificationPromise;
+  }
+
+  function tryOpenPendingTeam(){
+    if(!pendingNotification?.teamId||document.querySelector(PANEL_SELECTOR))return;
+    const card=document.querySelector(`[data-nexlab-record-id="${CSS.escape(pendingNotification.teamId)}"]`);if(!card)return;
+    const buttons=[...card.querySelectorAll('button')];const details=buttons.find(button=>/^(ver detalhes|detalhes)$/i.test(clean(button.textContent,60)));if(details){details.click();}
+  }
+
+  function createState(panel,teamId){
+    const state={panel,teamId,activeTab:'overview',messages:[],nextCursor:null,loaded:false,loading:false,access:null,accessError:null,accessLoading:null,profiles:new Map(),currentUserId:'',targetContentId:'',content:null,chatPanel:null};
+    panel.classList.add('has-nexlab-team-chat-v055');const header=panel.querySelector(HEADER_SELECTOR);const nav=buildTabs(state);const chat=buildConversationPanel(state);state.chatPanel=chat;const content=panel.querySelector(CONTENT_SELECTOR);
+    if(header)header.insertAdjacentElement('afterend',nav);else panel.prepend(nav);if(content)content.appendChild(chat);else panel.appendChild(chat);
+    states.set(panel,state);
+    if(pendingNotification?.teamId===teamId){state.activeTab='conversation';state.targetContentId=pendingNotification.contentId||'';}
+    void loadAccess(state).then(()=>{classifyAndApply(state);if(state.activeTab==='conversation')void ensureConversationReady(state);});classifyAndApply(state);return state;
+  }
+
+  function ensurePanel(panel){
+    if(!(panel instanceof HTMLElement))return;const teamId=String(panel.dataset.nexlabTeamId||'');if(!isUuid(teamId))return;
+    let state=states.get(panel);if(!state||state.teamId!==teamId){panel.querySelector('.nexlab-team-tabs-v055')?.remove();panel.querySelector('.nexlab-team-chat-v055')?.remove();state=createState(panel,teamId);}else{
+      if(!panel.querySelector('.nexlab-team-tabs-v055')){const nav=buildTabs(state);panel.querySelector(HEADER_SELECTOR)?.insertAdjacentElement('afterend',nav);}
+      if(!panel.querySelector('.nexlab-team-chat-v055')){const chat=buildConversationPanel(state);state.chatPanel=chat;panel.querySelector(CONTENT_SELECTOR)?.appendChild(chat);}
+      classifyAndApply(state);
+    }
+  }
+
+  function scan(){observerScheduled=false;tryOpenPendingTeam();document.querySelectorAll(PANEL_SELECTOR).forEach(ensurePanel);}
+  function scheduleScan(){if(observerScheduled)return;observerScheduled=true;requestAnimationFrame(scan);}
+  const observer=new MutationObserver(scheduleScan);
+  function start(){observer.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['data-nexlab-team-id','data-nexlab-record-id']});void resolveNotificationTarget().then(()=>scheduleScan());scheduleScan();}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+
+  globalThis.addEventListener('nexlab:session-reset',()=>{profilesPromise=null;notificationPromise=null;pendingNotification=null;});
+  globalThis.__NEXLAB_TEAM_CHAT__=Object.freeze({
+    version:BUILD.version,revision:REVISION,workerUrl:workerUrl(),
+    refreshCurrent(){const panel=document.querySelector(PANEL_SELECTOR);const state=panel&&states.get(panel);return state?loadMessages(state,{force:true}):Promise.resolve(null);},
+    openCurrent(){const panel=document.querySelector(PANEL_SELECTOR);const state=panel&&states.get(panel);if(state){activateTab(state,'conversation');return true;}return false;},
+    snapshot(){const panel=document.querySelector(PANEL_SELECTOR);const state=panel&&states.get(panel);return state?Object.freeze({teamId:state.teamId,activeTab:state.activeTab,loaded:state.loaded,messages:state.messages.length,nextCursor:!!state.nextCursor,canView:state.access?.can_view_chat??null,canSend:state.access?.can_send_message??null}):null;}
+  });
+})();
