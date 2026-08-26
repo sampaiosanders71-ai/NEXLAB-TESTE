@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: ReportsModule. */
-export { ReportsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-conversa-equipes-d1";
+export { ReportsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-tarefas-equipes-pendencias";
