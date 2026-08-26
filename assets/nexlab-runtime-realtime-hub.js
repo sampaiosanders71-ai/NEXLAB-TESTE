@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const ID=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-tarefas-equipes-pendencias'});
+  const ID=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-auditoria-final'});
   if(globalThis.__NEXLAB_PENDING_REALTIME_HUB__?.revision===ID.revision)return;
 
   const VERSION=ID.version;
@@ -41,7 +41,7 @@
         if(listeners.size===0)return;
         let next=client.channel('nexlab-pending-hub-canonical');
         for(const table of TABLES){
-          next=next.on('postgres_changes',{event:'*',schema:'public',table},payload=>notify({table,eventType:payload?.eventType||''}));
+          next=next.on('postgres_changes',{event:'*',schema:'public',table},payload=>{const row=payload?.new&&typeof payload.new==='object'?payload.new:payload?.old&&typeof payload.old==='object'?payload.old:{};const detail={table,eventType:payload?.eventType||''};if(table==='team_history'&&row.team_id)detail.teamId=String(row.team_id);notify(detail);});
         }
         channel=next.subscribe(status=>{
           if(channel!==next)return;

@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-tarefas-equipes-pendencias'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-auditoria-final'});
   const REVISION=BUILD.revision;
   if(globalThis.__NEXLAB_TEAM_CHAT__?.revision===REVISION)return;
 
@@ -12,6 +12,7 @@
   const WORKER_FALLBACK='https://nexlab-communication.sampaiosanders71.workers.dev';
   const PAGE_SIZE=30;
   const states=new WeakMap();
+  const stateByTeamId=new Map();
   let profilesPromise=null;
   let observerScheduled=false;
   let pendingNotification=null;
@@ -155,6 +156,18 @@
   function taskPriorityLabel(value){return ({baixa:'Baixa',normal:'Normal',alta:'Alta',urgente:'Urgente'}[String(value||'').toLowerCase()]||'Normal');}
   function taskStatusLabel(value){return ({pendente:'Pendente',em_andamento:'Em andamento',concluida:'Concluída',cancelada:'Cancelada'}[String(value||'').toLowerCase()]||'Pendente');}
   function isTaskOverdue(task){if(!task?.deadline||['concluida','cancelada'].includes(String(task.status||'')))return false;const today=new Date();today.setHours(0,0,0,0);const due=new Date(`${task.deadline}T00:00:00`);return Number.isFinite(due.getTime())&&due<today;}
+
+  function bindTaskRealtime(state){
+    if(state.taskRealtimeUnsubscribe)return;
+    const subscribe=globalThis.__NEXLAB_PENDING_REALTIME_HUB__?.subscribe;
+    if(typeof subscribe!=='function')return;
+    state.taskRealtimeUnsubscribe=subscribe(detail=>{
+      if(detail?.table!=='team_history'||!state.tasksLoaded)return;
+      if(detail.teamId&&String(detail.teamId)!==String(state.teamId))return;
+      if(state.taskRealtimeTimer)clearTimeout(state.taskRealtimeTimer);
+      state.taskRealtimeTimer=setTimeout(()=>{state.taskRealtimeTimer=null;void loadTeamTasks(state,{force:true});},250);
+    });
+  }
 
   async function loadTeamTasks(state,{force=false}={}){
     if(state.tasksLoading)return state.tasksLoading;
@@ -431,20 +444,41 @@
   }
 
   function createState(panel,teamId){
-    const state={panel,teamId,activeTab:'overview',messages:[],nextCursor:null,loaded:false,loading:false,access:null,accessError:null,accessLoading:null,profiles:new Map(),currentUserId:'',targetContentId:'',targetTaskId:'',content:null,chatPanel:null,tasksPanel:null,taskWorkspace:null,tasksLoaded:false,tasksLoading:null};
+    const state={panel,teamId,activeTab:'overview',messages:[],nextCursor:null,loaded:false,loading:false,access:null,accessError:null,accessLoading:null,profiles:new Map(),currentUserId:'',targetContentId:'',targetTaskId:'',content:null,chatPanel:null,tasksPanel:null,taskWorkspace:null,tasksLoaded:false,tasksLoading:null,taskRealtimeUnsubscribe:null,taskRealtimeTimer:null};
     panel.classList.add('has-nexlab-team-chat-v055','has-nexlab-team-tasks-v056');const header=panel.querySelector(HEADER_SELECTOR);const nav=buildTabs(state);const tasks=buildTasksPanel(state);const chat=buildConversationPanel(state);state.tasksPanel=tasks;state.chatPanel=chat;const content=panel.querySelector(CONTENT_SELECTOR);
     if(header)header.insertAdjacentElement('afterend',nav);else panel.prepend(nav);if(content)content.append(tasks,chat);else panel.append(tasks,chat);
-    states.set(panel,state);
+    states.set(panel,state);stateByTeamId.set(teamId,state);bindTaskRealtime(state);
     if(pendingNotification?.teamId===teamId){state.activeTab=pendingNotification.section||'overview';state.targetContentId=pendingNotification.contentId||'';state.targetTaskId=pendingNotification.taskId||'';}
     void loadAccess(state).then(()=>{classifyAndApply(state);if(state.activeTab==='conversation')void ensureConversationReady(state);if(state.activeTab==='tasks')void ensureTeamTasksReady(state);});classifyAndApply(state);return state;
   }
 
+  function rebindState(panel,state){
+    state.panel=panel;state.content=panel.querySelector(CONTENT_SELECTOR);
+    panel.classList.add('has-nexlab-team-chat-v055','has-nexlab-team-tasks-v056');
+    panel.querySelector('.nexlab-team-tabs-v055')?.remove();panel.querySelector('.nexlab-team-tasks-v056')?.remove();panel.querySelector('.nexlab-team-chat-v055')?.remove();
+    const header=panel.querySelector(HEADER_SELECTOR);const nav=buildTabs(state);const tasks=buildTasksPanel(state);const chat=buildConversationPanel(state);
+    state.tasksPanel=tasks;state.chatPanel=chat;
+    if(header)header.insertAdjacentElement('afterend',nav);else panel.prepend(nav);
+    if(state.content)state.content.append(tasks,chat);else panel.append(tasks,chat);
+    states.set(panel,state);bindTaskRealtime(state);
+    if(state.loaded){renderMessages(state);syncOlderButton(state);}renderComposer(state);
+    if(state.tasksLoaded)renderTeamTasks(state);
+    classifyAndApply(state);
+    if(state.activeTab==='conversation'&&!state.loaded)void ensureConversationReady(state);
+    if(state.activeTab==='tasks'&&!state.tasksLoaded)void ensureTeamTasksReady(state);
+    return state;
+  }
+
   function ensurePanel(panel){
     if(!(panel instanceof HTMLElement))return;const teamId=String(panel.dataset.nexlabTeamId||'');if(!isUuid(teamId))return;
-    let state=states.get(panel);if(!state||state.teamId!==teamId){panel.querySelector('.nexlab-team-tabs-v055')?.remove();panel.querySelector('.nexlab-team-tasks-v056')?.remove();panel.querySelector('.nexlab-team-chat-v055')?.remove();state=createState(panel,teamId);}else{
+    let state=states.get(panel);if(!state||state.teamId!==teamId){
+      panel.querySelector('.nexlab-team-tabs-v055')?.remove();panel.querySelector('.nexlab-team-tasks-v056')?.remove();panel.querySelector('.nexlab-team-chat-v055')?.remove();
+      const cached=stateByTeamId.get(teamId);
+      state=cached&&!cached.panel?.isConnected?rebindState(panel,cached):createState(panel,teamId);
+    }else{
       if(!panel.querySelector('.nexlab-team-tabs-v055')){const nav=buildTabs(state);panel.querySelector(HEADER_SELECTOR)?.insertAdjacentElement('afterend',nav);}
-      if(!panel.querySelector('.nexlab-team-tasks-v056')){const tasks=buildTasksPanel(state);state.tasksPanel=tasks;panel.querySelector(CONTENT_SELECTOR)?.appendChild(tasks);}
-      if(!panel.querySelector('.nexlab-team-chat-v055')){const chat=buildConversationPanel(state);state.chatPanel=chat;panel.querySelector(CONTENT_SELECTOR)?.appendChild(chat);}
+      if(!panel.querySelector('.nexlab-team-tasks-v056')){const tasks=buildTasksPanel(state);state.tasksPanel=tasks;panel.querySelector(CONTENT_SELECTOR)?.appendChild(tasks);if(state.tasksLoaded)renderTeamTasks(state);}
+      if(!panel.querySelector('.nexlab-team-chat-v055')){const chat=buildConversationPanel(state);state.chatPanel=chat;panel.querySelector(CONTENT_SELECTOR)?.appendChild(chat);if(state.loaded){renderMessages(state);syncOlderButton(state);}renderComposer(state);}
       classifyAndApply(state);
     }
   }
@@ -455,7 +489,7 @@
   function start(){observer.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['data-nexlab-team-id','data-nexlab-record-id']});void resolveNotificationTarget().then(()=>scheduleScan());scheduleScan();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 
-  globalThis.addEventListener('nexlab:session-reset',()=>{profilesPromise=null;notificationPromise=null;pendingNotification=null;try{sessionStorage.removeItem('nexlabTeamTaskTarget');}catch{}});
+  globalThis.addEventListener('nexlab:session-reset',()=>{profilesPromise=null;notificationPromise=null;pendingNotification=null;for(const state of stateByTeamId.values()){if(state.taskRealtimeTimer)clearTimeout(state.taskRealtimeTimer);try{state.taskRealtimeUnsubscribe?.();}catch{}state.taskRealtimeTimer=null;state.taskRealtimeUnsubscribe=null;}stateByTeamId.clear();try{sessionStorage.removeItem('nexlabTeamTaskTarget');}catch{}});
   globalThis.__NEXLAB_TEAM_CHAT__=Object.freeze({
     version:BUILD.version,revision:REVISION,workerUrl:workerUrl(),
     refreshCurrent(){const panel=document.querySelector(PANEL_SELECTOR);const state=panel&&states.get(panel);return state?loadMessages(state,{force:true}):Promise.resolve(null);},

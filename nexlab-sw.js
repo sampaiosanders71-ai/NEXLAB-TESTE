@@ -1,5 +1,5 @@
 importScripts('./assets/nexlab-release-identity.js');
-const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-tarefas-equipes-pendencias',assetRevision:'app-beta-0-26-82-tarefas-equipes-pendencias',cacheName:'nexlab-beta-0-26-82-tarefas-equipes-pendencias',generatedAt:'2026-08-22T19:17:27Z'});
+const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-auditoria-final',assetRevision:'app-beta-0-26-82-auditoria-final',cacheName:'nexlab-beta-0-26-82-auditoria-final',generatedAt:'2026-08-26T21:34:10Z'});
 const APP_VERSION=BUILD_IDENTITY.version;
 const APP_RELEASE=BUILD_IDENTITY.release;
 const APP_REVISION=BUILD_IDENTITY.revision;
@@ -366,7 +366,7 @@ self.addEventListener('fetch',(event)=>{
 
 self.addEventListener('message',(event)=>{
   if(event.data?.type==='NEXLAB_GET_VERSION'){
-    event.ports?.[0]?.postMessage({type:'NEXLAB_VERSION',version:APP_VERSION,release:APP_RELEASE,revision:APP_REVISION,generatedAt:GENERATED_AT,cache:CACHE_NAME,cachePolicy:'minimal-core-precache-runtime-on-demand',compatibilityPolicy:'retained-cache-fallback-and-current-promotion'});
+    event.ports?.[0]?.postMessage({type:'NEXLAB_VERSION',version:APP_VERSION,release:APP_RELEASE,revision:APP_REVISION,generatedAt:GENERATED_AT,cache:CACHE_NAME,cachePolicy:'minimal-core-precache-runtime-on-demand',compatibilityPolicy:'current-cache-only-structural-recovery'});
     return;
   }
   if(event.data?.type==='NEXLAB_SKIP_WAITING'){

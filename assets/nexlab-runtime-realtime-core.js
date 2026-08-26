@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const ID=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-tarefas-equipes-pendencias'});
+  const ID=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-auditoria-final'});
   if(globalThis.__NEXLAB_REALTIME_CORE__?.revision===ID.revision)return;
 
   const VERSION=ID.version;
@@ -9,7 +9,7 @@
   const CANONICAL_TABLES=new Set([
     'profiles','spaces','bookings','booking_participants','booking_resources','meetings',
     'events','event_participants','projects','project_tasks','project_history','project_links',
-    'teams','team_members','team_links','assets','asset_maintenance','asset_movements',
+    'teams','team_members','team_links','team_history','assets','asset_maintenance','asset_movements',
     'stock_items','nexlab_stock_movements','marketing','marketing_dates','board_posts','feedback',
     'notifications','notification_deliveries','notification_reminders',
     'nexlab_system_events','nexlab_client_errors','nexlab_client_error_incidents',

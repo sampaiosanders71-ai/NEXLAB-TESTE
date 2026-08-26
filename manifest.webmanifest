@@ -2,7 +2,7 @@
   "id": "./",
   "name": "NEXLAB Beta 0.26.82",
   "short_name": "NEXLAB",
-  "description": "NEXLAB Beta 0.26.82 — auditoria pós-correções com metadados consolidados e regressão desktop/mobile revisada.",
+  "description": "NEXLAB — gestão acadêmica de equipes, projetos, reservas, eventos, patrimônio, comunicação e atividades.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

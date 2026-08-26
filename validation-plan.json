@@ -113,7 +113,7 @@
     }
   ],
   "release_title": "Beta 0.26.82 — Tarefas de Equipe e Pendências",
-  "generated_at": "2026-08-25T21:16:29Z",
+  "generated_at": "2026-08-26T21:34:10Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
     "controlled_test_run": "completed_and_cleaned",
@@ -205,7 +205,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-82-tarefas-equipes-pendencias",
+  "revision": "beta-0-26-82-auditoria-final",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -251,7 +251,7 @@
     "official_promotion": "blocked_until_exact_receipt",
     "manual_override_allowed": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-tarefas-equipes-pendencias",
+    "required_revision": "beta-0-26-82-auditoria-final",
     "receipt_max_age_days": 14
   },
   "activity_system_consistency_0_26_76": {
@@ -390,7 +390,6 @@
     "legacy_pointer_events_none_overridden": true
   },
   "post_audit_fixes_1_5_0_26_82": {
-    "revision": "beta-0-26-82-saude-sistema-timeout-corrigido",
     "fix_1_project_mobile_drag": {
       "pointer_events_enabled": true,
       "touch_action_none": true,
@@ -424,10 +423,11 @@
       "narrow_359_weekday_font_px": 8,
       "narrow_359_day_number_font_px": 10,
       "physical_confirmation": "pending"
-    }
+    },
+    "historical_revision": "beta-0-26-82-saude-sistema-timeout-corrigido"
   },
-  "build_revision": "beta-0-26-82-tarefas-equipes-pendencias",
-  "updated_at": "2026-08-26T00:13:11Z",
+  "build_revision": "beta-0-26-82-auditoria-final",
+  "updated_at": "2026-08-26T21:34:10Z",
   "post_login_permission_fix": {
     "pending_profile_counter_guard": "passed_static",
     "expected_42501_pending_counter_suppression": "passed_static",
@@ -477,7 +477,7 @@
     "physical_confirmation_required": true
   },
   "team_tasks_pending_0_26_82": {
-    "revision": "beta-0-26-82-tarefas-equipes-pendencias",
+    "revision": "beta-0-26-82-auditoria-final",
     "checks": [
       "team_task_create_member",
       "coordinator_nonmember_create",
@@ -491,5 +491,30 @@
     ],
     "backend_static": "passed",
     "physical_confirmation": "pending_after_publication"
+  },
+  "corrections_1_4_0_26_82": {
+    "revision": "beta-0-26-82-auditoria-final",
+    "asset_revision": "app-beta-0-26-82-auditoria-final",
+    "status": "static_corrected_backend_grants_applied_physical_pending",
+    "asset_revision_consistent": true,
+    "board_posts_write_grants_required": true,
+    "feedback_evidence_select_grant_required": true,
+    "current_metadata_normalized": true,
+    "physical_confirmation": "pending_after_publication"
+  },
+  "final_audit_completion_0_26_82": {
+    "status": "static_backend_corrected_physical_homologation_pending",
+    "revision": "beta-0-26-82-auditoria-final",
+    "asset_revision": "app-beta-0-26-82-auditoria-final",
+    "realtime_team_tasks": "team_history_signal_no_polling",
+    "service_worker_cache_policy": "current_cache_only_structural_recovery",
+    "physical_confirmation_pending": true,
+    "backend_verification": {
+      "release_gate_revision": "beta-0-26-82-auditoria-final",
+      "physical_receipt_count": 0,
+      "active_test_profiles": 0,
+      "tasks_created_by_index": true,
+      "team_history_realtime": true
+    }
   }
 }
