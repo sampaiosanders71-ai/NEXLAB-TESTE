@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-auditoria-final'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-equipes-layout-corrigido'});
   const REVISION=BUILD.revision;
   if(globalThis.__NEXLAB_TEAM_CHAT__?.revision===REVISION)return;
 
@@ -147,6 +147,10 @@
     section.append(head,notice,form,list);return section;
   }
 
+  function buildTeamWorkspace(tasks,chat){
+    const workspace=node('div','nexlab-team-workspace-v057');workspace.hidden=true;workspace.setAttribute('aria-label','Área de trabalho da equipe');workspace.append(tasks,chat);return workspace;
+  }
+
   function setTaskMessage(state,message,type='info'){
     const box=state.tasksPanel?.querySelector('.nexlab-team-task-message-v056');if(!box)return;
     box.hidden=!message;box.className=`nexlab-team-task-message-v056 is-${type}`;box.textContent=message||'';
@@ -280,6 +284,8 @@
 
   function classifyAndApply(state){
     const content=state.panel.querySelector(CONTENT_SELECTOR);state.content=content||null;if(!content)return;
+    const workspace=state.workspace||state.panel.querySelector(':scope > .nexlab-team-workspace-v057');
+    const footer=state.panel.querySelector(':scope > .team-details-v2680__footer');state.footer=footer||null;
     const groups={
       overview:[...content.querySelectorAll(':scope > .team-details-v2680__summary, :scope > .team-details-v2680__members, :scope > .team-workspace-v2680__history')],
       links:[...content.querySelectorAll(':scope > .team-workspace-v2680__links')]
@@ -289,14 +295,14 @@
     if(!groups.links.length){const el=content.querySelector('.team-workspace-v2680__links');if(el)groups.links.push(el);}
     const managed=new Set([...groups.overview,...groups.links]);
     for(const el of managed){el.hidden=true;}
-    state.chatPanel.hidden=true;state.tasksPanel.hidden=true;content.classList.remove('is-team-conversation-v055','is-team-tasks-v056');
-    if(state.activeTab==='conversation'){
-      state.chatPanel.hidden=false;content.classList.add('is-team-conversation-v055');
-    }else if(state.activeTab==='tasks'){
-      state.tasksPanel.hidden=false;content.classList.add('is-team-tasks-v056');
-    }else{
-      for(const el of groups[state.activeTab]||groups.overview)el.hidden=false;
-    }
+    const workspaceTab=state.activeTab==='conversation'||state.activeTab==='tasks';
+    content.hidden=workspaceTab;
+    if(footer)footer.hidden=workspaceTab;
+    if(workspace)workspace.hidden=!workspaceTab;
+    if(state.chatPanel)state.chatPanel.hidden=state.activeTab!=='conversation';
+    if(state.tasksPanel)state.tasksPanel.hidden=state.activeTab!=='tasks';
+    state.panel.classList.toggle('is-nexlab-team-workspace-v057',workspaceTab);
+    if(!workspaceTab){for(const el of groups[state.activeTab]||groups.overview)el.hidden=false;}
     syncNavigation(state);
   }
 
@@ -368,7 +374,7 @@
     const wrap=node('div','nexlab-team-composer-v055');
     const tools=node('div','nexlab-team-composer-tools-v055');const plus=node('button','nexlab-team-composer-plus-v055','+');plus.type='button';plus.setAttribute('aria-label','Opções da mensagem');plus.setAttribute('aria-expanded','false');
     const menu=node('div','nexlab-team-composer-menu-v055');menu.hidden=true;const taskAction=node('button','','+ Nova tarefa');taskAction.type='button';const mentionAction=node('button','','@ Mencionar alguém');mentionAction.type='button';menu.append(taskAction,mentionAction);tools.append(plus,menu);
-    const inputWrap=node('div','nexlab-team-composer-input-v055');const textarea=node('textarea','');textarea.rows=2;textarea.maxLength=4000;textarea.placeholder='Escreva uma mensagem...';textarea.setAttribute('aria-label','Mensagem para a equipe');
+    const inputWrap=node('div','nexlab-team-composer-input-v055');const textarea=node('textarea','');textarea.rows=1;textarea.maxLength=4000;textarea.placeholder='Escreva uma mensagem...';textarea.setAttribute('aria-label','Mensagem para a equipe');
     const suggestions=node('div','nexlab-team-mention-suggestions-v055');suggestions.hidden=true;inputWrap.append(textarea,suggestions);
     const send=node('button','nexlab-team-composer-send-v055','Enviar');send.type='button';
     const selected=new Set();const chipsSlot=node('div','nexlab-team-composer-selected-v055');const counter=node('span','nexlab-team-composer-counter-v055','0/4000');
@@ -388,7 +394,7 @@
     plus.addEventListener('click',()=>{menu.hidden=!menu.hidden;plus.setAttribute('aria-expanded',String(!menu.hidden));});
     taskAction.addEventListener('click',()=>{menu.hidden=true;plus.setAttribute('aria-expanded','false');activateTab(state,'tasks');void ensureTeamTasksReady(state).then(()=>showTaskForm(state));});
     mentionAction.addEventListener('click',()=>{menu.hidden=true;plus.setAttribute('aria-expanded','false');textarea.focus();showSuggestions(true);});
-    textarea.addEventListener('input',()=>{counter.textContent=`${textarea.value.length}/4000`;if(!textarea.value.includes('@')&&selected.size){selected.clear();refreshChips();}showSuggestions();});
+    textarea.addEventListener('input',()=>{counter.textContent=`${textarea.value.length}/4000`;textarea.style.height='auto';textarea.style.height=`${Math.min(textarea.scrollHeight,112)}px`;if(!textarea.value.includes('@')&&selected.size){selected.clear();refreshChips();}showSuggestions();});
     textarea.addEventListener('keyup',event=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(event.key))showSuggestions();});
     textarea.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send.click();}});
     textarea.addEventListener('blur',()=>setTimeout(hideSuggestions,180));
@@ -397,7 +403,7 @@
       const text=textarea.value.trim();if(!text){textarea.focus();return;}textarea.disabled=send.disabled=plus.disabled=true;send.textContent='Enviando...';
       try{
         const data=await api(`/v1/teams/${encodeURIComponent(state.teamId)}/messages`,{method:'POST',body:JSON.stringify({message:text,mentions:[...selected]})});
-        if(data?.message){state.messages.push(data.message);renderMessages(state);textarea.value='';selected.clear();refreshChips();counter.textContent='0/4000';setInlineMessage(state,'','info');scrollToBottom(state);}
+        if(data?.message){state.messages.push(data.message);renderMessages(state);textarea.value='';textarea.style.height='';selected.clear();refreshChips();counter.textContent='0/4000';setInlineMessage(state,'','info');scrollToBottom(state);}
       }catch(error){setInlineMessage(state,error.message||'Não foi possível enviar a mensagem.','err');textarea.focus();}
       finally{textarea.disabled=send.disabled=plus.disabled=false;send.textContent='Enviar';}
     });
@@ -443,27 +449,37 @@
     const buttons=[...card.querySelectorAll('button')];const details=buttons.find(button=>/^(ver detalhes|detalhes)$/i.test(clean(button.textContent,60)));if(details){details.click();}
   }
 
+  function mountWorkspace(panel,state){
+    panel.querySelectorAll('.nexlab-team-workspace-v057').forEach(el=>el.remove());
+    // Remove leftovers from the previous injected layout, including panels nested in the original content.
+    panel.querySelectorAll('.nexlab-team-tasks-v056,.nexlab-team-chat-v055').forEach(el=>el.remove());
+    const tasks=buildTasksPanel(state);const chat=buildConversationPanel(state);const workspace=buildTeamWorkspace(tasks,chat);
+    state.tasksPanel=tasks;state.chatPanel=chat;state.workspace=workspace;state.content=panel.querySelector(CONTENT_SELECTOR);state.footer=panel.querySelector(':scope > .team-details-v2680__footer');
+    const nav=panel.querySelector(':scope > .nexlab-team-tabs-v055');
+    if(nav)nav.insertAdjacentElement('afterend',workspace);else if(state.content)state.content.insertAdjacentElement('beforebegin',workspace);else panel.appendChild(workspace);
+    if(state.loaded){renderMessages(state);syncOlderButton(state);}renderComposer(state);
+    if(state.tasksLoaded)renderTeamTasks(state);
+  }
+
   function createState(panel,teamId){
-    const state={panel,teamId,activeTab:'overview',messages:[],nextCursor:null,loaded:false,loading:false,access:null,accessError:null,accessLoading:null,profiles:new Map(),currentUserId:'',targetContentId:'',targetTaskId:'',content:null,chatPanel:null,tasksPanel:null,taskWorkspace:null,tasksLoaded:false,tasksLoading:null,taskRealtimeUnsubscribe:null,taskRealtimeTimer:null};
-    panel.classList.add('has-nexlab-team-chat-v055','has-nexlab-team-tasks-v056');const header=panel.querySelector(HEADER_SELECTOR);const nav=buildTabs(state);const tasks=buildTasksPanel(state);const chat=buildConversationPanel(state);state.tasksPanel=tasks;state.chatPanel=chat;const content=panel.querySelector(CONTENT_SELECTOR);
-    if(header)header.insertAdjacentElement('afterend',nav);else panel.prepend(nav);if(content)content.append(tasks,chat);else panel.append(tasks,chat);
+    const state={panel,teamId,activeTab:'overview',messages:[],nextCursor:null,loaded:false,loading:false,access:null,accessError:null,accessLoading:null,profiles:new Map(),currentUserId:'',targetContentId:'',targetTaskId:'',content:null,footer:null,workspace:null,chatPanel:null,tasksPanel:null,taskWorkspace:null,tasksLoaded:false,tasksLoading:null,taskRealtimeUnsubscribe:null,taskRealtimeTimer:null};
+    panel.classList.add('has-nexlab-team-chat-v055','has-nexlab-team-tasks-v056');
+    const header=panel.querySelector(HEADER_SELECTOR);const nav=buildTabs(state);
+    if(header)header.insertAdjacentElement('afterend',nav);else panel.prepend(nav);
+    mountWorkspace(panel,state);
     states.set(panel,state);stateByTeamId.set(teamId,state);bindTaskRealtime(state);
     if(pendingNotification?.teamId===teamId){state.activeTab=pendingNotification.section||'overview';state.targetContentId=pendingNotification.contentId||'';state.targetTaskId=pendingNotification.taskId||'';}
     void loadAccess(state).then(()=>{classifyAndApply(state);if(state.activeTab==='conversation')void ensureConversationReady(state);if(state.activeTab==='tasks')void ensureTeamTasksReady(state);});classifyAndApply(state);return state;
   }
 
   function rebindState(panel,state){
-    state.panel=panel;state.content=panel.querySelector(CONTENT_SELECTOR);
+    state.panel=panel;state.content=panel.querySelector(CONTENT_SELECTOR);state.footer=panel.querySelector(':scope > .team-details-v2680__footer');
     panel.classList.add('has-nexlab-team-chat-v055','has-nexlab-team-tasks-v056');
-    panel.querySelector('.nexlab-team-tabs-v055')?.remove();panel.querySelector('.nexlab-team-tasks-v056')?.remove();panel.querySelector('.nexlab-team-chat-v055')?.remove();
-    const header=panel.querySelector(HEADER_SELECTOR);const nav=buildTabs(state);const tasks=buildTasksPanel(state);const chat=buildConversationPanel(state);
-    state.tasksPanel=tasks;state.chatPanel=chat;
+    panel.querySelectorAll('.nexlab-team-tabs-v055,.nexlab-team-workspace-v057,.nexlab-team-tasks-v056,.nexlab-team-chat-v055').forEach(el=>el.remove());
+    const header=panel.querySelector(HEADER_SELECTOR);const nav=buildTabs(state);
     if(header)header.insertAdjacentElement('afterend',nav);else panel.prepend(nav);
-    if(state.content)state.content.append(tasks,chat);else panel.append(tasks,chat);
-    states.set(panel,state);bindTaskRealtime(state);
-    if(state.loaded){renderMessages(state);syncOlderButton(state);}renderComposer(state);
-    if(state.tasksLoaded)renderTeamTasks(state);
-    classifyAndApply(state);
+    mountWorkspace(panel,state);
+    states.set(panel,state);bindTaskRealtime(state);classifyAndApply(state);
     if(state.activeTab==='conversation'&&!state.loaded)void ensureConversationReady(state);
     if(state.activeTab==='tasks'&&!state.tasksLoaded)void ensureTeamTasksReady(state);
     return state;
@@ -472,13 +488,14 @@
   function ensurePanel(panel){
     if(!(panel instanceof HTMLElement))return;const teamId=String(panel.dataset.nexlabTeamId||'');if(!isUuid(teamId))return;
     let state=states.get(panel);if(!state||state.teamId!==teamId){
-      panel.querySelector('.nexlab-team-tabs-v055')?.remove();panel.querySelector('.nexlab-team-tasks-v056')?.remove();panel.querySelector('.nexlab-team-chat-v055')?.remove();
+      panel.querySelectorAll('.nexlab-team-tabs-v055,.nexlab-team-workspace-v057,.nexlab-team-tasks-v056,.nexlab-team-chat-v055').forEach(el=>el.remove());
       const cached=stateByTeamId.get(teamId);
       state=cached&&!cached.panel?.isConnected?rebindState(panel,cached):createState(panel,teamId);
     }else{
-      if(!panel.querySelector('.nexlab-team-tabs-v055')){const nav=buildTabs(state);panel.querySelector(HEADER_SELECTOR)?.insertAdjacentElement('afterend',nav);}
-      if(!panel.querySelector('.nexlab-team-tasks-v056')){const tasks=buildTasksPanel(state);state.tasksPanel=tasks;panel.querySelector(CONTENT_SELECTOR)?.appendChild(tasks);if(state.tasksLoaded)renderTeamTasks(state);}
-      if(!panel.querySelector('.nexlab-team-chat-v055')){const chat=buildConversationPanel(state);state.chatPanel=chat;panel.querySelector(CONTENT_SELECTOR)?.appendChild(chat);if(state.loaded){renderMessages(state);syncOlderButton(state);}renderComposer(state);}
+      let nav=panel.querySelector(':scope > .nexlab-team-tabs-v055');
+      if(!nav){nav=buildTabs(state);const header=panel.querySelector(HEADER_SELECTOR);if(header)header.insertAdjacentElement('afterend',nav);else panel.prepend(nav);}
+      const workspace=panel.querySelector(':scope > .nexlab-team-workspace-v057');
+      if(!workspace||!workspace.querySelector('.nexlab-team-tasks-v056')||!workspace.querySelector('.nexlab-team-chat-v055'))mountWorkspace(panel,state);
       classifyAndApply(state);
     }
   }

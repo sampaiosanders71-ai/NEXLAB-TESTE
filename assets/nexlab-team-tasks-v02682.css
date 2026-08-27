@@ -1,5 +1,6 @@
 /* NEXLAB Beta 0.26.82 — Etapa 5.6: Tarefas integradas às Equipes + Pendências */
 .team-details-v2680 .team-details-v2680__content.is-team-tasks-v056{display:flex;padding:0;overflow:hidden;background:#f8fafc}
+.team-details-v2680 .nexlab-team-workspace-v057>.nexlab-team-tasks-v056{width:100%;height:100%;flex:1 1 auto}
 .team-details-v2680 .nexlab-team-tasks-v056{display:flex;min-width:0;min-height:0;width:100%;flex:1;flex-direction:column;background:#f8fafc;overflow:hidden}
 .team-details-v2680 .nexlab-team-tasks-v056[hidden]{display:none!important}
 .team-details-v2680 .nexlab-team-tasks-head-v056{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem 1rem;border-bottom:1px solid #e2e8f0;background:#fff}

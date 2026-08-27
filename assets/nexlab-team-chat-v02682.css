@@ -1,6 +1,12 @@
 /* NEXLAB Beta 0.26.82 — Etapa 5.5: Conversa das Equipes */
 .team-details-v2680.has-nexlab-team-chat-v055{min-height:min(760px,92vh)}
-.team-details-v2680.has-nexlab-team-chat-v055 .team-details-v2680__content{flex:1;min-height:0}
+.team-details-v2680.has-nexlab-team-chat-v055 .team-details-v2680__content{flex:1 1 auto;min-height:0;width:100%}
+.team-details-v2680 .nexlab-team-workspace-v057{display:flex;width:100%;min-width:0;min-height:0;flex:1 1 auto;overflow:hidden;background:#f8fafc}
+.team-details-v2680 .nexlab-team-workspace-v057[hidden],
+.team-details-v2680 .team-details-v2680__content[hidden],
+.team-details-v2680 .team-details-v2680__footer[hidden]{display:none!important}
+.team-details-v2680.is-nexlab-team-workspace-v057{min-height:min(760px,92vh)}
+.team-details-v2680.is-nexlab-team-workspace-v057 .nexlab-team-workspace-v057{height:100%}
 .team-details-v2680 .nexlab-team-tabs-v055{display:flex;flex:0 0 auto;gap:.35rem;padding:.55rem 1.1rem;border-bottom:1px solid #e2e8f0;background:#fff;overflow-x:auto;scrollbar-width:none}
 .team-details-v2680 .nexlab-team-tabs-v055::-webkit-scrollbar{display:none}
 .team-details-v2680 .nexlab-team-tab-v055{min-height:2.25rem;padding:0 .8rem;border:1px solid transparent;border-radius:.72rem;background:transparent;color:#64748b;font-size:.64rem;font-weight:900;white-space:nowrap;cursor:pointer}
@@ -49,7 +55,7 @@
 .team-details-v2680 .nexlab-team-chat-empty-v055 p{margin:0;max-width:24rem;font-size:.63rem;line-height:1.5}
 .team-details-v2680 .nexlab-team-chat-empty-icon-v055{font-size:1.55rem}
 
-.team-details-v2680 .nexlab-team-chat-composer-slot-v055{flex:0 0 auto;padding:.65rem .75rem calc(.65rem + env(safe-area-inset-bottom));border-top:1px solid #e2e8f0;background:#fff}
+.team-details-v2680 .nexlab-team-chat-composer-slot-v055{flex:0 0 auto;padding:.65rem .85rem calc(.65rem + env(safe-area-inset-bottom));border-top:1px solid #e2e8f0;background:#fff;box-shadow:0 -6px 18px rgba(15,23,42,.035)}
 .team-details-v2680 .nexlab-team-composer-v055{display:grid;gap:.38rem}
 .team-details-v2680 .nexlab-team-composer-row-v055{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:end;gap:.42rem}
 .team-details-v2680 .nexlab-team-composer-tools-v055{position:relative}
@@ -61,7 +67,7 @@
 .team-details-v2680 .nexlab-team-composer-menu-v055 button{width:100%;min-height:2.2rem;border:0;border-radius:.55rem;background:#fff;padding:0 .65rem;color:#334155;text-align:left;font-size:.62rem;font-weight:850;cursor:pointer}
 .team-details-v2680 .nexlab-team-composer-menu-v055 button:hover{background:#f8fafc}
 .team-details-v2680 .nexlab-team-composer-input-v055{position:relative}
-.team-details-v2680 .nexlab-team-composer-input-v055 textarea{box-sizing:border-box;width:100%;min-height:2.55rem;max-height:8rem;resize:vertical;border:1px solid #cbd5e1;border-radius:.8rem;padding:.62rem .72rem;background:#fff;color:#0f2747;font:650 .7rem/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;outline:none}
+.team-details-v2680 .nexlab-team-composer-input-v055 textarea{box-sizing:border-box;width:100%;min-height:2.55rem;max-height:8rem;resize:none;overflow-y:auto;border:1px solid #cbd5e1;border-radius:.8rem;padding:.62rem .72rem;background:#fff;color:#0f2747;font:650 .7rem/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;outline:none}
 .team-details-v2680 .nexlab-team-composer-input-v055 textarea:focus{border-color:#fb923c;box-shadow:0 0 0 3px rgba(249,115,22,.1)}
 .team-details-v2680 .nexlab-team-mention-suggestions-v055{position:absolute;z-index:50;left:.15rem;right:.15rem;bottom:calc(100% + .35rem);display:grid;max-height:12rem;overflow:auto;padding:.3rem;border:1px solid #e2e8f0;border-radius:.75rem;background:#fff;box-shadow:0 18px 42px rgba(15,23,42,.18)}
 .team-details-v2680 .nexlab-team-mention-suggestions-v055>button{display:flex;align-items:center;justify-content:space-between;gap:.7rem;min-height:2.2rem;border:0;border-radius:.55rem;background:#fff;padding:0 .65rem;color:#334155;text-align:left;font-size:.63rem;font-weight:850;cursor:pointer}
@@ -74,6 +80,13 @@
 .team-details-v2680 .nexlab-team-mention-chip-v055 button{border:0;background:transparent;color:inherit;font:inherit;cursor:pointer}
 .team-details-v2680 .nexlab-team-composer-counter-v055{justify-self:end;color:#94a3b8;font-size:.49rem;font-weight:750;padding-right:.2rem}
 .team-details-v2680 .nexlab-team-chat-readonly-v055{margin:0;padding:.7rem;border:1px solid #e2e8f0;border-radius:.75rem;background:#f8fafc;color:#64748b;font-size:.62rem;font-weight:700;text-align:center}
+
+@media(max-width:820px){
+  .team-details-v2680.has-nexlab-team-chat-v055{display:flex!important;flex-direction:column!important}
+  .team-details-v2680.has-nexlab-team-chat-v055 .team-details-v2680__header,
+  .team-details-v2680.has-nexlab-team-chat-v055 .team-details-v2680__content,
+  .team-details-v2680.has-nexlab-team-chat-v055 .team-details-v2680__footer{grid-row:auto!important}
+}
 
 @media(max-width:700px){
   .team-details-v2680.has-nexlab-team-chat-v055{width:100%;height:100%;max-height:100%;border-radius:0}
