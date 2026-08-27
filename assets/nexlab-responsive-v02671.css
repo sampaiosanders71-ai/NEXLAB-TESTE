@@ -950,3 +950,25 @@ body[data-nexlab-modal-open="true"] :where(#nexlab-admin-tools-trigger,#nexlab-t
     overflow:visible!important;
   }
 }
+
+/* Beta 0.26.82 - Prioridade 1: menus de 3 pontos fora de containers com overflow. */
+.nexlab-viewport-menu-portal-v02682[data-nexlab-viewport-menu="true"]{
+  position:fixed!important;right:auto!important;bottom:auto!important;
+  display:grid!important;gap:.18rem!important;padding:.35rem!important;
+  background:#fff!important;border:1px solid #e2e8f0!important;
+  border-radius:.9rem!important;overflow:auto!important;overscroll-behavior:contain!important;
+  z-index:2147483646!important;box-shadow:0 22px 60px rgba(2,6,23,.26)!important;
+}
+.nexlab-viewport-menu-portal-v02682 :where(button,a,[role="menuitem"]){
+  box-sizing:border-box;display:flex!important;align-items:center!important;gap:.5rem!important;
+  width:100%!important;min-height:2.35rem!important;margin:0!important;padding:.55rem .7rem!important;
+  border:0!important;border-radius:.62rem!important;background:#fff!important;color:#334155!important;
+  font-size:.68rem!important;font-weight:800!important;text-align:left!important;text-decoration:none!important;cursor:pointer!important;
+}
+.nexlab-viewport-menu-portal-v02682 :where(button,a,[role="menuitem"]):hover{background:#f8fafc!important;color:#0f2747!important}
+.nexlab-viewport-menu-portal-v02682 :where(button,a,[role="menuitem"]):disabled,
+.nexlab-viewport-menu-portal-v02682 [aria-disabled="true"]{opacity:.45!important;cursor:not-allowed!important}
+.nexlab-viewport-menu-portal-v02682 .text-red-600,
+.nexlab-viewport-menu-portal-v02682 .text-red-700,
+.nexlab-viewport-menu-portal-v02682 .is-danger{color:#be123c!important}
+[data-nexlab-viewport-source="true"]{visibility:hidden!important;pointer-events:none!important}

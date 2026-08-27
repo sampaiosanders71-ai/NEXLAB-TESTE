@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: BoardModule. */
-export { BoardModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-equipes-layout-corrigido";
+export { BoardModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-prioridade-3-refinamento-visual";

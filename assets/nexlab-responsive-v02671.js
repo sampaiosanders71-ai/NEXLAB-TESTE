@@ -1,12 +1,15 @@
 (function(){
   'use strict';
-  if(globalThis.__NEXLAB_RESPONSIVE_V02671__)return;
-  globalThis.__NEXLAB_RESPONSIVE_V02671__=Object.freeze({version:'0.26.82'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-prioridade-3-refinamento-visual'});
+  if(globalThis.__NEXLAB_RESPONSIVE_V02671__?.revision===BUILD.revision)return;
 
   const root=document.documentElement;
   let activeMenu=null;
+  let sourcePopover=null;
+  let portal=null;
   let raf=0;
   let scanTimer=0;
+  let closing=false;
   const detailsSelector='details.card-action-menu,details.project-details-more-v02667,details.team-card-v2680__menu';
   const popoverSelector=':scope > .card-action-menu__popover,:scope > .project-details-more-menu-v02667,:scope > [role="menu"]';
 
@@ -24,42 +27,115 @@
   }
 
   function getPopover(details){return details?.querySelector?.(popoverSelector)||null;}
-  function clearMenu(details){
+  function stripIds(node){
+    if(!(node instanceof Element))return;
+    node.removeAttribute('id');
+    node.querySelectorAll?.('[id]').forEach(el=>el.removeAttribute('id'));
+  }
+  function mirrorAction(original){
+    const clone=original.cloneNode(true);
+    stripIds(clone);
+    clone.removeAttribute('open');
+    if(original instanceof HTMLButtonElement)clone.disabled=original.disabled;
+    if(original.getAttribute('aria-disabled')==='true')clone.setAttribute('aria-disabled','true');
+    clone.addEventListener('pointerdown',event=>event.stopPropagation());
+    clone.addEventListener('click',event=>{
+      event.preventDefault();
+      event.stopPropagation();
+      if(original instanceof HTMLButtonElement&&original.disabled)return;
+      if(original.getAttribute('aria-disabled')==='true')return;
+      try{original.click();}catch(error){console.warn('NEXLAB menu action proxy',error);}
+      setTimeout(()=>closeMenu(true),0);
+    });
+    return clone;
+  }
+  function buildPortal(details){
     const pop=getPopover(details);
-    if(!pop)return;
-    pop.removeAttribute('data-nexlab-viewport-menu');
-    ['--nexlab-menu-top','--nexlab-menu-left','--nexlab-menu-width'].forEach(name=>pop.style.removeProperty(name));
+    if(!pop)return null;
+    closePortalOnly();
+    sourcePopover=pop;
+    pop.dataset.nexlabViewportSource='true';
+    pop.setAttribute('aria-hidden','true');
+    pop.style.setProperty('visibility','hidden','important');
+    pop.style.setProperty('pointer-events','none','important');
+
+    const layer=document.createElement('div');
+    layer.className=((pop.className||'').trim()+' nexlab-viewport-menu-portal-v02682').trim();
+    layer.dataset.nexlabViewportMenu='true';
+    layer.setAttribute('role',pop.getAttribute('role')||'menu');
+    layer.setAttribute('aria-label',pop.getAttribute('aria-label')||'Ações do card');
+
+    for(const child of [...pop.children]){
+      if(child.matches?.('button,a,[role="menuitem"]')) layer.appendChild(mirrorAction(child));
+      else{
+        const wrapper=child.cloneNode(true);
+        stripIds(wrapper);
+        const originalActions=[...child.querySelectorAll?.('button,a,[role="menuitem"]')||[]];
+        const clonedActions=[...wrapper.querySelectorAll?.('button,a,[role="menuitem"]')||[]];
+        clonedActions.forEach((clone,index)=>{
+          const original=originalActions[index];
+          if(!original)return;
+          const proxy=mirrorAction(original);
+          clone.replaceWith(proxy);
+        });
+        layer.appendChild(wrapper);
+      }
+    }
+    document.body.appendChild(layer);
+    portal=layer;
+    return layer;
+  }
+  function closePortalOnly(){
+    portal?.remove();portal=null;
+    if(sourcePopover){
+      sourcePopover.removeAttribute('data-nexlab-viewport-source');
+      sourcePopover.removeAttribute('aria-hidden');
+      sourcePopover.style.removeProperty('visibility');
+      sourcePopover.style.removeProperty('pointer-events');
+      sourcePopover=null;
+    }
+  }
+  function closeMenu(closeDetails=false){
+    if(closing)return;
+    closing=true;
+    const details=activeMenu;
+    closePortalOnly();
+    activeMenu=null;
+    if(closeDetails&&details?.open){try{details.open=false;}catch{}}
+    closing=false;
   }
   function positionMenu(details){
-    if(!details?.open||!document.documentElement.contains(details))return;
+    if(!details?.open||!document.documentElement.contains(details))return closeMenu(false);
     const trigger=details.querySelector(':scope > summary');
-    const pop=getPopover(details);
-    if(!trigger||!pop)return;
-    pop.setAttribute('data-nexlab-viewport-menu','true');
-    pop.style.setProperty('--nexlab-menu-top','0px');
-    pop.style.setProperty('--nexlab-menu-left','0px');
-    pop.style.setProperty('--nexlab-menu-width','208px');
+    if(!trigger)return;
+    if(!portal||!document.body.contains(portal))buildPortal(details);
+    if(!portal)return;
 
     const vv=globalThis.visualViewport;
     const viewportLeft=vv?.offsetLeft||0;
     const viewportTop=vv?.offsetTop||0;
-    const viewportWidth=vv?.width||globalThis.innerWidth;
-    const viewportHeight=vv?.height||globalThis.innerHeight;
+    const viewportWidth=vv?.width||globalThis.innerWidth||document.documentElement.clientWidth;
+    const viewportHeight=vv?.height||globalThis.innerHeight||document.documentElement.clientHeight;
     const margin=12,gap=7;
     const triggerRect=trigger.getBoundingClientRect();
     const maxWidth=Math.max(180,viewportWidth-margin*2);
-    const natural=Math.max(pop.scrollWidth||0,208);
+    const natural=Math.max(sourcePopover?.scrollWidth||0,portal.scrollWidth||0,208);
     const width=Math.min(natural,maxWidth);
-    pop.style.setProperty('--nexlab-menu-width',Math.round(width)+'px');
+    portal.style.setProperty('--nexlab-menu-width',Math.round(width)+'px');
+    portal.style.width=Math.round(width)+'px';
+    portal.style.maxWidth=`calc(100vw - ${margin*2}px)`;
+    portal.style.maxHeight=`calc(100dvh - ${margin*2}px)`;
 
-    const measured=pop.getBoundingClientRect();
-    const height=Math.min(measured.height||pop.scrollHeight||220,viewportHeight-margin*2);
+    const measured=portal.getBoundingClientRect();
+    const height=Math.min(measured.height||portal.scrollHeight||220,viewportHeight-margin*2);
     let left=triggerRect.right-width;
     left=Math.max(viewportLeft+margin,Math.min(left,viewportLeft+viewportWidth-margin-width));
     let top=triggerRect.bottom+gap;
     if(top+height>viewportTop+viewportHeight-margin)top=Math.max(viewportTop+margin,triggerRect.top-height-gap);
-    pop.style.setProperty('--nexlab-menu-left',Math.round(left)+'px');
-    pop.style.setProperty('--nexlab-menu-top',Math.round(top)+'px');
+    portal.style.setProperty('--nexlab-menu-left',Math.round(left)+'px');
+    portal.style.setProperty('--nexlab-menu-top',Math.round(top)+'px');
+    portal.style.left=Math.round(left)+'px';
+    portal.style.top=Math.round(top)+'px';
   }
   function scheduleMenu(){
     cancelAnimationFrame(raf);
@@ -70,7 +146,6 @@
     const open=Boolean(document.querySelector('[aria-modal="true"],dialog[open],.nexlab-update-overlay,.nexlab-push-consent-overlay'));
     document.body?.setAttribute('data-nexlab-modal-open',open?'true':'false');
   }
-
   function enhanceScrollRegions(scope=document){
     scope.querySelectorAll?.('.overflow-x-auto,.nexlab-v265-table-scroll,.nexlab-v265-calendar-scroll,.project-table-wrap-v02667,.project-table-wrap-v2690,.teams-v2680__table-wrap').forEach(el=>{
       el.setAttribute('data-nexlab-horizontal-scroll','true');
@@ -79,52 +154,36 @@
       if(!el.hasAttribute('aria-label'))el.setAttribute('aria-label','Conteúdo com rolagem horizontal');
     });
   }
-
-  function scan(scope=document){
-    updateModalState();
-    enhanceScrollRegions(scope);
-  }
-  function scheduleScan(scope=document){
-    clearTimeout(scanTimer);
-    scanTimer=setTimeout(()=>scan(scope),24);
-  }
+  function scan(scope=document){updateModalState();enhanceScrollRegions(scope);if(activeMenu&&!activeMenu.isConnected)closeMenu(false);}
+  function scheduleScan(scope=document){clearTimeout(scanTimer);scanTimer=setTimeout(()=>scan(scope),24);}
 
   document.addEventListener('toggle',event=>{
     const details=event.target instanceof Element?event.target.closest(detailsSelector):null;
     if(!details)return;
     if(details.open){
       document.querySelectorAll(detailsSelector).forEach(other=>{if(other!==details&&other.open)other.open=false;});
+      if(activeMenu&&activeMenu!==details)closeMenu(false);
       activeMenu=details;
-      scheduleMenu();
-    }else{
-      clearMenu(details);
-      if(activeMenu===details)activeMenu=null;
-    }
+      requestAnimationFrame(()=>{buildPortal(details);positionMenu(details);});
+    }else if(activeMenu===details){closeMenu(false);}
   },true);
 
   document.addEventListener('pointerdown',event=>{
     if(!activeMenu?.open)return;
-    const pop=getPopover(activeMenu);
-    if(event.target instanceof Node&&(activeMenu.contains(event.target)||pop?.contains(event.target)))return;
-    activeMenu.open=false;
-  },true);
-  document.addEventListener('click',event=>{
-    if(!activeMenu?.open)return;
-    if(event.target instanceof Element&&event.target.closest('button,a,[role="menuitem"]'))setTimeout(()=>{if(activeMenu?.open)activeMenu.open=false;},0);
+    if(event.target instanceof Node&&(portal?.contains(event.target)||activeMenu.querySelector(':scope > summary')?.contains(event.target)))return;
+    closeMenu(true);
   },true);
   document.addEventListener('keydown',event=>{
     if(event.key==='Escape'&&activeMenu?.open){
       const trigger=activeMenu.querySelector(':scope > summary');
-      activeMenu.open=false;
-      trigger?.focus?.();
+      closeMenu(true);trigger?.focus?.();
     }
   });
 
   const observer=new MutationObserver(records=>{
     let scope=document;
     for(const record of records){if(record.target instanceof Element){scope=record.target;break;}}
-    scheduleScan(scope);
-    scheduleMenu();
+    scheduleScan(scope);scheduleMenu();
   });
   observer.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['open','aria-modal','class']});
 
@@ -135,6 +194,6 @@
   document.addEventListener('scroll',scheduleMenu,true);
 
   updateViewport();
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>scan(document),{once:true});
-  else scan(document);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>scan(document),{once:true});else scan(document);
+  globalThis.__NEXLAB_RESPONSIVE_V02671__=Object.freeze({version:BUILD.version,revision:BUILD.revision,viewportMenus:'body-proxy-portal'});
 })();

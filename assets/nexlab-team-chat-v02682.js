@@ -25,6 +25,8 @@
   function initials(name){return clean(name,80).split(/\s+/).filter(Boolean).slice(0,2).map(v=>v[0]?.toUpperCase()||'').join('')||'U';}
   function roleLabel(role){return ({admin:'Admin',administrador:'Admin',coordenador:'Coordenador',bolsista:'Bolsista',voluntario:'Voluntário',coworking_junior:'Coworking Júnior'}[String(role||'').toLowerCase()]||'Usuário');}
   function formatDate(value){if(!value)return 'Agora';try{return new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(new Date(value));}catch{return '—';}}
+  function chatDayKey(value){try{const d=new Date(value);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}catch{return 'unknown';}}
+  function chatDayLabel(value){try{const d=new Date(value),now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate()),target=new Date(d.getFullYear(),d.getMonth(),d.getDate()),days=Math.round((today-target)/86400000);if(days===0)return 'Hoje';if(days===1)return 'Ontem';return new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'short',year:d.getFullYear()!==now.getFullYear()?'numeric':undefined}).format(d).replace('.','');}catch{return 'Mensagens';}}
 
   function node(tag,className,text){const el=document.createElement(tag);if(className)el.className=className;if(text!=null)el.textContent=String(text);return el;}
   function profile(state,id){return state.profiles?.get?.(String(id))||null;}
@@ -354,15 +356,18 @@
   function renderMessages(state){
     const list=state.chatPanel.querySelector('.nexlab-team-chat-list-v055');list.replaceChildren();
     if(!state.messages.length){const empty=node('div','nexlab-team-chat-empty-v055');empty.append(node('span','nexlab-team-chat-empty-icon-v055','💬'),node('strong','', 'Nenhuma mensagem ainda'),node('p','',state.access?.can_send_message?'Envie a primeira mensagem para a equipe.':'Ainda não há mensagens registradas nesta conversa.'));list.appendChild(empty);return;}
-    let lastAuthor='';
+    let lastAuthor='',lastDay='';
     for(const message of state.messages){
-      const own=String(message.author_id||'')===state.currentUserId;const author=profile(state,message.author_id);const row=node('article',`nexlab-team-chat-row-v055 ${own?'is-own':'is-other'}`);row.dataset.messageId=String(message.id||'');
-      if(!own){const avatar=node('span','nexlab-team-chat-avatar-v055',initials(author?.nome));avatar.title=author?.nome||'Usuário';row.appendChild(avatar);}
+      const currentDay=chatDayKey(message.created_at);
+      if(currentDay!==lastDay){const separator=node('div','nexlab-team-chat-day-v058',chatDayLabel(message.created_at));separator.setAttribute('role','separator');list.appendChild(separator);lastAuthor='';lastDay=currentDay;}
+      const authorId=String(message.author_id||'');const own=authorId===state.currentUserId;const grouped=lastAuthor===authorId;
+      const author=profile(state,message.author_id);const row=node('article',`nexlab-team-chat-row-v055 ${own?'is-own':'is-other'}${grouped?' is-grouped-v058':''}`);row.dataset.messageId=String(message.id||'');
+      if(!own){const avatar=node('span',`nexlab-team-chat-avatar-v055${grouped?' is-ghost-v058':''}`,initials(author?.nome));avatar.title=author?.nome||'Usuário';row.appendChild(avatar);}
       const wrap=node('div','nexlab-team-chat-bubble-wrap-v055');
-      if(!own&&lastAuthor!==String(message.author_id||'')){const who=node('span','nexlab-team-chat-author-v055',author?.nome||'Usuário');who.title=roleLabel(author?.role);wrap.appendChild(who);}
+      if(!own&&!grouped){const who=node('span','nexlab-team-chat-author-v055',author?.nome||'Usuário');who.title=roleLabel(author?.role);wrap.appendChild(who);}
       const bubble=node('div','nexlab-team-chat-bubble-v055');const text=node('p','nexlab-team-chat-text-v055');appendTextWithMentions(text,message.message);bubble.appendChild(text);
       if(Array.isArray(message.mentions)&&message.mentions.length){const mentions=node('div','nexlab-team-chat-mentions-v055');for(const id of message.mentions)mentions.appendChild(node('span','',`@ ${profileName(state,id)}`));bubble.appendChild(mentions);}
-      const meta=node('span','nexlab-team-chat-time-v055',formatDate(message.created_at));bubble.appendChild(meta);wrap.appendChild(bubble);row.appendChild(wrap);list.appendChild(row);lastAuthor=String(message.author_id||'');
+      const meta=node('span','nexlab-team-chat-time-v055',formatDate(message.created_at));bubble.appendChild(meta);wrap.appendChild(bubble);row.appendChild(wrap);list.appendChild(row);lastAuthor=authorId;
     }
   }
 
