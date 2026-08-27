@@ -3,11 +3,11 @@
   "display_version": "NEXLAB Beta 0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-equipes-layout-corrigido",
-  "asset_revision": "app-beta-0-26-82-equipes-layout-corrigido",
+  "revision": "beta-0-26-82-projetos-comentarios-laterais",
+  "asset_revision": "app-beta-0-26-82-projetos-comentarios-laterais",
   "generated_at": "2026-08-26T23:59:00Z",
   "title": "Beta 0.26.82 — Equipes com layout corrigido",
-  "cache_name": "nexlab-beta-0-26-82-equipes-layout-corrigido",
+  "cache_name": "nexlab-beta-0-26-82-projetos-comentarios-laterais",
   "entry": "index.html",
   "core_files": [
     "index.html",
@@ -107,8 +107,8 @@
     "administrator_receipt_required": true,
     "manual_approval_allowed": false,
     "status": "candidate_blocked_pending_exact_physical_receipt",
-    "build_revision": "beta-0-26-82-equipes-layout-corrigido",
-    "evidence_revision": "beta-0-26-82-equipes-layout-corrigido",
+    "build_revision": "beta-0-26-82-projetos-comentarios-laterais",
+    "evidence_revision": "beta-0-26-82-projetos-comentarios-laterais",
     "evidence_storage_scoped_by_build_revision": true,
     "controlled_push_test": "provider_accepted_pending_device_display_and_tap",
     "controlled_push_sent_at": "2026-07-29T06:07:04.801Z",
@@ -123,7 +123,7 @@
     "responsive_global_contract": "static_passed_physical_confirmation_pending",
     "exact_version_revision_receipt_required": true,
     "current_exact_receipts": 0,
-    "revision": "beta-0-26-82-equipes-layout-corrigido"
+    "revision": "beta-0-26-82-projetos-comentarios-laterais"
   },
   "observability": {
     "user_notice_reference_persisted": true,
@@ -269,7 +269,7 @@
     "current_release_0_26_82": {
       "version": "0.26.82",
       "status": "beta",
-      "revision": "beta-0-26-82-equipes-layout-corrigido",
+      "revision": "beta-0-26-82-projetos-comentarios-laterais",
       "rpc_health": "nexlab_get_database_health_v02682",
       "rpc_diagnostics": "nexlab_get_homologation_diagnostics_v02682",
       "rpc_gate": "nexlab_get_release_publish_gate_v02682",
@@ -289,10 +289,10 @@
   "validation": {
     "scope": "current_revision_only",
     "version": "0.26.82",
-    "revision": "beta-0-26-82-equipes-layout-corrigido",
-    "asset_revision": "app-beta-0-26-82-equipes-layout-corrigido",
+    "revision": "beta-0-26-82-projetos-comentarios-laterais",
+    "asset_revision": "app-beta-0-26-82-projetos-comentarios-laterais",
     "metadata_cleanup_completed": true,
-    "validation_plan_revision": "beta-0-26-82-equipes-layout-corrigido",
+    "validation_plan_revision": "beta-0-26-82-projetos-comentarios-laterais",
     "stale_project_summary_card_expectation_removed": true,
     "physical_device_test": "pending_exact_revision_confirmation",
     "fully_homologated": false,
@@ -314,9 +314,9 @@
   "files": 78,
   "build_identity": {
     "version": "0.26.82",
-    "revision": "beta-0-26-82-equipes-layout-corrigido",
-    "asset_revision": "app-beta-0-26-82-equipes-layout-corrigido",
-    "cache_name": "nexlab-beta-0-26-82-equipes-layout-corrigido",
+    "revision": "beta-0-26-82-projetos-comentarios-laterais",
+    "asset_revision": "app-beta-0-26-82-projetos-comentarios-laterais",
+    "cache_name": "nexlab-beta-0-26-82-projetos-comentarios-laterais",
     "generated_at": "2026-08-26T20:40:00Z",
     "base_release": "0.26.71",
     "stable_frontend_base": "0.26.69",
@@ -1820,7 +1820,7 @@
     "assert_rpc": "nexlab_assert_release_publishable_v02682",
     "publication_allowed": false,
     "required_app_version": "0.26.82",
-    "required_revision": "beta-0-26-82-equipes-layout-corrigido",
+    "required_revision": "beta-0-26-82-projetos-comentarios-laterais",
     "receipt_max_age_days": 14,
     "manual_override_allowed": false,
     "candidate_deployment_allowed_for_homologation": true,
@@ -2423,8 +2423,8 @@
     }
   },
   "team_modal_layout_fix_0_26_82": {
-    "revision": "beta-0-26-82-equipes-layout-corrigido",
-    "asset_revision": "app-beta-0-26-82-equipes-layout-corrigido",
+    "revision": "beta-0-26-82-projetos-comentarios-laterais",
+    "asset_revision": "app-beta-0-26-82-projetos-comentarios-laterais",
     "scope": "equipes",
     "status": "candidate_for_physical_homologation",
     "changes": [
@@ -2442,7 +2442,7 @@
       "projects_modified_by_this_fix": false
     },
     "backend_verification": {
-      "release_gate_revision": "beta-0-26-82-equipes-layout-corrigido",
+      "release_gate_revision": "beta-0-26-82-projetos-comentarios-laterais",
       "release_gate_aligned": true,
       "device_homologation_revision_aligned": true,
       "physical_receipts_for_revision": 0,

@@ -1,5 +1,5 @@
 importScripts('./assets/nexlab-release-identity.js');
-const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-equipes-layout-corrigido',assetRevision:'app-beta-0-26-82-equipes-layout-corrigido',cacheName:'nexlab-beta-0-26-82-equipes-layout-corrigido',generatedAt:'2026-08-26T23:59:00Z'});
+const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-projetos-comentarios-laterais',assetRevision:'app-beta-0-26-82-projetos-comentarios-laterais',cacheName:'nexlab-beta-0-26-82-projetos-comentarios-laterais',generatedAt:'2026-08-26T23:59:00Z'});
 const APP_VERSION=BUILD_IDENTITY.version;
 const APP_RELEASE=BUILD_IDENTITY.release;
 const APP_REVISION=BUILD_IDENTITY.revision;
