@@ -112,7 +112,7 @@
       "expected_result": "Revisão atual consistente em desktop e celular, sem regressões conhecidas nos fluxos corrigidos; promoção continua bloqueada até recibo físico válido da revisão exata."
     }
   ],
-  "release_title": "NEXLAB Beta 0.26.82 — Prioridade 3: refinamento visual",
+  "release_title": "NEXLAB Beta 0.26.82 — Relatórios baseado na referência de cards",
   "generated_at": "2026-08-27T19:18:15Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
@@ -205,7 +205,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-82-prioridade-3-refinamento-visual",
+  "revision": "beta-0-26-82-relatorios-referencia-cards",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -251,7 +251,7 @@
     "official_promotion": "blocked_pending_exact_physical_receipt",
     "manual_override_allowed": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-prioridade-3-refinamento-visual",
+    "required_revision": "beta-0-26-82-relatorios-referencia-cards",
     "receipt_max_age_days": 14
   },
   "activity_system_consistency_0_26_76": {
@@ -426,8 +426,8 @@
     },
     "historical_revision": "beta-0-26-82-saude-sistema-timeout-corrigido"
   },
-  "build_revision": "beta-0-26-82-prioridade-3-refinamento-visual",
-  "updated_at": "2026-08-27T18:55:00Z",
+  "build_revision": "beta-0-26-82-relatorios-referencia-cards",
+  "updated_at": "2026-08-27T20:20:00Z",
   "post_login_permission_fix": {
     "pending_profile_counter_guard": "passed_static",
     "expected_42501_pending_counter_suppression": "passed_static",
@@ -579,5 +579,42 @@
     ],
     "functional_rules_changed": false,
     "physical_confirmation": "pending"
+  },
+  "profile_reference_cards_0_26_82": {
+    "revision": "beta-0-26-82-perfil-referencia-cards",
+    "scope": [
+      "profile_module",
+      "profile_cards"
+    ],
+    "sidebar_unchanged": true,
+    "global_topbar_unchanged": true,
+    "other_modules_unchanged": true,
+    "profile_logic_unchanged": true,
+    "physical_visual_confirmation_required": true
+  },
+  "reports_reference_cards_0_26_82": {
+    "revision": "beta-0-26-82-relatorios-referencia-cards",
+    "scope": [
+      "reports_module",
+      "reports_cards"
+    ],
+    "sidebar_unchanged": true,
+    "global_topbar_unchanged": true,
+    "other_modules_unchanged": true,
+    "reports_logic_unchanged": true,
+    "physical_visual_confirmation_required": true,
+    "desktop_checks": [
+      "hero",
+      "metrics",
+      "two_column_module_cards",
+      "download_actions",
+      "history"
+    ],
+    "mobile_checks": [
+      "hero_stack",
+      "metrics_2x2",
+      "module_cards_single_column",
+      "download_actions"
+    ]
   }
 }

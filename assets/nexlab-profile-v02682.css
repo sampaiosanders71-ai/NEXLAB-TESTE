@@ -1,0 +1,320 @@
+/* NEXLAB Beta 0.26.82 — Perfil: redesign isolado baseado na referência aprovada. */
+body[data-nexlab-page="perfil"] .nexlab-profile-page-v058{
+  width:min(100%,1280px)!important;
+  margin-inline:auto;
+  gap:20px!important;
+}
+
+/* Hero do perfil — somente área interna do módulo. */
+body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:28px!important;
+  min-height:164px;
+  padding:28px 30px!important;
+  overflow:hidden!important;
+  border:1px solid #e4e9f0!important;
+  border-radius:20px!important;
+  background:#fff!important;
+  box-shadow:0 7px 24px rgba(15,35,65,.055)!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  width:330px;
+  height:210px;
+  right:-45px;
+  top:-26px;
+  opacity:.48;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 58% 55%,transparent 0 46px,rgba(249,115,22,.13) 47px 48px,transparent 49px 70px,rgba(249,115,22,.09) 71px 72px,transparent 73px 96px,rgba(249,115,22,.06) 97px 98px,transparent 99px),
+    linear-gradient(130deg,transparent 18%,rgba(255,247,237,.9) 19% 50%,transparent 51%);
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058>.absolute.pointer-events-none,
+body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058>.absolute[class*="blur"]{display:none!important}
+body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058>div{position:relative;z-index:1}
+body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058 .group{flex:0 0 auto}
+body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058 .group>.absolute{display:none!important}
+body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058 .group :where(.w-20,.md\:w-24){
+  width:104px!important;height:104px!important;border-width:5px!important;border-color:#fff!important;
+  box-shadow:0 4px 16px rgba(15,35,65,.16)!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058 h1{
+  margin:2px 0 0!important;
+  font-size:clamp(1.7rem,2.7vw,2.25rem)!important;
+  line-height:1.08!important;
+  letter-spacing:-.035em!important;
+  color:#102b50!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058>div:nth-of-type(2){
+  text-align:left!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058>div:nth-of-type(2)>div:first-child>span:first-child{
+  padding:6px 12px!important;
+  border-radius:8px!important;
+  background:#102b50!important;
+  color:#fff!important;
+  font-size:9px!important;
+  letter-spacing:.06em!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058>div:last-child{margin-left:auto!important}
+body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058>div:last-child button{
+  min-height:42px!important;
+  padding-inline:18px!important;
+  border-radius:11px!important;
+  background:#f97316!important;
+  box-shadow:0 5px 14px rgba(249,115,22,.18)!important;
+  white-space:nowrap;
+}
+
+/* Grade principal do perfil. */
+body[data-nexlab-page="perfil"] .nexlab-profile-layout-v058{
+  display:grid!important;
+  grid-template-columns:minmax(280px,340px) minmax(0,1fr)!important;
+  align-items:start!important;
+  gap:18px!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-layout-v058>div{min-width:0!important}
+body[data-nexlab-page="perfil"] .nexlab-profile-layout-v058>div:first-child{display:grid!important;gap:14px!important}
+
+/* Cards de informações. */
+body[data-nexlab-page="perfil"] .nexlab-profile-info-card-v059{
+  padding:18px!important;
+  border:1px solid #e5eaf0!important;
+  border-radius:16px!important;
+  background:#fff!important;
+  box-shadow:0 4px 15px rgba(15,35,65,.035)!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-info-card-v059>h3{
+  margin:0 0 14px!important;
+  padding:0 0 12px!important;
+  border-bottom:1px solid #edf1f5!important;
+  font-size:13px!important;
+  font-weight:800!important;
+  color:#112c50!important;
+  letter-spacing:-.01em!important;
+  text-transform:none!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-info-content-v059{
+  display:grid!important;
+  gap:0!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-info-row-v059{
+  display:grid!important;
+  grid-template-columns:minmax(110px,.9fr) minmax(0,1.25fr)!important;
+  align-items:center!important;
+  gap:10px!important;
+  min-height:38px!important;
+  padding:8px 0!important;
+  border-bottom:1px solid #f1f4f7!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-info-row-v059:last-child{border-bottom:0!important}
+body[data-nexlab-page="perfil"] .nexlab-profile-info-row-v059>span:first-child{
+  margin:0!important;
+  font-family:inherit!important;
+  font-size:10px!important;
+  font-weight:650!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  color:#7b8aa1!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-info-row-v059>span:nth-child(2){
+  overflow:hidden;
+  font-family:inherit!important;
+  font-size:11px!important;
+  font-weight:700!important;
+  color:#334a69!important;
+  text-overflow:ellipsis;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-status-block-v059{
+  margin-top:8px!important;
+  border-radius:12px!important;
+  box-shadow:none!important;
+}
+
+/* Habilidades. */
+body[data-nexlab-page="perfil"] .nexlab-profile-skills-v059>div:last-child{
+  gap:7px!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-skills-v059>div:last-child>span{
+  min-height:26px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  padding:4px 10px!important;
+  border:1px solid #d8ecc8!important;
+  border-radius:999px!important;
+  background:#f4faef!important;
+  color:#5d9c32!important;
+  font-size:9px!important;
+  font-weight:750!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+}
+
+/* Minhas contribuições. */
+body[data-nexlab-page="perfil"] .nexlab-profile-contributions-v058{
+  padding:20px!important;
+  border:1px solid #e5eaf0!important;
+  border-radius:16px!important;
+  background:#fff!important;
+  box-shadow:0 4px 15px rgba(15,35,65,.035)!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-contrib-head-v059 h3{
+  margin:0!important;
+  color:#112c50!important;
+  font-size:15px!important;
+  font-weight:850!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-contrib-head-v059 p{
+  margin-top:3px!important;
+  color:#7b8aa1!important;
+  font-size:10px!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-stats-v059{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-top:16px;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-stat-v059{
+  min-width:0;
+  display:grid;
+  grid-template-columns:38px minmax(0,1fr);
+  grid-template-rows:auto auto;
+  column-gap:10px;
+  align-items:center;
+  padding:13px;
+  border:1px solid #e6ebf1;
+  border-radius:13px;
+  background:#fff;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-stat-icon-v059{
+  grid-row:1 / span 2;
+  width:38px;height:38px;
+  display:grid;place-items:center;
+  border-radius:10px;
+  background:#f4f7fb;
+  color:#2563eb;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-stat-v059[data-kind="projects"] .nexlab-profile-stat-icon-v059,
+body[data-nexlab-page="perfil"] .nexlab-profile-stat-v059[data-kind="meetings"] .nexlab-profile-stat-icon-v059{background:#fff7ed;color:#f59e0b}
+body[data-nexlab-page="perfil"] .nexlab-profile-stat-v059[data-kind="events"] .nexlab-profile-stat-icon-v059{background:#fff1f2;color:#ef4444}
+body[data-nexlab-page="perfil"] .nexlab-profile-stat-value-v059{
+  align-self:end;
+  color:#102b50;
+  font-size:18px;
+  line-height:1;
+  font-weight:900;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-stat-label-v059{
+  align-self:start;
+  margin-top:4px;
+  overflow:hidden;
+  color:#52657f;
+  font-size:9px;
+  font-weight:700;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+/* Listas das contribuições. */
+body[data-nexlab-page="perfil"] .nexlab-profile-activity-grid-v059{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+  padding-top:0!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-activity-card-v059{
+  min-width:0;
+  padding:14px!important;
+  border:1px solid #e7ebf0!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  box-shadow:none!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-activity-card-v059>h4{
+  margin:0!important;
+  padding:0 0 11px!important;
+  border-bottom:1px solid #eef2f5!important;
+  color:#173458!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-activity-card-v059>div:last-child{
+  display:grid!important;
+  gap:7px!important;
+  padding-top:10px!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-activity-card-v059>div:last-child>div{
+  min-height:58px;
+  padding:10px 11px!important;
+  border:1px solid #edf1f5!important;
+  border-radius:11px!important;
+  background:#fff!important;
+  box-shadow:none!important;
+}
+body[data-nexlab-page="perfil"] .nexlab-profile-activity-card-v059>div:last-child>p{
+  min-height:112px;
+  display:grid!important;
+  place-items:center;
+  margin:0!important;
+  padding:18px 12px!important;
+  border:0!important;
+  border-radius:11px!important;
+  background:#fbfcfd!important;
+  color:#8a98aa!important;
+  font-size:10px!important;
+  font-style:normal!important;
+  text-align:center!important;
+}
+
+/* Edição e segurança continuam funcionais, apenas alinhadas ao novo card. */
+body[data-nexlab-page="perfil"] .nexlab-profile-edit-v058,
+body[data-nexlab-page="perfil"] .nexlab-profile-security-v058,
+body[data-nexlab-page="perfil"] .nexlab-profile-page-v058>section{
+  border:1px solid #e5eaf0!important;
+  border-radius:16px!important;
+  background:#fff!important;
+  box-shadow:0 4px 15px rgba(15,35,65,.035)!important;
+}
+
+@media(max-width:1040px){
+  body[data-nexlab-page="perfil"] .nexlab-profile-stats-v059{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:900px){
+  body[data-nexlab-page="perfil"] .nexlab-profile-layout-v058{grid-template-columns:minmax(0,1fr)!important}
+  body[data-nexlab-page="perfil"] .nexlab-profile-layout-v058>div:first-child{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body[data-nexlab-page="perfil"] .nexlab-profile-layout-v058>div:first-child>.nexlab-profile-skills-v059{grid-column:1/-1}
+}
+@media(max-width:640px){
+  body[data-nexlab-page="perfil"] .nexlab-profile-page-v058{gap:12px!important}
+  body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058{
+    display:grid!important;
+    grid-template-columns:76px minmax(0,1fr)!important;
+    gap:14px!important;
+    min-height:0;
+    padding:17px!important;
+  }
+  body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058::after{display:none}
+  body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058 .group :where(.w-20,.md\:w-24){width:76px!important;height:76px!important}
+  body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058>div:nth-of-type(2){width:100%!important}
+  body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058 h1{font-size:1.45rem!important}
+  body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058>div:last-child{
+    grid-column:1/-1;
+    width:100%!important;
+    margin:0!important;
+  }
+  body[data-nexlab-page="perfil"] .nexlab-profile-hero-v058>div:last-child button{width:100%!important;justify-content:center!important}
+  body[data-nexlab-page="perfil"] .nexlab-profile-layout-v058>div:first-child{display:grid!important;grid-template-columns:minmax(0,1fr)!important}
+  body[data-nexlab-page="perfil"] .nexlab-profile-info-row-v059{grid-template-columns:minmax(0,1fr)!important;gap:3px!important}
+  body[data-nexlab-page="perfil"] .nexlab-profile-stats-v059{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  body[data-nexlab-page="perfil"] .nexlab-profile-stat-v059{grid-template-columns:32px minmax(0,1fr);padding:10px;column-gap:8px}
+  body[data-nexlab-page="perfil"] .nexlab-profile-stat-icon-v059{width:32px;height:32px}
+  body[data-nexlab-page="perfil"] .nexlab-profile-activity-grid-v059{grid-template-columns:minmax(0,1fr)!important}
+  body[data-nexlab-page="perfil"] .nexlab-profile-contributions-v058{padding:14px!important}
+}
