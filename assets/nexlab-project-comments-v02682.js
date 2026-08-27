@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-projetos-comentarios-laterais'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-projetos-layout-lateral-final'});
   const REVISION=BUILD.revision;
   if(globalThis.__NEXLAB_PROJECT_COMMENTS__?.revision===REVISION)return;
 
@@ -244,11 +244,26 @@
     }
     if(body){
       body.hidden=false;
+      body.style.gridTemplateColumns='minmax(0,1fr)';
+      body.style.columnGap='0';
+      body.style.rowGap='.75rem';
+      body.style.alignContent='start';
+      if(state.activeTab==='tasks'){
+        body.style.display='block';
+      }else if(state.activeTab==='team'){
+        body.style.display='block';
+      }else{
+        body.style.display='grid';
+      }
       const groups=[...body.children].filter(el=>el.dataset.nexlabProjectGroup);
       const hasTarget=groups.some(el=>el.dataset.nexlabProjectGroup===state.activeTab);
       for(const child of [...body.children]){
         if(child.classList.contains('nexlab-project-tab-empty-v054')){
           child.hidden=child.dataset.for!==state.activeTab||hasTarget;
+          continue;
+        }
+        if(state.activeTab!=='tasks' && child.classList.contains('project-details-tasks-pane-v02667')){
+          child.hidden=true;
           continue;
         }
         child.hidden=child.dataset.nexlabProjectGroup!==state.activeTab;

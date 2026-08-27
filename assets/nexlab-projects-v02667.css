@@ -268,3 +268,7 @@
   contain:none!important;
   contain-intrinsic-size:auto!important;
 }
+
+/* NEXLAB Beta 0.26.82 - ajuste de largura do layout lateral de comentarios */
+.project-details-panel-v02667.nexlab-project-layout-v054{width:min(78rem,100%);height:min(94vh,58rem);max-height:min(94vh,58rem);}
+@media(max-width:1120px){.project-details-panel-v02667.nexlab-project-layout-v054{width:min(74rem,100%);}}

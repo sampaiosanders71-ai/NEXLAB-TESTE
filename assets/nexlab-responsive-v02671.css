@@ -855,3 +855,98 @@ body[data-nexlab-modal-open="true"] :where(#nexlab-admin-tools-trigger,#nexlab-t
     gap:.65rem!important;
   }
 }
+
+/* NEXLAB Beta 0.26.82 - layout final de Projetos com comentarios laterais.
+   Esta regra fica no ultimo stylesheet para neutralizar a grade legada de duas colunas. */
+@media (min-width:821px){
+  .project-details-panel-v2690.project-details-panel-v02667.nexlab-project-layout-v054{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(22rem,26rem)!important;
+    grid-template-rows:auto auto minmax(0,1fr) auto!important;
+    width:min(78rem,calc(100vw - 2rem))!important;
+    height:min(94vh,58rem)!important;
+    max-width:calc(100vw - 2rem)!important;
+    max-height:min(94vh,58rem)!important;
+    overflow:hidden!important;
+  }
+  .project-details-panel-v02667.nexlab-project-layout-v054 > .project-details-header-v02667{
+    grid-column:1/-1!important;
+    grid-row:1!important;
+  }
+  .project-details-panel-v02667.nexlab-project-layout-v054 > .nexlab-project-tabs-v054{
+    grid-column:1!important;
+    grid-row:2!important;
+    min-width:0!important;
+    margin:0!important;
+    border-right:1px solid #e2e8f0!important;
+  }
+  .project-details-panel-v02667.nexlab-project-layout-v054 > .project-details-body-v02667{
+    grid-column:1!important;
+    grid-row:3!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-auto-columns:minmax(0,1fr)!important;
+    grid-auto-flow:row!important;
+    column-gap:0!important;
+    row-gap:.75rem!important;
+    align-content:start!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    min-height:0!important;
+    box-sizing:border-box!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    padding:.85rem .95rem!important;
+    border-right:1px solid #e2e8f0!important;
+  }
+  .project-details-panel-v02667.nexlab-project-layout-v054 > .project-details-body-v02667 > *{
+    grid-column:1/-1!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    box-sizing:border-box!important;
+  }
+  .project-details-panel-v02667.nexlab-project-layout-v054 > .project-details-body-v02667 .project-details-summary-v02667{
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  }
+  .project-details-panel-v02667.nexlab-project-layout-v054 > .nexlab-project-comments-v054{
+    grid-column:2!important;
+    grid-row:2/5!important;
+    display:grid!important;
+    grid-template-rows:auto auto auto minmax(0,1fr) auto!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:0!important;
+    height:auto!important;
+    max-height:none!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+    margin:0!important;
+    padding:.85rem 1rem 1rem!important;
+    border-left:0!important;
+    background:#f8fafc!important;
+  }
+  .project-details-panel-v02667.nexlab-project-layout-v054 > .nexlab-project-comments-v054[hidden]{display:none!important}
+  .project-details-panel-v02667.nexlab-project-layout-v054 > .project-details-footer-v02667{
+    grid-column:1!important;
+    grid-row:4!important;
+    position:static!important;
+    inset:auto!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+    border-right:1px solid #e2e8f0!important;
+  }
+  .project-details-panel-v02667.nexlab-project-layout-v054[data-nexlab-project-active-tab="tasks"] > .project-details-body-v02667,
+  .project-details-panel-v02667.nexlab-project-layout-v054[data-nexlab-project-active-tab="team"] > .project-details-body-v02667{
+    display:block!important;
+  }
+  .project-details-panel-v02667.nexlab-project-layout-v054[data-nexlab-project-active-tab="tasks"] .project-details-tasks-pane-v02667{
+    position:static!important;
+    width:100%!important;
+    max-width:none!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+}
