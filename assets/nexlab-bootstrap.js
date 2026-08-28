@@ -2,7 +2,22 @@
   if (window.__NEXLAB_BOOTSTRAP_V26_7__) return;
   window.__NEXLAB_BOOTSTRAP_V26_7__ = true;
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-correcoes-pre-homologacao',assetRevision:'app-beta-0-26-82-correcoes-pre-homologacao',cacheName:'nexlab-beta-0-26-82-correcoes-pre-homologacao',generatedAt:'2026-08-28T00:50:00Z'});
+  // Static-hosting frame guard. GitHub Pages cannot emit frame-ancestors/X-Frame-Options headers,
+  // so the app refuses to render when embedded. A hosting-level header remains preferable when available.
+  try {
+    if (window.top !== window.self) {
+      document.documentElement.dataset.nexlabFrameGuard = 'blocked';
+      document.documentElement.style.display = 'none';
+      try { window.top.location.replace(window.location.href); } catch {}
+      return;
+    }
+  } catch {
+    document.documentElement.dataset.nexlabFrameGuard = 'blocked';
+    document.documentElement.style.display = 'none';
+    return;
+  }
+
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-integridade-pos-auditoria',assetRevision:'app-beta-0-26-82-integridade-pos-auditoria',cacheName:'nexlab-beta-0-26-82-integridade-pos-auditoria',generatedAt:'2026-08-28T01:45:00Z'});
   const APP_VERSION = BUILD_IDENTITY.version;
   const APP_RELEASE = BUILD_IDENTITY.release;
   const APP_REVISION = BUILD_IDENTITY.revision;
@@ -428,7 +443,10 @@
     auth_flow: 'string',
     buildRevision: 'string',
     release: 'string',
-    assetRevision: 'string'
+    assetRevision: 'string',
+    module_asset_url: 'string',
+    module_error_source: 'string',
+    requested_build_revision: 'string'
   });
 
   function observabilitySanitizeMetadata(value){
@@ -473,6 +491,52 @@
       hash = Math.imul(hash, 16777619);
     }
     return `v267-${(hash >>> 0).toString(16)}`;
+  }
+
+  const OBSERVABILITY_MODULE_ALIASES = Object.freeze({
+    teamsmodule:'equipes', equipes:'equipes',
+    participantsmodule:'participantes', usersmodule:'participantes', participantes:'participantes', usuarios:'participantes',
+    permissionsmodule:'permissoes', permissoes:'permissoes',
+    projectsmodule:'projetos', projetos:'projetos',
+    profilemodule:'perfil', perfil:'perfil',
+    feedbackmodulelegacy:'feedback', feedbackmodule:'feedback', feedback:'feedback',
+    assetsmodule:'inventario', stockmodule:'inventario', inventario:'inventario', patrimonio:'inventario', estoque:'inventario',
+    bookingsmodule:'reserva', reserva:'reserva', reservas:'reserva',
+    marketingmodule:'marketing', marketing:'marketing',
+    eventsmodule:'eventos', eventos:'eventos',
+    boardmodule:'mural', mural:'mural',
+    logsmodule:'atividades-sistema', logs:'atividades-sistema', 'saude-sistema':'atividades-sistema', 'atividades-sistema':'atividades-sistema',
+    reportsmodule:'relatorios', relatorios:'relatorios',
+    pendingmodule:'pendencias', pendencias:'pendencias',
+    agendamodule:'agenda', agenda:'agenda'
+  });
+
+  function observabilityCanonicalModule(value){
+    const raw = observabilitySanitize(value || '', 120).trim();
+    if (!raw) return '';
+    const key = raw.toLowerCase().replace(/[\s_-]+/g,'');
+    return OBSERVABILITY_MODULE_ALIASES[key] || OBSERVABILITY_MODULE_ALIASES[raw.toLowerCase()] || raw;
+  }
+
+  function observabilityStructuralModuleMessage(message){
+    const text = String(message || '');
+    if (!/(?:unexpected token|invalid or unexpected token|unexpected end of input|syntaxerror|does not provide an export named|failed to fetch dynamically imported module|error loading dynamically imported module|importing a module script failed|chunkloaderror|loading chunk|module script)/i.test(text)) return '';
+    return text
+      .replace(/https?:\/\/[^\s)]+\/assets\//gi,'assets/')
+      .replace(/[?&]v=[^&\s)]+/gi,'')
+      .replace(/:\d+:\d+(?=\)?(?:\s|$))/g,'')
+      .replace(/\s+/g,' ')
+      .trim()
+      .slice(0,300);
+  }
+
+  function observabilityFingerprintFor(input, source, moduleName, message){
+    const provided = String(input?.fingerprint || '').trim();
+    if (/^v267-[0-9a-f]+$/i.test(provided)) return provided;
+    if (provided) return observabilityHash(provided);
+    const structural = observabilityStructuralModuleMessage(message);
+    if (structural) return observabilityHash(`module-structural|${moduleName}|${structural}`);
+    return observabilityHash(`${source}|${moduleName}|${String(message || '').slice(0,300)}`);
   }
 
   function observabilityFindToken(value, depth = 0){
@@ -524,14 +588,10 @@
     try {
       const message = observabilitySanitize(input?.message || 'Erro técnico sem mensagem.', 1000);
       const source = observabilitySanitize(input?.source || 'client', 80);
-      const moduleName = observabilitySanitize(
-        input?.module || document.body?.dataset?.nexlabPage || '',
-        120
+      const moduleName = observabilityCanonicalModule(
+        input?.module || document.body?.dataset?.nexlabPage || ''
       );
-      const fingerprint = observabilityHash(
-        input?.fingerprint ||
-        `${source}|${moduleName}|${message.slice(0, 300)}`
-      );
+      const fingerprint = observabilityFingerprintFor(input, source, moduleName, message);
 
       if (!observabilityDedupAllowed(fingerprint)) {
         observabilityState.dropped += 1;
@@ -700,9 +760,8 @@
   }
 
   function userErrorBuildContext(input, fingerprint, reference){
-    const moduleName = observabilitySanitize(
-      input?.module || document.body?.dataset?.nexlabPage || 'não identificado',
-      120
+    const moduleName = observabilityCanonicalModule(
+      input?.module || document.body?.dataset?.nexlabPage || 'não identificado'
     ) || 'não identificado';
     return {
       reference,
@@ -780,10 +839,12 @@
       return null;
     }
     if (userErrorExcluded(raw)) return null;
-    const moduleName = raw.module || document.body?.dataset?.nexlabPage || '';
-    const fingerprint = observabilityHash(
-      raw.fingerprint ||
-      `${raw.source || 'client'}|${moduleName}|${String(raw.message || '').slice(0,300)}`
+    const moduleName = observabilityCanonicalModule(raw.module || document.body?.dataset?.nexlabPage || '');
+    const fingerprint = observabilityFingerprintFor(
+      raw,
+      observabilitySanitize(raw.source || 'client',80),
+      moduleName,
+      observabilitySanitize(raw.message || 'Erro técnico sem mensagem.',1000)
     );
     const reference = userErrorReference(fingerprint);
     observabilityQueueEvent({
@@ -1233,14 +1294,14 @@
   'use strict';
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||{};
   const VERSION=BUILD.version||'0.26.82';
-  const REVISION=BUILD.revision||'beta-0-26-82-correcoes-pre-homologacao';
+  const REVISION=BUILD.revision||'beta-0-26-82-integridade-pos-auditoria';
   if(globalThis.__NEXLAB_POST_STARTUP__?.revision===REVISION)return;
   const MAX_ATTEMPTS=3;
   const sources=(BUILD.resources?.postStartup||[
     'assets/nexlab-vapid-rotation.js',
     'assets/nexlab-push-consent.js',
     'assets/nexlab-feedback-evidence.js'
-  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-82-correcoes-pre-homologacao'));
+  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-82-integridade-pos-auditoria'));
   const state={version:VERSION,revision:REVISION,status:'scheduled',loaded:[],errors:[],attempts:{},lastReason:'',startedAt:null,completedAt:null};
   const sourceState=new Map(sources.map(src=>[src,{status:'pending',attempts:0,lastError:''}]));
   let active=null;
