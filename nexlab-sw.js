@@ -1,5 +1,5 @@
 importScripts('./assets/nexlab-release-identity.js');
-const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-relatorios-referencia-cards',assetRevision:'app-beta-0-26-82-relatorios-referencia-cards',cacheName:'nexlab-beta-0-26-82-relatorios-referencia-cards',generatedAt:'2026-08-27T19:18:15Z'});
+const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-correcoes-pre-homologacao',assetRevision:'app-beta-0-26-82-correcoes-pre-homologacao',cacheName:'nexlab-beta-0-26-82-correcoes-pre-homologacao',generatedAt:'2026-08-28T00:50:00Z'});
 const APP_VERSION=BUILD_IDENTITY.version;
 const APP_RELEASE=BUILD_IDENTITY.release;
 const APP_REVISION=BUILD_IDENTITY.revision;
@@ -10,6 +10,10 @@ const CACHE_PREFIX='nexlab-';
 const STRUCTURAL_RECOVERY_PURGE_PREVIOUS_CACHES=true;
 const NETWORK_TIMEOUT_MS=3500;
 const APP_ENTRY_NETWORK_TIMEOUT_MS=1800;
+const PRECACHE_FETCH_TIMEOUT_MS=12000;
+const PRECACHE_RETRY_ATTEMPTS=3;
+const PRECACHE_CONCURRENCY=6;
+const PRECACHE_RETRY_BASE_DELAY_MS=450;
 const RESOURCE_ENTRY=BUILD_IDENTITY.resources?.entry||Object.freeze({main:'assets/nexlab-runtime-app.js',vendor:'assets/nexlab-runtime-vendor.js',shared:'assets/nexlab-runtime-shared.js',feature:'assets/nexlab-runtime-features.js',export:'assets/nexlab-runtime-export.js'});
 const RESOURCE_POLICY=BUILD_IDENTITY.pwa||Object.freeze({mandatoryShell:[],functional:[],optional:[],compatibility:[],offlineProbe:[]});
 const MAIN_BUNDLE=RESOURCE_ENTRY.main.split('/').pop();
@@ -32,6 +36,16 @@ const OFFLINE_URL=new URL('./offline.html',self.registration.scope).href;
 const SCOPE_URL=new URL(self.registration.scope);
 const INSTALL_CACHE_NAME=`${CACHE_NAME}-installing`;
 const REQUIRED_SHELL=new Set(MANDATORY_SHELL.map(url=>new URL(url,self.registration.scope).href));
+const ATOMIC_MODULE_GRAPH=[...(BUILD_IDENTITY.resources?.precacheGraph||BUILD_IDENTITY.pwa?.atomicModuleGraph||[])].map(versionedPolicyUrl);
+const ATOMIC_MODULE_GRAPH_URLS=new Set(ATOMIC_MODULE_GRAPH.map(url=>new URL(url,self.registration.scope).href));
+const REVISION_GUARDED_PATHNAMES=new Set([
+  ...(BUILD_IDENTITY.resources?.initial||[]),
+  ...(BUILD_IDENTITY.resources?.lazy||[]),
+  ...(BUILD_IDENTITY.resources?.postStartup||[]),
+  ...(BUILD_IDENTITY.resources?.moduleFacades||[]),
+  ...(BUILD_IDENTITY.resources?.precacheGraph||[]),
+  ...(RESOURCE_POLICY.mandatoryShell||[])
+].filter(path=>/\.(?:js|css)$/i.test(String(path||''))).map(path=>new URL(`./${normalizePolicyPath(path)}`,self.registration.scope).pathname));
 const PROTECTED_COMPATIBILITY_PATHNAMES=new Set(PROTECTED_COMPATIBILITY_FILES.map(path=>new URL(path,self.registration.scope).pathname));
 
 let retainedPreviousCacheName=null;
@@ -164,12 +178,60 @@ function contentTypeMatches(kind,contentType){
   return true;
 }
 
+
 function responseIsCacheable(request,response,kind=expectedKind(request,new URL(request.url))){
   if(!response||!response.ok||response.type==='opaque')return false;
   let responseUrl;
   try{responseUrl=new URL(response.url||request.url);}catch{return false;}
   if(responseUrl.origin!==self.location.origin)return false;
   return contentTypeMatches(kind,response.headers.get('content-type'));
+}
+
+function isRevisionGuardedAsset(url){
+  return REVISION_GUARDED_PATHNAMES.has(url.pathname);
+}
+
+function revisionRequestIsCurrent(url){
+  const requested=String(url.searchParams.get('v')||'').trim();
+  return !requested||requested===ASSET_REVISION;
+}
+
+function staleRevisionResponse(request,url){
+  const kind=expectedKind(request,url);
+  const type=kind==='style'?'text/css; charset=utf-8':'text/javascript; charset=utf-8';
+  return new Response(kind==='style'?'/* NEXLAB: revisão antiga bloqueada. */':'/* NEXLAB: revisão antiga bloqueada para impedir mistura de módulos. */',{
+    status:409,
+    statusText:'NEXLAB revision mismatch',
+    headers:{'Content-Type':type,'Cache-Control':'no-store','X-NEXLAB-Expected-Asset-Revision':ASSET_REVISION,'X-NEXLAB-Requested-Asset-Revision':String(url.searchParams.get('v')||'')}
+  });
+}
+
+async function validateRevisionClosure(request,response){
+  const url=new URL(request.url);
+  const kind=expectedKind(request,url);
+  if(!['script','style','html'].includes(kind))return true;
+  const text=await response.clone().text();
+  const revisionTokens=[...text.matchAll(/[?&]v=(app-beta-[A-Za-z0-9-]+)/g)].map(match=>match[1]);
+  const stale=revisionTokens.filter(token=>token!==ASSET_REVISION);
+  if(stale.length)throw new Error(`Referência cruzada de revisão em ${url.pathname}: ${[...new Set(stale)].join(', ')}`);
+  if(url.pathname.includes('/assets/modules/')&&url.pathname.endsWith('.js')){
+    const expected=`../nexlab-runtime-features.js?v=${ASSET_REVISION}`;
+    if(!text.includes(expected))throw new Error(`Facade de módulo fora da revisão atual: ${url.pathname}`);
+  }
+  if(url.pathname.endsWith('/assets/nexlab-runtime-shared.js')){
+    for(const graphUrl of ATOMIC_MODULE_GRAPH_URLS){
+      const graphPath=new URL(graphUrl).pathname;
+      if(!graphPath.includes('/assets/modules/'))continue;
+      const relative=`./modules/${graphPath.split('/').pop()}?v=${ASSET_REVISION}`;
+      if(!text.includes(relative))throw new Error(`Mapa de módulos incompleto ou divergente: ${relative}`);
+    }
+  }
+  if(url.pathname.endsWith('/assets/nexlab-runtime-features.js')){
+    for(const dependency of ['nexlab-runtime-vendor.js','nexlab-runtime-shared.js']){
+      if(!text.includes(`${dependency}?v=${ASSET_REVISION}`))throw new Error(`Runtime de features aponta para dependência de outra revisão: ${dependency}`);
+    }
+  }
+  return true;
 }
 
 async function isCanonicalAppShell(response){
@@ -192,36 +254,82 @@ async function isCanonicalAppShell(response){
   }catch{return false;}
 }
 
+function sleep(milliseconds){return new Promise(resolve=>setTimeout(resolve,milliseconds));}
+
+async function mapWithConcurrency(items,limit,worker){
+  const values=Array.from(items||[]);
+  const results=new Array(values.length);
+  let cursor=0;
+  const runners=Array.from({length:Math.max(1,Math.min(Number(limit)||1,values.length||1))},async()=>{
+    while(true){
+      const index=cursor++;
+      if(index>=values.length)return;
+      results[index]=await worker(values[index],index);
+    }
+  });
+  await Promise.all(runners);
+  return results;
+}
+
 async function fetchFresh(url){
   const request=new Request(new URL(url,self.registration.scope).href,{cache:'reload',credentials:'same-origin'});
-  const response=await fetch(request);
-  if(!responseIsCacheable(request,response))throw new Error(`Resposta inválida para ${request.url}`);
-  if(expectedKind(request,new URL(request.url))==='html'&&request.url===INDEX_URL&&!(await isCanonicalAppShell(response))){
-    throw new Error('O index.html recebido não corresponde ao shell desta revisão.');
+  let lastError=null;
+  for(let attempt=1;attempt<=PRECACHE_RETRY_ATTEMPTS;attempt+=1){
+    try{
+      const response=await fetchWithTimeout(request,PRECACHE_FETCH_TIMEOUT_MS);
+      if(!responseIsCacheable(request,response))throw new Error(`Resposta inválida para ${request.url}`);
+      await validateRevisionClosure(request,response);
+      if(expectedKind(request,new URL(request.url))==='html'&&request.url===INDEX_URL&&!(await isCanonicalAppShell(response))){
+        throw new Error('O index.html recebido não corresponde ao shell desta revisão.');
+      }
+      return {request,response};
+    }catch(error){
+      lastError=error;
+      if(attempt<PRECACHE_RETRY_ATTEMPTS)await sleep(PRECACHE_RETRY_BASE_DELAY_MS*attempt);
+    }
   }
-  return {request,response};
+  throw new Error(`Falha ao baixar ativo obrigatório após ${PRECACHE_RETRY_ATTEMPTS} tentativas: ${request.url}. ${String(lastError?.message||lastError||'')}`);
+}
+
+async function validateInstalledGraph(){
+  const cache=await caches.open(CACHE_NAME);
+  const missing=[];
+  const invalid=[];
+  for(const url of REQUIRED_SHELL){
+    const request=new Request(url,{credentials:'same-origin'});
+    const response=await cache.match(request,{ignoreSearch:false});
+    if(!response){missing.push(url);continue;}
+    const kind=expectedKind(request,new URL(url));
+    if(!responseIsCacheable(request,response,kind)){invalid.push(`${url} (tipo/status)`);continue;}
+    try{await validateRevisionClosure(request,response);}catch(error){invalid.push(`${url} (${String(error?.message||error)})`);}
+  }
+  const graphMissing=[...ATOMIC_MODULE_GRAPH_URLS].filter(url=>!REQUIRED_SHELL.has(url)||missing.includes(url));
+  const ok=!missing.length&&!invalid.length&&!graphMissing.length;
+  return {ok,revision:APP_REVISION,assetRevision:ASSET_REVISION,requiredCount:REQUIRED_SHELL.size,graphCount:ATOMIC_MODULE_GRAPH_URLS.size,missing,invalid,graphMissing};
 }
 
 async function precacheShell(){
   await caches.delete(INSTALL_CACHE_NAME);
   const staging=await caches.open(INSTALL_CACHE_NAME);
   try{
-    const fetched=await Promise.all(MANDATORY_SHELL.map(async(url)=>{
+    const fetched=await mapWithConcurrency(MANDATORY_SHELL,PRECACHE_CONCURRENCY,async(url)=>{
       const {request,response}=await fetchFresh(url);
       await staging.put(request,response.clone());
       return request.url;
-    }));
+    });
     const available=new Set(fetched);
     const missing=[...REQUIRED_SHELL].filter(url=>!available.has(url));
     if(missing.length)throw new Error(`Arquivos obrigatórios não foram armazenados: ${missing.join(', ')}`);
     const finalCache=await caches.open(CACHE_NAME);
     const stagedRequests=await staging.keys();
     if(stagedRequests.length!==REQUIRED_SHELL.size)throw new Error(`Precache incompleto: ${stagedRequests.length}/${REQUIRED_SHELL.size}.`);
-    await Promise.all(stagedRequests.map(async(request)=>{
+    await mapWithConcurrency(stagedRequests,PRECACHE_CONCURRENCY,async(request)=>{
       const response=await staging.match(request);
       if(!response)throw new Error(`Resposta ausente no cache temporário: ${request.url}`);
       await finalCache.put(request,response);
-    }));
+    });
+    const graphValidation=await validateInstalledGraph();
+    if(!graphValidation.ok)throw new Error(`Grafo obrigatório inválido: ${JSON.stringify(graphValidation)}`);
   }catch(error){
     await caches.delete(CACHE_NAME);
     throw error;
@@ -339,6 +447,11 @@ self.addEventListener('fetch',(event)=>{
   const url=new URL(request.url);
   if(url.origin!==self.location.origin)return;
 
+  if(isRevisionGuardedAsset(url)&&url.searchParams.has('v')&&!revisionRequestIsCurrent(url)){
+    event.respondWith(staleRevisionResponse(request,url));
+    return;
+  }
+
   if(url.pathname.endsWith('/release.json')){
     event.respondWith(fetch(new Request(request,{cache:'no-store'})));
     return;
@@ -366,22 +479,27 @@ self.addEventListener('fetch',(event)=>{
 
 self.addEventListener('message',(event)=>{
   if(event.data?.type==='NEXLAB_GET_VERSION'){
-    event.ports?.[0]?.postMessage({type:'NEXLAB_VERSION',version:APP_VERSION,release:APP_RELEASE,revision:APP_REVISION,generatedAt:GENERATED_AT,cache:CACHE_NAME,cachePolicy:'minimal-core-precache-runtime-on-demand',compatibilityPolicy:'current-cache-only-structural-recovery'});
+    event.ports?.[0]?.postMessage({type:'NEXLAB_VERSION',version:APP_VERSION,release:APP_RELEASE,revision:APP_REVISION,generatedAt:GENERATED_AT,cache:CACHE_NAME,cachePolicy:'atomic-module-graph-precache-bounded-retry',compatibilityPolicy:'strict-revision-guard'});
+    return;
+  }
+  if(event.data?.type==='NEXLAB_VALIDATE_INSTALL'){
+    event.waitUntil((async()=>{
+      try{event.ports?.[0]?.postMessage(await validateInstalledGraph());}
+      catch(error){event.ports?.[0]?.postMessage({ok:false,revision:APP_REVISION,error:String(error?.message||error)});}
+    })());
     return;
   }
   if(event.data?.type==='NEXLAB_SKIP_WAITING'){
-    const expectedVersion=String(event.data.expectedVersion||'').trim();
-    const expectedRevision=String(event.data.expectedRevision||'').trim();
-    if(expectedVersion&&expectedVersion!==APP_VERSION){
-      event.ports?.[0]?.postMessage({ok:false,error:'Versão do worker diferente da versão confirmada.'});
-      return;
-    }
-    if(expectedRevision&&expectedRevision!==APP_REVISION){
-      event.ports?.[0]?.postMessage({ok:false,error:'Revisão do worker diferente da revisão confirmada.'});
-      return;
-    }
-    event.ports?.[0]?.postMessage({ok:true,version:APP_VERSION,revision:APP_REVISION});
-    event.waitUntil(self.skipWaiting());
+    event.waitUntil((async()=>{
+      const expectedVersion=String(event.data.expectedVersion||'').trim();
+      const expectedRevision=String(event.data.expectedRevision||'').trim();
+      if(expectedVersion&&expectedVersion!==APP_VERSION){event.ports?.[0]?.postMessage({ok:false,error:'Versão do worker diferente da versão confirmada.'});return;}
+      if(expectedRevision&&expectedRevision!==APP_REVISION){event.ports?.[0]?.postMessage({ok:false,error:'Revisão do worker diferente da revisão confirmada.'});return;}
+      const validation=await validateInstalledGraph();
+      if(!validation.ok){event.ports?.[0]?.postMessage({ok:false,error:'O grafo de módulos da nova revisão não está íntegro.',validation});return;}
+      event.ports?.[0]?.postMessage({ok:true,version:APP_VERSION,revision:APP_REVISION,validation});
+      await self.skipWaiting();
+    })());
   }
 });
 

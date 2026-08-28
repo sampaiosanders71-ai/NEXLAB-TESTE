@@ -113,7 +113,7 @@
     }
   ],
   "release_title": "NEXLAB Beta 0.26.82 — Relatórios baseado na referência de cards",
-  "generated_at": "2026-08-27T19:18:15Z",
+  "generated_at": "2026-08-28T00:50:00Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
     "controlled_test_run": "completed_and_cleaned",
@@ -205,7 +205,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-82-relatorios-referencia-cards",
+  "revision": "beta-0-26-82-correcoes-pre-homologacao",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -251,7 +251,7 @@
     "official_promotion": "blocked_pending_exact_physical_receipt",
     "manual_override_allowed": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-relatorios-referencia-cards",
+    "required_revision": "beta-0-26-82-correcoes-pre-homologacao",
     "receipt_max_age_days": 14
   },
   "activity_system_consistency_0_26_76": {
@@ -426,7 +426,7 @@
     },
     "historical_revision": "beta-0-26-82-saude-sistema-timeout-corrigido"
   },
-  "build_revision": "beta-0-26-82-relatorios-referencia-cards",
+  "build_revision": "beta-0-26-82-correcoes-pre-homologacao",
   "updated_at": "2026-08-27T20:20:00Z",
   "post_login_permission_fix": {
     "pending_profile_counter_guard": "passed_static",
@@ -615,6 +615,41 @@
       "metrics_2x2",
       "module_cards_single_column",
       "download_actions"
+    ]
+  },
+  "atomic_module_update_validation": {
+    "revision": "beta-0-26-82-correcoes-pre-homologacao",
+    "required": [
+      "all module facades precached",
+      "runtime features/export precached",
+      "waiting worker graph validation",
+      "stale ?v requests rejected",
+      "controller-change reload"
+    ],
+    "physical_test": [
+      "deploy full candidate",
+      "wait for update banner",
+      "activate update",
+      "open Agenda, Usuários, Relatórios, Projetos without hard refresh",
+      "repeat from second tab",
+      "test browser back/forward cache"
+    ]
+  },
+  "pre_homologation_corrections_0_26_82": {
+    "revision": "beta-0-26-82-correcoes-pre-homologacao",
+    "required": [
+      "all runtime fallbacks use current revision",
+      "precache uses bounded concurrency",
+      "mandatory fetches use timeout and retry",
+      "Voluntário appears in current-role filter",
+      "current release metadata is consistent"
+    ],
+    "physical_test": [
+      "publish full candidate",
+      "activate update on desktop and mobile",
+      "open Agenda, Usuários, Relatórios and Projetos sequentially",
+      "filter Usuários by Voluntário",
+      "repeat update from unstable/mobile connection if possible"
     ]
   }
 }

@@ -2,7 +2,7 @@
   'use strict';
   const BUILD=root.__NEXLAB_BUILD_IDENTITY__||{};
   const VERSION=String(BUILD.version||'0.26.82');
-  const REVISION=String(BUILD.revision||'beta-0-26-82-equipes-layout-corrigido');
+  const REVISION=String(BUILD.revision||'beta-0-26-82-correcoes-pre-homologacao');
   const CACHE_PREFIX='nexlab-';
   const GUARD_KEY='nexlab:module-recovery:'+REVISION;
   const STRUCTURAL_RE=/(?:unexpected token|invalid or unexpected token|unexpected end of input|syntaxerror|does not provide an export named|failed to fetch dynamically imported module|error loading dynamically imported module|importing a module script failed|chunkloaderror|loading chunk|module script)/i;
@@ -30,6 +30,11 @@
   async function serverIdentity(){
     try{const url=new URL('./release.json',document.baseURI);url.searchParams.set('nexlabModuleRecovery',String(Date.now()));const response=await fetch(url,{cache:'no-store',credentials:'same-origin',headers:{Accept:'application/json'}});if(!response.ok)return null;const data=await response.json();return {version:String(data?.version||''),revision:String(data?.revision||''),assetRevision:String(data?.asset_revision||'')};}catch{return null;}
   }
+  async function workerIdentity(worker=navigator.serviceWorker?.controller){
+    if(!worker||typeof MessageChannel==='undefined')return null;
+    try{return await new Promise((resolve)=>{const channel=new MessageChannel();const timer=setTimeout(()=>resolve(null),1800);channel.port1.onmessage=(event)=>{clearTimeout(timer);resolve(event.data||null);};worker.postMessage({type:'NEXLAB_GET_VERSION'},[channel.port2]);});}catch{return null;}
+  }
+  function replaceForRevision(revision,reason){const target=new URL(location.href);target.searchParams.set('nexlabModuleRecovery',String(Date.now()));if(revision)target.searchParams.set('nexlabRevision',revision);target.searchParams.set('nexlabRecoveryReason',reason);root.setTimeout(()=>location.replace(target.toString()),60);}
   function showBlocked(detail){
     const render=()=>{
       if(document.getElementById('nexlab-module-recovery-blocked'))return;
@@ -54,10 +59,20 @@
       const now=Date.now();const guard=readGuard();
       if(guard&&Number(guard.count||0)>=1&&now-Number(guard.at||0)<120000){state.status='blocked';showBlocked(detail);return false;}
       state.status='recovering';state.attempts+=1;writeGuard({count:Number(guard?.count||0)+1,at:now,module:ctx.module,url:ctx.url,message:detail.message});
-      const purged=await purgeNexlabCaches();await refreshWorker();const remote=await serverIdentity();
-      dispatch('nexlab:module-recovery-started',{...detail,purgedCaches:purged,serverIdentity:remote});
-      const target=new URL(location.href);target.searchParams.set('nexlabModuleRecovery',String(now));if(remote?.revision)target.searchParams.set('nexlabRevision',remote.revision);
-      root.setTimeout(()=>location.replace(target.toString()),80);return true;
+      const [controller,remote]=await Promise.all([workerIdentity(),serverIdentity()]);
+      if(controller?.revision&&controller.revision!==REVISION){
+        dispatch('nexlab:module-recovery-started',{...detail,purgedCaches:[],serverIdentity:remote,controllerIdentity:controller,strategy:'reload-to-controller'});
+        replaceForRevision(controller.revision,'controller-ahead');return true;
+      }
+      if(remote?.revision&&remote.revision!==REVISION){
+        await refreshWorker();
+        try{const manager=root.__NEXLAB_UPDATE_MANAGER__;if(manager?.check&&manager?.applyUpdate){const check=await manager.check({forceWorkerUpdate:true});if(check?.updateAvailable){const applied=await manager.applyUpdate();if(applied?.ok)return true;}}}catch{}
+        dispatch('nexlab:module-recovery-started',{...detail,purgedCaches:[],serverIdentity:remote,controllerIdentity:controller,strategy:'preserve-cache-wait-for-update'});
+        replaceForRevision(remote.revision,'server-ahead');return true;
+      }
+      const purged=await purgeNexlabCaches();await refreshWorker();
+      dispatch('nexlab:module-recovery-started',{...detail,purgedCaches:purged,serverIdentity:remote,controllerIdentity:controller,strategy:'same-revision-cache-repair'});
+      replaceForRevision(remote?.revision||REVISION,'same-revision-repair');return true;
     })().finally(()=>{state.active=null;});
     return state.active;
   }
