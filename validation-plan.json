@@ -111,8 +111,8 @@
       "expected_result": "Revisão atual consistente em desktop e celular, sem regressões conhecidas nos fluxos corrigidos; promoção continua bloqueada até recibo físico válido da revisão exata."
     }
   ],
-  "release_title": "NEXLAB Beta 0.26.82 — Marketing: lista removida",
-  "generated_at": "2026-08-29T20:37:15Z",
+  "release_title": "NEXLAB Beta 0.26.82 — Marketing com lista integrada ao calendário",
+  "generated_at": "2026-08-29T21:34:21Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
     "controlled_test_run": "completed_and_cleaned",
@@ -191,8 +191,14 @@
     "project_comments_d1_contract": "static_passed_physical_confirmation_pending",
     "javascript_syntax": "50/50 passed",
     "json_parse": "3/3 passed",
-    "local_module_imports": "passed",
-    "release_hash_inventory": "81/81 passed"
+    "local_module_imports": "43/43 passed",
+    "release_hash_inventory": "81/81 passed",
+    "marketing_integrated_list_contract": "passed_static_physical_pending",
+    "marketing_integrated_list_revision": "beta-0-26-82-marketing-lista-integrada",
+    "marketing_legacy_list_classes_absent": true,
+    "marketing_card_actions_event_isolation": "passed_static",
+    "marketing_detail_modal_contract": "passed_static",
+    "marketing_responsive_layout_contract": "desktop_right_mobile_below_static_passed"
   },
   "responsive_global_checks": [
     "viewport_360x800",
@@ -208,7 +214,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-82-marketing-lista-removida",
+  "revision": "beta-0-26-82-marketing-lista-integrada",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -254,7 +260,7 @@
     "official_promotion": "blocked_pending_exact_physical_receipt",
     "manual_override_allowed": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-marketing-lista-removida",
+    "required_revision": "beta-0-26-82-marketing-lista-integrada",
     "receipt_max_age_days": 14
   },
   "activity_system_consistency_0_26_76": {
@@ -429,7 +435,7 @@
     },
     "historical_revision": "beta-0-26-82-saude-sistema-timeout-corrigido"
   },
-  "build_revision": "beta-0-26-82-marketing-lista-removida",
+  "build_revision": "beta-0-26-82-marketing-lista-integrada",
   "updated_at": "2026-08-29T19:33:33Z",
   "post_login_permission_fix": {
     "pending_profile_counter_guard": "passed_static",
@@ -622,7 +628,7 @@
     ]
   },
   "atomic_module_update_validation": {
-    "revision": "beta-0-26-82-marketing-lista-removida",
+    "revision": "beta-0-26-82-marketing-lista-integrada",
     "required": [
       "all module facades precached",
       "runtime features/export precached",
@@ -692,6 +698,26 @@
     "pending_preserved": true,
     "database_records_preserved": true,
     "rebuild_not_started": true,
-    "revision": "beta-0-26-82-marketing-lista-removida"
+    "revision": "beta-0-26-82-marketing-lista-integrada"
+  },
+  "marketing_integrated_list_0_26_82": {
+    "status": "implemented_static_verified_physical_pending",
+    "revision": "beta-0-26-82-marketing-lista-integrada",
+    "desktop_layout": "calendar_left_activity_list_right",
+    "mobile_layout": "activity_list_below_calendar",
+    "card_fields": [
+      "title",
+      "date",
+      "status",
+      "channel",
+      "responsible"
+    ],
+    "card_click": "opens_details",
+    "edit_action": "pencil_icon_stops_card_click",
+    "delete_action": "trash_icon_admin_only_stops_card_click",
+    "day_click": "filters_selected_date_second_click_restores_month",
+    "internal_scroll_desktop": true,
+    "legacy_list_reuse": false,
+    "physical_confirmation": "pending_after_publication"
   }
 }
