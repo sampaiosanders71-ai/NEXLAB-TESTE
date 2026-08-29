@@ -208,7 +208,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-82-marketing-lista-direita-final",
+  "revision": "beta-0-26-82-marketing-sem-lista",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -254,7 +254,7 @@
     "official_promotion": "blocked_pending_exact_physical_receipt",
     "manual_override_allowed": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-marketing-lista-direita-final",
+    "required_revision": "beta-0-26-82-marketing-sem-lista",
     "receipt_max_age_days": 14
   },
   "activity_system_consistency_0_26_76": {
@@ -429,7 +429,7 @@
     },
     "historical_revision": "beta-0-26-82-saude-sistema-timeout-corrigido"
   },
-  "build_revision": "beta-0-26-82-marketing-lista-direita-final",
+  "build_revision": "beta-0-26-82-marketing-sem-lista",
   "updated_at": "2026-08-29T19:33:33Z",
   "post_login_permission_fix": {
     "pending_profile_counter_guard": "passed_static",
@@ -621,7 +621,7 @@
     ]
   },
   "atomic_module_update_validation": {
-    "revision": "beta-0-26-82-marketing-lista-direita-final",
+    "revision": "beta-0-26-82-marketing-sem-lista",
     "required": [
       "all module facades precached",
       "runtime features/export precached",
@@ -680,5 +680,14 @@
     "release_integrity_contract": "files_array_path_size_sha256",
     "supabase_gate_exact_revision": "beta-0-26-82-marketing-lista-direita-final",
     "physical_confirmation_pending": true
+  },
+  "marketing_list_removal_0_26_82": {
+    "status": "implemented",
+    "list_tab_removed": true,
+    "list_renderer_removed": true,
+    "records_preserved": true,
+    "calendar_preserved": true,
+    "pending_preserved": true,
+    "rebuild_pending_definition": true
   }
 }

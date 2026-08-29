@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: PermissionsModule. */
-export { PermissionsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-marketing-lista-direita-final";
+export { PermissionsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-marketing-sem-lista";
