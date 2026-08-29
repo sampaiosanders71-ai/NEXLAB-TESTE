@@ -204,7 +204,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-82-marketing-referencia-agenda",
+  "revision": "beta-0-26-82-marketing-sem-gap-direita",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -250,7 +250,7 @@
     "official_promotion": "blocked_pending_exact_physical_receipt",
     "manual_override_allowed": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-marketing-referencia-agenda",
+    "required_revision": "beta-0-26-82-marketing-sem-gap-direita",
     "receipt_max_age_days": 14
   },
   "activity_system_consistency_0_26_76": {
@@ -425,7 +425,7 @@
     },
     "historical_revision": "beta-0-26-82-saude-sistema-timeout-corrigido"
   },
-  "build_revision": "beta-0-26-82-marketing-referencia-agenda",
+  "build_revision": "beta-0-26-82-marketing-sem-gap-direita",
   "updated_at": "2026-08-28T01:20:37Z",
   "post_login_permission_fix": {
     "pending_profile_counter_guard": "passed_static",
@@ -617,7 +617,7 @@
     ]
   },
   "atomic_module_update_validation": {
-    "revision": "beta-0-26-82-marketing-referencia-agenda",
+    "revision": "beta-0-26-82-marketing-sem-gap-direita",
     "required": [
       "all module facades precached",
       "runtime features/export precached",
@@ -635,7 +635,7 @@
     ]
   },
   "pre_homologation_corrections_0_26_82": {
-    "revision": "beta-0-26-82-marketing-referencia-agenda",
+    "revision": "beta-0-26-82-marketing-sem-gap-direita",
     "required": [
       "all runtime fallbacks use current revision",
       "precache uses bounded concurrency",
@@ -656,10 +656,10 @@
     "issue": "Unexpected token comma no runtime ESM compartilhado",
     "fix": "Remoção do fechamento JSX excedente no ReportsModule",
     "esm_gate": "Obrigatório: arquivos com import/export são validados como .mjs",
-    "revision": "beta-0-26-82-marketing-referencia-agenda"
+    "revision": "beta-0-26-82-marketing-sem-gap-direita"
   },
   "integrity_post_audit": {
-    "revision": "beta-0-26-82-marketing-referencia-agenda",
+    "revision": "beta-0-26-82-marketing-sem-gap-direita",
     "required_checks": [
       "module_esm_load",
       "module_error_dedup",

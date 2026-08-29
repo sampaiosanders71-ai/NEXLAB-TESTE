@@ -1,9 +1,9 @@
 (function(){
   'use strict';
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-marketing-referencia-agenda',homologationRevision:'beta-0-26-82-marketing-referencia-agenda'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-marketing-sem-gap-direita',homologationRevision:'beta-0-26-82-marketing-sem-gap-direita'});
   const VERSION=BUILD.version;
   const BUILD_REVISION=BUILD.revision;
-  const REVISION=BUILD.homologationRevision||'beta-0-26-82-marketing-referencia-agenda';
+  const REVISION=BUILD.homologationRevision||'beta-0-26-82-marketing-sem-gap-direita';
   if(globalThis.__NEXLAB_DEVICE_HOMOLOGATION__?.revision===REVISION)return;
   const EVIDENCE_KEY='nexlab:device-homologation:'+VERSION+':'+BUILD_REVISION;
   const RPC='nexlab_record_device_homologation_v02682';

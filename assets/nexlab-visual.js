@@ -1505,10 +1505,10 @@
     style.textContent=`
       .module-shell.nexlab-marketing-reset,.nexlab-marketing-reset{width:100%!important;max-width:100%!important;min-width:0!important;}
       .nexlab-marketing-reset .nexlab-mkt-agenda.nexlab-mkt-agenda--patched{display:block!important;width:100%!important;min-width:0!important;}
-      .nexlab-marketing-reset .nexlab-mkt-desktop-split{display:grid!important;grid-template-columns:minmax(0,1.72fr) minmax(24rem,.96fr)!important;align-items:start!important;gap:18px!important;width:100%!important;min-width:0!important;}
-      .nexlab-marketing-reset .nexlab-mkt-desktop-split>.nexlab-mkt-mobile-calendar,.nexlab-marketing-reset .nexlab-mkt-desktop-split>.nexlab-mkt-mobile-selected{width:100%!important;min-width:0!important;margin:0!important;}
-      .nexlab-marketing-reset .nexlab-mkt-desktop-split>.nexlab-mkt-mobile-selected{position:sticky!important;top:0!important;max-height:none!important;}
-      @media (max-width:1180px){.nexlab-marketing-reset .nexlab-mkt-desktop-split{grid-template-columns:minmax(0,1fr)!important;gap:12px!important;}.nexlab-marketing-reset .nexlab-mkt-desktop-split>.nexlab-mkt-mobile-selected{position:static!important;}}
+      .nexlab-marketing-reset .nexlab-mkt-desktop-split{display:flex!important;align-items:stretch!important;justify-content:space-between!important;gap:22px!important;width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;}
+      .nexlab-marketing-reset .nexlab-mkt-desktop-split>.nexlab-mkt-mobile-calendar{flex:1 1 auto!important;width:auto!important;max-width:none!important;min-width:0!important;margin:0!important;}
+      .nexlab-marketing-reset .nexlab-mkt-desktop-split>.nexlab-mkt-mobile-selected{flex:0 0 clamp(24rem,30vw,29rem)!important;width:clamp(24rem,30vw,29rem)!important;max-width:clamp(24rem,30vw,29rem)!important;min-width:24rem!important;margin:0!important;position:sticky!important;top:0!important;max-height:none!important;align-self:stretch!important;}
+      @media (max-width:1180px){.nexlab-marketing-reset .nexlab-mkt-desktop-split{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important;}.nexlab-marketing-reset .nexlab-mkt-desktop-split>.nexlab-mkt-mobile-selected{position:static!important;width:100%!important;max-width:100%!important;min-width:0!important;flex:1 1 auto!important;}}
     `;
     document.head.appendChild(style);
   }

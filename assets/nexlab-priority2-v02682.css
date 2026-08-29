@@ -876,3 +876,52 @@ body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-re
     font-size:.92rem!important;
   }
 }
+
+
+/* NEXLAB Beta 0.26.82 — Hotfix: remove área vazia à direita no Marketing e aproxima da estrutura da Agenda. */
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda,
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda.nexlab-mkt-agenda--patched{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-desktop-split{
+  display:flex!important;
+  align-items:stretch!important;
+  justify-content:space-between!important;
+  gap:22px!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-desktop-split > .nexlab-mkt-mobile-calendar{
+  flex:1 1 auto!important;
+  width:auto!important;
+  max-width:none!important;
+  min-width:0!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-desktop-split > .nexlab-mkt-mobile-selected{
+  flex:0 0 clamp(24rem, 30vw, 29rem)!important;
+  width:clamp(24rem, 30vw, 29rem)!important;
+  max-width:clamp(24rem, 30vw, 29rem)!important;
+  min-width:24rem!important;
+  margin-left:0!important;
+  align-self:stretch!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-selected-list{
+  max-height:none!important;
+}
+@media (max-width: 1180px){
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-desktop-split{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:12px!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-desktop-split > .nexlab-mkt-mobile-selected{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    flex:1 1 auto!important;
+  }
+}
