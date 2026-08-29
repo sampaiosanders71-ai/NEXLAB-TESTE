@@ -1,7 +1,7 @@
 (function(root){
   'use strict';
   const VERSION='0.26.82';
-  const REVISION='beta-0-26-82-homologacao-correcoes-criticas';
+  const REVISION='beta-0-26-82-marketing-lista-direita-final';
   const RPC='nexlab_get_release_publish_gate_v02682';
   const ASSERT_RPC='nexlab_assert_release_publishable_v02682';
   const EVIDENCE_KEY='nexlab:device-homologation:'+VERSION+':'+REVISION;
