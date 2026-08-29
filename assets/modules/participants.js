@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: ParticipantsModule. */
-export { ParticipantsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-marketing-sem-gap-direita";
+export { ParticipantsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-homologacao-correcoes-criticas";

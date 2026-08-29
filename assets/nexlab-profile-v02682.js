@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-marketing-sem-gap-direita'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-homologacao-correcoes-criticas'});
   const REVISION=BUILD.revision;
   if(globalThis.__NEXLAB_PROFILE_REDESIGN__?.revision===REVISION)return;
   let scheduled=false;

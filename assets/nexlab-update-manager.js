@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-marketing-sem-gap-direita',generatedAt:'2026-08-29T01:34:38Z',cacheName:'nexlab-beta-0-26-82-marketing-sem-gap-direita'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-homologacao-correcoes-criticas',generatedAt:'2026-08-29T18:21:08Z',cacheName:'nexlab-beta-0-26-82-homologacao-correcoes-criticas'});
   const CURRENT_VERSION = BUILD_IDENTITY.version;
   const CURRENT_RELEASE = BUILD_IDENTITY.release;
   const CURRENT_REVISION = BUILD_IDENTITY.revision;
