@@ -1493,3 +1493,61 @@
   // A observação global é compartilhada com rootUiObserver para evitar varreduras duplicadas.
 
 })();
+
+
+/* NEXLAB Beta 0.26.82 — Hotfix: garante lista do Marketing à direita do calendário. */
+;(function(){
+  const STYLE_ID='nexlab-mkt-desktop-split-style';
+  function ensureStyle(){
+    if(document.getElementById(STYLE_ID)) return;
+    const style=document.createElement('style');
+    style.id=STYLE_ID;
+    style.textContent=`
+      .module-shell.nexlab-marketing-reset,.nexlab-marketing-reset{width:100%!important;max-width:100%!important;min-width:0!important;}
+      .nexlab-marketing-reset .nexlab-mkt-agenda.nexlab-mkt-agenda--patched{display:block!important;width:100%!important;min-width:0!important;}
+      .nexlab-marketing-reset .nexlab-mkt-desktop-split{display:grid!important;grid-template-columns:minmax(0,1.72fr) minmax(24rem,.96fr)!important;align-items:start!important;gap:18px!important;width:100%!important;min-width:0!important;}
+      .nexlab-marketing-reset .nexlab-mkt-desktop-split>.nexlab-mkt-mobile-calendar,.nexlab-marketing-reset .nexlab-mkt-desktop-split>.nexlab-mkt-mobile-selected{width:100%!important;min-width:0!important;margin:0!important;}
+      .nexlab-marketing-reset .nexlab-mkt-desktop-split>.nexlab-mkt-mobile-selected{position:sticky!important;top:0!important;max-height:none!important;}
+      @media (max-width:1180px){.nexlab-marketing-reset .nexlab-mkt-desktop-split{grid-template-columns:minmax(0,1fr)!important;gap:12px!important;}.nexlab-marketing-reset .nexlab-mkt-desktop-split>.nexlab-mkt-mobile-selected{position:static!important;}}
+    `;
+    document.head.appendChild(style);
+  }
+  function patchMarketingLayout(){
+    const root=document.querySelector('.module-shell.nexlab-marketing-reset') || document.querySelector('.nexlab-marketing-reset');
+    const agenda=root?.querySelector('.nexlab-mkt-agenda');
+    if(!root || !agenda) return;
+    const cal=agenda.querySelector('.nexlab-mkt-mobile-calendar');
+    const selected=agenda.querySelector('.nexlab-mkt-mobile-selected');
+    if(!cal || !selected) return;
+    ensureStyle();
+    root.style.width='100%';
+    root.style.maxWidth='100%';
+    root.style.minWidth='0';
+    agenda.classList.add('nexlab-mkt-agenda--patched');
+    let split=agenda.querySelector(':scope > .nexlab-mkt-desktop-split');
+    if(!split){
+      split=document.createElement('div');
+      split.className='nexlab-mkt-desktop-split';
+      const desktopCalendar=agenda.querySelector(':scope > .nexlab-mkt-calendar-desktop');
+      if(desktopCalendar) agenda.insertBefore(split, desktopCalendar);
+      else agenda.appendChild(split);
+    }
+    if(cal.parentElement!==split) split.appendChild(cal);
+    if(selected.parentElement!==split) split.appendChild(selected);
+    const desktopCalendar=agenda.querySelector(':scope > .nexlab-mkt-calendar-desktop');
+    if(desktopCalendar) desktopCalendar.style.display='none';
+  }
+  let raf=0;
+  function queuePatch(){
+    cancelAnimationFrame(raf);
+    raf=requestAnimationFrame(patchMarketingLayout);
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',queuePatch,{once:true});}else{queuePatch();}
+  window.addEventListener('load',queuePatch);
+  window.addEventListener('resize',queuePatch,{passive:true});
+  window.addEventListener('hashchange',queuePatch);
+  window.addEventListener('popstate',queuePatch);
+  const observer=new MutationObserver(queuePatch);
+  const start=()=>observer.observe(document.body||document.documentElement,{childList:true,subtree:true});
+  if(document.body) start(); else window.addEventListener('DOMContentLoaded',start,{once:true});
+})();

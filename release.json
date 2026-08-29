@@ -3,11 +3,11 @@
   "display_version": "NEXLAB Beta 0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
-  "asset_revision": "app-beta-0-26-82-marketing-update-sem-ambiente-teste",
-  "generated_at": "2026-08-29T01:34:38Z",
-  "title": "Beta 0.26.82 — Marketing lateral, atualização restaurada e ambiente de teste removido",
-  "cache_name": "nexlab-beta-0-26-82-marketing-update-sem-ambiente-teste",
+  "revision": "beta-0-26-82-marketing-lateral-direita-hotfix",
+  "asset_revision": "app-beta-0-26-82-marketing-lateral-direita-hotfix",
+  "generated_at": "2026-08-29T02:10:00Z",
+  "title": "Beta 0.26.82 — hotfix do Marketing lateral à direita, atualização restaurada e ambiente de teste removido",
+  "cache_name": "nexlab-beta-0-26-82-marketing-lateral-direita-hotfix",
   "entry": "index.html",
   "core_files": [
     "index.html",
@@ -135,8 +135,8 @@
     "administrator_receipt_required": true,
     "manual_approval_allowed": false,
     "status": "candidate_blocked_pending_exact_physical_receipt",
-    "build_revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
-    "evidence_revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
+    "build_revision": "beta-0-26-82-marketing-lateral-direita-hotfix",
+    "evidence_revision": "beta-0-26-82-marketing-lateral-direita-hotfix",
     "evidence_storage_scoped_by_build_revision": true,
     "controlled_push_test": "provider_accepted_pending_device_display_and_tap",
     "controlled_push_sent_at": "2026-07-29T06:07:04.801Z",
@@ -151,7 +151,7 @@
     "responsive_global_contract": "static_passed_physical_confirmation_pending",
     "exact_version_revision_receipt_required": true,
     "current_exact_receipts": 0,
-    "revision": "beta-0-26-82-marketing-update-sem-ambiente-teste"
+    "revision": "beta-0-26-82-marketing-lateral-direita-hotfix"
   },
   "observability": {
     "user_notice_reference_persisted": true,
@@ -297,7 +297,7 @@
     "current_release_0_26_82": {
       "version": "0.26.82",
       "status": "beta",
-      "revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
+      "revision": "beta-0-26-82-marketing-lateral-direita-hotfix",
       "rpc_health": "nexlab_get_database_health_v02682",
       "rpc_diagnostics": "nexlab_get_homologation_diagnostics_v02682",
       "rpc_gate": "nexlab_get_release_publish_gate_v02682",
@@ -317,10 +317,10 @@
   "validation": {
     "scope": "current_revision_only",
     "version": "0.26.82",
-    "revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
-    "asset_revision": "app-beta-0-26-82-marketing-update-sem-ambiente-teste",
+    "revision": "beta-0-26-82-marketing-lateral-direita-hotfix",
+    "asset_revision": "app-beta-0-26-82-marketing-lateral-direita-hotfix",
     "metadata_cleanup_completed": true,
-    "validation_plan_revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
+    "validation_plan_revision": "beta-0-26-82-marketing-lateral-direita-hotfix",
     "stale_project_summary_card_expectation_removed": true,
     "physical_device_test": "pending",
     "fully_homologated": false,
@@ -356,7 +356,7 @@
       "missing": 0
     },
     "inventory_hashes": "82/82 matched",
-    "backend_revision_gate": "aligned_to_beta-0-26-82-marketing-update-sem-ambiente-teste",
+    "backend_revision_gate": "aligned_to_beta-0-26-82-marketing-lateral-direita-hotfix",
     "current_exact_receipts": 0,
     "esm_link_validation": {
       "entries": 22,
@@ -367,15 +367,15 @@
   "files": 83,
   "build_identity": {
     "version": "0.26.82",
-    "revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
-    "asset_revision": "app-beta-0-26-82-marketing-update-sem-ambiente-teste",
-    "cache_name": "nexlab-beta-0-26-82-marketing-update-sem-ambiente-teste",
+    "revision": "beta-0-26-82-marketing-lateral-direita-hotfix",
+    "asset_revision": "app-beta-0-26-82-marketing-lateral-direita-hotfix",
+    "cache_name": "nexlab-beta-0-26-82-marketing-lateral-direita-hotfix",
     "generated_at": "2026-08-28T01:20:37Z",
     "base_release": "0.26.71",
     "stable_frontend_base": "0.26.69",
     "recovery_from_rejected_release": "0.26.70",
-    "assetRevision": "app-beta-0-26-82-marketing-update-sem-ambiente-teste",
-    "cacheName": "nexlab-beta-0-26-82-marketing-update-sem-ambiente-teste",
+    "assetRevision": "app-beta-0-26-82-marketing-lateral-direita-hotfix",
+    "cacheName": "nexlab-beta-0-26-82-marketing-lateral-direita-hotfix",
     "generatedAt": "2026-08-28T01:20:37Z"
   },
   "external_feedback_evidence": {
@@ -1904,7 +1904,7 @@
     "assert_rpc": "nexlab_assert_release_publishable_v02682",
     "publication_allowed": false,
     "required_app_version": "0.26.82",
-    "required_revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
+    "required_revision": "beta-0-26-82-marketing-lateral-direita-hotfix",
     "receipt_max_age_days": 14,
     "manual_override_allowed": false,
     "candidate_deployment_allowed_for_homologation": true,
@@ -2722,8 +2722,8 @@
     "telemetry_records_module_asset_url": true
   },
   "pre_homologation_corrections_0_26_82": {
-    "revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
-    "asset_revision": "app-beta-0-26-82-marketing-update-sem-ambiente-teste",
+    "revision": "beta-0-26-82-marketing-lateral-direita-hotfix",
+    "asset_revision": "app-beta-0-26-82-marketing-lateral-direita-hotfix",
     "generated_at": "2026-08-28T01:20:37Z",
     "stale_runtime_fallbacks_normalized": true,
     "precache_concurrency": 6,
@@ -2736,14 +2736,14 @@
     "file_hashes_expected": 82
   },
   "module_syntax_fix_0_26_82": {
-    "revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
+    "revision": "beta-0-26-82-marketing-lateral-direita-hotfix",
     "fixed": "Fechamento JSX excedente no ReportsModule que tornava nexlab-runtime-features.js inválido como módulo ESM.",
     "impact": "Corrige falhas Unexpected token \",\" em Usuários, Pendências e demais fachadas que importam o runtime compartilhado.",
     "validation": "Todos os arquivos ESM passam por parser de módulo real (.mjs) além da checagem JavaScript comum.",
     "generated_at": "2026-08-28T01:20:37Z"
   },
   "integrity_post_audit_0_26_82": {
-    "revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
+    "revision": "beta-0-26-82-marketing-lateral-direita-hotfix",
     "module_telemetry_canonicalization": true,
     "structural_module_error_deduplication": true,
     "precomputed_fingerprint_double_hash_fixed": true,

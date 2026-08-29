@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-marketing-update-sem-ambiente-teste'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-marketing-lateral-direita-hotfix'});
   const REVISION=BUILD.revision;
   if(globalThis.__NEXLAB_PROFILE_REDESIGN__?.revision===REVISION)return;
   let scheduled=false;

@@ -1,0 +1,9 @@
+PUBLIQUE ESTES ARQUIVOS NO GITHUB PAGES, SUBSTITUINDO OS EXISTENTES.
+
+Objetivo desta revisão:
+1) Forçar a lista do Marketing para a direita do calendário no desktop.
+2) Manter o botão de atualização funcionando.
+3) Manter o recurso Ambiente de teste removido do app.
+
+Não há arquivo extra para excluir nesta hotfix além do que já foi removido antes.
+Depois da publicação, aguarde cerca de 60 segundos para o aviso de atualização aparecer nas abas antigas.
