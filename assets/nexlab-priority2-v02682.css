@@ -925,3 +925,37 @@ body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-re
     flex:1 1 auto!important;
   }
 }
+
+/* NEXLAB Beta 0.26.82 — Hotfix final: Marketing deve ocupar toda a largura e manter a lista ao lado do calendário no desktop. */
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-desktop-split{
+  grid-column:1 / -1 !important;
+  display:grid !important;
+  grid-template-columns:minmax(0,1.68fr) minmax(20rem,.92fr) !important;
+  align-items:stretch !important;
+  gap:20px !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-desktop-split > .nexlab-mkt-mobile-calendar,
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-desktop-split > .nexlab-mkt-mobile-selected{
+  grid-column:auto !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  margin:0 !important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-desktop-split > .nexlab-mkt-mobile-selected{
+  position:sticky !important;
+  top:0 !important;
+  align-self:start !important;
+}
+@media (max-width: 980px){
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-desktop-split{
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:12px !important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-desktop-split > .nexlab-mkt-mobile-selected{
+    position:static !important;
+  }
+}
