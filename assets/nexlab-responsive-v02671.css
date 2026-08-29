@@ -70,7 +70,7 @@ main :where(input,select,textarea){min-width:0}
 .project-card-owner-v02667 strong{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
 
 /* Ferramentas flutuantes nunca cobrem modais. */
-body[data-nexlab-modal-open="true"] :where(#nexlab-admin-tools-trigger,#nexlab-test-trigger,#nexlab-validation-trigger,#nexlab-coordinator-preview-trigger){display:none!important}
+body[data-nexlab-modal-open="true"] :where(#nexlab-validation-trigger,#nexlab-coordinator-preview-trigger){display:none!important}
 
 @media(max-width:900px){
   .teams-v2680__toolbar{grid-template-columns:1fr!important;align-items:stretch!important}
@@ -127,7 +127,7 @@ body[data-nexlab-modal-open="true"] :where(#nexlab-admin-tools-trigger,#nexlab-t
   .projects-module-v02667 .nexlab-project-kanban__column{max-height:none!important}
   .projects-module-v02667 .nexlab-project-kanban__column>div:last-child{max-height:none!important;overflow-y:visible!important}
 
-  body:not([data-nexlab-page="dashboard"]) :where(#nexlab-admin-tools-trigger,#nexlab-test-trigger,#nexlab-validation-trigger,#nexlab-coordinator-preview-trigger){display:none!important}
+  body:not([data-nexlab-page="dashboard"]) :where(#nexlab-validation-trigger,#nexlab-coordinator-preview-trigger){display:none!important}
 }
 
 @media(max-width:639px){
@@ -167,7 +167,7 @@ body[data-nexlab-modal-open="true"] :where(#nexlab-admin-tools-trigger,#nexlab-t
   .nexlab-modal-actions,.nexlab-connection-actions,.nexlab-confirm-actions{display:flex!important;flex-direction:column-reverse!important;gap:.55rem!important}
   .nexlab-modal-actions button,.nexlab-connection-actions button,.nexlab-confirm-actions button{width:100%!important}
 
-  body[data-nexlab-page="dashboard"] :where(#nexlab-admin-tools-trigger,#nexlab-test-trigger,#nexlab-validation-trigger){right:var(--nexlab-mobile-gutter)!important;bottom:calc(var(--nexlab-mobile-gutter) + var(--nexlab-safe-bottom))!important;left:auto!important}
+  body[data-nexlab-page="dashboard"] :where(#nexlab-validation-trigger){right:var(--nexlab-mobile-gutter)!important;bottom:calc(var(--nexlab-mobile-gutter) + var(--nexlab-safe-bottom))!important;left:auto!important}
 }
 
 @media(max-width:420px){

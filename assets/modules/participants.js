@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: ParticipantsModule. */
-export { ParticipantsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-integridade-pos-auditoria";
+export { ParticipantsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-marketing-update-sem-ambiente-teste";

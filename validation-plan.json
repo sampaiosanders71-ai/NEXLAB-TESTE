@@ -8,7 +8,6 @@
     "all_required_items_approved": true,
     "no_adjustment_or_blocking_reviews": true,
     "permission_matrix_complete": true,
-    "test_environment_clean": true,
     "publication_keeps_beta_status": true,
     "exact_physical_device_receipt_required": true,
     "exact_version_revision_match_required": true,
@@ -29,27 +28,27 @@
       "expected_result": "Acesso restrito, vínculo válido e ausência de funções administrativas."
     },
     {
-      "item_key": "temporary_users",
-      "title": "Usuários temporários",
+      "item_key": "marketing_calendar_list",
+      "title": "Marketing — calendário e lista",
       "test_steps": [
-        "Abrir o botão Ambiente de teste",
-        "Confirmar que não há atalhos de Permissões, visualização ou promoção nessa tela",
-        "Criar o cenário",
-        "Baixar credenciais",
-        "Limpar o cenário"
+        "Abrir o módulo Marketing em um computador",
+        "Confirmar que o calendário aparece à esquerda e a lista do mês/dia à direita",
+        "Selecionar um dia e confirmar que a lista lateral filtra a data",
+        "Reduzir a largura da tela e confirmar que calendário e lista passam para uma coluna"
       ],
-      "expected_result": "A tela contém somente criação, consulta e limpeza de contas e registros fictícios rastreados."
+      "expected_result": "No desktop, calendário e lista ficam lado a lado; em telas menores, a composição empilha sem estouro horizontal."
     },
     {
-      "item_key": "fictional_data",
-      "title": "Dados fictícios e limpeza",
+      "item_key": "update_delivery",
+      "title": "Atualização do aplicativo",
       "test_steps": [
-        "Criar dados fictícios",
-        "Revisar os módulos",
-        "Confirmar a marcação [TESTE]",
-        "Executar a limpeza"
+        "Manter uma revisão anterior do NEXLAB aberta",
+        "Publicar uma nova revisão no GitHub Pages",
+        "Aguardar até 60 segundos ou voltar o foco para a aba",
+        "Confirmar que o aviso Atualização do NEXLAB disponível aparece com o botão Atualizar agora",
+        "Confirmar a atualização e validar a recarga na nova revisão"
       ],
-      "expected_result": "Somente os dados vinculados à execução são removidos."
+      "expected_result": "A revisão publicada é detectada, o usuário recebe o botão de atualização e a ativação só ocorre após confirmação."
     },
     {
       "item_key": "profile_preview",
@@ -205,7 +204,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-82-integridade-pos-auditoria",
+  "revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -251,7 +250,7 @@
     "official_promotion": "blocked_pending_exact_physical_receipt",
     "manual_override_allowed": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-integridade-pos-auditoria",
+    "required_revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
     "receipt_max_age_days": 14
   },
   "activity_system_consistency_0_26_76": {
@@ -426,7 +425,7 @@
     },
     "historical_revision": "beta-0-26-82-saude-sistema-timeout-corrigido"
   },
-  "build_revision": "beta-0-26-82-integridade-pos-auditoria",
+  "build_revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
   "updated_at": "2026-08-28T01:20:37Z",
   "post_login_permission_fix": {
     "pending_profile_counter_guard": "passed_static",
@@ -618,7 +617,7 @@
     ]
   },
   "atomic_module_update_validation": {
-    "revision": "beta-0-26-82-integridade-pos-auditoria",
+    "revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
     "required": [
       "all module facades precached",
       "runtime features/export precached",
@@ -636,7 +635,7 @@
     ]
   },
   "pre_homologation_corrections_0_26_82": {
-    "revision": "beta-0-26-82-integridade-pos-auditoria",
+    "revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
     "required": [
       "all runtime fallbacks use current revision",
       "precache uses bounded concurrency",
@@ -657,10 +656,10 @@
     "issue": "Unexpected token comma no runtime ESM compartilhado",
     "fix": "Remoção do fechamento JSX excedente no ReportsModule",
     "esm_gate": "Obrigatório: arquivos com import/export são validados como .mjs",
-    "revision": "beta-0-26-82-integridade-pos-auditoria"
+    "revision": "beta-0-26-82-marketing-update-sem-ambiente-teste"
   },
   "integrity_post_audit": {
-    "revision": "beta-0-26-82-integridade-pos-auditoria",
+    "revision": "beta-0-26-82-marketing-update-sem-ambiente-teste",
     "required_checks": [
       "module_esm_load",
       "module_error_dedup",

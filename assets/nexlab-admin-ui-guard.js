@@ -5,7 +5,7 @@
   const PROJECT_REF=CONFIG.projectRef;
   const BASE=CONFIG.supabaseUrl;
   const KEY=CONFIG.supabaseAnonKey;
-  const TRIGGER_SELECTOR='#nexlab-admin-tools-trigger,#nexlab-validation-trigger,#nexlab-coordinator-preview-trigger,#nexlab-test-trigger';
+  const TRIGGER_SELECTOR='#nexlab-validation-trigger,#nexlab-coordinator-preview-trigger';
   const OVERLAY_SELECTOR='.nexlab-admin-overlay,.nexlab-validation-overlay,.nexlab-test-overlay';
   const overlays=new Set();
   const overlayState=new WeakMap();
@@ -50,7 +50,7 @@
     }else if(admin){
       removeNodes('#nexlab-validation-trigger,#nexlab-coordinator-preview-trigger');
     }else{
-      removeNodes('#nexlab-admin-tools-trigger,#nexlab-test-trigger,.nexlab-admin-overlay,.nexlab-test-overlay');
+      removeNodes('.nexlab-admin-overlay');
     }
   }
   function setVerification(state,detail={}){

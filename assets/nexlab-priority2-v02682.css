@@ -566,3 +566,53 @@ body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-se
   body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day,
   body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-head button{transition:none!important}
 }
+
+/* NEXLAB Beta 0.26.82 — Marketing em duas colunas no desktop. */
+body[data-nexlab-page="marketing"] main .module-shell.nexlab-marketing-reset{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.72fr) minmax(23rem,.96fr)!important;
+  align-items:start!important;
+  align-content:start!important;
+  gap:18px!important;
+  width:100%!important;
+  min-width:0!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-mobile-calendar{
+  grid-column:1!important;
+  align-self:start!important;
+  width:100%!important;
+  min-width:0!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-mobile-selected{
+  grid-column:2!important;
+  align-self:stretch!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:100%!important;
+  max-height:none!important;
+  margin:0!important;
+  position:sticky!important;
+  top:0!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-selected-list{
+  min-height:0!important;
+  max-height:40rem!important;
+}
+@media (max-width: 1180px){
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:12px!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-mobile-calendar,
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-mobile-selected{
+    grid-column:1!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-mobile-selected{
+    position:static!important;
+  }
+}

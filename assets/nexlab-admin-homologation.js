@@ -15,8 +15,7 @@
 
   const style=document.createElement('style');
   style.textContent=`
-    #nexlab-admin-tools-trigger{position:fixed;right:18px;bottom:86px;z-index:10045;border:0;border-radius:999px;background:#0b2a63;color:#fff;padding:11px 15px;box-shadow:0 14px 38px rgba(15,23,42,.3);font:800 12px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer;display:flex;gap:8px;align-items:center}
-    #nexlab-admin-tools-trigger:hover{background:#123a7a}#nexlab-admin-tools-trigger svg{width:17px;height:17px}
+    
     .nexlab-admin-overlay{position:fixed;inset:0;z-index:10080;background:rgba(2,6,23,.68);display:grid;place-items:center;padding:18px}
     .nexlab-admin-dialog{width:min(980px,100%);max-height:min(92vh,920px);overflow:auto;background:#fff;border-radius:24px;box-shadow:0 30px 90px rgba(2,6,23,.38);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#0f172a}
     .nexlab-admin-dialog.is-wide{width:min(1380px,100%)}
@@ -40,7 +39,7 @@
     .nexlab-kanban-list{padding:10px;display:grid;gap:8px;align-content:start;min-height:390px}.nexlab-permission-card{border:1px solid #dbe4ef;background:#fff;border-radius:14px;padding:11px;display:grid;gap:7px;cursor:grab;box-shadow:0 4px 12px rgba(15,23,42,.04)}.nexlab-permission-card.is-locked{cursor:not-allowed;background:#f1f5f9}.nexlab-permission-card.is-dragging{opacity:.45}.nexlab-permission-card h4{font-size:11px;margin:0;color:#0f172a}.nexlab-permission-card p{font-size:9px;line-height:1.4;color:#64748b;margin:0}.nexlab-permission-card-meta{display:flex;gap:5px;flex-wrap:wrap}.nexlab-permission-card-meta span{font-size:8px;font-weight:900;border-radius:999px;background:#eef2f7;color:#475569;padding:4px 6px}.nexlab-permission-toggle{border:0;background:#e2e8f0;color:#334155;border-radius:9px;padding:7px 8px;font:800 9px/1 system-ui;cursor:pointer}.nexlab-permission-card.is-locked .nexlab-permission-toggle{display:none}
     .nexlab-security-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.nexlab-security-summary div{border:1px solid #dbe4ef;border-radius:14px;padding:12px;background:#f8fafc}.nexlab-security-summary strong{display:block;font-size:19px;color:#0b2a63}.nexlab-security-summary span{font-size:9px;color:#64748b}.nexlab-hash{display:block;word-break:break-all;border:1px solid #dbe4ef;background:#0f172a;color:#e2e8f0;border-radius:12px;padding:10px;font:10px/1.5 ui-monospace,monospace}
     .nexlab-review-list{display:grid;gap:9px}.nexlab-review-row{border:1px solid #dbe4ef;border-radius:13px;padding:11px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px}.nexlab-review-row strong{font-size:11px}.nexlab-review-row span{font-size:10px;color:#64748b}.nexlab-review-state{font-weight:900!important}.nexlab-review-state.ok{color:#166534}.nexlab-review-state.fail{color:#b91c1c}.nexlab-hidden{display:none!important}
-    @media(max-width:760px){#nexlab-admin-tools-trigger{right:14px;bottom:78px;padding:12px}#nexlab-admin-tools-trigger span{display:none}.nexlab-admin-overlay{padding:0}.nexlab-admin-dialog,.nexlab-admin-dialog.is-wide{max-height:100vh;height:100%;border-radius:0}.nexlab-admin-head,.nexlab-admin-body{padding-left:17px;padding-right:17px}.nexlab-admin-grid{grid-template-columns:1fr}.nexlab-role-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.nexlab-preview-summary,.nexlab-security-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.nexlab-kanban-toolbar{grid-template-columns:1fr}.nexlab-kanban-board{grid-template-columns:repeat(4,270px)}.nexlab-kanban-column-head{top:72px}}
+    @media(max-width:760px){.nexlab-admin-overlay{padding:0}.nexlab-admin-dialog,.nexlab-admin-dialog.is-wide{max-height:100vh;height:100%;border-radius:0}.nexlab-admin-head,.nexlab-admin-body{padding-left:17px;padding-right:17px}.nexlab-admin-grid{grid-template-columns:1fr}.nexlab-role-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.nexlab-preview-summary,.nexlab-security-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.nexlab-kanban-toolbar{grid-template-columns:1fr}.nexlab-kanban-board{grid-template-columns:repeat(4,270px)}.nexlab-kanban-column-head{top:72px}}
   `;
   document.head.appendChild(style);
 
@@ -449,21 +448,20 @@
   }
 
   async function openReleaseReview(){
-    const {body}=createDialog(`Revisão da Beta ${VERSION}`,'Executa testes funcionais do bloqueio somente leitura, acesso de Coordenadores, Kanban individual, matriz e ambiente controlado.');
+    const {body}=createDialog(`Revisão da Beta ${VERSION}`,'Executa testes funcionais do bloqueio somente leitura, acesso de Coordenadores, Kanban individual e matriz.');
     const status=messageBox('Executando verificações funcionais...');body.appendChild(status);
     const list=document.createElement('div');list.className='nexlab-review-list';body.appendChild(list);
     const actions=document.createElement('div');actions.className='nexlab-admin-actions nexlab-hidden';actions.innerHTML='<button type="button" class="nexlab-admin-btn nexlab-admin-secondary">Baixar relatório da revisão</button>';body.appendChild(actions);
     try{
-      let release=null,manifest=null,matrix=null,testStatus=null,diagnostics=null,previewData=null;
+      let release=null,manifest=null,matrix=null,diagnostics=null,previewData=null;
       const results=await Promise.allSettled([
         fetch(`./release.json?review=${Date.now()}`,{cache:'no-store'}).then(response=>response.ok?response.json():null),
         fetch(`./manifest.webmanifest?review=${Date.now()}`,{cache:'no-store'}).then(response=>response.ok?response.json():null),
         loadMatrix(true),
-        window.NexlabTestEnvironment?.call?window.NexlabTestEnvironment.call('status'):Promise.resolve(null),
         rpc('nexlab_get_homologation_diagnostics_v02682'),
         loadPreviewData()
       ]);
-      [release,manifest,matrix,testStatus,diagnostics,previewData]=results.map(result=>result.status==='fulfilled'?result.value:null);
+      [release,manifest,matrix,diagnostics,previewData]=results.map(result=>result.status==='fulfilled'?result.value:null);
       const identity=window.__NEXLAB_BUILD_IDENTITY__||window.__NEXLAB_RELEASE__||{};
       const guardTest=window.NexlabProfilePreviewGuard?.selfTest?.()||{ok:false,cases:[]};
       const kanbanTest=window.NexlabPermissionKanbanDiagnostics?.selfTest?.(matrix)||{ok:false,cases:[]};
@@ -482,36 +480,13 @@
       const uiGuard=window.NexlabAdministrativeUiGuard?.selfTest?.()||{ok:false};
       const mandatory=identity?.pwa?.mandatoryShell||[];const functional=identity?.pwa?.functional||[];const duplicates=mandatory.filter(path=>functional.includes(path));
       checks.push({label:'Limpeza de sessão e acessibilidade administrativa',ok:uiGuard.ok===true,detail:uiGuard.ok?'logout, troca de perfil, foco, Esc e restauração de foco ativos':'proteção não carregada'});
-      checks.push({label:'Cache obrigatório das ferramentas',ok:['assets/nexlab-rpc-registry.js','assets/nexlab-admin-ui-guard.js','assets/nexlab-test-environment.js','assets/nexlab-coordinator-validation.js','assets/nexlab-admin-homologation.js'].every(path=>mandatory.includes(path))&&duplicates.length===0,detail:`${mandatory.length} recursos obrigatórios; ${duplicates.length} duplicidade(s)`});
+      checks.push({label:'Cache obrigatório das ferramentas',ok:['assets/nexlab-rpc-registry.js','assets/nexlab-admin-ui-guard.js','assets/nexlab-coordinator-validation.js','assets/nexlab-admin-homologation.js'].every(path=>mandatory.includes(path))&&duplicates.length===0,detail:`${mandatory.length} recursos obrigatórios; ${duplicates.length} duplicidade(s)`});
       checks.push({label:'Dashboard consolidado',ok:diagnostics?.dashboard_bundle?.available===true&&diagnostics?.dashboard_bundle?.single_round_trip===true&&diagnostics?.dashboard_bundle?.section_isolation===true,detail:diagnostics?.dashboard_bundle?.available?'uma RPC com isolamento por seção':'RPC consolidada indisponível'});
-      checks.push({label:'Ambiente de teste controlado',ok:Boolean(testStatus)&&testStatus?.active!==true&&diagnostics?.test_environment?.clean===true,detail:testStatus?.active===true?'cenário ativo':testStatus?'nenhum cenário ativo':'consulta indisponível'});
       const allOk=checks.every(item=>item.ok);status.className=`nexlab-admin-note ${allOk?'nexlab-admin-success':'nexlab-admin-warning'}`;status.textContent=allOk?'Todos os testes funcionais integrados foram aprovados.':'A revisão funcional encontrou itens que precisam de atenção.';
       for(const item of checks){const row=document.createElement('div');row.className='nexlab-review-row';row.innerHTML='<div><strong></strong><br><span></span></div><span class="nexlab-review-state"></span>';row.querySelector('strong').textContent=item.label;row.querySelector('div span').textContent=item.detail;const state=row.querySelector('.nexlab-review-state');state.textContent=item.ok?'APROVADO':'ATENÇÃO';state.classList.add(item.ok?'ok':'fail');list.appendChild(row);}
       const report={app:'NEXLAB',version:VERSION,checked_at:new Date().toISOString(),approved:allOk,checks,rpc_registry:rpcRegistryTest,preview_guard:guardTest,permission_kanban:kanbanTest,server_diagnostics:diagnostics};actions.classList.remove('nexlab-hidden');actions.querySelector('button').onclick=()=>downloadBlob(`NEXLAB_REVISAO_${VERSION.replaceAll('.','_')}.json`,JSON.stringify(report,null,2));
     }catch(error){status.className='nexlab-admin-note nexlab-admin-error';status.textContent=error.message||'Falha na revisão funcional.';const retry=document.createElement('button');retry.type='button';retry.className='nexlab-admin-btn nexlab-admin-secondary';retry.textContent='Tentar novamente';retry.onclick=()=>{document.querySelector('.nexlab-admin-overlay')?.remove();openReleaseReview();};body.appendChild(retry);}
   }
 
-  function openSuite(){
-    if(window.NexlabTestEnvironment?.open){window.NexlabTestEnvironment.open();return;}
-    const {body}=createDialog('Ambiente de teste','Crie ou limpe contas temporárias e registros fictícios rastreados.');
-    body.appendChild(messageBox('O módulo de dados fictícios ainda está carregando. Feche esta janela e tente novamente em alguns segundos.','nexlab-admin-warning'));
-  }
-
-  function removeAdminUi(){document.getElementById('nexlab-admin-tools-trigger')?.remove();document.querySelectorAll('.nexlab-admin-overlay').forEach(node=>node.remove());}
-  async function mount(){
-    const existing=document.getElementById('nexlab-admin-tools-trigger');
-    if(window.__NEXLAB_PROFILE_PREVIEW__?.active){removeAdminUi();return;}
-    const profile=await currentAdmin();if(!profile){removeAdminUi();return;}
-    document.getElementById('nexlab-test-trigger')?.remove();
-    if(existing)return;
-    const button=document.createElement('button');button.id='nexlab-admin-tools-trigger';button.type='button';button.title='Criar ou limpar registros fictícios';button.setAttribute('aria-label','Abrir ambiente de teste');button.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3h6M10 9V3m4 6V3M8 9h8l3 9a2 2 0 0 1-2 3H7a2 2 0 0 1-2-3l3-9Z"/><path d="M8 15h8"/></svg><span>Ambiente de teste</span>';button.onclick=openSuite;document.body.appendChild(button);
-  }
-
-  window.NexlabAdminHomologation=Object.freeze({version:VERSION,open:openSuite,openProfilePreview,openPermissionKanban,openSecurityExport,openReleaseReview,openCoordinatorValidation:()=>window.NexlabCoordinatorValidation?.openValidation?.(),openPromotion:()=>window.NexlabCoordinatorValidation?.openPromotion?.()});
-  window.addEventListener('nexlab:auth-ready',()=>setTimeout(mount,500));
-  window.addEventListener('nexlab:session-reset',()=>{removeAdminUi();setTimeout(mount,350);});
-  window.addEventListener('focus',mount);
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')mount();});
-  setTimeout(mount,2600);
-  setInterval(mount,10000);
+  window.NexlabAdminHomologation=Object.freeze({version:VERSION,openProfilePreview,openPermissionKanban,openSecurityExport,openReleaseReview,openCoordinatorValidation:()=>window.NexlabCoordinatorValidation?.openValidation?.(),openPromotion:()=>window.NexlabCoordinatorValidation?.openPromotion?.()});
 })();

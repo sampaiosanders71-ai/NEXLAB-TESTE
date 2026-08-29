@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: ProjectsModule. */
-export { ProjectsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-integridade-pos-auditoria";
+export { ProjectsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-marketing-update-sem-ambiente-teste";

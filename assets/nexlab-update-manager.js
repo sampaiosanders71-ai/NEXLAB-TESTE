@@ -1,14 +1,14 @@
 (function(){
   'use strict';
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-integridade-pos-auditoria',generatedAt:'2026-08-28T01:20:37Z',cacheName:'nexlab-beta-0-26-82-integridade-pos-auditoria'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-marketing-update-sem-ambiente-teste',generatedAt:'2026-08-29T01:34:38Z',cacheName:'nexlab-beta-0-26-82-marketing-update-sem-ambiente-teste'});
   const CURRENT_VERSION = BUILD_IDENTITY.version;
   const CURRENT_RELEASE = BUILD_IDENTITY.release;
   const CURRENT_REVISION = BUILD_IDENTITY.revision;
   const CURRENT_GENERATED_AT = BUILD_IDENTITY.generatedAt;
   const RELEASE_URL = './release.json';
   const WORKER_URL = './nexlab-sw.js';
-  const CHECK_INTERVAL_MS = 15 * 60 * 1000;
+  const CHECK_INTERVAL_MS = 60 * 1000;
   const MESSAGE_TIMEOUT_MS = 3000;
   const INSTALL_TIMEOUT_MS = 18000;
   const DEFERRED_KEY = 'nexlab:update-deferred-revision';
@@ -29,6 +29,7 @@
   let controllerChangeHandler = null;
   let workerMessageHandler = null;
   let visibilityHandler = null;
+  let focusHandler = null;
   let onlineHandler = null;
   let pageShowHandler = null;
 
@@ -75,6 +76,15 @@
     return 0;
   }
   function isNewer(identity){return compareIdentity(identity,CURRENT_IDENTITY)>0;}
+  function isPublishedUpdate(identity){
+    const normalized=identityFrom(identity);if(!normalized)return false;
+    if(normalized.revision&&normalized.revision!==CURRENT_REVISION){
+      const remoteTime=Date.parse(normalized.generatedAt||''),currentTime=Date.parse(CURRENT_GENERATED_AT||'');
+      if(Number.isFinite(remoteTime)&&Number.isFinite(currentTime))return remoteTime>=currentTime;
+      return true;
+    }
+    return isNewer(normalized);
+  }
   function dispatch(name,detail){try{window.dispatchEvent(new CustomEvent(name,{detail}));}catch{}}
   function deferredRevision(){try{return sessionStorage.getItem(DEFERRED_KEY)||'';}catch{return '';}}
   function clearDeferred(){try{sessionStorage.removeItem(DEFERRED_KEY);}catch{}}
@@ -112,7 +122,7 @@
   }
   function observeRegistration(registration){
     if(!registration||observedRegistration===registration)return;detachRegistrationObserver();observedRegistration=registration;
-    registrationUpdateFoundHandler=()=>{const installing=registration.installing;if(!installing)return;state.status='installing';dispatch('nexlab:update-state',{...state});installing.addEventListener('statechange',async()=>{if(installing.state==='installed'&&navigator.serviceWorker.controller){const identity=await workerIdentity(registration.waiting||installing);if(isNewer(identity)){state.workerVersion=identity?.version||null;state.workerRelease=identity?.release||null;state.workerRevision=identity?.revision||null;publishAvailable(identity);}}},{once:false});};
+    registrationUpdateFoundHandler=()=>{const installing=registration.installing;if(!installing)return;state.status='installing';dispatch('nexlab:update-state',{...state});installing.addEventListener('statechange',async()=>{if(installing.state==='installed'&&navigator.serviceWorker.controller){const identity=await workerIdentity(registration.waiting||installing);if(isPublishedUpdate(identity)){state.workerVersion=identity?.version||null;state.workerRelease=identity?.release||null;state.workerRevision=identity?.revision||null;publishAvailable(identity);}}},{once:false});};
     registration.addEventListener('updatefound',registrationUpdateFoundHandler);
   }
   async function getRegistration(){
@@ -133,14 +143,14 @@
     const url=new URL(RELEASE_URL,location.href);url.searchParams.set('nexlabUpdateCheck',String(Date.now()));const response=await fetch(url.toString(),{method:'GET',cache:'no-store',credentials:'same-origin',headers:{Accept:'application/json'}});if(!response.ok)throw new Error(`Falha ao consultar release.json (${response.status}).`);return identityFrom(await response.json())||{};
   }
   function publishAvailable(identity,options={}){
-    const normalized=identityFrom(identity)||{};if(!isNewer(normalized))return false;
+    const normalized=identityFrom(identity)||{};if(!isPublishedUpdate(normalized))return false;
     state.remoteVersion=normalized.version||state.remoteVersion;state.remoteRelease=normalized.release||state.remoteRelease;state.remoteRevision=normalized.revision||state.remoteRevision;state.remoteGeneratedAt=normalized.generatedAt||state.remoteGeneratedAt;state.updateAvailable=true;
     if(!options.force&&normalized.revision&&deferredRevision()===normalized.revision){state.status='deferred';hideBanner();dispatch('nexlab:update-deferred',{...state});return true;}
     state.status='available';showBanner(normalized);dispatch('nexlab:update-available',{...state});return true;
   }
 
   async function reloadForIdentity(identity,reason){
-    const normalized=identityFrom(identity);if(!normalized||!isNewer(normalized)||reloaded)return false;const now=Date.now(),reloadKey=normalized.revision||normalized.generatedAt||'unknown';
+    const normalized=identityFrom(identity);if(!normalized||!isPublishedUpdate(normalized)||reloaded)return false;const now=Date.now(),reloadKey=normalized.revision||normalized.generatedAt||'unknown';
     try{const previous=JSON.parse(sessionStorage.getItem('nexlab:update-reload-guard')||'null');if(previous?.key===reloadKey&&now-Number(previous.at||0)<10000){state.status='error';state.error='Atualização interrompida para evitar recarregamento repetitivo.';dispatch('nexlab:update-reload-blocked',{...state,reason,identity:normalized});return false;}sessionStorage.setItem('nexlab:update-reload-guard',JSON.stringify({key:reloadKey,at:now}));sessionStorage.setItem('nexlab:last-activated-revision',reloadKey);}catch{}
     clearDeferred();reloaded=true;state.status='reloading';state.activeRevision=normalized.revision||null;dispatch('nexlab:update-reloading',{...state,reason});
     const target=new URL(location.href);target.searchParams.set('nexlabActivated',reloadKey);target.searchParams.set('nexlabReload',String(now));window.setTimeout(()=>location.replace(target.toString()),40);return true;
@@ -153,7 +163,7 @@
       let releaseIdentity=null;try{releaseIdentity=await fetchRelease();}catch(error){if(!registration)throw error;}
       const activeIdentity=await workerIdentity(registration?.active||navigator.serviceWorker.controller);state.activeRevision=activeIdentity?.revision||null;
       const candidateWorker=registration?.waiting||registration?.installing||null;const candidateIdentity=await workerIdentity(candidateWorker);
-      const waitingNewer=Boolean(registration?.waiting&&isNewer(candidateIdentity)),installingNewer=Boolean(registration?.installing&&isNewer(candidateIdentity)),activeNewer=isNewer(activeIdentity),releaseNewer=isNewer(releaseIdentity);
+      const waitingNewer=Boolean(registration?.waiting&&isPublishedUpdate(candidateIdentity)),installingNewer=Boolean(registration?.installing&&isPublishedUpdate(candidateIdentity)),activeNewer=isPublishedUpdate(activeIdentity),releaseNewer=isPublishedUpdate(releaseIdentity);
       if(activeNewer){
         const reloading=await reloadForIdentity(activeIdentity,'active-worker-ahead-of-page');
         if(reloading)return{ok:true,...state,action:'reload-active-ahead'};
@@ -174,14 +184,14 @@
     if(!worker)return false;return withTimeout(new Promise((resolve,reject)=>{const channel=new MessageChannel();channel.port1.onmessage=(event)=>{if(event.data?.ok)resolve(true);else reject(new Error(event.data?.error||'O Service Worker recusou a ativação.'));};worker.postMessage({type:'NEXLAB_SKIP_WAITING',expectedVersion:state.workerVersion||state.remoteVersion||null,expectedRevision:state.workerRevision||state.remoteRevision||null},[channel.port2]);}),MESSAGE_TIMEOUT_MS,'O Service Worker não confirmou a ativação.');
   }
   async function waitForControllerChange(expectedIdentity,milliseconds=12000){
-    const expected=identityFrom(expectedIdentity);return new Promise((resolve,reject)=>{let settled=false,timer=null;const cleanup=()=>{navigator.serviceWorker.removeEventListener('controllerchange',onControllerChange);if(timer)window.clearTimeout(timer);};const finish=(value,error)=>{if(settled)return;settled=true;cleanup();if(error)reject(error);else resolve(value);};const onControllerChange=async()=>{const identity=await workerIdentity(navigator.serviceWorker.controller);if(!identity)return;if(expected?.revision&&identity.revision!==expected.revision)return;if(!isNewer(identity))return;finish(identity);};timer=window.setTimeout(async()=>{const registration=await navigator.serviceWorker.getRegistration('./').catch(()=>null);const identity=await workerIdentity(registration?.active||navigator.serviceWorker.controller);if(identity&&isNewer(identity)&&(!expected?.revision||identity.revision===expected.revision))return finish(identity);finish(null,new Error('A ativação terminou sem transferir o controle para a nova revisão.'));},milliseconds);navigator.serviceWorker.addEventListener('controllerchange',onControllerChange);});
+    const expected=identityFrom(expectedIdentity);return new Promise((resolve,reject)=>{let settled=false,timer=null;const cleanup=()=>{navigator.serviceWorker.removeEventListener('controllerchange',onControllerChange);if(timer)window.clearTimeout(timer);};const finish=(value,error)=>{if(settled)return;settled=true;cleanup();if(error)reject(error);else resolve(value);};const onControllerChange=async()=>{const identity=await workerIdentity(navigator.serviceWorker.controller);if(!identity)return;if(expected?.revision&&identity.revision!==expected.revision)return;if(!isPublishedUpdate(identity))return;finish(identity);};timer=window.setTimeout(async()=>{const registration=await navigator.serviceWorker.getRegistration('./').catch(()=>null);const identity=await workerIdentity(registration?.active||navigator.serviceWorker.controller);if(identity&&isPublishedUpdate(identity)&&(!expected?.revision||identity.revision===expected.revision))return finish(identity);finish(null,new Error('A ativação terminou sem transferir o controle para a nova revisão.'));},milliseconds);navigator.serviceWorker.addEventListener('controllerchange',onControllerChange);});
   }
   async function applyUpdate(){
     if(applying)return{ok:false,reason:'already_applying'};applying=true;state.status='applying';state.error=null;clearDeferred();setBannerProgress('Instalando e validando a nova revisão. Esta página será recarregada quando a ativação terminar.');dispatch('nexlab:update-state',{...state});
     try{
       const registration=await getRegistration();if(!registration)throw new Error('Service Worker indisponível neste navegador.');if(!registration.waiting)await registration.update();
       const waitingWorker=registration.waiting||await waitForWaitingWorker(registration);const identity=await workerIdentity(waitingWorker);
-      if(!waitingWorker||!isNewer(identity)){const activeIdentity=await workerIdentity(registration.active||navigator.serviceWorker.controller);if(activeIdentity&&isNewer(activeIdentity)){const reloading=await reloadForIdentity(activeIdentity,'manual-confirmation-active-worker');if(reloading)return{ok:true,action:'reload-active',identity:activeIdentity};}throw new Error('A nova revisão foi anunciada, mas os arquivos ainda não chegaram completos ao servidor. Tente novamente em instantes.');}
+      if(!waitingWorker||!isPublishedUpdate(identity)){const activeIdentity=await workerIdentity(registration.active||navigator.serviceWorker.controller);if(activeIdentity&&isPublishedUpdate(activeIdentity)){const reloading=await reloadForIdentity(activeIdentity,'manual-confirmation-active-worker');if(reloading)return{ok:true,action:'reload-active',identity:activeIdentity};}throw new Error('A nova revisão foi anunciada, mas os arquivos ainda não chegaram completos ao servidor. Tente novamente em instantes.');}
       state.workerVersion=identity.version;state.workerRelease=identity.release;state.workerRevision=identity.revision;state.status='validating';setBannerProgress('Validando todos os módulos da nova revisão...');dispatch('nexlab:update-state',{...state});
       const graphValidation=await validateWaitingGraph(waitingWorker);
       if(!graphValidation?.ok)throw new Error('A nova revisão não passou na validação completa dos módulos.');
@@ -192,19 +202,19 @@
 
   function start(){
     if(started)return;started=true;if(!('serviceWorker'in navigator)||location.protocol==='file:'){state.status='unsupported';return;}
-    controllerChangeHandler=async()=>{const identity=await workerIdentity(navigator.serviceWorker.controller);state.activeRevision=identity?.revision||state.activeRevision;if(!applying&&identity?.revision&&identity.revision!==CURRENT_REVISION&&isNewer(identity)){await reloadForIdentity(identity,'external-controller-change');return;}dispatch('nexlab:update-controller-changed',{...state,identity});};
-    workerMessageHandler=async(event)=>{if(event.data?.type!=='NEXLAB_SW_ACTIVATED')return;state.status=applying?'activating':'available';if(!applying&&event.data?.revision&&event.data.revision!==CURRENT_REVISION&&isNewer(event.data)){await reloadForIdentity(event.data,'external-worker-activation');return;}dispatch('nexlab:update-state',{...state,worker:event.data});};
-    visibilityHandler=()=>{if(document.visibilityState==='visible')void check();};onlineHandler=()=>{void check();};
-    pageShowHandler=async(event)=>{if(!event.persisted)return;const registration=await navigator.serviceWorker.getRegistration('./').catch(()=>null);const identity=await workerIdentity(registration?.active||navigator.serviceWorker.controller);if(identity?.revision&&identity.revision!==CURRENT_REVISION&&isNewer(identity)){await reloadForIdentity(identity,'bfcache-revision-mismatch');return;}void check({forceWorkerUpdate:false});};
-    navigator.serviceWorker.addEventListener('controllerchange',controllerChangeHandler);navigator.serviceWorker.addEventListener('message',workerMessageHandler);document.addEventListener('visibilitychange',visibilityHandler);window.addEventListener('online',onlineHandler,{passive:true});window.addEventListener('pageshow',pageShowHandler);
+    controllerChangeHandler=async()=>{const identity=await workerIdentity(navigator.serviceWorker.controller);state.activeRevision=identity?.revision||state.activeRevision;if(!applying&&identity?.revision&&identity.revision!==CURRENT_REVISION&&isPublishedUpdate(identity)){await reloadForIdentity(identity,'external-controller-change');return;}dispatch('nexlab:update-controller-changed',{...state,identity});};
+    workerMessageHandler=async(event)=>{if(event.data?.type!=='NEXLAB_SW_ACTIVATED')return;state.status=applying?'activating':'available';if(!applying&&event.data?.revision&&event.data.revision!==CURRENT_REVISION&&isPublishedUpdate(event.data)){await reloadForIdentity(event.data,'external-worker-activation');return;}dispatch('nexlab:update-state',{...state,worker:event.data});};
+    visibilityHandler=()=>{if(document.visibilityState==='visible')void check();};focusHandler=()=>{void check({forceWorkerUpdate:true});};onlineHandler=()=>{void check();};
+    pageShowHandler=async(event)=>{if(!event.persisted)return;const registration=await navigator.serviceWorker.getRegistration('./').catch(()=>null);const identity=await workerIdentity(registration?.active||navigator.serviceWorker.controller);if(identity?.revision&&identity.revision!==CURRENT_REVISION&&isPublishedUpdate(identity)){await reloadForIdentity(identity,'bfcache-revision-mismatch');return;}void check({forceWorkerUpdate:false});};
+    navigator.serviceWorker.addEventListener('controllerchange',controllerChangeHandler);navigator.serviceWorker.addEventListener('message',workerMessageHandler);document.addEventListener('visibilitychange',visibilityHandler);window.addEventListener('focus',focusHandler,{passive:true});window.addEventListener('online',onlineHandler,{passive:true});window.addEventListener('pageshow',pageShowHandler);
     initialTimeoutId=window.setTimeout(()=>{initialTimeoutId=null;void check();},1200);intervalId=window.setInterval(()=>void check(),CHECK_INTERVAL_MS);
   }
   function stop(){
     if(initialTimeoutId)window.clearTimeout(initialTimeoutId);if(intervalId)window.clearInterval(intervalId);initialTimeoutId=null;intervalId=null;
-    if(controllerChangeHandler)navigator.serviceWorker?.removeEventListener('controllerchange',controllerChangeHandler);if(workerMessageHandler)navigator.serviceWorker?.removeEventListener('message',workerMessageHandler);if(visibilityHandler)document.removeEventListener('visibilitychange',visibilityHandler);if(onlineHandler)window.removeEventListener('online',onlineHandler);if(pageShowHandler)window.removeEventListener('pageshow',pageShowHandler);
-    controllerChangeHandler=null;workerMessageHandler=null;visibilityHandler=null;onlineHandler=null;pageShowHandler=null;detachRegistrationObserver();started=false;
+    if(controllerChangeHandler)navigator.serviceWorker?.removeEventListener('controllerchange',controllerChangeHandler);if(workerMessageHandler)navigator.serviceWorker?.removeEventListener('message',workerMessageHandler);if(visibilityHandler)document.removeEventListener('visibilitychange',visibilityHandler);if(focusHandler)window.removeEventListener('focus',focusHandler);if(onlineHandler)window.removeEventListener('online',onlineHandler);if(pageShowHandler)window.removeEventListener('pageshow',pageShowHandler);
+    controllerChangeHandler=null;workerMessageHandler=null;visibilityHandler=null;focusHandler=null;onlineHandler=null;pageShowHandler=null;detachRegistrationObserver();started=false;
   }
 
-  window.__NEXLAB_UPDATE_MANAGER__={version:CURRENT_VERSION,release:CURRENT_RELEASE,revision:CURRENT_REVISION,state,compareVersions:compareNumbers,compareIdentity,check,applyUpdate,start,stop};
+  window.__NEXLAB_UPDATE_MANAGER__={version:CURRENT_VERSION,release:CURRENT_RELEASE,revision:CURRENT_REVISION,state,compareVersions:compareNumbers,compareIdentity,isPublishedUpdate,check,applyUpdate,start,stop};
   if(document.readyState==='complete')start();else window.addEventListener('load',start,{once:true});
 })();

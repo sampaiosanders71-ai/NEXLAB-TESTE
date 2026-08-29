@@ -1709,25 +1709,6 @@ textarea{
 }
 
 
-/* NEXLAB v26.7 — suporte de homologação e testes */
-html[data-nexlab-test='true']::before{
-  content:'AMBIENTE DE TESTE';
-  position:fixed;
-  top:0;
-  left:50%;
-  z-index:2147483500;
-  transform:translateX(-50%);
-  padding:.32rem .72rem;
-  border-radius:0 0 .72rem .72rem;
-  background:#7c3aed;
-  color:#fff;
-  font-size:.62rem;
-  font-weight:950;
-  letter-spacing:.08em;
-  pointer-events:none;
-}
-
-
 /* NEXLAB v26.7 — monitoramento e prontidão final */
 .nexlab-v267-production-panel{
   margin-top:16px;
