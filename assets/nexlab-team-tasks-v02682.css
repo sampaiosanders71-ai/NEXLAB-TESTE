@@ -1,0 +1,68 @@
+/* NEXLAB Beta 0.26.82 — Etapa 5.6: Tarefas integradas às Equipes + Pendências */
+.team-details-v2680 .team-details-v2680__content.is-team-tasks-v056{display:flex;padding:0;overflow:hidden;background:#f8fafc}
+.team-details-v2680 .nexlab-team-workspace-v057>.nexlab-team-tasks-v056{width:100%;height:100%;flex:1 1 auto}
+.team-details-v2680 .nexlab-team-tasks-v056{display:flex;min-width:0;min-height:0;width:100%;flex:1;flex-direction:column;background:#f8fafc;overflow:hidden}
+.team-details-v2680 .nexlab-team-tasks-v056[hidden]{display:none!important}
+.team-details-v2680 .nexlab-team-tasks-head-v056{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem 1rem;border-bottom:1px solid #e2e8f0;background:#fff}
+.team-details-v2680 .nexlab-team-tasks-head-v056 h3,.team-details-v2680 .nexlab-team-tasks-head-v056 p{margin:0}
+.team-details-v2680 .nexlab-team-tasks-head-v056 h3{color:#0f2747;font-size:.78rem;font-weight:950}
+.team-details-v2680 .nexlab-team-tasks-head-v056 p{margin-top:.15rem;color:#94a3b8;font-size:.59rem;font-weight:650}
+.team-details-v2680 .nexlab-team-tasks-head-actions-v056{display:flex;align-items:center;gap:.4rem}
+.team-details-v2680 .nexlab-team-task-refresh-v056,.team-details-v2680 .nexlab-team-task-create-v056{min-height:2rem;padding:0 .7rem;border-radius:.65rem;font-size:.59rem;font-weight:900;cursor:pointer}
+.team-details-v2680 .nexlab-team-task-refresh-v056{border:1px solid #dbe3ee;background:#fff;color:#475569}
+.team-details-v2680 .nexlab-team-task-create-v056{border:1px solid #f97316;background:#f97316;color:#fff}
+.team-details-v2680 .nexlab-team-task-refresh-v056:hover{background:#f8fafc;color:#0f2747}
+.team-details-v2680 .nexlab-team-task-create-v056:hover{background:#ea580c}
+.team-details-v2680 .nexlab-team-task-refresh-v056:disabled,.team-details-v2680 .nexlab-team-task-create-v056:disabled{opacity:.55;cursor:wait}
+.team-details-v2680 .nexlab-team-task-message-v056{margin:.55rem .8rem 0;padding:.6rem .7rem;border:1px solid #dbeafe;border-radius:.7rem;background:#eff6ff;color:#1e40af;font-size:.61rem;font-weight:750}
+.team-details-v2680 .nexlab-team-task-message-v056.is-ok{border-color:#bbf7d0;background:#f0fdf4;color:#166534}
+.team-details-v2680 .nexlab-team-task-message-v056.is-err{border-color:#fecdd3;background:#fff1f2;color:#be123c}
+.team-details-v2680 .nexlab-team-task-form-slot-v056{flex:0 0 auto;padding:.7rem .85rem 0}
+.team-details-v2680 .nexlab-team-task-form-v056{display:grid;gap:.65rem;padding:.8rem;border:1px solid #fed7aa;border-radius:.9rem;background:#fff;box-shadow:0 4px 16px rgba(15,23,42,.035)}
+.team-details-v2680 .nexlab-team-task-form-head-v056{display:grid;gap:.1rem}
+.team-details-v2680 .nexlab-team-task-form-head-v056 strong{color:#0f2747;font-size:.7rem;font-weight:950}
+.team-details-v2680 .nexlab-team-task-form-head-v056 span{color:#94a3b8;font-size:.55rem;font-weight:650}
+.team-details-v2680 .nexlab-team-task-form-grid-v056{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1.4fr) minmax(8rem,.8fr) minmax(7rem,.7fr);gap:.55rem}
+.team-details-v2680 .nexlab-team-task-field-v056{display:grid;gap:.28rem;min-width:0;color:#64748b;font-size:.53rem;font-weight:900}
+.team-details-v2680 .nexlab-team-task-field-v056>span{text-transform:uppercase;letter-spacing:.045em}
+.team-details-v2680 .nexlab-team-task-field-v056 input,.team-details-v2680 .nexlab-team-task-field-v056 select,.team-details-v2680 .nexlab-team-task-field-v056 textarea{box-sizing:border-box;width:100%;border:1px solid #cbd5e1;border-radius:.7rem;background:#fff;padding:.58rem .65rem;color:#0f2747;font:650 .64rem/1.4 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;outline:none}
+.team-details-v2680 .nexlab-team-task-field-v056 input,.team-details-v2680 .nexlab-team-task-field-v056 select{min-height:2.35rem}
+.team-details-v2680 .nexlab-team-task-field-v056 textarea{resize:vertical;min-height:4.4rem}
+.team-details-v2680 .nexlab-team-task-field-v056 input:focus,.team-details-v2680 .nexlab-team-task-field-v056 select:focus,.team-details-v2680 .nexlab-team-task-field-v056 textarea:focus{border-color:#fb923c;box-shadow:0 0 0 3px rgba(249,115,22,.1)}
+.team-details-v2680 .nexlab-team-task-form-actions-v056{display:flex;justify-content:flex-end;gap:.4rem}
+.team-details-v2680 .nexlab-team-task-form-actions-v056 button{min-height:2.1rem;padding:0 .75rem;border:1px solid #dbe3ee;border-radius:.65rem;background:#fff;color:#475569;font-size:.58rem;font-weight:900;cursor:pointer}
+.team-details-v2680 .nexlab-team-task-form-actions-v056 button.is-primary{border-color:#f97316;background:#f97316;color:#fff}
+.team-details-v2680 .nexlab-team-task-list-v056{display:grid;align-content:start;min-height:12rem;flex:1;gap:.55rem;overflow-y:auto;padding:.75rem .85rem 1rem;overscroll-behavior:contain}
+.team-details-v2680 .nexlab-team-task-list-v056.is-loading{opacity:.62}
+.team-details-v2680 .nexlab-team-task-card-v056{display:grid;gap:.48rem;padding:.75rem .8rem;border:1px solid #e2e8f0;border-radius:.85rem;background:#fff;box-shadow:0 3px 12px rgba(15,23,42,.035);transition:outline-color .2s ease,transform .2s ease}
+.team-details-v2680 .nexlab-team-task-card-v056.is-overdue{border-color:#fecaca;background:#fffafa}
+.team-details-v2680 .nexlab-team-task-card-v056.is-done{opacity:.68}
+.team-details-v2680 .nexlab-team-task-card-v056.is-target{outline:3px solid rgba(249,115,22,.24);outline-offset:2px}
+.team-details-v2680 .nexlab-team-task-card-top-v056{display:flex;align-items:flex-start;justify-content:space-between;gap:.7rem}
+.team-details-v2680 .nexlab-team-task-card-top-v056 h4{margin:0;color:#0f2747;font-size:.7rem;font-weight:950;line-height:1.35}
+.team-details-v2680 .nexlab-team-task-badges-v056{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.25rem}
+.team-details-v2680 .nexlab-team-task-badges-v056 span{padding:.2rem .4rem;border-radius:999px;background:#f1f5f9;color:#475569;font-size:.48rem;font-weight:900;white-space:nowrap}
+.team-details-v2680 .nexlab-team-task-badges-v056 .is-priority-alta{background:#fff7ed;color:#c2410c}
+.team-details-v2680 .nexlab-team-task-badges-v056 .is-priority-urgente{background:#fff1f2;color:#be123c}
+.team-details-v2680 .nexlab-team-task-badges-v056 .is-status-concluida{background:#f0fdf4;color:#166534}
+.team-details-v2680 .nexlab-team-task-badges-v056 .is-status-em_andamento{background:#eff6ff;color:#1d4ed8}
+.team-details-v2680 .nexlab-team-task-description-v056{margin:0;color:#64748b;font-size:.61rem;font-weight:600;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.team-details-v2680 .nexlab-team-task-meta-v056{display:flex;flex-wrap:wrap;gap:.3rem .8rem;color:#64748b;font-size:.53rem;font-weight:750}
+.team-details-v2680 .nexlab-team-task-actions-v056{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.35rem;padding-top:.15rem}
+.team-details-v2680 .nexlab-team-task-actions-v056 button{min-height:1.95rem;padding:0 .65rem;border:1px solid #dbe3ee;border-radius:.6rem;background:#fff;color:#475569;font-size:.55rem;font-weight:900;cursor:pointer}
+.team-details-v2680 .nexlab-team-task-actions-v056 button.is-complete{border-color:#bbf7d0;background:#f0fdf4;color:#166534}
+.team-details-v2680 .nexlab-team-task-actions-v056 button.is-danger{border-color:#fecdd3;background:#fff1f2;color:#be123c}
+.team-details-v2680 .nexlab-team-task-empty-v056{display:grid;place-content:center;justify-items:center;gap:.3rem;min-height:14rem;padding:2rem;text-align:center;color:#64748b}
+.team-details-v2680 .nexlab-team-task-empty-v056 strong{color:#334155;font-size:.72rem}
+.team-details-v2680 .nexlab-team-task-empty-v056 p{margin:0;max-width:25rem;font-size:.61rem;line-height:1.5}
+@media(max-width:850px){.team-details-v2680 .nexlab-team-task-form-grid-v056{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){
+  .team-details-v2680 .nexlab-team-tasks-head-v056{padding:.68rem .72rem}
+  .team-details-v2680 .nexlab-team-tasks-head-v056 p{display:none}
+  .team-details-v2680 .nexlab-team-task-form-slot-v056{padding:.55rem .6rem 0}
+  .team-details-v2680 .nexlab-team-task-form-grid-v056{grid-template-columns:1fr}
+  .team-details-v2680 .nexlab-team-task-list-v056{padding:.6rem .6rem calc(.8rem + env(safe-area-inset-bottom))}
+  .team-details-v2680 .nexlab-team-task-card-top-v056{display:grid}
+  .team-details-v2680 .nexlab-team-task-badges-v056{justify-content:flex-start}
+}
+@media(prefers-reduced-motion:reduce){.team-details-v2680 .nexlab-team-task-card-v056{transition:none}}

@@ -1,0 +1,104 @@
+/* NEXLAB Beta 0.26.82 — Etapa 5.5: Conversa das Equipes */
+.team-details-v2680.has-nexlab-team-chat-v055{min-height:min(760px,92vh)}
+.team-details-v2680.has-nexlab-team-chat-v055 .team-details-v2680__content{flex:1 1 auto;min-height:0;width:100%}
+.team-details-v2680 .nexlab-team-workspace-v057{display:flex;width:100%;min-width:0;min-height:0;flex:1 1 auto;overflow:hidden;background:#f8fafc}
+.team-details-v2680 .nexlab-team-workspace-v057[hidden],
+.team-details-v2680 .team-details-v2680__content[hidden],
+.team-details-v2680 .team-details-v2680__footer[hidden]{display:none!important}
+.team-details-v2680.is-nexlab-team-workspace-v057{min-height:min(760px,92vh)}
+.team-details-v2680.is-nexlab-team-workspace-v057 .nexlab-team-workspace-v057{height:100%}
+.team-details-v2680 .nexlab-team-tabs-v055{display:flex;flex:0 0 auto;gap:.35rem;padding:.55rem 1.1rem;border-bottom:1px solid #e2e8f0;background:#fff;overflow-x:auto;scrollbar-width:none}
+.team-details-v2680 .nexlab-team-tabs-v055::-webkit-scrollbar{display:none}
+.team-details-v2680 .nexlab-team-tab-v055{min-height:2.25rem;padding:0 .8rem;border:1px solid transparent;border-radius:.72rem;background:transparent;color:#64748b;font-size:.64rem;font-weight:900;white-space:nowrap;cursor:pointer}
+.team-details-v2680 .nexlab-team-tab-v055:hover{background:#f8fafc;color:#0f2747}
+.team-details-v2680 .nexlab-team-tab-v055.is-active{border-color:#fed7aa;background:#fff7ed;color:#c2410c}
+.team-details-v2680 .nexlab-team-tab-v055:disabled{opacity:.45;cursor:not-allowed}
+
+.team-details-v2680 .team-details-v2680__content.is-team-conversation-v055{display:flex;padding:0;overflow:hidden;background:#f8fafc}
+.team-details-v2680 .nexlab-team-chat-v055{display:flex;min-width:0;min-height:0;width:100%;flex:1;flex-direction:column;background:#f8fafc}
+.team-details-v2680 .nexlab-team-chat-v055[hidden]{display:none!important}
+.team-details-v2680 .nexlab-team-chat-head-v055{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem 1rem;border-bottom:1px solid #e2e8f0;background:#fff}
+.team-details-v2680 .nexlab-team-chat-head-v055 h3,.team-details-v2680 .nexlab-team-chat-head-v055 p{margin:0}
+.team-details-v2680 .nexlab-team-chat-head-v055 h3{color:#0f2747;font-size:.78rem;font-weight:950}
+.team-details-v2680 .nexlab-team-chat-head-v055 p{margin-top:.15rem;color:#94a3b8;font-size:.59rem;font-weight:650}
+.team-details-v2680 .nexlab-team-chat-refresh-v055,.team-details-v2680 .nexlab-team-chat-older-v055{min-height:2rem;padding:0 .65rem;border:1px solid #dbe3ee;border-radius:.65rem;background:#fff;color:#475569;font-size:.59rem;font-weight:900;cursor:pointer}
+.team-details-v2680 .nexlab-team-chat-refresh-v055:hover,.team-details-v2680 .nexlab-team-chat-older-v055:hover{background:#f8fafc;color:#0f2747}
+.team-details-v2680 .nexlab-team-chat-refresh-v055:disabled,.team-details-v2680 .nexlab-team-chat-older-v055:disabled{opacity:.55;cursor:wait}
+.team-details-v2680 .nexlab-team-chat-older-v055{align-self:center;margin:.6rem 0 .1rem}
+.team-details-v2680 .nexlab-team-chat-message-v055{margin:.55rem .8rem 0;padding:.6rem .7rem;border:1px solid #dbeafe;border-radius:.7rem;background:#eff6ff;color:#1e40af;font-size:.61rem;font-weight:750}
+.team-details-v2680 .nexlab-team-chat-message-v055.is-ok{border-color:#bbf7d0;background:#f0fdf4;color:#166534}
+.team-details-v2680 .nexlab-team-chat-message-v055.is-err{border-color:#fecdd3;background:#fff1f2;color:#be123c}
+
+.team-details-v2680 .nexlab-team-chat-list{min-height:0}
+.team-details-v2680 .nexlab-team-chat-list-v055{display:flex;min-height:12rem;flex:1;flex-direction:column;gap:.28rem;overflow-y:auto;padding:.75rem 1rem 1rem;overscroll-behavior:contain;scroll-behavior:smooth}
+.team-details-v2680 .nexlab-team-chat-list-v055.is-loading{opacity:.62}
+.team-details-v2680 .nexlab-team-chat-row-v055{display:flex;width:100%;align-items:flex-end;gap:.42rem}
+.team-details-v2680 .nexlab-team-chat-row-v055.is-own{justify-content:flex-end}
+.team-details-v2680 .nexlab-team-chat-row-v055.is-other{justify-content:flex-start}
+.team-details-v2680 .nexlab-team-chat-row-v055.is-target .nexlab-team-chat-bubble-v055{outline:3px solid rgba(249,115,22,.22);outline-offset:2px}
+.team-details-v2680 .nexlab-team-chat-avatar-v055{display:flex;width:1.9rem;height:1.9rem;flex:0 0 auto;align-items:center;justify-content:center;border-radius:.65rem;background:#e0e7ff;color:#1e3a8a;font-size:.58rem;font-weight:950}
+.team-details-v2680 .nexlab-team-chat-bubble-wrap-v055{display:grid;max-width:min(76%,34rem);gap:.16rem}
+.team-details-v2680 .nexlab-team-chat-row-v055.is-own .nexlab-team-chat-bubble-wrap-v055{justify-items:end}
+.team-details-v2680 .nexlab-team-chat-author-v055{padding-left:.35rem;color:#64748b;font-size:.55rem;font-weight:850}
+.team-details-v2680 .nexlab-team-chat-bubble-v055{display:grid;gap:.25rem;min-width:4rem;padding:.58rem .7rem .36rem;border:1px solid #e2e8f0;border-radius:1rem 1rem 1rem .3rem;background:#fff;color:#334155;box-shadow:0 3px 10px rgba(15,23,42,.035)}
+.team-details-v2680 .nexlab-team-chat-row-v055.is-own .nexlab-team-chat-bubble-v055{border-color:#0f2747;border-radius:1rem 1rem .3rem 1rem;background:#0f2747;color:#fff}
+.team-details-v2680 .nexlab-team-chat-text-v055{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.7rem;font-weight:650;line-height:1.5}
+.team-details-v2680 .nexlab-team-inline-mention-v055{font-weight:950;color:#c2410c;background:#fff7ed;border-radius:.3rem;padding:0 .12rem}
+.team-details-v2680 .nexlab-team-chat-row-v055.is-own .nexlab-team-inline-mention-v055{color:#ffedd5;background:rgba(255,255,255,.11)}
+.team-details-v2680 .nexlab-team-chat-time-v055{justify-self:end;color:#94a3b8;font-size:.5rem;font-weight:750}
+.team-details-v2680 .nexlab-team-chat-row-v055.is-own .nexlab-team-chat-time-v055{color:#cbd5e1}
+.team-details-v2680 .nexlab-team-chat-mentions-v055{display:flex;flex-wrap:wrap;gap:.2rem}
+.team-details-v2680 .nexlab-team-chat-mentions-v055 span{padding:.12rem .3rem;border-radius:999px;background:#fff7ed;color:#c2410c;font-size:.48rem;font-weight:850}
+.team-details-v2680 .nexlab-team-chat-row-v055.is-own .nexlab-team-chat-mentions-v055 span{background:rgba(255,255,255,.12);color:#ffedd5}
+.team-details-v2680 .nexlab-team-chat-empty-v055{display:grid;flex:1;place-content:center;justify-items:center;gap:.32rem;min-height:16rem;padding:2rem;text-align:center;color:#64748b}
+.team-details-v2680 .nexlab-team-chat-empty-v055 strong{color:#334155;font-size:.76rem}
+.team-details-v2680 .nexlab-team-chat-empty-v055 p{margin:0;max-width:24rem;font-size:.63rem;line-height:1.5}
+.team-details-v2680 .nexlab-team-chat-empty-icon-v055{font-size:1.55rem}
+
+.team-details-v2680 .nexlab-team-chat-composer-slot-v055{flex:0 0 auto;padding:.65rem .85rem calc(.65rem + env(safe-area-inset-bottom));border-top:1px solid #e2e8f0;background:#fff;box-shadow:0 -6px 18px rgba(15,23,42,.035)}
+.team-details-v2680 .nexlab-team-composer-v055{display:grid;gap:.38rem}
+.team-details-v2680 .nexlab-team-composer-row-v055{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:end;gap:.42rem}
+.team-details-v2680 .nexlab-team-composer-tools-v055{position:relative}
+.team-details-v2680 .nexlab-team-composer-plus-v055,.team-details-v2680 .nexlab-team-composer-send-v055{height:2.55rem;border:0;border-radius:.8rem;font-size:.66rem;font-weight:950;cursor:pointer}
+.team-details-v2680 .nexlab-team-composer-plus-v055{width:2.55rem;border:1px solid #dbe3ee;background:#f8fafc;color:#334155;font-size:1.1rem}
+.team-details-v2680 .nexlab-team-composer-send-v055{padding:0 .88rem;background:#f97316;color:#fff}
+.team-details-v2680 .nexlab-team-composer-plus-v055:disabled,.team-details-v2680 .nexlab-team-composer-send-v055:disabled{opacity:.55;cursor:wait}
+.team-details-v2680 .nexlab-team-composer-menu-v055{position:absolute;z-index:45;left:0;bottom:calc(100% + .35rem);min-width:11.5rem;padding:.3rem;border:1px solid #e2e8f0;border-radius:.75rem;background:#fff;box-shadow:0 14px 35px rgba(15,23,42,.18)}
+.team-details-v2680 .nexlab-team-composer-menu-v055 button{width:100%;min-height:2.2rem;border:0;border-radius:.55rem;background:#fff;padding:0 .65rem;color:#334155;text-align:left;font-size:.62rem;font-weight:850;cursor:pointer}
+.team-details-v2680 .nexlab-team-composer-menu-v055 button:hover{background:#f8fafc}
+.team-details-v2680 .nexlab-team-composer-input-v055{position:relative}
+.team-details-v2680 .nexlab-team-composer-input-v055 textarea{box-sizing:border-box;width:100%;min-height:2.55rem;max-height:8rem;resize:none;overflow-y:auto;border:1px solid #cbd5e1;border-radius:.8rem;padding:.62rem .72rem;background:#fff;color:#0f2747;font:650 .7rem/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;outline:none}
+.team-details-v2680 .nexlab-team-composer-input-v055 textarea:focus{border-color:#fb923c;box-shadow:0 0 0 3px rgba(249,115,22,.1)}
+.team-details-v2680 .nexlab-team-mention-suggestions-v055{position:absolute;z-index:50;left:.15rem;right:.15rem;bottom:calc(100% + .35rem);display:grid;max-height:12rem;overflow:auto;padding:.3rem;border:1px solid #e2e8f0;border-radius:.75rem;background:#fff;box-shadow:0 18px 42px rgba(15,23,42,.18)}
+.team-details-v2680 .nexlab-team-mention-suggestions-v055>button{display:flex;align-items:center;justify-content:space-between;gap:.7rem;min-height:2.2rem;border:0;border-radius:.55rem;background:#fff;padding:0 .65rem;color:#334155;text-align:left;font-size:.63rem;font-weight:850;cursor:pointer}
+.team-details-v2680 .nexlab-team-mention-suggestions-v055>button:hover{background:#f8fafc}
+.team-details-v2680 .nexlab-team-mention-suggestions-v055 small{color:#94a3b8;font-size:.53rem}
+.team-details-v2680 .nexlab-team-mention-suggestions-v055>p{margin:.25rem;padding:.35rem;color:#94a3b8;font-size:.59rem}
+.team-details-v2680 .nexlab-team-composer-selected-v055:empty{display:none}
+.team-details-v2680 .nexlab-team-composer-chips-v055{display:flex;flex-wrap:wrap;gap:.28rem;padding-left:3rem}
+.team-details-v2680 .nexlab-team-mention-chip-v055{display:inline-flex;align-items:center;gap:.2rem;min-height:1.5rem;padding:0 .42rem;border:1px solid #fed7aa;border-radius:999px;background:#fff7ed;color:#c2410c;font-size:.54rem;font-weight:850}
+.team-details-v2680 .nexlab-team-mention-chip-v055 button{border:0;background:transparent;color:inherit;font:inherit;cursor:pointer}
+.team-details-v2680 .nexlab-team-composer-counter-v055{justify-self:end;color:#94a3b8;font-size:.49rem;font-weight:750;padding-right:.2rem}
+.team-details-v2680 .nexlab-team-chat-readonly-v055{margin:0;padding:.7rem;border:1px solid #e2e8f0;border-radius:.75rem;background:#f8fafc;color:#64748b;font-size:.62rem;font-weight:700;text-align:center}
+
+@media(max-width:820px){
+  .team-details-v2680.has-nexlab-team-chat-v055{display:flex!important;flex-direction:column!important}
+  .team-details-v2680.has-nexlab-team-chat-v055 .team-details-v2680__header,
+  .team-details-v2680.has-nexlab-team-chat-v055 .team-details-v2680__content,
+  .team-details-v2680.has-nexlab-team-chat-v055 .team-details-v2680__footer{grid-row:auto!important}
+}
+
+@media(max-width:700px){
+  .team-details-v2680.has-nexlab-team-chat-v055{width:100%;height:100%;max-height:100%;border-radius:0}
+  .team-details-v2680 .nexlab-team-tabs-v055{padding:.45rem .6rem}
+  .team-details-v2680 .nexlab-team-tab-v055{min-height:2.3rem;padding:0 .68rem}
+  .team-details-v2680 .nexlab-team-chat-head-v055{padding:.68rem .72rem}
+  .team-details-v2680 .nexlab-team-chat-head-v055 p{display:none}
+  .team-details-v2680 .nexlab-team-chat-list-v055{padding:.65rem .6rem .9rem}
+  .team-details-v2680 .nexlab-team-chat-bubble-wrap-v055{max-width:84%}
+  .team-details-v2680 .nexlab-team-chat-composer-slot-v055{padding:.55rem .55rem calc(.55rem + env(safe-area-inset-bottom))}
+  .team-details-v2680 .nexlab-team-composer-plus-v055,.team-details-v2680 .nexlab-team-composer-send-v055{height:2.65rem}
+  .team-details-v2680 .nexlab-team-composer-plus-v055{width:2.65rem}
+  .team-details-v2680 .nexlab-team-composer-input-v055 textarea{min-height:2.65rem}
+}
+@media(prefers-reduced-motion:reduce){.team-details-v2680 .nexlab-team-chat-list-v055{scroll-behavior:auto}}

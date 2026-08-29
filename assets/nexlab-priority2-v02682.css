@@ -1,0 +1,878 @@
+/* NEXLAB Beta 0.26.82 — Prioridade 2: Agenda/Marketing + consolidação mobile. */
+
+/* --------------------------------------------------------------------------
+   Marketing: mesma regra de navegação da Agenda.
+   Calendário compacto à esquerda + lista do dia/mês à direita.
+   Um clique seleciona o dia; repetir o clique volta à lista do mês.
+   -------------------------------------------------------------------------- */
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.62fr) minmax(19.5rem,1fr)!important;
+  align-items:stretch!important;
+  gap:18px!important;
+  min-width:0!important;
+  overflow:visible!important;
+  padding:18px!important;
+  border:1px solid rgba(203,213,225,.72)!important;
+  border-radius:28px!important;
+  background:#fff!important;
+  box-shadow:0 10px 32px rgba(15,23,42,.05)!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-empty-state-compact,
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-agenda-head,
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-today-btn{
+  grid-column:1/-1!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-head{
+  width:min(305px,100%)!important;
+  min-height:50px!important;
+  display:grid!important;
+  grid-template-columns:44px minmax(0,1fr) 44px!important;
+  align-items:center!important;
+  gap:8px!important;
+  margin:0!important;
+  padding:5px 7px!important;
+  border:0!important;
+  border-radius:16px!important;
+  background:#07284b!important;
+  box-shadow:0 8px 18px rgba(7,40,75,.12)!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-head button{
+  width:40px!important;
+  min-width:40px!important;
+  height:40px!important;
+  min-height:40px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:#fff!important;
+  color:#07284b!important;
+  font-size:1.45rem!important;
+  line-height:1!important;
+  box-shadow:none!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-head > div{
+  min-width:0!important;
+  text-align:center!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-head strong{
+  display:block!important;
+  overflow:hidden!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  font-size:.92rem!important;
+  line-height:1.15!important;
+  font-weight:900!important;
+  text-overflow:ellipsis!important;
+  text-transform:capitalize!important;
+  white-space:nowrap!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-today-btn{
+  justify-self:start!important;
+  width:auto!important;
+  min-height:34px!important;
+  margin:-10px 0 0!important;
+  padding:0 .8rem!important;
+  border:1px solid #dbe3ec!important;
+  border-radius:10px!important;
+  background:#fff!important;
+  color:#53657e!important;
+  font-size:.65rem!important;
+  font-weight:850!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-calendar-desktop{
+  display:none!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-calendar{
+  grid-column:1!important;
+  display:block!important;
+  min-width:0!important;
+  padding:14px!important;
+  border:1px solid rgba(203,213,225,.72)!important;
+  border-radius:22px!important;
+  background:#fff!important;
+  overflow:hidden!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-weekdays,
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-days{
+  display:grid!important;
+  grid-template-columns:repeat(7,minmax(0,1fr))!important;
+  width:100%!important;
+  min-width:0!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-weekdays{
+  gap:1px!important;
+  margin:0!important;
+  padding:1px 1px 0!important;
+  border:1px solid #dbe3ec!important;
+  border-bottom:0!important;
+  border-radius:18px 18px 0 0!important;
+  background:#dbe3ec!important;
+  overflow:hidden!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-weekdays span{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:30px!important;
+  padding:7px 3px!important;
+  background:#f7f9fc!important;
+  color:#53657e!important;
+  font-size:.58rem!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:.055em!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-days{
+  gap:1px!important;
+  padding:0 1px 1px!important;
+  border:1px solid #dbe3ec!important;
+  border-top:0!important;
+  border-radius:0 0 18px 18px!important;
+  background:#dbe3ec!important;
+  overflow:hidden!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day{
+  position:relative!important;
+  min-width:0!important;
+  min-height:84px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:space-between!important;
+  gap:5px!important;
+  margin:0!important;
+  padding:8px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:#fff!important;
+  color:#1e293b!important;
+  text-align:left!important;
+  box-shadow:none!important;
+  touch-action:manipulation!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day:hover{
+  background:#f8fafc!important;
+  box-shadow:inset 0 0 0 1px rgba(148,163,184,.4)!important;
+  z-index:1!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day.is-muted{
+  background:#f8fafc!important;
+  color:#94a3b8!important;
+  opacity:1!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day.is-selected{
+  background:#fff7ed!important;
+  box-shadow:inset 0 0 0 2px #f97316!important;
+  z-index:2!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day-number{
+  width:26px!important;
+  height:26px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border-radius:999px!important;
+  font-size:.74rem!important;
+  line-height:1!important;
+  font-weight:900!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day.is-today .nexlab-mkt-mobile-day-number{
+  background:#f97316!important;
+  color:#fff!important;
+  box-shadow:0 3px 8px rgba(249,115,22,.22)!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day.is-selected:not(.is-today) .nexlab-mkt-mobile-day-number{
+  background:#07284b!important;
+  color:#fff!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day-summary{
+  width:100%!important;
+  min-height:12px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:4px!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-dots{
+  display:flex!important;
+  align-items:center!important;
+  gap:4px!important;
+  overflow:hidden!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-dots i{
+  width:7px!important;
+  height:7px!important;
+  flex:0 0 7px!important;
+  border-radius:999px!important;
+  box-shadow:0 0 0 2px rgba(255,255,255,.9)!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day-summary small{
+  margin-left:auto!important;
+  color:#64748b!important;
+  font-size:.56rem!important;
+  font-weight:900!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-selected{
+  grid-column:2!important;
+  display:flex!important;
+  flex-direction:column!important;
+  min-width:0!important;
+  min-height:100%!important;
+  max-height:640px!important;
+  margin:0!important;
+  padding:0!important;
+  border:1px solid rgba(203,213,225,.72)!important;
+  border-radius:22px!important;
+  background:#fff!important;
+  overflow:hidden!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-selected-head{
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  margin:0!important;
+  padding:17px 18px 15px!important;
+  border:0!important;
+  border-bottom:1px solid #e7edf4!important;
+  background:linear-gradient(180deg,#fbfdff 0%,#f7f9fc 100%)!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-selected-head span{
+  display:block!important;
+  margin:0 0 3px!important;
+  color:#94a3b8!important;
+  font-size:.58rem!important;
+  line-height:1.1!important;
+  font-weight:900!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-selected-head strong{
+  display:block!important;
+  margin:0!important;
+  color:#0f2747!important;
+  font-size:.92rem!important;
+  line-height:1.25!important;
+  font-weight:900!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-selected-head small{
+  display:block!important;
+  margin:3px 0 0!important;
+  color:#64748b!important;
+  font-size:.64rem!important;
+  font-weight:800!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-selected-list{
+  display:flex!important;
+  flex:1 1 auto!important;
+  flex-direction:column!important;
+  gap:9px!important;
+  min-height:0!important;
+  padding:12px!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-record{
+  flex:0 0 auto!important;
+  min-width:0!important;
+  padding:12px!important;
+  border:1px solid #e2e8f0!important;
+  border-radius:15px!important;
+  background:#fff!important;
+  box-shadow:0 4px 14px rgba(15,23,42,.03)!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-record-head,
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-record-actions,
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-record-meta{
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:6px!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-record h3{
+  margin:7px 0 0!important;
+  color:#0f2747!important;
+  font-size:.82rem!important;
+  line-height:1.3!important;
+  font-weight:900!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-record > p{
+  margin:5px 0 0!important;
+  color:#64748b!important;
+  font-size:.68rem!important;
+  line-height:1.45!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-record-meta{
+  justify-content:space-between!important;
+  margin-top:7px!important;
+  color:#64748b!important;
+  font-size:.62rem!important;
+  font-weight:800!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-record-actions{
+  margin-top:9px!important;
+  padding-top:8px!important;
+  border-top:1px solid #f1f5f9!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-selected-empty{
+  display:grid!important;
+  place-items:center!important;
+  align-content:center!important;
+  flex:1 1 auto!important;
+  min-height:220px!important;
+  padding:22px 16px!important;
+  border:0!important;
+  background:#fff!important;
+  color:#64748b!important;
+  text-align:center!important;
+}
+
+/* --------------------------------------------------------------------------
+   Consolidação mobile: correções estruturais comuns entre módulos.
+   Não redesenha Perfil, Comunicação, Comentários ou Mural; apenas evita
+   estouro, controles espremidos e grids incompatíveis com telas estreitas.
+   -------------------------------------------------------------------------- */
+@media(max-width:767px){
+  :root{--nexlab-mobile-content-gap:.7rem}
+  body main{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow-x:clip!important;
+  }
+  body main > *{
+    max-width:100%!important;
+    min-width:0!important;
+  }
+  body .module-shell{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    gap:var(--nexlab-mobile-content-gap)!important;
+  }
+  body .module-header{
+    width:100%!important;
+    min-width:0!important;
+    padding:.8rem!important;
+    border-radius:1rem!important;
+  }
+  body .module-header h1,
+  body .module-header h2{
+    font-size:clamp(1.05rem,5.2vw,1.35rem)!important;
+    line-height:1.2!important;
+  }
+  body .module-header p{
+    font-size:.7rem!important;
+    line-height:1.45!important;
+  }
+  body .module-actions,
+  body :where(.toolbar,.module-toolbar,[class*="__toolbar"]){
+    min-width:0!important;
+    max-width:100%!important;
+  }
+  body :where([role="tablist"],.nexlab-mkt-view-tabs,.nexlab-dashboard-switcher,.teams-v2680__view-switch){
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    overscroll-behavior-inline:contain!important;
+    scrollbar-width:none!important;
+    -webkit-overflow-scrolling:touch!important;
+  }
+  body :where([role="tablist"],.nexlab-mkt-view-tabs,.nexlab-dashboard-switcher,.teams-v2680__view-switch)::-webkit-scrollbar{display:none!important}
+  body :where([role="tablist"]>button,.nexlab-mkt-view-tabs>button,.nexlab-dashboard-switcher>button,.teams-v2680__view-switch>button){
+    flex:0 0 auto!important;
+    white-space:nowrap!important;
+  }
+  body main :where(.overflow-x-auto,.project-table-wrap-v02667,.project-table-wrap-v2690,.teams-v2680__table-wrap,.nexlab-v265-table-scroll){
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow-x:auto!important;
+    -webkit-overflow-scrolling:touch!important;
+  }
+  body main table{
+    max-width:none!important;
+  }
+  body main :where(input,select,textarea){
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    font-size:16px!important;
+  }
+  body main :where(.grid.grid-cols-2,.grid.grid-cols-3,.grid.grid-cols-4,.grid.grid-cols-5,.grid.grid-cols-6){
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  body main :where(.flex.justify-between,.flex.items-center.justify-between){
+    min-width:0!important;
+  }
+
+  /* Equipes */
+  body[data-nexlab-page="equipes"] .teams-v2680__metrics,
+  body[data-nexlab-page="equipes"] .team-details-v2680__facts{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  body[data-nexlab-page="equipes"] .teams-v2680__toolbar-actions{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    width:100%!important;
+  }
+
+  /* Projetos */
+  body[data-nexlab-page="projetos"] .project-details-panel-v02667.nexlab-project-layout-v054{
+    display:flex!important;
+    flex-direction:column!important;
+    width:100%!important;
+    max-width:100%!important;
+    height:100%!important;
+    max-height:100%!important;
+  }
+  body[data-nexlab-page="projetos"] .nexlab-project-tabs-v054{
+    flex:0 0 auto!important;
+    width:100%!important;
+    border-right:0!important;
+  }
+  body[data-nexlab-page="projetos"] .project-details-body-v02667,
+  body[data-nexlab-page="projetos"] .nexlab-project-comments-v054{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+  body[data-nexlab-page="projetos"] .nexlab-project-comments-v054{
+    flex:0 0 auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+  body[data-nexlab-page="projetos"] .nexlab-project-comments-list-v054{
+    max-height:22rem!important;
+    overflow-y:auto!important;
+  }
+
+  /* Reservas e reuniões */
+  body[data-nexlab-page="reserva"] :where(.nexlab-meeting-management-head-r55631,.nexlab-meeting-response-head-r55627){
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:.65rem!important;
+  }
+  body[data-nexlab-page="reserva"] :where(.nexlab-meeting-management-head-r55631,.nexlab-meeting-response-head-r55627)>*{
+    width:100%!important;
+    min-width:0!important;
+  }
+
+  /* Marketing = mesma composição da Agenda também no celular. */
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:10px!important;
+    padding:8px!important;
+    border-radius:18px!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-head,
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-today-btn,
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-calendar,
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-selected{
+    grid-column:1!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-head{
+    width:100%!important;
+    min-height:52px!important;
+    margin:0!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-today-btn{
+    margin:0!important;
+    justify-self:center!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-calendar{
+    padding:8px!important;
+    border-radius:16px!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day{
+    min-height:54px!important;
+    padding:5px 3px!important;
+    align-items:center!important;
+    text-align:center!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day-number{
+    width:23px!important;
+    height:23px!important;
+    font-size:.7rem!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day-summary{
+    justify-content:center!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day-summary small{
+    margin-left:0!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-selected{
+    min-height:0!important;
+    max-height:none!important;
+    border-radius:16px!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-selected-list{
+    max-height:none!important;
+    overflow:visible!important;
+  }
+
+  /* Agenda */
+  body[data-nexlab-page="agenda"] .nexlab-agenda-integrated-grid-v02682{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+  body[data-nexlab-page="agenda"] .nexlab-agenda-calendar-grid-v02682{
+    width:100%!important;
+    min-width:0!important;
+  }
+
+  /* Inventário, usuários, permissões, eventos, mural, feedback e relatórios:
+     preserva tabelas/controles sem ultrapassar a viewport. */
+  body[data-nexlab-page="inventario"] .nexlab-inventory-module,
+  body[data-nexlab-page="participantes"] .module-shell,
+  body[data-nexlab-page="permissoes"] .module-shell,
+  body[data-nexlab-page="eventos"] .module-shell,
+  body[data-nexlab-page="mural"] .module-shell,
+  body[data-nexlab-page="feedback"] .module-shell,
+  body[data-nexlab-page="relatorios"] .module-shell,
+  body[data-nexlab-page="pendencias"] .module-shell,
+  body[data-nexlab-page="perfil"] .module-shell{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+}
+
+@media(max-width:420px){
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day{
+    min-height:50px!important;
+    padding:4px 2px!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-dots i{
+    width:5px!important;
+    height:5px!important;
+    flex-basis:5px!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day-summary small{
+    font-size:.52rem!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-day,
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-head button{transition:none!important}
+}
+
+/* NEXLAB Beta 0.26.82 — Marketing em duas colunas no desktop. */
+body[data-nexlab-page="marketing"] main .module-shell.nexlab-marketing-reset{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.72fr) minmax(23rem,.96fr)!important;
+  align-items:start!important;
+  align-content:start!important;
+  gap:18px!important;
+  width:100%!important;
+  min-width:0!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-mobile-calendar{
+  grid-column:1!important;
+  align-self:start!important;
+  width:100%!important;
+  min-width:0!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-mobile-selected{
+  grid-column:2!important;
+  align-self:stretch!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:100%!important;
+  max-height:none!important;
+  margin:0!important;
+  position:sticky!important;
+  top:0!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-selected-list{
+  min-height:0!important;
+  max-height:40rem!important;
+}
+@media (max-width: 1180px){
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:12px!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-mobile-calendar,
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-mobile-selected{
+    grid-column:1!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda > .nexlab-mkt-mobile-selected{
+    position:static!important;
+  }
+}
+
+
+/* NEXLAB Beta 0.26.82 — Hotfix: força a lista do Marketing à direita do calendário no desktop. */
+.nexlab-marketing-reset .nexlab-mkt-agenda.nexlab-mkt-agenda--patched{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+}
+.nexlab-marketing-reset .nexlab-mkt-desktop-split{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.72fr) minmax(24rem,.96fr)!important;
+  align-items:start!important;
+  gap:18px!important;
+  width:100%!important;
+  min-width:0!important;
+}
+.nexlab-marketing-reset .nexlab-mkt-desktop-split > .nexlab-mkt-mobile-calendar,
+.nexlab-marketing-reset .nexlab-mkt-desktop-split > .nexlab-mkt-mobile-selected{
+  width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+}
+.nexlab-marketing-reset .nexlab-mkt-desktop-split > .nexlab-mkt-mobile-selected{
+  position:sticky!important;
+  top:0!important;
+  max-height:none!important;
+}
+body[data-nexlab-page="marketing"] main .module-shell.nexlab-marketing-reset,
+.nexlab-marketing-reset{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+@media (max-width:1180px){
+  .nexlab-marketing-reset .nexlab-mkt-desktop-split{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:12px!important;
+  }
+  .nexlab-marketing-reset .nexlab-mkt-desktop-split > .nexlab-mkt-mobile-selected{
+    position:static!important;
+  }
+}
+
+
+/* NEXLAB Beta 0.26.82 — Marketing com referência visual da Agenda. */
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-desktop-split{
+  grid-template-columns:minmax(0,1.68fr) minmax(22rem,.96fr)!important;
+  gap:20px!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-mobile-selected.nexlab-mkt-agenda-ref{
+  border-radius:24px!important;
+  border:1px solid rgba(203,213,225,.78)!important;
+  box-shadow:0 12px 32px rgba(15,23,42,.05)!important;
+  background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%)!important;
+  max-height:none!important;
+  min-height:100%!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-selected-head{
+  position:relative!important;
+  padding:18px 18px 16px!important;
+  background:linear-gradient(180deg,#fcfdff 0%,#f7f9fc 100%)!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-selected-head div{
+  min-width:0!important;
+  padding-right:88px!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-selected-head span{
+  margin-bottom:4px!important;
+  font-size:.66rem!important;
+  letter-spacing:.12em!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-selected-head strong{
+  font-size:1.08rem!important;
+  line-height:1.25!important;
+  letter-spacing:-.01em!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-selected-head small{
+  position:absolute!important;
+  top:20px!important;
+  right:18px!important;
+  margin:0!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:28px!important;
+  padding:0 12px!important;
+  border-radius:999px!important;
+  border:1px solid rgba(249,115,22,.22)!important;
+  background:#fff7ed!important;
+  color:#b45309!important;
+  font-size:.72rem!important;
+  font-weight:900!important;
+  box-shadow:0 4px 12px rgba(249,115,22,.08)!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-selected-list{
+  gap:12px!important;
+  padding:14px!important;
+  background:#fff!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:46px minmax(0,1fr)!important;
+  grid-template-areas:
+    "icon head"
+    "icon title"
+    "icon desc"
+    "icon meta"
+    "icon actions"!important;
+  align-items:start!important;
+  gap:8px 12px!important;
+  min-height:92px!important;
+  padding:14px 14px 14px 16px!important;
+  border:1px solid #e2e8f0!important;
+  border-left:4px solid #ec4899!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  box-shadow:0 4px 14px rgba(15,23,42,.035)!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record::before{
+  content:attr(data-short);
+  grid-area:icon!important;
+  width:38px!important;
+  height:38px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border-radius:14px!important;
+  border:1px solid color-mix(in srgb,var(--mkt-accent,#ec4899) 24%,#ffffff)!important;
+  background:color-mix(in srgb,var(--mkt-accent,#ec4899) 10%,#ffffff)!important;
+  color:var(--mkt-accent,#ec4899)!important;
+  font-size:.78rem!important;
+  font-weight:900!important;
+  letter-spacing:.02em!important;
+  text-transform:uppercase!important;
+  align-self:center!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record[data-channel-tone="instagram"]{--mkt-accent:#e11d48!important;}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record[data-channel-tone="facebook"]{--mkt-accent:#2563eb!important;}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record[data-channel-tone="whatsapp"]{--mkt-accent:#16a34a!important;}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record[data-channel-tone="outro"]{--mkt-accent:#f97316!important;}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record-head{
+  grid-area:head!important;
+  gap:8px!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-status,
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-channel{
+  display:inline-flex!important;
+  align-items:center!important;
+  min-height:26px!important;
+  padding:0 10px!important;
+  border-radius:999px!important;
+  border:1px solid #e2e8f0!important;
+  font-size:.74rem!important;
+  font-weight:900!important;
+  letter-spacing:.01em!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-status{
+  background:#fff7ed!important;
+  border-color:#fed7aa!important;
+  color:#b45309!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-channel{
+  background:color-mix(in srgb,var(--mkt-accent,#ec4899) 10%,#ffffff)!important;
+  border-color:color-mix(in srgb,var(--mkt-accent,#ec4899) 24%,#ffffff)!important;
+  color:var(--mkt-accent,#ec4899)!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record h3{
+  grid-area:title!important;
+  margin:0!important;
+  font-size:1.02rem!important;
+  line-height:1.32!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record > p{
+  grid-area:desc!important;
+  margin:0!important;
+  font-size:.83rem!important;
+  line-height:1.5!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record-meta{
+  grid-area:meta!important;
+  justify-content:flex-start!important;
+  gap:10px!important;
+  margin-top:0!important;
+  font-size:.74rem!important;
+  color:#64748b!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record-meta a{
+  color:#0f2747!important;
+  font-weight:800!important;
+  text-decoration:none!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record-actions{
+  grid-area:actions!important;
+  margin-top:2px!important;
+  padding-top:0!important;
+  border-top:0!important;
+  gap:8px!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record-actions button{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:34px!important;
+  padding:0 12px!important;
+  border-radius:12px!important;
+  border:1px solid #dbe5f1!important;
+  background:#fff!important;
+  color:#334155!important;
+  font-size:.78rem!important;
+  font-weight:800!important;
+  transition:all .18s ease!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record-actions button:hover{
+  transform:translateY(-1px)!important;
+  box-shadow:0 8px 18px rgba(15,23,42,.08)!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record-actions button[data-action="advance"]{
+  border-color:#cbd5e1!important;
+  background:#f8fafc!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record-actions button[data-action="remove"],
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record-actions button.danger{
+  border-color:#fecaca!important;
+  background:#fff1f2!important;
+  color:#be123c!important;
+}
+body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-selected-empty{
+  min-height:260px!important;
+  background:#fff!important;
+}
+@media (max-width:1180px){
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-desktop-split{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-selected-head div{
+    padding-right:0!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-selected-head small{
+    position:static!important;
+    margin-top:8px!important;
+    align-self:flex-start!important;
+  }
+}
+@media (max-width:767px){
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record{
+    grid-template-columns:40px minmax(0,1fr)!important;
+    padding:12px!important;
+    border-radius:16px!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record::before{
+    width:34px!important;
+    height:34px!important;
+    border-radius:12px!important;
+    font-size:.72rem!important;
+  }
+  body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda-ref .nexlab-mkt-mobile-record h3{
+    font-size:.92rem!important;
+  }
+}
