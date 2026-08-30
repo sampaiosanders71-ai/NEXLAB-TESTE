@@ -17,6 +17,19 @@
   },
   "items": [
     {
+      "item_key": "visual_accessibility",
+      "title": "Acessibilidade visual global",
+      "test_steps": [
+        "Abrir Dashboard, Pendências, Agenda, Marketing, Projetos e Meu Perfil em desktop e celular.",
+        "Confirmar que fundo geral é distinguível dos cards brancos e que bordas permanecem visíveis.",
+        "Confirmar que textos secundários, labels e placeholders estão legíveis sem depender de cinza muito claro.",
+        "Navegar por teclado e confirmar foco laranja visível em botões, links e campos.",
+        "Ativar a preferência de maior contraste do sistema/navegador, quando disponível, e confirmar reforço automático.",
+        "Confirmar que o aumento dos textos pequenos não causa sobreposição ou rolagem horizontal."
+      ],
+      "expected_result": "Todos os módulos mantêm a identidade clara do NEXLAB, porém com contraste maior, bordas mais perceptíveis, textos pequenos legíveis e foco de teclado evidente."
+    },
+    {
       "item_key": "volunteer_profile",
       "title": "Perfil Voluntário",
       "test_steps": [
@@ -125,8 +138,8 @@
       "expected_result": "Revisão atual consistente em desktop e celular, sem regressões conhecidas nos fluxos corrigidos; promoção continua bloqueada até recibo físico válido da revisão exata."
     }
   ],
-  "release_title": "NEXLAB Beta 0.26.82 — Perfil com colunas corrigidas",
-  "generated_at": "2026-08-30T23:23:00Z",
+  "release_title": "NEXLAB Beta 0.26.82 — Acessibilidade visual global",
+  "generated_at": "2026-08-30T23:30:00Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
     "controlled_test_run": "completed_and_cleaned",
@@ -208,7 +221,7 @@
     "local_module_imports": "43/43 passed",
     "release_hash_inventory": "81/81 passed",
     "marketing_integrated_list_contract": "passed_static_physical_pending",
-    "marketing_integrated_list_revision": "beta-0-26-82-perfil-colunas-corrigidas",
+    "marketing_integrated_list_revision": "beta-0-26-82-acessibilidade-visual",
     "marketing_legacy_list_classes_absent": true,
     "marketing_card_actions_event_isolation": "passed_static",
     "marketing_detail_modal_contract": "passed_static",
@@ -234,7 +247,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-82-perfil-colunas-corrigidas",
+  "revision": "beta-0-26-82-acessibilidade-visual",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -280,7 +293,7 @@
     "official_promotion": "blocked_pending_exact_physical_receipt",
     "manual_override_allowed": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-perfil-colunas-corrigidas",
+    "required_revision": "beta-0-26-82-acessibilidade-visual",
     "receipt_max_age_days": 14
   },
   "activity_system_consistency_0_26_76": {
@@ -455,7 +468,7 @@
     },
     "historical_revision": "beta-0-26-82-saude-sistema-timeout-corrigido"
   },
-  "build_revision": "beta-0-26-82-perfil-colunas-corrigidas",
+  "build_revision": "beta-0-26-82-acessibilidade-visual",
   "updated_at": "2026-08-29T19:33:33Z",
   "post_login_permission_fix": {
     "pending_profile_counter_guard": "passed_static",
@@ -648,7 +661,7 @@
     ]
   },
   "atomic_module_update_validation": {
-    "revision": "beta-0-26-82-perfil-colunas-corrigidas",
+    "revision": "beta-0-26-82-acessibilidade-visual",
     "required": [
       "all module facades precached",
       "runtime features/export precached",
@@ -718,11 +731,11 @@
     "pending_preserved": true,
     "database_records_preserved": true,
     "rebuild_not_started": true,
-    "revision": "beta-0-26-82-perfil-colunas-corrigidas"
+    "revision": "beta-0-26-82-acessibilidade-visual"
   },
   "marketing_integrated_list_0_26_82": {
     "status": "implemented_static_verified_physical_pending",
-    "revision": "beta-0-26-82-perfil-colunas-corrigidas",
+    "revision": "beta-0-26-82-acessibilidade-visual",
     "desktop_layout": "calendar_left_activity_list_right",
     "mobile_layout": "activity_list_below_calendar",
     "card_fields": [
@@ -750,7 +763,7 @@
     "profile_rebuild_pending": true
   },
   "profile_rebuild_0_26_82": {
-    "revision": "beta-0-26-82-perfil-colunas-corrigidas",
+    "revision": "beta-0-26-82-acessibilidade-visual",
     "status": "static_passed_physical_pending",
     "layout": "hero + profile information left + contributions right on desktop; single column on mobile",
     "metrics": [
