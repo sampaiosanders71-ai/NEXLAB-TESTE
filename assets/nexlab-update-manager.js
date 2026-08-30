@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-marketing-lista-integrada',generatedAt:'2026-08-29T21:34:21Z',cacheName:'nexlab-beta-0-26-82-marketing-lista-integrada'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-perfil-redesign-refinado',generatedAt:'2026-08-30T21:45:00Z',cacheName:'nexlab-beta-0-26-82-perfil-redesign-refinado'});
   const CURRENT_VERSION = BUILD_IDENTITY.version;
   const CURRENT_RELEASE = BUILD_IDENTITY.release;
   const CURRENT_REVISION = BUILD_IDENTITY.revision;
