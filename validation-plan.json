@@ -125,8 +125,8 @@
       "expected_result": "Revisão atual consistente em desktop e celular, sem regressões conhecidas nos fluxos corrigidos; promoção continua bloqueada até recibo físico válido da revisão exata."
     }
   ],
-  "release_title": "NEXLAB Beta 0.26.82 — Perfil com redesign refinado",
-  "generated_at": "2026-08-30T21:45:00Z",
+  "release_title": "NEXLAB Beta 0.26.82 — Perfil visual removido para reconstrução",
+  "generated_at": "2026-08-30T22:30:00Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
     "controlled_test_run": "completed_and_cleaned",
@@ -208,7 +208,7 @@
     "local_module_imports": "43/43 passed",
     "release_hash_inventory": "81/81 passed",
     "marketing_integrated_list_contract": "passed_static_physical_pending",
-    "marketing_integrated_list_revision": "beta-0-26-82-perfil-redesign-refinado",
+    "marketing_integrated_list_revision": "beta-0-26-82-perfil-visual-removido",
     "marketing_legacy_list_classes_absent": true,
     "marketing_card_actions_event_isolation": "passed_static",
     "marketing_detail_modal_contract": "passed_static",
@@ -233,7 +233,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-82-perfil-redesign-refinado",
+  "revision": "beta-0-26-82-perfil-visual-removido",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -279,7 +279,7 @@
     "official_promotion": "blocked_pending_exact_physical_receipt",
     "manual_override_allowed": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-perfil-redesign-refinado",
+    "required_revision": "beta-0-26-82-perfil-visual-removido",
     "receipt_max_age_days": 14
   },
   "activity_system_consistency_0_26_76": {
@@ -454,7 +454,7 @@
     },
     "historical_revision": "beta-0-26-82-saude-sistema-timeout-corrigido"
   },
-  "build_revision": "beta-0-26-82-perfil-redesign-refinado",
+  "build_revision": "beta-0-26-82-perfil-visual-removido",
   "updated_at": "2026-08-29T19:33:33Z",
   "post_login_permission_fix": {
     "pending_profile_counter_guard": "passed_static",
@@ -647,7 +647,7 @@
     ]
   },
   "atomic_module_update_validation": {
-    "revision": "beta-0-26-82-perfil-redesign-refinado",
+    "revision": "beta-0-26-82-perfil-visual-removido",
     "required": [
       "all module facades precached",
       "runtime features/export precached",
@@ -717,11 +717,11 @@
     "pending_preserved": true,
     "database_records_preserved": true,
     "rebuild_not_started": true,
-    "revision": "beta-0-26-82-perfil-redesign-refinado"
+    "revision": "beta-0-26-82-perfil-visual-removido"
   },
   "marketing_integrated_list_0_26_82": {
     "status": "implemented_static_verified_physical_pending",
-    "revision": "beta-0-26-82-perfil-redesign-refinado",
+    "revision": "beta-0-26-82-perfil-visual-removido",
     "desktop_layout": "calendar_left_activity_list_right",
     "mobile_layout": "activity_list_below_calendar",
     "card_fields": [
@@ -738,5 +738,14 @@
     "internal_scroll_desktop": true,
     "legacy_list_reuse": false,
     "physical_confirmation": "pending_after_publication"
+  },
+  "profile_visual_removal_0_26_82": {
+    "status": "implemented",
+    "active_profile_visual_removed": true,
+    "dedicated_profile_css_removed": true,
+    "dedicated_profile_dom_enhancer_removed": true,
+    "profile_route_preserved": true,
+    "profile_data_preserved": true,
+    "profile_rebuild_pending": true
   }
 }
