@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-perfil-visual-removido'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-perfil-reconstruido'});
   if(globalThis.__NEXLAB_RESPONSIVE_V02671__?.revision===BUILD.revision)return;
 
   const root=document.documentElement;
