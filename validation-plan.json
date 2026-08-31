@@ -5,11 +5,11 @@
   "version": "0.26.82",
   "title": "Roteiro de validação dos Coordenadores — revisão atual",
   "release_title": "NEXLAB Beta 0.26.82 — Homologação consistente",
-  "revision": "beta-0-26-82-equipes-cards-removidos",
-  "build_revision": "beta-0-26-82-equipes-cards-removidos",
-  "asset_revision": "app-beta-0-26-82-equipes-cards-removidos",
+  "revision": "beta-0-26-82-equipes-cards-reconstruidos",
+  "build_revision": "beta-0-26-82-equipes-cards-reconstruidos",
+  "asset_revision": "app-beta-0-26-82-equipes-cards-reconstruidos",
   "generated_at": "2026-08-31T03:01:07Z",
-  "updated_at": "2026-08-31T03:01:07Z",
+  "updated_at": "2026-08-31T03:35:51Z",
   "minimum_coordinator_approvals_per_item": 1,
   "promotion_rules": {
     "all_required_items_approved": true,
@@ -184,7 +184,7 @@
   "pwa_homologation": {
     "status": "static_passed_physical_pending",
     "exact_revision_receipt_required": true,
-    "service_worker_cache_revision": "beta-0-26-82-equipes-cards-removidos",
+    "service_worker_cache_revision": "beta-0-26-82-equipes-cards-reconstruidos",
     "physical_device": "pending"
   },
   "external_supabase": {
@@ -198,7 +198,7 @@
     "candidate_deployment": true,
     "official_promotion": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-equipes-cards-removidos",
+    "required_revision": "beta-0-26-82-equipes-cards-reconstruidos",
     "manual_override_allowed": false
   },
   "responsive_checks": [
@@ -215,11 +215,14 @@
     "team_identity_stages": "A_B_C_D_E_implemented",
     "profile_layout": "left_info_right_contributions_desktop_single_column_mobile",
     "custom_background": "desktop_and_mobile_including_dashboard",
-    "observability": "exact_revision_classification"
+    "observability": "exact_revision_classification",
+    "team_card_renderer": "team-card-rebuilt-v02682",
+    "team_card_content": "icon_name_responsible_members_only",
+    "team_card_default_view": "cards"
   },
   "team_cards_removal_0_26_82": {
-    "status": "cards_removed_rebuild_pending",
-    "revision": "beta-0-26-82-equipes-cards-removidos",
+    "status": "completed_historical_step",
+    "revision": "beta-0-26-82-equipes-cards-reconstruidos",
     "visual_card_renderer_removed": true,
     "legacy_card_css_removed": true,
     "table_view_preserved": true,
@@ -228,7 +231,41 @@
     "team_details_preserved": true,
     "team_chat_preserved": true,
     "team_personalization_preserved": true,
-    "rebuild_started": false,
+    "rebuild_started": true,
+    "physical_confirmation_required": true,
+    "historical_only": true
+  },
+  "team_cards_rebuild_0_26_82": {
+    "status": "static_verified_physical_required",
+    "revision": "beta-0-26-82-equipes-cards-reconstruidos",
+    "default_view": "cards",
+    "table_view_preserved": true,
+    "expected_visible_content": [
+      "Ícone da equipe",
+      "Nome da equipe",
+      "Responsável",
+      "Integrantes"
+    ],
+    "must_not_show_in_card": [
+      "Descrição",
+      "Área",
+      "Projetos",
+      "Datas",
+      "Status textual"
+    ],
+    "interactions": [
+      "Clique no corpo abre detalhes",
+      "Menu de três pontos não dispara abertura do card",
+      "Integrantes abre modal correto",
+      "Editar respeita permissão",
+      "Arquivar/restaurar respeita permissão",
+      "Excluir permanece exclusivo de Admin"
+    ],
+    "responsive": [
+      "Desktop em grade",
+      "Celular em uma coluna",
+      "Sem sobreposição do menu"
+    ],
     "physical_confirmation_required": true
   }
 }
