@@ -1,9 +1,9 @@
 (function(){
   'use strict';
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-acessibilidade-visual',homologationRevision:'beta-0-26-82-acessibilidade-visual'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-fundo-personalizado',homologationRevision:'beta-0-26-82-fundo-personalizado'});
   const VERSION=BUILD.version;
   const BUILD_REVISION=BUILD.revision;
-  const REVISION=BUILD.homologationRevision||'beta-0-26-82-acessibilidade-visual';
+  const REVISION=BUILD.homologationRevision||'beta-0-26-82-fundo-personalizado';
   if(globalThis.__NEXLAB_DEVICE_HOMOLOGATION__?.revision===REVISION)return;
   const EVIDENCE_KEY='nexlab:device-homologation:'+VERSION+':'+BUILD_REVISION;
   const RPC='nexlab_record_device_homologation_v02682';

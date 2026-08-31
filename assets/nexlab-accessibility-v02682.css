@@ -120,3 +120,47 @@ hr,[class*="divide-slate"]>*+*{border-color:var(--nexlab-a11y-border-soft)!impor
     transition-duration:.01ms!important;
   }
 }
+
+
+/* NEXLAB — fundo personalizado institucional */
+html,body,#root{
+  background-color:var(--nexlab-a11y-page)!important;
+}
+.nexlab-bg{
+  background-color:var(--nexlab-a11y-page)!important;
+  background-image:
+    linear-gradient(rgba(238,243,248,.12),rgba(238,243,248,.12)),
+    url("./backgrounds/nexlab-bg-desktop.webp")!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  background-attachment:fixed!important;
+}
+/* O conteúdo principal permanece transparente para a arte aparecer entre os cards. */
+main{background:transparent!important}
+
+@media (max-width:767px){
+  .nexlab-bg{
+    background-image:
+      linear-gradient(rgba(238,243,248,.10),rgba(238,243,248,.10)),
+      url("./backgrounds/nexlab-bg-mobile.webp")!important;
+    background-size:cover!important;
+    background-position:center top!important;
+    background-attachment:fixed!important;
+  }
+}
+
+@media (prefers-contrast: more){
+  .nexlab-bg{
+    background-image:
+      linear-gradient(rgba(231,237,244,.30),rgba(231,237,244,.30)),
+      url("./backgrounds/nexlab-bg-desktop.webp")!important;
+  }
+}
+@media (max-width:767px) and (prefers-contrast: more){
+  .nexlab-bg{
+    background-image:
+      linear-gradient(rgba(231,237,244,.28),rgba(231,237,244,.28)),
+      url("./backgrounds/nexlab-bg-mobile.webp")!important;
+  }
+}
