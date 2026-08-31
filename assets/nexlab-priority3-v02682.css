@@ -1,58 +1,6 @@
 /* NEXLAB Beta 0.26.82 — Prioridade 3: refinamento visual de Perfil, Comunicação, Comentários e Mural do Dashboard. */
 
-/* ============================================================
-   EQUIPES — comunicação com leitura de chat mais natural
-   ============================================================ */
-.team-details-v2680 .nexlab-team-chat-v055{
-  background:#f5f7fa!important;
-}
-.team-details-v2680 .nexlab-team-chat-head-v055{
-  position:sticky;top:0;z-index:5;padding:.78rem 1rem!important;
-  border-bottom:1px solid #e2e8f0!important;background:rgba(255,255,255,.96)!important;
-  backdrop-filter:blur(10px);
-}
-.team-details-v2680 .nexlab-team-chat-head-v055 h3{font-size:.82rem!important;letter-spacing:-.01em}
-.team-details-v2680 .nexlab-team-chat-list-v055{
-  gap:.18rem!important;padding:.7rem max(1rem,calc((100% - 58rem)/2)) 1rem!important;
-  scroll-padding-block:3rem 6rem;
-}
-.team-details-v2680 .nexlab-team-chat-day-v058{
-  align-self:center;position:sticky;top:.35rem;z-index:3;margin:.55rem 0 .75rem;
-  padding:.28rem .62rem;border:1px solid #e2e8f0;border-radius:999px;
-  background:rgba(255,255,255,.94);box-shadow:0 3px 10px rgba(15,23,42,.045);
-  color:#64748b;font-size:.52rem;font-weight:900;letter-spacing:.035em;text-transform:uppercase;
-}
-.team-details-v2680 .nexlab-team-chat-row-v055{gap:.45rem!important;margin-top:.24rem}
-.team-details-v2680 .nexlab-team-chat-row-v055.is-grouped-v058{margin-top:.05rem}
-.team-details-v2680 .nexlab-team-chat-avatar-v055{
-  width:2rem!important;height:2rem!important;border-radius:50%!important;background:#e8eef8!important;
-  border:1px solid #dbe3ee;color:#0f2747!important;
-}
-.team-details-v2680 .nexlab-team-chat-avatar-v055.is-ghost-v058{visibility:hidden}
-.team-details-v2680 .nexlab-team-chat-bubble-wrap-v055{max-width:min(72%,38rem)!important;gap:.13rem!important}
-.team-details-v2680 .nexlab-team-chat-author-v055{padding-left:.45rem!important;font-size:.55rem!important;color:#64748b!important}
-.team-details-v2680 .nexlab-team-chat-bubble-v055{
-  padding:.62rem .76rem .4rem!important;border-color:#dfe6ef!important;border-radius:14px 14px 14px 5px!important;
-  background:#fff!important;box-shadow:0 3px 10px rgba(15,23,42,.045)!important;
-}
-.team-details-v2680 .nexlab-team-chat-row-v055.is-own .nexlab-team-chat-bubble-v055{
-  border-color:#0f2747!important;border-radius:14px 14px 5px 14px!important;background:#0f2747!important;
-  box-shadow:0 4px 12px rgba(15,39,71,.14)!important;
-}
-.team-details-v2680 .nexlab-team-chat-text-v055{font-size:.72rem!important;line-height:1.5!important}
-.team-details-v2680 .nexlab-team-chat-time-v055{font-size:.48rem!important;opacity:.78}
-.team-details-v2680 .nexlab-team-chat-composer-slot-v055{
-  position:sticky;bottom:0;z-index:6;padding:.62rem max(.8rem,calc((100% - 60rem)/2)) calc(.62rem + env(safe-area-inset-bottom))!important;
-  border-top:1px solid #e2e8f0!important;background:rgba(255,255,255,.97)!important;backdrop-filter:blur(10px);
-  box-shadow:0 -8px 28px rgba(15,23,42,.055)!important;
-}
-.team-details-v2680 .nexlab-team-composer-row-v055{gap:.38rem!important}
-.team-details-v2680 .nexlab-team-composer-input-v055 textarea{
-  border-radius:14px!important;border-color:#cbd5e1!important;background:#f8fafc!important;padding:.66rem .78rem!important;
-}
-.team-details-v2680 .nexlab-team-composer-input-v055 textarea:focus{background:#fff!important}
-.team-details-v2680 .nexlab-team-composer-plus-v055{border-radius:12px!important;background:#f8fafc!important}
-.team-details-v2680 .nexlab-team-composer-send-v055{border-radius:12px!important;padding-inline:1rem!important}
+/* Equipes — o chat foi reconstruído em nexlab-team-chat-v02682.css. */
 
 /* ============================================================
    PROJETOS — comentários inspirados no fluxo de atividade do Trello
@@ -176,9 +124,8 @@ body[data-nexlab-page="dashboard"] .nexlab-dashboard-feed-image{max-height:380px
   .project-details-panel-v02667 .nexlab-project-comments-list-v054{max-height:26rem!important}
 }
 @media(max-width:640px){
-  .team-details-v2680 .nexlab-team-chat-list-v055{padding:.6rem .6rem .9rem!important}
-  .team-details-v2680 .nexlab-team-chat-bubble-wrap-v055{max-width:86%!important}
-  .team-details-v2680 .nexlab-team-chat-day-v058{top:.2rem}
+  .team-details-v2680 .nexlab-team-chat-list-rebuilt-v02682{padding:.6rem .6rem .9rem!important}
+  .team-details-v2680 .nexlab-team-chat-bubble-wrap-rebuilt-v02682{max-width:86%!important}
   .project-details-panel-v02667 .nexlab-project-comment-text-v054,
   .project-details-panel-v02667 .nexlab-project-comment-card-v054>.nexlab-project-mention-chips-v054,
   .project-details-panel-v02667 .nexlab-project-comment-reply-slot-v054{margin-left:0!important}
@@ -190,7 +137,7 @@ body[data-nexlab-page="dashboard"] .nexlab-dashboard-feed-image{max-height:380px
   body[data-nexlab-page="dashboard"] .nexlab-dashboard-feed-card{border-radius:14px!important}
 }
 @media(prefers-reduced-motion:reduce){
-  .team-details-v2680 .nexlab-team-chat-list-v055{scroll-behavior:auto!important}
+  .team-details-v2680 .nexlab-team-chat-list-rebuilt-v02682{scroll-behavior:auto!important}
 }
 
 
@@ -967,8 +914,8 @@ select.nexlab-team-form-v02682__control{padding-right:38px!important}
 .team-details-v02682__identity{display:flex;align-items:flex-start;gap:12px;min-width:0}
 .team-details-v02682__identity>div{min-width:0}
 .team-details-v02682__icon{display:grid;width:50px;height:50px;flex:0 0 auto;place-items:center;border:1px solid color-mix(in srgb,var(--nexlab-team-accent) 22%,#dbe3ec);border-radius:16px;background:color-mix(in srgb,var(--nexlab-team-accent) 8%,#fff)}
-.team-details-v02682 .nexlab-team-tabs-v055{border-bottom-color:color-mix(in srgb,var(--nexlab-team-accent) 16%,#e2e8f0)}
-.team-details-v02682 .nexlab-team-tab-v055[aria-selected="true"]{color:color-mix(in srgb,var(--nexlab-team-accent) 88%,#0f172a);border-color:color-mix(in srgb,var(--nexlab-team-accent) 42%,#e2e8f0);background:color-mix(in srgb,var(--nexlab-team-accent) 7%,#fff)}
+.team-details-v02682 .nexlab-team-tabs-rebuilt-v02682{border-bottom-color:color-mix(in srgb,var(--nexlab-team-accent) 16%,#e2e8f0)}
+.team-details-v02682 .nexlab-team-tab-rebuilt-v02682[aria-selected="true"]{color:#0f2747}
 
 .nexlab-team-select-preview-v02682{
   --nexlab-team-accent:#2563eb;
@@ -993,11 +940,11 @@ select.nexlab-team-form-v02682__control{padding-right:38px!important}
 .project-team-selector-v02682 .nexlab-team-select-preview-v02682{align-self:flex-start}
 
 /* Conversa da equipe herda a identidade definida no painel de detalhes. */
-.nexlab-team-chat-title-v02682{display:flex!important;align-items:center!important;gap:9px!important;min-width:0}
-.nexlab-team-chat-title-copy-v02682{min-width:0}
-.nexlab-team-chat-title-copy-v02682 p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nexlab-team-chat-title-rebuilt-v02682{display:flex!important;align-items:center!important;gap:9px!important;min-width:0}
+.nexlab-team-chat-title-copy-rebuilt-v02682{min-width:0}
+.nexlab-team-chat-title-copy-rebuilt-v02682 p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .nexlab-team-chat-identity-icon-v02682{display:block;flex:0 0 auto;color:var(--nexlab-team-chat-accent,#2563eb);overflow:visible}
-.team-details-v02682 .nexlab-team-chat-head-v055{border-bottom-color:color-mix(in srgb,var(--nexlab-team-accent) 16%,#e2e8f0)}
+.team-details-v02682 .nexlab-team-chat-header-rebuilt-v02682{border-bottom-color:color-mix(in srgb,var(--nexlab-team-accent) 16%,#e2e8f0)}
 
 @media(max-width:700px){
   .team-details-v02682__identity{align-items:center}

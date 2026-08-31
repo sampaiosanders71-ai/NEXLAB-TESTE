@@ -5,9 +5,9 @@
   "version": "0.26.82",
   "title": "Roteiro de validação dos Coordenadores — revisão atual",
   "release_title": "NEXLAB Beta 0.26.82 — Formulário de Equipes estável",
-  "revision": "beta-0-26-82-atividades-sistema-worker-horario",
-  "build_revision": "beta-0-26-82-atividades-sistema-worker-horario",
-  "asset_revision": "app-beta-0-26-82-atividades-sistema-worker-horario",
+  "revision": "beta-0-26-82-equipes-chat-integrado",
+  "build_revision": "beta-0-26-82-equipes-chat-integrado",
+  "asset_revision": "app-beta-0-26-82-equipes-chat-integrado",
   "generated_at": "2026-08-31T04:50:16Z",
   "updated_at": "2026-08-31T12:47:01Z",
   "minimum_coordinator_approvals_per_item": 1,
@@ -184,7 +184,7 @@
   "pwa_homologation": {
     "status": "static_passed_physical_pending",
     "exact_revision_receipt_required": true,
-    "service_worker_cache_revision": "beta-0-26-82-atividades-sistema-worker-horario",
+    "service_worker_cache_revision": "beta-0-26-82-equipes-chat-integrado",
     "physical_device": "pending"
   },
   "external_supabase": {
@@ -198,9 +198,9 @@
     "candidate_deployment": true,
     "official_promotion": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-atividades-sistema-worker-horario",
+    "required_revision": "beta-0-26-82-equipes-chat-integrado",
     "manual_override_allowed": false,
-    "revision": "beta-0-26-82-atividades-sistema-worker-horario"
+    "revision": "beta-0-26-82-equipes-chat-integrado"
   },
   "responsive_checks": [
     "desktop_1365x768",
@@ -225,7 +225,7 @@
   },
   "team_cards_removal_0_26_82": {
     "status": "completed_historical_step",
-    "revision": "beta-0-26-82-atividades-sistema-worker-horario",
+    "revision": "beta-0-26-82-equipes-chat-integrado",
     "visual_card_renderer_removed": true,
     "legacy_card_css_removed": true,
     "table_view_preserved": true,
@@ -273,7 +273,7 @@
   },
   "team_icon_render_fix_0_26_82": {
     "status": "static_verified_physical_required",
-    "revision": "beta-0-26-82-atividades-sistema-worker-horario",
+    "revision": "beta-0-26-82-equipes-chat-integrado",
     "expected_icon_count": 20,
     "expected_color_count": 7,
     "checks": [
@@ -305,7 +305,7 @@
     "historical_only": true
   },
   "team_form_parser_fix_0_26_82": {
-    "revision": "beta-0-26-82-atividades-sistema-worker-horario",
+    "revision": "beta-0-26-82-equipes-chat-integrado",
     "status": "candidate_pending_physical_validation",
     "root_cause": "extra_closing_parenthesis_in_team_form_renderer",
     "affected_modules": [
@@ -326,7 +326,7 @@
     "physical_validation_required": true
   },
   "system_activities_rebuild_0_26_82": {
-    "revision": "beta-0-26-82-atividades-sistema-worker-horario",
+    "revision": "beta-0-26-82-equipes-chat-integrado",
     "status": "superseded_by_monitoring_integration",
     "scope": "Etapas A e B — remover UI anterior e reconstruir painel único",
     "checks": [
@@ -342,7 +342,7 @@
     "historical_only": true
   },
   "system_activities_monitoring_integration_0_26_82": {
-    "revision": "beta-0-26-82-atividades-sistema-worker-horario",
+    "revision": "beta-0-26-82-equipes-chat-integrado",
     "status": "candidate_pending_physical_validation",
     "scope": "Etapas C, D e E — métricas reais, estados operacionais e auditoria",
     "checks": [
@@ -368,7 +368,7 @@
     "physical_validation_required": true
   },
   "system_activities_worker_schedule_alignment_0_26_82": {
-    "revision": "beta-0-26-82-atividades-sistema-worker-horario",
+    "revision": "beta-0-26-82-equipes-chat-integrado",
     "status": "static_verified_physical_required",
     "worker_expected_cadence_minutes": 60,
     "worker_stale_warning_minutes": 90,
@@ -379,5 +379,29 @@
     ],
     "purpose": "Evitar falso alerta entre execuções horárias normais do Worker de notificações.",
     "physical_validation_required": true
+  },
+  "team_chat_rebuild_0_26_82": {
+    "revision": "beta-0-26-82-equipes-chat-integrado",
+    "status": "static_verified_physical_required",
+    "checks": [
+      "A estrutura visual anterior do chat não é renderizada.",
+      "Cabeçalho mostra identidade da equipe e acesso aos membros.",
+      "Abas Visão geral, Tarefas, Vínculos e Conversa permanecem funcionais.",
+      "Mensagens próprias aparecem à direita e mensagens de terceiros à esquerda.",
+      "Mensagens consecutivas do mesmo autor são agrupadas e separadores de data permanecem.",
+      "O estado da conversa usa respostas reais do Worker e alterna entre verificando, conectada, reconectando, offline e indisponível.",
+      "Não há polling periódico: a atualização ocorre ao abrir quando stale, manualmente, ao reconectar e ao voltar para a aba após período stale.",
+      "Responder mostra contexto no composer e persiste a referência como texto estruturado compatível com o Worker atual.",
+      "Mencionar usa a seleção de perfis existente e preserva a validação de menções.",
+      "Criar pendência a partir de uma mensagem abre a Tarefa da equipe com título e descrição pré-preenchidos.",
+      "Copiar mensagem usa Clipboard API com fallback local.",
+      "Enter envia e Shift+Enter cria nova linha.",
+      "No celular o chat usa largura total, textarea de 16 px e menu de ações por toque sem rolagem horizontal da página.",
+      "Worker/D1, paginação, notificações, permissões e integração com Pendências permanecem no fluxo existente."
+    ],
+    "physical_validation_required": true,
+    "stage_c_completed": true,
+    "stage_d_completed": true,
+    "stage_e_static_completed": true
   }
 }
