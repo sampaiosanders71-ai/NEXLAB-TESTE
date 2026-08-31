@@ -233,3 +233,16 @@
   .team-details-v2680 .nexlab-team-task-row-toggle-v02682,
   .team-details-v2680 .nexlab-team-task-row-menu-toggle-v02682{width:2.45rem;height:2.45rem}
 }
+
+/* Ajuste pós-homologação — rolagem vertical única da aba Tarefas */
+.team-details-v2680 .nexlab-team-workspace-v057>.nexlab-team-tasks-rebuilt-v02682{overflow-y:auto;overflow-x:hidden;scrollbar-gutter:stable;overscroll-behavior-y:contain}
+.team-details-v2680 .nexlab-team-tasks-shell-v02682{min-height:100%;height:max-content;overflow:visible}
+.team-details-v2680 .nexlab-team-task-groups-v02682{overflow:visible;min-height:0;padding-bottom:1rem}
+.team-details-v2680 .nexlab-team-tasks-rebuilt-v02682::-webkit-scrollbar{width:9px}
+.team-details-v2680 .nexlab-team-tasks-rebuilt-v02682::-webkit-scrollbar-track{background:transparent}
+.team-details-v2680 .nexlab-team-tasks-rebuilt-v02682::-webkit-scrollbar-thumb{background:rgba(100,116,139,.3);border:2px solid transparent;border-radius:999px;background-clip:padding-box}
+.team-details-v2680 .nexlab-team-tasks-rebuilt-v02682::-webkit-scrollbar-thumb:hover{background:rgba(100,116,139,.5);border:2px solid transparent;background-clip:padding-box}
+@media(max-width:700px){
+  .team-details-v2680 .nexlab-team-workspace-v057>.nexlab-team-tasks-rebuilt-v02682{scrollbar-gutter:auto}
+  .team-details-v2680 .nexlab-team-tasks-shell-v02682{overflow:visible}
+}
