@@ -139,18 +139,18 @@
     },
     {
       "item_key": "custom_background",
-      "title": "Fundo personalizado responsivo",
+      "title": "Fundo personalizado responsivo em todos os módulos",
       "test_steps": [
-        "Abrir o app em desktop e confirmar a arte horizontal",
-        "Abrir em celular e confirmar a arte vertical",
-        "Navegar entre módulos e confirmar legibilidade de cards e textos",
-        "Testar rolagem e confirmar que a arte não cobre a sidebar nem os cards"
+        "Abrir o Dashboard em desktop e confirmar a arte horizontal atrás do conteúdo",
+        "Navegar para outros módulos e confirmar que o mesmo fundo permanece",
+        "Abrir o app em celular e confirmar a arte vertical também no Dashboard",
+        "Confirmar que cards, cabeçalho, sidebar e textos continuam legíveis durante a rolagem"
       ],
-      "expected_result": "O fundo horizontal é usado no desktop, o vertical no celular e o conteúdo permanece legível."
+      "expected_result": "O fundo personalizado aparece também no Dashboard, usa a arte horizontal no desktop e a vertical no celular, sem prejudicar a legibilidade."
     }
   ],
-  "release_title": "NEXLAB Beta 0.26.82 — fundo personalizado responsivo",
-  "generated_at": "2026-08-31T00:36:00Z",
+  "release_title": "NEXLAB Beta 0.26.82 — fundo personalizado em todos os módulos",
+  "generated_at": "2026-08-31T00:32:00Z",
   "execution_4_functional_homologation": {
     "status": "backend_passed_ui_pending",
     "controlled_test_run": "completed_and_cleaned",
@@ -232,7 +232,7 @@
     "local_module_imports": "43/43 passed",
     "release_hash_inventory": "81/81 passed",
     "marketing_integrated_list_contract": "passed_static_physical_pending",
-    "marketing_integrated_list_revision": "beta-0-26-82-fundo-personalizado",
+    "marketing_integrated_list_revision": "beta-0-26-82-fundo-dashboard",
     "marketing_legacy_list_classes_absent": true,
     "marketing_card_actions_event_isolation": "passed_static",
     "marketing_detail_modal_contract": "passed_static",
@@ -258,7 +258,7 @@
     "touch_target_minimum",
     "orientation_change"
   ],
-  "revision": "beta-0-26-82-fundo-personalizado",
+  "revision": "beta-0-26-82-fundo-dashboard",
   "structural_recovery": {
     "base_release": "0.26.69",
     "rejected_release": "0.26.70",
@@ -304,7 +304,7 @@
     "official_promotion": "blocked_pending_exact_physical_receipt",
     "manual_override_allowed": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-fundo-personalizado",
+    "required_revision": "beta-0-26-82-fundo-dashboard",
     "receipt_max_age_days": 14
   },
   "activity_system_consistency_0_26_76": {
@@ -479,7 +479,7 @@
     },
     "historical_revision": "beta-0-26-82-saude-sistema-timeout-corrigido"
   },
-  "build_revision": "beta-0-26-82-fundo-personalizado",
+  "build_revision": "beta-0-26-82-fundo-dashboard",
   "updated_at": "2026-08-29T19:33:33Z",
   "post_login_permission_fix": {
     "pending_profile_counter_guard": "passed_static",
@@ -672,7 +672,7 @@
     ]
   },
   "atomic_module_update_validation": {
-    "revision": "beta-0-26-82-fundo-personalizado",
+    "revision": "beta-0-26-82-fundo-dashboard",
     "required": [
       "all module facades precached",
       "runtime features/export precached",
@@ -742,11 +742,11 @@
     "pending_preserved": true,
     "database_records_preserved": true,
     "rebuild_not_started": true,
-    "revision": "beta-0-26-82-fundo-personalizado"
+    "revision": "beta-0-26-82-fundo-dashboard"
   },
   "marketing_integrated_list_0_26_82": {
     "status": "implemented_static_verified_physical_pending",
-    "revision": "beta-0-26-82-fundo-personalizado",
+    "revision": "beta-0-26-82-fundo-dashboard",
     "desktop_layout": "calendar_left_activity_list_right",
     "mobile_layout": "activity_list_below_calendar",
     "card_fields": [
@@ -774,7 +774,7 @@
     "profile_rebuild_pending": true
   },
   "profile_rebuild_0_26_82": {
-    "revision": "beta-0-26-82-fundo-personalizado",
+    "revision": "beta-0-26-82-fundo-dashboard",
     "status": "static_passed_physical_pending",
     "layout": "hero + profile information left + contributions right on desktop; single column on mobile",
     "metrics": [

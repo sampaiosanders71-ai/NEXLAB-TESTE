@@ -164,3 +164,10 @@ main{background:transparent!important}
       url("./backgrounds/nexlab-bg-mobile.webp")!important;
   }
 }
+
+
+/* Dashboard também deve revelar o fundo personalizado global. */
+body[data-nexlab-page="dashboard"] main{
+  background:transparent!important;
+  background-image:none!important;
+}
