@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: EventsModule. */
-export { EventsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-equipes-identidade-integrada";
+export { EventsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-homologacao-consistente";
