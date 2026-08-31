@@ -4,12 +4,12 @@
   "app_version": "0.26.82",
   "version": "0.26.82",
   "title": "Roteiro de validação dos Coordenadores — revisão atual",
-  "release_title": "NEXLAB Beta 0.26.82 — Ícones de Equipes renderizados",
-  "revision": "beta-0-26-82-equipes-icones-renderizados",
-  "build_revision": "beta-0-26-82-equipes-icones-renderizados",
-  "asset_revision": "app-beta-0-26-82-equipes-icones-renderizados",
+  "release_title": "NEXLAB Beta 0.26.82 — Formulário de Equipes reconstruído",
+  "revision": "beta-0-26-82-equipes-formulario-reconstruido",
+  "build_revision": "beta-0-26-82-equipes-formulario-reconstruido",
+  "asset_revision": "beta-0-26-82-equipes-formulario-reconstruido",
   "generated_at": "2026-08-31T03:55:38Z",
-  "updated_at": "2026-08-31T03:55:38Z",
+  "updated_at": "2026-08-31T04:25:19Z",
   "minimum_coordinator_approvals_per_item": 1,
   "promotion_rules": {
     "all_required_items_approved": true,
@@ -184,7 +184,7 @@
   "pwa_homologation": {
     "status": "static_passed_physical_pending",
     "exact_revision_receipt_required": true,
-    "service_worker_cache_revision": "beta-0-26-82-equipes-icones-renderizados",
+    "service_worker_cache_revision": "beta-0-26-82-equipes-formulario-reconstruido",
     "physical_device": "pending"
   },
   "external_supabase": {
@@ -198,9 +198,9 @@
     "candidate_deployment": true,
     "official_promotion": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-equipes-icones-renderizados",
+    "required_revision": "beta-0-26-82-equipes-formulario-reconstruido",
     "manual_override_allowed": false,
-    "revision": "beta-0-26-82-equipes-icones-renderizados"
+    "revision": "beta-0-26-82-equipes-formulario-reconstruido"
   },
   "responsive_checks": [
     "desktop_1365x768",
@@ -223,7 +223,7 @@
   },
   "team_cards_removal_0_26_82": {
     "status": "completed_historical_step",
-    "revision": "beta-0-26-82-equipes-icones-renderizados",
+    "revision": "beta-0-26-82-equipes-formulario-reconstruido",
     "visual_card_renderer_removed": true,
     "legacy_card_css_removed": true,
     "table_view_preserved": true,
@@ -271,7 +271,7 @@
   },
   "team_icon_render_fix_0_26_82": {
     "status": "static_verified_physical_required",
-    "revision": "beta-0-26-82-equipes-icones-renderizados",
+    "revision": "beta-0-26-82-equipes-formulario-reconstruido",
     "expected_icon_count": 20,
     "expected_color_count": 7,
     "checks": [
@@ -285,5 +285,20 @@
     ],
     "implementation": "inline_svg",
     "physical_confirmation_required": true
+  },
+  "team_form_rebuild_0_26_82": {
+    "revision": "beta-0-26-82-equipes-formulario-reconstruido",
+    "status": "pending_physical_validation",
+    "checks": [
+      "Criar Equipe e Editar Equipe usam a mesma estrutura visual.",
+      "O bloco Ícone da equipe mostra ícone, nome/tipo, cor atual e Alterar ícone.",
+      "Alterar ícone abre popover compacto com 20 ícones e 7 cores.",
+      "Sugestão pelo nome permanece opcional e nunca altera a seleção sem clique.",
+      "Área/especialidade e Responsável obrigatório aparecem lado a lado no desktop.",
+      "Descrição e Regra de responsabilidade ocupam a largura do formulário.",
+      "Cancelar fica à esquerda e Criar equipe/Salvar alterações à direita.",
+      "No celular, o formulário passa para uma coluna sem corte do popover."
+    ],
+    "physical_validation_required": true
   }
 }
