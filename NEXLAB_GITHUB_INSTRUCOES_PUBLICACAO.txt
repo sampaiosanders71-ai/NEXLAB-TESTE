@@ -1,0 +1,35 @@
+PUBLIQUE ESTES ARQUIVOS NO GITHUB PAGES, SUBSTITUINDO OS EXISTENTES.
+
+Versão: NEXLAB Beta 0.26.82
+Revisão: beta-0-26-82-equipes-formulario-estavel
+
+ESCOPO DESTA REVISÃO
+1) Mantém Perfil reconstruído, acessibilidade visual e fundo personalizado responsivo.
+2) Mantém Marketing com calendário + lista integrada.
+3) Mantém a personalização de Equipes: 20 ícones, 7 cores, criação/edição, detalhes, conversa, tabela e seletores de Projetos.
+4) Mantém os cartões de Equipes reconstruídos do zero, exibindo somente ícone, nome, responsável e integrantes.
+5) Corrige os ícones que apareciam como caixas vazias no seletor de Criar/Editar equipe.
+6) Os 20 ícones agora são renderizados como SVG inline, sem depender de CSS mask externo.
+7) A mesma correção vale para cards, detalhes, tabela, seletores e identidade da conversa da equipe.
+8) Cor escolhida e fallback Users + azul continuam preservados.
+9) Dados, integrantes, permissões, vínculos, histórico, arquivamento, exclusão e conversas não foram alterados.
+
+PUBLICAÇÃO E HOMOLOGAÇÃO
+- A promoção oficial permanece bloqueada até existir recibo físico autenticado para a revisão exata beta-0-26-82-equipes-formulario-estavel.
+- Após publicar, abra Criar/Editar equipe e confirme visualmente os 20 ícones.
+- Teste também preview, sugestão pelo nome, cards, detalhes, tabela e conversa da equipe.
+- Não reutilize recibos de revisões anteriores.
+
+ALTERAÇÃO ATUAL — FORMULÁRIO DE EQUIPES
+- Criação e edição de Equipes foram reconstruídas com a mesma estrutura visual.
+- O seletor de ícone/cor agora é compacto e abre sob o botão “Alterar ícone”.
+- Permanecem disponíveis 20 ícones e 7 cores.
+- Dados, permissões, responsável, integrantes e RPC de salvamento foram preservados.
+- Confirmação visual física deve ser feita após publicar esta revisão.
+
+
+Correção de estabilidade do formulário
+- Removido um parêntese de fechamento excedente no renderizador compartilhado de Equipes.
+- A falha causava SyntaxError ao importar o bundle de funcionalidades e afetava Equipes e Relatórios.
+- O novo formulário de Criar/Editar Equipe foi preservado integralmente.
+- Revisão atual: beta-0-26-82-equipes-formulario-estavel
