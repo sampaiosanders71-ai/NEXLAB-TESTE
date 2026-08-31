@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-fundo-dashboard'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-equipes-identidade-integrada'});
   const REVISION=BUILD.revision;
   if(globalThis.__NEXLAB_TEAM_CHAT__?.revision===REVISION)return;
 
@@ -29,6 +29,10 @@
   function chatDayLabel(value){try{const d=new Date(value),now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate()),target=new Date(d.getFullYear(),d.getMonth(),d.getDate()),days=Math.round((today-target)/86400000);if(days===0)return 'Hoje';if(days===1)return 'Ontem';return new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'short',year:d.getFullYear()!==now.getFullYear()?'numeric':undefined}).format(d).replace('.','');}catch{return 'Mensagens';}}
 
   function node(tag,className,text){const el=document.createElement(tag);if(className)el.className=className;if(text!=null)el.textContent=String(text);return el;}
+  const TEAM_COLOR_VALUES_V02682=Object.freeze({blue:'#2563eb',orange:'#f97316',green:'#16a34a',purple:'#7c3aed',cyan:'#0891b2',pink:'#db2777',amber:'#d97706'});
+  const TEAM_ICON_KEYS_V02682=new Set(['users','code-2','monitor-cog','megaphone','messages-square','palette','clipboard-list','briefcase-business','circle-dollar-sign','microscope','lightbulb','graduation-cap','calendar-days','target','chart-no-axes-combined','headset','files','badge-check','compass','settings']);
+  function teamIdentity(state){const panel=state?.panel;const iconKey=TEAM_ICON_KEYS_V02682.has(String(panel?.dataset?.nexlabTeamIcon||''))?String(panel.dataset.nexlabTeamIcon):'users';const colorKey=TEAM_COLOR_VALUES_V02682[String(panel?.dataset?.nexlabTeamColor||'')]?String(panel.dataset.nexlabTeamColor):'blue';return {iconKey,colorKey,color:TEAM_COLOR_VALUES_V02682[colorKey],name:clean(panel?.dataset?.nexlabTeamName||'Equipe',120)||'Equipe'};}
+  function teamIdentityIcon(state,size=26){const identity=teamIdentity(state);const icon=node('span','nexlab-team-chat-identity-icon-v02682');icon.setAttribute('aria-hidden','true');icon.style.width=`${size}px`;icon.style.height=`${size}px`;icon.style.setProperty('--nexlab-team-chat-icon-mask',`url(./assets/team-icons/${identity.iconKey}.svg?v=app-beta-0-26-82-equipes-identidade-integrada)`);icon.style.setProperty('--nexlab-team-chat-accent',identity.color);return icon;}
   function profile(state,id){return state.profiles?.get?.(String(id))||null;}
   function profileName(state,id){return profile(state,id)?.nome||'Usuário';}
 
@@ -125,7 +129,7 @@
   function buildConversationPanel(state){
     const section=node('section','nexlab-team-chat-v055');section.hidden=true;section.setAttribute('aria-label','Conversa da equipe');
     const head=node('header','nexlab-team-chat-head-v055');
-    const title=node('div');title.append(node('h3','', 'Conversa da equipe'),node('p','', 'Mensagens de texto no contexto desta equipe.'));
+    const identity=teamIdentity(state);const title=node('div','nexlab-team-chat-title-v02682');const copy=node('div','nexlab-team-chat-title-copy-v02682');copy.append(node('h3','', 'Conversa da equipe'),node('p','', identity.name));title.append(teamIdentityIcon(state,26),copy);
     const refresh=node('button','nexlab-team-chat-refresh-v055','Atualizar');refresh.type='button';refresh.addEventListener('click',()=>loadMessages(state,{force:true}));
     head.append(title,refresh);
     const notice=node('div','nexlab-team-chat-message-v055');notice.hidden=true;notice.setAttribute('role','status');

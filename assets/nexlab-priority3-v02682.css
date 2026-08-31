@@ -676,3 +676,182 @@ body[data-nexlab-page="marketing"] .nexlab-mkt-detail-link-v2{
 @media(max-width:680px){
   .nexlab-profile-rebuild-v02682 .nexlab-profile-sidebar-v02682{display:flex!important;flex-direction:column!important}
 }
+
+/* Equipes — Etapas A/B: personalização de ícone e cor */
+.nexlab-team-personalization-v02682{border:1px solid #d7e0eb;border-radius:20px;padding:16px;background:rgba(248,250,252,.84);display:flex;flex-direction:column;gap:14px}
+.nexlab-team-personalization-v02682__head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.nexlab-team-personalization-v02682__head p{margin:4px 0 0;color:#52637a;font-size:12px;line-height:1.45}
+.nexlab-team-personalization-v02682__preview{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid color-mix(in srgb,var(--nexlab-team-accent,#2563eb) 25%,#d7e0eb);border-radius:13px;background:#fff;color:var(--nexlab-team-accent,#2563eb);font-size:11px;font-weight:800;white-space:nowrap}
+.nexlab-team-icon-glyph-v02682{display:inline-block;flex:0 0 auto;background-color:var(--nexlab-team-icon-color,#2563eb);-webkit-mask-image:var(--nexlab-team-icon-mask);mask-image:var(--nexlab-team-icon-mask);-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:contain;mask-size:contain}
+.nexlab-team-icon-suggestion-v02682{appearance:none;border:1px solid #bfdbfe;background:#eff6ff;color:#123c72;border-radius:14px;padding:9px 11px;display:flex;align-items:center;gap:10px;text-align:left;cursor:pointer;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+.nexlab-team-icon-suggestion-v02682:hover{border-color:#60a5fa;box-shadow:0 5px 16px rgba(37,99,235,.09)}
+.nexlab-team-icon-suggestion-v02682 span{display:grid;grid-template-columns:auto auto;column-gap:7px;align-items:baseline}
+.nexlab-team-icon-suggestion-v02682 small{grid-column:1/-1;color:#64748b;font-size:10px;font-weight:700}
+.nexlab-team-icon-suggestion-v02682 strong{font-size:12px;color:#17365d}
+.nexlab-team-icon-suggestion-v02682 em{font-size:10px;color:#2563eb;font-style:normal;font-weight:800}
+.nexlab-team-icon-groups-v02682{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.nexlab-team-icon-group-v02682{min-width:0}
+.nexlab-team-icon-group-v02682>p{margin:0 0 6px;color:#52637a;font-size:10px;line-height:1.2;font-weight:850;text-transform:uppercase;letter-spacing:.055em}
+.nexlab-team-icon-grid-v02682{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.nexlab-team-icon-option-v02682{appearance:none;min-width:0;min-height:46px;border:1px solid #d7e0eb;border-radius:12px;background:#fff;color:#52637a;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;transition:border-color .15s ease,box-shadow .15s ease,background .15s ease,transform .15s ease}
+.nexlab-team-icon-option-v02682:hover{border-color:#93a8c1;background:#f8fafc}
+.nexlab-team-icon-option-v02682.is-selected{border-color:var(--nexlab-accent,#f97316);box-shadow:0 0 0 2px rgba(249,115,22,.14);background:#fffaf5}
+.nexlab-team-icon-option-v02682.is-selected:after{content:"✓";position:absolute;right:4px;top:2px;font-size:9px;line-height:1;color:#ea580c;font-weight:900}
+.nexlab-team-icon-option-v02682>span:last-child:not(.nexlab-team-icon-glyph-v02682){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.nexlab-team-color-field-v02682{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:2px}
+.nexlab-team-color-grid-v02682{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nexlab-team-color-option-v02682{appearance:none;width:32px;height:32px;padding:4px;border-radius:999px;border:1px solid #d7e0eb;background:#fff;cursor:pointer;display:grid;place-items:center;transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease}
+.nexlab-team-color-option-v02682 span{display:block;width:20px;height:20px;border-radius:999px;background:var(--nexlab-team-color);box-shadow:inset 0 0 0 1px rgba(15,39,66,.07)}
+.nexlab-team-color-option-v02682:hover{transform:translateY(-1px);border-color:#94a3b8}
+.nexlab-team-color-option-v02682.is-selected{border-color:var(--nexlab-team-color);box-shadow:0 0 0 2px color-mix(in srgb,var(--nexlab-team-color) 22%,transparent)}
+@media(max-width:640px){.nexlab-team-personalization-v02682{padding:13px;border-radius:17px}.nexlab-team-personalization-v02682__head{align-items:stretch;flex-direction:column}.nexlab-team-personalization-v02682__preview{align-self:flex-start}.nexlab-team-icon-groups-v02682{grid-template-columns:1fr}.nexlab-team-icon-grid-v02682{grid-template-columns:repeat(5,minmax(0,1fr))}.nexlab-team-color-field-v02682{align-items:flex-start;flex-direction:column}.nexlab-team-color-option-v02682{width:36px;height:36px}.nexlab-team-color-option-v02682 span{width:22px;height:22px}}
+
+/* Equipes — Etapas C/D: cards e identidade visual integrada */
+.teams-v2680__grid.teams-v02682__identity-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+.team-card-v02682{
+  --nexlab-team-accent:#2563eb;
+  position:relative;
+  display:flex;
+  min-width:0;
+  flex-direction:column;
+  gap:16px;
+  overflow:visible;
+  padding:20px;
+  border:1px solid #dbe3ec;
+  border-top:3px solid color-mix(in srgb,var(--nexlab-team-accent) 78%,#fff);
+  border-radius:24px;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 12px 34px rgba(15,23,42,.055);
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.team-card-v02682:before{
+  content:"";
+  position:absolute;
+  inset:0 auto auto 0;
+  width:155px;
+  height:108px;
+  border-radius:22px 0 999px 0;
+  background:color-mix(in srgb,var(--nexlab-team-accent) 5%,transparent);
+  pointer-events:none;
+}
+.team-card-v02682:hover{
+  transform:translateY(-2px);
+  border-color:color-mix(in srgb,var(--nexlab-team-accent) 30%,#dbe3ec);
+  box-shadow:0 16px 40px rgba(15,23,42,.085);
+}
+.team-card-v02682.is-archived{background:rgba(248,250,252,.96);opacity:.84}
+.team-card-v02682__head{position:relative;display:flex;align-items:flex-start;gap:12px;min-width:0}
+.team-card-v02682__icon{
+  display:grid;
+  width:58px;
+  height:58px;
+  flex:0 0 auto;
+  place-items:center;
+  border:1px solid color-mix(in srgb,var(--nexlab-team-accent) 22%,#dbe3ec);
+  border-radius:18px;
+  background:color-mix(in srgb,var(--nexlab-team-accent) 8%,#fff);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.65);
+}
+.team-card-v02682__badges{display:flex;min-width:0;flex:1;flex-wrap:wrap;align-items:center;gap:6px;padding-top:2px}
+.team-card-v02682__menu{margin-left:auto!important;flex:0 0 auto}
+.team-card-v02682__body{position:relative;min-width:0}
+.team-card-v02682__body h3{margin:0;color:#0a1f52;font-size:1.18rem;font-weight:950;line-height:1.25;letter-spacing:-.01em}
+.team-card-v02682__body p{display:-webkit-box;min-height:39px;margin:7px 0 0;overflow:hidden;color:#52637a;font-size:.76rem;line-height:1.55;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+.team-card-v02682__responsible{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-width:0;
+  padding:12px 13px;
+  border:1px solid #dfe6ee;
+  border-radius:16px;
+  background:rgba(248,250,252,.72);
+}
+.team-card-v02682__leader-avatar{
+  display:grid;
+  width:38px;
+  height:38px;
+  flex:0 0 auto;
+  place-items:center;
+  border-radius:999px;
+  background:color-mix(in srgb,var(--nexlab-team-accent) 10%,#fff);
+  color:color-mix(in srgb,var(--nexlab-team-accent) 86%,#0f172a);
+  font-size:.78rem;
+  font-weight:950;
+}
+.team-card-v02682__responsible>div{min-width:0}
+.team-card-v02682__responsible span,.team-card-v02682__facts span{display:block;color:#64748b;font-size:.59rem;font-weight:850;letter-spacing:.045em;text-transform:uppercase}
+.team-card-v02682__responsible strong{display:block;margin-top:3px;overflow:hidden;color:#102a57;font-size:.78rem;font-weight:900;text-overflow:ellipsis;white-space:nowrap}
+.team-card-v02682__facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.team-card-v02682__facts>div{min-width:0;padding:12px 13px;border:1px solid #e2e8f0;border-radius:15px;background:#fff}
+.team-card-v02682__facts strong{display:block;margin-top:4px;overflow:hidden;color:#17365d;font-size:.76rem;font-weight:900;text-overflow:ellipsis;white-space:nowrap}
+.team-card-v02682__footer{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:auto;padding-top:1px}
+.team-card-v02682__footer .team-button-v2680{width:100%;min-height:42px;border-radius:13px}
+.team-card-v02682__footer .team-button-v2680.is-primary{box-shadow:0 8px 18px rgba(249,115,22,.14)}
+
+.team-table-identity-v02682{display:flex;align-items:center;gap:9px;min-width:170px}
+.team-table-identity-v02682__icon{display:grid;width:34px;height:34px;flex:0 0 auto;place-items:center;border:1px solid color-mix(in srgb,var(--nexlab-team-accent) 20%,#dbe3ec);border-radius:11px;background:color-mix(in srgb,var(--nexlab-team-accent) 7%,#fff)}
+.team-table-identity-v02682>div{min-width:0}.team-table-identity-v02682 strong,.team-table-identity-v02682 small{display:block}.team-table-identity-v02682 small{margin-top:2px;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.team-details-v02682{--nexlab-team-accent:#2563eb}
+.team-details-v02682 .team-details-v2680__header{
+  border-top:3px solid color-mix(in srgb,var(--nexlab-team-accent) 78%,#fff);
+  background:linear-gradient(135deg,color-mix(in srgb,var(--nexlab-team-accent) 6%,#f8fafc) 0%,#fff 72%);
+}
+.team-details-v02682__identity{display:flex;align-items:flex-start;gap:12px;min-width:0}
+.team-details-v02682__identity>div{min-width:0}
+.team-details-v02682__icon{display:grid;width:50px;height:50px;flex:0 0 auto;place-items:center;border:1px solid color-mix(in srgb,var(--nexlab-team-accent) 22%,#dbe3ec);border-radius:16px;background:color-mix(in srgb,var(--nexlab-team-accent) 8%,#fff)}
+.team-details-v02682 .nexlab-team-tabs-v055{border-bottom-color:color-mix(in srgb,var(--nexlab-team-accent) 16%,#e2e8f0)}
+.team-details-v02682 .nexlab-team-tab-v055[aria-selected="true"]{color:color-mix(in srgb,var(--nexlab-team-accent) 88%,#0f172a);border-color:color-mix(in srgb,var(--nexlab-team-accent) 42%,#e2e8f0);background:color-mix(in srgb,var(--nexlab-team-accent) 7%,#fff)}
+
+.nexlab-team-select-preview-v02682{
+  --nexlab-team-accent:#2563eb;
+  display:inline-flex;
+  max-width:100%;
+  align-items:center;
+  gap:7px;
+  margin-top:6px;
+  padding:6px 9px;
+  border:1px solid color-mix(in srgb,var(--nexlab-team-accent) 22%,#dbe3ec);
+  border-radius:11px;
+  background:color-mix(in srgb,var(--nexlab-team-accent) 6%,#fff);
+  color:#17365d;
+  font-size:.68rem;
+  font-weight:850;
+  line-height:1.2;
+}
+.nexlab-team-select-preview-v02682.is-compact{padding:5px 7px;font-size:.62rem}
+.nexlab-team-select-preview-v02682__icon{display:grid;width:24px;height:24px;flex:0 0 auto;place-items:center;border-radius:8px;background:#fff}
+.nexlab-team-select-preview-v02682.is-compact .nexlab-team-select-preview-v02682__icon{width:21px;height:21px}
+.nexlab-team-select-preview-v02682>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.project-team-selector-v02682 .nexlab-team-select-preview-v02682{align-self:flex-start}
+
+/* Conversa da equipe herda a identidade definida no painel de detalhes. */
+.nexlab-team-chat-title-v02682{display:flex!important;align-items:center!important;gap:9px!important;min-width:0}
+.nexlab-team-chat-title-copy-v02682{min-width:0}
+.nexlab-team-chat-title-copy-v02682 p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nexlab-team-chat-identity-icon-v02682{display:inline-block;flex:0 0 auto;background-color:var(--nexlab-team-chat-accent,#2563eb);-webkit-mask-image:var(--nexlab-team-chat-icon-mask);mask-image:var(--nexlab-team-chat-icon-mask);-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:contain;mask-size:contain}
+.team-details-v02682 .nexlab-team-chat-head-v055{border-bottom-color:color-mix(in srgb,var(--nexlab-team-accent) 16%,#e2e8f0)}
+
+@media(min-width:1500px){.teams-v2680__grid.teams-v02682__identity-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1040px){.teams-v2680__grid.teams-v02682__identity-grid{grid-template-columns:1fr}}
+@media(max-width:700px){
+  .team-card-v02682{padding:16px;border-radius:20px;gap:13px}
+  .team-card-v02682__icon{width:50px;height:50px;border-radius:15px}
+  .team-card-v02682__body h3{font-size:1.05rem}
+  .team-card-v02682__facts,.team-card-v02682__footer{grid-template-columns:1fr}
+  .team-card-v02682__footer{gap:8px}
+  .team-details-v02682__identity{align-items:center}
+  .team-details-v02682__icon{width:42px;height:42px;border-radius:13px}
+}
+@media(max-width:430px){
+  .team-card-v02682__head{align-items:flex-start}
+  .team-card-v02682__badges{gap:5px}
+  .team-card-v02682__responsible{padding:10px}
+  .team-card-v02682__facts>div{padding:10px 11px}
+  .nexlab-team-select-preview-v02682{width:100%}
+}
+@media(prefers-reduced-motion:reduce){.team-card-v02682{transition:none}.team-card-v02682:hover{transform:none}}
