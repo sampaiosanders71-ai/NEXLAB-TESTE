@@ -3,12 +3,12 @@
   "format_version": "2.0",
   "app_version": "0.26.82",
   "version": "0.26.82",
-  "title": "NEXLAB Beta 0.26.82 — Homologação de Vínculos de Equipes C/D/E",
+  "title": "NEXLAB Beta 0.26.82 — Equipes / Tarefas finalizadas",
   "release_title": "Vínculos de Equipes integrados",
-  "revision": "beta-0-26-82-equipes-vinculos-integrados",
-  "build_revision": "beta-0-26-82-equipes-vinculos-integrados",
-  "asset_revision": "app-beta-0-26-82-equipes-vinculos-integrados",
-  "generated_at": "2026-08-31T19:05:00Z",
+  "revision": "beta-0-26-82-equipes-tarefas-finalizadas",
+  "build_revision": "beta-0-26-82-equipes-tarefas-finalizadas",
+  "asset_revision": "app-beta-0-26-82-equipes-tarefas-finalizadas",
+  "generated_at": "2026-08-31T19:56:00Z",
   "updated_at": "2026-08-31T19:05:00Z",
   "minimum_coordinator_approvals_per_item": 1,
   "promotion_rules": {
@@ -198,7 +198,7 @@
   "pwa_homologation": {
     "status": "static_passed_physical_pending",
     "exact_revision_receipt_required": true,
-    "service_worker_cache_revision": "beta-0-26-82-equipes-vinculos-integrados",
+    "service_worker_cache_revision": "beta-0-26-82-equipes-tarefas-finalizadas",
     "physical_device": "pending"
   },
   "external_supabase": {
@@ -212,9 +212,9 @@
     "candidate_deployment": true,
     "official_promotion": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-equipes-vinculos-integrados",
+    "required_revision": "beta-0-26-82-equipes-tarefas-finalizadas",
     "manual_override_allowed": false,
-    "revision": "beta-0-26-82-equipes-vinculos-integrados"
+    "revision": "beta-0-26-82-equipes-tarefas-finalizadas"
   },
   "responsive_checks": [
     "desktop_1365x768",
@@ -239,7 +239,7 @@
   },
   "team_cards_removal_0_26_82": {
     "status": "completed_historical_step",
-    "revision": "beta-0-26-82-equipes-vinculos-integrados",
+    "revision": "beta-0-26-82-equipes-tarefas-finalizadas",
     "visual_card_renderer_removed": true,
     "legacy_card_css_removed": true,
     "table_view_preserved": true,
@@ -287,7 +287,7 @@
   },
   "team_icon_render_fix_0_26_82": {
     "status": "static_verified_physical_required",
-    "revision": "beta-0-26-82-equipes-vinculos-integrados",
+    "revision": "beta-0-26-82-equipes-tarefas-finalizadas",
     "expected_icon_count": 20,
     "expected_color_count": 7,
     "checks": [
@@ -319,7 +319,7 @@
     "historical_only": true
   },
   "team_form_parser_fix_0_26_82": {
-    "revision": "beta-0-26-82-equipes-vinculos-integrados",
+    "revision": "beta-0-26-82-equipes-tarefas-finalizadas",
     "status": "candidate_pending_physical_validation",
     "root_cause": "extra_closing_parenthesis_in_team_form_renderer",
     "affected_modules": [
@@ -340,7 +340,7 @@
     "physical_validation_required": true
   },
   "system_activities_rebuild_0_26_82": {
-    "revision": "beta-0-26-82-equipes-vinculos-integrados",
+    "revision": "beta-0-26-82-equipes-tarefas-finalizadas",
     "status": "superseded_by_monitoring_integration",
     "scope": "Etapas A e B — remover UI anterior e reconstruir painel único",
     "checks": [
@@ -356,7 +356,7 @@
     "historical_only": true
   },
   "system_activities_monitoring_integration_0_26_82": {
-    "revision": "beta-0-26-82-equipes-vinculos-integrados",
+    "revision": "beta-0-26-82-equipes-tarefas-finalizadas",
     "status": "candidate_pending_physical_validation",
     "scope": "Etapas C, D e E — métricas reais, estados operacionais e auditoria",
     "checks": [
@@ -382,7 +382,7 @@
     "physical_validation_required": true
   },
   "system_activities_worker_schedule_alignment_0_26_82": {
-    "revision": "beta-0-26-82-equipes-vinculos-integrados",
+    "revision": "beta-0-26-82-equipes-tarefas-finalizadas",
     "status": "static_verified_physical_required",
     "worker_expected_cadence_minutes": 60,
     "worker_stale_warning_minutes": 90,
@@ -395,7 +395,7 @@
     "physical_validation_required": true
   },
   "team_chat_rebuild_0_26_82": {
-    "revision": "beta-0-26-82-equipes-vinculos-integrados",
+    "revision": "beta-0-26-82-equipes-tarefas-finalizadas",
     "status": "static_verified_physical_required",
     "checks": [
       "A estrutura visual anterior do chat não é renderizada.",
@@ -419,7 +419,7 @@
     "stage_e_static_completed": true
   },
   "team_links_rebuild_0_26_82": {
-    "revision": "beta-0-26-82-equipes-vinculos-integrados",
+    "revision": "beta-0-26-82-equipes-tarefas-finalizadas",
     "scope": "Aba Vínculos do detalhe de Equipes",
     "header_preserved": true,
     "tabs_preserved": true,
@@ -435,5 +435,19 @@
     ],
     "stages_c_d_e_pending": true,
     "physical_confirmation_required": true
+  },
+  "team_tasks_integration": {
+    "revision": "beta-0-26-82-equipes-tarefas-finalizadas",
+    "scope": "Etapas C/D",
+    "checks": [
+      "workspace real",
+      "search_filter",
+      "group_counts",
+      "read_only",
+      "task_details",
+      "status_actions",
+      "responsibility_actions",
+      "delete_permissions"
+    ]
   }
 }
