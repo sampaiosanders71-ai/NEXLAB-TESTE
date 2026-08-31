@@ -14,6 +14,5 @@
 .nexlab-activity-details-v02677 summary{cursor:pointer;color:#475569;font-size:.68rem;font-weight:800;list-style-position:inside}
 .nexlab-activity-details-v02677 dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:.35rem .75rem;margin-top:.6rem;padding:.65rem;border-radius:.75rem;background:#f8fafc;font-size:.66rem;line-height:1.45}
 .nexlab-activity-details-v02677 dt{font-weight:900;color:#64748b}.nexlab-activity-details-v02677 dd{margin:0;color:#334155;overflow-wrap:anywhere}
-.nexlab-system-activities__tab:focus-visible,.nexlab-system-activities [role="tabpanel"]:focus-visible{outline:3px solid rgba(245,158,11,.35);outline-offset:3px}
 @media(max-width:1180px){.nexlab-activity-filters-v02677{grid-template-columns:repeat(3,minmax(0,1fr))}.nexlab-activity-filters-v02677 .nexlab-activity-search{grid-column:span 3}}
 @media(max-width:720px){.nexlab-activity-filters-v02677{grid-template-columns:1fr}.nexlab-activity-filters-v02677 .nexlab-activity-search{grid-column:auto}.nexlab-activity-custom-dates-v02677{grid-template-columns:1fr}.nexlab-activity-clear-filters-v02677{width:100%}.nexlab-activity-filters-v02677 .nexlab-activity-selection-toggle{justify-self:stretch}.nexlab-activity-details-v02677 dl{grid-template-columns:1fr;gap:.2rem}.nexlab-activity-details-v02677 dd{margin-bottom:.4rem}}

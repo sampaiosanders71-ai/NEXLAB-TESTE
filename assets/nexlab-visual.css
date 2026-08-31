@@ -6453,49 +6453,37 @@ body:not([data-nexlab-page="feedback"]) .nexlab-evidence-admin{display:none!impo
 }
 
 
-/* NEXLAB Beta 0.26.82 — Atividades do Sistema unificadas */
-.nexlab-system-activities__tabs{
-  display:flex;gap:.5rem;overflow-x:auto;padding:.35rem;
-  border:1px solid rgb(226 232 240);border-radius:1rem;background:rgb(248 250 252);
-  scrollbar-width:none;position:sticky;top:4.75rem;z-index:12;
-}
-.nexlab-system-activities__tabs::-webkit-scrollbar{display:none}
-.nexlab-system-activities__tab{
-  min-height:2.75rem;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
-  flex:1 0 auto;padding:.65rem 1rem;border-radius:.75rem;color:rgb(100 116 139);
-  font-size:.75rem;font-weight:800;white-space:nowrap;transition:.18s ease;
-}
-.nexlab-system-activities__tab:hover{background:white;color:rgb(15 23 42)}
-.nexlab-system-activities__tab.is-active{background:rgb(15 43 79);color:white;box-shadow:0 4px 14px rgb(15 23 42 / .12)}
-.nexlab-system-activities__overview,.nexlab-system-activities__panel{display:grid;gap:1rem}
-.nexlab-system-activities__metric{
-  min-height:7.5rem;background:white;border:1px solid rgb(226 232 240);border-radius:1rem;padding:1rem;
-  display:flex;flex-direction:column;justify-content:center;box-shadow:0 1px 3px rgb(15 23 42 / .03)
-}
-.nexlab-system-activities__metric span{font-size:.625rem;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:rgb(148 163 184)}
-.nexlab-system-activities__metric strong{font-size:1.05rem;line-height:1.25;margin-top:.35rem;color:rgb(15 43 79)}
-.nexlab-system-activities__metric small{font-size:.68rem;margin-top:.25rem;color:rgb(100 116 139);font-weight:600}
-.nexlab-system-activities__shortcut{
-  display:flex;align-items:center;gap:1rem;background:white;border:1px solid rgb(226 232 240);border-radius:1.15rem;padding:1rem
-}
-.nexlab-system-activities__shortcut-icon{width:2.75rem;height:2.75rem;display:grid;place-items:center;border-radius:.85rem;background:rgb(239 246 255);color:rgb(29 78 216);flex:none}
-.nexlab-system-activities__shortcut-icon.is-health{background:rgb(255 247 237);color:rgb(234 88 12)}
-.nexlab-system-activities__shortcut h2{font-size:.875rem;font-weight:900;color:rgb(15 43 79)}
-.nexlab-system-activities__shortcut p{font-size:.72rem;line-height:1.5;margin-top:.2rem;color:rgb(100 116 139)}
-.nexlab-system-activities__shortcut button{flex:none;padding:.65rem .85rem;border-radius:.75rem;background:rgb(248 250 252);border:1px solid rgb(226 232 240);font-size:.7rem;font-weight:800;color:rgb(51 65 85)}
-.nexlab-system-activities__shortcut button:hover{border-color:rgb(249 115 22);color:rgb(234 88 12)}
-.nexlab-system-activities__panel--activities>.module-shell{max-width:none;padding:0}
-.nexlab-system-activities__panel--activities .module-header{display:none}
-.nexlab-system-activities__panel--health>.space-y-5>header:first-child{display:none}
-@media(max-width:767px){
-  .nexlab-system-activities__tabs{top:4.25rem}
-  .nexlab-system-activities__tab{min-width:max-content;flex:0 0 auto;padding:.6rem .8rem}
-  .nexlab-system-activities__metric{min-height:6.5rem;padding:.85rem}
-  .nexlab-system-activities__metric strong{font-size:.9rem}
-  .nexlab-system-activities__shortcut{align-items:flex-start;flex-wrap:wrap}
-  .nexlab-system-activities__shortcut button{width:100%}
-}
-
+/* NEXLAB Beta 0.26.82 — Atividades do Sistema reconstruídas */
+.nexlab-system-monitor{display:grid;gap:1rem;max-width:none}
+.nexlab-system-monitor__header{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.15rem 0 .35rem}
+.nexlab-system-monitor__heading{display:flex;align-items:center;gap:.9rem;min-width:0}
+.nexlab-system-monitor__heading-icon{width:3rem;height:3rem;border-radius:.85rem;display:grid;place-items:center;flex:none;color:white;background:linear-gradient(145deg,#07162d,#123d7a);box-shadow:0 10px 24px rgba(15,43,79,.18)}
+.nexlab-system-monitor__heading h1{margin:0;color:#0b2a63;font-size:1.35rem;line-height:1.15;font-weight:900;letter-spacing:-.025em}
+.nexlab-system-monitor__heading p{margin:.25rem 0 0;color:#64748b;font-size:.78rem;line-height:1.4;font-weight:600}
+.nexlab-system-monitor__refresh{min-height:2.45rem;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.65rem .9rem;border:1px solid #dbe4ef;border-radius:.8rem;background:#fff;color:#334155;font-size:.7rem;font-weight:850;box-shadow:0 2px 8px rgba(15,23,42,.04);transition:.18s ease}
+.nexlab-system-monitor__refresh:hover:not(:disabled){border-color:#94a3b8;background:#f8fafc;color:#0b2a63}.nexlab-system-monitor__refresh:disabled{opacity:.6;cursor:not-allowed}
+.nexlab-system-monitor__hero{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:1rem;padding:1.1rem 1.25rem;border:1px solid #dbe4ef;border-radius:1rem;background:#fff;box-shadow:0 4px 18px rgba(15,23,42,.045)}
+.nexlab-system-monitor__hero-icon{width:3.15rem;height:3.15rem;border-radius:999px;display:grid;place-items:center;background:#f1f5f9;color:#475569;box-shadow:0 0 0 .55rem rgba(148,163,184,.08)}
+.nexlab-system-monitor__hero-copy h2{margin:0;font-size:1rem;font-weight:900;color:#0f2742}.nexlab-system-monitor__hero-copy p{margin:.3rem 0 0;color:#64748b;font-size:.75rem;line-height:1.45;font-weight:600}
+.nexlab-system-monitor__hero-time{display:flex;align-items:center;gap:.65rem;color:#64748b;font-size:.7rem;font-weight:700;white-space:nowrap}.nexlab-system-monitor__hero-time i{width:.45rem;height:.45rem;border-radius:50%;background:#94a3b8}
+.nexlab-system-monitor__hero.is-success .nexlab-system-monitor__hero-icon{background:#eaf8ef;color:#16a34a;box-shadow:0 0 0 .55rem rgba(22,163,74,.07)}.nexlab-system-monitor__hero.is-success .nexlab-system-monitor__hero-copy h2{color:#159447}.nexlab-system-monitor__hero.is-success .nexlab-system-monitor__hero-time i{background:#22c55e}
+.nexlab-system-monitor__hero.is-warning .nexlab-system-monitor__hero-icon{background:#fff7ed;color:#ea580c;box-shadow:0 0 0 .55rem rgba(234,88,12,.07)}.nexlab-system-monitor__hero.is-warning .nexlab-system-monitor__hero-time i{background:#f97316}
+.nexlab-system-monitor__hero.is-danger .nexlab-system-monitor__hero-icon{background:#fef2f2;color:#dc2626;box-shadow:0 0 0 .55rem rgba(220,38,38,.06)}.nexlab-system-monitor__hero.is-danger .nexlab-system-monitor__hero-time i{background:#ef4444}
+.nexlab-system-monitor__services{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem}
+.nexlab-system-monitor__service{min-height:6.65rem;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;align-items:center;column-gap:.8rem;row-gap:.5rem;padding:1rem;border:1px solid #dbe4ef;border-radius:1rem;background:#fff;box-shadow:0 3px 14px rgba(15,23,42,.035)}
+.nexlab-system-monitor__service-icon{grid-row:1/3;width:2.7rem;height:2.7rem;border-radius:.75rem;display:grid;place-items:center;background:#eff6ff;color:#2563eb}.nexlab-system-monitor__service.is-success .nexlab-system-monitor__service-icon{background:#ecfdf3;color:#16a34a}.nexlab-system-monitor__service.is-warning .nexlab-system-monitor__service-icon{background:#fff7ed;color:#ea580c}.nexlab-system-monitor__service.is-danger .nexlab-system-monitor__service-icon{background:#fef2f2;color:#dc2626}.nexlab-system-monitor__service.is-neutral .nexlab-system-monitor__service-icon{background:#f1f5f9;color:#475569}
+.nexlab-system-monitor__service-copy{min-width:0}.nexlab-system-monitor__service-copy strong{display:block;color:#0f2742;font-size:.8rem;font-weight:900}.nexlab-system-monitor__service-copy span{display:block;margin-top:.2rem;color:#64748b;font-size:.66rem;line-height:1.4;font-weight:600}
+.nexlab-system-monitor__status-chip{justify-self:start;border:1px solid #dbe4ef;border-radius:999px;padding:.28rem .55rem;background:#f8fafc;color:#64748b;font-size:.6rem;line-height:1;font-weight:900}.nexlab-system-monitor__service.is-success .nexlab-system-monitor__status-chip{border-color:#bbf7d0;background:#f0fdf4;color:#15803d}.nexlab-system-monitor__service.is-warning .nexlab-system-monitor__status-chip{border-color:#fed7aa;background:#fff7ed;color:#c2410c}.nexlab-system-monitor__service.is-danger .nexlab-system-monitor__status-chip{border-color:#fecaca;background:#fef2f2;color:#b91c1c}
+.nexlab-system-monitor__section{border:1px solid #dbe4ef;border-radius:1rem;background:#fff;padding:1rem;box-shadow:0 3px 14px rgba(15,23,42,.035)}
+.nexlab-system-monitor__section-title{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:.75rem}.nexlab-system-monitor__section-title h2{margin:0;color:#0f2742;font-size:.82rem;font-weight:900}.nexlab-system-monitor__section-title span{color:#94a3b8;font-size:.62rem;font-weight:700}
+.nexlab-system-monitor__resources{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}.nexlab-system-monitor__resource{border:1px solid #e2e8f0;border-radius:.95rem;padding:1rem;background:#fff}.nexlab-system-monitor__resource-head{display:flex;align-items:center;gap:.75rem}.nexlab-system-monitor__resource-icon{width:2.55rem;height:2.55rem;border-radius:999px;display:grid;place-items:center;flex:none}.nexlab-system-monitor__resource-icon.is-green{background:#eaf8ef;color:#15803d}.nexlab-system-monitor__resource-icon.is-blue{background:#eff6ff;color:#1d4ed8}.nexlab-system-monitor__resource-head strong{display:block;color:#0f2742;font-size:.76rem;font-weight:900}.nexlab-system-monitor__resource-head span{display:block;margin-top:.2rem;color:#64748b;font-size:.64rem;font-weight:600}
+.nexlab-system-monitor__resource-value{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:.8rem;margin-top:1rem}.nexlab-system-monitor__resource-track{height:.58rem;border-radius:999px;overflow:hidden;background:#e9eef5}.nexlab-system-monitor__resource-fill{height:100%;border-radius:inherit}.nexlab-system-monitor__resource-fill.is-pending{width:0;background:#94a3b8}.nexlab-system-monitor__resource-value>strong{min-width:2rem;text-align:right;color:#0f2742;font-size:.8rem;font-weight:900}
+.nexlab-system-monitor__pending-note{display:flex;align-items:flex-start;gap:.45rem;margin:.75rem 0 0;color:#64748b;font-size:.62rem;line-height:1.45;font-weight:650}.nexlab-system-monitor__pending-note svg{flex:none;color:#3b82f6;margin-top:.03rem}
+.nexlab-system-monitor__operational{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem}.nexlab-system-monitor__operational-item{min-height:5.4rem;border:1px solid #e2e8f0;border-radius:.85rem;padding:.85rem;background:#f8fafc}.nexlab-system-monitor__operational-item span{display:block;color:#64748b;font-size:.6rem;font-weight:800}.nexlab-system-monitor__operational-item strong{display:block;margin-top:.35rem;color:#0f2742;font-size:1.25rem;line-height:1;font-weight:950}.nexlab-system-monitor__operational-item small{display:block;margin-top:.4rem;color:#94a3b8;font-size:.58rem;font-weight:700}
+.nexlab-system-monitor__history{border:1px solid #e2e8f0;border-radius:.9rem;overflow:hidden}.nexlab-system-monitor__history-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:.75rem;padding:.8rem .85rem;background:#fff}.nexlab-system-monitor__history-icon{width:1.8rem;height:1.8rem;border-radius:999px;display:grid;place-items:center;background:#f1f5f9;color:#64748b}.nexlab-system-monitor__history-row.is-success .nexlab-system-monitor__history-icon{background:#ecfdf3;color:#16a34a}.nexlab-system-monitor__history-row.is-warning .nexlab-system-monitor__history-icon{background:#fff7ed;color:#ea580c}.nexlab-system-monitor__history-row.is-danger .nexlab-system-monitor__history-icon{background:#fef2f2;color:#dc2626}.nexlab-system-monitor__history-copy strong{display:block;color:#334155;font-size:.68rem;font-weight:800}.nexlab-system-monitor__history-copy span{display:block;margin-top:.15rem;color:#94a3b8;font-size:.6rem;font-weight:600}.nexlab-system-monitor__history-row time{color:#64748b;font-size:.62rem;font-weight:700}.nexlab-system-monitor__history-empty{min-height:4rem;display:flex;align-items:center;justify-content:center;gap:.55rem;color:#94a3b8;font-size:.65rem;font-weight:700}
+.nexlab-system-monitor__technical{border:1px solid #dbe4ef;border-radius:1rem;background:#fff;overflow:hidden}.nexlab-system-monitor__technical summary{display:flex;align-items:center;gap:.55rem;padding:.85rem 1rem;cursor:pointer;color:#475569;font-size:.68rem;font-weight:850;list-style:none}.nexlab-system-monitor__technical summary::-webkit-details-marker{display:none}.nexlab-system-monitor__technical summary span{flex:1}.nexlab-system-monitor__technical-chevron{transform:rotate(90deg);transition:transform .18s ease}.nexlab-system-monitor__technical[open] .nexlab-system-monitor__technical-chevron{transform:rotate(270deg)}.nexlab-system-monitor__technical-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.65rem;padding:0 1rem 1rem}.nexlab-system-monitor__technical-grid>div{min-width:0;border:1px solid #e2e8f0;border-radius:.75rem;padding:.75rem;background:#f8fafc}.nexlab-system-monitor__technical-grid span{display:block;color:#94a3b8;font-size:.56rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}.nexlab-system-monitor__technical-grid strong{display:block;margin-top:.3rem;color:#334155;font-size:.64rem;line-height:1.35;font-weight:800;overflow-wrap:anywhere}
+@media(max-width:1180px){.nexlab-system-monitor__services{grid-template-columns:repeat(2,minmax(0,1fr))}.nexlab-system-monitor__operational{grid-template-columns:repeat(2,minmax(0,1fr))}.nexlab-system-monitor__technical-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:767px){.nexlab-system-monitor{gap:.8rem}.nexlab-system-monitor__header{align-items:flex-start}.nexlab-system-monitor__heading-icon{width:2.7rem;height:2.7rem}.nexlab-system-monitor__heading h1{font-size:1.05rem}.nexlab-system-monitor__heading p{font-size:.68rem}.nexlab-system-monitor__refresh{width:2.55rem;min-height:2.55rem;padding:0}.nexlab-system-monitor__refresh span{display:none}.nexlab-system-monitor__hero{grid-template-columns:auto minmax(0,1fr);padding:1rem}.nexlab-system-monitor__hero-time{grid-column:1/-1;justify-content:flex-end}.nexlab-system-monitor__services,.nexlab-system-monitor__resources,.nexlab-system-monitor__operational,.nexlab-system-monitor__technical-grid{grid-template-columns:1fr}.nexlab-system-monitor__section{padding:.85rem}.nexlab-system-monitor__section-title{align-items:flex-start;flex-direction:column;gap:.2rem}.nexlab-system-monitor__service{min-height:5.7rem}.nexlab-system-monitor__history-row{grid-template-columns:auto minmax(0,1fr)}.nexlab-system-monitor__history-row time{grid-column:2}.nexlab-system-monitor__technical-grid{padding:0 .85rem .85rem}}
 
 /* NEXLAB Beta 0.26.82 — cabeçalhos escuros padronizados em todos os módulos */
 body:not([data-nexlab-page="dashboard"]) main .module-header,
@@ -6782,3 +6770,17 @@ body[data-nexlab-page="inventario"] main .nexlab-inventory-sectionbar .nexlab-mo
     justify-content: flex-start;
   }
 }
+/* NEXLAB Beta 0.26.82 — Atividades do Sistema: monitoramento integrado C/D/E. */
+.nexlab-system-monitor__resource-fill.is-success{background:#22c55e}
+.nexlab-system-monitor__resource-fill.is-warning{background:#f97316}
+.nexlab-system-monitor__resource-fill.is-danger{background:#ef4444}
+.nexlab-system-monitor__resource-fill.is-neutral{background:#94a3b8}
+.nexlab-system-monitor__resource-note{display:flex;align-items:flex-start;gap:.45rem;margin:.75rem 0 0;color:#64748b;font-size:.62rem;line-height:1.45;font-weight:650}
+.nexlab-system-monitor__resource-note svg{flex:none;color:#3b82f6;margin-top:.03rem}
+.nexlab-system-monitor__operational-item.is-success{background:#f7fdf9;border-color:#dcfce7}
+.nexlab-system-monitor__operational-item.is-success strong{color:#15803d}
+.nexlab-system-monitor__operational-item.is-warning{background:#fffaf5;border-color:#fed7aa}
+.nexlab-system-monitor__operational-item.is-warning strong{color:#c2410c}
+.nexlab-system-monitor__operational-item.is-danger{background:#fff7f7;border-color:#fecaca}
+.nexlab-system-monitor__operational-item.is-danger strong{color:#b91c1c}
+.nexlab-system-monitor__history-row+.nexlab-system-monitor__history-row{border-top:1px solid #edf2f7}

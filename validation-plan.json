@@ -5,11 +5,11 @@
   "version": "0.26.82",
   "title": "Roteiro de validação dos Coordenadores — revisão atual",
   "release_title": "NEXLAB Beta 0.26.82 — Formulário de Equipes estável",
-  "revision": "beta-0-26-82-equipes-formulario-estavel",
-  "build_revision": "beta-0-26-82-equipes-formulario-estavel",
-  "asset_revision": "app-beta-0-26-82-equipes-formulario-estavel",
+  "revision": "beta-0-26-82-atividades-sistema-worker-horario",
+  "build_revision": "beta-0-26-82-atividades-sistema-worker-horario",
+  "asset_revision": "app-beta-0-26-82-atividades-sistema-worker-horario",
   "generated_at": "2026-08-31T04:50:16Z",
-  "updated_at": "2026-08-31T04:50:16Z",
+  "updated_at": "2026-08-31T12:47:01Z",
   "minimum_coordinator_approvals_per_item": 1,
   "promotion_rules": {
     "all_required_items_approved": true,
@@ -184,7 +184,7 @@
   "pwa_homologation": {
     "status": "static_passed_physical_pending",
     "exact_revision_receipt_required": true,
-    "service_worker_cache_revision": "beta-0-26-82-equipes-formulario-estavel",
+    "service_worker_cache_revision": "beta-0-26-82-atividades-sistema-worker-horario",
     "physical_device": "pending"
   },
   "external_supabase": {
@@ -198,9 +198,9 @@
     "candidate_deployment": true,
     "official_promotion": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-equipes-formulario-estavel",
+    "required_revision": "beta-0-26-82-atividades-sistema-worker-horario",
     "manual_override_allowed": false,
-    "revision": "beta-0-26-82-equipes-formulario-estavel"
+    "revision": "beta-0-26-82-atividades-sistema-worker-horario"
   },
   "responsive_checks": [
     "desktop_1365x768",
@@ -219,11 +219,13 @@
     "observability": "exact_revision_classification",
     "team_card_renderer": "team-card-rebuilt-v02682",
     "team_card_content": "icon_name_responsible_members_only",
-    "team_card_default_view": "cards"
+    "team_card_default_view": "cards",
+    "system_activities_ui": "single_monitor_screen_no_tabs",
+    "system_activities_stage": "A_B_C_D_E_completed"
   },
   "team_cards_removal_0_26_82": {
     "status": "completed_historical_step",
-    "revision": "beta-0-26-82-equipes-formulario-estavel",
+    "revision": "beta-0-26-82-atividades-sistema-worker-horario",
     "visual_card_renderer_removed": true,
     "legacy_card_css_removed": true,
     "table_view_preserved": true,
@@ -271,7 +273,7 @@
   },
   "team_icon_render_fix_0_26_82": {
     "status": "static_verified_physical_required",
-    "revision": "beta-0-26-82-equipes-formulario-estavel",
+    "revision": "beta-0-26-82-atividades-sistema-worker-horario",
     "expected_icon_count": 20,
     "expected_color_count": 7,
     "checks": [
@@ -303,7 +305,7 @@
     "historical_only": true
   },
   "team_form_parser_fix_0_26_82": {
-    "revision": "beta-0-26-82-equipes-formulario-estavel",
+    "revision": "beta-0-26-82-atividades-sistema-worker-horario",
     "status": "candidate_pending_physical_validation",
     "root_cause": "extra_closing_parenthesis_in_team_form_renderer",
     "affected_modules": [
@@ -321,6 +323,61 @@
       "Alterar ícone abre o seletor com 20 ícones e 7 cores.",
       "Salvar criação e edição continua usando nexlab_save_team_v02682."
     ],
+    "physical_validation_required": true
+  },
+  "system_activities_rebuild_0_26_82": {
+    "revision": "beta-0-26-82-atividades-sistema-worker-horario",
+    "status": "superseded_by_monitoring_integration",
+    "scope": "Etapas A e B — remover UI anterior e reconstruir painel único",
+    "checks": [
+      "Atividades do Sistema não exibe abas internas.",
+      "A tela única mostra estado geral, serviços essenciais, recursos, saúde operacional, histórico e detalhes técnicos.",
+      "Somente Admin mantém acesso ao módulo.",
+      "O botão Atualizar executa a verificação geral já existente.",
+      "Nenhum percentual sem fonte real é inventado; a revisão atual substitui os placeholders por métricas reais disponíveis e mantém traço quando não existe quota confiável.",
+      "Desktop e celular mantêm leitura em grid responsivo."
+    ],
+    "stage_c_metrics_required": false,
+    "physical_validation_required": true,
+    "historical_only": true
+  },
+  "system_activities_monitoring_integration_0_26_82": {
+    "revision": "beta-0-26-82-atividades-sistema-worker-horario",
+    "status": "candidate_pending_physical_validation",
+    "scope": "Etapas C, D e E — métricas reais, estados operacionais e auditoria",
+    "checks": [
+      "Aplicativo usa erros e incidentes da revisão exata atual, sem misturar revisões antigas.",
+      "Supabase mostra tamanho real do banco e uso real de conexões PostgreSQL.",
+      "Comunicação executa leitura autenticada no Worker/D1 quando existe equipe acessível ao Admin.",
+      "Nenhum percentual de quota D1 ou plano Supabase é inventado quando o provedor não expõe o limite.",
+      "Notificações mostram fila ativa, atrasos, falhas das últimas 24h e último Worker.",
+      "Estado geral é verde, amarelo ou vermelho conforme os quatro serviços essenciais.",
+      "Atualização automática ocorre a cada 90 segundos somente com a página visível.",
+      "Atualização manual permanece disponível.",
+      "Histórico recente contém somente eventos técnicos relevantes.",
+      "Detalhes técnicos mostram versão, revisão, banco, Worker/D1 e notificações."
+    ],
+    "thresholds": {
+      "database_connections_warning_pct": 70,
+      "database_connections_danger_pct": 85,
+      "communication_latency_warning_ms": 3000,
+      "communication_timeout_ms": 8000,
+      "notification_worker_stale_minutes": 15,
+      "automatic_refresh_seconds": 90
+    },
+    "physical_validation_required": true
+  },
+  "system_activities_worker_schedule_alignment_0_26_82": {
+    "revision": "beta-0-26-82-atividades-sistema-worker-horario",
+    "status": "static_verified_physical_required",
+    "worker_expected_cadence_minutes": 60,
+    "worker_stale_warning_minutes": 90,
+    "immediate_danger_conditions": [
+      "notification_failures_24h > 0",
+      "queue_overdue > 0",
+      "last_worker.status in failed,error,degraded"
+    ],
+    "purpose": "Evitar falso alerta entre execuções horárias normais do Worker de notificações.",
     "physical_validation_required": true
   }
 }
