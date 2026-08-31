@@ -4,12 +4,12 @@
   "app_version": "0.26.82",
   "version": "0.26.82",
   "title": "Roteiro de validação dos Coordenadores — revisão atual",
-  "release_title": "NEXLAB Beta 0.26.82 — Homologação consistente",
-  "revision": "beta-0-26-82-equipes-cards-reconstruidos",
-  "build_revision": "beta-0-26-82-equipes-cards-reconstruidos",
-  "asset_revision": "app-beta-0-26-82-equipes-cards-reconstruidos",
-  "generated_at": "2026-08-31T03:01:07Z",
-  "updated_at": "2026-08-31T03:35:51Z",
+  "release_title": "NEXLAB Beta 0.26.82 — Ícones de Equipes renderizados",
+  "revision": "beta-0-26-82-equipes-icones-renderizados",
+  "build_revision": "beta-0-26-82-equipes-icones-renderizados",
+  "asset_revision": "app-beta-0-26-82-equipes-icones-renderizados",
+  "generated_at": "2026-08-31T03:55:38Z",
+  "updated_at": "2026-08-31T03:55:38Z",
   "minimum_coordinator_approvals_per_item": 1,
   "promotion_rules": {
     "all_required_items_approved": true,
@@ -184,7 +184,7 @@
   "pwa_homologation": {
     "status": "static_passed_physical_pending",
     "exact_revision_receipt_required": true,
-    "service_worker_cache_revision": "beta-0-26-82-equipes-cards-reconstruidos",
+    "service_worker_cache_revision": "beta-0-26-82-equipes-icones-renderizados",
     "physical_device": "pending"
   },
   "external_supabase": {
@@ -198,8 +198,9 @@
     "candidate_deployment": true,
     "official_promotion": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-equipes-cards-reconstruidos",
-    "manual_override_allowed": false
+    "required_revision": "beta-0-26-82-equipes-icones-renderizados",
+    "manual_override_allowed": false,
+    "revision": "beta-0-26-82-equipes-icones-renderizados"
   },
   "responsive_checks": [
     "desktop_1365x768",
@@ -222,7 +223,7 @@
   },
   "team_cards_removal_0_26_82": {
     "status": "completed_historical_step",
-    "revision": "beta-0-26-82-equipes-cards-reconstruidos",
+    "revision": "beta-0-26-82-equipes-icones-renderizados",
     "visual_card_renderer_removed": true,
     "legacy_card_css_removed": true,
     "table_view_preserved": true,
@@ -237,7 +238,7 @@
   },
   "team_cards_rebuild_0_26_82": {
     "status": "static_verified_physical_required",
-    "revision": "beta-0-26-82-equipes-cards-reconstruidos",
+    "revision": "historical_pre_icon_render_fix",
     "default_view": "cards",
     "table_view_preserved": true,
     "expected_visible_content": [
@@ -266,6 +267,23 @@
       "Celular em uma coluna",
       "Sem sobreposição do menu"
     ],
+    "physical_confirmation_required": true
+  },
+  "team_icon_render_fix_0_26_82": {
+    "status": "static_verified_physical_required",
+    "revision": "beta-0-26-82-equipes-icones-renderizados",
+    "expected_icon_count": 20,
+    "expected_color_count": 7,
+    "checks": [
+      "Todos os 20 ícones aparecem no seletor de Criar/Editar equipe",
+      "Preview mostra o ícone selecionado",
+      "Sugestão pelo nome mostra o ícone sugerido",
+      "Card mostra ícone e cor da equipe",
+      "Tabela e detalhes mostram a mesma identidade",
+      "Conversa da equipe mostra a mesma identidade",
+      "Fallback Users aparece para chave vazia ou inválida"
+    ],
+    "implementation": "inline_svg",
     "physical_confirmation_required": true
   }
 }
