@@ -32,7 +32,7 @@ main :where(input,select,textarea){min-width:0}
 }
 
 /* Um único posicionador de menus para cards, equipes e detalhes. */
-:where(.card-action-menu,.project-details-more-v02667,.team-card-v2680__menu)[open]{z-index:120!important}
+:where(.card-action-menu,.project-details-more-v02667)[open]{z-index:120!important}
 [data-nexlab-viewport-menu="true"]{
   position:fixed!important;inset:auto!important;
   top:var(--nexlab-menu-top)!important;left:var(--nexlab-menu-left)!important;

@@ -5,9 +5,9 @@
   "version": "0.26.82",
   "title": "Roteiro de validação dos Coordenadores — revisão atual",
   "release_title": "NEXLAB Beta 0.26.82 — Homologação consistente",
-  "revision": "beta-0-26-82-homologacao-consistente",
-  "build_revision": "beta-0-26-82-homologacao-consistente",
-  "asset_revision": "app-beta-0-26-82-homologacao-consistente",
+  "revision": "beta-0-26-82-equipes-cards-removidos",
+  "build_revision": "beta-0-26-82-equipes-cards-removidos",
+  "asset_revision": "app-beta-0-26-82-equipes-cards-removidos",
   "generated_at": "2026-08-31T03:01:07Z",
   "updated_at": "2026-08-31T03:01:07Z",
   "minimum_coordinator_approvals_per_item": 1,
@@ -158,19 +158,19 @@
       "expected_result": "O fundo personalizado aparece também no Dashboard, usa a arte horizontal no desktop e a vertical no celular, sem prejudicar a legibilidade."
     },
     {
-      "item_key": "team_identity_integration",
-      "title": "Equipes — cards e identidade visual integrada",
+      "item_key": "team_cards_removed",
+      "title": "Equipes — cartões removidos e identidade preservada",
       "test_steps": [
-        "Abrir Equipes no desktop e confirmar que cada card usa o ícone e a cor salvos para a equipe",
-        "Confirmar área, status, responsável, quantidade de integrantes, atualização e ações do card",
-        "Abrir os detalhes da equipe e confirmar a mesma identidade visual do card",
-        "Abrir a aba Conversa e confirmar ícone/cor e nome da equipe no cabeçalho",
-        "Abrir Projetos e confirmar a identidade da equipe no filtro e no campo Equipe vinculada de criar/editar",
-        "Alternar para a tabela de Equipes e confirmar ícone/cor junto ao nome",
-        "Repetir em celular, verificando coluna única, botões legíveis e ausência de rolagem horizontal",
-        "Testar teclado/foco e menu de ações sem perda das permissões atuais"
+        "Abrir Equipes e confirmar que a visualização inicial temporária é Tabela",
+        "Alternar para Cartões e confirmar que nenhum card antigo é renderizado; deve aparecer somente o estado de reconstrução",
+        "Na Tabela, confirmar que ícone e cor salvos continuam junto ao nome da equipe",
+        "Abrir detalhes e confirmar que ícone/cor, dados, integrantes, vínculos e histórico permanecem disponíveis",
+        "Abrir Conversa e confirmar que a identidade da equipe continua no cabeçalho",
+        "Abrir Criar/Editar equipe e confirmar seletor de 20 ícones, 7 cores e sugestão pelo nome",
+        "Abrir Projetos e confirmar identidade da equipe no filtro e no seletor de equipe vinculada",
+        "Confirmar que não existem classes/estilos team-card-v02682 ou team-card-v2680 no pacote ativo"
       ],
-      "expected_result": "A identidade escolhida para cada equipe permanece consistente em cards, detalhes, conversa, tabela e seletores, com layout responsivo e sem regressões funcionais."
+      "expected_result": "Os cartões antigos não existem mais. A Tabela mantém o módulo utilizável e toda a identidade, dados e funções das equipes permanecem preservados enquanto a reconstrução visual está pendente."
     }
   ],
   "functional_homologation": {
@@ -184,7 +184,7 @@
   "pwa_homologation": {
     "status": "static_passed_physical_pending",
     "exact_revision_receipt_required": true,
-    "service_worker_cache_revision": "beta-0-26-82-homologacao-consistente",
+    "service_worker_cache_revision": "beta-0-26-82-equipes-cards-removidos",
     "physical_device": "pending"
   },
   "external_supabase": {
@@ -198,7 +198,7 @@
     "candidate_deployment": true,
     "official_promotion": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-homologacao-consistente",
+    "required_revision": "beta-0-26-82-equipes-cards-removidos",
     "manual_override_allowed": false
   },
   "responsive_checks": [
@@ -216,5 +216,19 @@
     "profile_layout": "left_info_right_contributions_desktop_single_column_mobile",
     "custom_background": "desktop_and_mobile_including_dashboard",
     "observability": "exact_revision_classification"
+  },
+  "team_cards_removal_0_26_82": {
+    "status": "cards_removed_rebuild_pending",
+    "revision": "beta-0-26-82-equipes-cards-removidos",
+    "visual_card_renderer_removed": true,
+    "legacy_card_css_removed": true,
+    "table_view_preserved": true,
+    "table_view_temporary_default": true,
+    "team_data_preserved": true,
+    "team_details_preserved": true,
+    "team_chat_preserved": true,
+    "team_personalization_preserved": true,
+    "rebuild_started": false,
+    "physical_confirmation_required": true
   }
 }

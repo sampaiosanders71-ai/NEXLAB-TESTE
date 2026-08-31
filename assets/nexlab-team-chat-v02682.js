@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-homologacao-consistente'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-equipes-cards-removidos'});
   const REVISION=BUILD.revision;
   if(globalThis.__NEXLAB_TEAM_CHAT__?.revision===REVISION)return;
 
@@ -32,7 +32,7 @@
   const TEAM_COLOR_VALUES_V02682=Object.freeze({blue:'#2563eb',orange:'#f97316',green:'#16a34a',purple:'#7c3aed',cyan:'#0891b2',pink:'#db2777',amber:'#d97706'});
   const TEAM_ICON_KEYS_V02682=new Set(['users','code-2','monitor-cog','megaphone','messages-square','palette','clipboard-list','briefcase-business','circle-dollar-sign','microscope','lightbulb','graduation-cap','calendar-days','target','chart-no-axes-combined','headset','files','badge-check','compass','settings']);
   function teamIdentity(state){const panel=state?.panel;const iconKey=TEAM_ICON_KEYS_V02682.has(String(panel?.dataset?.nexlabTeamIcon||''))?String(panel.dataset.nexlabTeamIcon):'users';const colorKey=TEAM_COLOR_VALUES_V02682[String(panel?.dataset?.nexlabTeamColor||'')]?String(panel.dataset.nexlabTeamColor):'blue';return {iconKey,colorKey,color:TEAM_COLOR_VALUES_V02682[colorKey],name:clean(panel?.dataset?.nexlabTeamName||'Equipe',120)||'Equipe'};}
-  function teamIdentityIcon(state,size=26){const identity=teamIdentity(state);const icon=node('span','nexlab-team-chat-identity-icon-v02682');icon.setAttribute('aria-hidden','true');icon.style.width=`${size}px`;icon.style.height=`${size}px`;icon.style.setProperty('--nexlab-team-chat-icon-mask',`url(./assets/team-icons/${identity.iconKey}.svg?v=app-beta-0-26-82-homologacao-consistente)`);icon.style.setProperty('--nexlab-team-chat-accent',identity.color);return icon;}
+  function teamIdentityIcon(state,size=26){const identity=teamIdentity(state);const icon=node('span','nexlab-team-chat-identity-icon-v02682');icon.setAttribute('aria-hidden','true');icon.style.width=`${size}px`;icon.style.height=`${size}px`;icon.style.setProperty('--nexlab-team-chat-icon-mask',`url(./assets/team-icons/${identity.iconKey}.svg?v=app-beta-0-26-82-equipes-cards-removidos)`);icon.style.setProperty('--nexlab-team-chat-accent',identity.color);return icon;}
   function profile(state,id){return state.profiles?.get?.(String(id))||null;}
   function profileName(state,id){return profile(state,id)?.nome||'Usuário';}
 

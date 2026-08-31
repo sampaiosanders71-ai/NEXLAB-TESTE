@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-homologacao-consistente'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-equipes-cards-removidos'});
   if(globalThis.__NEXLAB_RESPONSIVE_V02671__?.revision===BUILD.revision)return;
 
   const root=document.documentElement;
@@ -10,7 +10,7 @@
   let raf=0;
   let scanTimer=0;
   let closing=false;
-  const detailsSelector='details.card-action-menu,details.project-details-more-v02667,details.team-card-v2680__menu';
+  const detailsSelector='details.card-action-menu,details.project-details-more-v02667';
   const popoverSelector=':scope > .card-action-menu__popover,:scope > .project-details-more-menu-v02667,:scope > [role="menu"]';
 
   function updateViewport(){
