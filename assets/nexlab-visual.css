@@ -2930,7 +2930,6 @@ textarea{
 }
 
 /* NEXLAB v26.8.0 — Equipes etapa 3: histórico, notificações e vínculos */
-.team-workspace-v2680__links,
 .team-workspace-v2680__history{
   display:grid;
   gap:14px;
@@ -2957,134 +2956,39 @@ textarea{
   line-height:1.45;
 }
 
-.team-link-form-v2680{
-  display:grid;
-  grid-template-columns:minmax(120px,.42fr) minmax(240px,1fr) auto;
-  gap:10px;
-  align-items:end;
-  padding:13px;
-  border:1px solid #fed7aa;
-  border-radius:16px;
-  background:#fff7ed;
-}
 
-.team-link-form-v2680 label{
-  display:grid;
-  gap:6px;
-  min-width:0;
-}
 
-.team-link-form-v2680 label > span{
-  color:#9a3412;
-  font-size:.62rem;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.045em;
-}
 
-.team-link-form-v2680 select{
-  width:100%;
-  min-height:40px;
-  padding:0 10px;
-  border:1px solid #fdba74;
-  border-radius:11px;
-  background:#fff;
-  color:#334155;
-  font-size:.68rem;
-  font-weight:750;
-  outline:none;
-}
 
-.team-link-form-v2680 select:focus{
-  border-color:#f97316;
-  box-shadow:0 0 0 3px rgba(249,115,22,.12);
-}
 
-.team-link-list-v2680{
-  display:grid;
-  gap:9px;
-}
 
-.team-link-card-v2680{
-  display:grid;
-  grid-template-columns:auto minmax(0,1fr) auto;
-  gap:11px;
-  align-items:center;
-  padding:12px 13px;
-  border:1px solid #e2e8f0;
-  border-radius:15px;
-  background:#f8fafc;
-}
 
-.team-link-card-v2680 > div{
-  min-width:0;
-}
 
-.team-link-card-v2680 strong,
-.team-link-card-v2680 small{
-  display:block;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
 
-.team-link-card-v2680 strong{
-  color:#0f172a;
-  font-size:.72rem;
-  font-weight:850;
-}
 
-.team-link-card-v2680 small{
-  margin-top:3px;
-  color:#94a3b8;
-  font-size:.62rem;
-  font-weight:650;
-}
 
-.team-link-card-v2680__type{
-  display:inline-flex;
-  min-height:28px;
-  align-items:center;
-  justify-content:center;
-  padding:0 9px;
-  border-radius:999px;
-  background:#eff6ff;
-  color:#1d4ed8;
-  font-size:.58rem;
-  font-weight:900;
-  white-space:nowrap;
-}
 
-.team-link-card-v2680__type.type-event{
-  background:#ecfdf5;
-  color:#047857;
-}
 
-.team-link-card-v2680__type.type-meeting{
-  background:#f5f3ff;
-  color:#6d28d9;
-}
 
-.team-link-card-v2680__remove{
-  min-height:32px;
-  padding:0 10px;
-  border:1px solid #fecaca;
-  border-radius:10px;
-  background:#fff;
-  color:#b91c1c;
-  font-size:.61rem;
-  font-weight:850;
-  cursor:pointer;
-}
 
-.team-link-card-v2680__remove:hover{
-  background:#fef2f2;
-}
 
-.team-link-card-v2680__remove:disabled{
-  cursor:not-allowed;
-  opacity:.55;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .team-workspace-v2680__loading,
 .team-workspace-v2680__error{
@@ -3199,35 +3103,10 @@ textarea{
   font-weight:750;
 }
 
-@media(max-width:760px){
-  .team-link-form-v2680{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .team-link-form-v2680 > button{
-    grid-column:1/-1;
-    width:100%;
-  }
-}
-
 @media(max-width:520px){
-  .team-workspace-v2680__links,
   .team-workspace-v2680__history{
     padding:14px;
     border-radius:17px;
-  }
-
-  .team-link-form-v2680,
-  .team-link-card-v2680{
-    grid-template-columns:1fr;
-  }
-
-  .team-link-card-v2680__type{
-    justify-self:start;
-  }
-
-  .team-link-card-v2680__remove{
-    width:100%;
   }
 
   .team-history-v2680__title{

@@ -3,13 +3,13 @@
   "format_version": "2.0",
   "app_version": "0.26.82",
   "version": "0.26.82",
-  "title": "Roteiro de validação dos Coordenadores — revisão atual",
-  "release_title": "NEXLAB Beta 0.26.82 — Formulário de Equipes estável",
-  "revision": "beta-0-26-82-equipes-chat-integrado",
-  "build_revision": "beta-0-26-82-equipes-chat-integrado",
-  "asset_revision": "app-beta-0-26-82-equipes-chat-integrado",
-  "generated_at": "2026-08-31T04:50:16Z",
-  "updated_at": "2026-08-31T12:47:01Z",
+  "title": "NEXLAB Beta 0.26.82 — Homologação de Vínculos de Equipes C/D/E",
+  "release_title": "Vínculos de Equipes integrados",
+  "revision": "beta-0-26-82-equipes-vinculos-integrados",
+  "build_revision": "beta-0-26-82-equipes-vinculos-integrados",
+  "asset_revision": "app-beta-0-26-82-equipes-vinculos-integrados",
+  "generated_at": "2026-08-31T19:05:00Z",
+  "updated_at": "2026-08-31T19:05:00Z",
   "minimum_coordinator_approvals_per_item": 1,
   "promotion_rules": {
     "all_required_items_approved": true,
@@ -171,6 +171,20 @@
         "Confirmar que não existem classes/estilos team-card-v02682 ou team-card-v2680 no pacote ativo"
       ],
       "expected_result": "Os cartões antigos não existem mais. A Tabela mantém o módulo utilizável e toda a identidade, dados e funções das equipes permanecem preservados enquanto a reconstrução visual está pendente."
+    },
+    {
+      "item_key": "team_links_cde",
+      "title": "Equipes — Vínculos C/D/E",
+      "test_steps": [
+        "Abrir uma equipe e acessar a aba Vínculos sem alterar o cabeçalho, abas superiores ou rodapé.",
+        "Confirmar resumo real por Projetos, Eventos e Reuniões e contador total de vínculos.",
+        "Alternar o tipo, selecionar um registro disponível e adicionar o vínculo; confirmar feedback de salvamento e atualização do contador.",
+        "Usar Atualizar para recarregar o workspace da equipe sem polling automático.",
+        "Desvincular um registro e confirmar que o modal deixa claro que o registro original não será excluído.",
+        "Abrir uma equipe sem permissão de gestão e uma equipe arquivada; confirmar o estado somente leitura.",
+        "Repetir em celular e verificar controles de toque, ausência de overflow horizontal e seletor sem zoom indevido."
+      ],
+      "expected_result": "A aba Vínculos usa os RPCs existentes, apresenta estados reais e seguros de adição/remoção, mantém modo consulta quando aplicável e permanece responsiva sem alterar o cabeçalho do detalhe da equipe."
     }
   ],
   "functional_homologation": {
@@ -184,7 +198,7 @@
   "pwa_homologation": {
     "status": "static_passed_physical_pending",
     "exact_revision_receipt_required": true,
-    "service_worker_cache_revision": "beta-0-26-82-equipes-chat-integrado",
+    "service_worker_cache_revision": "beta-0-26-82-equipes-vinculos-integrados",
     "physical_device": "pending"
   },
   "external_supabase": {
@@ -198,9 +212,9 @@
     "candidate_deployment": true,
     "official_promotion": false,
     "required_version": "0.26.82",
-    "required_revision": "beta-0-26-82-equipes-chat-integrado",
+    "required_revision": "beta-0-26-82-equipes-vinculos-integrados",
     "manual_override_allowed": false,
-    "revision": "beta-0-26-82-equipes-chat-integrado"
+    "revision": "beta-0-26-82-equipes-vinculos-integrados"
   },
   "responsive_checks": [
     "desktop_1365x768",
@@ -225,7 +239,7 @@
   },
   "team_cards_removal_0_26_82": {
     "status": "completed_historical_step",
-    "revision": "beta-0-26-82-equipes-chat-integrado",
+    "revision": "beta-0-26-82-equipes-vinculos-integrados",
     "visual_card_renderer_removed": true,
     "legacy_card_css_removed": true,
     "table_view_preserved": true,
@@ -273,7 +287,7 @@
   },
   "team_icon_render_fix_0_26_82": {
     "status": "static_verified_physical_required",
-    "revision": "beta-0-26-82-equipes-chat-integrado",
+    "revision": "beta-0-26-82-equipes-vinculos-integrados",
     "expected_icon_count": 20,
     "expected_color_count": 7,
     "checks": [
@@ -305,7 +319,7 @@
     "historical_only": true
   },
   "team_form_parser_fix_0_26_82": {
-    "revision": "beta-0-26-82-equipes-chat-integrado",
+    "revision": "beta-0-26-82-equipes-vinculos-integrados",
     "status": "candidate_pending_physical_validation",
     "root_cause": "extra_closing_parenthesis_in_team_form_renderer",
     "affected_modules": [
@@ -326,7 +340,7 @@
     "physical_validation_required": true
   },
   "system_activities_rebuild_0_26_82": {
-    "revision": "beta-0-26-82-equipes-chat-integrado",
+    "revision": "beta-0-26-82-equipes-vinculos-integrados",
     "status": "superseded_by_monitoring_integration",
     "scope": "Etapas A e B — remover UI anterior e reconstruir painel único",
     "checks": [
@@ -342,7 +356,7 @@
     "historical_only": true
   },
   "system_activities_monitoring_integration_0_26_82": {
-    "revision": "beta-0-26-82-equipes-chat-integrado",
+    "revision": "beta-0-26-82-equipes-vinculos-integrados",
     "status": "candidate_pending_physical_validation",
     "scope": "Etapas C, D e E — métricas reais, estados operacionais e auditoria",
     "checks": [
@@ -368,7 +382,7 @@
     "physical_validation_required": true
   },
   "system_activities_worker_schedule_alignment_0_26_82": {
-    "revision": "beta-0-26-82-equipes-chat-integrado",
+    "revision": "beta-0-26-82-equipes-vinculos-integrados",
     "status": "static_verified_physical_required",
     "worker_expected_cadence_minutes": 60,
     "worker_stale_warning_minutes": 90,
@@ -381,7 +395,7 @@
     "physical_validation_required": true
   },
   "team_chat_rebuild_0_26_82": {
-    "revision": "beta-0-26-82-equipes-chat-integrado",
+    "revision": "beta-0-26-82-equipes-vinculos-integrados",
     "status": "static_verified_physical_required",
     "checks": [
       "A estrutura visual anterior do chat não é renderizada.",
@@ -403,5 +417,23 @@
     "stage_c_completed": true,
     "stage_d_completed": true,
     "stage_e_static_completed": true
+  },
+  "team_links_rebuild_0_26_82": {
+    "revision": "beta-0-26-82-equipes-vinculos-integrados",
+    "scope": "Aba Vínculos do detalhe de Equipes",
+    "header_preserved": true,
+    "tabs_preserved": true,
+    "footer_preserved": true,
+    "checks": [
+      "Abrir Equipes > uma equipe > Vínculos e confirmar que somente o conteúdo da aba foi alterado.",
+      "Confirmar título Projetos, eventos e reuniões e contador de vínculos no canto direito.",
+      "Confirmar seletor segmentado Projeto | Evento | Reunião.",
+      "Confirmar Registro disponível e botão Adicionar vínculo no mesmo bloco no desktop.",
+      "Sem vínculos, confirmar estado vazio grande com borda tracejada e mensagem de primeiro vínculo.",
+      "No celular, confirmar empilhamento do formulário sem rolagem horizontal da página.",
+      "Confirmar que adicionar/desvincular continua usando as permissões e RPCs existentes."
+    ],
+    "stages_c_d_e_pending": true,
+    "physical_confirmation_required": true
   }
 }

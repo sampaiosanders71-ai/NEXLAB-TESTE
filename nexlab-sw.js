@@ -1,5 +1,5 @@
 importScripts('./assets/nexlab-release-identity.js');
-const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-equipes-chat-integrado',assetRevision:'app-beta-0-26-82-equipes-chat-integrado',cacheName:'nexlab-beta-0-26-82-equipes-chat-integrado',generatedAt:'2026-08-31T04:25:19Z'});
+const BUILD_IDENTITY=self.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-equipes-vinculos-integrados',assetRevision:'app-beta-0-26-82-equipes-vinculos-integrados',cacheName:'nexlab-beta-0-26-82-equipes-vinculos-integrados',generatedAt:'2026-08-31T18:30:00Z'});
 const APP_VERSION=BUILD_IDENTITY.version;
 const APP_RELEASE=BUILD_IDENTITY.release;
 const APP_REVISION=BUILD_IDENTITY.revision;
