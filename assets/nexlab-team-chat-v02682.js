@@ -2,7 +2,7 @@
   'use strict';
   const TEAM_ICON_SVG_SHAPES_V02682={"badge-check":[["path",{"d":"M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"}],["path",{"d":"m9 12 2 2 4-4"}]],"briefcase-business":[["path",{"d":"M12 12h.01"}],["path",{"d":"M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"}],["path",{"d":"M22 13a18.15 18.15 0 0 1-20 0"}],["rect",{"width":"20","height":"14","x":"2","y":"6","rx":"2"}]],"calendar-days":[["path",{"d":"M8 2v4"}],["path",{"d":"M16 2v4"}],["rect",{"width":"18","height":"18","x":"3","y":"4","rx":"2"}],["path",{"d":"M3 10h18"}],["path",{"d":"M8 14h.01"}],["path",{"d":"M12 14h.01"}],["path",{"d":"M16 14h.01"}],["path",{"d":"M8 18h.01"}],["path",{"d":"M12 18h.01"}],["path",{"d":"M16 18h.01"}]],"chart-no-axes-combined":[["path",{"d":"M12 16v5"}],["path",{"d":"M16 14v7"}],["path",{"d":"M20 10v11"}],["path",{"d":"m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"}],["path",{"d":"M4 18v3"}],["path",{"d":"M8 14v7"}]],"circle-dollar-sign":[["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"}],["path",{"d":"M12 18V6"}]],"clipboard-list":[["rect",{"width":"8","height":"4","x":"8","y":"2","rx":"1","ry":"1"}],["path",{"d":"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"}],["path",{"d":"M12 11h4"}],["path",{"d":"M12 16h4"}],["path",{"d":"M8 11h.01"}],["path",{"d":"M8 16h.01"}]],"code-2":[["path",{"d":"m18 16 4-4-4-4"}],["path",{"d":"m6 8-4 4 4 4"}],["path",{"d":"m14.5 4-5 16"}]],"compass":[["path",{"d":"m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"}],["circle",{"cx":"12","cy":"12","r":"10"}]],"files":[["path",{"d":"M20 7h-3a2 2 0 0 1-2-2V2"}],["path",{"d":"M9 18a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h7l4 4v10a2 2 0 0 1-2 2Z"}],["path",{"d":"M3 7.6v12.8A1.6 1.6 0 0 0 4.6 22h9.8"}]],"graduation-cap":[["path",{"d":"M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"}],["path",{"d":"M22 10v6"}],["path",{"d":"M6 12.5V16a6 3 0 0 0 12 0v-3.5"}]],"headset":[["path",{"d":"M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"}],["path",{"d":"M21 16v2a4 4 0 0 1-4 4h-5"}]],"lightbulb":[["path",{"d":"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"}],["path",{"d":"M9 18h6"}],["path",{"d":"M10 22h4"}]],"megaphone":[["path",{"d":"m3 11 18-5v12L3 14v-3z"}],["path",{"d":"M11.6 16.8a3 3 0 1 1-5.8-1.6"}]],"messages-square":[["path",{"d":"M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"}],["path",{"d":"M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"}]],"microscope":[["path",{"d":"M6 18h8"}],["path",{"d":"M3 22h18"}],["path",{"d":"M14 22a7 7 0 1 0 0-14h-1"}],["path",{"d":"M9 14h2"}],["path",{"d":"M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"}],["path",{"d":"M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"}]],"monitor-cog":[["path",{"d":"M12 17v4"}],["path",{"d":"m14.305 7.53.923-.382"}],["path",{"d":"m15.228 4.852-.923-.383"}],["path",{"d":"m16.852 3.228-.383-.924"}],["path",{"d":"m16.852 8.772-.383.923"}],["path",{"d":"m19.148 3.228.383-.924"}],["path",{"d":"m19.53 9.696-.382-.924"}],["path",{"d":"m20.772 4.852.924-.383"}],["path",{"d":"m20.772 7.148.924.383"}],["path",{"d":"M22 13v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"}],["path",{"d":"M8 21h8"}],["circle",{"cx":"18","cy":"6","r":"3"}]],"palette":[["path",{"d":"M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"}],["circle",{"cx":"13.5","cy":"6.5","r":".5","fill":"currentColor"}],["circle",{"cx":"17.5","cy":"10.5","r":".5","fill":"currentColor"}],["circle",{"cx":"6.5","cy":"12.5","r":".5","fill":"currentColor"}],["circle",{"cx":"8.5","cy":"7.5","r":".5","fill":"currentColor"}]],"settings":[["path",{"d":"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"}],["circle",{"cx":"12","cy":"12","r":"3"}]],"target":[["circle",{"cx":"12","cy":"12","r":"10"}],["circle",{"cx":"12","cy":"12","r":"6"}],["circle",{"cx":"12","cy":"12","r":"2"}]],"users":[["path",{"d":"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"}],["path",{"d":"M16 3.128a4 4 0 0 1 0 7.744"}],["path",{"d":"M22 21v-2a4 4 0 0 0-3-3.87"}],["circle",{"cx":"9","cy":"7","r":"4"}]]};
 
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-equipes-vinculos-integrados'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-equipes-tarefas-finalizadas'});
   const REVISION=BUILD.revision;
   if(globalThis.__NEXLAB_TEAM_CHAT__?.revision===REVISION)return;
 
@@ -43,7 +43,15 @@
     reply:[['path',{d:'m9 17-5-5 5-5'}],['path',{d:'M4 12h10a6 6 0 0 1 6 6v1'}]],
     clipboard:[['rect',{x:'9',y:'2',width:'6',height:'4',rx:'1'}],['path',{d:'M9 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3'}]],
     more:[['circle',{cx:'5',cy:'12',r:'1'}],['circle',{cx:'12',cy:'12',r:'1'}],['circle',{cx:'19',cy:'12',r:'1'}]],
-    chevron:[['path',{d:'m9 18 6-6-6-6'}]]
+    chevron:[['path',{d:'m9 18 6-6-6-6'}]],
+    search:[['circle',{cx:'11',cy:'11',r:'7'}],['path',{d:'m21 21-4.35-4.35'}]],
+    filter:[['polygon',{points:'22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3'}]],
+    plus:[['path',{d:'M12 5v14'}],['path',{d:'M5 12h14'}]],
+    clock:[['circle',{cx:'12',cy:'12',r:'9'}],['path',{d:'M12 7v5l3 2'}]],
+    play:[['path',{d:'M8 5v14l11-7z'}]],
+    'check-circle':[['circle',{cx:'12',cy:'12',r:'9'}],['path',{d:'m9 12 2 2 4-4'}]],
+    calendar:[['rect',{x:'3',y:'4',width:'18',height:'18',rx:'2'}],['path',{d:'M16 2v4'}],['path',{d:'M8 2v4'}],['path',{d:'M3 10h18'}]],
+    dot:[['circle',{cx:'12',cy:'12',r:'2.25'}]]
   });
   function teamChatUiIcon(key,size=16){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('fill','none');svg.setAttribute('stroke','currentColor');svg.setAttribute('stroke-width','2');svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');svg.setAttribute('width',String(size));svg.setAttribute('height',String(size));svg.setAttribute('aria-hidden','true');for(const [tag,attrs] of TEAM_CHAT_UI_ICONS_V02682[key]||[]){const child=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [name,value] of Object.entries(attrs))child.setAttribute(name,String(value));svg.appendChild(child);}return svg;}
   const TEAM_COLOR_VALUES_V02682=Object.freeze({blue:'#2563eb',orange:'#f97316',green:'#16a34a',purple:'#7c3aed',cyan:'#0891b2',pink:'#db2777',amber:'#d97706'});
@@ -184,17 +192,36 @@
   }
 
   function buildTasksPanel(state){
-    const section=node('section','nexlab-team-tasks-v056');section.hidden=true;section.setAttribute('aria-label','Tarefas da equipe');
-    const head=node('header','nexlab-team-tasks-head-v056');
-    const title=node('div');title.append(node('h3','', 'Tarefas da equipe'),node('p','', 'Ações atribuídas aos integrantes desta equipe.'));
-    const actions=node('div','nexlab-team-tasks-head-actions-v056');
-    const refresh=node('button','nexlab-team-task-refresh-v056','Atualizar');refresh.type='button';refresh.addEventListener('click',()=>loadTeamTasks(state,{force:true}));
-    const create=node('button','nexlab-team-task-create-v056','+ Tarefa');create.type='button';create.hidden=true;create.addEventListener('click',()=>showTaskForm(state));
-    actions.append(refresh,create);head.append(title,actions);
-    const notice=node('div','nexlab-team-task-message-v056');notice.hidden=true;notice.setAttribute('role','status');
-    const form=node('div','nexlab-team-task-form-slot-v056');form.hidden=true;
-    const list=node('div','nexlab-team-task-list-v056');list.setAttribute('aria-live','polite');
-    section.append(head,notice,form,list);return section;
+    const section=node('section','nexlab-team-tasks-rebuilt-v02682');section.hidden=true;section.setAttribute('aria-label','Tarefas da equipe');
+    const shell=node('div','nexlab-team-tasks-shell-v02682');
+    const heading=node('header','nexlab-team-tasks-heading-v02682');
+    const headingCopy=node('div','nexlab-team-tasks-heading-copy-v02682');headingCopy.append(node('h3','', 'Tarefas da equipe'),node('p','', 'Acompanhe e gerencie as tarefas da equipe.'));
+    heading.appendChild(headingCopy);
+
+    const toolbar=node('div','nexlab-team-tasks-toolbar-v02682');
+    const search=node('label','nexlab-team-task-search-v02682');
+    search.appendChild(teamChatUiIcon('search',16));
+    const searchInput=document.createElement('input');searchInput.type='search';searchInput.placeholder='Buscar tarefa...';searchInput.setAttribute('aria-label','Buscar tarefa');searchInput.autocomplete='off';searchInput.value=state.taskSearchTerm||'';searchInput.addEventListener('input',()=>{state.taskSearchTerm=searchInput.value||'';renderTeamTasks(state);});search.appendChild(searchInput);
+
+    const toolbarActions=node('div','nexlab-team-task-toolbar-actions-v02682');
+    const filtersWrap=node('div','nexlab-team-task-filters-wrap-v02682');
+    const filters=node('button','nexlab-team-task-filter-toggle-v02682');filters.type='button';filters.setAttribute('aria-haspopup','menu');filters.setAttribute('aria-expanded',String(!!state.taskFilterPanelOpen));filters.append(teamChatUiIcon('filter',14),node('span','', 'Filtros'));filters.addEventListener('click',()=>{state.taskFilterPanelOpen=!state.taskFilterPanelOpen;renderTeamTasks(state);});
+    const filtersPanel=node('div','nexlab-team-task-filter-panel-v02682');filtersPanel.hidden=true;filtersPanel.setAttribute('role','menu');
+    const filterOptions=[['all','Todas'],['mine','Minhas'],['overdue','Atrasadas'],['scheduled','Com prazo']];
+    for(const [value,label] of filterOptions){const option=node('button','nexlab-team-task-filter-option-v02682',label);option.type='button';option.setAttribute('role','menuitemradio');option.dataset.quickFilter=value;option.addEventListener('click',()=>{state.taskQuickFilter=value;state.taskFilterPanelOpen=false;renderTeamTasks(state);});filtersPanel.appendChild(option);}    
+    filtersWrap.append(filters,filtersPanel);
+
+    const create=node('button','nexlab-team-task-create-v02682');create.type='button';create.hidden=true;create.append(teamChatUiIcon('plus',15),node('span','', 'Nova tarefa'));create.addEventListener('click',()=>showTaskForm(state));
+
+    toolbarActions.append(filtersWrap,create);toolbar.append(search,toolbarActions);
+
+    const summary=node('div','nexlab-team-task-summary-v02682');
+    const notice=node('div','nexlab-team-task-message-v02682');notice.hidden=true;notice.setAttribute('role','status');
+    const form=node('div','nexlab-team-task-form-slot-v02682');form.hidden=true;
+    const detail=node('div','nexlab-team-task-detail-slot-v02682');detail.hidden=true;
+    const list=node('div','nexlab-team-task-groups-v02682');list.setAttribute('aria-live','polite');
+
+    shell.append(heading,toolbar,summary,notice,form,detail,list);section.appendChild(shell);return section;
   }
 
   function buildTeamWorkspace(tasks,chat){
@@ -202,14 +229,70 @@
   }
 
   function setTaskMessage(state,message,type='info'){
-    const box=state.tasksPanel?.querySelector('.nexlab-team-task-message-v056');if(!box)return;
-    box.hidden=!message;box.className=`nexlab-team-task-message-v056 is-${type}`;box.textContent=message||'';
+    const box=state.tasksPanel?.querySelector('.nexlab-team-task-message-v02682');if(!box)return;
+    box.hidden=!message;box.className=`nexlab-team-task-message-v02682 is-${type}`;box.textContent=message||'';
   }
 
-  function formatTaskDay(value){if(!value)return 'Sem prazo';try{return new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'}).format(new Date(`${value}T12:00:00`));}catch{return String(value);}}
+  function formatTaskDay(value){if(!value)return 'Sem prazo';try{return new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'}).format(new Date(`${String(value).slice(0,10)}T12:00:00`));}catch{return String(value);}}
+  function formatTaskMoment(value){if(!value)return '';try{return new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'}).format(new Date(value));}catch{return '';}}
   function taskPriorityLabel(value){return ({baixa:'Baixa',normal:'Normal',alta:'Alta',urgente:'Urgente'}[String(value||'').toLowerCase()]||'Normal');}
-  function taskStatusLabel(value){return ({pendente:'Pendente',em_andamento:'Em andamento',concluida:'Concluída',cancelada:'Cancelada'}[String(value||'').toLowerCase()]||'Pendente');}
-  function isTaskOverdue(task){if(!task?.deadline||['concluida','cancelada'].includes(String(task.status||'')))return false;const today=new Date();today.setHours(0,0,0,0);const due=new Date(`${task.deadline}T00:00:00`);return Number.isFinite(due.getTime())&&due<today;}
+  function normalizeTaskStatus(value){const key=String(value||'').toLowerCase();if(key==='em andamento')return 'em_andamento';if(key==='concluída')return 'concluida';return ({pendente:'pendente',em_andamento:'em_andamento',concluida:'concluida',cancelada:'cancelada'}[key]||'pendente');}
+  function taskStatusLabel(value){return ({pendente:'Pendentes',em_andamento:'Em andamento',concluida:'Concluídas',cancelada:'Canceladas'}[normalizeTaskStatus(value)]||'Pendentes');}
+  function taskSummaryLabel(key){return ({total:'todas as tarefas',pendente:'aguardando início',em_andamento:'em progresso',concluida:'finalizadas'}[key]||'todas as tarefas');}
+  function isTaskOverdue(task){if(!task?.deadline||['concluida','cancelada'].includes(normalizeTaskStatus(task.status)))return false;const today=new Date();today.setHours(0,0,0,0);const due=new Date(`${String(task.deadline).slice(0,10)}T00:00:00`);return Number.isFinite(due.getTime())&&due<today;}
+  function taskMetaLine(task){const status=normalizeTaskStatus(task?.status);const creator=clean(task?.created_by_name||task?.creator_name||task?.author_name||'Equipe',80)||'Equipe';if(status==='concluida'){const who=clean(task?.completed_by_name||task?.responsible_name||creator,80)||creator;const date=formatTaskMoment(task?.completed_at||task?.updated_at)||formatTaskDay(task?.deadline);return date?`Concluída por ${who} • Concluída em: ${date}`:`Concluída por ${who}`;}if(status==='em_andamento'){const started=formatTaskMoment(task?.started_at||task?.updated_at);return started?`Criada por ${creator} • Iniciada em: ${started}`:`Criada por ${creator}`;}if(status==='cancelada'){const canceled=formatTaskMoment(task?.updated_at);return canceled?`Criada por ${creator} • Cancelada em: ${canceled}`:`Criada por ${creator}`;}const due=task?.deadline?formatTaskDay(task.deadline):'';return due?`Criada por ${creator} • Prazo: ${due}`:`Criada por ${creator}`;}
+  function taskDateBadge(task){const status=normalizeTaskStatus(task?.status);if(status==='concluida'){return {icon:'check-circle',label:formatTaskMoment(task?.completed_at)||formatTaskDay(task?.deadline)};}return {icon:'calendar',label:formatTaskDay(task?.deadline)};}
+  function taskGroupTone(key){return ({pendente:'pending',em_andamento:'progress',concluida:'done',cancelada:'muted'}[normalizeTaskStatus(key)]||'pending');}
+  function taskMatchesSearch(task,query){const q=clean(query||'',120).toLowerCase();if(!q)return true;const hay=[task?.title,task?.description,task?.responsible_name,task?.created_by_name,task?.creator_name,task?.author_name,taskPriorityLabel(task?.priority),taskStatusLabel(task?.status)].map(value=>String(value||'').toLowerCase()).join(' ');return hay.includes(q);}
+  function taskMatchesQuickFilter(state,task){const mode=String(state.taskQuickFilter||'all');if(mode==='mine')return String(task?.responsible_id||'')===String(state.currentUserId||'');if(mode==='overdue')return isTaskOverdue(task);if(mode==='scheduled')return !!task?.deadline;return true;}
+  function taskGroupCatalog(){return [{key:'pendente',label:'Pendentes'},{key:'em_andamento',label:'Em andamento'},{key:'concluida',label:'Concluídas'},{key:'cancelada',label:'Canceladas'}];}
+
+  function taskWorkspaceReadOnly(workspace){
+    if(!workspace)return false;
+    return !!(workspace.read_only||workspace.team_archived||workspace.archived||workspace.team?.archived_at||workspace.team?.archived===true);
+  }
+  function taskStatusActionLabel(status){
+    return ({pendente:'Iniciar tarefa',em_andamento:'Voltar para pendente',concluida:'Reabrir tarefa',cancelada:'Reabrir tarefa'}[normalizeTaskStatus(status)]||'Alterar status');
+  }
+  function taskNextStatus(status){
+    return ({pendente:'em_andamento',em_andamento:'pendente',concluida:'em_andamento',cancelada:'pendente'}[normalizeTaskStatus(status)]||'pendente');
+  }
+  function taskDetailValue(label,value){const row=node('div','nexlab-team-task-detail-row-v02682');row.append(node('span','',label),node('strong','',value||'—'));return row;}
+  function closeTaskDetail(state){const slot=state.tasksPanel?.querySelector('.nexlab-team-task-detail-slot-v02682');if(slot){slot.hidden=true;slot.replaceChildren();}state.taskDetailId='';}
+  function showTaskDetails(state,task){
+    const slot=state.tasksPanel?.querySelector('.nexlab-team-task-detail-slot-v02682');if(!slot||!task)return;
+    state.taskOpenMenuId='';state.taskDetailId=String(task.id||'');slot.hidden=false;slot.replaceChildren();
+    const card=node('section','nexlab-team-task-detail-card-v02682');card.dataset.taskDetailId=state.taskDetailId;
+    const head=node('div','nexlab-team-task-detail-head-v02682');
+    const title=node('div');title.append(node('small','',taskStatusLabel(task.status)),node('h4','',task.title||'Tarefa'));
+    const close=node('button','nexlab-team-task-detail-close-v02682');close.type='button';close.setAttribute('aria-label','Fechar detalhes');close.textContent='×';close.addEventListener('click',()=>closeTaskDetail(state));head.append(title,close);card.appendChild(head);
+    if(task.description)card.appendChild(node('p','nexlab-team-task-detail-description-v02682',task.description));
+    const grid=node('div','nexlab-team-task-detail-grid-v02682');grid.append(
+      taskDetailValue('Responsável',task.responsible_name||'Não atribuído'),
+      taskDetailValue('Prazo',formatTaskDay(task.deadline)),
+      taskDetailValue('Prioridade',taskPriorityLabel(task.priority)),
+      taskDetailValue('Situação',taskStatusLabel(task.status).replace(/s$/,''))
+    );card.appendChild(grid);
+    const meta=node('p','nexlab-team-task-detail-meta-v02682',taskMetaLine(task));card.appendChild(meta);
+    const actions=node('div','nexlab-team-task-detail-actions-v02682');
+    const readonly=taskWorkspaceReadOnly(state.taskWorkspace);
+    if(task.can_edit&&!readonly){const edit=node('button','','Editar tarefa');edit.type='button';edit.addEventListener('click',()=>{closeTaskDetail(state);showTaskForm(state,task);});actions.appendChild(edit);}
+    if(task.can_complete&&normalizeTaskStatus(task.status)!=='concluida'&&!readonly){const done=node('button','is-primary','Concluir');done.type='button';done.addEventListener('click',()=>{closeTaskDetail(state);completeTeamTask(state,task);});actions.appendChild(done);}
+    if(task.can_delete&&!readonly){const remove=node('button','is-danger','Excluir');remove.type='button';remove.addEventListener('click',()=>{closeTaskDetail(state);deleteTeamTask(state,task);});actions.appendChild(remove);}
+    if(actions.childElementCount)card.appendChild(actions);slot.appendChild(card);
+    requestAnimationFrame(()=>card.scrollIntoView({behavior:'smooth',block:'nearest'}));
+  }
+  async function updateTeamTaskStatus(state,task,status){
+    if(!task?.can_edit||taskWorkspaceReadOnly(state.taskWorkspace))return;
+    try{
+      setTaskMessage(state,'Atualizando situação da tarefa...','info');
+      const c=await waitClient();
+      const {data,error}=await c.rpc('nexlab_manage_team_task_v1',{p_team_id:state.teamId,p_action:'update',p_task_id:task.id,p_title:task.title||'Tarefa',p_description:task.description||null,p_responsible_id:task.responsible_id||null,p_deadline:task.deadline||null,p_priority:task.priority||'normal',p_status:status});
+      if(error)throw error;if(!data?.ok)throw new Error('O Supabase não confirmou a mudança de situação.');
+      state.taskWorkspace=data.workspace||state.taskWorkspace;state.tasksLoaded=true;state.taskOpenMenuId='';closeTaskDetail(state);renderTeamTasks(state);setTaskMessage(state,'Situação da tarefa atualizada.','ok');
+      try{globalThis.__NEXLAB_PENDING_REALTIME_HUB__?.refresh?.({table:'tasks',eventType:'LOCAL_MUTATION'});globalThis.dispatchEvent(new CustomEvent('nexlab:pending-refresh'));}catch{}
+    }catch(error){console.error('NEXLAB team task status',error);setTaskMessage(state,error?.message||'Não foi possível alterar a situação da tarefa.','err');}
+  }
 
   function bindTaskRealtime(state){
     if(state.taskRealtimeUnsubscribe)return;
@@ -225,15 +308,15 @@
 
   async function loadTeamTasks(state,{force=false}={}){
     if(state.tasksLoading)return state.tasksLoading;
-    const list=state.tasksPanel?.querySelector('.nexlab-team-task-list-v056');const refresh=state.tasksPanel?.querySelector('.nexlab-team-task-refresh-v056');
+    const list=state.tasksPanel?.querySelector('.nexlab-team-task-groups-v02682');const refresh=state.tasksPanel?.querySelector('.nexlab-team-task-refresh-v02682');
     if(refresh){refresh.disabled=true;refresh.textContent='Atualizando...';}
     if(list&&(!state.tasksLoaded||force))list.classList.add('is-loading');
     setTaskMessage(state,'Carregando tarefas...','info');
     state.tasksLoading=(async()=>{
       const c=await waitClient();const {data,error}=await c.rpc('nexlab_get_team_tasks_v1',{p_team_id:state.teamId});if(error)throw error;
       if(!data?.ok)throw new Error('O Supabase não confirmou o carregamento das tarefas.');
-      state.taskWorkspace=data;state.tasksLoaded=true;setTaskMessage(state,'','info');renderTeamTasks(state);syncNavigation(state);return data;
-    })().catch(error=>{console.error('NEXLAB team tasks load',error);setTaskMessage(state,error?.message||'Não foi possível carregar as tarefas.','err');return null;}).finally(()=>{
+      state.taskWorkspace=data;state.tasksLoaded=true;state.taskLoadError=null;setTaskMessage(state,'','info');renderTeamTasks(state);syncNavigation(state);return data;
+    })().catch(error=>{console.error('NEXLAB team tasks load',error);state.taskLoadError=error;setTaskMessage(state,error?.message||'Não foi possível carregar as tarefas.','err');renderTeamTasks(state);return null;}).finally(()=>{
       state.tasksLoading=null;if(list)list.classList.remove('is-loading');if(refresh){refresh.disabled=false;refresh.textContent='Atualizar';}
     });
     return state.tasksLoading;
@@ -245,25 +328,26 @@
     if(state.targetTaskId)highlightTaskTarget(state,state.targetTaskId);
   }
 
-  function taskField(label,input){const wrap=node('label','nexlab-team-task-field-v056');wrap.append(node('span','',label),input);return wrap;}
+  function taskField(label,input){const wrap=node('label','nexlab-team-task-field-v02682');wrap.append(node('span','',label),input);return wrap;}
 
   function showTaskForm(state,task=null,prefill=null){
     const permissions=state.taskWorkspace?.permissions||{};
+    if(taskWorkspaceReadOnly(state.taskWorkspace)){setTaskMessage(state,'Esta equipe está em modo somente leitura.','err');return;}
     if(task&&!task.can_edit)return;
     if(!task&&!permissions.can_create){setTaskMessage(state,'Você não possui permissão para criar tarefas nesta equipe.','err');return;}
-    const slot=state.tasksPanel?.querySelector('.nexlab-team-task-form-slot-v056');if(!slot)return;
+    const slot=state.tasksPanel?.querySelector('.nexlab-team-task-form-slot-v02682');if(!slot)return;
     const editing=!!task;slot.hidden=false;slot.replaceChildren();
-    const form=node('form','nexlab-team-task-form-v056');
-    const formHead=node('div','nexlab-team-task-form-head-v056');formHead.append(node('strong','',editing?'Editar tarefa':'Nova tarefa'),node('span','',editing?'Somente Líder ou Vice-Líder pode alterar os detalhes.':'Escolha um integrante da equipe como responsável.'));form.appendChild(formHead);
+    const form=node('form','nexlab-team-task-form-v02682');
+    const formHead=node('div','nexlab-team-task-form-head-v02682');formHead.append(node('strong','',editing?'Editar tarefa':'Nova tarefa'),node('span','',editing?'Somente Líder ou Vice-Líder pode alterar os detalhes.':'Escolha um integrante da equipe como responsável.'));form.appendChild(formHead);
     const title=document.createElement('input');title.type='text';title.maxLength=180;title.required=true;title.value=task?.title||clean(prefill?.title||'',180);title.placeholder='Ex.: Preparar material da apresentação';
     const responsible=document.createElement('select');responsible.required=true;responsible.appendChild(new Option('Selecione o responsável',''));
     for(const member of state.taskWorkspace?.members||[]){const option=new Option(member.name||'Integrante',member.id);if(String(member.id)===String(task?.responsible_id||''))option.selected=true;responsible.appendChild(option);}
     const deadline=document.createElement('input');deadline.type='date';deadline.required=true;deadline.value=task?.deadline||'';
     const priority=document.createElement('select');for(const [value,label] of [['baixa','Baixa'],['normal','Normal'],['alta','Alta'],['urgente','Urgente']]){const option=new Option(label,value);if(value===(task?.priority||'normal'))option.selected=true;priority.appendChild(option);}
     const description=document.createElement('textarea');description.rows=3;description.maxLength=4000;description.value=task?.description||clean(prefill?.description||'',4000);description.placeholder='Descrição opcional';
-    const grid=node('div','nexlab-team-task-form-grid-v056');grid.append(taskField('Título',title),taskField('Responsável',responsible),taskField('Prazo',deadline),taskField('Prioridade',priority));form.append(grid,taskField('Descrição',description));
+    const grid=node('div','nexlab-team-task-form-grid-v02682');grid.append(taskField('Título',title),taskField('Responsável',responsible),taskField('Prazo',deadline),taskField('Prioridade',priority));form.append(grid,taskField('Descrição',description));
     let status=null;if(editing){status=document.createElement('select');const statusOptions=[['pendente','Pendente'],['em_andamento','Em andamento'],['cancelada','Cancelada']];if(task.can_complete||task.status==='concluida')statusOptions.splice(2,0,['concluida','Concluída']);for(const [value,label] of statusOptions){const option=new Option(label,value);if(value===(task.status||'pendente'))option.selected=true;status.appendChild(option);}form.appendChild(taskField('Status',status));}
-    const actions=node('div','nexlab-team-task-form-actions-v056');const cancel=node('button','','Cancelar');cancel.type='button';cancel.addEventListener('click',()=>{slot.hidden=true;slot.replaceChildren();});const save=node('button','is-primary',editing?'Salvar alterações':'Criar tarefa');save.type='submit';actions.append(cancel,save);form.appendChild(actions);
+    const actions=node('div','nexlab-team-task-form-actions-v02682');const cancel=node('button','','Cancelar');cancel.type='button';cancel.addEventListener('click',()=>{slot.hidden=true;slot.replaceChildren();});const save=node('button','is-primary',editing?'Salvar alterações':'Criar tarefa');save.type='submit';actions.append(cancel,save);form.appendChild(actions);
     form.addEventListener('submit',async event=>{
       event.preventDefault();save.disabled=true;cancel.disabled=true;save.textContent=editing?'Salvando...':'Criando...';
       try{
@@ -278,7 +362,7 @@
   }
 
   async function completeTeamTask(state,task){
-    if(!task?.can_complete)return;
+    if(!task?.can_complete||taskWorkspaceReadOnly(state.taskWorkspace))return;
     try{
       const c=await waitClient();const {data,error}=await c.rpc('nexlab_manage_team_task_v1',{p_team_id:state.teamId,p_action:'complete',p_task_id:task.id,p_title:null,p_description:null,p_responsible_id:null,p_deadline:null,p_priority:null,p_status:null});if(error)throw error;if(!data?.ok)throw new Error('O Supabase não confirmou a conclusão da tarefa.');
       state.taskWorkspace=data.workspace||state.taskWorkspace;renderTeamTasks(state);setTaskMessage(state,'Tarefa concluída.','ok');try{globalThis.__NEXLAB_PENDING_REALTIME_HUB__?.refresh?.({table:'tasks',eventType:'LOCAL_MUTATION'});globalThis.dispatchEvent(new CustomEvent('nexlab:pending-refresh'));}catch{}
@@ -286,7 +370,7 @@
   }
 
   async function deleteTeamTask(state,task){
-    if(!task?.can_delete)return;if(!confirm(`Excluir a tarefa “${task.title||'Tarefa'}”?`))return;
+    if(!task?.can_delete||taskWorkspaceReadOnly(state.taskWorkspace))return;if(!confirm(`Excluir a tarefa “${task.title||'Tarefa'}”?`))return;
     try{
       const c=await waitClient();const {data,error}=await c.rpc('nexlab_manage_team_task_v1',{p_team_id:state.teamId,p_action:'delete',p_task_id:task.id,p_title:null,p_description:null,p_responsible_id:null,p_deadline:null,p_priority:null,p_status:null});if(error)throw error;if(!data?.ok)throw new Error('O Supabase não confirmou a exclusão da tarefa.');
       state.taskWorkspace=data.workspace||state.taskWorkspace;renderTeamTasks(state);setTaskMessage(state,'Tarefa excluída.','ok');try{globalThis.__NEXLAB_PENDING_REALTIME_HUB__?.refresh?.({table:'tasks',eventType:'LOCAL_MUTATION'});globalThis.dispatchEvent(new CustomEvent('nexlab:pending-refresh'));}catch{}
@@ -294,21 +378,82 @@
   }
 
   function renderTeamTasks(state){
-    const panel=state.tasksPanel;if(!panel)return;const list=panel.querySelector('.nexlab-team-task-list-v056');const create=panel.querySelector('.nexlab-team-task-create-v056');if(!list)return;
-    const workspace=state.taskWorkspace||{};if(create)create.hidden=!workspace.permissions?.can_create;list.replaceChildren();
+    const panel=state.tasksPanel;if(!panel)return;
+    const list=panel.querySelector('.nexlab-team-task-groups-v02682');
+    const create=panel.querySelector('.nexlab-team-task-create-v02682');
+    const summary=panel.querySelector('.nexlab-team-task-summary-v02682');
+    const filterButton=panel.querySelector('.nexlab-team-task-filter-toggle-v02682');
+    const filterPanel=panel.querySelector('.nexlab-team-task-filter-panel-v02682');
+    if(!list||!summary)return;
+    const workspace=state.taskWorkspace||{};
+    const readOnly=taskWorkspaceReadOnly(workspace);
+    if(create)create.hidden=!workspace.permissions?.can_create||readOnly;
+    if(filterPanel){filterPanel.hidden=!state.taskFilterPanelOpen;filterPanel.querySelectorAll('[data-quick-filter]').forEach(button=>{const active=button.dataset.quickFilter===String(state.taskQuickFilter||'all');button.classList.toggle('is-active',active);button.setAttribute('aria-checked',String(active));});}
+    if(filterButton){filterButton.classList.toggle('is-active',String(state.taskQuickFilter||'all')!=='all'||!!clean(state.taskSearchTerm||'',120));filterButton.setAttribute('aria-expanded',String(!!state.taskFilterPanelOpen));}
+
     const tasks=Array.isArray(workspace.tasks)?workspace.tasks:[];
-    if(!tasks.length){const empty=node('div','nexlab-team-task-empty-v056');empty.append(node('strong','', 'Nenhuma tarefa registrada'),node('p','',workspace.permissions?.can_create?'Use “+ Tarefa” para criar a primeira atividade da equipe.':'Ainda não há tarefas nesta equipe.'));list.appendChild(empty);return;}
-    for(const task of tasks){
-      const card=node('article','nexlab-team-task-card-v056');card.dataset.taskId=String(task.id||'');if(isTaskOverdue(task))card.classList.add('is-overdue');if(task.status==='concluida')card.classList.add('is-done');
-      const top=node('div','nexlab-team-task-card-top-v056');const main=node('div','');main.append(node('h4','',task.title||'Tarefa'));
-      const badges=node('div','nexlab-team-task-badges-v056');const status=node('span',`is-status-${clean(task.status,30)}`,taskStatusLabel(task.status));const priority=node('span',`is-priority-${clean(task.priority,30)}`,taskPriorityLabel(task.priority));badges.append(status,priority);top.append(main,badges);card.appendChild(top);
-      if(task.description)card.appendChild(node('p','nexlab-team-task-description-v056',task.description));
-      const meta=node('div','nexlab-team-task-meta-v056');meta.append(node('span','',`Responsável: ${task.responsible_name||'Não identificado'}`),node('span','',`${isTaskOverdue(task)?'Atrasada • ':''}Prazo: ${formatTaskDay(task.deadline)}`));card.appendChild(meta);
-      const actions=node('div','nexlab-team-task-actions-v056');
-      if(task.can_complete){const done=node('button','is-complete','Concluir');done.type='button';done.addEventListener('click',()=>completeTeamTask(state,task));actions.appendChild(done);}
-      if(task.can_edit){const edit=node('button','','Editar');edit.type='button';edit.addEventListener('click',()=>showTaskForm(state,task));actions.appendChild(edit);}
-      if(task.can_delete){const remove=node('button','is-danger','Excluir');remove.type='button';remove.addEventListener('click',()=>deleteTeamTask(state,task));actions.appendChild(remove);}
-      if(actions.childElementCount)card.appendChild(actions);list.appendChild(card);
+    const normalized=tasks.map(task=>({...task,status:normalizeTaskStatus(task?.status)}));
+    const counts={total:normalized.length,pendente:0,em_andamento:0,concluida:0,cancelada:0};
+    normalized.forEach(task=>{counts[normalizeTaskStatus(task.status)]=(counts[normalizeTaskStatus(task.status)]||0)+1;});
+
+    summary.replaceChildren();
+    const summaryCards=[
+      ['total','Total',counts.total,'todas as tarefas','dot'],
+      ['pendente','Pendentes',counts.pendente,taskSummaryLabel('pendente'),'clock'],
+      ['em_andamento','Em andamento',counts.em_andamento,taskSummaryLabel('em_andamento'),'play'],
+      ['concluida','Concluídas',counts.concluida,taskSummaryLabel('concluida'),'check-circle']
+    ];
+    for(const [key,label,value,caption,icon] of summaryCards){
+      const card=node('article',`nexlab-team-task-stat-card-v02682 is-${key}`);
+      const iconShell=node('span','nexlab-team-task-stat-icon-v02682');iconShell.appendChild(teamChatUiIcon(icon,16));
+      const copy=node('div','nexlab-team-task-stat-copy-v02682');copy.append(node('strong','',String(value)),node('span','',label),node('small','',caption));
+      card.append(iconShell,copy);summary.appendChild(card);
+    }
+
+    list.replaceChildren();
+    if(state.taskLoadError&&!state.tasksLoaded){const empty=node('div','nexlab-team-task-empty-v02682');empty.append(node('strong','', 'Não foi possível carregar as tarefas'),node('p','',clean(state.taskLoadError?.message||'Tente novamente em instantes.',180)));list.appendChild(empty);return;}
+    if(readOnly){const readonly=node('div','nexlab-team-task-readonly-v02682');readonly.append(teamChatUiIcon('clipboard',15),node('span','', 'Equipe arquivada ou em modo somente leitura. As tarefas podem ser consultadas, mas não alteradas.'));list.appendChild(readonly);}
+    if(workspace.permissions?.can_view===false){const empty=node('div','nexlab-team-task-empty-v02682');empty.append(node('strong','', 'Sem acesso às tarefas'),node('p','', 'Você não possui permissão para visualizar as tarefas desta equipe.'));list.appendChild(empty);return;}
+    if(!normalized.length){const empty=node('div','nexlab-team-task-empty-v02682');empty.append(node('strong','', 'Nenhuma tarefa registrada'),node('p','',workspace.permissions?.can_create?'Use “Nova tarefa” para criar a primeira atividade da equipe.':'Ainda não há tarefas nesta equipe.'));list.appendChild(empty);return;}
+
+    const filtered=normalized.filter(task=>taskMatchesQuickFilter(state,task)&&taskMatchesSearch(task,state.taskSearchTerm));
+    if(!filtered.length){const empty=node('div','nexlab-team-task-empty-v02682');empty.append(node('strong','', 'Nenhum resultado encontrado'),node('p','', 'Ajuste a busca ou os filtros para localizar outra tarefa.'));list.appendChild(empty);return;}
+
+    for(const group of taskGroupCatalog()){
+      const items=filtered.filter(task=>normalizeTaskStatus(task.status)===group.key);
+      if(!items.length&&group.key==='cancelada'&&!counts.cancelada)continue;
+      const section=node('section',`nexlab-team-task-group-v02682 is-${taskGroupTone(group.key)}`);
+      const header=node('button','nexlab-team-task-group-head-v02682');header.type='button';const groupBodyId=`nexlab-team-task-group-${state.teamId}-${group.key}`;header.setAttribute('aria-expanded',String(!state.taskGroupCollapsed[group.key]));header.setAttribute('aria-controls',groupBodyId);header.addEventListener('click',()=>{state.taskGroupCollapsed[group.key]=!state.taskGroupCollapsed[group.key];renderTeamTasks(state);});
+      const headLeft=node('div','nexlab-team-task-group-head-left-v02682');headLeft.append(node('span',`nexlab-team-task-group-dot-v02682 is-${taskGroupTone(group.key)}`),node('strong','',group.label),node('span','nexlab-team-task-group-count-v02682',String(items.length)));
+      const headRight=node('span','nexlab-team-task-group-chevron-v02682');headRight.appendChild(teamChatUiIcon('chevron',14));header.append(headLeft,headRight);
+      section.appendChild(header);
+      const body=node('div','nexlab-team-task-group-body-v02682');body.id=groupBodyId;body.hidden=!!state.taskGroupCollapsed[group.key];
+      if(!items.length){const empty=node('div','nexlab-team-task-group-empty-v02682','Nenhuma tarefa neste grupo.');body.appendChild(empty);}else{
+        for(const task of items){
+          const row=node('article','nexlab-team-task-row-v02682');row.dataset.taskId=String(task.id||'');if(isTaskOverdue(task))row.classList.add('is-overdue');if(normalizeTaskStatus(task.status)==='concluida')row.classList.add('is-done');
+          const lead=node(task.can_complete&&!readOnly&&normalizeTaskStatus(task.status)!=='concluida'?'button':'span','nexlab-team-task-row-toggle-v02682');if(task.can_complete&&!readOnly&&normalizeTaskStatus(task.status)!=='concluida'){lead.type='button';lead.title='Concluir tarefa';lead.setAttribute('aria-label',`Concluir tarefa: ${task.title||'Tarefa'}`);lead.addEventListener('click',event=>{event.stopPropagation();completeTeamTask(state,task);});}lead.classList.add(`is-${taskGroupTone(task.status)}`);lead.appendChild(teamChatUiIcon(normalizeTaskStatus(task.status)==='concluida'?'check-circle':'dot',16));
+          const main=node('div','nexlab-team-task-row-main-v02682');
+          main.append(node('h4','',task.title||'Tarefa'),node('p','',taskMetaLine(task)));
+          if(task.description){main.appendChild(node('small','nexlab-team-task-row-description-v02682',task.description));}
+          const trailing=node('div','nexlab-team-task-row-trailing-v02682');
+          const assignee=node('div','nexlab-team-task-assignee-v02682');const avatar=node('span','nexlab-team-task-assignee-avatar-v02682',initials(task.responsible_name||'U'));const assigneeName=node('span','nexlab-team-task-assignee-name-v02682',clean(task.responsible_name||'Não atribuído',60)||'Não atribuído');assignee.append(avatar,assigneeName);
+          const badgeInfo=taskDateBadge(task);const dateBadge=node('div','nexlab-team-task-date-badge-v02682');dateBadge.append(teamChatUiIcon(badgeInfo.icon,14),node('span','',badgeInfo.label||'Sem prazo'));
+          const menuWrap=node('div','nexlab-team-task-row-menu-wrap-v02682');
+          const toggle=node('button','nexlab-team-task-row-menu-toggle-v02682');toggle.type='button';toggle.setAttribute('aria-label','Ações da tarefa');toggle.setAttribute('aria-haspopup','menu');toggle.setAttribute('aria-expanded',String(state.taskOpenMenuId===String(task.id||'')));toggle.appendChild(teamChatUiIcon('more',16));toggle.addEventListener('click',event=>{event.stopPropagation();state.taskOpenMenuId=state.taskOpenMenuId===String(task.id||'')?'':String(task.id||'');renderTeamTasks(state);});
+          menuWrap.appendChild(toggle);
+          const menu=node('div','nexlab-team-task-row-menu-v02682');menu.hidden=state.taskOpenMenuId!==String(task.id||'');menu.setAttribute('role','menu');
+          const details=node('button','','Ver detalhes');details.type='button';details.setAttribute('role','menuitem');details.addEventListener('click',event=>{event.stopPropagation();showTaskDetails(state,task);});menu.appendChild(details);
+          if(task.can_complete&&normalizeTaskStatus(task.status)!=='concluida'&&!readOnly){const done=node('button','is-complete','Concluir');done.type='button';done.setAttribute('role','menuitem');done.addEventListener('click',event=>{event.stopPropagation();completeTeamTask(state,task);});menu.appendChild(done);}
+          if(task.can_edit&&!readOnly){const statusAction=node('button','',taskStatusActionLabel(task.status));statusAction.type='button';statusAction.setAttribute('role','menuitem');statusAction.addEventListener('click',event=>{event.stopPropagation();updateTeamTaskStatus(state,task,taskNextStatus(task.status));});menu.appendChild(statusAction);}
+          if(task.can_edit&&!readOnly){const reassign=node('button','','Reatribuir responsável');reassign.type='button';reassign.setAttribute('role','menuitem');reassign.addEventListener('click',event=>{event.stopPropagation();state.taskOpenMenuId='';showTaskForm(state,task);requestAnimationFrame(()=>state.tasksPanel?.querySelector('.nexlab-team-task-form-v02682 select')?.focus());});menu.appendChild(reassign);}
+          if(task.can_edit&&!readOnly){const edit=node('button','','Editar');edit.type='button';edit.setAttribute('role','menuitem');edit.addEventListener('click',event=>{event.stopPropagation();state.taskOpenMenuId='';showTaskForm(state,task);});menu.appendChild(edit);}
+          if(task.can_delete&&!readOnly){const remove=node('button','is-danger','Excluir');remove.type='button';remove.addEventListener('click',event=>{event.stopPropagation();state.taskOpenMenuId='';deleteTeamTask(state,task);});menu.appendChild(remove);}
+          if(menu.childElementCount)menuWrap.appendChild(menu);
+          trailing.append(assignee,dateBadge,menuWrap);
+          row.append(lead,main,trailing);body.appendChild(row);
+        }
+      }
+      section.appendChild(body);list.appendChild(section);
     }
     if(state.targetTaskId)highlightTaskTarget(state,state.targetTaskId);
   }
@@ -468,7 +613,7 @@
 
   function scrollToBottom(state,behavior='smooth'){const list=state.chatPanel?.querySelector('.nexlab-team-chat-list-rebuilt-v02682');if(list)requestAnimationFrame(()=>list.scrollTo({top:list.scrollHeight,behavior:behavior==='instant'?'auto':behavior}));}
 
-  function mentionChips(state,selected,onRemove){const wrap=node('div','nexlab-team-composer-chips-rebuilt-v02682');for(const id of selected){const chip=node('span','nexlab-team-mention-chip-rebuilt-v02682');chip.append(document.createTextNode(`@ ${profileName(state,id)}`));const remove=node('button','','×');remove.type='button';remove.setAttribute('aria-label',`Remover menção a ${profileName(state,id)}`);remove.addEventListener('click',()=>onRemove(id));chip.appendChild(remove);wrap.appendChild(chip);}return wrap;}
+  function mentionChips(state,selected,onRemove){const wrap=node('div','nexlab-team-composer-chips-rebuilt-v02682');for(const id of selected){const chip=node('span','nexlab-team-mention-chip-rebuilt-v02682');chip.append(document.createTextNode(`@ ${profileName(state,id)}`));const remove=node('button','','×');remove.type='button';remove.setAttribute('role','menuitem');remove.setAttribute('aria-label',`Remover menção a ${profileName(state,id)}`);remove.addEventListener('click',()=>onRemove(id));chip.appendChild(remove);wrap.appendChild(chip);}return wrap;}
 
   function buildComposer(state){
     const wrap=node('div','nexlab-team-composer-rebuilt-v02682');
@@ -557,7 +702,7 @@
   function mountWorkspace(panel,state){
     panel.querySelectorAll('.nexlab-team-workspace-v057').forEach(el=>el.remove());
     // Remove leftovers from the previous injected layout, including panels nested in the original content.
-    panel.querySelectorAll('.nexlab-team-tasks-v056,.nexlab-team-chat-rebuilt-v02682').forEach(el=>el.remove());
+    panel.querySelectorAll('.nexlab-team-tasks-rebuilt-v02682,.nexlab-team-chat-rebuilt-v02682').forEach(el=>el.remove());
     const tasks=buildTasksPanel(state);const chat=buildConversationPanel(state);const workspace=buildTeamWorkspace(tasks,chat);
     state.tasksPanel=tasks;state.chatPanel=chat;state.workspace=workspace;state.content=panel.querySelector(CONTENT_SELECTOR);state.footer=panel.querySelector(':scope > .team-details-v2680__footer');
     const nav=panel.querySelector(':scope > .nexlab-team-tabs-rebuilt-v02682');
@@ -567,8 +712,8 @@
   }
 
   function createState(panel,teamId){
-    const state={panel,teamId,activeTab:'overview',messages:[],nextCursor:null,loaded:false,loading:false,access:null,accessError:null,accessLoading:null,profiles:new Map(),currentUserId:'',targetContentId:'',targetTaskId:'',content:null,footer:null,workspace:null,chatPanel:null,tasksPanel:null,taskWorkspace:null,tasksLoaded:false,tasksLoading:null,taskRealtimeUnsubscribe:null,taskRealtimeTimer:null,communication:{status:navigator.onLine===false?'offline':'checking',lastSuccessAt:null,lastLatencyMs:null,lastErrorAt:null},composerApi:null};
-    panel.classList.add('has-nexlab-team-chat-rebuilt-v02682','has-nexlab-team-tasks-v056');
+    const state={panel,teamId,activeTab:'overview',messages:[],nextCursor:null,loaded:false,loading:false,access:null,accessError:null,accessLoading:null,profiles:new Map(),currentUserId:'',targetContentId:'',targetTaskId:'',content:null,footer:null,workspace:null,chatPanel:null,tasksPanel:null,taskWorkspace:null,tasksLoaded:false,tasksLoading:null,taskRealtimeUnsubscribe:null,taskRealtimeTimer:null,communication:{status:navigator.onLine===false?'offline':'checking',lastSuccessAt:null,lastLatencyMs:null,lastErrorAt:null},composerApi:null,taskSearchTerm:'',taskQuickFilter:'all',taskFilterPanelOpen:false,taskGroupCollapsed:{pendente:false,em_andamento:false,concluida:false,cancelada:false},taskOpenMenuId:'',taskDetailId:'',taskLoadError:null};
+    panel.classList.add('has-nexlab-team-chat-rebuilt-v02682','has-nexlab-team-tasks-rebuilt-v02682');
     const header=panel.querySelector(HEADER_SELECTOR);const nav=buildTabs(state);
     if(header)header.insertAdjacentElement('afterend',nav);else panel.prepend(nav);
     mountWorkspace(panel,state);
@@ -579,8 +724,8 @@
 
   function rebindState(panel,state){
     state.panel=panel;state.content=panel.querySelector(CONTENT_SELECTOR);state.footer=panel.querySelector(':scope > .team-details-v2680__footer');
-    panel.classList.add('has-nexlab-team-chat-rebuilt-v02682','has-nexlab-team-tasks-v056');
-    panel.querySelectorAll('.nexlab-team-tabs-rebuilt-v02682,.nexlab-team-workspace-v057,.nexlab-team-tasks-v056,.nexlab-team-chat-rebuilt-v02682').forEach(el=>el.remove());
+    panel.classList.add('has-nexlab-team-chat-rebuilt-v02682','has-nexlab-team-tasks-rebuilt-v02682');
+    panel.querySelectorAll('.nexlab-team-tabs-rebuilt-v02682,.nexlab-team-workspace-v057,.nexlab-team-tasks-rebuilt-v02682,.nexlab-team-chat-rebuilt-v02682').forEach(el=>el.remove());
     const header=panel.querySelector(HEADER_SELECTOR);const nav=buildTabs(state);
     if(header)header.insertAdjacentElement('afterend',nav);else panel.prepend(nav);
     mountWorkspace(panel,state);
@@ -593,22 +738,33 @@
   function ensurePanel(panel){
     if(!(panel instanceof HTMLElement))return;const teamId=String(panel.dataset.nexlabTeamId||'');if(!isUuid(teamId))return;
     let state=states.get(panel);if(!state||state.teamId!==teamId){
-      panel.querySelectorAll('.nexlab-team-tabs-rebuilt-v02682,.nexlab-team-workspace-v057,.nexlab-team-tasks-v056,.nexlab-team-chat-rebuilt-v02682').forEach(el=>el.remove());
+      panel.querySelectorAll('.nexlab-team-tabs-rebuilt-v02682,.nexlab-team-workspace-v057,.nexlab-team-tasks-rebuilt-v02682,.nexlab-team-chat-rebuilt-v02682').forEach(el=>el.remove());
       const cached=stateByTeamId.get(teamId);
       state=cached&&!cached.panel?.isConnected?rebindState(panel,cached):createState(panel,teamId);
     }else{
       let nav=panel.querySelector(':scope > .nexlab-team-tabs-rebuilt-v02682');
       if(!nav){nav=buildTabs(state);const header=panel.querySelector(HEADER_SELECTOR);if(header)header.insertAdjacentElement('afterend',nav);else panel.prepend(nav);}
       const workspace=panel.querySelector(':scope > .nexlab-team-workspace-v057');
-      if(!workspace||!workspace.querySelector('.nexlab-team-tasks-v056')||!workspace.querySelector('.nexlab-team-chat-rebuilt-v02682'))mountWorkspace(panel,state);
+      if(!workspace||!workspace.querySelector('.nexlab-team-tasks-rebuilt-v02682')||!workspace.querySelector('.nexlab-team-chat-rebuilt-v02682'))mountWorkspace(panel,state);
       classifyAndApply(state);
+    }
+  }
+
+  function closeTaskFloatingPanels(target,{escape=false}={}){
+    for(const state of stateByTeamId.values()){
+      if(state.activeTab!=='tasks'||!state.tasksPanel?.isConnected)continue;
+      let changed=false;
+      if(state.taskFilterPanelOpen&&(escape||!(target instanceof Element)||!target.closest('.nexlab-team-task-filters-wrap-v02682'))){state.taskFilterPanelOpen=false;changed=true;}
+      if(state.taskOpenMenuId&&(escape||!(target instanceof Element)||!target.closest('.nexlab-team-task-row-menu-wrap-v02682'))){state.taskOpenMenuId='';changed=true;}
+      if(changed)renderTeamTasks(state);
+      if(escape&&state.taskDetailId)closeTaskDetail(state);
     }
   }
 
   function scan(){observerScheduled=false;tryOpenPendingTeam();document.querySelectorAll(PANEL_SELECTOR).forEach(ensurePanel);}
   function scheduleScan(){if(observerScheduled)return;observerScheduled=true;requestAnimationFrame(scan);}
   const observer=new MutationObserver(scheduleScan);
-  function start(){observer.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['data-nexlab-team-id','data-nexlab-record-id']});void resolveNotificationTarget().then(()=>scheduleScan());scheduleScan();}
+  function start(){observer.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['data-nexlab-team-id','data-nexlab-record-id']});document.addEventListener('pointerdown',event=>closeTaskFloatingPanels(event.target),{passive:true});document.addEventListener('keydown',event=>{if(event.key==='Escape')closeTaskFloatingPanels(event.target,{escape:true});});void resolveNotificationTarget().then(()=>scheduleScan());scheduleScan();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 
   globalThis.addEventListener('offline',()=>{for(const state of stateByTeamId.values())setCommunicationState(state,'offline','O dispositivo está offline.');});
