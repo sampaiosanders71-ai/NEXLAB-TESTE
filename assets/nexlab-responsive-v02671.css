@@ -972,3 +972,198 @@ body[data-nexlab-modal-open="true"] :where(#nexlab-validation-trigger,#nexlab-co
 .nexlab-viewport-menu-portal-v02682 .text-red-700,
 .nexlab-viewport-menu-portal-v02682 .is-danger{color:#be123c!important}
 [data-nexlab-viewport-source="true"]{visibility:hidden!important;pointer-events:none!important}
+
+/* NEXLAB Beta 0.26.82 — correção completa de Notificações no celular. */
+body[data-nexlab-page="notificacoes"] #nexlab-main-content{
+  min-width:0!important;
+  overflow-x:clip!important;
+}
+.nexlab-notifications-module-v02682{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+}
+.nexlab-notifications-module-v02682 :where(article,h1,h2,h3,p,span,div){
+  min-width:0;
+}
+.nexlab-notifications-tabs-shell-v02682{
+  overscroll-behavior-x:contain!important;
+  scrollbar-width:thin;
+  scrollbar-color:#94a3b8 transparent;
+  scroll-behavior:smooth;
+}
+.nexlab-notifications-tabs-shell-v02682::-webkit-scrollbar{height:5px}
+.nexlab-notifications-tabs-shell-v02682::-webkit-scrollbar-track{background:transparent}
+.nexlab-notifications-tabs-shell-v02682::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:999px}
+.nexlab-notifications-tab-v02682{scroll-snap-align:center;touch-action:manipulation}
+.nexlab-notifications-tabs-v02682{scroll-snap-type:x proximity}
+.nexlab-notification-card-title-v02682,
+.nexlab-notification-card-message-v02682{
+  max-width:100%!important;
+  overflow-wrap:anywhere!important;
+  word-break:normal!important;
+}
+
+@media(max-width:639px){
+  .nexlab-notifications-module-v02682{
+    padding-bottom:max(.75rem,env(safe-area-inset-bottom));
+  }
+  .nexlab-notifications-module-header{
+    gap:.75rem!important;
+  }
+  .nexlab-notifications-header-actions-v02682{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    width:100%!important;
+    gap:.5rem!important;
+  }
+  .nexlab-notifications-header-actions-v02682>button{
+    width:100%!important;
+    min-width:0!important;
+    min-height:44px!important;
+    justify-content:center!important;
+    white-space:normal!important;
+    text-align:center!important;
+  }
+  .nexlab-notifications-tabs-shell-v02682{
+    margin-inline:0!important;
+    padding:.3rem .3rem .4rem!important;
+  }
+  .nexlab-notifications-tab-v02682{
+    min-height:44px!important;
+    padding:.7rem .9rem!important;
+    white-space:nowrap!important;
+  }
+  .nexlab-notifications-filters-v02682{
+    padding:.75rem!important;
+    gap:.65rem!important;
+  }
+  .nexlab-notifications-filters-v02682 :where(input,select){
+    min-width:0!important;
+    width:100%!important;
+    min-height:44px!important;
+    font-size:16px!important;
+  }
+  .nexlab-notification-card-v02682{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    padding:.8rem!important;
+    overflow:hidden!important;
+  }
+  .nexlab-notification-card-main-v02682{
+    display:grid!important;
+    grid-template-columns:22px 36px minmax(0,1fr)!important;
+    align-items:start!important;
+    gap:.6rem!important;
+  }
+  .nexlab-notification-card-main-v02682>input[type="checkbox"]{
+    width:22px!important;
+    height:22px!important;
+    min-width:22px!important;
+    margin-top:.15rem!important;
+  }
+  .nexlab-notification-card-main-v02682>span{
+    width:36px!important;
+    min-width:36px!important;
+    height:36px!important;
+  }
+  .nexlab-notification-card-actions-v02682{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:.45rem!important;
+  }
+  .nexlab-notification-card-actions-v02682>button{
+    box-sizing:border-box!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:44px!important;
+    padding:.55rem .45rem!important;
+    border:1px solid #e2e8f0!important;
+    border-radius:.65rem!important;
+    background:#fff!important;
+    text-align:center!important;
+    line-height:1.25!important;
+    text-decoration:none!important;
+    touch-action:manipulation;
+  }
+  .nexlab-notifications-pagination-v02682{
+    flex-wrap:wrap!important;
+    width:100%!important;
+    gap:.6rem!important;
+  }
+  .nexlab-notifications-pagination-v02682>span{
+    width:100%!important;
+  }
+  .nexlab-notifications-pagination-v02682>div{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;
+    align-items:center!important;
+    width:100%!important;
+    gap:.5rem!important;
+  }
+  .nexlab-notifications-pagination-v02682 button{
+    width:100%!important;
+    min-width:0!important;
+    min-height:44px!important;
+    padding:.6rem .5rem!important;
+  }
+  .nexlab-notification-preference-row-v02682>div:last-child{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    width:100%!important;
+    gap:.5rem!important;
+  }
+  .nexlab-notification-preference-row-v02682>div:last-child>button{
+    width:100%!important;
+    min-width:0!important;
+    min-height:44px!important;
+    white-space:normal!important;
+    line-height:1.25!important;
+  }
+  .nexlab-notification-preference-row-v02682>div:last-child>button:last-child:nth-child(3){
+    grid-column:1/-1!important;
+  }
+  .nexlab-notifications-module-v02682 :where(.nexlab-invitation-quick-actions-r55628 button){
+    min-height:44px!important;
+    touch-action:manipulation;
+  }
+  .nexlab-notification-popover-v02682{
+    z-index:90!important;
+    top:calc(4rem + env(safe-area-inset-top))!important;
+    bottom:max(.5rem,env(safe-area-inset-bottom))!important;
+    max-height:none!important;
+    min-height:0!important;
+    overscroll-behavior:contain!important;
+    touch-action:pan-y!important;
+    isolation:isolate;
+  }
+  .nexlab-notification-popover-header-v02682,
+  .nexlab-notification-markall-row-v02682,
+  .nexlab-notification-open-center-row-v02682{
+    flex:0 0 auto!important;
+  }
+  .nexlab-notification-list-v02682{
+    flex:1 1 auto!important;
+    min-height:0!important;
+    max-height:none!important;
+  }
+}
+
+@media(max-width:359px){
+  .nexlab-notifications-header-actions-v02682,
+  .nexlab-notification-card-actions-v02682,
+  .nexlab-notification-preference-row-v02682>div:last-child,
+  .nexlab-notifications-time-grid-v02682{
+    grid-template-columns:1fr!important;
+  }
+  .nexlab-notification-preference-row-v02682>div:last-child>button:last-child:nth-child(3){
+    grid-column:auto!important;
+  }
+  .nexlab-notification-card-main-v02682{
+    grid-template-columns:22px minmax(0,1fr)!important;
+  }
+  .nexlab-notification-card-main-v02682>span{
+    display:none!important;
+  }
+}
