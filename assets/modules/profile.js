@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: ProfileModule. */
-export { ProfileModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-notificacoes-mobile-corrigidas";
+export { ProfileModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-marketing-mensagem-removida";
