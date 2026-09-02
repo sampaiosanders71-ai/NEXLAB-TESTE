@@ -17,7 +17,7 @@
     return;
   }
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-equipes-tarefas-scroll-corrigido',assetRevision:'app-beta-0-26-82-equipes-tarefas-scroll-corrigido-corrigido',cacheName:'nexlab-beta-0-26-82-equipes-tarefas-scroll-corrigido-corrigido',generatedAt:'2026-08-30T21:45:00Z'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-equipes-tarefas-scroll-corrigido',assetRevision:'app-beta-0-26-82-equipes-tarefas-scroll-corrigido',cacheName:'nexlab-beta-0-26-82-equipes-tarefas-scroll-corrigido',generatedAt:'2026-09-02T12:45:00Z'});
   const APP_VERSION = BUILD_IDENTITY.version;
   const APP_RELEASE = BUILD_IDENTITY.release;
   const APP_REVISION = BUILD_IDENTITY.revision;
@@ -1301,7 +1301,7 @@
     'assets/nexlab-vapid-rotation.js',
     'assets/nexlab-push-consent.js',
     'assets/nexlab-feedback-evidence.js'
-  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-82-equipes-tarefas-scroll-corrigido-corrigido'));
+  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-82-equipes-tarefas-scroll-corrigido'));
   const state={version:VERSION,revision:REVISION,status:'scheduled',loaded:[],errors:[],attempts:{},lastReason:'',startedAt:null,completedAt:null};
   const sourceState=new Map(sources.map(src=>[src,{status:'pending',attempts:0,lastError:''}]));
   let active=null;

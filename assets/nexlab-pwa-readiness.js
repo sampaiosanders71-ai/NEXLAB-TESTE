@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-equipes-tarefas-scroll-corrigido',assetRevision:'app-beta-0-26-82-equipes-tarefas-scroll-corrigido-corrigido',cacheName:'nexlab-beta-0-26-82-equipes-tarefas-scroll-corrigido-corrigido'});
+  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-equipes-tarefas-scroll-corrigido',assetRevision:'app-beta-0-26-82-equipes-tarefas-scroll-corrigido',cacheName:'nexlab-beta-0-26-82-equipes-tarefas-scroll-corrigido'});
   if (window.__NEXLAB_PWA_READINESS__?.revision === BUILD_IDENTITY.revision) return;
 
   const VERSION=BUILD_IDENTITY.version;
