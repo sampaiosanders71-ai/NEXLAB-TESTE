@@ -1,11 +1,11 @@
 (function(){
   'use strict';
-  const ID=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-marketing-mensagem-removida'});
+  const ID=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-pendencias-meu-dia-fg'});
   if(globalThis.__NEXLAB_PENDING_REALTIME_HUB__?.revision===ID.revision)return;
 
   const VERSION=ID.version;
   const REVISION=ID.revision;
-  const TABLES=['profiles','bookings','booking_participants','feedback','projects','project_tasks','assets','teams','team_members','team_history','stock_items','meetings'];
+  const TABLES=['profiles','bookings','booking_participants','feedback','projects','project_tasks','assets','teams','team_members','team_history','stock_items','meetings','notifications'];
   const listeners=new Set();
   let channel=null;
   let connecting=null;
