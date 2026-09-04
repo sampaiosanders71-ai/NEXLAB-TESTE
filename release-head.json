@@ -1,1 +1,14 @@
-{"protocol":2,"version":"0.26.82","release":"Beta","channel":"beta","revision":"beta-0-26-82-update-atomic-v1","asset_revision":"app-beta-0-26-82-update-atomic-v1","generated_at":"2026-09-04T02:25:00Z","manifest":"release-manifest.json","manifest_sha256":"1a7c1770be1dcce3a590c9544580771af6f6ca57d23fa800bcf273373d777180","essential_count":44,"essential_bytes":1931542,"cache_name":"nexlab-app-beta-0-26-82-update-atomic-v1"}
+{
+  "protocol": 2,
+  "version": "0.26.82",
+  "release": "Beta",
+  "channel": "beta",
+  "revision": "beta-0-26-82-interface-performance",
+  "asset_revision": "app-beta-0-26-82-interface-performance",
+  "generated_at": "2026-09-04T02:52:00Z",
+  "manifest": "release-manifest.json",
+  "manifest_sha256": "ef70f159bbd3a9ea11e6d5cfe80631d6932c91c47ada0b9e7cf16b739fa72da5",
+  "essential_count": 52,
+  "essential_bytes": 2258134,
+  "cache_name": "nexlab-app-beta-0-26-82-interface-performance"
+}

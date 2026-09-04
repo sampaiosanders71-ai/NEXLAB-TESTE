@@ -6,8 +6,6 @@
   const PROJECT_REF=CONFIG.projectRef;
   const BASE=CONFIG.supabaseUrl;
   const KEY=CONFIG.supabaseAnonKey;
-  let cachedProfile=null;
-  let cachedAt=0;
 
   const style=document.createElement('style');
   style.textContent=`
@@ -28,9 +26,6 @@
 
   function authToken(){return CONFIG.getAccessToken();}
 
-  function jwtSubject(jwt){
-    try{const body=jwt.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');const padded=body.padEnd(Math.ceil(body.length/4)*4,'=');const payload=JSON.parse(decodeURIComponent(Array.from(atob(padded),c=>`%${c.charCodeAt(0).toString(16).padStart(2,'0')}`).join('')));return String(payload?.sub||'');}catch{return '';}
-  }
   async function api(path,options={}){
     const token=authToken();if(!token)throw new Error('Sessão não encontrada. Entre novamente no NEXLAB.');
     const method=String(options.method||'GET').toUpperCase();const rpcMatch=String(path||'').match(/\/rpc\/([^/?#]+)/i);const rpcName=rpcMatch?decodeURIComponent(rpcMatch[1]):'';const readOperation=method==='GET'||globalThis.__NEXLAB_RPC_REGISTRY__?.classifyRpc?.(rpcName)==='read';const attempts=readOperation?2:1;let lastError=null;
@@ -38,11 +33,6 @@
     if(lastError?.name==='AbortError')throw new Error('A consulta demorou mais de 12 segundos. Verifique a conexão e tente novamente.');throw lastError||new Error('Não foi possível concluir a consulta.');
   }
   function rpc(name,payload={}){return api(`/rest/v1/rpc/${encodeURIComponent(name)}`,{method:'POST',body:JSON.stringify(payload)});}
-  async function currentProfile(force=false){
-    const id=jwtSubject(authToken());if(!id){cachedProfile=null;cachedAt=0;return null;}
-    if(!force&&cachedProfile&&String(cachedProfile.id||'')===id&&Date.now()-cachedAt<10000)return cachedProfile;
-    try{const rows=await api(`/rest/v1/profiles?id=eq.${encodeURIComponent(id)}&select=id,nome,role,ativo`);const profile=Array.isArray(rows)?rows[0]:null;cachedProfile=profile;cachedAt=Date.now();return profile;}catch{return null;}
-  }
   function dialog(title,description){
     const overlay=document.createElement('div');overlay.className='nexlab-validation-overlay';
     const panel=document.createElement('section');panel.className='nexlab-validation-dialog';panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.innerHTML='<header class="nexlab-validation-head"><div><h2></h2><p></p></div><button class="nexlab-validation-close" type="button" aria-label="Fechar">×</button></header><div class="nexlab-validation-body"></div>';
@@ -138,13 +128,16 @@
     open();
   }
   function removeCoordinatorUi(){document.getElementById('nexlab-validation-trigger')?.remove();document.getElementById('nexlab-coordinator-preview-trigger')?.remove();document.querySelectorAll('.nexlab-validation-overlay').forEach(node=>node.remove());}
-  async function mount(){
+  function mount(roleHint=''){
     if(window.__NEXLAB_PROFILE_PREVIEW__?.active){removeCoordinatorUi();return;}
-    const profile=await currentProfile(true);const role=String(profile?.role||'').toLowerCase();if(profile?.ativo===false||role!=='coordenador'){removeCoordinatorUi();return;}
+    const guardState=window.NexlabAdministrativeUiGuard?.getState?.()||{};
+    const role=String(roleHint||guardState.role||'').toLowerCase();
+    if(guardState.verification&&guardState.verification!=='authorized'&&!roleHint){removeCoordinatorUi();return;}
+    if(role!=='coordenador'){removeCoordinatorUi();return;}
     if(!document.getElementById('nexlab-validation-trigger')){const button=document.createElement('button');button.id='nexlab-validation-trigger';button.type='button';button.textContent='Validar versão';button.title='Validação dos coordenadores';button.setAttribute('aria-label','Abrir validação dos coordenadores');button.onclick=()=>openValidation();document.body.appendChild(button);}
     if(!document.getElementById('nexlab-coordinator-preview-trigger')){const preview=document.createElement('button');preview.id='nexlab-coordinator-preview-trigger';preview.type='button';preview.textContent='Visualizar perfis';preview.title='Visualizar o aplicativo como outro perfil, em modo somente leitura';preview.setAttribute('aria-label','Visualizar o aplicativo como outro perfil');preview.onclick=openProfilePreview;document.body.appendChild(preview);}
   }
 
   window.NexlabCoordinatorValidation=Object.freeze({version:VERSION,open:openValidation,openValidation,openPromotion,openProfilePreview,load:()=>rpc('nexlab_get_validation_cycle_v02657')});
-  window.addEventListener('nexlab:auth-ready',()=>setTimeout(mount,650));window.addEventListener('nexlab:session-reset',()=>{cachedProfile=null;cachedAt=0;removeCoordinatorUi();setTimeout(mount,350);});window.addEventListener('focus',mount);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')mount();});setTimeout(mount,2800);setInterval(mount,10000);
+  window.addEventListener('nexlab:administrative-ui-synced',event=>mount(event.detail?.role||''));window.addEventListener('nexlab:auth-ready',()=>setTimeout(()=>mount(window.NexlabAdministrativeUiGuard?.getState?.().role||''),700));window.addEventListener('nexlab:session-reset',()=>removeCoordinatorUi());setTimeout(()=>mount(window.NexlabAdministrativeUiGuard?.getState?.().role||''),2200);
 })();

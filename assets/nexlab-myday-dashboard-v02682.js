@@ -1,5 +1,5 @@
 /* NEXLAB 0.26.82 — Meu Dia no Dashboard — Etapa E. */
-import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-update-atomic-v1";
+import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-interface-performance";
 
 const CARD_ID = "nexlab-myday-dashboard-summary-v02682";
 let refreshTimer = null;
@@ -105,10 +105,41 @@ function schedule(delay = 120) {
   refreshTimer = setTimeout(() => { void loadSummary(); }, delay);
 }
 
-const observer = new MutationObserver(() => {
-  if (document.body?.dataset?.nexlabPage === "dashboard") schedule(100);
-});
-observer.observe(document.documentElement, { subtree: true, childList: true, attributes: true, attributeFilter: ["data-nexlab-page"] });
+let pageObserver = null;
+let mainObserver = null;
+
+function dashboardShellChanged(records = []) {
+  if (document.body?.dataset?.nexlabPage !== "dashboard") return false;
+  return records.some(record => {
+    if (record.type !== "childList") return false;
+    return [...record.addedNodes, ...record.removedNodes].some(node => {
+      if (!(node instanceof Element)) return false;
+      return node.matches?.(".module-shell") || Boolean(node.querySelector?.(".module-shell"));
+    });
+  });
+}
+
+function observeMainContent() {
+  if (mainObserver) return;
+  const main = document.getElementById("nexlab-main-content");
+  if (!main) return;
+  mainObserver = new MutationObserver(records => {
+    if (dashboardShellChanged(records)) schedule(120);
+  });
+  mainObserver.observe(main, { childList: true });
+}
+
+function startObservers() {
+  if (!document.body || pageObserver) return;
+  pageObserver = new MutationObserver(records => {
+    const pageChanged = records.some(record => record.type === "attributes" && record.attributeName === "data-nexlab-page");
+    if (!pageChanged) return;
+    observeMainContent();
+    if (document.body?.dataset?.nexlabPage === "dashboard") schedule(100);
+  });
+  pageObserver.observe(document.body, { attributes: true, attributeFilter: ["data-nexlab-page"] });
+  observeMainContent();
+}
 
 globalThis.addEventListener("nexlab:myday-updated", event => {
   if (document.body?.dataset?.nexlabPage === "dashboard" && event?.detail) render(event.detail);
@@ -117,4 +148,4 @@ globalThis.addEventListener("nexlab:network-status", () => schedule(250));
 globalThis.addEventListener("popstate", () => schedule(100));
 globalThis.addEventListener("hashchange", () => schedule(100));
 
-document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", () => schedule(300), { once: true }) : schedule(300);
+document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", () => { startObservers(); schedule(300); }, { once: true }) : (startObservers(), schedule(300));

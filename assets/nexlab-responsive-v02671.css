@@ -1167,3 +1167,19 @@ body[data-nexlab-page="notificacoes"] #nexlab-main-content{
     display:none!important;
   }
 }
+
+
+/* NEXLAB Beta 0.26.82 — consolidação da rolagem da Sidebar.
+   Mantém o conteúdo da navegação rolável, mas evita uma segunda barra vertical visível
+   ao lado da barra principal da página. */
+#mobile-sidebar > div:first-child{
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  scrollbar-width:none!important;
+  -ms-overflow-style:none!important;
+}
+#mobile-sidebar > div:first-child::-webkit-scrollbar{
+  width:0!important;
+  height:0!important;
+  display:none!important;
+}

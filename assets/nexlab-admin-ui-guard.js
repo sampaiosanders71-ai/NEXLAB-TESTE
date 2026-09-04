@@ -13,6 +13,7 @@
   let syncing=false;
   let lastRole='';
   let lastVerification='unknown';
+  let lastSyncAt=0;
 
   function authToken(){return CONFIG.getAccessToken();}
 
@@ -72,8 +73,10 @@
       return {state:'unavailable',reason:error?.name==='AbortError'?'timeout':'network',message:String(error?.message||'')};
     }finally{clearTimeout(timer);}
   }
-  async function sync(){
-    if(syncing)return;syncing=true;
+  async function sync(force=false){
+    const now=Date.now();
+    if(syncing||(!force&&now-lastSyncAt<15000))return;
+    syncing=true;lastSyncAt=now;
     try{
       const result=await fetchProfile();
       if(result.state==='unavailable'){
@@ -95,14 +98,14 @@
     }
   });
   observer.observe(document.documentElement,{childList:true,subtree:true});
-  window.addEventListener('nexlab:session-reset',()=>{immediateReset();setTimeout(sync,300);});
-  window.addEventListener('nexlab:auth-ready',()=>setTimeout(sync,350));
+  window.addEventListener('nexlab:session-reset',()=>{immediateReset();lastSyncAt=0;setTimeout(()=>sync(true),300);});
+  window.addEventListener('nexlab:auth-ready',()=>{lastSyncAt=0;setTimeout(()=>sync(true),350);});
   window.addEventListener('storage',event=>{
     if(!String(event.key||'').startsWith(`sb-${PROJECT_REF}-auth-token`))return;
     if(!event.newValue)immediateReset();
-    else setTimeout(sync,250);
+    else{lastSyncAt=0;setTimeout(()=>sync(true),250);}
   });
-  window.addEventListener('focus',sync);window.addEventListener('online',sync);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')sync();});
-  setTimeout(sync,1800);setInterval(sync,8000);
-  window.NexlabAdministrativeUiGuard=Object.freeze({version:VERSION,sync,reset:immediateReset,getState:()=>({role:lastRole,verification:lastVerification}),selfTest:()=>({ok:true,version:VERSION,overlayFocusTrap:true,escapeClose:true,focusRestored:true,sessionResetCleanup:true,roleResync:true,transientFailurePreservesUi:true,testEnvironmentProtected:true})});
+  window.addEventListener('focus',()=>sync());window.addEventListener('online',()=>sync());document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')sync();});
+  setTimeout(()=>sync(true),1800);
+  window.NexlabAdministrativeUiGuard=Object.freeze({version:VERSION,sync:(force=false)=>sync(Boolean(force)),reset:immediateReset,getState:()=>({role:lastRole,verification:lastVerification}),selfTest:()=>({ok:true,version:VERSION,overlayFocusTrap:true,escapeClose:true,focusRestored:true,sessionResetCleanup:true,roleResync:true,transientFailurePreservesUi:true,testEnvironmentProtected:true})});
 })();
