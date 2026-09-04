@@ -901,17 +901,58 @@
   });
 
   window.addEventListener('error', (event) => {
+    // Resource-load failures (img/link/script/etc.) also reach window in capture mode.
+    // They are not JavaScript exceptions and must never open the blocking user-error modal.
+    const isErrorEvent = typeof ErrorEvent !== 'undefined' && event instanceof ErrorEvent;
+    if (!isErrorEvent) {
+      const target = event?.target;
+      const tag = observabilitySanitize(target?.tagName || 'resource', 40).toLowerCase();
+      const rawResource = target?.currentSrc || target?.src || target?.href || '';
+      let resourcePath = '';
+      try { resourcePath = new URL(String(rawResource || ''), location.href).pathname; } catch {}
+      observabilityQueueEvent({
+        source: 'resource-load',
+        severity: tag === 'script' ? 'warning' : 'info',
+        message: `Falha protegida ao carregar recurso estático (${tag || 'resource'}).`,
+        module: document.body?.dataset?.nexlabPage || '',
+        metadata: {
+          resourceTag: tag,
+          resourcePath: observabilitySanitize(resourcePath, 300),
+          user_notice_shown: false
+        }
+      });
+      return;
+    }
+
     const cause = event.error?.cause || event.error;
+    const message = cause?.message || event.message || '';
+    const filename = observabilitySanitize(event.filename || '', 300);
+    const line = Number(event.lineno || 0);
+    const column = Number(event.colno || 0);
+
+    // Browsers/extensions may emit opaque ErrorEvents with no diagnostic information.
+    // Logging them as a real application crash creates false-positive modals.
+    if (!cause && !filename && line === 0 && column === 0 && (!message || /^script error\.?$/i.test(String(message).trim()))) {
+      observabilityQueueEvent({
+        source: 'window.error-opaque',
+        severity: 'warning',
+        message: 'Evento de erro opaco ignorado por não conter diagnóstico do aplicativo.',
+        module: document.body?.dataset?.nexlabPage || '',
+        metadata: { user_notice_shown:false }
+      });
+      return;
+    }
+
     reportDetectedUserError({
       source: 'window.error',
       severity: 'error',
-      message: cause?.message || event.message || 'Erro JavaScript não tratado.',
+      message: message || 'Erro JavaScript não tratado.',
       stack: cause?.stack || event.error?.stack || '',
       error: cause,
       metadata: {
-        filename: observabilitySanitize(event.filename || '', 300),
-        line: Number(event.lineno || 0),
-        column: Number(event.colno || 0),
+        filename,
+        line,
+        column,
         wrapper: observabilitySanitize(event.message || '', 300),
         causeName: observabilitySanitize(cause?.name || '', 120)
       }

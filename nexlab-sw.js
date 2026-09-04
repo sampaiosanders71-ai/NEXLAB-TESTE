@@ -1,9 +1,9 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
-const APP_REVISION='beta-0-26-82-update-atomic-v1';
-const GENERATED_AT='2026-09-04T02:25:00Z';
-const ASSET_REVISION='app-beta-0-26-82-update-atomic-v1';
-const CACHE_NAME='nexlab-app-beta-0-26-82-update-atomic-v1';
+const APP_REVISION='beta-0-26-82-interface-performance';
+const GENERATED_AT='2026-09-04T02:59:00Z';
+const ASSET_REVISION='app-beta-0-26-82-interface-performance';
+const CACHE_NAME='nexlab-app-beta-0-26-82-interface-performance';
 const STAGING_CACHE_NAME='nexlab-stage-'+APP_REVISION;
 const META_CACHE_NAME='nexlab-update-meta';
 const CACHE_PREFIX='nexlab-';
@@ -44,7 +44,7 @@ self.addEventListener('install',event=>{event.waitUntil(stageInstall());});
 self.addEventListener('activate',event=>{event.waitUntil((async()=>{const validation=await promoteStaging();await self.clients.claim();const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});for(const client of clients){try{client.postMessage({type:'NEXLAB_SW_ACTIVATED',version:APP_VERSION,release:APP_RELEASE,revision:APP_REVISION,generatedAt:GENERATED_AT,cache:CACHE_NAME,validation,previousCachesRetained:true});}catch{}}})());});
 async function activeCacheMatch(request,options={}){const cache=await caches.open(CACHE_NAME);return cache.match(request,options);}
 async function previousCacheMatch(request,options={}){for(const name of await oldCacheNames()){const cache=await caches.open(name);const hit=await cache.match(request,options);if(hit)return hit;}return null;}
-function requestedRevision(url){return String(url.searchParams.get('v')||'').trim();}
+function requestedRevision(url){const value=String(url.searchParams.get('v')||'').trim();return /^app-(?:beta|rc|stable)-/i.test(value)?value:'';}
 function isStatic(request,url){return ['script','style','image','font','manifest'].includes(request.destination)||/\.(?:js|css|png|webp|ico|jpe?g|svg|woff2?|webmanifest)$/i.test(url.pathname);}
 function appEntry(url){const scope=SCOPE_URL.pathname.endsWith('/')?SCOPE_URL.pathname:SCOPE_URL.pathname+'/';return url.pathname===scope||url.pathname===scope+'index.html';}
 async function cacheCurrentNetwork(request){const response=await fetchWithTimeout(new Request(request,{cache:'no-store'}),NETWORK_TIMEOUT_MS);if(!response.ok||response.type==='opaque')throw new Error('Resposta de rede inválida.');const cache=await caches.open(CACHE_NAME);await cache.put(new Request(new URL(request.url).origin+new URL(request.url).pathname),response.clone());return response;}

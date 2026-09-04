@@ -5,10 +5,10 @@
   "channel": "beta",
   "revision": "beta-0-26-82-interface-performance",
   "asset_revision": "app-beta-0-26-82-interface-performance",
-  "generated_at": "2026-09-04T02:52:00Z",
+  "generated_at": "2026-09-04T02:59:00Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "ef70f159bbd3a9ea11e6d5cfe80631d6932c91c47ada0b9e7cf16b739fa72da5",
+  "manifest_sha256": "47800e545cf3bf6a49a2799832001016f0b80470842a6f264f7fcc15d3e52ee6",
   "essential_count": 52,
-  "essential_bytes": 2258134,
+  "essential_bytes": 2261331,
   "cache_name": "nexlab-app-beta-0-26-82-interface-performance"
 }
