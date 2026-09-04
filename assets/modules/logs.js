@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: LogsModule. */
-export { LogsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-pendencias-meu-dia-fg-update-fix";
+export { LogsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-update-atomic-v1";

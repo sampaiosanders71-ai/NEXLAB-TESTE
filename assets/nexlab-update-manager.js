@@ -1,270 +1,49 @@
 (function(){
   'use strict';
+  const BUILD=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-update-atomic-v1',generatedAt:'2026-09-04T02:25:00Z',cacheName:'nexlab-app-beta-0-26-82-update-atomic-v1'});
+  const CURRENT={version:String(BUILD.version||''),release:String(BUILD.release||''),revision:String(BUILD.revision||''),generatedAt:String(BUILD.generatedAt||'')};
+  const HEAD_URL='./release-head.json';
+  const WORKER_URL='./nexlab-sw.js';
+  const CHECK_INTERVAL_MS=15*60*1000;
+  const VISIBILITY_MIN_INTERVAL_MS=2*60*1000;
+  const MESSAGE_TIMEOUT_MS=5000;
+  const ACTIVATE_TIMEOUT_MS=30000;
+  const DEFERRED_KEY='nexlab:update-deferred-revision';
+  if(window.__NEXLAB_UPDATE_MANAGER__?.revision===CURRENT.revision)return;
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-pendencias-meu-dia-fg-update-fix',generatedAt:'2026-09-03T02:12:00Z',cacheName:'nexlab-beta-0-26-82-pendencias-meu-dia-fg-update-fix'});
-  const CURRENT_VERSION = BUILD_IDENTITY.version;
-  const CURRENT_RELEASE = BUILD_IDENTITY.release;
-  const CURRENT_REVISION = BUILD_IDENTITY.revision;
-  const CURRENT_GENERATED_AT = BUILD_IDENTITY.generatedAt;
-  const RELEASE_URL = './release.json';
-  const WORKER_URL = './nexlab-sw.js';
-  const CHECK_INTERVAL_MS = 60 * 1000;
-  const MESSAGE_TIMEOUT_MS = 3000;
-  const INSTALL_TIMEOUT_MS = 18000;
-  const DEFERRED_KEY = 'nexlab:update-deferred-revision';
-
-  if (window.__NEXLAB_UPDATE_MANAGER__?.revision === CURRENT_REVISION) return;
-
-  let intervalId = null;
-  let initialTimeoutId = null;
-  let started = false;
-  let applying = false;
-  let reloaded = false;
-  let checkPromise = null;
-  let banner = null;
-  let bannerNowButton = null;
-  let bannerText = null;
-  let observedRegistration = null;
-  let registrationUpdateFoundHandler = null;
-  let controllerChangeHandler = null;
-  let workerMessageHandler = null;
-  let visibilityHandler = null;
-  let focusHandler = null;
-  let onlineHandler = null;
-  let pageShowHandler = null;
-
-  const state = {
-    version: CURRENT_VERSION,
-    release: CURRENT_RELEASE,
-    revision: CURRENT_REVISION,
-    generatedAt: CURRENT_GENERATED_AT,
-    status: 'idle',
-    updateAvailable: false,
-    remoteVersion: null,
-    remoteRelease: null,
-    remoteRevision: null,
-    remoteGeneratedAt: null,
-    workerVersion: null,
-    workerRelease: null,
-    workerRevision: null,
-    activeRevision: null,
-    checkedAt: null,
-    error: null
-  };
-
-  function numericParts(value){
-    return String(value || '').split(/[^0-9]+/).filter(Boolean).slice(0, 6).map((part) => Number(part) || 0);
-  }
-  function compareNumbers(left, right){
-    const a=numericParts(left), b=numericParts(right), length=Math.max(a.length,b.length,1);
-    for(let index=0;index<length;index+=1){const difference=(a[index]||0)-(b[index]||0);if(difference!==0)return difference>0?1:-1;}
-    return 0;
-  }
-  function identityFrom(value){
-    if(!value||typeof value!=='object')return null;
-    return {version:String(value.version||'').trim()||null,release:String(value.release||'').trim()||null,revision:String(value.revision||'').trim()||null,generatedAt:String(value.generatedAt||value.generated_at||'').trim()||null,cache:String(value.cache||'').trim()||null};
-  }
-  const CURRENT_IDENTITY=Object.freeze({version:CURRENT_VERSION,release:CURRENT_RELEASE,revision:CURRENT_REVISION,generatedAt:CURRENT_GENERATED_AT});
-  function compareIdentity(leftValue,rightValue=CURRENT_IDENTITY){
-    const left=identityFrom(leftValue),right=identityFrom(rightValue);if(!left||!right)return 0;
-    const versionComparison=compareNumbers(left.version,right.version);if(versionComparison!==0)return versionComparison;
-    const releaseComparison=compareNumbers(left.release,right.release);if(releaseComparison!==0)return releaseComparison;
-    if(left.revision&&right.revision&&left.revision===right.revision)return 0;
-    if(left.revision&&right.revision){const revisionComparison=compareNumbers(left.revision,right.revision);if(revisionComparison!==0)return revisionComparison;}
-    const leftTime=Date.parse(left.generatedAt||''),rightTime=Date.parse(right.generatedAt||'');
-    if(Number.isFinite(leftTime)&&Number.isFinite(rightTime)&&leftTime!==rightTime)return leftTime>rightTime?1:-1;
-    return 0;
-  }
-  function isNewer(identity){return compareIdentity(identity,CURRENT_IDENTITY)>0;}
-  function isPublishedUpdate(identity){
-    const normalized=identityFrom(identity);if(!normalized)return false;
-    if(normalized.revision&&normalized.revision!==CURRENT_REVISION){
-      const remoteTime=Date.parse(normalized.generatedAt||''),currentTime=Date.parse(CURRENT_GENERATED_AT||'');
-      if(Number.isFinite(remoteTime)&&Number.isFinite(currentTime))return remoteTime>=currentTime;
-      return true;
-    }
-    return isNewer(normalized);
-  }
-  function dispatch(name,detail){try{window.dispatchEvent(new CustomEvent(name,{detail}));}catch{}}
-  function deferredRevision(){try{return sessionStorage.getItem(DEFERRED_KEY)||'';}catch{return '';}}
+  let started=false,intervalId=null,initialTimer=null,checking=null,applying=false,reloading=false,lastCheckMs=0;
+  let observedRegistration=null,updateFoundHandler=null,banner=null,bannerText=null,bannerNow=null;
+  const state={...CURRENT,status:'idle',updateAvailable:false,remoteVersion:null,remoteRelease:null,remoteRevision:null,remoteGeneratedAt:null,workerRevision:null,checkedAt:null,error:null,protocol:2};
+  const dispatch=(name,detail)=>{try{window.dispatchEvent(new CustomEvent(name,{detail}));}catch{}};
+  const withTimeout=(promise,ms,message)=>new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error(message)),ms);Promise.resolve(promise).then(v=>{clearTimeout(timer);resolve(v);},e=>{clearTimeout(timer);reject(e);});});
+  function id(value){if(!value||typeof value!=='object')return null;return{version:String(value.version||'').trim(),release:String(value.release||'').trim(),revision:String(value.revision||'').trim(),generatedAt:String(value.generatedAt||value.generated_at||'').trim(),cache:String(value.cache||'').trim(),protocol:Number(value.protocol||value.update_protocol||0)||0};}
+  function newer(value){const remote=id(value);if(!remote?.revision||remote.revision===CURRENT.revision)return false;const rt=Date.parse(remote.generatedAt||''),ct=Date.parse(CURRENT.generatedAt||'');if(Number.isFinite(rt)&&Number.isFinite(ct))return rt>ct;return remote.revision!==CURRENT.revision;}
+  function deferred(){try{return sessionStorage.getItem(DEFERRED_KEY)||'';}catch{return '';}}
   function clearDeferred(){try{sessionStorage.removeItem(DEFERRED_KEY);}catch{}}
-
-  function ensureStyle(){
-    if(document.getElementById('nexlab-update-manager-style'))return;
-    const style=document.createElement('style');style.id='nexlab-update-manager-style';style.textContent=[
-      '.nexlab-update-banner{position:fixed!important;right:18px!important;bottom:18px!important;left:auto!important;top:auto!important;z-index:2147483000!important;display:block!important;width:min(410px,calc(100vw - 36px))!important;max-width:410px!important;min-width:0!important;box-sizing:border-box!important;padding:16px!important;border:1px solid #b9c8de!important;border-radius:16px!important;background:#fff!important;color:#10233f!important;box-shadow:0 18px 48px rgba(15,35,65,.24)!important;font:14px/1.45 Arial,sans-serif!important;text-align:left!important}',
-      '.nexlab-update-banner strong{display:block!important;width:auto!important;margin:0 0 5px!important;font-size:15px!important;line-height:1.35!important}','.nexlab-update-banner p{display:block!important;width:auto!important;max-width:none!important;margin:0 0 12px!important;white-space:normal!important;word-break:normal!important}',
-      '.nexlab-update-actions{display:flex!important;gap:8px!important;justify-content:flex-end!important;align-items:center!important;flex-wrap:wrap!important;width:100%!important}','.nexlab-update-actions button{width:auto!important;min-width:0!important;border-radius:10px!important;border:1px solid #b9c8de!important;padding:8px 12px!important;font-weight:700!important;cursor:pointer!important}',
-      '.nexlab-update-actions button:disabled{cursor:wait;opacity:.65}','.nexlab-update-now{background:#0b2a63;color:#fff;border-color:#0b2a63!important}','.nexlab-update-later{background:#fff;color:#263b58}',
-      '@media(max-width:520px){.nexlab-update-banner{left:12px;right:12px;bottom:12px;max-width:none}}'
-    ].join('');document.head.appendChild(style);
-  }
-  function hideBanner(){if(!banner)return;banner.remove();banner=null;bannerNowButton=null;bannerText=null;}
-  function deferUpdate(){
-    const revision=state.remoteRevision||state.workerRevision||'';
-    try{if(revision)sessionStorage.setItem(DEFERRED_KEY,revision);}catch{}
-    hideBanner();state.status='deferred';state.error=null;dispatch('nexlab:update-deferred',{...state});
-  }
-  function identityLabel(identity){const normalized=identityFrom(identity)||{};return String(normalized.release||'').toLowerCase()==='beta'&&normalized.version?`Beta ${normalized.version}`:[normalized.version,normalized.release].filter(Boolean).join(' — ');}
-  function setBannerProgress(message){if(bannerText)bannerText.textContent=message;if(bannerNowButton){bannerNowButton.disabled=true;bannerNowButton.textContent='Aplicando...';}}
-  function restoreBannerAction(message){if(bannerText&&message)bannerText.textContent=message;if(bannerNowButton){bannerNowButton.disabled=false;bannerNowButton.textContent='Tentar novamente';}}
-  function showBanner(identity){
-    if(!document.body)return;ensureStyle();hideBanner();const container=document.createElement('section');container.className='nexlab-update-banner';container.setAttribute('role','status');container.setAttribute('aria-live','polite');
-    const title=document.createElement('strong');title.textContent='Atualização do NEXLAB disponível';const text=document.createElement('p');const label=identityLabel(identity);text.textContent=label?`A versão ${label} foi baixada e validada. A página só será trocada depois da sua confirmação.`:'A nova revisão foi baixada e validada. A página só será trocada depois da sua confirmação.';
-    const actions=document.createElement('div');actions.className='nexlab-update-actions';const later=document.createElement('button');later.type='button';later.className='nexlab-update-later';later.textContent='Depois';later.addEventListener('click',deferUpdate);
-    const now=document.createElement('button');now.type='button';now.className='nexlab-update-now';now.textContent='Atualizar agora';now.addEventListener('click',()=>applyUpdate());actions.append(later,now);container.append(title,text,actions);document.body.appendChild(container);banner=container;bannerNowButton=now;bannerText=text;
-  }
-  async function withTimeout(promise,milliseconds,message){let timer;try{return await Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error(message)),milliseconds);})]);}finally{clearTimeout(timer);}}
-
-  function detachRegistrationObserver(){
-    if(observedRegistration&&registrationUpdateFoundHandler)observedRegistration.removeEventListener('updatefound',registrationUpdateFoundHandler);
-    observedRegistration=null;registrationUpdateFoundHandler=null;
-  }
-  function observeRegistration(registration){
-    if(!registration||observedRegistration===registration)return;detachRegistrationObserver();observedRegistration=registration;
-    registrationUpdateFoundHandler=()=>{
-      const installing=registration.installing;if(!installing)return;
-      state.status='downloading';state.updateAvailable=false;hideBanner();dispatch('nexlab:update-preparing',{...state});
-      installing.addEventListener('statechange',async()=>{
-        if(installing.state==='installed'&&navigator.serviceWorker.controller){
-          const waiting=registration.waiting||null;
-          const identity=await workerIdentity(waiting);
-          if(!waiting||!isPublishedUpdate(identity))return;
-          try{
-            const validation=await validateWaitingGraph(waiting);
-            if(validation?.ok){
-              state.workerVersion=identity?.version||null;state.workerRelease=identity?.release||null;state.workerRevision=identity?.revision||null;
-              publishAvailable(identity,{ready:true,validation});
-            }
-          }catch(error){
-            state.status='preparing';state.updateAvailable=false;state.error=String(error?.message||error);hideBanner();dispatch('nexlab:update-preparing',{...state,error:state.error});
-          }
-        }else if(installing.state==='redundant'){
-          state.status='preparing';state.updateAvailable=false;hideBanner();dispatch('nexlab:update-preparing',{...state});
-        }
-      });
-    };
-    registration.addEventListener('updatefound',registrationUpdateFoundHandler);
-  }
-  async function getRegistration(){
-    if(!('serviceWorker'in navigator)||location.protocol==='file:')return null;
-    let registration=await navigator.serviceWorker.getRegistration('./');
-    if(!registration)registration=await navigator.serviceWorker.register(WORKER_URL,{scope:'./',updateViaCache:'none'});
-    observeRegistration(registration);return registration;
-  }
-  async function workerIdentity(worker){
-    if(!worker||typeof MessageChannel==='undefined')return null;
-    return withTimeout(new Promise((resolve)=>{const channel=new MessageChannel();channel.port1.onmessage=(event)=>resolve(identityFrom(event.data));worker.postMessage({type:'NEXLAB_GET_VERSION'},[channel.port2]);}),MESSAGE_TIMEOUT_MS,'O worker não respondeu com sua identificação.').catch(()=>null);
-  }
-  async function validateWaitingGraph(worker){
-    if(!worker||typeof MessageChannel==='undefined')throw new Error('Worker de atualização indisponível para validar módulos.');
-    return withTimeout(new Promise((resolve,reject)=>{const channel=new MessageChannel();channel.port1.onmessage=(event)=>{const result=event.data||{};if(result.ok)resolve(result);else reject(new Error(result.error||'O grafo de módulos da nova revisão está incompleto.'));};worker.postMessage({type:'NEXLAB_VALIDATE_INSTALL'},[channel.port2]);}),8000,'A validação do grafo de módulos excedeu o tempo esperado.');
-  }
-  async function fetchRelease(){
-    const url=new URL(RELEASE_URL,location.href);url.searchParams.set('nexlabUpdateCheck',String(Date.now()));const response=await fetch(url.toString(),{method:'GET',cache:'no-store',credentials:'same-origin',headers:{Accept:'application/json'}});if(!response.ok)throw new Error(`Falha ao consultar release.json (${response.status}).`);return identityFrom(await response.json())||{};
-  }
-  function publishAvailable(identity,options={}){
-    const normalized=identityFrom(identity)||{};
-    // A atualização só pode ser anunciada depois que o Service Worker entrou em
-    // waiting e validou integralmente o shell/grafo desta revisão.
-    if(options.ready!==true||!isPublishedUpdate(normalized))return false;
-    state.remoteVersion=normalized.version||state.remoteVersion;state.remoteRelease=normalized.release||state.remoteRelease;state.remoteRevision=normalized.revision||state.remoteRevision;state.remoteGeneratedAt=normalized.generatedAt||state.remoteGeneratedAt;state.updateAvailable=true;state.error=null;
-    if(!options.force&&normalized.revision&&deferredRevision()===normalized.revision){state.status='deferred';hideBanner();dispatch('nexlab:update-deferred',{...state});return true;}
-    state.status='available';showBanner(normalized);dispatch('nexlab:update-available',{...state,validation:options.validation||null});return true;
-  }
-
-
-  async function reloadForIdentity(identity,reason){
-    const normalized=identityFrom(identity);if(!normalized||!isPublishedUpdate(normalized)||reloaded)return false;const now=Date.now(),reloadKey=normalized.revision||normalized.generatedAt||'unknown';
-    try{const previous=JSON.parse(sessionStorage.getItem('nexlab:update-reload-guard')||'null');if(previous?.key===reloadKey&&now-Number(previous.at||0)<10000){state.status='error';state.error='Atualização interrompida para evitar recarregamento repetitivo.';dispatch('nexlab:update-reload-blocked',{...state,reason,identity:normalized});return false;}sessionStorage.setItem('nexlab:update-reload-guard',JSON.stringify({key:reloadKey,at:now}));sessionStorage.setItem('nexlab:last-activated-revision',reloadKey);}catch{}
-    clearDeferred();reloaded=true;state.status='reloading';state.activeRevision=normalized.revision||null;dispatch('nexlab:update-reloading',{...state,reason});
-    const target=new URL(location.href);target.searchParams.set('nexlabActivated',reloadKey);target.searchParams.set('nexlabReload',String(now));window.setTimeout(()=>location.replace(target.toString()),40);return true;
-  }
-
-  async function performCheck(options={}){
-    const forceWorkerUpdate=options.forceWorkerUpdate!==false;state.status='checking';state.error=null;dispatch('nexlab:update-state',{...state});
-    try{
-      const registration=await getRegistration();
-      let releaseIdentity=null;try{releaseIdentity=await fetchRelease();}catch(error){if(!registration)throw error;}
-      const releaseNewer=isPublishedUpdate(releaseIdentity);
-      if(releaseNewer){
-        state.remoteVersion=releaseIdentity?.version||null;state.remoteRelease=releaseIdentity?.release||null;state.remoteRevision=releaseIdentity?.revision||null;state.remoteGeneratedAt=releaseIdentity?.generatedAt||null;
-      }
-      if(registration&&forceWorkerUpdate)try{await registration.update();}catch{}
-      const activeIdentity=await workerIdentity(registration?.active||navigator.serviceWorker.controller);state.activeRevision=activeIdentity?.revision||null;
-      if(isPublishedUpdate(activeIdentity)){
-        const reloading=await reloadForIdentity(activeIdentity,'active-worker-ahead-of-page');
-        if(reloading)return{ok:true,...state,action:'reload-active-ahead'};
-      }
-
-      // Nunca use release.json sozinho como prova de prontidão. Ele pode chegar ao
-      // CDN antes dos demais assets. Somente um worker em waiting, com o grafo
-      // integralmente validado, pode liberar o aviso ao usuário.
-      const waitingWorker=registration?.waiting||null;
-      const waitingIdentity=await workerIdentity(waitingWorker);
-      state.workerVersion=waitingIdentity?.version||null;state.workerRelease=waitingIdentity?.release||null;state.workerRevision=waitingIdentity?.revision||null;
-      if(waitingWorker&&isPublishedUpdate(waitingIdentity)){
-        try{
-          const graphValidation=await validateWaitingGraph(waitingWorker);
-          state.checkedAt=new Date().toISOString();
-          if(graphValidation?.ok){publishAvailable(waitingIdentity,{ready:true,validation:graphValidation});return{ok:true,...state,ready:true,graphValidation};}
-        }catch(error){
-          state.error=String(error?.message||error);
-        }
-      }
-
-      state.checkedAt=new Date().toISOString();state.updateAvailable=false;hideBanner();
-      if(releaseNewer||registration?.installing){
-        state.status=registration?.installing?'downloading':'preparing';
-        dispatch('nexlab:update-preparing',{...state,remote:releaseIdentity});
-      }else{
-        state.status='current';clearDeferred();dispatch('nexlab:update-current',{...state});
-      }
-      return{ok:true,...state,ready:false};
-    }catch(error){state.status='error';state.updateAvailable=false;hideBanner();state.error=String(error?.message||error);state.checkedAt=new Date().toISOString();dispatch('nexlab:update-error',{...state});return{ok:false,...state};}
-  }
-
-  function check(options={}){if(checkPromise)return checkPromise;checkPromise=performCheck(options).finally(()=>{checkPromise=null;});return checkPromise;}
-
-  async function waitForWaitingWorker(registration,milliseconds=INSTALL_TIMEOUT_MS){
-    if(registration?.waiting)return registration.waiting;
-    return withTimeout(new Promise((resolve)=>{let installing=registration?.installing||null;const inspect=()=>{if(registration?.waiting)return resolve(registration.waiting);installing=registration?.installing||installing;if(!installing)return;if(installing.state==='installed')return resolve(registration.waiting||installing);if(installing.state==='redundant')return resolve(null);};const onUpdateFound=()=>{installing=registration.installing;installing?.addEventListener('statechange',inspect);inspect();};registration?.addEventListener('updatefound',onUpdateFound,{once:true});installing?.addEventListener('statechange',inspect);inspect();}),milliseconds,'A nova versão ainda não terminou de instalar.').catch(()=>null);
-  }
-  async function requestActivation(worker){
-    if(!worker)return false;return withTimeout(new Promise((resolve,reject)=>{const channel=new MessageChannel();channel.port1.onmessage=(event)=>{if(event.data?.ok)resolve(true);else reject(new Error(event.data?.error||'O Service Worker recusou a ativação.'));};worker.postMessage({type:'NEXLAB_SKIP_WAITING',expectedVersion:state.workerVersion||state.remoteVersion||null,expectedRevision:state.workerRevision||state.remoteRevision||null},[channel.port2]);}),MESSAGE_TIMEOUT_MS,'O Service Worker não confirmou a ativação.');
-  }
-  async function waitForControllerChange(expectedIdentity,milliseconds=12000){
-    const expected=identityFrom(expectedIdentity);return new Promise((resolve,reject)=>{let settled=false,timer=null;const cleanup=()=>{navigator.serviceWorker.removeEventListener('controllerchange',onControllerChange);if(timer)window.clearTimeout(timer);};const finish=(value,error)=>{if(settled)return;settled=true;cleanup();if(error)reject(error);else resolve(value);};const onControllerChange=async()=>{const identity=await workerIdentity(navigator.serviceWorker.controller);if(!identity)return;if(expected?.revision&&identity.revision!==expected.revision)return;if(!isPublishedUpdate(identity))return;finish(identity);};timer=window.setTimeout(async()=>{const registration=await navigator.serviceWorker.getRegistration('./').catch(()=>null);const identity=await workerIdentity(registration?.active||navigator.serviceWorker.controller);if(identity&&isPublishedUpdate(identity)&&(!expected?.revision||identity.revision===expected.revision))return finish(identity);finish(null,new Error('A ativação terminou sem transferir o controle para a nova revisão.'));},milliseconds);navigator.serviceWorker.addEventListener('controllerchange',onControllerChange);});
-  }
-  async function applyUpdate(){
-    if(applying)return{ok:false,reason:'already_applying'};applying=true;state.status='applying';state.error=null;clearDeferred();setBannerProgress('Instalando e validando a nova revisão. Esta página será recarregada quando a ativação terminar.');dispatch('nexlab:update-state',{...state});
-    try{
-      const registration=await getRegistration();if(!registration)throw new Error('Service Worker indisponível neste navegador.');if(!registration.waiting)await registration.update();
-      const waitingWorker=registration.waiting||await waitForWaitingWorker(registration);const identity=await workerIdentity(waitingWorker);
-      if(!waitingWorker||!isPublishedUpdate(identity)){const activeIdentity=await workerIdentity(registration.active||navigator.serviceWorker.controller);if(activeIdentity&&isPublishedUpdate(activeIdentity)){const reloading=await reloadForIdentity(activeIdentity,'manual-confirmation-active-worker');if(reloading)return{ok:true,action:'reload-active',identity:activeIdentity};}throw new Error('A atualização ainda está sendo preparada. O aviso será exibido novamente somente quando todos os arquivos estiverem validados.');}
-      state.workerVersion=identity.version;state.workerRelease=identity.release;state.workerRevision=identity.revision;state.status='validating';setBannerProgress('Validando todos os módulos da nova revisão...');dispatch('nexlab:update-state',{...state});
-      const graphValidation=await validateWaitingGraph(waitingWorker);
-      if(!graphValidation?.ok)throw new Error('A nova revisão não passou na validação completa dos módulos.');
-      state.status='activating';setBannerProgress(`Módulos validados (${graphValidation.graphCount||0}). Ativando a nova revisão...`);dispatch('nexlab:update-state',{...state,graphValidation});
-      const controllerChange=waitForControllerChange(identity);await requestActivation(waitingWorker);const activatedIdentity=await controllerChange;const reloading=await reloadForIdentity(activatedIdentity,'manual-confirmation-controller-change');if(!reloading)throw new Error('A revisão foi ativada, mas a recarga segura não pôde ser iniciada.');return{ok:true,action:'reload-confirmed',identity:activatedIdentity};
-    }catch(error){applying=false;state.status='error';state.error=String(error?.message||error);restoreBannerAction(state.error);dispatch('nexlab:update-error',{...state});return{ok:false,error:state.error};}
-  }
-
-  function start(){
-    if(started)return;started=true;if(!('serviceWorker'in navigator)||location.protocol==='file:'){state.status='unsupported';return;}
-    controllerChangeHandler=async()=>{const identity=await workerIdentity(navigator.serviceWorker.controller);state.activeRevision=identity?.revision||state.activeRevision;if(!applying&&identity?.revision&&identity.revision!==CURRENT_REVISION&&isPublishedUpdate(identity)){await reloadForIdentity(identity,'external-controller-change');return;}dispatch('nexlab:update-controller-changed',{...state,identity});};
-    workerMessageHandler=async(event)=>{if(event.data?.type!=='NEXLAB_SW_ACTIVATED')return;state.status=applying?'activating':'available';if(!applying&&event.data?.revision&&event.data.revision!==CURRENT_REVISION&&isPublishedUpdate(event.data)){await reloadForIdentity(event.data,'external-worker-activation');return;}dispatch('nexlab:update-state',{...state,worker:event.data});};
-    visibilityHandler=()=>{if(document.visibilityState==='visible')void check();};focusHandler=()=>{void check({forceWorkerUpdate:true});};onlineHandler=()=>{void check();};
-    pageShowHandler=async(event)=>{if(!event.persisted)return;const registration=await navigator.serviceWorker.getRegistration('./').catch(()=>null);const identity=await workerIdentity(registration?.active||navigator.serviceWorker.controller);if(identity?.revision&&identity.revision!==CURRENT_REVISION&&isPublishedUpdate(identity)){await reloadForIdentity(identity,'bfcache-revision-mismatch');return;}void check({forceWorkerUpdate:false});};
-    navigator.serviceWorker.addEventListener('controllerchange',controllerChangeHandler);navigator.serviceWorker.addEventListener('message',workerMessageHandler);document.addEventListener('visibilitychange',visibilityHandler);window.addEventListener('focus',focusHandler,{passive:true});window.addEventListener('online',onlineHandler,{passive:true});window.addEventListener('pageshow',pageShowHandler);
-    initialTimeoutId=window.setTimeout(()=>{initialTimeoutId=null;void check();},1200);intervalId=window.setInterval(()=>void check(),CHECK_INTERVAL_MS);
-  }
-  function stop(){
-    if(initialTimeoutId)window.clearTimeout(initialTimeoutId);if(intervalId)window.clearInterval(intervalId);initialTimeoutId=null;intervalId=null;
-    if(controllerChangeHandler)navigator.serviceWorker?.removeEventListener('controllerchange',controllerChangeHandler);if(workerMessageHandler)navigator.serviceWorker?.removeEventListener('message',workerMessageHandler);if(visibilityHandler)document.removeEventListener('visibilitychange',visibilityHandler);if(focusHandler)window.removeEventListener('focus',focusHandler);if(onlineHandler)window.removeEventListener('online',onlineHandler);if(pageShowHandler)window.removeEventListener('pageshow',pageShowHandler);
-    controllerChangeHandler=null;workerMessageHandler=null;visibilityHandler=null;focusHandler=null;onlineHandler=null;pageShowHandler=null;detachRegistrationObserver();started=false;
-  }
-
-  window.__NEXLAB_UPDATE_MANAGER__={version:CURRENT_VERSION,release:CURRENT_RELEASE,revision:CURRENT_REVISION,state,compareVersions:compareNumbers,compareIdentity,isPublishedUpdate,check,applyUpdate,start,stop};
+  function ensureStyle(){if(document.getElementById('nexlab-update-manager-style'))return;const style=document.createElement('style');style.id='nexlab-update-manager-style';style.textContent='.nexlab-update-banner{position:fixed!important;right:18px!important;bottom:18px!important;z-index:2147483000!important;width:min(410px,calc(100vw - 36px))!important;box-sizing:border-box!important;padding:16px!important;border:1px solid #b9c8de!important;border-radius:16px!important;background:#fff!important;color:#10233f!important;box-shadow:0 18px 48px rgba(15,35,65,.24)!important;font:14px/1.45 Arial,sans-serif!important}.nexlab-update-banner strong{display:block!important;margin:0 0 5px!important;font-size:15px!important}.nexlab-update-banner p{margin:0 0 12px!important;white-space:normal!important}.nexlab-update-actions{display:flex!important;gap:8px!important;justify-content:flex-end!important;flex-wrap:wrap!important}.nexlab-update-actions button{border-radius:10px!important;border:1px solid #b9c8de!important;padding:8px 12px!important;font-weight:700!important;cursor:pointer!important}.nexlab-update-now{background:#0b2a63!important;color:#fff!important;border-color:#0b2a63!important}.nexlab-update-later{background:#fff!important;color:#263b58!important}@media(max-width:520px){.nexlab-update-banner{left:12px!important;right:12px!important;bottom:12px!important;width:auto!important}}';document.head.appendChild(style);}
+  function hideBanner(){banner?.remove();banner=null;bannerText=null;bannerNow=null;}
+  function showBanner(identity,validation){if(!document.body)return;const remote=id(identity);if(!remote?.revision)return;if(deferred()===remote.revision)return;ensureStyle();hideBanner();const box=document.createElement('section');box.className='nexlab-update-banner';box.setAttribute('role','status');box.setAttribute('aria-live','polite');const title=document.createElement('strong');title.textContent='Atualização do NEXLAB pronta';const text=document.createElement('p');text.textContent=`A revisão ${remote.revision} já foi baixada e validada (${Number(validation?.essentialCount||0)} arquivos essenciais). Atualize quando puder.`;const actions=document.createElement('div');actions.className='nexlab-update-actions';const later=document.createElement('button');later.type='button';later.className='nexlab-update-later';later.textContent='Depois';later.onclick=()=>{try{sessionStorage.setItem(DEFERRED_KEY,remote.revision);}catch{}hideBanner();state.status='deferred';dispatch('nexlab:update-deferred',{...state});};const now=document.createElement('button');now.type='button';now.className='nexlab-update-now';now.textContent='Atualizar agora';now.onclick=()=>void applyUpdate();actions.append(later,now);box.append(title,text,actions);document.body.appendChild(box);banner=box;bannerText=text;bannerNow=now;}
+  function setProgress(message){if(bannerText)bannerText.textContent=message;if(bannerNow){bannerNow.disabled=true;bannerNow.textContent='Atualizando...';}}
+  function restoreAction(message){if(bannerText)bannerText.textContent=message||'Não foi possível ativar a atualização. Tente novamente.';if(bannerNow){bannerNow.disabled=false;bannerNow.textContent='Tentar novamente';}}
+  async function fetchHead(){const url=new URL(HEAD_URL,location.href);url.searchParams.set('check',String(Date.now()));const response=await fetch(url,{cache:'no-store',credentials:'same-origin',headers:{Accept:'application/json'}});if(!response.ok)throw new Error(`Cabeçalho de atualização indisponível (${response.status}).`);const data=await response.json();return id(data)||{};}
+  async function getRegistration(){if(!('serviceWorker'in navigator)||location.protocol==='file:')return null;let registration=await navigator.serviceWorker.getRegistration('./');if(!registration)registration=await navigator.serviceWorker.register(WORKER_URL,{scope:'./',updateViaCache:'none'});observeRegistration(registration);return registration;}
+  async function workerMessage(worker,payload,timeoutMs=MESSAGE_TIMEOUT_MS){if(!worker||typeof MessageChannel==='undefined')return null;return withTimeout(new Promise((resolve,reject)=>{const channel=new MessageChannel();channel.port1.onmessage=(event)=>{const data=event.data||{};data.ok===false?reject(new Error(data.error||'O Service Worker recusou a operação.')):resolve(data);};worker.postMessage(payload,[channel.port2]);}),timeoutMs,'O Service Worker não respondeu no tempo esperado.');}
+  async function workerIdentity(worker){try{return id(await workerMessage(worker,{type:'NEXLAB_GET_VERSION'}));}catch{return null;}}
+  async function validateWaiting(worker){return workerMessage(worker,{type:'NEXLAB_VALIDATE_INSTALL'},10000);}
+  function publishReady(identity,validation){const remote=id(identity);if(!remote||!newer(remote)||validation?.ok!==true)return false;state.workerRevision=remote.revision;state.remoteVersion=remote.version;state.remoteRelease=remote.release;state.remoteRevision=remote.revision;state.remoteGeneratedAt=remote.generatedAt;state.updateAvailable=true;state.status=deferred()===remote.revision?'deferred':'available';state.error=null;if(state.status==='available')showBanner(remote,validation);dispatch('nexlab:update-available',{...state,validation});return true;}
+  async function inspectWaiting(registration,expectedHead=null){const worker=registration?.waiting;if(!worker)return false;const identity=await workerIdentity(worker);if(!identity?.revision||!newer(identity))return false;if(expectedHead?.revision&&identity.revision!==expectedHead.revision)return false;try{const validation=await validateWaiting(worker);return publishReady(identity,validation);}catch(error){state.status='preparing';state.error=String(error?.message||error);hideBanner();dispatch('nexlab:update-preparing',{...state});return false;}}
+  function detachObserver(){if(observedRegistration&&updateFoundHandler)observedRegistration.removeEventListener('updatefound',updateFoundHandler);observedRegistration=null;updateFoundHandler=null;}
+  function observeRegistration(registration){if(!registration||observedRegistration===registration)return;detachObserver();observedRegistration=registration;updateFoundHandler=()=>{const installing=registration.installing;if(!installing)return;state.status='downloading';state.updateAvailable=false;hideBanner();dispatch('nexlab:update-preparing',{...state});installing.addEventListener('statechange',()=>{if(installing.state==='installed'&&navigator.serviceWorker.controller)void inspectWaiting(registration);else if(installing.state==='redundant'){state.status='preparing';state.error='A revisão ainda não foi publicada por completo. O NEXLAB atual permanece ativo.';dispatch('nexlab:update-preparing',{...state});}});};registration.addEventListener('updatefound',updateFoundHandler);void inspectWaiting(registration);}
+  async function performCheck(options={}){lastCheckMs=Date.now();state.status='checking';state.error=null;try{const registration=await getRegistration();let head=null;try{head=await fetchHead();}catch(error){state.checkedAt=new Date().toISOString();state.status=navigator.onLine===false?'offline':'current';state.error=navigator.onLine===false?null:String(error?.message||error);return{ok:true,...state,offline:navigator.onLine===false};}state.checkedAt=new Date().toISOString();if(head?.revision&&newer(head)){state.remoteVersion=head.version;state.remoteRelease=head.release;state.remoteRevision=head.revision;state.remoteGeneratedAt=head.generatedAt;if(await inspectWaiting(registration,head))return{ok:true,...state,ready:true};state.updateAvailable=false;hideBanner();state.status=registration?.installing?'downloading':'preparing';if(registration&&!registration.installing)try{await registration.update();}catch{}dispatch('nexlab:update-preparing',{...state,remote:head});return{ok:true,...state,ready:false};}state.updateAvailable=false;state.status='current';state.error=null;clearDeferred();hideBanner();dispatch('nexlab:update-current',{...state});return{ok:true,...state,ready:false};}catch(error){state.status='error';state.error=String(error?.message||error);state.checkedAt=new Date().toISOString();dispatch('nexlab:update-error',{...state});return{ok:false,...state};}}
+  function check(options={}){if(checking)return checking;checking=performCheck(options).finally(()=>{checking=null;});return checking;}
+  async function applyUpdate(){if(applying)return{ok:false,reason:'already_applying'};applying=true;state.status='activating';state.error=null;clearDeferred();setProgress('Ativando a revisão já validada...');try{const registration=await getRegistration();const waiting=registration?.waiting;if(!waiting)throw new Error('A atualização ainda não está no estado pronto. Aguarde o próximo aviso.');const identity=await workerIdentity(waiting);if(!identity||!newer(identity))throw new Error('O Service Worker em espera não corresponde a uma revisão nova.');const validation=await validateWaiting(waiting);if(validation?.ok!==true)throw new Error('A revisão deixou de passar na validação final.');const controllerPromise=waitForController(identity.revision);await workerMessage(waiting,{type:'NEXLAB_ACTIVATE_UPDATE',expectedVersion:identity.version,expectedRevision:identity.revision},10000);await controllerPromise;state.status='reloading';setProgress('Atualização ativada. Recarregando o NEXLAB...');reloadOnce(identity.revision);return{ok:true,identity,validation};}catch(error){applying=false;state.status='error';state.error=String(error?.message||error);restoreAction(state.error);dispatch('nexlab:update-error',{...state});return{ok:false,error:state.error};}}
+  function waitForController(revision){return withTimeout(new Promise(resolve=>{const onChange=async()=>{const active=await workerIdentity(navigator.serviceWorker.controller);if(!revision||active?.revision===revision){navigator.serviceWorker.removeEventListener('controllerchange',onChange);resolve(active);}};navigator.serviceWorker.addEventListener('controllerchange',onChange);}),ACTIVATE_TIMEOUT_MS,'A nova revisão foi ativada, mas não assumiu a página no tempo esperado.');}
+  function reloadOnce(revision){if(reloading)return;reloading=true;try{const key='nexlab:update-reload:'+revision;const at=Number(sessionStorage.getItem(key)||0);if(Date.now()-at<10000)return;sessionStorage.setItem(key,String(Date.now()));}catch{}const target=new URL(location.href);target.searchParams.set('nexlabActivated',revision);target.searchParams.set('nexlabReload',String(Date.now()));setTimeout(()=>location.replace(target.toString()),50);}
+  async function announceBootOk(){try{const registration=await navigator.serviceWorker.getRegistration('./');const active=registration?.active||navigator.serviceWorker.controller;const identity=await workerIdentity(active);if(identity?.revision!==CURRENT.revision)return false;await workerMessage(active,{type:'NEXLAB_APP_BOOT_OK',expectedRevision:CURRENT.revision},8000);return true;}catch{return false;}}
+  function showAvailable(){if(state.updateAvailable&&state.remoteRevision&&observedRegistration?.waiting)void inspectWaiting(observedRegistration,{revision:state.remoteRevision});}
+  function start(){if(started)return;started=true;if(!('serviceWorker'in navigator)||location.protocol==='file:'){state.status='unsupported';return;}void getRegistration().then(reg=>{observeRegistration(reg);void inspectWaiting(reg);});initialTimer=setTimeout(()=>void check(),1800);intervalId=setInterval(()=>void check(),CHECK_INTERVAL_MS);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&Date.now()-lastCheckMs>VISIBILITY_MIN_INTERVAL_MS)void check();});window.addEventListener('online',()=>void check());window.addEventListener('pageshow',event=>{if(event.persisted&&Date.now()-lastCheckMs>VISIBILITY_MIN_INTERVAL_MS)void check();});navigator.serviceWorker.addEventListener('controllerchange',async()=>{const identity=await workerIdentity(navigator.serviceWorker.controller);if(identity?.revision&&identity.revision!==CURRENT.revision)reloadOnce(identity.revision);});if(document.body?.dataset?.nexlabAppReady==='true')void announceBootOk();}
+  function stop(){if(initialTimer)clearTimeout(initialTimer);if(intervalId)clearInterval(intervalId);initialTimer=null;intervalId=null;detachObserver();started=false;}
+  window.addEventListener('nexlab:application-ready',()=>void announceBootOk(),{once:true});
+  window.__NEXLAB_UPDATE_MANAGER__={version:CURRENT.version,release:CURRENT.release,revision:CURRENT.revision,state,check,applyUpdate,start,stop,showAvailable,isPublishedUpdate:newer,compareIdentity:(a,b=CURRENT)=>{const ai=id(a),bi=id(b);if(!ai||!bi)return 0;if(ai.revision===bi.revision)return 0;const at=Date.parse(ai.generatedAt||''),bt=Date.parse(bi.generatedAt||'');return Number.isFinite(at)&&Number.isFinite(bt)?Math.sign(at-bt):1;}};
   if(document.readyState==='complete')start();else window.addEventListener('load',start,{once:true});
 })();

@@ -1,5 +1,5 @@
 /* NEXLAB 0.26.82 — Meu Dia no Dashboard — Etapa E. */
-import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-pendencias-meu-dia-fg-update-fix";
+import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-update-atomic-v1";
 
 const CARD_ID = "nexlab-myday-dashboard-summary-v02682";
 let refreshTimer = null;

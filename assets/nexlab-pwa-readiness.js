@@ -1,12 +1,12 @@
 (function(){
   'use strict';
-  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-pendencias-meu-dia-fg-update-fix',assetRevision:'app-beta-0-26-82-pendencias-meu-dia-fg-update-fix',cacheName:'nexlab-beta-0-26-82-pendencias-meu-dia-fg-update-fix'});
+  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-update-atomic-v1',assetRevision:'app-beta-0-26-82-update-atomic-v1',cacheName:'nexlab-beta-0-26-82-update-atomic-v1'});
   if (window.__NEXLAB_PWA_READINESS__?.revision === BUILD_IDENTITY.revision) return;
 
   const VERSION=BUILD_IDENTITY.version;
   const RELEASE=BUILD_IDENTITY.release;
   const REVISION=BUILD_IDENTITY.revision;
-  const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-82-pendencias-meu-dia-fg-update-fix';
+  const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-82-update-atomic-v1';
   const ASSET_REVISION=BUILD_IDENTITY.assetRevision;
   const CACHE_NAME=BUILD_IDENTITY.cacheName;
   const STORAGE_KEY='nexlab:pwa-readiness:'+VERSION;
@@ -298,7 +298,6 @@
     try{
       if(navigator.onLine!==false)throw new Error('Desligue a internet antes de executar esta prova.');
       const display=displayState();
-    const performanceProbe=performanceState(runtimeModules);
       if(!display.installed)throw new Error('Abra o diagnóstico pelo aplicativo instalado.');
       if(!navigator.serviceWorker?.controller)throw new Error('A página não está controlada pelo Service Worker.');
       const evidence=readDeviceEvidence();
