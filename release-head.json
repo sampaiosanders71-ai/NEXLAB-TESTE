@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-sidebar-colapsavel",
-  "asset_revision": "app-beta-0-26-82-sidebar-colapsavel",
+  "revision": "beta-0-26-82-sidebar-toggle-visivel",
+  "asset_revision": "app-beta-0-26-82-sidebar-toggle-visivel",
   "generated_at": "2026-09-04T21:30:00Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "188fec3fc3310363cc49000e45c0b636b6c3506e906850f60fd05c4d1f38c59a",
+  "manifest_sha256": "5e16131f9a7ba5409a49498ba77acf3c0208db3d8121a21ef079ce9c89a4e6bb",
   "essential_count": 52,
-  "essential_bytes": 2264969,
-  "cache_name": "nexlab-app-beta-0-26-82-sidebar-colapsavel"
+  "essential_bytes": 2266360,
+  "cache_name": "nexlab-app-beta-0-26-82-sidebar-toggle-visivel"
 }
