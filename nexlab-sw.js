@@ -6,6 +6,8 @@ const APP_REVISION=BUILD_IDENTITY.revision;
 const GENERATED_AT=BUILD_IDENTITY.generatedAt;
 const ASSET_REVISION=BUILD_IDENTITY.assetRevision;
 const CACHE_NAME=BUILD_IDENTITY.cacheName;
+const RECOVERY_AUTO_ACTIVATE=true;
+const RECOVERY_NAVIGATION_PARAM='nexlabRecovery';
 const CACHE_PREFIX='nexlab-';
 const STRUCTURAL_RECOVERY_PURGE_PREVIOUS_CACHES=true;
 const NETWORK_TIMEOUT_MS=3500;
@@ -340,9 +342,10 @@ async function precacheShell(){
 
 self.addEventListener('install',(event)=>{
   event.waitUntil((async()=>{
-    // A nova revisão permanece em waiting. A ativação só ocorre após
-    // NEXLAB_SKIP_WAITING, enviado pelo botão "Atualizar agora".
+    // Hotfix de recuperação: valida todo o shell já publicado e, somente
+    // depois, ativa automaticamente para substituir workers antigos presos.
     await precacheShell();
+    if(RECOVERY_AUTO_ACTIVATE)await self.skipWaiting();
   })());
 });
 
@@ -357,7 +360,17 @@ self.addEventListener('activate',(event)=>{
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
     for(const client of clients){
-      try{client.postMessage({type:'NEXLAB_SW_ACTIVATED',version:APP_VERSION,release:APP_RELEASE,revision:APP_REVISION,generatedAt:GENERATED_AT,cache:CACHE_NAME,reloadByWorker:false,previousCacheRetained:retainedPrevious,previousCacheValidated:Boolean(retainedPrevious)});}catch{}
+      try{client.postMessage({type:'NEXLAB_SW_ACTIVATED',version:APP_VERSION,release:APP_RELEASE,revision:APP_REVISION,generatedAt:GENERATED_AT,cache:CACHE_NAME,reloadByWorker:RECOVERY_AUTO_ACTIVATE,previousCacheRetained:retainedPrevious,previousCacheValidated:Boolean(retainedPrevious)});}catch{}
+      if(RECOVERY_AUTO_ACTIVATE&&'navigate' in client){
+        try{
+          const target=new URL(client.url);
+          if(target.origin===self.location.origin&&target.pathname.startsWith(SCOPE_URL.pathname)){
+            target.searchParams.set(RECOVERY_NAVIGATION_PARAM,APP_REVISION);
+            target.searchParams.set('nexlabReload',String(Date.now()));
+            await client.navigate(target.href);
+          }
+        }catch{}
+      }
     }
   })());
 });
