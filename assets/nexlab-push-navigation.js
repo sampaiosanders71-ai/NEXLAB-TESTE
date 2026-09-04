@@ -1,6 +1,6 @@
 /* NEXLAB Beta 0.26.82 — navegação Push sincronizada com a prontidão real do aplicativo. */
 (()=>{
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-sidebar-colapsavel',homologationRevision:'beta-0-26-82-sidebar-colapsavel'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-sidebar-toggle-visivel',homologationRevision:'beta-0-26-82-sidebar-toggle-visivel'});
   if(globalThis.__NEXLAB_PUSH_NAVIGATION__?.version===BUILD.version)return;
   const VERSION=BUILD.version;
   const BUILD_REVISION=BUILD.revision;

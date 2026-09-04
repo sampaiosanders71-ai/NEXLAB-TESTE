@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-sidebar-colapsavel',generatedAt:'2026-09-04T02:59:00Z',cacheName:'nexlab-app-beta-0-26-82-sidebar-colapsavel'});
+  const BUILD=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-sidebar-toggle-visivel',generatedAt:'2026-09-04T21:30:00Z',cacheName:'nexlab-app-beta-0-26-82-sidebar-toggle-visivel'});
   const CURRENT={version:String(BUILD.version||''),release:String(BUILD.release||''),revision:String(BUILD.revision||''),generatedAt:String(BUILD.generatedAt||'')};
   const HEAD_URL='./release-head.json';
   const WORKER_URL='./nexlab-sw.js';

@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-sidebar-colapsavel'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-sidebar-toggle-visivel'});
   const REVISION=BUILD.revision;
   if(globalThis.__NEXLAB_PROJECT_COMMENTS__?.revision===REVISION)return;
 

@@ -1499,34 +1499,66 @@
 /* Sidebar colapsável — Beta 0.26.82 */
 (function(){
   const KEY='nexlab:sidebar:collapsed';
-  function setup(){
+  const desktop=window.matchMedia('(min-width:768px)');
+  let collapsed=false;
+  let toggle=null;
+  let observer=null;
+  try{collapsed=localStorage.getItem(KEY)==='1';}catch{}
+
+  function apply(){
     const sidebar=document.getElementById('mobile-sidebar');
-    if(!sidebar||sidebar.querySelector('.nexlab-sidebar-collapse-toggle'))return;
-    const desktop=window.matchMedia('(min-width:768px)');
-    let collapsed=false;
-    try{collapsed=localStorage.getItem(KEY)==='1';}catch{}
-    const apply=()=>{
-      const active=desktop.matches&&collapsed;
-      sidebar.classList.toggle('nexlab-sidebar-collapsed',active);
+    if(!sidebar)return false;
+    const active=desktop.matches&&collapsed;
+    sidebar.classList.toggle('nexlab-sidebar-collapsed',active);
+    document.body?.classList.toggle('nexlab-sidebar-collapsed-state',active);
+    if(toggle){
       toggle.setAttribute('aria-expanded',active?'false':'true');
+      toggle.setAttribute('aria-controls','mobile-sidebar');
       toggle.setAttribute('aria-label',active?'Expandir menu lateral':'Recolher menu lateral');
       toggle.title=active?'Expandir menu lateral':'Recolher menu lateral';
-    };
-    const toggle=document.createElement('button');
-    toggle.type='button';
-    toggle.className='nexlab-sidebar-collapse-toggle';
-    toggle.innerHTML='<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M14.5 5 8 12l6.5 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    toggle.addEventListener('click',()=>{
-      collapsed=!collapsed;
-      try{localStorage.setItem(KEY,collapsed?'1':'0');}catch{}
-      apply();
-      window.dispatchEvent(new CustomEvent('nexlab:sidebar-collapse-change',{detail:{collapsed}}));
-    });
-    sidebar.appendChild(toggle);
-    desktop.addEventListener?.('change',apply);
-    apply();
+    }
+    return true;
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(setup,0),{once:true});else setTimeout(setup,0);
-  const obs=new MutationObserver(()=>setup());
-  obs.observe(document.documentElement,{childList:true,subtree:true});
+
+  function ensureToggle(){
+    if(!document.body)return false;
+    if(!toggle||!toggle.isConnected){
+      toggle=document.querySelector('body > .nexlab-sidebar-collapse-toggle');
+      if(!toggle){
+        toggle=document.createElement('button');
+        toggle.type='button';
+        toggle.className='nexlab-sidebar-collapse-toggle';
+        toggle.innerHTML='<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M14.5 5 8 12l6.5 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        toggle.addEventListener('click',()=>{
+          collapsed=!collapsed;
+          try{localStorage.setItem(KEY,collapsed?'1':'0');}catch{}
+          apply();
+          window.dispatchEvent(new CustomEvent('nexlab:sidebar-collapse-change',{detail:{collapsed}}));
+        });
+        document.body.appendChild(toggle);
+      }
+    }
+    return true;
+  }
+
+  function setup(){
+    const sidebar=document.getElementById('mobile-sidebar');
+    if(!sidebar)return false;
+    ensureToggle();
+    apply();
+    if(observer){observer.disconnect();observer=null;}
+    return true;
+  }
+
+  function start(){
+    if(setup())return;
+    observer=new MutationObserver(()=>{ if(setup()&&observer){observer.disconnect();observer=null;} });
+    observer.observe(document.body||document.documentElement,{childList:true,subtree:true});
+    setTimeout(()=>{ if(observer){observer.disconnect();observer=null;} setup(); },10000);
+  }
+
+  desktop.addEventListener?.('change',apply);
+  window.addEventListener('nexlab:application-ready',setup);
+  window.addEventListener('pageshow',setup);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();

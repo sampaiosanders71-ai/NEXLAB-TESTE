@@ -6671,32 +6671,38 @@ body[data-nexlab-page="inventario"] main .nexlab-inventory-sectionbar .nexlab-mo
     width:16.5rem!important;
     min-width:16.5rem!important;
     transition:width .28s ease,min-width .28s ease!important;
-    overflow-x:visible!important;
   }
   #mobile-sidebar.nexlab-sidebar-collapsed{
     width:5rem!important;
     min-width:5rem!important;
   }
-  #mobile-sidebar .nexlab-sidebar-collapse-toggle{
-    position:absolute!important;
+  body>.nexlab-sidebar-collapse-toggle{
+    position:fixed!important;
     top:1.35rem!important;
-    right:-1rem!important;
-    z-index:80!important;
+    left:calc(16.5rem - 1.1rem)!important;
+    z-index:2147482500!important;
     width:2.2rem!important;
     height:2.2rem!important;
+    padding:0!important;
     border-radius:999px!important;
     display:flex!important;
     align-items:center!important;
     justify-content:center!important;
     background:#0b1930!important;
     color:#fff!important;
-    border:2px solid rgba(255,255,255,.85)!important;
-    box-shadow:0 8px 24px rgba(2,8,23,.28)!important;
+    border:2px solid rgba(255,255,255,.92)!important;
+    box-shadow:0 8px 24px rgba(2,8,23,.32)!important;
     cursor:pointer!important;
-    transition:transform .28s ease,background .2s ease!important;
+    opacity:1!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+    transition:left .28s ease,transform .28s ease,background .2s ease!important;
   }
-  #mobile-sidebar .nexlab-sidebar-collapse-toggle:hover{background:#132847!important;}
-  #mobile-sidebar.nexlab-sidebar-collapsed .nexlab-sidebar-collapse-toggle{transform:rotate(180deg)!important;}
+  body>.nexlab-sidebar-collapse-toggle:hover{background:#132847!important;}
+  body.nexlab-sidebar-collapsed-state>.nexlab-sidebar-collapse-toggle{
+    left:calc(5rem - 1.1rem)!important;
+    transform:rotate(180deg)!important;
+  }
   #mobile-sidebar.nexlab-sidebar-collapsed nav h3,
   #mobile-sidebar.nexlab-sidebar-collapsed nav button span,
   #mobile-sidebar.nexlab-sidebar-collapsed nav a span,
@@ -6720,4 +6726,4 @@ body[data-nexlab-page="inventario"] main .nexlab-inventory-sectionbar .nexlab-mo
     object-fit:contain!important;
   }
 }
-@media (max-width:767px){#mobile-sidebar .nexlab-sidebar-collapse-toggle{display:none!important;}}
+@media (max-width:767px){body>.nexlab-sidebar-collapse-toggle{display:none!important;}}
