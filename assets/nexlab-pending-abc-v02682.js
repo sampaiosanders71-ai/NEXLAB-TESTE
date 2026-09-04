@@ -1,6 +1,6 @@
 /* NEXLAB 0.26.82 - Pendencias / Meu Dia - etapas A-G. */
-import { g as React, o as jsxRuntime, Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-pendencias-meu-dia-fg";
-import { Do as ModuleHeader, Qn as loadPendingCenter, Jn as isPendingItem, Vn as readableError } from "./nexlab-runtime-shared.js?v=app-beta-0-26-82-pendencias-meu-dia-fg";
+import { g as React, o as jsxRuntime, Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-pendencias-meu-dia-fg-update-fix";
+import { Do as ModuleHeader, Qn as loadPendingCenter, Jn as isPendingItem, Vn as readableError } from "./nexlab-runtime-shared.js?v=app-beta-0-26-82-pendencias-meu-dia-fg-update-fix";
 
 const { Fragment, jsx, jsxs } = jsxRuntime;
 const PAGE_SIZE = 8;

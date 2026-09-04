@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-pendencias-meu-dia-fg',generatedAt:'2026-09-03T01:46:00Z',cacheName:'nexlab-beta-0-26-82-pendencias-meu-dia-fg'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-pendencias-meu-dia-fg-update-fix',generatedAt:'2026-09-03T02:12:00Z',cacheName:'nexlab-beta-0-26-82-pendencias-meu-dia-fg-update-fix'});
   const CURRENT_VERSION = BUILD_IDENTITY.version;
   const CURRENT_RELEASE = BUILD_IDENTITY.release;
   const CURRENT_REVISION = BUILD_IDENTITY.revision;
@@ -92,9 +92,9 @@
   function ensureStyle(){
     if(document.getElementById('nexlab-update-manager-style'))return;
     const style=document.createElement('style');style.id='nexlab-update-manager-style';style.textContent=[
-      '.nexlab-update-banner{position:fixed;right:18px;bottom:18px;z-index:2147483000;max-width:410px;padding:16px;border:1px solid #b9c8de;border-radius:16px;background:#fff;color:#10233f;box-shadow:0 18px 48px rgba(15,35,65,.24);font:14px/1.45 Arial,sans-serif}',
-      '.nexlab-update-banner strong{display:block;margin-bottom:5px;font-size:15px}','.nexlab-update-banner p{margin:0 0 12px}',
-      '.nexlab-update-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}','.nexlab-update-actions button{border-radius:10px;border:1px solid #b9c8de;padding:8px 12px;font-weight:700;cursor:pointer}',
+      '.nexlab-update-banner{position:fixed!important;right:18px!important;bottom:18px!important;left:auto!important;top:auto!important;z-index:2147483000!important;display:block!important;width:min(410px,calc(100vw - 36px))!important;max-width:410px!important;min-width:0!important;box-sizing:border-box!important;padding:16px!important;border:1px solid #b9c8de!important;border-radius:16px!important;background:#fff!important;color:#10233f!important;box-shadow:0 18px 48px rgba(15,35,65,.24)!important;font:14px/1.45 Arial,sans-serif!important;text-align:left!important}',
+      '.nexlab-update-banner strong{display:block!important;width:auto!important;margin:0 0 5px!important;font-size:15px!important;line-height:1.35!important}','.nexlab-update-banner p{display:block!important;width:auto!important;max-width:none!important;margin:0 0 12px!important;white-space:normal!important;word-break:normal!important}',
+      '.nexlab-update-actions{display:flex!important;gap:8px!important;justify-content:flex-end!important;align-items:center!important;flex-wrap:wrap!important;width:100%!important}','.nexlab-update-actions button{width:auto!important;min-width:0!important;border-radius:10px!important;border:1px solid #b9c8de!important;padding:8px 12px!important;font-weight:700!important;cursor:pointer!important}',
       '.nexlab-update-actions button:disabled{cursor:wait;opacity:.65}','.nexlab-update-now{background:#0b2a63;color:#fff;border-color:#0b2a63!important}','.nexlab-update-later{background:#fff;color:#263b58}',
       '@media(max-width:520px){.nexlab-update-banner{left:12px;right:12px;bottom:12px;max-width:none}}'
     ].join('');document.head.appendChild(style);
@@ -110,7 +110,7 @@
   function restoreBannerAction(message){if(bannerText&&message)bannerText.textContent=message;if(bannerNowButton){bannerNowButton.disabled=false;bannerNowButton.textContent='Tentar novamente';}}
   function showBanner(identity){
     if(!document.body)return;ensureStyle();hideBanner();const container=document.createElement('section');container.className='nexlab-update-banner';container.setAttribute('role','status');container.setAttribute('aria-live','polite');
-    const title=document.createElement('strong');title.textContent='Atualização do NEXLAB disponível';const text=document.createElement('p');const label=identityLabel(identity);text.textContent=label?`A versão ${label} está pronta. A página só será trocada depois da sua confirmação.`:'Uma nova revisão está pronta. A página só será trocada depois da sua confirmação.';
+    const title=document.createElement('strong');title.textContent='Atualização do NEXLAB disponível';const text=document.createElement('p');const label=identityLabel(identity);text.textContent=label?`A versão ${label} foi baixada e validada. A página só será trocada depois da sua confirmação.`:'A nova revisão foi baixada e validada. A página só será trocada depois da sua confirmação.';
     const actions=document.createElement('div');actions.className='nexlab-update-actions';const later=document.createElement('button');later.type='button';later.className='nexlab-update-later';later.textContent='Depois';later.addEventListener('click',deferUpdate);
     const now=document.createElement('button');now.type='button';now.className='nexlab-update-now';now.textContent='Atualizar agora';now.addEventListener('click',()=>applyUpdate());actions.append(later,now);container.append(title,text,actions);document.body.appendChild(container);banner=container;bannerNowButton=now;bannerText=text;
   }
@@ -122,7 +122,28 @@
   }
   function observeRegistration(registration){
     if(!registration||observedRegistration===registration)return;detachRegistrationObserver();observedRegistration=registration;
-    registrationUpdateFoundHandler=()=>{const installing=registration.installing;if(!installing)return;state.status='installing';dispatch('nexlab:update-state',{...state});installing.addEventListener('statechange',async()=>{if(installing.state==='installed'&&navigator.serviceWorker.controller){const identity=await workerIdentity(registration.waiting||installing);if(isPublishedUpdate(identity)){state.workerVersion=identity?.version||null;state.workerRelease=identity?.release||null;state.workerRevision=identity?.revision||null;publishAvailable(identity);}}},{once:false});};
+    registrationUpdateFoundHandler=()=>{
+      const installing=registration.installing;if(!installing)return;
+      state.status='downloading';state.updateAvailable=false;hideBanner();dispatch('nexlab:update-preparing',{...state});
+      installing.addEventListener('statechange',async()=>{
+        if(installing.state==='installed'&&navigator.serviceWorker.controller){
+          const waiting=registration.waiting||null;
+          const identity=await workerIdentity(waiting);
+          if(!waiting||!isPublishedUpdate(identity))return;
+          try{
+            const validation=await validateWaitingGraph(waiting);
+            if(validation?.ok){
+              state.workerVersion=identity?.version||null;state.workerRelease=identity?.release||null;state.workerRevision=identity?.revision||null;
+              publishAvailable(identity,{ready:true,validation});
+            }
+          }catch(error){
+            state.status='preparing';state.updateAvailable=false;state.error=String(error?.message||error);hideBanner();dispatch('nexlab:update-preparing',{...state,error:state.error});
+          }
+        }else if(installing.state==='redundant'){
+          state.status='preparing';state.updateAvailable=false;hideBanner();dispatch('nexlab:update-preparing',{...state});
+        }
+      });
+    };
     registration.addEventListener('updatefound',registrationUpdateFoundHandler);
   }
   async function getRegistration(){
@@ -143,11 +164,15 @@
     const url=new URL(RELEASE_URL,location.href);url.searchParams.set('nexlabUpdateCheck',String(Date.now()));const response=await fetch(url.toString(),{method:'GET',cache:'no-store',credentials:'same-origin',headers:{Accept:'application/json'}});if(!response.ok)throw new Error(`Falha ao consultar release.json (${response.status}).`);return identityFrom(await response.json())||{};
   }
   function publishAvailable(identity,options={}){
-    const normalized=identityFrom(identity)||{};if(!isPublishedUpdate(normalized))return false;
-    state.remoteVersion=normalized.version||state.remoteVersion;state.remoteRelease=normalized.release||state.remoteRelease;state.remoteRevision=normalized.revision||state.remoteRevision;state.remoteGeneratedAt=normalized.generatedAt||state.remoteGeneratedAt;state.updateAvailable=true;
+    const normalized=identityFrom(identity)||{};
+    // A atualização só pode ser anunciada depois que o Service Worker entrou em
+    // waiting e validou integralmente o shell/grafo desta revisão.
+    if(options.ready!==true||!isPublishedUpdate(normalized))return false;
+    state.remoteVersion=normalized.version||state.remoteVersion;state.remoteRelease=normalized.release||state.remoteRelease;state.remoteRevision=normalized.revision||state.remoteRevision;state.remoteGeneratedAt=normalized.generatedAt||state.remoteGeneratedAt;state.updateAvailable=true;state.error=null;
     if(!options.force&&normalized.revision&&deferredRevision()===normalized.revision){state.status='deferred';hideBanner();dispatch('nexlab:update-deferred',{...state});return true;}
-    state.status='available';showBanner(normalized);dispatch('nexlab:update-available',{...state});return true;
+    state.status='available';showBanner(normalized);dispatch('nexlab:update-available',{...state,validation:options.validation||null});return true;
   }
+
 
   async function reloadForIdentity(identity,reason){
     const normalized=identityFrom(identity);if(!normalized||!isPublishedUpdate(normalized)||reloaded)return false;const now=Date.now(),reloadKey=normalized.revision||normalized.generatedAt||'unknown';
@@ -159,21 +184,46 @@
   async function performCheck(options={}){
     const forceWorkerUpdate=options.forceWorkerUpdate!==false;state.status='checking';state.error=null;dispatch('nexlab:update-state',{...state});
     try{
-      const registration=await getRegistration();if(registration&&forceWorkerUpdate)try{await registration.update();}catch{}
+      const registration=await getRegistration();
       let releaseIdentity=null;try{releaseIdentity=await fetchRelease();}catch(error){if(!registration)throw error;}
+      const releaseNewer=isPublishedUpdate(releaseIdentity);
+      if(releaseNewer){
+        state.remoteVersion=releaseIdentity?.version||null;state.remoteRelease=releaseIdentity?.release||null;state.remoteRevision=releaseIdentity?.revision||null;state.remoteGeneratedAt=releaseIdentity?.generatedAt||null;
+      }
+      if(registration&&forceWorkerUpdate)try{await registration.update();}catch{}
       const activeIdentity=await workerIdentity(registration?.active||navigator.serviceWorker.controller);state.activeRevision=activeIdentity?.revision||null;
-      const candidateWorker=registration?.waiting||registration?.installing||null;const candidateIdentity=await workerIdentity(candidateWorker);
-      const waitingNewer=Boolean(registration?.waiting&&isPublishedUpdate(candidateIdentity)),installingNewer=Boolean(registration?.installing&&isPublishedUpdate(candidateIdentity)),activeNewer=isPublishedUpdate(activeIdentity),releaseNewer=isPublishedUpdate(releaseIdentity);
-      if(activeNewer){
+      if(isPublishedUpdate(activeIdentity)){
         const reloading=await reloadForIdentity(activeIdentity,'active-worker-ahead-of-page');
         if(reloading)return{ok:true,...state,action:'reload-active-ahead'};
       }
-      const availableIdentity=waitingNewer||installingNewer?candidateIdentity:(releaseNewer?releaseIdentity:null);
-      state.workerVersion=candidateIdentity?.version||null;state.workerRelease=candidateIdentity?.release||null;state.workerRevision=candidateIdentity?.revision||null;state.checkedAt=new Date().toISOString();state.updateAvailable=Boolean(availableIdentity);state.status=availableIdentity?'available':'current';
-      if(availableIdentity)publishAvailable(availableIdentity);else{hideBanner();clearDeferred();dispatch('nexlab:update-current',{...state});}
-      return{ok:true,...state};
-    }catch(error){state.status='error';state.error=String(error?.message||error);state.checkedAt=new Date().toISOString();dispatch('nexlab:update-error',{...state});return{ok:false,...state};}
+
+      // Nunca use release.json sozinho como prova de prontidão. Ele pode chegar ao
+      // CDN antes dos demais assets. Somente um worker em waiting, com o grafo
+      // integralmente validado, pode liberar o aviso ao usuário.
+      const waitingWorker=registration?.waiting||null;
+      const waitingIdentity=await workerIdentity(waitingWorker);
+      state.workerVersion=waitingIdentity?.version||null;state.workerRelease=waitingIdentity?.release||null;state.workerRevision=waitingIdentity?.revision||null;
+      if(waitingWorker&&isPublishedUpdate(waitingIdentity)){
+        try{
+          const graphValidation=await validateWaitingGraph(waitingWorker);
+          state.checkedAt=new Date().toISOString();
+          if(graphValidation?.ok){publishAvailable(waitingIdentity,{ready:true,validation:graphValidation});return{ok:true,...state,ready:true,graphValidation};}
+        }catch(error){
+          state.error=String(error?.message||error);
+        }
+      }
+
+      state.checkedAt=new Date().toISOString();state.updateAvailable=false;hideBanner();
+      if(releaseNewer||registration?.installing){
+        state.status=registration?.installing?'downloading':'preparing';
+        dispatch('nexlab:update-preparing',{...state,remote:releaseIdentity});
+      }else{
+        state.status='current';clearDeferred();dispatch('nexlab:update-current',{...state});
+      }
+      return{ok:true,...state,ready:false};
+    }catch(error){state.status='error';state.updateAvailable=false;hideBanner();state.error=String(error?.message||error);state.checkedAt=new Date().toISOString();dispatch('nexlab:update-error',{...state});return{ok:false,...state};}
   }
+
   function check(options={}){if(checkPromise)return checkPromise;checkPromise=performCheck(options).finally(()=>{checkPromise=null;});return checkPromise;}
 
   async function waitForWaitingWorker(registration,milliseconds=INSTALL_TIMEOUT_MS){
@@ -191,7 +241,7 @@
     try{
       const registration=await getRegistration();if(!registration)throw new Error('Service Worker indisponível neste navegador.');if(!registration.waiting)await registration.update();
       const waitingWorker=registration.waiting||await waitForWaitingWorker(registration);const identity=await workerIdentity(waitingWorker);
-      if(!waitingWorker||!isPublishedUpdate(identity)){const activeIdentity=await workerIdentity(registration.active||navigator.serviceWorker.controller);if(activeIdentity&&isPublishedUpdate(activeIdentity)){const reloading=await reloadForIdentity(activeIdentity,'manual-confirmation-active-worker');if(reloading)return{ok:true,action:'reload-active',identity:activeIdentity};}throw new Error('A nova revisão foi anunciada, mas os arquivos ainda não chegaram completos ao servidor. Tente novamente em instantes.');}
+      if(!waitingWorker||!isPublishedUpdate(identity)){const activeIdentity=await workerIdentity(registration.active||navigator.serviceWorker.controller);if(activeIdentity&&isPublishedUpdate(activeIdentity)){const reloading=await reloadForIdentity(activeIdentity,'manual-confirmation-active-worker');if(reloading)return{ok:true,action:'reload-active',identity:activeIdentity};}throw new Error('A atualização ainda está sendo preparada. O aviso será exibido novamente somente quando todos os arquivos estiverem validados.');}
       state.workerVersion=identity.version;state.workerRelease=identity.release;state.workerRevision=identity.revision;state.status='validating';setBannerProgress('Validando todos os módulos da nova revisão...');dispatch('nexlab:update-state',{...state});
       const graphValidation=await validateWaitingGraph(waitingWorker);
       if(!graphValidation?.ok)throw new Error('A nova revisão não passou na validação completa dos módulos.');

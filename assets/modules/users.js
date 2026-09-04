@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: UsersModule. */
-export { UsersModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-pendencias-meu-dia-fg";
+export { UsersModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-pendencias-meu-dia-fg-update-fix";
