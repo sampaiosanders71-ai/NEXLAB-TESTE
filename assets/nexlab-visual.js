@@ -1495,3 +1495,38 @@
 })();
 
 /* NEXLAB Beta 0.26.82 — Marketing: layout integrado ao componente React; sem reparenting de DOM. */
+
+/* Sidebar colapsável — Beta 0.26.82 */
+(function(){
+  const KEY='nexlab:sidebar:collapsed';
+  function setup(){
+    const sidebar=document.getElementById('mobile-sidebar');
+    if(!sidebar||sidebar.querySelector('.nexlab-sidebar-collapse-toggle'))return;
+    const desktop=window.matchMedia('(min-width:768px)');
+    let collapsed=false;
+    try{collapsed=localStorage.getItem(KEY)==='1';}catch{}
+    const apply=()=>{
+      const active=desktop.matches&&collapsed;
+      sidebar.classList.toggle('nexlab-sidebar-collapsed',active);
+      toggle.setAttribute('aria-expanded',active?'false':'true');
+      toggle.setAttribute('aria-label',active?'Expandir menu lateral':'Recolher menu lateral');
+      toggle.title=active?'Expandir menu lateral':'Recolher menu lateral';
+    };
+    const toggle=document.createElement('button');
+    toggle.type='button';
+    toggle.className='nexlab-sidebar-collapse-toggle';
+    toggle.innerHTML='<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M14.5 5 8 12l6.5 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    toggle.addEventListener('click',()=>{
+      collapsed=!collapsed;
+      try{localStorage.setItem(KEY,collapsed?'1':'0');}catch{}
+      apply();
+      window.dispatchEvent(new CustomEvent('nexlab:sidebar-collapse-change',{detail:{collapsed}}));
+    });
+    sidebar.appendChild(toggle);
+    desktop.addEventListener?.('change',apply);
+    apply();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(setup,0),{once:true});else setTimeout(setup,0);
+  const obs=new MutationObserver(()=>setup());
+  obs.observe(document.documentElement,{childList:true,subtree:true});
+})();

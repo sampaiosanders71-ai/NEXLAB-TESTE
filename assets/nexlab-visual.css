@@ -6663,3 +6663,61 @@ body[data-nexlab-page="inventario"] main .nexlab-inventory-sectionbar .nexlab-mo
 .nexlab-system-monitor__operational-item.is-danger{background:#fff7f7;border-color:#fecaca}
 .nexlab-system-monitor__operational-item.is-danger strong{color:#b91c1c}
 .nexlab-system-monitor__history-row+.nexlab-system-monitor__history-row{border-top:1px solid #edf2f7}
+
+/* Sidebar colapsável — Beta 0.26.82 */
+@media (min-width:768px){
+  #mobile-sidebar{
+    position:relative!important;
+    width:16.5rem!important;
+    min-width:16.5rem!important;
+    transition:width .28s ease,min-width .28s ease!important;
+    overflow-x:visible!important;
+  }
+  #mobile-sidebar.nexlab-sidebar-collapsed{
+    width:5rem!important;
+    min-width:5rem!important;
+  }
+  #mobile-sidebar .nexlab-sidebar-collapse-toggle{
+    position:absolute!important;
+    top:1.35rem!important;
+    right:-1rem!important;
+    z-index:80!important;
+    width:2.2rem!important;
+    height:2.2rem!important;
+    border-radius:999px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    background:#0b1930!important;
+    color:#fff!important;
+    border:2px solid rgba(255,255,255,.85)!important;
+    box-shadow:0 8px 24px rgba(2,8,23,.28)!important;
+    cursor:pointer!important;
+    transition:transform .28s ease,background .2s ease!important;
+  }
+  #mobile-sidebar .nexlab-sidebar-collapse-toggle:hover{background:#132847!important;}
+  #mobile-sidebar.nexlab-sidebar-collapsed .nexlab-sidebar-collapse-toggle{transform:rotate(180deg)!important;}
+  #mobile-sidebar.nexlab-sidebar-collapsed nav h3,
+  #mobile-sidebar.nexlab-sidebar-collapsed nav button span,
+  #mobile-sidebar.nexlab-sidebar-collapsed nav a span,
+  #mobile-sidebar.nexlab-sidebar-collapsed .nexlab-sidebar-user-text,
+  #mobile-sidebar.nexlab-sidebar-collapsed [data-nexlab-sidebar-label]{
+    opacity:0!important;
+    width:0!important;
+    overflow:hidden!important;
+    pointer-events:none!important;
+  }
+  #mobile-sidebar.nexlab-sidebar-collapsed nav button,
+  #mobile-sidebar.nexlab-sidebar-collapsed nav a{
+    justify-content:center!important;
+    gap:0!important;
+    padding-left:.8rem!important;
+    padding-right:.8rem!important;
+  }
+  #mobile-sidebar.nexlab-sidebar-collapsed img.nexlab-sidebar-logo{
+    max-width:3rem!important;
+    width:3rem!important;
+    object-fit:contain!important;
+  }
+}
+@media (max-width:767px){#mobile-sidebar .nexlab-sidebar-collapse-toggle{display:none!important;}}

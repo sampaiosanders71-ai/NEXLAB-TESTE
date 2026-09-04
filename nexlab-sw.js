@@ -1,9 +1,9 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
-const APP_REVISION='beta-0-26-82-interface-performance';
+const APP_REVISION='beta-0-26-82-sidebar-colapsavel';
 const GENERATED_AT='2026-09-04T02:59:00Z';
-const ASSET_REVISION='app-beta-0-26-82-interface-performance';
-const CACHE_NAME='nexlab-app-beta-0-26-82-interface-performance';
+const ASSET_REVISION='app-beta-0-26-82-sidebar-colapsavel';
+const CACHE_NAME='nexlab-app-beta-0-26-82-sidebar-colapsavel';
 const STAGING_CACHE_NAME='nexlab-stage-'+APP_REVISION;
 const META_CACHE_NAME='nexlab-update-meta';
 const CACHE_PREFIX='nexlab-';
