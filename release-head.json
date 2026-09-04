@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-interface-performance",
-  "asset_revision": "app-beta-0-26-82-interface-performance",
-  "generated_at": "2026-09-04T02:59:00Z",
+  "revision": "beta-0-26-82-sidebar-colapsavel",
+  "asset_revision": "app-beta-0-26-82-sidebar-colapsavel",
+  "generated_at": "2026-09-04T21:30:00Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "47800e545cf3bf6a49a2799832001016f0b80470842a6f264f7fcc15d3e52ee6",
+  "manifest_sha256": "188fec3fc3310363cc49000e45c0b636b6c3506e906850f60fd05c4d1f38c59a",
   "essential_count": 52,
-  "essential_bytes": 2261331,
-  "cache_name": "nexlab-app-beta-0-26-82-interface-performance"
+  "essential_bytes": 2264969,
+  "cache_name": "nexlab-app-beta-0-26-82-sidebar-colapsavel"
 }
