@@ -6753,6 +6753,8 @@ body[data-nexlab-page="inventario"] main .nexlab-inventory-sectionbar .nexlab-mo
     height:3.85rem!important;
     transform:translate(-50%,-50%)!important;
     background:url('../brand/nexlab-icon.webp?v=brand-r50') center/contain no-repeat!important;
+    filter:brightness(0) invert(1) drop-shadow(0 2px 8px rgba(255,255,255,.12))!important;
+    opacity:.96!important;
     pointer-events:none!important;
   }
 }

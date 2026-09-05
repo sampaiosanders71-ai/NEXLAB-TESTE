@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-sidebar-adaptativa",
-  "asset_revision": "app-beta-0-26-82-sidebar-adaptativa",
-  "generated_at": "2026-09-04T21:55:00Z",
+  "revision": "beta-0-26-82-sidebar-adaptativa-clara",
+  "asset_revision": "app-beta-0-26-82-sidebar-adaptativa-clara",
+  "generated_at": "2026-09-05T22:30:00Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "a870fd8a3f5f8074081e67356a5e6b311861e6add8e1504d644a15a359fd2d38",
+  "manifest_sha256": "2c39a35b75bdf2cd49521e8b0e80a0495991d70fb06f674b1c7bdb2a83cfce9a",
   "essential_count": 52,
-  "essential_bytes": 2268779,
-  "cache_name": "nexlab-app-beta-0-26-82-sidebar-adaptativa"
+  "essential_bytes": 2269839,
+  "cache_name": "nexlab-app-beta-0-26-82-sidebar-adaptativa-clara"
 }

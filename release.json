@@ -3,11 +3,11 @@
   "display_version": "NEXLAB Beta 0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-sidebar-adaptativa",
-  "asset_revision": "app-beta-0-26-82-sidebar-adaptativa",
-  "generated_at": "2026-09-04T21:55:00Z",
-  "title": "NEXLAB Beta 0.26.82 — Sidebar adaptativa",
-  "cache_name": "nexlab-app-beta-0-26-82-sidebar-adaptativa",
+  "revision": "beta-0-26-82-sidebar-adaptativa-clara",
+  "asset_revision": "app-beta-0-26-82-sidebar-adaptativa-clara",
+  "generated_at": "2026-09-05T22:30:00Z",
+  "title": "NEXLAB Beta 0.26.82 — Sidebar adaptativa com símbolo claro",
+  "cache_name": "nexlab-app-beta-0-26-82-sidebar-adaptativa-clara",
   "entry": "index.html",
   "core_files": [
     "index.html",
@@ -134,8 +134,8 @@
     "administrator_receipt_required": true,
     "manual_approval_allowed": false,
     "status": "candidate_blocked_pending_exact_physical_receipt",
-    "build_revision": "beta-0-26-82-sidebar-adaptativa",
-    "evidence_revision": "beta-0-26-82-sidebar-adaptativa",
+    "build_revision": "beta-0-26-82-sidebar-adaptativa-clara",
+    "evidence_revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "evidence_storage_scoped_by_build_revision": true,
     "controlled_push_test": "provider_accepted_pending_device_display_and_tap",
     "controlled_push_sent_at": "2026-07-29T06:07:04.801Z",
@@ -150,7 +150,7 @@
     "responsive_global_contract": "static_passed_physical_confirmation_pending",
     "exact_version_revision_receipt_required": true,
     "current_exact_receipts": 0,
-    "revision": "beta-0-26-82-sidebar-adaptativa"
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara"
   },
   "observability": {
     "user_notice_reference_persisted": true,
@@ -296,7 +296,7 @@
     "current_release_0_26_82": {
       "version": "0.26.82",
       "status": "beta",
-      "revision": "beta-0-26-82-sidebar-adaptativa",
+      "revision": "beta-0-26-82-sidebar-adaptativa-clara",
       "rpc_health": "nexlab_get_database_health_v02682",
       "rpc_diagnostics": "nexlab_get_homologation_diagnostics_v02682",
       "rpc_gate": "nexlab_get_release_publish_gate_v02682",
@@ -317,8 +317,8 @@
   "validation": {
     "scope": "current_revision_only",
     "version": "0.26.82",
-    "revision": "beta-0-26-82-sidebar-adaptativa",
-    "asset_revision": "app-beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
+    "asset_revision": "app-beta-0-26-82-sidebar-adaptativa-clara",
     "metadata_cleanup_completed": true,
     "stale_project_summary_card_expectation_removed": true,
     "physical_device_test": "pending",
@@ -328,14 +328,14 @@
     "static_regression_suite": true,
     "inventory_files": 105,
     "package_files_including_release_json": 106,
-    "package_uncompressed_bytes": 4171299,
-    "js_syntax": "50/50",
+    "package_uncompressed_bytes": 4165188,
+    "js_syntax": "51/51",
     "local_js_imports": "45/45",
     "json_documents": "2/2",
     "css_documents": "15/15",
     "html_local_references": "53/53",
     "inventory_hashes": "105/105 matched",
-    "backend_revision_gate": "pending_alignment_to_beta-0-26-82-sidebar-adaptativa",
+    "backend_revision_gate": "pending_alignment_to_beta-0-26-82-sidebar-adaptativa-clara",
     "current_exact_receipts": 0,
     "esm_link_validation": {
       "entries": 45,
@@ -347,7 +347,7 @@
     "visual_viewports_checked": [],
     "horizontal_overflow_detected": null,
     "mobile_actions_menu_within_viewport": null,
-    "generated_at": "2026-09-04T21:55:00Z",
+    "generated_at": "2026-09-05T22:30:00Z",
     "static_mobile_breakpoints_checked": [
       "639px",
       "359px"
@@ -383,88 +383,88 @@
     },
     {
       "path": "assets/modules/agenda.js",
-      "size": 162,
-      "sha256": "eea4be35a693d88c315d0f4936506e14ea50c9fb8ff2c0e401bf232b386533e7"
+      "size": 174,
+      "sha256": "d786f49fca08b85e0b315873af50f425f445558661d2dc616e54b358b1cc7905"
     },
     {
       "path": "assets/modules/assets.js",
-      "size": 162,
-      "sha256": "1ea117c5097bef255f1ad2ffa3533e259cdf1d1003a47fbdd2b231b7d3b1bee4"
+      "size": 174,
+      "sha256": "d195944314cadd0869662c30812cf45c4ef6d957886d0c39006148454fc01362"
     },
     {
       "path": "assets/modules/board.js",
-      "size": 160,
-      "sha256": "7ce0bdf3640061ae81dae60a575a30e3303c7dae671d0b08ff395218c8ba9075"
+      "size": 172,
+      "sha256": "396f683810d0bf78d16f336f63d1f10b93b0585a8c80ce55823eed33f77fe127"
     },
     {
       "path": "assets/modules/bookings.js",
-      "size": 166,
-      "sha256": "aae45d11c00c7b0c7c645f36f00ac084a9a77d51a3b8dd02f52667281eb51dcb"
+      "size": 178,
+      "sha256": "4114f8a54c09f37142c3f5fc04fe4e86230bbaa33b9b26937718104321c46d7f"
     },
     {
       "path": "assets/modules/events.js",
-      "size": 162,
-      "sha256": "77633393b73c29b1160e4fd1cb2536c7b1f432af1158e01f3a1f007246c5ab15"
+      "size": 174,
+      "sha256": "3ab394a19d8cb5c633107398f812bf82fb3f2574b9f2b9b8c2083068dcc5d4ce"
     },
     {
       "path": "assets/modules/feedback.js",
-      "size": 178,
-      "sha256": "53be811e6b3dd8563fbefff06341f7daf93f4bd42672328e92cbaaafc533c201"
+      "size": 190,
+      "sha256": "cc92120afc8f9b1de5789341bc42a80e5a8374fa59e7e8485d075c8883a85928"
     },
     {
       "path": "assets/modules/logs.js",
-      "size": 158,
-      "sha256": "acaafc16a7af6629dc1cb82ec21064bff8e18ae9ae572a1613db05de46c59168"
+      "size": 170,
+      "sha256": "57060bb0374753a424c709b85ef5993d1fc99205e3d6146db6ef44968babd8b7"
     },
     {
       "path": "assets/modules/marketing.js",
-      "size": 168,
-      "sha256": "9f6fa7bb5cc0c9922287e873d8d6b6704283b424a4dfb978245d21fde6963c11"
+      "size": 180,
+      "sha256": "05a54fcb0a69f7125965823344867f4d4246642b9a96275ef2bb5afaaee3d41a"
     },
     {
       "path": "assets/modules/participants.js",
-      "size": 174,
-      "sha256": "47b775f5b5120232c06679ec0fc46e64e9816adb16934dc2a6d36b4864c2e725"
+      "size": 186,
+      "sha256": "8223d076a42a31aad92a1879f273b0d2aa142f288e05729f939387bbc02c38ea"
     },
     {
       "path": "assets/modules/pending.js",
-      "size": 158,
-      "sha256": "236fd0548d915be124b574e29825cc2c2ea9f771dc97536b059b74ca1ce9a27c"
+      "size": 170,
+      "sha256": "d6892b584f22ceeea32e3aa5ad69e9fc87200271850b5589fe3c3d9b780bddf2"
     },
     {
       "path": "assets/modules/permissions.js",
-      "size": 172,
-      "sha256": "888d80f1e8c24d590739ac91996ef62e3140a7afb0373ac551a5211510d837b4"
+      "size": 184,
+      "sha256": "8fdb31c014d2f9d29546852b134cdc5713711aa4be69192a76db19237b05a0de"
     },
     {
       "path": "assets/modules/profile.js",
-      "size": 164,
-      "sha256": "e0e70f862af17118d34c9c2cac12c72b78bbcae0df81e9466b86a0df3ad9a525"
+      "size": 176,
+      "sha256": "b453c57270534e5d3b4724d9c0a67df192b310435ebeaccaf0c0b8230870da80"
     },
     {
       "path": "assets/modules/projects.js",
-      "size": 166,
-      "sha256": "f113794c30fd4821da931d153feb9d951a14d16d687cb4b71aaf8bb6e8aadca2"
+      "size": 178,
+      "sha256": "e6886df18f53e2b3e0c107a31fd474aea5a3809745dcb4ec7b1e13bb6b172670"
     },
     {
       "path": "assets/modules/reports.js",
-      "size": 164,
-      "sha256": "9f3864a8617253ebb97b57412f741cb6e807e194cc67a48c073868e2463d9d87"
+      "size": 176,
+      "sha256": "40550967bed350666f94d0011f1f4315f20d5729f7721d0be05db40fb01c679b"
     },
     {
       "path": "assets/modules/stock.js",
-      "size": 160,
-      "sha256": "d0b1d38bbf6a27837d571c3e204d1e6312ebad833934925209f3eb708e2a73f4"
+      "size": 172,
+      "sha256": "306b50aaf83698cf81cc1a0cbc33b24aa8bf10502eabe0e48f24df4dd75786e3"
     },
     {
       "path": "assets/modules/teams.js",
-      "size": 160,
-      "sha256": "32da2b1c90e0abeb3955cb7b6404b8c617f5beac122ea691f2e5b7e3320d7fc4"
+      "size": 172,
+      "sha256": "dbc876859fb88076568394439a70a376b1b380367117bf3933e67f5753c9ab0e"
     },
     {
       "path": "assets/modules/users.js",
-      "size": 160,
-      "sha256": "b5726247fa3681163e06c0a68e97affc91134e2b735d00a11ef4c67d53320565"
+      "size": 172,
+      "sha256": "966aed102fe02c1e0f87d48e9ec461378b6fde6978cca9992843766b7e641717"
     },
     {
       "path": "assets/nexlab-accessibility-v02682.css",
@@ -493,13 +493,13 @@
     },
     {
       "path": "assets/nexlab-auth-security.js",
-      "size": 12410,
-      "sha256": "fa92455f81d4d492353ef71291cb0ce4ee7c88925fad3611c7a726a76c076967"
+      "size": 12416,
+      "sha256": "ad5e81a25225228db52db6a94eb73aebbfba5edce37a3eb9ba74f72d9bc01bcd"
     },
     {
       "path": "assets/nexlab-bootstrap.js",
-      "size": 59659,
-      "sha256": "b44ff89771876cae1746a8246d9d2e3178a8b2d47959aa4bec59858c689a935f"
+      "size": 59701,
+      "sha256": "5090cdeb14fce06f722f428f2617563658791b12cc7f4d05d2638ba1438311cd"
     },
     {
       "path": "assets/nexlab-config.js",
@@ -518,8 +518,8 @@
     },
     {
       "path": "assets/nexlab-device-homologation.js",
-      "size": 9570,
-      "sha256": "b51c78ca32a995ee8d69ebd4e261899870ff99e1367a7b43498485656ab97b7e"
+      "size": 9588,
+      "sha256": "4ba12c1452145b3935992e6f0842a4135af944d36130e0693e15153ec3c5197d"
     },
     {
       "path": "assets/nexlab-dialogs.js",
@@ -528,8 +528,8 @@
     },
     {
       "path": "assets/nexlab-feedback-evidence.js",
-      "size": 24907,
-      "sha256": "1cc91f80b01032a1afe1d0cc6d1d298b5aab2053db23da350fdf1d33d166f718"
+      "size": 24913,
+      "sha256": "6599870fb27423e186808cbe2270312f528dffffa4d6b41033a2d28694f122a1"
     },
     {
       "path": "assets/nexlab-inventory-v02674.css",
@@ -538,18 +538,18 @@
     },
     {
       "path": "assets/nexlab-module-recovery.js",
-      "size": 4799,
-      "sha256": "01b6f62a25011c7ad55d9ac768c86dfa8afe9293bb94b1a6c5b506400289f094"
+      "size": 4805,
+      "sha256": "94773aac57b68d30d41e76167d5d69a5e97b2fce9518033760bcbec6339b537d"
     },
     {
       "path": "assets/nexlab-myday-dashboard-v02682.js",
-      "size": 6238,
-      "sha256": "1bb5416db05b585c4819083d8b6d119ecd141457335edb8769989b676d94b4e0"
+      "size": 6250,
+      "sha256": "5087caff6116676d3a6fd93d4faf84ded18c7c94d42252fab2ee5c2b8041be78"
     },
     {
       "path": "assets/nexlab-pending-abc-v02682.js",
-      "size": 37844,
-      "sha256": "269185ca9da670e0b6fe0a7b7798b9beb8de23518452fbe4c3f276291d2da820"
+      "size": 37868,
+      "sha256": "f6d86e5a0cec7609bff7c713801f04ebd636563c48e9bd14c98f8a792566446c"
     },
     {
       "path": "assets/nexlab-permissions-v02664.css",
@@ -578,8 +578,8 @@
     },
     {
       "path": "assets/nexlab-project-comments-v02682.js",
-      "size": 37137,
-      "sha256": "96dd7c1b2af448fd70da96749ce4d160437d164a4cdd55222f9aabb5c542ef75"
+      "size": 37143,
+      "sha256": "caa36acca9a291ff5e5f2f299de6d22a76cdeb8d8eb1d8cc3d0d9159156955c8"
     },
     {
       "path": "assets/nexlab-projects-v02667.css",
@@ -588,28 +588,28 @@
     },
     {
       "path": "assets/nexlab-push-consent.js",
-      "size": 15013,
-      "sha256": "072e41ba8f08b15e49f20508886807b126a26d510736d727af0b784fb8c18fec"
+      "size": 15019,
+      "sha256": "f9f4179a5c82db523076402c44060dfda47ece0bc5498fc8f8eab76b45677580"
     },
     {
       "path": "assets/nexlab-push-navigation.js",
-      "size": 9478,
-      "sha256": "fdc16ae480f22c84afab07cd24c12224e2abbabbfe63ba79da26ec0c36f13461"
+      "size": 9490,
+      "sha256": "b34295eff5c1f5a02f9282e7b6af0385c5a56e55f525cf33ba492f6b0a42ec58"
     },
     {
       "path": "assets/nexlab-pwa-readiness.js",
-      "size": 31757,
-      "sha256": "407ea65bb3249de96f08d726db453a7c3058fc0dba7667ae6a932ca5e4f3ab4d"
+      "size": 31787,
+      "sha256": "44fdfabdac73c6f84b72b7e676e5be7593d6341b43695e31912c5fbbb0a1bfd5"
     },
     {
       "path": "assets/nexlab-release-gate.js",
-      "size": 3352,
-      "sha256": "a54019fb51dcde3b40b323ad86bdf88d13839ee0d50ed8d957444769da53f484"
+      "size": 3358,
+      "sha256": "1fbf3bf348ac4b87f39a357dc883ada1004ffa09af5113d536fc7d266b47b564"
     },
     {
       "path": "assets/nexlab-release-identity.js",
-      "size": 8902,
-      "sha256": "2d849b5b4575b360822cdbfff55c80de72da714677a4b0fe86790c6abea269f4"
+      "size": 8944,
+      "sha256": "4dfb4ddcba23a6b16fa3075a0c6f997809fde787a957974fa81b00265232d2f2"
     },
     {
       "path": "assets/nexlab-reports-v02682.css",
@@ -623,8 +623,8 @@
     },
     {
       "path": "assets/nexlab-responsive-v02671.js",
-      "size": 9509,
-      "sha256": "a3ce4e97b52e4388e6fa5096e9fb671756f9565cb0aa61b8cda8c1af0d35886c"
+      "size": 9515,
+      "sha256": "cb0c0327c67d513b0df57dbcdcc211afd9bd088a9e217853371cb97dba435dbf"
     },
     {
       "path": "assets/nexlab-rpc-registry.js",
@@ -633,8 +633,8 @@
     },
     {
       "path": "assets/nexlab-runtime-app.js",
-      "size": 63642,
-      "sha256": "f89df8257aa5afa47cf3fd3bf88e8d80aa587feeb238d167a0283fff117e8bfd"
+      "size": 63666,
+      "sha256": "14b1103334b230059146bece930fe610c90788617a451d1963d047b78dbfe8e3"
     },
     {
       "path": "assets/nexlab-runtime-export.js",
@@ -643,23 +643,23 @@
     },
     {
       "path": "assets/nexlab-runtime-features.js",
-      "size": 581838,
-      "sha256": "e7fd5de0cc8a8f7cde76e6867e277eabbadc952ad440c6da7a3d92efe6724937"
+      "size": 582114,
+      "sha256": "df365ceae7624ea60b8acb324534667778d87e915335c59315a04638a55506c5"
     },
     {
       "path": "assets/nexlab-runtime-realtime-core.js",
-      "size": 11136,
-      "sha256": "4fc14873dc58928fd87de6b6a9a8d85e50b8ee2a4645d844cfda920436e84506"
+      "size": 11142,
+      "sha256": "6772f377e803bad81b7eac488a273911bf3dd97a7aaeedcb5d18007bdce45230"
     },
     {
       "path": "assets/nexlab-runtime-realtime-hub.js",
-      "size": 3489,
-      "sha256": "078902df7d5c633406182c7c3bd1b1fa059f9604d096c9b0709584f81e069633"
+      "size": 3495,
+      "sha256": "6d9610789079a79c84db295200a19eec724697151051c889ef8543dc8adeb645"
     },
     {
       "path": "assets/nexlab-runtime-shared.js",
-      "size": 247779,
-      "sha256": "31adf5aca0dae7593919db933b09019a6fc87db55cd25ad57d1a3a332138072b"
+      "size": 248001,
+      "sha256": "3d6ebe5e19b40456b384aa6acf1513e9c52f75197cbcf8fdfa233d9659052d95"
     },
     {
       "path": "assets/nexlab-runtime-vendor.js",
@@ -673,8 +673,8 @@
     },
     {
       "path": "assets/nexlab-team-chat-v02682.js",
-      "size": 90081,
-      "sha256": "fcd91d2fad4e393fb14cc6e747baf8a135e0022ad74daf74a57475c4152ac7f6"
+      "size": 90087,
+      "sha256": "e96267e868bc47fbea1e0940ba5837977a2a38b905fe96e521d4177ebbddc58e"
     },
     {
       "path": "assets/nexlab-team-tasks-v02682.css",
@@ -683,8 +683,8 @@
     },
     {
       "path": "assets/nexlab-update-manager.js",
-      "size": 17140,
-      "sha256": "824c8ab81345e294aa6a85ccedbb561eab61e7e9c51283124c545ae3ff45913a"
+      "size": 17164,
+      "sha256": "800de3cf5d4cd30fa5c881541b721cc2893de99985696671cb8670d4027cdc8d"
     },
     {
       "path": "assets/nexlab-vapid-rotation.js",
@@ -693,8 +693,8 @@
     },
     {
       "path": "assets/nexlab-visual.css",
-      "size": 211512,
-      "sha256": "5224bc2754271fac2642b1c661d73063be61745604871512f6973bf6d9adc7e6"
+      "size": 211630,
+      "sha256": "13609793cacc1b57075a2a50d33af5c17b05ae69493cd7a71a8424807050c5d9"
     },
     {
       "path": "assets/nexlab-visual.js",
@@ -848,8 +848,8 @@
     },
     {
       "path": "index.html",
-      "size": 10355,
-      "sha256": "e3f3f0217997d2cebf14d2ec21e434d9c073850ca17663547f5dc3a1bc5fb84b"
+      "size": 10853,
+      "sha256": "f9f74b7dbdf6806ed1ed7563d47006d751f0713376a3ed47bb7c79fcd7624d81"
     },
     {
       "path": "manifest.webmanifest",
@@ -858,8 +858,8 @@
     },
     {
       "path": "nexlab-sw.js",
-      "size": 20130,
-      "sha256": "83e2c5b6351f89d76b4ef0156adc6e57a9b493b4bd49f02a4d14e9cbe4185025"
+      "size": 20166,
+      "sha256": "990751b56bdb6288e79be4e18369fcec58b94dd0b550190c7e40c63fa87bcd6c"
     },
     {
       "path": "offline.html",
@@ -868,21 +868,21 @@
     },
     {
       "path": "pwa-check.html",
-      "size": 8581,
-      "sha256": "eb89b01b3b8606d45bd07cf5ae1d176c9aac8381233e34191d6a78779b231cf4"
+      "size": 8641,
+      "sha256": "d7c56f554776b1373423dbca0ca06847a4e894d195249f1d451eba8b0564d686"
     },
     {
       "path": "release-head.json",
-      "size": 481,
-      "sha256": "b791d650cda25407dbf1b9b820e535a2ed646277194358cea3876f27ed7e077f"
+      "size": 499,
+      "sha256": "a8c92e58abe3ada7c8891cae1029c00f288fd60b049991344c98e05b0dcf71be"
     },
     {
       "path": "release-manifest.json",
-      "size": 9147,
-      "sha256": "a870fd8a3f5f8074081e67356a5e6b311861e6add8e1504d644a15a359fd2d38"
+      "size": 9165,
+      "sha256": "2c39a35b75bdf2cd49521e8b0e80a0495991d70fb06f674b1c7bdb2a83cfce9a"
     }
   ],
-  "build_identity": "beta-0-26-82-sidebar-adaptativa",
+  "build_identity": "beta-0-26-82-sidebar-adaptativa-clara",
   "external_feedback_evidence": {
     "provider": "cloudflare_r2",
     "supabase_storage_used": false,
@@ -3031,7 +3031,7 @@
     "assert_rpc": "nexlab_assert_release_publishable_v02682",
     "publication_allowed": false,
     "required_app_version": "0.26.82",
-    "required_revision": "beta-0-26-82-sidebar-adaptativa",
+    "required_revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "receipt_max_age_days": 14,
     "manual_override_allowed": false,
     "candidate_deployment_allowed_for_homologation": true,
@@ -3520,7 +3520,7 @@
     "historical_only": true
   },
   "team_tasks_pending_v02682": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "preserved",
     "note": "Fluxo funcional de tarefas e integração com Pendências preservados durante a reconstrução visual da aba Tarefas."
   },
@@ -4040,7 +4040,7 @@
     "critical_css_size_bytes": 57377,
     "critical_css_sha256": "efa7ce3ed9464c97fc920c4edd7eddf13a560049249d79c9fdbe4b39048a1938",
     "physical_device_homologation": "pending_exact_revision_receipt",
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "generated_at": "2026-08-31T18:33:51Z",
     "marketing_integrated_list": "passed_static_physical_pending",
     "marketing_legacy_list_classes_absent": true,
@@ -4098,7 +4098,7 @@
   },
   "marketing_integrated_list_0_26_82": {
     "status": "implemented_static_verified_physical_pending",
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "calendar_preserved": true,
     "list_rebuilt_from_scratch": true,
     "desktop": "calendar_left_list_right",
@@ -4113,7 +4113,7 @@
     "physical_confirmation_required": true
   },
   "profile_refined_visual_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "scope": "profile_module_visual_only",
     "reference_direction": "hero_compact_info_left_contributions_right",
     "hero": "compact_reference_based",
@@ -4139,7 +4139,7 @@
   },
   "profile_rebuild_0_26_82": {
     "status": "implemented_static_verified_physical_pending",
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "scope": "profile_visual_only",
     "functional_profile_logic_preserved": true,
     "desktop_layout": "hero + left profile column + right contributions column",
@@ -4169,7 +4169,7 @@
   },
   "accessibility_visual_0_26_82": {
     "status": "implemented_static_verified_physical_pending",
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "global_stylesheet": "assets/nexlab-accessibility-v02682.css",
     "page_background": "#eef3f8",
     "card_border": "#cbd5e1",
@@ -4240,7 +4240,7 @@
     "current_table_view": "preserved_as_alternative"
   },
   "team_identity_integration_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "identity_integrated_with_rebuilt_cards",
     "stage_c": "rebuilt_cards_from_zero",
     "stage_d": [
@@ -4258,7 +4258,7 @@
     "historical_only": false
   },
   "homologation_consistency_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "implemented_static_validation_pending_physical_browser",
     "exact_revision_observability": true,
     "database_health_metadata_updated": true,
@@ -4271,7 +4271,7 @@
   },
   "team_cards_removal_0_26_82": {
     "status": "completed_historical_step",
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "scope": "teams_list_cards_only",
     "visual_card_renderer_removed": true,
     "legacy_card_css_removed": true,
@@ -4316,7 +4316,7 @@
   },
   "team_icon_render_fix_0_26_82": {
     "status": "implemented_static_verified_physical_pending",
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "scope": "team_icon_rendering",
     "root_cause": "external_svg_css_mask_not_rendering_in_published_browser",
     "picker_icons": "inline_svg",
@@ -4418,7 +4418,7 @@
     "stage_c_metrics_required": false
   },
   "system_activities_monitoring_integration_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "static_verified_physical_required",
     "scope": "Atividades do Sistema — Etapas C, D e E com métricas reais e estados operacionais",
     "backend_rpc": "nexlab_get_system_monitor_v02682",
@@ -4442,7 +4442,7 @@
     "worker_stale_threshold_reason": "Janela de 90 min para uma rotina aproximadamente horária, evitando falso alerta entre execuções normais."
   },
   "system_activities_worker_schedule_alignment_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "static_verified_physical_required",
     "root_cause": "A interface marcava o Worker como atrasado após 15 minutos apesar da cadência observada ser aproximadamente horária.",
     "worker_expected_cadence_minutes": 60,
@@ -4456,7 +4456,7 @@
     "physical_confirmation": "pending"
   },
   "team_chat_rebuild_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "static_verified_physical_required",
     "scope": "frontend_chat_integration",
     "stages": [
@@ -4513,7 +4513,7 @@
     "stage_e_static_homologation_completed": true
   },
   "team_chat_integration_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "static_verified_physical_required",
     "stages_completed": [
       "C",
@@ -4558,7 +4558,7 @@
     "historical_only": true
   },
   "team_links_rebuild_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "stages_c_d_e_static_verified_physical_required",
     "scope": "team_details_links_tab_only",
     "team_header_changed": false,
@@ -4606,7 +4606,7 @@
     "physical_confirmation": false
   },
   "team_tasks_rebuild_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "integrated",
     "scope": "Equipes > Tarefas — Etapas C/D",
     "changes": [
@@ -4619,7 +4619,7 @@
     ]
   },
   "team_tasks_final_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "technical_ready",
     "scope": "Etapa E da aba Tarefas em Equipes",
     "changes": [
@@ -4631,7 +4631,7 @@
     "physical_device_receipt_required": true
   },
   "team_tasks_scroll_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "applied",
     "scope": "Equipes > Tarefas",
     "changes": [
@@ -4642,14 +4642,14 @@
     ]
   },
   "team_tasks_scroll_fix_v02682": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "applied",
     "problem": "overflow-y existia, porém sem altura definida no container o conteúdo expandia e a barra não era criada",
     "fix": "altura definida no modal em Tarefas + workspace flex restrito + overflow-y:scroll diretamente no painel de tarefas",
     "header_preserved": true
   },
   "homologation_corrections_1_4_v02682": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "static_regression_passed_physical_validation_pending",
     "generated_at": "2026-09-03T02:12:00Z",
     "changes": [
@@ -4664,7 +4664,7 @@
     "physical_device_receipt_required": true
   },
   "homologation_corrections_5_8_v02682": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "validated_at": "2026-09-02T18:35:00Z",
     "overall_status": "candidate_ready_external_publication_and_physical_receipt_pending",
     "correction_5_package_regeneration": {
@@ -4704,7 +4704,7 @@
     }
   },
   "notifications_mobile_fix_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "static_regression_passed_physical_validation_pending",
     "scope": "Notificações no celular",
     "changes": [
@@ -4721,7 +4721,7 @@
     "backend_change_scope": "release gate revision only"
   },
   "marketing_empty_message_removal_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "static_regression_passed_physical_validation_pending",
     "scope": "Marketing",
     "removed": [
@@ -4738,7 +4738,7 @@
     "validated_at": "2026-09-02T23:41:09.111Z"
   },
   "pending_my_day_ab_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "preserved_as_baseline_for_stage_c",
     "scope": "Pendências - conteúdo interno",
     "stages": [
@@ -4770,7 +4770,7 @@
     "task_backend_contracts_verified": true
   },
   "pending_my_day_c_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "implemented_static_regression_pending_physical_validation",
     "scope": "Pendências → Reuniões",
     "stage": "C - Reuniões",
@@ -4796,7 +4796,7 @@
     "validated_at": "2026-09-03T02:12:00Z"
   },
   "pending_my_day_de_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "applied",
     "scope": "Etapas D e E do Plano Funcional Meu Dia / Pendências",
     "changes": [
@@ -4809,7 +4809,7 @@
     ]
   },
   "pending_my_day_fg_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "technical_complete_physical_pending",
     "stage_f": {
       "status": "applied",
@@ -4854,7 +4854,7 @@
     }
   },
   "update_manager_hotfix_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "status": "applied",
     "scope": "Service Worker e gerenciador de atualização",
     "changes": [
@@ -4883,10 +4883,10 @@
     "release_json_used_for_polling": false,
     "service_worker_owner": "assets/nexlab-update-manager.js",
     "secondary_registrars_removed": true,
-    "revision": "beta-0-26-82-sidebar-adaptativa"
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara"
   },
   "final_interface_performance_0_26_82": {
-    "revision": "beta-0-26-82-sidebar-adaptativa",
+    "revision": "beta-0-26-82-sidebar-adaptativa-clara",
     "version": "0.26.82",
     "sidebar_single_visible_scrollbar": true,
     "sidebar_navigation_remains_scrollable": true,
@@ -4902,7 +4902,7 @@
     "my_day_nested_mutation_test": "30 nested DOM changes produced 0 extra RPC calls",
     "my_day_direct_shell_change_test": "1 controlled refresh",
     "atomic_transition_from": "beta-0-26-82-update-atomic",
-    "atomic_transition_to": "beta-0-26-82-sidebar-adaptativa",
+    "atomic_transition_to": "beta-0-26-82-sidebar-adaptativa-clara",
     "live_service_worker_browser_cycle": "environment_loopback_navigation_blocked"
   },
   "update_stability_hotfix_0_26_82": {
