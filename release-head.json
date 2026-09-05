@@ -7,8 +7,8 @@
   "asset_revision": "app-beta-0-26-82-sidebar-adaptativa-clara",
   "generated_at": "2026-09-05T22:30:00Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "2c39a35b75bdf2cd49521e8b0e80a0495991d70fb06f674b1c7bdb2a83cfce9a",
+  "manifest_sha256": "ed37ce90986a5134e56e34bc99da10f4712052ec387f9aa4eda8b2db256dd5ca",
   "essential_count": 52,
-  "essential_bytes": 2269839,
+  "essential_bytes": 2269425,
   "cache_name": "nexlab-app-beta-0-26-82-sidebar-adaptativa-clara"
 }

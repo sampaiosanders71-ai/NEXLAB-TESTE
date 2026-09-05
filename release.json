@@ -383,88 +383,88 @@
     },
     {
       "path": "assets/modules/agenda.js",
-      "size": 174,
-      "sha256": "d786f49fca08b85e0b315873af50f425f445558661d2dc616e54b358b1cc7905"
+      "size": 168,
+      "sha256": "8da4ae955d980418d447175a105ef5a5419c589304ebbbb27c84c60e53c6a740"
     },
     {
       "path": "assets/modules/assets.js",
-      "size": 174,
-      "sha256": "d195944314cadd0869662c30812cf45c4ef6d957886d0c39006148454fc01362"
+      "size": 168,
+      "sha256": "f6aa0b22893180383d471bb785c85f62f2330fd26088df456fb99dabda84a866"
     },
     {
       "path": "assets/modules/board.js",
-      "size": 172,
-      "sha256": "396f683810d0bf78d16f336f63d1f10b93b0585a8c80ce55823eed33f77fe127"
+      "size": 166,
+      "sha256": "d63b750cda21b5a7d2e649cd7ee6a92d0fa083ca630e0120f9d7476e47b2a4ec"
     },
     {
       "path": "assets/modules/bookings.js",
-      "size": 178,
-      "sha256": "4114f8a54c09f37142c3f5fc04fe4e86230bbaa33b9b26937718104321c46d7f"
+      "size": 172,
+      "sha256": "6c5db3edd782efa621aa722d048a38b4d5504137ef6260db54bc00a9e1f4dce0"
     },
     {
       "path": "assets/modules/events.js",
-      "size": 174,
-      "sha256": "3ab394a19d8cb5c633107398f812bf82fb3f2574b9f2b9b8c2083068dcc5d4ce"
+      "size": 168,
+      "sha256": "2b895345db7682b18dabe79c40968873461749cacbdfe8d08c449d81b72fcf02"
     },
     {
       "path": "assets/modules/feedback.js",
-      "size": 190,
-      "sha256": "cc92120afc8f9b1de5789341bc42a80e5a8374fa59e7e8485d075c8883a85928"
+      "size": 184,
+      "sha256": "17528770ee25d090c6cdd6a100f9a9830e62540bc7a9dba3a901a11051981de0"
     },
     {
       "path": "assets/modules/logs.js",
-      "size": 170,
-      "sha256": "57060bb0374753a424c709b85ef5993d1fc99205e3d6146db6ef44968babd8b7"
+      "size": 164,
+      "sha256": "9861c037e4fd8f167dff6b4abf97d69a79862a8dbf5a2517b0c53f5175e2354a"
     },
     {
       "path": "assets/modules/marketing.js",
-      "size": 180,
-      "sha256": "05a54fcb0a69f7125965823344867f4d4246642b9a96275ef2bb5afaaee3d41a"
+      "size": 174,
+      "sha256": "674ffaba2cca5111909a4dc422de193c0d6e8c59b5dd2431a01d10eda97696c6"
     },
     {
       "path": "assets/modules/participants.js",
-      "size": 186,
-      "sha256": "8223d076a42a31aad92a1879f273b0d2aa142f288e05729f939387bbc02c38ea"
+      "size": 180,
+      "sha256": "8b7e6c75c4cd0c5e8a8ba046fd82e812b9aa6b87b75f441de7d04535208d761e"
     },
     {
       "path": "assets/modules/pending.js",
-      "size": 170,
-      "sha256": "d6892b584f22ceeea32e3aa5ad69e9fc87200271850b5589fe3c3d9b780bddf2"
+      "size": 164,
+      "sha256": "8998de475fbf31ffa94efe8de95e4abafeae115b7084350a2cba0034f8756ad5"
     },
     {
       "path": "assets/modules/permissions.js",
-      "size": 184,
-      "sha256": "8fdb31c014d2f9d29546852b134cdc5713711aa4be69192a76db19237b05a0de"
+      "size": 178,
+      "sha256": "fb91ccad4483774b1b4751f7e6818fe13ceeb2a7c96ab4c0d8679f5861826267"
     },
     {
       "path": "assets/modules/profile.js",
-      "size": 176,
-      "sha256": "b453c57270534e5d3b4724d9c0a67df192b310435ebeaccaf0c0b8230870da80"
+      "size": 170,
+      "sha256": "1afbaf3453c603e51a6eb7d10122f9487de55ba94f1ebe0e2eff220e2515e273"
     },
     {
       "path": "assets/modules/projects.js",
-      "size": 178,
-      "sha256": "e6886df18f53e2b3e0c107a31fd474aea5a3809745dcb4ec7b1e13bb6b172670"
+      "size": 172,
+      "sha256": "61c373bc6fce2f7d5abe1cf7158037e7517fc8845c186c3301abcb63133d9f24"
     },
     {
       "path": "assets/modules/reports.js",
-      "size": 176,
-      "sha256": "40550967bed350666f94d0011f1f4315f20d5729f7721d0be05db40fb01c679b"
+      "size": 170,
+      "sha256": "174187f618baa003ae56113661b667e5dfe0408263b9e68454702956aaaade8b"
     },
     {
       "path": "assets/modules/stock.js",
-      "size": 172,
-      "sha256": "306b50aaf83698cf81cc1a0cbc33b24aa8bf10502eabe0e48f24df4dd75786e3"
+      "size": 166,
+      "sha256": "0cd010c9300ce18d3610913f97c2e0a5854e37ad5cc63ea59a73e7e2ee48be47"
     },
     {
       "path": "assets/modules/teams.js",
-      "size": 172,
-      "sha256": "dbc876859fb88076568394439a70a376b1b380367117bf3933e67f5753c9ab0e"
+      "size": 166,
+      "sha256": "8cb8078f6d08511fb552843e101dcb22e6aa36359c32765ade47ade7f65cf846"
     },
     {
       "path": "assets/modules/users.js",
-      "size": 172,
-      "sha256": "966aed102fe02c1e0f87d48e9ec461378b6fde6978cca9992843766b7e641717"
+      "size": 166,
+      "sha256": "524066fd207db7ba3cc36e927cca1d685807b9aaf885a8161effd603f3721b70"
     },
     {
       "path": "assets/nexlab-accessibility-v02682.css",
@@ -498,8 +498,8 @@
     },
     {
       "path": "assets/nexlab-bootstrap.js",
-      "size": 59701,
-      "sha256": "5090cdeb14fce06f722f428f2617563658791b12cc7f4d05d2638ba1438311cd"
+      "size": 59689,
+      "sha256": "000ff9280f67544f81e18497b0256f5b7718c7f3f0939de7cd42e861e36a02f0"
     },
     {
       "path": "assets/nexlab-config.js",
@@ -543,13 +543,13 @@
     },
     {
       "path": "assets/nexlab-myday-dashboard-v02682.js",
-      "size": 6250,
-      "sha256": "5087caff6116676d3a6fd93d4faf84ded18c7c94d42252fab2ee5c2b8041be78"
+      "size": 6244,
+      "sha256": "9d5dd2669dcb3765cfd8a05c82ec991b06e7e57d7d3e1239433a3122d94e023b"
     },
     {
       "path": "assets/nexlab-pending-abc-v02682.js",
-      "size": 37868,
-      "sha256": "f6d86e5a0cec7609bff7c713801f04ebd636563c48e9bd14c98f8a792566446c"
+      "size": 37856,
+      "sha256": "4ad32ac6cefdd80f57d47784373cd6ec05070aec8a39dd9ebba7966f431c7c20"
     },
     {
       "path": "assets/nexlab-permissions-v02664.css",
@@ -598,8 +598,8 @@
     },
     {
       "path": "assets/nexlab-pwa-readiness.js",
-      "size": 31787,
-      "sha256": "44fdfabdac73c6f84b72b7e676e5be7593d6341b43695e31912c5fbbb0a1bfd5"
+      "size": 31781,
+      "sha256": "17b32cb2d6adc7c3315018e7349eff0f9ee6c97fb303356bfa9eee6358301555"
     },
     {
       "path": "assets/nexlab-release-gate.js",
@@ -608,8 +608,8 @@
     },
     {
       "path": "assets/nexlab-release-identity.js",
-      "size": 8944,
-      "sha256": "4dfb4ddcba23a6b16fa3075a0c6f997809fde787a957974fa81b00265232d2f2"
+      "size": 8926,
+      "sha256": "e2645af60e5217d0643f4252776079042be615d8f2ec138bb653ba6dd9f58077"
     },
     {
       "path": "assets/nexlab-reports-v02682.css",
@@ -633,8 +633,8 @@
     },
     {
       "path": "assets/nexlab-runtime-app.js",
-      "size": 63666,
-      "sha256": "14b1103334b230059146bece930fe610c90788617a451d1963d047b78dbfe8e3"
+      "size": 63654,
+      "sha256": "b634fe4dbb904aaa09919b5b07bd32051acb9ba722f4e50dec0cf58455ab1ace"
     },
     {
       "path": "assets/nexlab-runtime-export.js",
@@ -643,8 +643,8 @@
     },
     {
       "path": "assets/nexlab-runtime-features.js",
-      "size": 582114,
-      "sha256": "df365ceae7624ea60b8acb324534667778d87e915335c59315a04638a55506c5"
+      "size": 581976,
+      "sha256": "3d36e30247b0a5f4a97ffe1a73ffa575dc1f86ca0f62c6a4fc099bb60a761ca5"
     },
     {
       "path": "assets/nexlab-runtime-realtime-core.js",
@@ -658,8 +658,8 @@
     },
     {
       "path": "assets/nexlab-runtime-shared.js",
-      "size": 248001,
-      "sha256": "3d6ebe5e19b40456b384aa6acf1513e9c52f75197cbcf8fdfa233d9659052d95"
+      "size": 247893,
+      "sha256": "ae6d7ea1e843d9ddd9945a30dc355a247fa356fc768ed359ded44e8bc174ceb2"
     },
     {
       "path": "assets/nexlab-runtime-vendor.js",
@@ -683,8 +683,8 @@
     },
     {
       "path": "assets/nexlab-update-manager.js",
-      "size": 17164,
-      "sha256": "800de3cf5d4cd30fa5c881541b721cc2893de99985696671cb8670d4027cdc8d"
+      "size": 17152,
+      "sha256": "94fef19439bdae8ee5e3bfed12464af6a43cdca16f5fd31601094a0bcaff6576"
     },
     {
       "path": "assets/nexlab-vapid-rotation.js",
@@ -848,8 +848,8 @@
     },
     {
       "path": "index.html",
-      "size": 10853,
-      "sha256": "f9f74b7dbdf6806ed1ed7563d47006d751f0713376a3ed47bb7c79fcd7624d81"
+      "size": 10607,
+      "sha256": "6eed47643293316985b33f9686551ef0e96c02e7d00fa7a6b6cd589cedac5670"
     },
     {
       "path": "manifest.webmanifest",
@@ -858,8 +858,8 @@
     },
     {
       "path": "nexlab-sw.js",
-      "size": 20166,
-      "sha256": "990751b56bdb6288e79be4e18369fcec58b94dd0b550190c7e40c63fa87bcd6c"
+      "size": 20148,
+      "sha256": "0ff89d9762fe8b43267ace06ee2ef9f053280b36abefaa32897de389b6fccc74"
     },
     {
       "path": "offline.html",
@@ -868,18 +868,18 @@
     },
     {
       "path": "pwa-check.html",
-      "size": 8641,
-      "sha256": "d7c56f554776b1373423dbca0ca06847a4e894d195249f1d451eba8b0564d686"
+      "size": 8611,
+      "sha256": "7253dedf12140a82742acc82ed2748f603133b8faf3c455e7ba454a6528817d0"
     },
     {
       "path": "release-head.json",
       "size": 499,
-      "sha256": "a8c92e58abe3ada7c8891cae1029c00f288fd60b049991344c98e05b0dcf71be"
+      "sha256": "70fcc43ad94793d4043805ca4cb3bb5fe1acc8d8c269cfa2f0f9a9ec70cdb224"
     },
     {
       "path": "release-manifest.json",
       "size": 9165,
-      "sha256": "2c39a35b75bdf2cd49521e8b0e80a0495991d70fb06f674b1c7bdb2a83cfce9a"
+      "sha256": "ed37ce90986a5134e56e34bc99da10f4712052ec387f9aa4eda8b2db256dd5ca"
     }
   ],
   "build_identity": "beta-0-26-82-sidebar-adaptativa-clara",
@@ -1058,7 +1058,7 @@
     "marketing_database_constraints": true,
     "physical_homologation": "pending_real_installed_device_after_publication"
   },
-  "package_uncompressed_bytes": 4163389,
+  "package_uncompressed_bytes": 3968952,
   "corrections_0_26_30": {
     "activity_search_width_controlled": true,
     "activity_filters_aligned_desktop": true,
@@ -1226,88 +1226,88 @@
     },
     {
       "path": "assets/modules/agenda.js",
-      "size": 166,
-      "sha256": "24c47c851afca2ba28aa7193aa36a2d32996c36ca7a36f5d102c9e0d25bdb6a3"
+      "size": 168,
+      "sha256": "8da4ae955d980418d447175a105ef5a5419c589304ebbbb27c84c60e53c6a740"
     },
     {
       "path": "assets/modules/assets.js",
-      "size": 166,
-      "sha256": "6cba70a0ea0713f57c82fc449f7a95ba23325bad2f9debe5fe2bcb5836854489"
+      "size": 168,
+      "sha256": "f6aa0b22893180383d471bb785c85f62f2330fd26088df456fb99dabda84a866"
     },
     {
       "path": "assets/modules/board.js",
-      "size": 164,
-      "sha256": "7b294f11f098bed6c7d9a9e041df46412b28069910bd47f12ac74bcd4f22a644"
+      "size": 166,
+      "sha256": "d63b750cda21b5a7d2e649cd7ee6a92d0fa083ca630e0120f9d7476e47b2a4ec"
     },
     {
       "path": "assets/modules/bookings.js",
-      "size": 170,
-      "sha256": "611749a804ed8b9864694f9cb0a600962e0de567149d6488ed77cb7fede19ea7"
+      "size": 172,
+      "sha256": "6c5db3edd782efa621aa722d048a38b4d5504137ef6260db54bc00a9e1f4dce0"
     },
     {
       "path": "assets/modules/events.js",
-      "size": 166,
-      "sha256": "4cc091a9673c7fc6ac01fc1ad21bbd2f9ffc2dd6f8a10bfbd891ed569bdb334e"
+      "size": 168,
+      "sha256": "2b895345db7682b18dabe79c40968873461749cacbdfe8d08c449d81b72fcf02"
     },
     {
       "path": "assets/modules/feedback.js",
-      "size": 182,
-      "sha256": "93179bc8cc54637e4a0ffda0adcb0c9e54436b0a512f7529196d9ab2f5c18949"
+      "size": 184,
+      "sha256": "17528770ee25d090c6cdd6a100f9a9830e62540bc7a9dba3a901a11051981de0"
     },
     {
       "path": "assets/modules/logs.js",
-      "size": 162,
-      "sha256": "0e8d75ad8471e3e1a0aba4a9d8d15c6f9fdd43bdba784b52d631b385b84e5e0d"
+      "size": 164,
+      "sha256": "9861c037e4fd8f167dff6b4abf97d69a79862a8dbf5a2517b0c53f5175e2354a"
     },
     {
       "path": "assets/modules/marketing.js",
-      "size": 172,
-      "sha256": "390763075571c9baefe15ec805bc20991930c4074b131a7f5c4d84d77a988ca3"
+      "size": 174,
+      "sha256": "674ffaba2cca5111909a4dc422de193c0d6e8c59b5dd2431a01d10eda97696c6"
     },
     {
       "path": "assets/modules/participants.js",
-      "size": 178,
-      "sha256": "797608443b2a43d1c509a5d7cb081d7c5c45ea595fbfe643490cda235aff63b6"
+      "size": 180,
+      "sha256": "8b7e6c75c4cd0c5e8a8ba046fd82e812b9aa6b87b75f441de7d04535208d761e"
     },
     {
       "path": "assets/modules/pending.js",
-      "size": 162,
-      "sha256": "4478e22b955e7b945c778828186cec20d7de30e3715aeffd01f24866845efdbe"
+      "size": 164,
+      "sha256": "8998de475fbf31ffa94efe8de95e4abafeae115b7084350a2cba0034f8756ad5"
     },
     {
       "path": "assets/modules/permissions.js",
-      "size": 176,
-      "sha256": "d205a5e7e5c74e7c108d0642b7a47efc57b1bf48c8298724d52c11c11a255c48"
+      "size": 178,
+      "sha256": "fb91ccad4483774b1b4751f7e6818fe13ceeb2a7c96ab4c0d8679f5861826267"
     },
     {
       "path": "assets/modules/profile.js",
-      "size": 168,
-      "sha256": "836bcb333fb30ad5690f01b0092c4d1ecfdd33bebcc3c5a6e64fa79271eb31c9"
+      "size": 170,
+      "sha256": "1afbaf3453c603e51a6eb7d10122f9487de55ba94f1ebe0e2eff220e2515e273"
     },
     {
       "path": "assets/modules/projects.js",
-      "size": 170,
-      "sha256": "cfdc4cd039ab579cd0b7df2ed7b1051a8e001b78a3e5421ab95bc01d2ae183c0"
+      "size": 172,
+      "sha256": "61c373bc6fce2f7d5abe1cf7158037e7517fc8845c186c3301abcb63133d9f24"
     },
     {
       "path": "assets/modules/reports.js",
-      "size": 168,
-      "sha256": "ebb35e44b341048de015fcf5600cea7486135d21c65e6ecc671f2e5b67c40fd2"
+      "size": 170,
+      "sha256": "174187f618baa003ae56113661b667e5dfe0408263b9e68454702956aaaade8b"
     },
     {
       "path": "assets/modules/stock.js",
-      "size": 164,
-      "sha256": "17be5a36ca392af99c4e5522adaa5df8a64e48c1fee437de6d477e0bf08c8e8b"
+      "size": 166,
+      "sha256": "0cd010c9300ce18d3610913f97c2e0a5854e37ad5cc63ea59a73e7e2ee48be47"
     },
     {
       "path": "assets/modules/teams.js",
-      "size": 164,
-      "sha256": "3c1b216ab0001206032c704f91fbc0535038b8323817fe9806917c199d4085a9"
+      "size": 166,
+      "sha256": "8cb8078f6d08511fb552843e101dcb22e6aa36359c32765ade47ade7f65cf846"
     },
     {
       "path": "assets/modules/users.js",
-      "size": 164,
-      "sha256": "e3b0fdbb8445826613b2ae734ddacc13cd0d6a844dca69cd31b391045f0a8cae"
+      "size": 166,
+      "sha256": "524066fd207db7ba3cc36e927cca1d685807b9aaf885a8161effd603f3721b70"
     },
     {
       "path": "assets/nexlab-accessibility-v02682.css",
@@ -1336,13 +1336,13 @@
     },
     {
       "path": "assets/nexlab-auth-security.js",
-      "size": 12414,
-      "sha256": "de64a324a0e1599620fd8889ea84873b3a50e16438a9aa1ac0b49dc886a26c11"
+      "size": 12416,
+      "sha256": "ad5e81a25225228db52db6a94eb73aebbfba5edce37a3eb9ba74f72d9bc01bcd"
     },
     {
       "path": "assets/nexlab-bootstrap.js",
-      "size": 59679,
-      "sha256": "16f9c53a540be7b9763d95473d34b06aeb4ee55239e784fbd9e9e223a7838e73"
+      "size": 59689,
+      "sha256": "000ff9280f67544f81e18497b0256f5b7718c7f3f0939de7cd42e861e36a02f0"
     },
     {
       "path": "assets/nexlab-config.js",
@@ -1361,8 +1361,8 @@
     },
     {
       "path": "assets/nexlab-device-homologation.js",
-      "size": 9582,
-      "sha256": "f18a9633303b5e5830b3606e0741d6e4ef5fdd63901692d5924f9e78ad0ea0d0"
+      "size": 9588,
+      "sha256": "4ba12c1452145b3935992e6f0842a4135af944d36130e0693e15153ec3c5197d"
     },
     {
       "path": "assets/nexlab-dialogs.js",
@@ -1371,8 +1371,8 @@
     },
     {
       "path": "assets/nexlab-feedback-evidence.js",
-      "size": 24911,
-      "sha256": "e7e80c40b257eba1928e518b5d08b7ac80b25072d46891f5e0eb4e2a96f9687d"
+      "size": 24913,
+      "sha256": "6599870fb27423e186808cbe2270312f528dffffa4d6b41033a2d28694f122a1"
     },
     {
       "path": "assets/nexlab-inventory-v02674.css",
@@ -1381,18 +1381,18 @@
     },
     {
       "path": "assets/nexlab-module-recovery.js",
-      "size": 4803,
-      "sha256": "74b21f0e09aa9efdc912f57fc2a18096be4bee98f4bd3f69d306f788eaed9d39"
+      "size": 4805,
+      "sha256": "94773aac57b68d30d41e76167d5d69a5e97b2fce9518033760bcbec6339b537d"
     },
     {
       "path": "assets/nexlab-myday-dashboard-v02682.js",
-      "size": 6242,
-      "sha256": "5bb46a7ece136a7af771e03fd81e317cdb44bacef2e32c110e9d85193c18b2c1"
+      "size": 6244,
+      "sha256": "9d5dd2669dcb3765cfd8a05c82ec991b06e7e57d7d3e1239433a3122d94e023b"
     },
     {
       "path": "assets/nexlab-pending-abc-v02682.js",
-      "size": 37852,
-      "sha256": "f7df17e2bf3d60ba8a2c0009540be57e8fbd357cfba2dc066a3b2585c7915637"
+      "size": 37856,
+      "sha256": "4ad32ac6cefdd80f57d47784373cd6ec05070aec8a39dd9ebba7966f431c7c20"
     },
     {
       "path": "assets/nexlab-permissions-v02664.css",
@@ -1421,8 +1421,8 @@
     },
     {
       "path": "assets/nexlab-project-comments-v02682.js",
-      "size": 37141,
-      "sha256": "02df65548efd1839401e4bd4a3b7d1f4dbe2d8c3b3de55b989067f1092a108c9"
+      "size": 37143,
+      "sha256": "caa36acca9a291ff5e5f2f299de6d22a76cdeb8d8eb1d8cc3d0d9159156955c8"
     },
     {
       "path": "assets/nexlab-projects-v02667.css",
@@ -1431,28 +1431,28 @@
     },
     {
       "path": "assets/nexlab-push-consent.js",
-      "size": 15017,
-      "sha256": "482df1d68c4d2e4c01a255b258f08b7922607945008f2ed234de776b7620a453"
+      "size": 15019,
+      "sha256": "f9f4179a5c82db523076402c44060dfda47ece0bc5498fc8f8eab76b45677580"
     },
     {
       "path": "assets/nexlab-push-navigation.js",
-      "size": 9486,
-      "sha256": "f338fb292eac9cd8309dcb95c3da9431d6863cd20db9a90b94798c489680dbb4"
+      "size": 9490,
+      "sha256": "b34295eff5c1f5a02f9282e7b6af0385c5a56e55f525cf33ba492f6b0a42ec58"
     },
     {
       "path": "assets/nexlab-pwa-readiness.js",
-      "size": 31773,
-      "sha256": "ad43f4c5fe06b3ac669dab025a1efd46831f40d77c381e3ca06beb221a4ab350"
+      "size": 31781,
+      "sha256": "17b32cb2d6adc7c3315018e7349eff0f9ee6c97fb303356bfa9eee6358301555"
     },
     {
       "path": "assets/nexlab-release-gate.js",
-      "size": 3356,
-      "sha256": "18791206f05a4007ff2fa4f8ffd2a10c1938e7aa1370f4eb549d0b0f7f26c2f6"
+      "size": 3358,
+      "sha256": "1fbf3bf348ac4b87f39a357dc883ada1004ffa09af5113d536fc7d266b47b564"
     },
     {
       "path": "assets/nexlab-release-identity.js",
-      "size": 8918,
-      "sha256": "3f5606ac9514d68df107a3b3fd83f499bc0373feb8c3ae23ca81ca608f455961"
+      "size": 8926,
+      "sha256": "e2645af60e5217d0643f4252776079042be615d8f2ec138bb653ba6dd9f58077"
     },
     {
       "path": "assets/nexlab-reports-v02682.css",
@@ -1461,13 +1461,13 @@
     },
     {
       "path": "assets/nexlab-responsive-v02671.css",
-      "size": 46382,
-      "sha256": "e386f79fe0f9222bcb00d552bafd7981341a26d6b541fbac313f1a4fe31e9e27"
+      "size": 47746,
+      "sha256": "9b4202188b5c3bf3676d6f53505a97daf39b46ab93f92761c9ad6dc053b0de24"
     },
     {
       "path": "assets/nexlab-responsive-v02671.js",
-      "size": 9513,
-      "sha256": "a005fc844dbdf115dd2a1dbf3e86d872ef321eec018d0f8facd2f43ed9b3538e"
+      "size": 9515,
+      "sha256": "cb0c0327c67d513b0df57dbcdcc211afd9bd088a9e217853371cb97dba435dbf"
     },
     {
       "path": "assets/nexlab-rpc-registry.js",
@@ -1476,8 +1476,8 @@
     },
     {
       "path": "assets/nexlab-runtime-app.js",
-      "size": 63650,
-      "sha256": "ba5e7b8140fffd7b0246542efbb22da9c123d5148b7889c571a6b711514973bc"
+      "size": 63654,
+      "sha256": "b634fe4dbb904aaa09919b5b07bd32051acb9ba722f4e50dec0cf58455ab1ace"
     },
     {
       "path": "assets/nexlab-runtime-export.js",
@@ -1486,23 +1486,23 @@
     },
     {
       "path": "assets/nexlab-runtime-features.js",
-      "size": 581930,
-      "sha256": "d55158b09f6a08a78d75fcd37bc18ed32fff18db46c9ba2493c83f2de7a2d052"
+      "size": 581976,
+      "sha256": "3d36e30247b0a5f4a97ffe1a73ffa575dc1f86ca0f62c6a4fc099bb60a761ca5"
     },
     {
       "path": "assets/nexlab-runtime-realtime-core.js",
-      "size": 11140,
-      "sha256": "6887189fc4bbbc83cc6701fafd7a3859010dacf9fba3d3384f5c4f04f7712f55"
+      "size": 11142,
+      "sha256": "6772f377e803bad81b7eac488a273911bf3dd97a7aaeedcb5d18007bdce45230"
     },
     {
       "path": "assets/nexlab-runtime-realtime-hub.js",
-      "size": 3493,
-      "sha256": "65a525f72b90df9bd90a4f618d76a98b8f5db913461a58046a3a668d0c897c09"
+      "size": 3495,
+      "sha256": "6d9610789079a79c84db295200a19eec724697151051c889ef8543dc8adeb645"
     },
     {
       "path": "assets/nexlab-runtime-shared.js",
-      "size": 247855,
-      "sha256": "d130005bf88131b4a0f1872ba32b55cc604b57408733d1ab64f6819a1360cc12"
+      "size": 247893,
+      "sha256": "ae6d7ea1e843d9ddd9945a30dc355a247fa356fc768ed359ded44e8bc174ceb2"
     },
     {
       "path": "assets/nexlab-runtime-vendor.js",
@@ -1516,8 +1516,8 @@
     },
     {
       "path": "assets/nexlab-team-chat-v02682.js",
-      "size": 90085,
-      "sha256": "41dac7e2414239673dfbdfe64f2b069ca9ca35beb7dc2f53c0a61dbcc27b9c61"
+      "size": 90087,
+      "sha256": "e96267e868bc47fbea1e0940ba5837977a2a38b905fe96e521d4177ebbddc58e"
     },
     {
       "path": "assets/nexlab-team-tasks-v02682.css",
@@ -1526,8 +1526,8 @@
     },
     {
       "path": "assets/nexlab-update-manager.js",
-      "size": 17148,
-      "sha256": "2a65569b38349e8ad32d11f04585cb8570c8e91848d80deb2a610b510d8a9382"
+      "size": 17152,
+      "sha256": "94fef19439bdae8ee5e3bfed12464af6a43cdca16f5fd31601094a0bcaff6576"
     },
     {
       "path": "assets/nexlab-vapid-rotation.js",
@@ -1536,13 +1536,13 @@
     },
     {
       "path": "assets/nexlab-visual.css",
-      "size": 210400,
-      "sha256": "e2d444dbe195fc7499cd91063145c6fa8b91b40a8db8b7a85c62dd88d476a0ed"
+      "size": 211630,
+      "sha256": "13609793cacc1b57075a2a50d33af5c17b05ae69493cd7a71a8424807050c5d9"
     },
     {
       "path": "assets/nexlab-visual.js",
-      "size": 89587,
-      "sha256": "8ec1444047c8ca2e920fb4217b5af463f58e0c4730e79e4795abdf2e1694acf5"
+      "size": 89882,
+      "sha256": "34b5354566c4d436e8643ac6eb3c58d100938cf9ca06d3995d7ad814f039129d"
     },
     {
       "path": "assets/team-icons/badge-check.svg",
@@ -1691,8 +1691,8 @@
     },
     {
       "path": "index.html",
-      "size": 10523,
-      "sha256": "9c79b2c3ec04aa9e82d1263c2ba547808b499f7ccbf90bedf080c8bd96761f9e"
+      "size": 10607,
+      "sha256": "6eed47643293316985b33f9686551ef0e96c02e7d00fa7a6b6cd589cedac5670"
     },
     {
       "path": "manifest.webmanifest",
@@ -1701,8 +1701,8 @@
     },
     {
       "path": "nexlab-sw.js",
-      "size": 20142,
-      "sha256": "e379d1c5dab7150711b9002dde9cf8fab80fe7cdd94b7aab572276129a57679c"
+      "size": 20148,
+      "sha256": "0ff89d9762fe8b43267ace06ee2ef9f053280b36abefaa32897de389b6fccc74"
     },
     {
       "path": "offline.html",
@@ -1711,18 +1711,18 @@
     },
     {
       "path": "pwa-check.html",
-      "size": 8601,
-      "sha256": "f92129b22701193648dc6552ddb118b04e4fd18f1000b458a49554fd1fe19cb1"
+      "size": 8611,
+      "sha256": "7253dedf12140a82742acc82ed2748f603133b8faf3c455e7ba454a6528817d0"
     },
     {
       "path": "release-head.json",
-      "size": 493,
-      "sha256": "23b9ac2f8ccff0d7cacbdd598a3178998fd6c216489851bd27a2ae0a86d9f5c5"
+      "size": 499,
+      "sha256": "70fcc43ad94793d4043805ca4cb3bb5fe1acc8d8c269cfa2f0f9a9ec70cdb224"
     },
     {
       "path": "release-manifest.json",
-      "size": 9159,
-      "sha256": "5e16131f9a7ba5409a49498ba77acf3c0208db3d8121a21ef079ce9c89a4e6bb"
+      "size": 9165,
+      "sha256": "ed37ce90986a5134e56e34bc99da10f4712052ec387f9aa4eda8b2db256dd5ca"
     }
   ],
   "inventory_files": [
@@ -2101,70 +2101,70 @@
     "assets/backgrounds/nexlab-bg-desktop.webp": "524cf182865105827177dba04cac01fb3ba78b747cd83eb701538cb0b372cb2c",
     "assets/backgrounds/nexlab-bg-mobile.webp": "03c36f0075500939ad3e9ef49b7f51ae5b39c9384971456850c270fdc2cb876c",
     "assets/index-B1u8eynw.css": "8ffc5a5991802f3640261d80efe3d0f851307ef1a60d2913857d35ab20ac57a7",
-    "assets/modules/agenda.js": "f458a64d3713441849f79f43c03d7d282164a906802dd302d9c8c6d087fa3a5c",
-    "assets/modules/assets.js": "0ee5cc85079d32eb57e147eb197a07323a8c79de00f60444136477f869fe53e5",
-    "assets/modules/board.js": "d4fe8fca0ed35069bf3f4bf4700c3fea7b5e3506d11dbb8e23965c6114efb168",
-    "assets/modules/bookings.js": "64fe5d6e4c5ba1b7c1a567a6364f6639dfdd22519f22fc7853b813f8d5f08af5",
-    "assets/modules/events.js": "6fc30a50e79e62f06d90e2b34466bc99417988fde84675a55d95b3153c6fd259",
-    "assets/modules/feedback.js": "c765f9852ea58d865922877577f4198f54b227af29941f70e9ed8ad75bf19cf2",
-    "assets/modules/logs.js": "a13159fdab1997979851d66b189bf049e87495089bd2732a6f3a10c55c27e540",
-    "assets/modules/marketing.js": "fa5524e9c24b68e4f41364983557b547e4a16f787e3505740a60874a7ef0d78b",
-    "assets/modules/participants.js": "1fd3bfcec54de978d2818d41fffaf443b0c6fa1f9d467e753e6569f6f4454ec7",
-    "assets/modules/pending.js": "2220173d9dff7418aa783d23fd140f02a258a94f5d71c9a476b8c13b7422323d",
-    "assets/modules/permissions.js": "2ebff6d7274281df72ee7c9467d355102aa385cc9e8b94798278b51dd49f7b8b",
-    "assets/modules/profile.js": "5039d6f03a72ae18c547686d00728a3448e6926b270cfe8241ccc6ed84c5fcd2",
-    "assets/modules/projects.js": "f2bf2f97e49801c1ccb908ac0b29cb7cda805fc5c22024d8eb58192bb4552dca",
-    "assets/modules/reports.js": "e672d7501f302c63c680b985185b9d8074419e9821a6bf6892d32dfeab590f32",
-    "assets/modules/stock.js": "163feb3923f2ab3d4b6c188f8c57b51c7622962e761a89d019577d936a03245f",
-    "assets/modules/teams.js": "05f68d713087e4c3abc5a3d218aa06ca67626b2b088fc050954a1b78b7b9a720",
-    "assets/modules/users.js": "d959adfc8a46bcb673d05ee43bdd218f73bdbb47c9cdb07b2db02fdba5a7854f",
+    "assets/modules/agenda.js": "8da4ae955d980418d447175a105ef5a5419c589304ebbbb27c84c60e53c6a740",
+    "assets/modules/assets.js": "f6aa0b22893180383d471bb785c85f62f2330fd26088df456fb99dabda84a866",
+    "assets/modules/board.js": "d63b750cda21b5a7d2e649cd7ee6a92d0fa083ca630e0120f9d7476e47b2a4ec",
+    "assets/modules/bookings.js": "6c5db3edd782efa621aa722d048a38b4d5504137ef6260db54bc00a9e1f4dce0",
+    "assets/modules/events.js": "2b895345db7682b18dabe79c40968873461749cacbdfe8d08c449d81b72fcf02",
+    "assets/modules/feedback.js": "17528770ee25d090c6cdd6a100f9a9830e62540bc7a9dba3a901a11051981de0",
+    "assets/modules/logs.js": "9861c037e4fd8f167dff6b4abf97d69a79862a8dbf5a2517b0c53f5175e2354a",
+    "assets/modules/marketing.js": "674ffaba2cca5111909a4dc422de193c0d6e8c59b5dd2431a01d10eda97696c6",
+    "assets/modules/participants.js": "8b7e6c75c4cd0c5e8a8ba046fd82e812b9aa6b87b75f441de7d04535208d761e",
+    "assets/modules/pending.js": "8998de475fbf31ffa94efe8de95e4abafeae115b7084350a2cba0034f8756ad5",
+    "assets/modules/permissions.js": "fb91ccad4483774b1b4751f7e6818fe13ceeb2a7c96ab4c0d8679f5861826267",
+    "assets/modules/profile.js": "1afbaf3453c603e51a6eb7d10122f9487de55ba94f1ebe0e2eff220e2515e273",
+    "assets/modules/projects.js": "61c373bc6fce2f7d5abe1cf7158037e7517fc8845c186c3301abcb63133d9f24",
+    "assets/modules/reports.js": "174187f618baa003ae56113661b667e5dfe0408263b9e68454702956aaaade8b",
+    "assets/modules/stock.js": "0cd010c9300ce18d3610913f97c2e0a5854e37ad5cc63ea59a73e7e2ee48be47",
+    "assets/modules/teams.js": "8cb8078f6d08511fb552843e101dcb22e6aa36359c32765ade47ade7f65cf846",
+    "assets/modules/users.js": "524066fd207db7ba3cc36e927cca1d685807b9aaf885a8161effd603f3721b70",
     "assets/nexlab-accessibility-v02682.css": "a5aa2cf970639876e5c8c0d3eecb24f210b48f463016a833d9c18576b3a849b7",
     "assets/nexlab-activities-v02677.css": "ec0731fe9773bbc73e8194dce8a8498dc5580ca33cf3edfdaada4ed6c5b07fbb",
     "assets/nexlab-admin-homologation.js": "62d5a425577c51cb1ba32005be3af3e6b204900014fe716476f680b74cbf949a",
     "assets/nexlab-admin-ui-guard.js": "301a841d30660be9b68297bc7bc8bc6d435afe9601467463f895aab5be6db237",
     "assets/nexlab-agenda-v02682.css": "004f6fcc97148cb246222569b351efabe6096abc197897d94e2a136c60246652",
-    "assets/nexlab-auth-security.js": "38229d3ea92da71f4299c5d5e658bde9fea41281736cacc9edc82b01a344235f",
-    "assets/nexlab-bootstrap.js": "6360dd0ffe1d67f00fabfc87148bec762afdc19c50bfc033d678c46e8ad21f5e",
+    "assets/nexlab-auth-security.js": "ad5e81a25225228db52db6a94eb73aebbfba5edce37a3eb9ba74f72d9bc01bcd",
+    "assets/nexlab-bootstrap.js": "000ff9280f67544f81e18497b0256f5b7718c7f3f0939de7cd42e861e36a02f0",
     "assets/nexlab-config.js": "18b171617db30dadcf2c95c83b4818f6a0debca8bfdf78276fbda66a44ee4f6b",
     "assets/nexlab-coordinator-validation.js": "8970da7bcc4d5c2ee3a8b172db0ba89f517577ff5b761824b6b9e9b4765df271",
     "assets/nexlab-dashboard-readiness.js": "5c9b9578d767d5eb09e6c8e55e5fa646e9a08abf13ee745072e5bdf0e2a6e4ad",
-    "assets/nexlab-device-homologation.js": "ab6edff38a75acb45f1ee8dd20db590c6bf09b328f737d7e44b68e0d1403ac48",
+    "assets/nexlab-device-homologation.js": "4ba12c1452145b3935992e6f0842a4135af944d36130e0693e15153ec3c5197d",
     "assets/nexlab-dialogs.js": "9e9f605129c86f05c6334a769b40d8dcc293e2a8ff8cc695314d0428f3f4c1f4",
-    "assets/nexlab-feedback-evidence.js": "c46845a79f8fa68fe3aa675fabdb46585ca3f1457c48e7523c00e618e2f5ce16",
+    "assets/nexlab-feedback-evidence.js": "6599870fb27423e186808cbe2270312f528dffffa4d6b41033a2d28694f122a1",
     "assets/nexlab-inventory-v02674.css": "396da17313a0a27da0603ebe1d52f0b3b74eda663383826eb61e94b7670d7c21",
-    "assets/nexlab-module-recovery.js": "e5c74e98e48ac6643cbc1ff9f317cb08997cb28bf121440124a1506f2f1f7c04",
-    "assets/nexlab-myday-dashboard-v02682.js": "2888173b7d5c9f93f3761b88965c9881b5bba17711c1d79de745e0ed3f291075",
-    "assets/nexlab-pending-abc-v02682.js": "c1ab72e190381afc2802b92b952db13f2e6ab6911d2f67b6428ac3fecf7e092c",
+    "assets/nexlab-module-recovery.js": "94773aac57b68d30d41e76167d5d69a5e97b2fce9518033760bcbec6339b537d",
+    "assets/nexlab-myday-dashboard-v02682.js": "9d5dd2669dcb3765cfd8a05c82ec991b06e7e57d7d3e1239433a3122d94e023b",
+    "assets/nexlab-pending-abc-v02682.js": "4ad32ac6cefdd80f57d47784373cd6ec05070aec8a39dd9ebba7966f431c7c20",
     "assets/nexlab-permissions-v02664.css": "2aaef9bb002f7dcdb86c5588566d4157fdf2202f218cc46579e67d10b4f05f8c",
     "assets/nexlab-priority2-v02682.css": "211a45831f4eb37b104b3126d8dc698bbc7e9ebd10c7c501ab96f601085b200c",
     "assets/nexlab-priority3-v02682.css": "83bb6d25a53f7b4ef97e7b54ed2a0cd7058a20ada159a0f343a8db8d2446fdc4",
     "assets/nexlab-profile-preview.js": "fa8080416ab5625b314af8bc0e978d7925416e5af6c06305fb017e804b0d5853",
     "assets/nexlab-project-comments-v02682.css": "2115d19e887ec5ed43c703cd1a0f518ec36d5c51bd8278f43240a7bbd2565090",
-    "assets/nexlab-project-comments-v02682.js": "aa8bcb4dc343d9e321ef7d9119f7fd26d6a1131632064fd8b233792391222c1a",
+    "assets/nexlab-project-comments-v02682.js": "caa36acca9a291ff5e5f2f299de6d22a76cdeb8d8eb1d8cc3d0d9159156955c8",
     "assets/nexlab-projects-v02667.css": "2acb7de318fd87447ffe82995710f92db27e311a38e3bf68c17fb0f29b0327c2",
-    "assets/nexlab-push-consent.js": "736b00618933a0141a781734e089b58614f3a731bfe0d9ddee07da261bf98eb3",
-    "assets/nexlab-push-navigation.js": "aecfb58a2a0ded11ee32b1de775517ef5de8aee28e1ee8b56084a1d0b7b2e88f",
-    "assets/nexlab-pwa-readiness.js": "4eb6c5cae26345737a212bc294769531c1d65a59e2871e2fc90c0746bfc09114",
-    "assets/nexlab-release-gate.js": "38cddba23c51ce4552e8327922b32484c642219bfa23b9553d48a19eab1d189c",
-    "assets/nexlab-release-identity.js": "b7b0e99105b9a1ef032f82651ed987bf90b353361156bf24b64427dc9c90a707",
+    "assets/nexlab-push-consent.js": "f9f4179a5c82db523076402c44060dfda47ece0bc5498fc8f8eab76b45677580",
+    "assets/nexlab-push-navigation.js": "b34295eff5c1f5a02f9282e7b6af0385c5a56e55f525cf33ba492f6b0a42ec58",
+    "assets/nexlab-pwa-readiness.js": "17b32cb2d6adc7c3315018e7349eff0f9ee6c97fb303356bfa9eee6358301555",
+    "assets/nexlab-release-gate.js": "1fbf3bf348ac4b87f39a357dc883ada1004ffa09af5113d536fc7d266b47b564",
+    "assets/nexlab-release-identity.js": "e2645af60e5217d0643f4252776079042be615d8f2ec138bb653ba6dd9f58077",
     "assets/nexlab-reports-v02682.css": "8c01471ddefc553d0d01999cbdaffafedb72e2c3e1b812e262d4c4cce094ebb4",
-    "assets/nexlab-responsive-v02671.css": "e386f79fe0f9222bcb00d552bafd7981341a26d6b541fbac313f1a4fe31e9e27",
-    "assets/nexlab-responsive-v02671.js": "f9bb44e3d0887678df99dfa4b5bfd0b05c091ccc8ad6f1af94c7d66d32b760f1",
+    "assets/nexlab-responsive-v02671.css": "9b4202188b5c3bf3676d6f53505a97daf39b46ab93f92761c9ad6dc053b0de24",
+    "assets/nexlab-responsive-v02671.js": "cb0c0327c67d513b0df57dbcdcc211afd9bd088a9e217853371cb97dba435dbf",
     "assets/nexlab-rpc-registry.js": "ca81f3bbc2d2b6ba4477fd31087de7e6b08ea99af410434a05278b1be83b784d",
-    "assets/nexlab-runtime-app.js": "c689895559b8405817bb5bbffeec5b8afad682b384c94f7cda09b5375fd98784",
+    "assets/nexlab-runtime-app.js": "b634fe4dbb904aaa09919b5b07bd32051acb9ba722f4e50dec0cf58455ab1ace",
     "assets/nexlab-runtime-export.js": "723549b2303cfa783cccec8de5b580aa5296c888abb6554906de68c0a2ed7735",
-    "assets/nexlab-runtime-features.js": "7eda1228b580ce5fc72c99c03a5c572345ef95e30dc520436abe067799636410",
-    "assets/nexlab-runtime-realtime-core.js": "9058ce35a05af1ecb6c0b37bf15fd408cad37d5c661fa007cc9f7698cf1a96fa",
-    "assets/nexlab-runtime-realtime-hub.js": "8a40e19446997c1284d89de92e2fd76521f8180fe774ade5373c443896ed5ed3",
-    "assets/nexlab-runtime-shared.js": "90ae95775d5312fdcaf20d35734436851bfe4e1facbb8185073dbde4f2b98640",
+    "assets/nexlab-runtime-features.js": "3d36e30247b0a5f4a97ffe1a73ffa575dc1f86ca0f62c6a4fc099bb60a761ca5",
+    "assets/nexlab-runtime-realtime-core.js": "6772f377e803bad81b7eac488a273911bf3dd97a7aaeedcb5d18007bdce45230",
+    "assets/nexlab-runtime-realtime-hub.js": "6d9610789079a79c84db295200a19eec724697151051c889ef8543dc8adeb645",
+    "assets/nexlab-runtime-shared.js": "ae6d7ea1e843d9ddd9945a30dc355a247fa356fc768ed359ded44e8bc174ceb2",
     "assets/nexlab-runtime-vendor.js": "5ea60910125235bfcb3d9834a633d375fe5f97df68f3d7ded91a50d05dd390d9",
     "assets/nexlab-team-chat-v02682.css": "a5050c671090c28cca146afd54cf9e47b3ca5198066dde563587ad463a199b29",
-    "assets/nexlab-team-chat-v02682.js": "6d34c51d506fb6d4b9b5103c1c84fe07421436271577a3169a5126b7fd85a8a4",
+    "assets/nexlab-team-chat-v02682.js": "e96267e868bc47fbea1e0940ba5837977a2a38b905fe96e521d4177ebbddc58e",
     "assets/nexlab-team-tasks-v02682.css": "bd49342a00423803f64d7fb964640504c3f0180d36ea41c6a866da3d8af10bab",
-    "assets/nexlab-update-manager.js": "f47ee8e434a22702868937f5165b182591f9323dbd7274e6ad1dab98a023e2b2",
+    "assets/nexlab-update-manager.js": "94fef19439bdae8ee5e3bfed12464af6a43cdca16f5fd31601094a0bcaff6576",
     "assets/nexlab-vapid-rotation.js": "fc338511aef1f7973e4f8cc12b14ed749780117dc0d08a88a3abd93aa7158a36",
-    "assets/nexlab-visual.css": "f2be04e1666d2621f656f85da88fe68495cc3f97d4d3ce4f89469e64a0f9df3c",
-    "assets/nexlab-visual.js": "b30341b28af4774f15d2df41c0952c23622e073d1ae8d95de5d827b164d38ac5",
+    "assets/nexlab-visual.css": "13609793cacc1b57075a2a50d33af5c17b05ae69493cd7a71a8424807050c5d9",
+    "assets/nexlab-visual.js": "34b5354566c4d436e8643ac6eb3c58d100938cf9ca06d3995d7ad814f039129d",
     "assets/team-icons/badge-check.svg": "31163f68a163aa8aa427ae6410e70becc213ee3d1911528a24d2e963c80cc1ee",
     "assets/team-icons/briefcase-business.svg": "ccbf6f362ce7bcc71d0861b1a440da5b6c0cd64be96baf9355a2e690b54418f3",
     "assets/team-icons/calendar-days.svg": "f695bc0ec1aa05e46afeca5db3b47a87afcac130e77b4c2cb08fa4b0e23c6c34",
@@ -2194,13 +2194,13 @@
     "icons/nexlab-favicon-rounded.png": "34444153e4be331ef77c64618cc04ff28b8d40dab0ba20ed0e124e2c8efbf592",
     "icons/nexlab-maskable-192.png": "69095b30dfa5df9091c3f6d62792074660bbf035071a56bafcac73d3fa7fe7be",
     "icons/nexlab-maskable-512.png": "c55135cbb263a64178443e06221f956f075fc8ce03d10dcd640d296f068723f5",
-    "index.html": "6100ece403d9c6b16dfa1d9f817d7088cf01f3d958e0e52bd2873453dcfe4123",
+    "index.html": "6eed47643293316985b33f9686551ef0e96c02e7d00fa7a6b6cd589cedac5670",
     "manifest.webmanifest": "2d559965644f2936325df151ba55197b7d584ce570d2f607f4eba3e164b5aa01",
-    "nexlab-sw.js": "343a804194b8d95e5e92cf338c5ebde8e665184714e7a3f68c5fa35143c86f12",
+    "nexlab-sw.js": "0ff89d9762fe8b43267ace06ee2ef9f053280b36abefaa32897de389b6fccc74",
     "offline.html": "d76cbf611242031655d7ddab7e11bb66763a43315ce7f13de3faaedc4253ed14",
-    "pwa-check.html": "f8d68c2c952b4ec19f4e74f5a6cab90799b05111b0c7a2eefc97f7a5f1f463ac",
-    "release-head.json": "47dcf8595c4f0be645f407474767ab69487a82d9106839f5c58487091775abf1",
-    "release-manifest.json": "188fec3fc3310363cc49000e45c0b636b6c3506e906850f60fd05c4d1f38c59a"
+    "pwa-check.html": "7253dedf12140a82742acc82ed2748f603133b8faf3c455e7ba454a6528817d0",
+    "release-head.json": "70fcc43ad94793d4043805ca4cb3bb5fe1acc8d8c269cfa2f0f9a9ec70cdb224",
+    "release-manifest.json": "ed37ce90986a5134e56e34bc99da10f4712052ec387f9aa4eda8b2db256dd5ca"
   },
   "corrections_0_26_41": {
     "marketing_creation_only_in_header": true,
@@ -3908,70 +3908,70 @@
     "assets/backgrounds/nexlab-bg-desktop.webp": 45958,
     "assets/backgrounds/nexlab-bg-mobile.webp": 47182,
     "assets/index-B1u8eynw.css": 130616,
-    "assets/modules/agenda.js": 162,
-    "assets/modules/assets.js": 162,
-    "assets/modules/board.js": 160,
-    "assets/modules/bookings.js": 166,
-    "assets/modules/events.js": 162,
-    "assets/modules/feedback.js": 178,
-    "assets/modules/logs.js": 158,
-    "assets/modules/marketing.js": 168,
-    "assets/modules/participants.js": 174,
-    "assets/modules/pending.js": 158,
-    "assets/modules/permissions.js": 172,
-    "assets/modules/profile.js": 164,
-    "assets/modules/projects.js": 166,
-    "assets/modules/reports.js": 164,
-    "assets/modules/stock.js": 160,
-    "assets/modules/teams.js": 160,
-    "assets/modules/users.js": 160,
+    "assets/modules/agenda.js": 168,
+    "assets/modules/assets.js": 168,
+    "assets/modules/board.js": 166,
+    "assets/modules/bookings.js": 172,
+    "assets/modules/events.js": 168,
+    "assets/modules/feedback.js": 184,
+    "assets/modules/logs.js": 164,
+    "assets/modules/marketing.js": 174,
+    "assets/modules/participants.js": 180,
+    "assets/modules/pending.js": 164,
+    "assets/modules/permissions.js": 178,
+    "assets/modules/profile.js": 170,
+    "assets/modules/projects.js": 172,
+    "assets/modules/reports.js": 170,
+    "assets/modules/stock.js": 166,
+    "assets/modules/teams.js": 166,
+    "assets/modules/users.js": 166,
     "assets/nexlab-accessibility-v02682.css": 6478,
     "assets/nexlab-activities-v02677.css": 2870,
     "assets/nexlab-admin-homologation.js": 52537,
     "assets/nexlab-admin-ui-guard.js": 8822,
     "assets/nexlab-agenda-v02682.css": 31690,
-    "assets/nexlab-auth-security.js": 12410,
-    "assets/nexlab-bootstrap.js": 59659,
+    "assets/nexlab-auth-security.js": 12416,
+    "assets/nexlab-bootstrap.js": 59689,
     "assets/nexlab-config.js": 4345,
     "assets/nexlab-coordinator-validation.js": 24688,
     "assets/nexlab-dashboard-readiness.js": 3583,
-    "assets/nexlab-device-homologation.js": 9570,
+    "assets/nexlab-device-homologation.js": 9588,
     "assets/nexlab-dialogs.js": 5969,
-    "assets/nexlab-feedback-evidence.js": 24907,
+    "assets/nexlab-feedback-evidence.js": 24913,
     "assets/nexlab-inventory-v02674.css": 4751,
-    "assets/nexlab-module-recovery.js": 4799,
-    "assets/nexlab-myday-dashboard-v02682.js": 6238,
-    "assets/nexlab-pending-abc-v02682.js": 37844,
+    "assets/nexlab-module-recovery.js": 4805,
+    "assets/nexlab-myday-dashboard-v02682.js": 6244,
+    "assets/nexlab-pending-abc-v02682.js": 37856,
     "assets/nexlab-permissions-v02664.css": 18275,
     "assets/nexlab-priority2-v02682.css": 17099,
     "assets/nexlab-priority3-v02682.css": 65531,
     "assets/nexlab-profile-preview.js": 14002,
     "assets/nexlab-project-comments-v02682.css": 18334,
-    "assets/nexlab-project-comments-v02682.js": 37137,
+    "assets/nexlab-project-comments-v02682.js": 37143,
     "assets/nexlab-projects-v02667.css": 20492,
-    "assets/nexlab-push-consent.js": 15013,
-    "assets/nexlab-push-navigation.js": 9478,
-    "assets/nexlab-pwa-readiness.js": 31757,
-    "assets/nexlab-release-gate.js": 3352,
-    "assets/nexlab-release-identity.js": 8902,
+    "assets/nexlab-push-consent.js": 15019,
+    "assets/nexlab-push-navigation.js": 9490,
+    "assets/nexlab-pwa-readiness.js": 31781,
+    "assets/nexlab-release-gate.js": 3358,
+    "assets/nexlab-release-identity.js": 8926,
     "assets/nexlab-reports-v02682.css": 11664,
-    "assets/nexlab-responsive-v02671.css": 46382,
-    "assets/nexlab-responsive-v02671.js": 9509,
+    "assets/nexlab-responsive-v02671.css": 47746,
+    "assets/nexlab-responsive-v02671.js": 9515,
     "assets/nexlab-rpc-registry.js": 9521,
-    "assets/nexlab-runtime-app.js": 63642,
+    "assets/nexlab-runtime-app.js": 63654,
     "assets/nexlab-runtime-export.js": 853192,
-    "assets/nexlab-runtime-features.js": 581838,
-    "assets/nexlab-runtime-realtime-core.js": 11136,
-    "assets/nexlab-runtime-realtime-hub.js": 3489,
-    "assets/nexlab-runtime-shared.js": 247779,
+    "assets/nexlab-runtime-features.js": 581976,
+    "assets/nexlab-runtime-realtime-core.js": 11142,
+    "assets/nexlab-runtime-realtime-hub.js": 3495,
+    "assets/nexlab-runtime-shared.js": 247893,
     "assets/nexlab-runtime-vendor.js": 425733,
     "assets/nexlab-team-chat-v02682.css": 43218,
-    "assets/nexlab-team-chat-v02682.js": 90081,
+    "assets/nexlab-team-chat-v02682.js": 90087,
     "assets/nexlab-team-tasks-v02682.css": 28483,
-    "assets/nexlab-update-manager.js": 17140,
+    "assets/nexlab-update-manager.js": 17152,
     "assets/nexlab-vapid-rotation.js": 5125,
-    "assets/nexlab-visual.css": 210269,
-    "assets/nexlab-visual.js": 88679,
+    "assets/nexlab-visual.css": 211630,
+    "assets/nexlab-visual.js": 89882,
     "assets/team-icons/badge-check.svg": 495,
     "assets/team-icons/briefcase-business.svg": 478,
     "assets/team-icons/calendar-days.svg": 569,
@@ -4001,13 +4001,13 @@
     "icons/nexlab-favicon-rounded.png": 49631,
     "icons/nexlab-maskable-192.png": 15897,
     "icons/nexlab-maskable-512.png": 76408,
-    "index.html": 10355,
+    "index.html": 10607,
     "manifest.webmanifest": 1135,
-    "nexlab-sw.js": 20130,
+    "nexlab-sw.js": 20148,
     "offline.html": 981,
-    "pwa-check.html": 8581,
-    "release-head.json": 481,
-    "release-manifest.json": 9147
+    "pwa-check.html": 8611,
+    "release-head.json": 499,
+    "release-manifest.json": 9165
   },
   "marketing_list_right_integrity_fix_0_26_82": {
     "revision": "beta-0-26-82-marketing-lista-direita-final",

@@ -9,8 +9,8 @@
   "essential_files": [
     {
       "path": "index.html",
-      "size": 10853,
-      "sha256": "f9f74b7dbdf6806ed1ed7563d47006d751f0713376a3ed47bb7c79fcd7624d81"
+      "size": 10607,
+      "sha256": "6eed47643293316985b33f9686551ef0e96c02e7d00fa7a6b6cd589cedac5670"
     },
     {
       "path": "offline.html",
@@ -24,8 +24,8 @@
     },
     {
       "path": "assets/nexlab-release-identity.js",
-      "size": 8944,
-      "sha256": "4dfb4ddcba23a6b16fa3075a0c6f997809fde787a957974fa81b00265232d2f2"
+      "size": 8926,
+      "sha256": "e2645af60e5217d0643f4252776079042be615d8f2ec138bb653ba6dd9f58077"
     },
     {
       "path": "assets/nexlab-module-recovery.js",
@@ -59,8 +59,8 @@
     },
     {
       "path": "assets/nexlab-runtime-shared.js",
-      "size": 248001,
-      "sha256": "3d6ebe5e19b40456b384aa6acf1513e9c52f75197cbcf8fdfa233d9659052d95"
+      "size": 247893,
+      "sha256": "ae6d7ea1e843d9ddd9945a30dc355a247fa356fc768ed359ded44e8bc174ceb2"
     },
     {
       "path": "assets/index-B1u8eynw.css",
@@ -134,8 +134,8 @@
     },
     {
       "path": "assets/nexlab-bootstrap.js",
-      "size": 59701,
-      "sha256": "5090cdeb14fce06f722f428f2617563658791b12cc7f4d05d2638ba1438311cd"
+      "size": 59689,
+      "sha256": "000ff9280f67544f81e18497b0256f5b7718c7f3f0939de7cd42e861e36a02f0"
     },
     {
       "path": "assets/nexlab-dialogs.js",
@@ -149,8 +149,8 @@
     },
     {
       "path": "assets/nexlab-update-manager.js",
-      "size": 17164,
-      "sha256": "800de3cf5d4cd30fa5c881541b721cc2893de99985696671cb8670d4027cdc8d"
+      "size": 17152,
+      "sha256": "94fef19439bdae8ee5e3bfed12464af6a43cdca16f5fd31601094a0bcaff6576"
     },
     {
       "path": "assets/nexlab-runtime-realtime-hub.js",
@@ -174,13 +174,13 @@
     },
     {
       "path": "assets/nexlab-runtime-app.js",
-      "size": 63666,
-      "sha256": "14b1103334b230059146bece930fe610c90788617a451d1963d047b78dbfe8e3"
+      "size": 63654,
+      "sha256": "b634fe4dbb904aaa09919b5b07bd32051acb9ba722f4e50dec0cf58455ab1ace"
     },
     {
       "path": "assets/nexlab-myday-dashboard-v02682.js",
-      "size": 6250,
-      "sha256": "5087caff6116676d3a6fd93d4faf84ded18c7c94d42252fab2ee5c2b8041be78"
+      "size": 6244,
+      "sha256": "9d5dd2669dcb3765cfd8a05c82ec991b06e7e57d7d3e1239433a3122d94e023b"
     },
     {
       "path": "assets/nexlab-visual.js",
