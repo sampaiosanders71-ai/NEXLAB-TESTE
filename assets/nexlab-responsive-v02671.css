@@ -1183,3 +1183,45 @@ body[data-nexlab-page="notificacoes"] #nexlab-main-content{
   height:0!important;
   display:none!important;
 }
+
+
+/* NEXLAB Beta 0.26.82 — Sidebar adaptativa.
+   A área de trabalho ocupa automaticamente o espaço liberado ao recolher o menu. */
+@media (min-width:768px){
+  #mobile-sidebar{
+    position:fixed!important;
+    left:0!important;
+    width:16.5rem!important;
+    min-width:16.5rem!important;
+    max-width:16.5rem!important;
+    transform:none!important;
+    visibility:visible!important;
+    transition:width .28s ease,min-width .28s ease,max-width .28s ease!important;
+  }
+  #mobile-sidebar.nexlab-sidebar-collapsed{
+    width:5rem!important;
+    min-width:5rem!important;
+    max-width:5rem!important;
+  }
+  #mobile-sidebar ~ .flex-1.flex.flex-col.min-w-0{
+    box-sizing:border-box!important;
+    margin-left:16.5rem!important;
+    width:calc(100% - 16.5rem)!important;
+    max-width:calc(100% - 16.5rem)!important;
+    min-width:0!important;
+    transition:margin-left .28s ease,width .28s ease,max-width .28s ease!important;
+  }
+  body.nexlab-sidebar-collapsed-state #mobile-sidebar ~ .flex-1.flex.flex-col.min-w-0{
+    margin-left:5rem!important;
+    width:calc(100% - 5rem)!important;
+    max-width:calc(100% - 5rem)!important;
+  }
+  #mobile-sidebar-trigger{display:none!important;}
+}
+@media (max-width:767px){
+  #mobile-sidebar ~ .flex-1.flex.flex-col.min-w-0{
+    margin-left:0!important;
+    width:100%!important;
+    max-width:100%!important;
+  }
+}

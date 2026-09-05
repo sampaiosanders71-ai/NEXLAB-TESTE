@@ -1509,8 +1509,13 @@
     const sidebar=document.getElementById('mobile-sidebar');
     if(!sidebar)return false;
     const active=desktop.matches&&collapsed;
+    const stateChanged=sidebar.classList.contains('nexlab-sidebar-collapsed')!==active;
     sidebar.classList.toggle('nexlab-sidebar-collapsed',active);
     document.body?.classList.toggle('nexlab-sidebar-collapsed-state',active);
+    if(stateChanged){
+      requestAnimationFrame(()=>{ try{window.dispatchEvent(new Event('resize'));}catch{} });
+      setTimeout(()=>{ try{window.dispatchEvent(new Event('resize'));}catch{} },320);
+    }
     if(toggle){
       toggle.setAttribute('aria-expanded',active?'false':'true');
       toggle.setAttribute('aria-controls','mobile-sidebar');

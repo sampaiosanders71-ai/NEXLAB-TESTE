@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-sidebar-toggle-visivel",
-  "asset_revision": "app-beta-0-26-82-sidebar-toggle-visivel",
-  "generated_at": "2026-09-04T21:30:00Z",
+  "revision": "beta-0-26-82-sidebar-adaptativa",
+  "asset_revision": "app-beta-0-26-82-sidebar-adaptativa",
+  "generated_at": "2026-09-04T21:55:00Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "5e16131f9a7ba5409a49498ba77acf3c0208db3d8121a21ef079ce9c89a4e6bb",
+  "manifest_sha256": "a870fd8a3f5f8074081e67356a5e6b311861e6add8e1504d644a15a359fd2d38",
   "essential_count": 52,
-  "essential_bytes": 2266360,
-  "cache_name": "nexlab-app-beta-0-26-82-sidebar-toggle-visivel"
+  "essential_bytes": 2268779,
+  "cache_name": "nexlab-app-beta-0-26-82-sidebar-adaptativa"
 }

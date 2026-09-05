@@ -6720,10 +6720,40 @@ body[data-nexlab-page="inventario"] main .nexlab-inventory-sectionbar .nexlab-mo
     padding-left:.8rem!important;
     padding-right:.8rem!important;
   }
+  /* No estado recolhido, exibe somente o símbolo do NEXLAB em destaque. */
+  #mobile-sidebar.nexlab-sidebar-collapsed > div:first-child > div:first-child{
+    padding-left:0!important;
+    padding-right:0!important;
+    min-height:4.65rem!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+  #mobile-sidebar.nexlab-sidebar-collapsed > div:first-child > div:first-child > div{
+    position:relative!important;
+    width:100%!important;
+    height:4.25rem!important;
+    padding:0!important;
+    display:grid!important;
+    place-items:center!important;
+  }
   #mobile-sidebar.nexlab-sidebar-collapsed img.nexlab-sidebar-logo{
-    max-width:3rem!important;
-    width:3rem!important;
+    width:3.85rem!important;
+    max-width:3.85rem!important;
+    height:3.85rem!important;
+    opacity:0!important;
     object-fit:contain!important;
+  }
+  #mobile-sidebar.nexlab-sidebar-collapsed > div:first-child > div:first-child > div::after{
+    content:"";
+    position:absolute!important;
+    left:50%!important;
+    top:50%!important;
+    width:3.85rem!important;
+    height:3.85rem!important;
+    transform:translate(-50%,-50%)!important;
+    background:url('../brand/nexlab-icon.webp?v=brand-r50') center/contain no-repeat!important;
+    pointer-events:none!important;
   }
 }
 @media (max-width:767px){body>.nexlab-sidebar-collapse-toggle{display:none!important;}}
