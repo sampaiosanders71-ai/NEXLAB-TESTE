@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-configuracoes-recuperacao-homologacao",
-  "asset_revision": "app-beta-0-26-82-configuracoes-recuperacao-homologacao",
-  "generated_at": "2026-09-06T00:16:00Z",
+  "revision": "beta-0-26-82-configuracoes-carregamento-corrigido",
+  "asset_revision": "app-beta-0-26-82-configuracoes-carregamento-corrigido",
+  "generated_at": "2026-09-06T00:40:00Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "347585599eb49d8fdc81f9907a60c69526f5ed847e6746cc05c567a6ce045d44",
+  "manifest_sha256": "1d207f0758b31d486ff2637b339c67273c2921d910bc4df23237a679e0ed5933",
   "essential_count": 55,
-  "essential_bytes": 2339916,
-  "cache_name": "nexlab-app-beta-0-26-82-configuracoes-recuperacao-homologacao"
+  "essential_bytes": 2339824,
+  "cache_name": "nexlab-app-beta-0-26-82-configuracoes-carregamento-corrigido"
 }
