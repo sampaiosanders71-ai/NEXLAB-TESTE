@@ -2,15 +2,15 @@
   "protocol": 2,
   "version": "0.26.82",
   "release": "Beta",
-  "revision": "beta-0-26-82-notificacoes-filtros-responsivos",
-  "asset_revision": "app-beta-0-26-82-notificacoes-filtros-responsivos",
-  "generated_at": "2026-09-06T02:12:00Z",
-  "cache_name": "nexlab-app-beta-0-26-82-notificacoes-filtros-responsivos",
+  "revision": "beta-0-26-82-notificacoes-runtime-corrigido",
+  "asset_revision": "app-beta-0-26-82-notificacoes-runtime-corrigido",
+  "generated_at": "2026-09-06T02:26:00Z",
+  "cache_name": "nexlab-app-beta-0-26-82-notificacoes-runtime-corrigido",
   "essential_files": [
     {
       "path": "index.html",
-      "size": 11464,
-      "sha256": "da5564de238d4484b988edeeee54cd584f9ad32465732c408071a98456abe0db"
+      "size": 11372,
+      "sha256": "97630680ae746f788a5339582f5fbf440f21b65a85007dbd439608795352abbc"
     },
     {
       "path": "offline.html",
@@ -24,13 +24,13 @@
     },
     {
       "path": "assets/nexlab-release-identity.js",
-      "size": 9457,
-      "sha256": "67ce983563190b408c51020e94d2e9d0398e4ffffd3c20ef7f58442168fca32d"
+      "size": 9449,
+      "sha256": "dd76c6b856e96c9c09011f5d2dd68e90a9797bf6b2dcbb0a6d4f1b3eddc94817"
     },
     {
       "path": "assets/nexlab-module-recovery.js",
-      "size": 4813,
-      "sha256": "3dacd81f0783b0694e096f3ae65a4019d65e761192ef2aa93dcc5b6ef1a3f293"
+      "size": 4811,
+      "sha256": "bc29f27fe90e4e9dae84752338245943b2b3bad6061b48547991de0b6199fa3d"
     },
     {
       "path": "assets/nexlab-rpc-registry.js",
@@ -59,13 +59,13 @@
     },
     {
       "path": "assets/nexlab-runtime-shared.js",
-      "size": 219694,
-      "sha256": "5d7427affd2544438d82802902278f4b05420ba25173dd38f641ba61c17a8eae"
+      "size": 221374,
+      "sha256": "4c33a4c3c283b0ea36218213fb4bb3853aa6adca22fb82afca4d5b2b9ab3f7a4"
     },
     {
       "path": "assets/nexlab-user-preferences.js",
-      "size": 2163,
-      "sha256": "7693843ddb83688a45d31df873fac996fed0646a25db6bbe8dcd1eef762a94fa"
+      "size": 2161,
+      "sha256": "72971a49e773df317b6d9fd53354ea58757decd8d409ae8a7885aaa88eb8e1cc"
     },
     {
       "path": "assets/index-B1u8eynw.css",
@@ -139,8 +139,8 @@
     },
     {
       "path": "assets/nexlab-bootstrap.js",
-      "size": 59729,
-      "sha256": "acf3fb843b0da8b7544a2998d08f5439731096e966018f3d4b2d63c701824b8b"
+      "size": 59719,
+      "sha256": "ca86bd6079a1199094e6291ed306f93b922346654d76580984d839dc24a98694"
     },
     {
       "path": "assets/nexlab-dialogs.js",
@@ -149,43 +149,43 @@
     },
     {
       "path": "assets/nexlab-runtime-realtime-core.js",
-      "size": 11150,
-      "sha256": "c8e9117bd1edb344d8f60da66ddbc85f9254cbf7720810bed963226f2e864506"
+      "size": 11148,
+      "sha256": "26070209b3707fa6539be01566ba654a5527f929eee5ea82a402d05ae0cb0d84"
     },
     {
       "path": "assets/nexlab-update-manager.js",
-      "size": 17173,
-      "sha256": "4d39ca0c7a23a7a4d3dccb9bac6ac355186ddce1ba623cec5ff535296b3e394f"
+      "size": 17169,
+      "sha256": "54e8a8b7450ec4959a5c6eb1818a39c46e081a3245e41aaaaa0f0d6b40a13878"
     },
     {
       "path": "assets/nexlab-runtime-realtime-hub.js",
-      "size": 3503,
-      "sha256": "71c082a24c89231008f197732ca72df513b8a8d6253517dff31709e3edafb7c4"
+      "size": 3501,
+      "sha256": "0d4b7e2c3737cfd4b870360a2183b889f078d765d4ae884038dadb621ebb704d"
     },
     {
       "path": "assets/nexlab-push-navigation.js",
-      "size": 9506,
-      "sha256": "adb472067983bfb7612a3eba174ee9ce1db7778c8b27ca9953dce399350e6689"
+      "size": 9502,
+      "sha256": "a84f029bf503289f4221e65033a3e66cc543d0741c87fc05e44415e3c780776b"
     },
     {
       "path": "assets/nexlab-device-homologation.js",
-      "size": 9632,
-      "sha256": "eb5e682479523f86d9d88742230d4639d8806a6c4a57f1f9ab2384db2a7f9e52"
+      "size": 9626,
+      "sha256": "41bb6f0e1da9cf14fec6927a837ef0d2608e60943aefc2fa93bf750f09fe392e"
     },
     {
       "path": "assets/nexlab-release-gate.js",
-      "size": 3366,
-      "sha256": "ef8b6b3ff0f4dfc338eca1e6ab5169a0ec081b4c260997294cbe7f2dba2497b5"
+      "size": 3364,
+      "sha256": "84443b0cb62669eaf8f631ef5f42bacc10e5c82cee8ee651c54fc67a0f0706fe"
     },
     {
       "path": "assets/nexlab-runtime-app.js",
-      "size": 63962,
-      "sha256": "882baa1297fc6fa7f9332104530734cd107029a69d7608b0e132a9ae14a74217"
+      "size": 63956,
+      "sha256": "79c05c43b3d155adec8ce93c062ed5aa74552c81c78c0a7713e0e0b6ec60b460"
     },
     {
       "path": "assets/nexlab-myday-dashboard-v02682.js",
-      "size": 6252,
-      "sha256": "90b7bd386aae259f17f2dc535ed66c49310edd5675950db1fa3b193221cbbd70"
+      "size": 6250,
+      "sha256": "298056dfc0561eb6b7d993b1f1a1f202cbca75f75f3060d4c2b7912753eb5c7b"
     },
     {
       "path": "assets/nexlab-visual.js",
@@ -194,23 +194,23 @@
     },
     {
       "path": "assets/nexlab-project-comments-v02682.js",
-      "size": 37151,
-      "sha256": "714e00c7162e3c0c7d970b21fd1265a38860d10295f2d56900f9cb42f1a0b42b"
+      "size": 37149,
+      "sha256": "d02b964ca234ae356015b9f8c65131caf57d3f95b2d05b7cbb54c0bb4b82300b"
     },
     {
       "path": "assets/nexlab-team-chat-v02682.js",
-      "size": 90095,
-      "sha256": "8b642f0ed2a8c01af8bdbbe3eaa28018727d5e9ce57de44d76ce6bcb191329a1"
+      "size": 90093,
+      "sha256": "886cedd1f66a4df87df636d3fd32a1f89012d6092dfe0b94620e4042ac013d9e"
     },
     {
       "path": "assets/nexlab-responsive-v02671.js",
-      "size": 9523,
-      "sha256": "e17eb38bcfa67dedb52d47c14e754fd2ad64997be6f44a52646b52c3b549967f"
+      "size": 9521,
+      "sha256": "ba3f5a1744116acda5fb8e5db4009e5785a145716cd2c2ac4a26745395eb3a5a"
     },
     {
       "path": "assets/nexlab-auth-security.js",
-      "size": 12433,
-      "sha256": "58945190da722d1b671e1a1c0a48e927648033bf425ac655554f095e5ab21653"
+      "size": 12431,
+      "sha256": "b67c868c13a74e2e3a191707203f3f8de9bb4d338857b7ac45241e0178e01781"
     },
     {
       "path": "assets/nexlab-coordinator-validation.js",
@@ -279,8 +279,8 @@
     },
     {
       "path": "assets/modules/settings.js",
-      "size": 45838,
-      "sha256": "370f0882dd5a59cc03e8c40f7753d1a9ef627f3bd908123d21b6d4350f40e5b1"
+      "size": 45834,
+      "sha256": "be626604dabd69ac5e3c879a5a605b012e1f9f3435e25fb354d12dca7a56142e"
     },
     {
       "path": "assets/nexlab-notifications-history-v02682.css",
