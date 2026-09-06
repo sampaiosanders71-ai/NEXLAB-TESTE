@@ -5,10 +5,10 @@
   "channel": "beta",
   "revision": "beta-0-26-82-dashboard-acoes-compactas",
   "asset_revision": "app-beta-0-26-82-recuperacao-app",
-  "generated_at": "2026-09-06T22:57:02Z",
+  "generated_at": "2026-09-06T23:14:53Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "e83b022817c360e962f9fa9dd972efb0427cbe263625f6f7b81d27403c8ee9fa",
+  "manifest_sha256": "640e6883c2e949b9612e98c3f5f0726396a1fe61706083fd60ac356429af5baa",
   "essential_count": 57,
-  "essential_bytes": 2377392,
-  "cache_name": "nexlab-app-beta-0-26-82-dashboard-acoes-compactas-20260906T225702Z"
+  "essential_bytes": 2381580,
+  "cache_name": "nexlab-app-beta-0-26-82-dashboard-acoes-compactas-20260906T231453Z"
 }

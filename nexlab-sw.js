@@ -1,9 +1,9 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
 const APP_REVISION='beta-0-26-82-dashboard-acoes-compactas';
-const GENERATED_AT='2026-09-06T22:57:02Z';
+const GENERATED_AT='2026-09-06T23:14:53Z';
 const ASSET_REVISION='app-beta-0-26-82-recuperacao-app';
-const CACHE_NAME='nexlab-app-beta-0-26-82-dashboard-acoes-compactas-20260906T225702Z';
+const CACHE_NAME='nexlab-app-beta-0-26-82-dashboard-acoes-compactas-20260906T231453Z';
 const GENERATION_KEY=GENERATED_AT.replace(/[^0-9A-Za-z]/g,'');
 const STAGING_CACHE_NAME='nxl-stage-'+APP_REVISION+'-'+GENERATION_KEY;
 const META_CACHE_NAME='nexlab-update-meta';
