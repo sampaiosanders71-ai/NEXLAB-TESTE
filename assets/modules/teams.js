@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: TeamsModule. */
-export { TeamsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-configuracoes-carregamento-corrigido";
+export { TeamsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-configuracoes-rolagem-independente";
