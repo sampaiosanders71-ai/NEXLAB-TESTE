@@ -2,15 +2,15 @@
   "protocol": 2,
   "version": "0.26.82",
   "release": "Beta",
-  "revision": "beta-0-26-82-recuperacao-app",
-  "asset_revision": "app-beta-0-26-82-recuperacao-app",
+  "revision": "beta-0-26-82-dashboard-isolado",
+  "asset_revision": "app-beta-0-26-82-dashboard-isolado",
   "generated_at": "2026-09-06T11:04:45Z",
-  "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T110445Z",
+  "cache_name": "nexlab-app-beta-0-26-82-dashboard-isolado-20260906T110445Z",
   "essential_files": [
     {
       "path": "index.html",
-      "size": 10682,
-      "sha256": "590826702db0297fe45601b4b2d7716432f443421231b2ac3ca30cd61ee99a04"
+      "size": 10774,
+      "sha256": "d08f9dd6869ea5a132c32a0df98b65e316c85664fa5b0483773347812940173e"
     },
     {
       "path": "offline.html",
@@ -24,8 +24,8 @@
     },
     {
       "path": "assets/nexlab-release-identity.js",
-      "size": 9406,
-      "sha256": "fc61dc87415108634d4d36980a758b5f057386f3d033324c4660e48e18c20304"
+      "size": 9414,
+      "sha256": "4606a0fc54a647f2ba461c10bfe2dd93153877168b2298e50030078a5847fe60"
     },
     {
       "path": "assets/nexlab-module-recovery.js",
@@ -184,8 +184,8 @@
     },
     {
       "path": "assets/nexlab-myday-dashboard-v02682.js",
-      "size": 6250,
-      "sha256": "298056dfc0561eb6b7d993b1f1a1f202cbca75f75f3060d4c2b7912753eb5c7b"
+      "size": 16366,
+      "sha256": "0e1f9c773883310788f9cf8c08606acf5cf2f047651c713f5276ba991e716cea"
     },
     {
       "path": "assets/nexlab-visual.js",

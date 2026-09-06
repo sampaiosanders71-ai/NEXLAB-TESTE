@@ -3,11 +3,11 @@
   "display_version": "NEXLAB Beta 0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-recuperacao-app",
-  "asset_revision": "app-beta-0-26-82-recuperacao-app",
+  "revision": "beta-0-26-82-dashboard-isolado",
+  "asset_revision": "app-beta-0-26-82-dashboard-isolado",
   "generated_at": "2026-09-06T11:04:45Z",
-  "title": "NEXLAB Beta 0.26.82 — Recuperação do aplicativo",
-  "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T110445Z",
+  "title": "NEXLAB Beta 0.26.82 — Dashboard isolado sobre núcleo recuperado",
+  "cache_name": "nexlab-app-beta-0-26-82-dashboard-isolado-20260906T110445Z",
   "entry": "index.html",
   "core_files": [
     "index.html",
@@ -320,10 +320,10 @@
     }
   },
   "validation": {
-    "scope": "NEXLAB Beta 0.26.82 — Recuperação do aplicativo",
+    "scope": "NEXLAB Beta 0.26.82 — Dashboard isolado sobre núcleo recuperado",
     "version": "0.26.82",
-    "revision": "beta-0-26-82-recuperacao-app",
-    "asset_revision": "app-beta-0-26-82-recuperacao-app",
+    "revision": "beta-0-26-82-dashboard-isolado",
+    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
     "metadata_cleanup_completed": true,
     "essential_count": 57,
     "manifest_sha256": "ee428645ec91ef47eb23924ef33550588d0fbf370faeaee52802c5c1b3a73ad2",
@@ -446,9 +446,9 @@
   "build_identity": {
     "version": "0.26.82",
     "release": "Beta",
-    "revision": "beta-0-26-82-recuperacao-app",
-    "asset_revision": "app-beta-0-26-82-recuperacao-app",
-    "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T110445Z",
+    "revision": "beta-0-26-82-dashboard-isolado",
+    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
+    "cache_name": "nexlab-app-beta-0-26-82-dashboard-isolado-20260906T110445Z",
     "generated_at": "2026-09-06T02:26:00Z"
   },
   "external_feedback_evidence": {
@@ -2980,7 +2980,7 @@
       "telemetry": {
         "app_version": "0.26.82",
         "build_revision": "beta-0-26-82-auditoria-final",
-        "asset_revision": "app-beta-0-26-82-recuperacao-app"
+        "asset_revision": "app-beta-0-26-82-dashboard-isolado"
       },
       "agenda_hook_error": {
         "dedicated_boundary": true,
@@ -3144,8 +3144,8 @@
   "corrections_1_4_0_26_82": {
     "status": "corrected_physical_homologation_pending",
     "revision": "beta-0-26-82-correcoes-1-4",
-    "asset_revision": "app-beta-0-26-82-recuperacao-app",
-    "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T110445Z",
+    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
+    "cache_name": "nexlab-app-beta-0-26-82-dashboard-isolado-20260906T110445Z",
     "fixes": [
       "all_current_asset_urls_use_single_asset_revision",
       "board_posts_insert_update_grants_restored_under_existing_rls",
@@ -3158,7 +3158,7 @@
   "corrections_5_9_0_26_82": {
     "status": "static_and_backend_regression_passed_physical_homologation_pending",
     "revision": "beta-0-26-82-correcoes-5-9",
-    "asset_revision": "app-beta-0-26-82-recuperacao-app",
+    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
     "fixes": [
       "legacy_export_r49_function_confirmed_retired_410_and_jwt_protected",
       "two_confirmed_test_profiles_quarantined_and_push_subscriptions_removed",
@@ -3201,8 +3201,8 @@
   "final_audit_completion_0_26_82": {
     "status": "static_and_backend_corrected_physical_homologation_pending",
     "revision": "beta-0-26-82-auditoria-final",
-    "asset_revision": "app-beta-0-26-82-recuperacao-app",
-    "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T110445Z",
+    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
+    "cache_name": "nexlab-app-beta-0-26-82-dashboard-isolado-20260906T110445Z",
     "fixes": [
       "service_worker_cache_policy_metadata_aligned_with_structural_recovery",
       "team_history_added_to_canonical_realtime_catalog",
@@ -3236,7 +3236,7 @@
   },
   "team_modal_layout_fix_0_26_82": {
     "revision": "beta-0-26-82-prioridade-1-reunioes-menus",
-    "asset_revision": "app-beta-0-26-82-recuperacao-app",
+    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
     "scope": "equipes",
     "status": "candidate_for_physical_homologation",
     "changes": [
@@ -3457,7 +3457,7 @@
   },
   "pre_homologation_corrections_0_26_82": {
     "revision": "beta-0-26-82-marketing-lista-direita-final",
-    "asset_revision": "app-beta-0-26-82-recuperacao-app",
+    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
     "generated_at": "2026-08-28T01:20:37Z",
     "stale_runtime_fallbacks_normalized": true,
     "precache_concurrency": 6,
@@ -3635,8 +3635,8 @@
     "physical_confirmation": "pending",
     "inventory_files": 81,
     "hashes_regenerated": true,
-    "asset_revision": "app-beta-0-26-82-recuperacao-app",
-    "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T110445Z",
+    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
+    "cache_name": "nexlab-app-beta-0-26-82-dashboard-isolado-20260906T110445Z",
     "historical_only": true
   },
   "final_static_validation_0_26_82": {
@@ -4625,7 +4625,7 @@
   },
   "settings_loading_fix_0_26_82": {
     "module": "Configurações",
-    "revision": "beta-0-26-82-recuperacao-app",
+    "revision": "beta-0-26-82-dashboard-isolado",
     "root_cause": "Erro de sintaxe no módulo lazy-loaded settings.js: propriedade type com aspas não fechadas e um fechamento de parênteses ausente no painel de notificações.",
     "client_error_fingerprint": "v267-3e7e1c06",
     "client_error_message": "Unexpected identifier 'is'",
@@ -4639,7 +4639,7 @@
   },
   "settings_independent_scroll_0_26_82": {
     "module": "Configurações",
-    "revision": "beta-0-26-82-recuperacao-app",
+    "revision": "beta-0-26-82-dashboard-isolado",
     "behavior": [
       "Menu lateral e painel de conteúdo possuem rolagem vertical independente em desktop e tablet.",
       "Trocar de seção retorna somente o painel de conteúdo ao topo, preservando a posição do menu lateral.",
@@ -4649,7 +4649,7 @@
   },
   "accessibility_font_scaling_fix_0_26_82": {
     "module": "Configurações > Acessibilidade",
-    "revision": "beta-0-26-82-recuperacao-app",
+    "revision": "beta-0-26-82-dashboard-isolado",
     "root_cause": "A preferência alterava apenas o font-size do elemento html, mas diversos componentes do NexLab definiam font-size em px, que não acompanha a escala do rem.",
     "corrections": [
       "Tamanhos tipográficos fixos em px dos estilos próprios foram convertidos para rem mantendo o mesmo tamanho visual no padrão.",
@@ -4665,7 +4665,7 @@
       "A",
       "B"
     ],
-    "revision": "beta-0-26-82-recuperacao-app",
+    "revision": "beta-0-26-82-dashboard-isolado",
     "purpose": "Histórico exclusivo de notificações recebidas",
     "configuration_controls_removed": true,
     "preferences_location": "Configurações > Notificações",
@@ -4713,7 +4713,7 @@
   "inventory_files_count": 110,
   "notifications_runtime_loading_fix_0_26_82": {
     "status": "corrected",
-    "revision": "beta-0-26-82-recuperacao-app",
+    "revision": "beta-0-26-82-dashboard-isolado",
     "cause": "O runtime compartilhado exportava e utilizava Ti, mas a declaração Ti foi removida acidentalmente durante a reconstrução dos filtros de Notificações.",
     "browser_error": "Export 'Ti' is not defined in module",
     "fix": "Restaurada a definição Ti usada pela Saúde do Sistema e mantido o conjunto de exports do runtime compartilhado.",
