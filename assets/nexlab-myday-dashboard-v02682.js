@@ -40,6 +40,7 @@ function ensureStyle(){
   if(document.getElementById(STYLE_ID))return;
   const style=document.createElement('style');style.id=STYLE_ID;style.textContent=`
 body[data-nexlab-page="dashboard"] .${LEGACY_CLASS}{display:none!important}
+body[data-nexlab-page="dashboard"] .nexlab-dashboard-slide.is-overview > :not(#${HOST_ID}){display:none!important}
 body[data-nexlab-page="dashboard"] #${HOST_ID}{--nxl-navy:#082650;--nxl-text:#0c2851;--nxl-muted:#6480a7;--nxl-border:#dbe5f0;--nxl-shadow:0 10px 30px rgba(24,57,99,.055);display:grid;gap:17px;width:100%;min-width:0;padding:0 1px 4px}
 body[data-nexlab-page="dashboard"] #${HOST_ID} *{box-sizing:border-box}
 body[data-nexlab-page="dashboard"] #${HOST_ID} button{font:inherit}
@@ -85,9 +86,11 @@ function miniItem(icon,label,dateValue){const row=document.createElement('div');
 function emptyItem(label){const row=document.createElement('div');row.className='nxl-dash-empty-v02682';row.textContent=label;return row;}
 function projectEmpty(label){const row=document.createElement('div');row.className='nxl-dash-project-empty-v02682';row.append(createIcon('file'),document.createTextNode(label));return row;}
 
+function suppressLegacyOverview(slide){if(!slide)return;for(const child of Array.from(slide.children||[])){if(child.id!==HOST_ID)child.classList.add(LEGACY_CLASS);}}
+
 function buildStructure(slide){
-  let host=slide.querySelector(`#${HOST_ID}`);if(host)return host;
-  const legacy=slide.querySelector(':scope > .module-shell');if(legacy)legacy.classList.add(LEGACY_CLASS);
+  let host=slide.querySelector(`#${HOST_ID}`);if(host){suppressLegacyOverview(slide);return host;}
+  suppressLegacyOverview(slide);
   host=document.createElement('section');host.id=HOST_ID;host.setAttribute('aria-label','Visão geral do Dashboard');
 
   const top=document.createElement('div');top.className='nxl-dash-top-v02682';
@@ -123,7 +126,7 @@ function buildStructure(slide){
 }
 
 function findOverviewSlide(){if(document.body?.dataset?.nexlabPage!=='dashboard')return null;return document.querySelector('#nexlab-main-content .nexlab-dashboard-slide.is-overview')||document.querySelector('main .nexlab-dashboard-slide.is-overview');}
-function ensureDashboard(){if(document.body?.dataset?.nexlabPage!=='dashboard')return false;ensureStyle();const slide=findOverviewSlide();if(!slide)return false;const host=buildStructure(slide);if(!host)return false;if(!currentData||Date.now()-lastLoadAt>DATA_TTL_MS)void loadData();else applyData(currentData);return true;}
+function ensureDashboard(){if(document.body?.dataset?.nexlabPage!=='dashboard')return false;ensureStyle();const slide=findOverviewSlide();if(!slide)return false;suppressLegacyOverview(slide);const host=buildStructure(slide);if(!host)return false;suppressLegacyOverview(slide);if(!currentData||Date.now()-lastLoadAt>DATA_TTL_MS)void loadData();else applyData(currentData);return true;}
 function setMetric(label,value){const host=document.getElementById(HOST_ID);if(!host)return;const node=[...host.querySelectorAll('[data-metric]')].find(n=>n.dataset.metric===label);if(node)node.textContent=String(num(value));}
 function setMyDay(label,value){const host=document.getElementById(HOST_ID);if(!host)return;const node=[...host.querySelectorAll('[data-myday]')].find(n=>n.dataset.myday===label);if(node)node.textContent=String(num(value));const parent=node?.closest('.nxl-dash-myday-stat-v02682');if(parent&&label==='Atrasados')parent.classList.toggle('is-danger',num(value)>0);}
 function setTeamMetric(label,value){const host=document.getElementById(HOST_ID);if(!host)return;const node=[...host.querySelectorAll('[data-teammetric]')].find(n=>n.dataset.teammetric===label);if(node)node.textContent=String(num(value));}

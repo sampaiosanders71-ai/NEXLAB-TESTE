@@ -5,9 +5,9 @@
   "channel": "beta",
   "revision": "beta-0-26-82-recuperacao-app",
   "asset_revision": "app-beta-0-26-82-recuperacao-app",
-  "generated_at": "2026-09-06T17:29:00Z",
+  "generated_at": "2026-09-06T17:41:06Z",
   "title": "NEXLAB Beta 0.26.82 — Dashboard reconstruído — etapas 3, 4 e 5",
-  "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T172900Z",
+  "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T174106Z",
   "entry": "index.html",
   "core_files": [
     "index.html",
@@ -331,7 +331,9 @@
     "runtime_module_link": "54/54",
     "dashboard_reference_structure": "passed_static_isolated_runtime_visual_refinement",
     "dashboard_exact_labels": "passed",
-    "dashboard_global_runtime_unchanged": "passed"
+    "dashboard_global_runtime_unchanged": "passed",
+    "dashboard_legacy_overlap_fix": "static_validated",
+    "dashboard_legacy_overview_hidden": "direct_children_excluded_except_reference_dashboard"
   },
   "files": [
     ".nojekyll",
@@ -451,8 +453,8 @@
     "release": "Beta",
     "revision": "beta-0-26-82-recuperacao-app",
     "asset_revision": "app-beta-0-26-82-recuperacao-app",
-    "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T172900Z",
-    "generated_at": "2026-09-06T17:29:00Z"
+    "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T174106Z",
+    "generated_at": "2026-09-06T17:41:06Z"
   },
   "external_feedback_evidence": {
     "provider": "cloudflare_r2",

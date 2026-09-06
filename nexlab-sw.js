@@ -1,9 +1,9 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
 const APP_REVISION='beta-0-26-82-recuperacao-app';
-const GENERATED_AT='2026-09-06T17:29:00Z';
+const GENERATED_AT='2026-09-06T17:41:06Z';
 const ASSET_REVISION='app-beta-0-26-82-recuperacao-app';
-const CACHE_NAME='nexlab-app-beta-0-26-82-recuperacao-app-20260906T172900Z';
+const CACHE_NAME='nexlab-app-beta-0-26-82-recuperacao-app-20260906T174106Z';
 const STAGING_CACHE_NAME='nexlab-stage-'+APP_REVISION+'-20260906T171800Z';
 const META_CACHE_NAME='nexlab-update-meta';
 const CACHE_PREFIX='nexlab-';

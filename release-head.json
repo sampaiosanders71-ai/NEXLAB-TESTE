@@ -5,10 +5,10 @@
   "channel": "beta",
   "revision": "beta-0-26-82-recuperacao-app",
   "asset_revision": "app-beta-0-26-82-recuperacao-app",
-  "generated_at": "2026-09-06T17:29:00Z",
+  "generated_at": "2026-09-06T17:41:06Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "011a4e2efbc0d34a310db0ef107f996474b707ef42eb60d38f07f397951db969",
+  "manifest_sha256": "9e818a1d9c44190baec7d8da3eb4b9d437a6444a3a86c2e2d324cc44b5aa4772",
   "essential_count": 57,
-  "essential_bytes": 2358712,
-  "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T172900Z"
+  "essential_bytes": 2359012,
+  "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T174106Z"
 }
