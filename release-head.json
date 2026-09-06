@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-configuracoes-carregamento-corrigido",
-  "asset_revision": "app-beta-0-26-82-configuracoes-carregamento-corrigido",
-  "generated_at": "2026-09-06T00:40:00Z",
+  "revision": "beta-0-26-82-configuracoes-rolagem-independente",
+  "asset_revision": "app-beta-0-26-82-configuracoes-rolagem-independente",
+  "generated_at": "2026-09-06T00:55:00Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "1d207f0758b31d486ff2637b339c67273c2921d910bc4df23237a679e0ed5933",
+  "manifest_sha256": "060ba7b3e4d704cb924d8ba6a87b2fb25d496e5120d8a5d8e9a86490b0746c17",
   "essential_count": 55,
-  "essential_bytes": 2339824,
-  "cache_name": "nexlab-app-beta-0-26-82-configuracoes-carregamento-corrigido"
+  "essential_bytes": 2341206,
+  "cache_name": "nexlab-app-beta-0-26-82-configuracoes-rolagem-independente"
 }
