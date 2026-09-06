@@ -5,10 +5,11 @@
   "channel": "beta",
   "revision": "beta-0-26-82-dashboard-finalizado",
   "asset_revision": "app-beta-0-26-82-dashboard-finalizado",
-  "generated_at": "2026-09-06T03:33:21Z",
+  "generated_at": "2026-09-06T03:44:30Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "2cad135536eb1037817421ecff63875e8e7c8706b328675d2e28aa0d8643ec2b",
+  "manifest_sha256": "bd28e37cda20a633047c06bea22fe2de221dc4087b0ba786b7485fe3ecfb4ca5",
   "essential_count": 57,
   "essential_bytes": 2328860,
-  "cache_name": "nexlab-app-beta-0-26-82-dashboard-finalizado-20260906T033321Z"
+  "cache_name": "nexlab-app-beta-0-26-82-dashboard-finalizado-20260906T034430Z",
+  "recovery_mode": "automatic_same_revision_cache_repair"
 }

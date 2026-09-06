@@ -1,9 +1,9 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
 const APP_REVISION='beta-0-26-82-dashboard-finalizado';
-const GENERATED_AT='2026-09-06T03:33:21Z';
+const GENERATED_AT='2026-09-06T03:44:30Z';
 const ASSET_REVISION='app-beta-0-26-82-dashboard-finalizado';
-const CACHE_NAME='nexlab-app-beta-0-26-82-dashboard-finalizado-20260906T033321Z';
+const CACHE_NAME='nexlab-app-beta-0-26-82-dashboard-finalizado-20260906T034430Z';
 const STAGING_CACHE_NAME='nexlab-stage-'+APP_REVISION+'-'+GENERATED_AT.replace(/[^0-9A-Za-z]/g,'');
 const META_CACHE_NAME='nexlab-update-meta';
 const CACHE_PREFIX='nexlab-';
@@ -40,8 +40,8 @@ async function validateStaging(manifest=installManifest){const resolved=manifest
 async function promoteStaging(){const manifest=await manifestFromCache(STAGING_CACHE_NAME);const validation=await validateStaging(manifest);if(!validation.ok)throw new Error('Cache temporário inválido no momento da ativação.');await caches.delete(CACHE_NAME);const staging=await caches.open(STAGING_CACHE_NAME);const target=await caches.open(CACHE_NAME);for(const request of await staging.keys()){const response=await staging.match(request);if(response)await target.put(request,response);}const finalValidation=await validateCache(CACHE_NAME,manifest);if(!finalValidation.ok){await caches.delete(CACHE_NAME);throw new Error('Falha ao promover o cache validado.');}return finalValidation;}
 async function oldCacheNames(){const keys=await caches.keys();return keys.filter(name=>name.startsWith(CACHE_PREFIX)&&!name.startsWith('nexlab-stage-')&&name!==CACHE_NAME&&name!==META_CACHE_NAME).sort().reverse();}
 async function cleanupOldCaches(){const names=await oldCacheNames();const all=await caches.keys();const staleStages=all.filter(name=>name.startsWith('nexlab-stage-')&&name!==STAGING_CACHE_NAME);await Promise.all([...names,...staleStages].map(name=>caches.delete(name)));await caches.delete(STAGING_CACHE_NAME);return [...names,...staleStages];}
-self.addEventListener('install',event=>{event.waitUntil(stageInstall());});
-self.addEventListener('activate',event=>{event.waitUntil((async()=>{const validation=await promoteStaging();await self.clients.claim();const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});for(const client of clients){try{client.postMessage({type:'NEXLAB_SW_ACTIVATED',version:APP_VERSION,release:APP_RELEASE,revision:APP_REVISION,generatedAt:GENERATED_AT,cache:CACHE_NAME,validation,previousCachesRetained:true});}catch{}}})());});
+self.addEventListener('install',event=>{event.waitUntil((async()=>{await stageInstall();await self.skipWaiting();})());});
+self.addEventListener('activate',event=>{event.waitUntil((async()=>{const validation=await promoteStaging();await self.clients.claim();const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});for(const client of clients){try{client.postMessage({type:'NEXLAB_SW_ACTIVATED',version:APP_VERSION,release:APP_RELEASE,revision:APP_REVISION,generatedAt:GENERATED_AT,cache:CACHE_NAME,validation,previousCachesRetained:true,emergencyRecovery:true});const target=new URL(client.url);for(const key of ['nexlabActivated','nexlabReload','nexlabModuleRetry','nexlabRecoveryReason','nexlabRecover','nexlabEmergencyReset'])target.searchParams.delete(key);target.searchParams.set('nexlabEmergencyReset',GENERATED_AT.replace(/[^0-9]/g,''));if(typeof client.navigate==='function')await client.navigate(target.href);}catch{}}})());});
 async function activeCacheMatch(request,options={}){const cache=await caches.open(CACHE_NAME);return cache.match(request,options);}
 async function previousCacheMatch(request,options={}){for(const name of await oldCacheNames()){const cache=await caches.open(name);const hit=await cache.match(request,options);if(hit)return hit;}return null;}
 function requestedRevision(url){const value=String(url.searchParams.get('v')||'').trim();return /^app-(?:beta|rc|stable)-/i.test(value)?value:'';}
