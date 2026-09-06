@@ -4,8 +4,8 @@
   "release": "Beta",
   "revision": "beta-0-26-82-recuperacao-app",
   "asset_revision": "app-beta-0-26-82-recuperacao-app",
-  "generated_at": "2026-09-06T22:01:29Z",
-  "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T220129Z",
+  "generated_at": "2026-09-06T22:17:26Z",
+  "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T221726Z",
   "essential_files": [
     {
       "path": "index.html",
@@ -25,7 +25,7 @@
     {
       "path": "assets/nexlab-release-identity.js",
       "size": 9406,
-      "sha256": "ed4e92498aa9c207d36523f01d9c8af973c5c365949f3f1eff71a6f906bdce93"
+      "sha256": "e12546715df2b2a771ff9b5799fdd969a3d0fa689d59326280af58343f372d1e"
     },
     {
       "path": "assets/nexlab-module-recovery.js",
@@ -184,8 +184,8 @@
     },
     {
       "path": "assets/nexlab-myday-dashboard-v02682.js",
-      "size": 47503,
-      "sha256": "6b6a5dc27be8d5aac94c4230151415ecd07db5ea748dee69b9d60ccdd34fad63"
+      "size": 52331,
+      "sha256": "ab3df48f9ea1d717b12d6db3780c037a04a0e5758884fcb43ad1a11be7afd4b8"
     },
     {
       "path": "assets/nexlab-visual.js",
