@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-notificacoes-runtime-corrigido'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-dashboard-finalizado'});
   const REVISION=BUILD.revision;
   if(globalThis.__NEXLAB_PROJECT_COMMENTS__?.revision===REVISION)return;
 

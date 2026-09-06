@@ -1,5 +1,5 @@
 /* NEXLAB 0.26.82 — Meu Dia no Dashboard — Etapa E. */
-import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-notificacoes-runtime-corrigido";
+import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-dashboard-finalizado";
 
 const CARD_ID = "nexlab-myday-dashboard-summary-v02682";
 let refreshTimer = null;
@@ -30,21 +30,26 @@ function createStat(label, value, tab, danger = false) {
 
 function findDashboardShell() {
   if (document.body?.dataset?.nexlabPage !== "dashboard") return null;
-  return document.querySelector("#nexlab-main-content .module-shell") || document.querySelector("main .module-shell");
+  return document.querySelector("#nexlab-main-content .nexlab-dashboard-ab-shell") || document.querySelector("main .nexlab-dashboard-ab-shell");
+}
+
+function findDashboardSlot() {
+  if (document.body?.dataset?.nexlabPage !== "dashboard") return null;
+  return document.getElementById("nexlab-dashboard-myday-slot");
 }
 
 function render(summary) {
   const shell = findDashboardShell();
-  if (!shell) return false;
+  const slot = findDashboardSlot();
+  if (!shell || !slot) return false;
   let card = document.getElementById(CARD_ID);
   if (!card) {
     card = document.createElement("section");
     card.id = CARD_ID;
     card.className = "nexlab-myday-dashboard-summary";
     card.setAttribute("aria-labelledby", `${CARD_ID}-title`);
-    const first = shell.firstElementChild;
-    first?.after(card) || shell.prepend(card);
   }
+  if (card.parentElement !== slot) slot.replaceChildren(card);
 
   const tasks = Number(summary?.tasks || 0);
   const meetings = Number(summary?.meetings || 0);
@@ -58,27 +63,19 @@ function render(summary) {
   card.replaceChildren();
   const copy = document.createElement("div");
   copy.className = "nexlab-myday-dashboard-copy";
-  const eyebrow = document.createElement("span");
-  eyebrow.textContent = "MEU DIA";
   const title = document.createElement("h2");
   title.id = `${CARD_ID}-title`;
-  title.textContent = "Resumo do que precisa da sua atenção";
-  const description = document.createElement("p");
-  const parts = [plural(tasks, "tarefa", "tarefas"), plural(meetings, "reunião", "reuniões")];
-  if (canApprove) parts.push(plural(approvals, "aprovação", "aprovações"));
-  description.textContent = `Hoje você tem ${parts.join(", ")}.${overdue > 0 ? ` ${plural(overdue, "item atrasado", "itens atrasados")}.` : " Nenhum item está atrasado."}`;
-  copy.append(eyebrow, title, description);
+  title.textContent = "Meu Dia";
+  copy.append(title);
 
   const stats = document.createElement("div");
   stats.className = "nexlab-myday-dashboard-stats";
-  stats.append(createStat("Tarefas", tasks, "tasks"), createStat("Reuniões", meetings, "meetings"));
-  if (canApprove) stats.append(createStat("Aprovações", approvals, "approvals"));
-  stats.append(createStat("Atrasados", overdue, "overdue", overdue > 0));
+  stats.append(createStat("Tarefas", tasks, "tasks"), createStat("Reuniões", meetings, "meetings"), createStat("Atrasados", overdue, "overdue", overdue > 0));
 
   const action = document.createElement("button");
   action.type = "button";
   action.className = "nexlab-myday-dashboard-open";
-  action.textContent = "Abrir Meu Dia";
+  action.innerHTML = "Abrir Meu Dia <span aria-hidden=\"true\">→</span>";
   action.addEventListener("click", () => navigatePending("overview"));
 
   card.append(copy, stats, action);
