@@ -3,13 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-dashboard-finalizado",
-  "asset_revision": "app-beta-0-26-82-dashboard-finalizado",
-  "generated_at": "2026-09-06T03:44:30Z",
+  "revision": "beta-0-26-82-recuperacao-app",
+  "asset_revision": "app-beta-0-26-82-recuperacao-app",
+  "generated_at": "2026-09-06T11:04:45Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "bd28e37cda20a633047c06bea22fe2de221dc4087b0ba786b7485fe3ecfb4ca5",
+  "manifest_sha256": "eedf1f34548dbcf638c2a985ba67b39847f87b5645016e91e1e5659e40882261",
   "essential_count": 57,
-  "essential_bytes": 2328860,
-  "cache_name": "nexlab-app-beta-0-26-82-dashboard-finalizado-20260906T034430Z",
-  "recovery_mode": "automatic_same_revision_cache_repair"
+  "essential_bytes": 2331072,
+  "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T110445Z"
 }
