@@ -68,8 +68,11 @@
       "nexlab_list_operational_activity_v02677",
       "nexlab_list_profiles_visible_v26311",
       "nexlab_notification_summary_v26190",
+      "nexlab_notification_history_v02682",
+      "nexlab_notification_history_filtered_v02682",
       "nexlab_prepare_project_delete_v2690",
       "nexlab_resolve_booking_target_v26170",
+      "nexlab_resolve_notification_target_v02682",
       "nexlab_resolve_notification_target_v26190"
   ]);
   const MUTATING=Object.freeze([
