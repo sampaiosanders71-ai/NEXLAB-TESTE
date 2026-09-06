@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-recuperacao-app",
+  "revision": "beta-0-26-82-atualizacao-estavel",
   "asset_revision": "app-beta-0-26-82-recuperacao-app",
-  "generated_at": "2026-09-06T22:17:26Z",
+  "generated_at": "2026-09-06T22:30:00Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "9cf431948642835a2e88f73a71f85fb22d2f73fdda3bc74a3c2b52c3c7168990",
+  "manifest_sha256": "4ec123693491576e19272958f87a343a9f34efb1176e7a5c34b887648ea9794e",
   "essential_count": 57,
-  "essential_bytes": 2377153,
-  "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T221726Z"
+  "essential_bytes": 2377324,
+  "cache_name": "nexlab-app-beta-0-26-82-atualizacao-estavel-20260906T223000Z"
 }
