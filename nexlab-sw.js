@@ -1,10 +1,10 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
 const APP_REVISION='beta-0-26-82-dashboard-finalizado';
-const GENERATED_AT='2026-09-06T03:24:30Z';
+const GENERATED_AT='2026-09-06T03:33:21Z';
 const ASSET_REVISION='app-beta-0-26-82-dashboard-finalizado';
-const CACHE_NAME='nexlab-app-beta-0-26-82-dashboard-finalizado';
-const STAGING_CACHE_NAME='nexlab-stage-'+APP_REVISION;
+const CACHE_NAME='nexlab-app-beta-0-26-82-dashboard-finalizado-20260906T033321Z';
+const STAGING_CACHE_NAME='nexlab-stage-'+APP_REVISION+'-'+GENERATED_AT.replace(/[^0-9A-Za-z]/g,'');
 const META_CACHE_NAME='nexlab-update-meta';
 const CACHE_PREFIX='nexlab-';
 const HEAD_PATH='release-head.json';

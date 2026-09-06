@@ -5,9 +5,9 @@
   "channel": "beta",
   "revision": "beta-0-26-82-dashboard-finalizado",
   "asset_revision": "app-beta-0-26-82-dashboard-finalizado",
-  "generated_at": "2026-09-06T03:24:30Z",
+  "generated_at": "2026-09-06T03:33:21Z",
   "title": "NEXLAB Beta 0.26.82 — Dashboard reconstruído e integrado",
-  "cache_name": "nexlab-app-beta-0-26-82-dashboard-finalizado",
+  "cache_name": "nexlab-app-beta-0-26-82-dashboard-finalizado-20260906T033321Z",
   "entry": "index.html",
   "core_files": [
     "index.html",
@@ -165,7 +165,8 @@
     "exact_build_revision_metadata": true,
     "post_login_permission_denial_modal_suppressed": true,
     "route_initialized_from_url_before_dashboard_fetch": true,
-    "access_denial_global_modal_excluded": true
+    "access_denial_global_modal_excluded": true,
+    "same_revision_update_cache_isolation": true
   },
   "database": {
     "version": "0.26.82",
@@ -331,7 +332,9 @@
     "module_source_parse": "54/54",
     "runtime_module_link": "50/50 local imports resolved",
     "html_local_references": "59/59",
-    "dashboard_contracts": "10/10"
+    "dashboard_contracts": "10/10",
+    "same_revision_atomic_cache_hotfix": true,
+    "same_revision_atomic_cache_generated_at": "2026-09-06T03:33:21Z"
   },
   "files": [
     ".nojekyll",
