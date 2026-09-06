@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: PermissionsModule. */
-export { PermissionsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-configuracoes-rolagem-independente";
+export { PermissionsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-acessibilidade-fontes-corrigidas";

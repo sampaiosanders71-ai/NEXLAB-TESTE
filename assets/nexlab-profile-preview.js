@@ -235,7 +235,7 @@
       #nexlab-profile-preview-banner{position:fixed;inset:0 0 auto 0;height:48px;z-index:2147483600;background:#7c2d12;color:#fff;display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 14px;font:700 12px/1.25 system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(124,45,18,.25)}
       #nexlab-profile-preview-banner strong{font-weight:900}#nexlab-profile-preview-banner span{opacity:.92}
       #nexlab-profile-preview-banner button{border:1px solid rgba(255,255,255,.5);background:#fff;color:#7c2d12;border-radius:9px;padding:7px 11px;font:800 11px/1 system-ui;cursor:pointer}
-      @media(max-width:640px){#nexlab-profile-preview-banner{justify-content:space-between;height:56px;font-size:10px}html.nexlab-preview-active body{padding-top:56px!important}#nexlab-profile-preview-banner span{display:none}}
+      @media(max-width:640px){#nexlab-profile-preview-banner{justify-content:space-between;height:56px;font-size:0.625rem}html.nexlab-preview-active body{padding-top:56px!important}#nexlab-profile-preview-banner span{display:none}}
     `;
     document.head.appendChild(style);
     const banner=document.createElement('div');banner.id='nexlab-profile-preview-banner';

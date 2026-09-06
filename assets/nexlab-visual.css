@@ -217,10 +217,10 @@ input[type='submit'][data-nexlab-busy='true'] *{
 .nexlab-confirm-card{width:min(420px,100%);border-radius:24px;background:#fff;border:1px solid rgba(14,31,61,.12);box-shadow:0 24px 80px rgba(2,8,23,.28);overflow:hidden;color:#0e1f3d;}
 .nexlab-confirm-head{padding:22px 22px 12px;display:flex;gap:12px;align-items:flex-start;}
 .nexlab-confirm-icon{width:42px;height:42px;border-radius:16px;display:grid;place-items:center;background:rgba(255,138,0,.13);color:#de6500;flex:none;font-weight:900;}
-.nexlab-confirm-title{font-size:18px;font-weight:900;letter-spacing:-.02em;margin:0;color:#0e1f3d!important;}
-.nexlab-confirm-text{font-size:14px;line-height:1.55;color:#475569!important;margin:6px 0 0;white-space:pre-wrap;}
+.nexlab-confirm-title{font-size:1.125rem;font-weight:900;letter-spacing:-.02em;margin:0;color:#0e1f3d!important;}
+.nexlab-confirm-text{font-size:0.875rem;line-height:1.55;color:#475569!important;margin:6px 0 0;white-space:pre-wrap;}
 .nexlab-confirm-actions{display:flex;gap:10px;justify-content:flex-end;padding:14px 18px 18px;background:#f8fafc;border-top:1px solid rgba(14,31,61,.08);}
-.nexlab-confirm-btn{border:0;border-radius:14px;padding:11px 14px;font-weight:900;font-size:13px;cursor:pointer;box-shadow:none!important;}
+.nexlab-confirm-btn{border:0;border-radius:14px;padding:11px 14px;font-weight:900;font-size:0.8125rem;cursor:pointer;box-shadow:none!important;}
 .nexlab-confirm-cancel{background:#fff;color:#334155;border:1px solid rgba(14,31,61,.12);}
 .nexlab-confirm-ok{background:linear-gradient(135deg,#de6500,#f47a00);color:#fff;}
 .nexlab-confirm-btn:focus-visible{outline:3px solid rgba(10,107,255,.25);outline-offset:2px;}
@@ -1583,7 +1583,7 @@ textarea{
   }
 
   main :where(input,select,textarea){
-    font-size:16px!important;
+    font-size:1rem!important;
   }
 
   main form .grid,
@@ -4941,12 +4941,12 @@ textarea{
 
 /* v26.9.0 — Pendências/Agenda r16: motivo acessível de recusa */
 .nexlab-prompt-body{padding:4px 22px 18px;display:flex;flex-direction:column;gap:8px;}
-.nexlab-prompt-label{font-size:12px;font-weight:900;color:#334155;}
-.nexlab-prompt-field{width:100%;min-height:116px;resize:vertical;border:1px solid rgba(14,31,61,.16);border-radius:16px;padding:12px 13px;background:#fff;color:#0f172a;font:inherit;font-size:13px;line-height:1.5;box-shadow:inset 0 1px 2px rgba(15,23,42,.04);}
+.nexlab-prompt-label{font-size:0.75rem;font-weight:900;color:#334155;}
+.nexlab-prompt-field{width:100%;min-height:116px;resize:vertical;border:1px solid rgba(14,31,61,.16);border-radius:16px;padding:12px 13px;background:#fff;color:#0f172a;font:inherit;font-size:0.8125rem;line-height:1.5;box-shadow:inset 0 1px 2px rgba(15,23,42,.04);}
 .nexlab-prompt-field:focus{outline:3px solid rgba(10,107,255,.18);border-color:rgba(10,107,255,.45);}
 .nexlab-prompt-field[aria-invalid="true"]{border-color:#dc2626;outline-color:rgba(220,38,38,.16);}
-.nexlab-prompt-help{margin:0;font-size:10px;color:#64748b;}
-.nexlab-prompt-error{min-height:16px;margin:0;font-size:11px;font-weight:800;color:#b91c1c;}
+.nexlab-prompt-help{margin:0;font-size:0.625rem;color:#64748b;}
+.nexlab-prompt-error{min-height:16px;margin:0;font-size:0.6875rem;font-weight:800;color:#b91c1c;}
 
 /* NEXLAB v26.25.1 — atualização automática segura */
 .nexlab-update-banner-v2{
@@ -5056,7 +5056,7 @@ textarea{
 /* Dashboard: Visão geral + feed do Mural Interno; seletor móvel sem sobreposição do cabeçalho. */
 .nexlab-dashboard-swipe-root{width:100%;min-width:0;overflow-x:clip}
 .nexlab-dashboard-switcher{display:flex;align-items:center;justify-content:center;gap:4px;width:max-content;max-width:100%;margin:0 auto 14px;padding:4px;border:1px solid rgba(203,213,225,.8);border-radius:14px;background:rgba(255,255,255,.9);box-shadow:0 1px 4px rgba(15,23,42,.04)}
-.nexlab-dashboard-switcher button{appearance:none;border:0;background:transparent;color:#64748b;font-size:12px;font-weight:800;line-height:1;padding:10px 15px;border-radius:10px;cursor:pointer;transition:background .2s ease,color .2s ease,box-shadow .2s ease}
+.nexlab-dashboard-switcher button{appearance:none;border:0;background:transparent;color:#64748b;font-size:0.75rem;font-weight:800;line-height:1;padding:10px 15px;border-radius:10px;cursor:pointer;transition:background .2s ease,color .2s ease,box-shadow .2s ease}
 .nexlab-dashboard-switcher button.is-active{background:#0f172a;color:#fff;box-shadow:0 2px 8px rgba(15,23,42,.18)}
 .nexlab-dashboard-switcher button:focus-visible{outline:3px solid rgba(249,115,22,.28);outline-offset:2px}
 .nexlab-dashboard-slider-viewport{position:relative;width:100%;min-height:360px;overflow:hidden;touch-action:pan-y pinch-zoom;contain:layout paint}
@@ -5072,30 +5072,30 @@ textarea{
 @media (min-width:1024px){.nexlab-dashboard-overview .lg\:col-span-7{grid-column:span 12/span 12!important}}
 .nexlab-dashboard-feed-page{padding-bottom:28px}
 .nexlab-dashboard-feed-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px;padding:20px;border:1px solid rgba(203,213,225,.72);border-radius:20px;background:linear-gradient(135deg,rgba(255,255,255,.98),rgba(248,250,252,.96));box-shadow:0 2px 10px rgba(15,23,42,.035)}
-.nexlab-dashboard-feed-eyebrow{display:block;margin-bottom:5px;color:#f97316;font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
-.nexlab-dashboard-feed-header h1{margin:0;color:#0f172a;font-size:24px;font-weight:900;letter-spacing:-.025em}
-.nexlab-dashboard-feed-header p{margin:5px 0 0;color:#64748b;font-size:12px;font-weight:600}
-.nexlab-dashboard-readonly-badge{flex:0 0 auto;padding:7px 10px;border:1px solid #e2e8f0;border-radius:999px;background:#f8fafc;color:#64748b;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+.nexlab-dashboard-feed-eyebrow{display:block;margin-bottom:5px;color:#f97316;font-size:0.625rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+.nexlab-dashboard-feed-header h1{margin:0;color:#0f172a;font-size:1.5rem;font-weight:900;letter-spacing:-.025em}
+.nexlab-dashboard-feed-header p{margin:5px 0 0;color:#64748b;font-size:0.75rem;font-weight:600}
+.nexlab-dashboard-readonly-badge{flex:0 0 auto;padding:7px 10px;border:1px solid #e2e8f0;border-radius:999px;background:#f8fafc;color:#64748b;font-size:0.625rem;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
 .nexlab-dashboard-feed-list{display:flex;flex-direction:column;gap:18px;width:min(100%,720px);margin:0 auto}
 .nexlab-dashboard-feed-card{overflow:hidden;border:1px solid rgba(203,213,225,.72);border-radius:20px;background:#fff;box-shadow:0 2px 12px rgba(15,23,42,.045)}
 .nexlab-dashboard-feed-author{display:flex;align-items:center;gap:11px;padding:15px 17px}
-.nexlab-dashboard-feed-avatar{display:flex;align-items:center;justify-content:center;width:38px;height:38px;flex:0 0 38px;border-radius:50%;background:#0f172a;color:#fff;font-size:12px;font-weight:900;letter-spacing:.03em}
+.nexlab-dashboard-feed-avatar{display:flex;align-items:center;justify-content:center;width:38px;height:38px;flex:0 0 38px;border-radius:50%;background:#0f172a;color:#fff;font-size:0.75rem;font-weight:900;letter-spacing:.03em}
 .nexlab-dashboard-feed-author-copy{display:flex;min-width:0;flex:1;flex-direction:column}
-.nexlab-dashboard-feed-author-copy strong{overflow:hidden;color:#1e293b;font-size:12px;font-weight:900;text-overflow:ellipsis;white-space:nowrap}
-.nexlab-dashboard-feed-author-copy span{margin-top:2px;color:#94a3b8;font-size:10px;font-weight:650}
-.nexlab-dashboard-fixed-badge{display:flex;align-items:center;gap:4px;padding:5px 8px;border:1px solid #ffedd5;border-radius:999px;background:#fff7ed;color:#f97316;font-size:9px;font-weight:900;text-transform:uppercase}
+.nexlab-dashboard-feed-author-copy strong{overflow:hidden;color:#1e293b;font-size:0.75rem;font-weight:900;text-overflow:ellipsis;white-space:nowrap}
+.nexlab-dashboard-feed-author-copy span{margin-top:2px;color:#94a3b8;font-size:0.625rem;font-weight:650}
+.nexlab-dashboard-fixed-badge{display:flex;align-items:center;gap:4px;padding:5px 8px;border:1px solid #ffedd5;border-radius:999px;background:#fff7ed;color:#f97316;font-size:0.5625rem;font-weight:900;text-transform:uppercase}
 .nexlab-dashboard-feed-image{display:block;width:100%;max-height:460px;object-fit:cover;border-top:1px solid #f1f5f9;border-bottom:1px solid #f1f5f9;background:#f8fafc}
 .nexlab-dashboard-feed-content{padding:17px}
-.nexlab-dashboard-feed-content h2{margin:0;color:#0f172a;font-size:15px;font-weight:900;line-height:1.35}
-.nexlab-dashboard-feed-content p{margin:8px 0 0;color:#475569;font-size:13px;font-weight:500;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
-.nexlab-dashboard-feed-card footer{padding:11px 17px;border-top:1px solid #f1f5f9;color:#94a3b8;font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.nexlab-dashboard-feed-content h2{margin:0;color:#0f172a;font-size:0.9375rem;font-weight:900;line-height:1.35}
+.nexlab-dashboard-feed-content p{margin:8px 0 0;color:#475569;font-size:0.8125rem;font-weight:500;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
+.nexlab-dashboard-feed-card footer{padding:11px 17px;border-top:1px solid #f1f5f9;color:#94a3b8;font-size:0.5625rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
 .nexlab-dashboard-feed-empty,.nexlab-dashboard-feed-error{width:min(100%,720px);margin:0 auto;padding:48px 20px;border:1px dashed #cbd5e1;border-radius:20px;background:#fff;text-align:center;color:#94a3b8}
 .nexlab-dashboard-feed-empty svg{margin:0 auto 12px;color:#cbd5e1}
-.nexlab-dashboard-feed-empty h2{margin:0;color:#334155;font-size:14px;font-weight:900}
-.nexlab-dashboard-feed-empty p,.nexlab-dashboard-feed-error p{margin:6px auto 0;max-width:420px;font-size:12px;line-height:1.6}
-.nexlab-dashboard-feed-error button{margin-top:14px;padding:9px 14px;border:0;border-radius:10px;background:#0f172a;color:#fff;font-size:11px;font-weight:900;cursor:pointer}
-.nexlab-dashboard-feed-loader{display:flex;min-height:54px;align-items:center;justify-content:center;color:#94a3b8;font-size:11px;font-weight:700}
-@media (max-width:640px){.nexlab-dashboard-switcher{position:relative;top:auto;z-index:1;margin:0 auto 10px}.nexlab-dashboard-feed-header{padding:16px}.nexlab-dashboard-feed-header h1{font-size:20px}.nexlab-dashboard-readonly-badge{padding:6px 8px;font-size:8px}.nexlab-dashboard-feed-author{padding:13px 14px}.nexlab-dashboard-feed-content{padding:15px}.nexlab-dashboard-feed-image{max-height:62vh}}
+.nexlab-dashboard-feed-empty h2{margin:0;color:#334155;font-size:0.875rem;font-weight:900}
+.nexlab-dashboard-feed-empty p,.nexlab-dashboard-feed-error p{margin:6px auto 0;max-width:420px;font-size:0.75rem;line-height:1.6}
+.nexlab-dashboard-feed-error button{margin-top:14px;padding:9px 14px;border:0;border-radius:10px;background:#0f172a;color:#fff;font-size:0.6875rem;font-weight:900;cursor:pointer}
+.nexlab-dashboard-feed-loader{display:flex;min-height:54px;align-items:center;justify-content:center;color:#94a3b8;font-size:0.6875rem;font-weight:700}
+@media (max-width:640px){.nexlab-dashboard-switcher{position:relative;top:auto;z-index:1;margin:0 auto 10px}.nexlab-dashboard-feed-header{padding:16px}.nexlab-dashboard-feed-header h1{font-size:1.25rem}.nexlab-dashboard-readonly-badge{padding:6px 8px;font-size:0.5rem}.nexlab-dashboard-feed-author{padding:13px 14px}.nexlab-dashboard-feed-content{padding:15px}.nexlab-dashboard-feed-image{max-height:62vh}}
 @media (prefers-reduced-motion:reduce){.nexlab-dashboard-slider-track,.nexlab-dashboard-slider-viewport,.nexlab-dashboard-switcher button,.nexlab-dashboard-swipe-hint span{transition:none!important}}
 
 /* Correção anterior — posicionamento do seletor móvel do Dashboard. */
@@ -5488,13 +5488,13 @@ input[type="datetime-local"].nexlab-form-control-v263033{
 .nexlab-meeting-response-head-r55627 h4 {
   margin: 0;
   color: #172554;
-  font-size: 13px;
+  font-size:0.8125rem;
   font-weight: 800;
 }
 .nexlab-meeting-response-head-r55627 p {
   margin: 3px 0 0;
   color: #64748b;
-  font-size: 11px;
+  font-size:0.6875rem;
 }
 .nexlab-meeting-response-head-r55627 > span {
   flex: 0 0 auto;
@@ -5503,7 +5503,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   padding: 5px 9px;
   background: #f8fafc;
   color: #475569;
-  font-size: 9px;
+  font-size:0.5625rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .04em;
@@ -5522,7 +5522,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
 .nexlab-meeting-response-note-r55627,
 .nexlab-meeting-response-closed-r55627 {
   margin: 10px 0 0;
-  font-size: 10px;
+  font-size:0.625rem;
   line-height: 1.45;
   color: #64748b;
 }
@@ -5546,7 +5546,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   min-height: 38px;
   border-radius: 12px;
   padding: 9px 13px;
-  font-size: 10px;
+  font-size:0.625rem;
   font-weight: 800;
   transition: border-color .18s ease, background .18s ease, transform .18s ease;
 }
@@ -5579,7 +5579,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   border-radius: 12px;
   background: #fff1f2;
   color: #be123c;
-  font-size: 20px;
+  font-size:1.25rem;
   font-weight: 900;
 }
 .nexlab-meeting-decline-field-r55627 {
@@ -5587,7 +5587,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   gap: 7px;
   margin-top: 17px;
   color: #334155;
-  font-size: 12px;
+  font-size:0.75rem;
   font-weight: 800;
 }
 .nexlab-meeting-decline-field-r55627 textarea {
@@ -5611,7 +5611,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
 .nexlab-meeting-decline-field-r55627 small {
   justify-self: end;
   color: #94a3b8;
-  font-size: 10px;
+  font-size:0.625rem;
   font-weight: 600;
 }
 @media (max-width: 520px) {
@@ -5643,7 +5643,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   padding:4px 8px;
   background:#f8fafc;
   color:#475569;
-  font-size:9px;
+  font-size:0.5625rem;
   line-height:1.15;
   font-weight:850;
   letter-spacing:.015em;
@@ -5682,7 +5682,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   min-height:36px;
   border-radius:10px;
   padding:8px 11px;
-  font-size:10px;
+  font-size:0.625rem;
   font-weight:850;
   transition:transform .16s ease,background .16s ease,border-color .16s ease;
 }
@@ -5731,7 +5731,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   border-radius:14px;
   background:#f8fafc;
   color:#64748b;
-  font-size:11px;
+  font-size:0.6875rem;
   font-weight:700;
 }
 .nexlab-meeting-management-r55631{
@@ -5751,13 +5751,13 @@ input[type="datetime-local"].nexlab-form-control-v263033{
 .nexlab-meeting-management-head-r55631 h4{
   margin:0;
   color:#0f2f66;
-  font-size:14px;
+  font-size:0.875rem;
   font-weight:850;
 }
 .nexlab-meeting-management-head-r55631 p{
   margin:3px 0 0;
   color:#64748b;
-  font-size:10px;
+  font-size:0.625rem;
   line-height:1.4;
 }
 .nexlab-meeting-management-head-r55631>span{
@@ -5767,7 +5767,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   border-radius:999px;
   background:#fff;
   color:#475569;
-  font-size:9px;
+  font-size:0.5625rem;
   font-weight:850;
 }
 .nexlab-meeting-management-stats-r55631{
@@ -5786,13 +5786,13 @@ input[type="datetime-local"].nexlab-form-control-v263033{
 }
 .nexlab-meeting-management-stats-r55631 strong{
   color:#0f172a;
-  font-size:18px;
+  font-size:1.125rem;
   line-height:1;
 }
 .nexlab-meeting-management-stats-r55631 span{
   overflow:hidden;
   color:#64748b;
-  font-size:9px;
+  font-size:0.5625rem;
   font-weight:800;
   text-overflow:ellipsis;
   white-space:nowrap;
@@ -5815,7 +5815,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   border-radius:11px;
   background:#fff;
   color:#475569;
-  font-size:9px;
+  font-size:0.5625rem;
   font-weight:850;
   transition:border-color .16s ease,background .16s ease,color .16s ease;
 }
@@ -5859,7 +5859,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   display:block;
   overflow:hidden;
   color:#1e293b;
-  font-size:11px;
+  font-size:0.6875rem;
   font-weight:850;
   text-overflow:ellipsis;
   white-space:nowrap;
@@ -5868,7 +5868,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   display:block;
   margin-top:2px;
   color:#94a3b8;
-  font-size:9px;
+  font-size:0.5625rem;
   font-weight:700;
   text-transform:capitalize;
 }
@@ -5879,7 +5879,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   border-radius:999px;
   background:#f8fafc;
   color:#475569;
-  font-size:8px;
+  font-size:0.5rem;
   font-weight:900;
 }
 .nexlab-meeting-management-person-main-r55631>span[data-status="confirmed"]{border-color:#bbf7d0;background:#f0fdf4;color:#166534}
@@ -5888,7 +5888,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
 .nexlab-meeting-management-time-r55631{
   margin:0;
   color:#64748b;
-  font-size:9px;
+  font-size:0.5625rem;
 }
 .nexlab-meeting-management-note-r55631{
   margin:0;
@@ -5897,7 +5897,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   border-radius:8px;
   background:#fff1f2;
   color:#881337;
-  font-size:10px;
+  font-size:0.625rem;
   line-height:1.45;
 }
 .nexlab-meeting-management-empty-r55631{
@@ -5906,7 +5906,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
   border:1px dashed #cbd5e1;
   border-radius:14px;
   color:#64748b;
-  font-size:10px;
+  font-size:0.625rem;
   font-weight:700;
   text-align:center;
 }
@@ -5920,7 +5920,7 @@ input[type="datetime-local"].nexlab-form-control-v263033{
 
 .nexlab-prompt-field-host{width:100%;}
 .nexlab-prompt-field[data-mode="text"],.nexlab-prompt-field[data-mode="code"]{min-height:48px;resize:none;}
-.nexlab-prompt-field[data-mode="code"]{font-size:22px;font-weight:900;letter-spacing:.35em;text-align:center;font-variant-numeric:tabular-nums;}
+.nexlab-prompt-field[data-mode="code"]{font-size:1.375rem;font-weight:900;letter-spacing:.35em;text-align:center;font-variant-numeric:tabular-nums;}
 
 
 /* Beta 0.26.82 — aviso global de erro e Feedback assistido */
@@ -5966,12 +5966,12 @@ html.nexlab-push-consent-open,
 html.nexlab-push-consent-open body{overflow:hidden}
 .nexlab-push-consent-overlay{position:fixed;inset:0;z-index:2147483300;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(2,12,27,.66);backdrop-filter:blur(8px)}
 .nexlab-push-consent-dialog{width:min(100%,440px);padding:26px;border:1px solid rgba(148,163,184,.28);border-radius:26px;background:#fff;color:#0f172a;box-shadow:0 28px 80px rgba(2,12,27,.34);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-align:left}
-.nexlab-push-consent-icon{display:flex;align-items:center;justify-content:center;width:54px;height:54px;margin-bottom:18px;border-radius:18px;background:#0b2a63;color:#fff;font-size:20px;font-weight:900;box-shadow:0 10px 26px rgba(11,42,99,.2)}
-.nexlab-push-consent-dialog h2{margin:0;color:#0f172a;font-size:21px;line-height:1.25;font-weight:850;letter-spacing:-.02em}
-.nexlab-push-consent-dialog>p{margin:11px 0 0;color:#475569;font-size:14px;line-height:1.62}
-.nexlab-push-consent-dialog .nexlab-push-consent-note{padding:11px 13px;border:1px solid #dbeafe;border-radius:14px;background:#eff6ff;color:#1e3a5f;font-size:12px;font-weight:650}
+.nexlab-push-consent-icon{display:flex;align-items:center;justify-content:center;width:54px;height:54px;margin-bottom:18px;border-radius:18px;background:#0b2a63;color:#fff;font-size:1.25rem;font-weight:900;box-shadow:0 10px 26px rgba(11,42,99,.2)}
+.nexlab-push-consent-dialog h2{margin:0;color:#0f172a;font-size:1.3125rem;line-height:1.25;font-weight:850;letter-spacing:-.02em}
+.nexlab-push-consent-dialog>p{margin:11px 0 0;color:#475569;font-size:0.875rem;line-height:1.62}
+.nexlab-push-consent-dialog .nexlab-push-consent-note{padding:11px 13px;border:1px solid #dbeafe;border-radius:14px;background:#eff6ff;color:#1e3a5f;font-size:0.75rem;font-weight:650}
 .nexlab-push-consent-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;flex-wrap:wrap}
-.nexlab-push-consent-actions button{min-height:42px;padding:10px 15px;border-radius:13px;font-size:13px;font-weight:800;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+.nexlab-push-consent-actions button{min-height:42px;padding:10px 15px;border-radius:13px;font-size:0.8125rem;font-weight:800;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
 .nexlab-push-consent-actions button:focus-visible{outline:3px solid rgba(249,115,22,.35);outline-offset:2px}
 .nexlab-push-consent-actions button:disabled{cursor:wait;opacity:.65}
 .nexlab-push-consent-primary{border:1px solid #0b2a63;background:#0b2a63;color:#fff;box-shadow:0 8px 20px rgba(11,42,99,.16)}

@@ -157,7 +157,7 @@
   .team-details-v2680 .nexlab-team-composer-plus-rebuilt-v02682{width:2.65rem}
   .team-details-v2680 .nexlab-team-composer-send-rebuilt-v02682{width:2.65rem;padding:0;justify-content:center}
   .team-details-v2680 .nexlab-team-composer-send-rebuilt-v02682 span{display:none}
-  .team-details-v2680 .nexlab-team-composer-input-rebuilt-v02682 textarea{min-height:2.65rem;font-size:16px}
+  .team-details-v2680 .nexlab-team-composer-input-rebuilt-v02682 textarea{min-height:2.65rem;font-size:1rem}
   .team-details-v2680 .nexlab-team-composer-chips-rebuilt-v02682{padding-left:0}
   .team-details-v2680 .nexlab-team-composer-reply-rebuilt-v02682{margin-left:0}
   .team-details-v2680 .nexlab-team-chat-context-copy-rebuilt-v02682 span{white-space:normal}
@@ -239,7 +239,7 @@
   .team-details-v2680 .nexlab-team-links-form-rebuilt-v02682{grid-template-columns:1fr;gap:.8rem;padding:.85rem;border-radius:.9rem}
   .team-details-v2680 .nexlab-team-links-add-rebuilt-v02682{grid-column:auto}
   .team-details-v2680 .nexlab-team-link-type-rebuilt-v02682{height:2.75rem;padding:0 .35rem;font-size:.56rem}
-  .team-details-v2680 .nexlab-team-links-select-shell-rebuilt-v02682 select{height:2.75rem;font-size:16px}
+  .team-details-v2680 .nexlab-team-links-select-shell-rebuilt-v02682 select{height:2.75rem;font-size:1rem}
   .team-details-v2680 .nexlab-team-links-add-rebuilt-v02682{height:2.75rem}
   .team-details-v2680 .nexlab-team-links-empty-rebuilt-v02682{min-height:11rem;padding:1.2rem .9rem}
   .team-details-v2680 .nexlab-team-link-row-rebuilt-v02682{grid-template-columns:auto minmax(0,1fr)}
@@ -295,7 +295,7 @@
   .team-details-v2680 .nexlab-team-links-head-actions-rebuilt-v02682{gap:.45rem}
   .team-details-v2680 .nexlab-team-links-refresh-rebuilt-v02682{min-height:2.35rem}
   .team-details-v2680 .nexlab-team-link-type-rebuilt-v02682{height:2.75rem;padding:0 .42rem}
-  .team-details-v2680 .nexlab-team-links-select-shell-rebuilt-v02682 select{height:2.75rem;font-size:16px}
+  .team-details-v2680 .nexlab-team-links-select-shell-rebuilt-v02682 select{height:2.75rem;font-size:1rem}
   .nexlab-team-unlink-dialog-rebuilt-v02682{grid-template-columns:1fr;padding:1rem}
   .nexlab-team-unlink-icon-rebuilt-v02682{width:2.4rem;height:2.4rem}
   .nexlab-team-unlink-actions-rebuilt-v02682{flex-direction:column-reverse}

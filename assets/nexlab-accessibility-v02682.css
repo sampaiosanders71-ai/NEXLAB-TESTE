@@ -48,8 +48,8 @@ aside .text-slate-300,aside .text-slate-400,aside .text-slate-500,aside .text-sl
 aside .text-slate-700,aside .text-slate-800,aside .text-slate-900{color:#f1f5f9!important}
 
 /* Textos que antes ficavam pequenos demais para leitura confortável. */
-.text-\[8px\],.text-\[9px\]{font-size:11px!important;line-height:1.35!important}
-.text-\[10px\],.text-\[11px\]{font-size:12px!important;line-height:1.4!important}
+.text-\[8px\],.text-\[9px\]{font-size:0.6875rem!important;line-height:1.35!important}
+.text-\[10px\],.text-\[11px\]{font-size:0.75rem!important;line-height:1.4!important}
 
 /* Campos: borda, conteúdo e placeholder ficam distinguíveis mesmo com brilho alto. */
 input,select,textarea{
