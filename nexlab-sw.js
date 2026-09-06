@@ -1,10 +1,10 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
 const APP_REVISION='beta-0-26-82-recuperacao-app';
-const GENERATED_AT='2026-09-06T17:41:06Z';
+const GENERATED_AT='2026-09-06T22:01:29Z';
 const ASSET_REVISION='app-beta-0-26-82-recuperacao-app';
-const CACHE_NAME='nexlab-app-beta-0-26-82-recuperacao-app-20260906T174106Z';
-const STAGING_CACHE_NAME='nexlab-stage-'+APP_REVISION+'-20260906T171800Z';
+const CACHE_NAME='nexlab-app-beta-0-26-82-recuperacao-app-20260906T220129Z';
+const STAGING_CACHE_NAME='nexlab-stage-'+APP_REVISION;
 const META_CACHE_NAME='nexlab-update-meta';
 const CACHE_PREFIX='nexlab-';
 const LEGACY_ASSET_REVISIONS=new Set(["app-beta-0-26-82-notificacoes-runtime-corrigido"]);
