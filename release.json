@@ -3,11 +3,11 @@
   "display_version": "NEXLAB Beta 0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-dashboard-isolado",
-  "asset_revision": "app-beta-0-26-82-dashboard-isolado",
-  "generated_at": "2026-09-06T11:04:45Z",
-  "title": "NEXLAB Beta 0.26.82 — Dashboard isolado sobre núcleo recuperado",
-  "cache_name": "nexlab-app-beta-0-26-82-dashboard-isolado-20260906T110445Z",
+  "revision": "beta-0-26-82-recuperacao-app",
+  "asset_revision": "app-beta-0-26-82-recuperacao-app",
+  "generated_at": "2026-09-06T17:29:00Z",
+  "title": "NEXLAB Beta 0.26.82 — Dashboard reconstruído — etapas 3, 4 e 5",
+  "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T172900Z",
   "entry": "index.html",
   "core_files": [
     "index.html",
@@ -320,15 +320,18 @@
     }
   },
   "validation": {
-    "scope": "NEXLAB Beta 0.26.82 — Dashboard isolado sobre núcleo recuperado",
+    "scope": "NEXLAB Beta 0.26.82 — Dashboard reconstruído — etapas 3, 4 e 5",
     "version": "0.26.82",
-    "revision": "beta-0-26-82-dashboard-isolado",
-    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
+    "revision": "beta-0-26-82-recuperacao-app",
+    "asset_revision": "app-beta-0-26-82-recuperacao-app",
     "metadata_cleanup_completed": true,
     "essential_count": 57,
-    "manifest_sha256": "ee428645ec91ef47eb23924ef33550588d0fbf370faeaee52802c5c1b3a73ad2",
+    "manifest_sha256": "011a4e2efbc0d34a310db0ef107f996474b707ef42eb60d38f07f397951db969",
     "module_source_parse": "54/54",
-    "runtime_module_link": "54/54"
+    "runtime_module_link": "54/54",
+    "dashboard_reference_structure": "passed_static_isolated_runtime_visual_refinement",
+    "dashboard_exact_labels": "passed",
+    "dashboard_global_runtime_unchanged": "passed"
   },
   "files": [
     ".nojekyll",
@@ -446,10 +449,10 @@
   "build_identity": {
     "version": "0.26.82",
     "release": "Beta",
-    "revision": "beta-0-26-82-dashboard-isolado",
-    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
-    "cache_name": "nexlab-app-beta-0-26-82-dashboard-isolado-20260906T110445Z",
-    "generated_at": "2026-09-06T02:26:00Z"
+    "revision": "beta-0-26-82-recuperacao-app",
+    "asset_revision": "app-beta-0-26-82-recuperacao-app",
+    "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T172900Z",
+    "generated_at": "2026-09-06T17:29:00Z"
   },
   "external_feedback_evidence": {
     "provider": "cloudflare_r2",
@@ -626,7 +629,7 @@
     "marketing_database_constraints": true,
     "physical_homologation": "pending_real_installed_device_after_publication"
   },
-  "package_uncompressed_bytes": 4033395,
+  "package_uncompressed_bytes": 4056490,
   "corrections_0_26_30": {
     "activity_search_width_controlled": true,
     "activity_filters_aligned_desktop": true,
@@ -1695,7 +1698,7 @@
   },
   "file_hashes": {
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "404.html": "bcca9e6d714ba970d6af28025bd2948a2a4718ea55fabe5651028c0807a593a0",
+    "404.html": "6fb283a66ed96b2b4dd77f372fa5b6705f96e3b6d3e7e540841a2bd57ff89a23",
     "assets/backgrounds/nexlab-bg-desktop.webp": "524cf182865105827177dba04cac01fb3ba78b747cd83eb701538cb0b372cb2c",
     "assets/backgrounds/nexlab-bg-mobile.webp": "03c36f0075500939ad3e9ef49b7f51ae5b39c9384971456850c270fdc2cb876c",
     "assets/index-B1u8eynw.css": "ac26c6ca438255b425e875a97bfb28383c839f1a8178e2b6eae436467eabed2e",
@@ -1732,7 +1735,7 @@
     "assets/nexlab-feedback-evidence.js": "da8aaa84574c059c0e973d54be17f26c5b52f6933d65c9cf3fb8ad38043ab686",
     "assets/nexlab-inventory-v02674.css": "396da17313a0a27da0603ebe1d52f0b3b74eda663383826eb61e94b7670d7c21",
     "assets/nexlab-module-recovery.js": "bc29f27fe90e4e9dae84752338245943b2b3bad6061b48547991de0b6199fa3d",
-    "assets/nexlab-myday-dashboard-v02682.js": "298056dfc0561eb6b7d993b1f1a1f202cbca75f75f3060d4c2b7912753eb5c7b",
+    "assets/nexlab-myday-dashboard-v02682.js": "e8d1d5125bffe96cd1dccf08be2fda460d152f4194c97babfb6f77f1e0e4d688",
     "assets/nexlab-notification-sidebar-badge-v02682.js": "a1c2a1e7769c9d5619d066a2064a5ca6924a7af225083ffe98f92a453d6b9936",
     "assets/nexlab-notifications-history-v02682.css": "03af1caa19202416e4985c99ca4b143d7c61d45d6c4bb2cf5fb44cc2096b99be",
     "assets/nexlab-pending-abc-v02682.js": "c38687dc47fa138f7e59a0c1e349845cb0720607f187881f8bca4aa31b3d7933",
@@ -1747,7 +1750,7 @@
     "assets/nexlab-push-navigation.js": "a84f029bf503289f4221e65033a3e66cc543d0741c87fc05e44415e3c780776b",
     "assets/nexlab-pwa-readiness.js": "ef50e36007e6511c748dc5597738739563a6d89e0a2ced40783be9192982a2cd",
     "assets/nexlab-release-gate.js": "84443b0cb62669eaf8f631ef5f42bacc10e5c82cee8ee651c54fc67a0f0706fe",
-    "assets/nexlab-release-identity.js": "dd76c6b856e96c9c09011f5d2dd68e90a9797bf6b2dcbb0a6d4f1b3eddc94817",
+    "assets/nexlab-release-identity.js": "9fe27aff65c9c1494e1d72952b6ee21f6350d6d4f7d565b5c2862ac9a49910aa",
     "assets/nexlab-reports-v02682.css": "8c01471ddefc553d0d01999cbdaffafedb72e2c3e1b812e262d4c4cce094ebb4",
     "assets/nexlab-responsive-v02671.css": "1d793319a9669259df02b5f03c447f7e51a932e86d7f458e51593c55a530b069",
     "assets/nexlab-responsive-v02671.js": "ba3f5a1744116acda5fb8e5db4009e5785a145716cd2c2ac4a26745395eb3a5a",
@@ -1797,13 +1800,13 @@
     "icons/nexlab-favicon-rounded.png": "34444153e4be331ef77c64618cc04ff28b8d40dab0ba20ed0e124e2c8efbf592",
     "icons/nexlab-maskable-192.png": "69095b30dfa5df9091c3f6d62792074660bbf035071a56bafcac73d3fa7fe7be",
     "icons/nexlab-maskable-512.png": "c55135cbb263a64178443e06221f956f075fc8ce03d10dcd640d296f068723f5",
-    "index.html": "97630680ae746f788a5339582f5fbf440f21b65a85007dbd439608795352abbc",
+    "index.html": "590826702db0297fe45601b4b2d7716432f443421231b2ac3ca30cd61ee99a04",
     "manifest.webmanifest": "2d559965644f2936325df151ba55197b7d584ce570d2f607f4eba3e164b5aa01",
-    "nexlab-sw.js": "389545793ff01f766dcc34d9c60d9dde88858fed154429a2729ff8b59ad54c81",
+    "nexlab-sw.js": "7f7ca2a296deeb03675f4505ba67049c582c81dd481d154d4251d8b6ba65ce49",
     "offline.html": "d76cbf611242031655d7ddab7e11bb66763a43315ce7f13de3faaedc4253ed14",
-    "pwa-check.html": "d09f9e8f7c68c997dd255f81c836281f9f9e4e608dffc2ac36c843cb60ecc612",
-    "release-head.json": "c38ede1a964bb695c2e09652b019940df51546d78b446f8cf1984b0d782f688d",
-    "release-manifest.json": "ee428645ec91ef47eb23924ef33550588d0fbf370faeaee52802c5c1b3a73ad2"
+    "pwa-check.html": "7114ccf4b1e5d05a72799511fcf0f88c8b4a01333ffa192113d87ef005597a9c",
+    "release-head.json": "ae3e53536fed5a2e2865fa0e62b19032e77908ebe53860f6b7ab82c5281b7a93",
+    "release-manifest.json": "011a4e2efbc0d34a310db0ef107f996474b707ef42eb60d38f07f397951db969"
   },
   "corrections_0_26_41": {
     "marketing_creation_only_in_header": true,
@@ -2652,7 +2655,7 @@
     "header_fixed_body_scrollable": true,
     "css": "assets/nexlab-inventory-v02674.css"
   },
-  "notes": "Correções 1 a 3: Service Worker não confunde cache-buster de marca com revisão, verificações administrativas sem polling contínuo e limpeza dos parâmetros técnicos da URL/título da aba.",
+  "notes": "Dashboard: etapas 3, 4 e 5 concluídas. Refinamento visual fiel à referência, rótulos exatos e implementação isolada do runtime global. Sem nova tabela ou coluna.",
   "corrections_0_26_75": {
     "scope": "Central de Atividades — integridade e consulta",
     "activity_delete_fixed": true,
@@ -2980,7 +2983,7 @@
       "telemetry": {
         "app_version": "0.26.82",
         "build_revision": "beta-0-26-82-auditoria-final",
-        "asset_revision": "app-beta-0-26-82-dashboard-isolado"
+        "asset_revision": "app-beta-0-26-82-recuperacao-app"
       },
       "agenda_hook_error": {
         "dedicated_boundary": true,
@@ -3144,8 +3147,8 @@
   "corrections_1_4_0_26_82": {
     "status": "corrected_physical_homologation_pending",
     "revision": "beta-0-26-82-correcoes-1-4",
-    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
-    "cache_name": "nexlab-app-beta-0-26-82-dashboard-isolado-20260906T110445Z",
+    "asset_revision": "app-beta-0-26-82-recuperacao-app",
+    "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T110445Z",
     "fixes": [
       "all_current_asset_urls_use_single_asset_revision",
       "board_posts_insert_update_grants_restored_under_existing_rls",
@@ -3158,7 +3161,7 @@
   "corrections_5_9_0_26_82": {
     "status": "static_and_backend_regression_passed_physical_homologation_pending",
     "revision": "beta-0-26-82-correcoes-5-9",
-    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
+    "asset_revision": "app-beta-0-26-82-recuperacao-app",
     "fixes": [
       "legacy_export_r49_function_confirmed_retired_410_and_jwt_protected",
       "two_confirmed_test_profiles_quarantined_and_push_subscriptions_removed",
@@ -3201,8 +3204,8 @@
   "final_audit_completion_0_26_82": {
     "status": "static_and_backend_corrected_physical_homologation_pending",
     "revision": "beta-0-26-82-auditoria-final",
-    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
-    "cache_name": "nexlab-app-beta-0-26-82-dashboard-isolado-20260906T110445Z",
+    "asset_revision": "app-beta-0-26-82-recuperacao-app",
+    "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T110445Z",
     "fixes": [
       "service_worker_cache_policy_metadata_aligned_with_structural_recovery",
       "team_history_added_to_canonical_realtime_catalog",
@@ -3236,7 +3239,7 @@
   },
   "team_modal_layout_fix_0_26_82": {
     "revision": "beta-0-26-82-prioridade-1-reunioes-menus",
-    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
+    "asset_revision": "app-beta-0-26-82-recuperacao-app",
     "scope": "equipes",
     "status": "candidate_for_physical_homologation",
     "changes": [
@@ -3457,7 +3460,7 @@
   },
   "pre_homologation_corrections_0_26_82": {
     "revision": "beta-0-26-82-marketing-lista-direita-final",
-    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
+    "asset_revision": "app-beta-0-26-82-recuperacao-app",
     "generated_at": "2026-08-28T01:20:37Z",
     "stale_runtime_fallbacks_normalized": true,
     "precache_concurrency": 6,
@@ -3508,7 +3511,7 @@
   "files_count": 111,
   "file_sizes": {
     ".nojekyll": 0,
-    "404.html": 1600,
+    "404.html": 1585,
     "assets/backgrounds/nexlab-bg-desktop.webp": 45958,
     "assets/backgrounds/nexlab-bg-mobile.webp": 47182,
     "assets/index-B1u8eynw.css": 130638,
@@ -3545,7 +3548,7 @@
     "assets/nexlab-feedback-evidence.js": 24919,
     "assets/nexlab-inventory-v02674.css": 4751,
     "assets/nexlab-module-recovery.js": 4811,
-    "assets/nexlab-myday-dashboard-v02682.js": 6250,
+    "assets/nexlab-myday-dashboard-v02682.js": 33890,
     "assets/nexlab-notification-sidebar-badge-v02682.js": 1435,
     "assets/nexlab-notifications-history-v02682.css": 15149,
     "assets/nexlab-pending-abc-v02682.js": 37868,
@@ -3560,7 +3563,7 @@
     "assets/nexlab-push-navigation.js": 9502,
     "assets/nexlab-pwa-readiness.js": 31805,
     "assets/nexlab-release-gate.js": 3364,
-    "assets/nexlab-release-identity.js": 9449,
+    "assets/nexlab-release-identity.js": 9406,
     "assets/nexlab-reports-v02682.css": 11664,
     "assets/nexlab-responsive-v02671.css": 47795,
     "assets/nexlab-responsive-v02671.js": 9521,
@@ -3610,13 +3613,13 @@
     "icons/nexlab-favicon-rounded.png": 49631,
     "icons/nexlab-maskable-192.png": 15897,
     "icons/nexlab-maskable-512.png": 76408,
-    "index.html": 11372,
+    "index.html": 10682,
     "manifest.webmanifest": 1135,
-    "nexlab-sw.js": 20182,
+    "nexlab-sw.js": 20412,
     "offline.html": 981,
-    "pwa-check.html": 8669,
-    "release-head.json": 517,
-    "release-manifest.json": 10782
+    "pwa-check.html": 8594,
+    "release-head.json": 489,
+    "release-manifest.json": 10755
   },
   "marketing_list_right_integrity_fix_0_26_82": {
     "revision": "beta-0-26-82-marketing-lista-direita-final",
@@ -3635,8 +3638,8 @@
     "physical_confirmation": "pending",
     "inventory_files": 81,
     "hashes_regenerated": true,
-    "asset_revision": "app-beta-0-26-82-dashboard-isolado",
-    "cache_name": "nexlab-app-beta-0-26-82-dashboard-isolado-20260906T110445Z",
+    "asset_revision": "app-beta-0-26-82-recuperacao-app",
+    "cache_name": "nexlab-app-beta-0-26-82-recuperacao-app-20260906T110445Z",
     "historical_only": true
   },
   "final_static_validation_0_26_82": {
@@ -4625,7 +4628,7 @@
   },
   "settings_loading_fix_0_26_82": {
     "module": "Configurações",
-    "revision": "beta-0-26-82-dashboard-isolado",
+    "revision": "beta-0-26-82-recuperacao-app",
     "root_cause": "Erro de sintaxe no módulo lazy-loaded settings.js: propriedade type com aspas não fechadas e um fechamento de parênteses ausente no painel de notificações.",
     "client_error_fingerprint": "v267-3e7e1c06",
     "client_error_message": "Unexpected identifier 'is'",
@@ -4639,7 +4642,7 @@
   },
   "settings_independent_scroll_0_26_82": {
     "module": "Configurações",
-    "revision": "beta-0-26-82-dashboard-isolado",
+    "revision": "beta-0-26-82-recuperacao-app",
     "behavior": [
       "Menu lateral e painel de conteúdo possuem rolagem vertical independente em desktop e tablet.",
       "Trocar de seção retorna somente o painel de conteúdo ao topo, preservando a posição do menu lateral.",
@@ -4649,7 +4652,7 @@
   },
   "accessibility_font_scaling_fix_0_26_82": {
     "module": "Configurações > Acessibilidade",
-    "revision": "beta-0-26-82-dashboard-isolado",
+    "revision": "beta-0-26-82-recuperacao-app",
     "root_cause": "A preferência alterava apenas o font-size do elemento html, mas diversos componentes do NexLab definiam font-size em px, que não acompanha a escala do rem.",
     "corrections": [
       "Tamanhos tipográficos fixos em px dos estilos próprios foram convertidos para rem mantendo o mesmo tamanho visual no padrão.",
@@ -4665,7 +4668,7 @@
       "A",
       "B"
     ],
-    "revision": "beta-0-26-82-dashboard-isolado",
+    "revision": "beta-0-26-82-recuperacao-app",
     "purpose": "Histórico exclusivo de notificações recebidas",
     "configuration_controls_removed": true,
     "preferences_location": "Configurações > Notificações",
@@ -4713,10 +4716,65 @@
   "inventory_files_count": 110,
   "notifications_runtime_loading_fix_0_26_82": {
     "status": "corrected",
-    "revision": "beta-0-26-82-dashboard-isolado",
+    "revision": "beta-0-26-82-recuperacao-app",
     "cause": "O runtime compartilhado exportava e utilizava Ti, mas a declaração Ti foi removida acidentalmente durante a reconstrução dos filtros de Notificações.",
     "browser_error": "Export 'Ti' is not defined in module",
     "fix": "Restaurada a definição Ti usada pela Saúde do Sistema e mantido o conjunto de exports do runtime compartilhado.",
     "validation": "Ligação ESM real adicionada à validação para detectar exports inexistentes antes da publicação."
+  },
+  "dashboard_reference_steps_1_2_0_26_82": {
+    "status": "implemented",
+    "runtime_isolated": true,
+    "global_runtime_modified": false,
+    "legacy_overview_hidden": true,
+    "removed_from_visual_structure": [
+      "Usuários ativos",
+      "Central de Atividades",
+      "Convidar Membro"
+    ],
+    "overview_structure": [
+      "Meu Dia",
+      "Status do Lab",
+      "Minhas equipes",
+      "Meus projetos ativos",
+      "Minhas reuniões",
+      "Pendências",
+      "Projetos em andamento",
+      "Ações recomendadas",
+      "Equipes"
+    ],
+    "descriptive_subtitles": false,
+    "mural_switcher_preserved": true
+  },
+  "dashboard_reference_steps_3_4_5_0_26_82": {
+    "status": "implemented",
+    "visual_reference_refinement": true,
+    "exact_content_labels": true,
+    "runtime_isolated": true,
+    "global_runtime_modified": false,
+    "descriptive_subtitles": false,
+    "summary_card_order": [
+      "Minhas equipes",
+      "Meus projetos ativos",
+      "Minhas reuniões",
+      "Pendências"
+    ],
+    "main_sections": [
+      "Meu Dia",
+      "Status do Lab",
+      "Projetos em andamento",
+      "Ações recomendadas",
+      "Equipes"
+    ],
+    "project_subsections": [
+      "Últimos projetos modificados",
+      "Próximas reuniões",
+      "Próximos eventos"
+    ],
+    "quick_actions": [
+      "Gerenciar Equipes",
+      "Visualizar Projetos",
+      "Reservas e Reuniões"
+    ]
   }
 }
