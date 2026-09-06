@@ -3,11 +3,11 @@
   "display_version": "NEXLAB Beta 0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-atualizacao-estavel",
+  "revision": "beta-0-26-82-dashboard-acoes-compactas",
   "asset_revision": "app-beta-0-26-82-recuperacao-app",
-  "generated_at": "2026-09-06T22:30:00Z",
-  "title": "NEXLAB Beta 0.26.82 — Atualização estabilizada",
-  "cache_name": "nexlab-app-beta-0-26-82-atualizacao-estavel-20260906T223000Z",
+  "generated_at": "2026-09-06T22:44:34Z",
+  "title": "NEXLAB Beta 0.26.82 — Ações compactas do Dashboard",
+  "cache_name": "nexlab-app-beta-0-26-82-dashboard-acoes-compactas-20260906T224434Z",
   "entry": "index.html",
   "core_files": [
     "index.html",
@@ -320,13 +320,13 @@
     }
   },
   "validation": {
-    "scope": "NEXLAB Beta 0.26.82 — Atualização estabilizada",
+    "scope": "NEXLAB Beta 0.26.82 — Ações compactas do Dashboard",
     "version": "0.26.82",
-    "revision": "beta-0-26-82-atualizacao-estavel",
+    "revision": "beta-0-26-82-dashboard-acoes-compactas",
     "asset_revision": "app-beta-0-26-82-recuperacao-app",
     "metadata_cleanup_completed": true,
     "essential_count": 57,
-    "manifest_sha256": "4ec123693491576e19272958f87a343a9f34efb1176e7a5c34b887648ea9794e",
+    "manifest_sha256": "9feac76524e55264e6166d0761c99f634bb98655955ded56d1d8ed94fccfc613",
     "module_source_parse": "54/54",
     "runtime_module_link": "54/54"
   },
@@ -445,10 +445,10 @@
   "build_identity": {
     "version": "0.26.82",
     "release": "Beta",
-    "revision": "beta-0-26-82-atualizacao-estavel",
+    "revision": "beta-0-26-82-dashboard-acoes-compactas",
     "asset_revision": "app-beta-0-26-82-recuperacao-app",
-    "cache_name": "nexlab-app-beta-0-26-82-atualizacao-estavel-20260906T223000Z",
-    "generated_at": "2026-09-06T22:30:00Z"
+    "cache_name": "nexlab-app-beta-0-26-82-dashboard-acoes-compactas-20260906T224434Z",
+    "generated_at": "2026-09-06T22:44:34Z"
   },
   "external_feedback_evidence": {
     "provider": "cloudflare_r2",
@@ -625,7 +625,7 @@
     "marketing_database_constraints": true,
     "physical_homologation": "pending_real_installed_device_after_publication"
   },
-  "package_uncompressed_bytes": 4079324,
+  "package_uncompressed_bytes": 4079406,
   "corrections_0_26_30": {
     "activity_search_width_controlled": true,
     "activity_filters_aligned_desktop": true,
@@ -1731,7 +1731,7 @@
     "assets/nexlab-feedback-evidence.js": "da8aaa84574c059c0e973d54be17f26c5b52f6933d65c9cf3fb8ad38043ab686",
     "assets/nexlab-inventory-v02674.css": "396da17313a0a27da0603ebe1d52f0b3b74eda663383826eb61e94b7670d7c21",
     "assets/nexlab-module-recovery.js": "bc29f27fe90e4e9dae84752338245943b2b3bad6061b48547991de0b6199fa3d",
-    "assets/nexlab-myday-dashboard-v02682.js": "ab3df48f9ea1d717b12d6db3780c037a04a0e5758884fcb43ad1a11be7afd4b8",
+    "assets/nexlab-myday-dashboard-v02682.js": "69af72badb5b429d3c124da1056e53a01481fbf986f0cc4f99bdeb9e8937c800",
     "assets/nexlab-notification-sidebar-badge-v02682.js": "a1c2a1e7769c9d5619d066a2064a5ca6924a7af225083ffe98f92a453d6b9936",
     "assets/nexlab-notifications-history-v02682.css": "03af1caa19202416e4985c99ca4b143d7c61d45d6c4bb2cf5fb44cc2096b99be",
     "assets/nexlab-pending-abc-v02682.js": "c38687dc47fa138f7e59a0c1e349845cb0720607f187881f8bca4aa31b3d7933",
@@ -1746,7 +1746,7 @@
     "assets/nexlab-push-navigation.js": "a84f029bf503289f4221e65033a3e66cc543d0741c87fc05e44415e3c780776b",
     "assets/nexlab-pwa-readiness.js": "ef50e36007e6511c748dc5597738739563a6d89e0a2ced40783be9192982a2cd",
     "assets/nexlab-release-gate.js": "84443b0cb62669eaf8f631ef5f42bacc10e5c82cee8ee651c54fc67a0f0706fe",
-    "assets/nexlab-release-identity.js": "4b1176fb56d7c0abcf16af8fffccd80825775e5a6d24620ac249df15508b4e12",
+    "assets/nexlab-release-identity.js": "f8cb9baaac487a0a88809f2f469582767132994f0a9c820b767af3294e0c96ab",
     "assets/nexlab-reports-v02682.css": "8c01471ddefc553d0d01999cbdaffafedb72e2c3e1b812e262d4c4cce094ebb4",
     "assets/nexlab-responsive-v02671.css": "1d793319a9669259df02b5f03c447f7e51a932e86d7f458e51593c55a530b069",
     "assets/nexlab-responsive-v02671.js": "ba3f5a1744116acda5fb8e5db4009e5785a145716cd2c2ac4a26745395eb3a5a",
@@ -1796,13 +1796,13 @@
     "icons/nexlab-favicon-rounded.png": "34444153e4be331ef77c64618cc04ff28b8d40dab0ba20ed0e124e2c8efbf592",
     "icons/nexlab-maskable-192.png": "69095b30dfa5df9091c3f6d62792074660bbf035071a56bafcac73d3fa7fe7be",
     "icons/nexlab-maskable-512.png": "c55135cbb263a64178443e06221f956f075fc8ce03d10dcd640d296f068723f5",
-    "index.html": "c47f586df3b11659e6b19a74c9c8bd5c33003bc08836b06989320dc949ab2efd",
+    "index.html": "c9adbdafa833ab5d0aa16ce2f83c37863b9e6ec4ba3649842d097df5f27c05a4",
     "manifest.webmanifest": "2d559965644f2936325df151ba55197b7d584ce570d2f607f4eba3e164b5aa01",
-    "nexlab-sw.js": "287578e5d3e970f9ac267353be614d5a9cfa3a9cceb53765c9a34e7e44ac4d2e",
+    "nexlab-sw.js": "03e8a93024d8b8d495fae6849b7def6c6db20ec5d5f67b506f8787a4f9c6581a",
     "offline.html": "d76cbf611242031655d7ddab7e11bb66763a43315ce7f13de3faaedc4253ed14",
     "pwa-check.html": "7114ccf4b1e5d05a72799511fcf0f88c8b4a01333ffa192113d87ef005597a9c",
-    "release-head.json": "420102cd6b4c6d7564e28728a81532d3bb4e2391b65b10e91b06817148afd237",
-    "release-manifest.json": "4ec123693491576e19272958f87a343a9f34efb1176e7a5c34b887648ea9794e"
+    "release-head.json": "296889bcc38fa4cbd3ce5df698eda49d253e4fe51dabb6f319ee4de80415e4b3",
+    "release-manifest.json": "9feac76524e55264e6166d0761c99f634bb98655955ded56d1d8ed94fccfc613"
   },
   "corrections_0_26_41": {
     "marketing_creation_only_in_header": true,
@@ -2651,7 +2651,7 @@
     "header_fixed_body_scrollable": true,
     "css": "assets/nexlab-inventory-v02674.css"
   },
-  "notes": "Dashboard reduzido no desktop/notebook: alturas, espaçamentos, cards, ações e tipografia ajustados para caber melhor na tela sem alterar o runtime global, os dados ou a versão do app.",
+  "notes": "Ações do Dashboard simplificadas: botões principais usam “Abrir” + seta; links de Projetos/Eventos usam rótulo curto + seta; ações recomendadas permanecem descritivas.",
   "corrections_0_26_75": {
     "scope": "Central de Atividades — integridade e consulta",
     "activity_delete_fixed": true,
@@ -3544,7 +3544,7 @@
     "assets/nexlab-feedback-evidence.js": 24919,
     "assets/nexlab-inventory-v02674.css": 4751,
     "assets/nexlab-module-recovery.js": 4811,
-    "assets/nexlab-myday-dashboard-v02682.js": 52331,
+    "assets/nexlab-myday-dashboard-v02682.js": 52353,
     "assets/nexlab-notification-sidebar-badge-v02682.js": 1435,
     "assets/nexlab-notifications-history-v02682.css": 15149,
     "assets/nexlab-pending-abc-v02682.js": 37868,
@@ -3559,7 +3559,7 @@
     "assets/nexlab-push-navigation.js": 9502,
     "assets/nexlab-pwa-readiness.js": 31805,
     "assets/nexlab-release-gate.js": 3364,
-    "assets/nexlab-release-identity.js": 9418,
+    "assets/nexlab-release-identity.js": 9436,
     "assets/nexlab-reports-v02682.css": 11664,
     "assets/nexlab-responsive-v02671.css": 47795,
     "assets/nexlab-responsive-v02671.js": 9521,
@@ -3609,13 +3609,13 @@
     "icons/nexlab-favicon-rounded.png": 49631,
     "icons/nexlab-maskable-192.png": 15897,
     "icons/nexlab-maskable-512.png": 76408,
-    "index.html": 10686,
+    "index.html": 10692,
     "manifest.webmanifest": 1135,
-    "nexlab-sw.js": 20721,
+    "nexlab-sw.js": 20733,
     "offline.html": 981,
     "pwa-check.html": 8594,
-    "release-head.json": 497,
-    "release-manifest.json": 10763
+    "release-head.json": 509,
+    "release-manifest.json": 10775
   },
   "marketing_list_right_integrity_fix_0_26_82": {
     "revision": "beta-0-26-82-marketing-lista-direita-final",
@@ -4482,7 +4482,7 @@
     "manifest": "release-manifest.json",
     "check_interval_minutes": 15,
     "essential_files": 57,
-    "essential_bytes": 2377324,
+    "essential_bytes": 2377370,
     "staging_cache": true,
     "hash_validation": true,
     "automatic_activation": false,
@@ -4491,7 +4491,7 @@
     "release_json_used_for_polling": false,
     "service_worker_owner": "assets/nexlab-update-manager.js",
     "secondary_registrars_removed": true,
-    "revision": "beta-0-26-82-atualizacao-estavel",
+    "revision": "beta-0-26-82-dashboard-acoes-compactas",
     "fix": "Service Worker permanece em waiting até o usuário confirmar Atualizar agora; cache temporário separado por geração."
   },
   "final_interface_performance_0_26_82": {
@@ -4516,7 +4516,7 @@
   },
   "update_stability_hotfix_0_26_82": {
     "status": "corrected",
-    "revision": "beta-0-26-82-atualizacao-estavel",
+    "revision": "beta-0-26-82-dashboard-acoes-compactas",
     "public_version_unchanged": true,
     "root_cause": "O Service Worker ativava automaticamente durante install, enquanto o gerenciador exigia um worker em waiting para exibir Atualizar agora.",
     "corrections": [
@@ -4758,5 +4758,15 @@
       "nexlab_get_database_health_v02682"
     ],
     "desktop_compact_layout": true
+  },
+  "dashboard_action_labels_0_26_82": {
+    "status": "applied",
+    "public_version_unchanged": true,
+    "open_my_day": "Abrir + seta",
+    "open_teams": "Abrir + seta",
+    "open_mural": "Abrir + seta",
+    "project_link": "Projetos + seta",
+    "event_link": "Eventos + seta",
+    "recommended_actions": "unchanged"
   }
 }

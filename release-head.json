@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-atualizacao-estavel",
+  "revision": "beta-0-26-82-dashboard-acoes-compactas",
   "asset_revision": "app-beta-0-26-82-recuperacao-app",
-  "generated_at": "2026-09-06T22:30:00Z",
+  "generated_at": "2026-09-06T22:44:34Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "4ec123693491576e19272958f87a343a9f34efb1176e7a5c34b887648ea9794e",
+  "manifest_sha256": "9feac76524e55264e6166d0761c99f634bb98655955ded56d1d8ed94fccfc613",
   "essential_count": 57,
-  "essential_bytes": 2377324,
-  "cache_name": "nexlab-app-beta-0-26-82-atualizacao-estavel-20260906T223000Z"
+  "essential_bytes": 2377370,
+  "cache_name": "nexlab-app-beta-0-26-82-dashboard-acoes-compactas-20260906T224434Z"
 }
