@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-notificacoes-runtime-corrigido",
-  "asset_revision": "app-beta-0-26-82-notificacoes-runtime-corrigido",
-  "generated_at": "2026-09-06T02:26:00Z",
+  "revision": "beta-0-26-82-dashboard-finalizado",
+  "asset_revision": "app-beta-0-26-82-dashboard-finalizado",
+  "generated_at": "2026-09-06T03:08:42Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "ee428645ec91ef47eb23924ef33550588d0fbf370faeaee52802c5c1b3a73ad2",
+  "manifest_sha256": "2689064134192ddc86db173cb88f73af4968f9864efb8ee5129413eb7c272238",
   "essential_count": 57,
-  "essential_bytes": 2331805,
-  "cache_name": "nexlab-app-beta-0-26-82-notificacoes-runtime-corrigido"
+  "essential_bytes": 2328309,
+  "cache_name": "nexlab-app-beta-0-26-82-dashboard-finalizado"
 }

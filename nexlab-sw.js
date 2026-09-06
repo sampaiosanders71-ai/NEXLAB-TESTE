@@ -1,9 +1,9 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
-const APP_REVISION='beta-0-26-82-notificacoes-runtime-corrigido';
-const GENERATED_AT='2026-09-06T02:26:00Z';
-const ASSET_REVISION='app-beta-0-26-82-notificacoes-runtime-corrigido';
-const CACHE_NAME='nexlab-app-beta-0-26-82-notificacoes-runtime-corrigido';
+const APP_REVISION='beta-0-26-82-dashboard-finalizado';
+const GENERATED_AT='2026-09-06T03:01:18Z';
+const ASSET_REVISION='app-beta-0-26-82-dashboard-finalizado';
+const CACHE_NAME='nexlab-app-beta-0-26-82-dashboard-finalizado';
 const STAGING_CACHE_NAME='nexlab-stage-'+APP_REVISION;
 const META_CACHE_NAME='nexlab-update-meta';
 const CACHE_PREFIX='nexlab-';
