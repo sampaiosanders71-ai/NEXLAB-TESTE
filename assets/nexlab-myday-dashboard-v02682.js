@@ -1,301 +1,151 @@
-/* NEXLAB Beta 0.26.82 — Dashboard isolado: apresentação e Meu Dia sem alterar o runtime global. */
+/* NEXLAB 0.26.82 — Dashboard fiel à referência — etapas 3, 4 e 5. Isolado do runtime global. */
 import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-notificacoes-runtime-corrigido";
 
-const CARD_ID = "nexlab-myday-dashboard-summary-v02682";
-const STYLE_ID = "nexlab-dashboard-isolated-style-v02682";
-let refreshTimer = null;
-let lastSignature = "";
-let pageObserver = null;
-let mainObserver = null;
-let layoutTimer = null;
+const HOST_ID="nexlab-dashboard-reference-structure-v02682";
+const STYLE_ID="nexlab-dashboard-reference-structure-style-v02682";
+const LEGACY_CLASS="nexlab-dashboard-legacy-overview-hidden-v02682";
+const DATA_TTL_MS=45000;
+let refreshTimer=null,lastLoadAt=0,pageObserver=null,mainObserver=null,currentData=null;
 
-function navigate(tabId, pendingTab = "") {
-  if (pendingTab) try { sessionStorage.setItem("nexlab.pending.active-tab", pendingTab); } catch {}
-  try {
-    globalThis.dispatchEvent(new CustomEvent("nexlab:navigate-record", {
-      detail: { tabId, id: "", entityType: tabId === "pendencias" ? "my_day" : "dashboard_shortcut", groupLabel: tabId === "pendencias" ? "Meu Dia" : "Dashboard", source: "dashboard-isolated" }
-    }));
-  } catch {}
-}
+const ICONS=Object.freeze({
+  users:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  folder:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>',
+  calendar:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="m9 16 2 2 4-4"/></svg>',
+  bell:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>',
+  server:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><path d="M6 6h.01M6 17h.01"/></svg>',
+  file:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>',
+  clipboard:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2h6v2M9 9h6M9 13h6M9 17h4"/></svg>',
+  arrow:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  chevron:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>',
+  archive:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M5 6v14h14V6M9 10h6"/><path d="M4 3h16l1 3H3Z"/></svg>',
+  question:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 1 1 5.83 1c0 2-3 2-3 4M12 18h.01"/></svg>'
+});
 
-function injectStyles() {
-  if (document.getElementById(STYLE_ID)) return;
-  const style = document.createElement("style");
-  style.id = STYLE_ID;
-  style.textContent = `
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-overview>.module-shell.nexlab-dashboard-isolated-v02682,
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-overview .module-shell.nexlab-dashboard-isolated-v02682{
-  display:flex!important;flex-direction:column!important;gap:18px!important;min-width:0!important;
-}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-legacy-hero-v02682{display:none!important}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-top-row-v02682{
-  order:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,280px);gap:16px;align-items:stretch;min-width:0;
-}
-body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-summary{
-  margin:0!important;min-height:126px!important;display:grid!important;grid-template-columns:minmax(160px,1fr) auto auto!important;gap:18px!important;align-items:center!important;
-  padding:18px 20px!important;border:1px solid #dbe4ef!important;border-radius:18px!important;background:rgba(255,255,255,.96)!important;
-  box-shadow:0 4px 18px rgba(15,35,65,.035)!important;
-}
-body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-copy{min-width:0!important}
-body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-copy h2{margin:0!important;color:#08234b!important;font-size:1.02rem!important;font-weight:900!important;line-height:1.2!important}
-body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-stats{display:flex!important;gap:9px!important;align-items:stretch!important;flex-wrap:nowrap!important}
-body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-stat{
-  min-width:92px!important;min-height:70px!important;display:grid!important;place-content:center!important;gap:3px!important;padding:10px 12px!important;
-  border:1px solid #e0e7f0!important;border-radius:14px!important;background:#fff!important;color:#16335c!important;text-align:center!important;cursor:pointer!important;
-}
-body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-stat strong{font-size:1.05rem!important;font-weight:900!important;line-height:1!important;color:#071f48!important}
-body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-stat span{font-size:.66rem!important;font-weight:800!important;color:#60718a!important}
-body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-stat.is-danger{border-color:#fecaca!important;background:#fff7f7!important}
-body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-stat.is-danger strong{color:#dc2626!important}
-body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-open{
-  min-height:44px!important;padding:0 17px!important;border:0!important;border-radius:12px!important;background:#082b5f!important;color:#fff!important;font-size:.72rem!important;font-weight:900!important;white-space:nowrap!important;cursor:pointer!important;
-}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-status-v02682{
-  min-height:126px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;padding:18px;
-  border:1px solid #dbe4ef;border-radius:18px;background:rgba(255,255,255,.96);box-shadow:0 4px 18px rgba(15,35,65,.035);
-}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-status-copy-v02682{min-width:0}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-status-label-v02682{display:block;margin-bottom:7px;color:#6980a0;font-size:.63rem;font-weight:900;text-transform:uppercase;letter-spacing:.055em}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-status-value-v02682{display:flex;align-items:center;gap:8px;color:#0b2a63;font-size:.85rem;font-weight:900}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-status-dot-v02682{width:8px;height:8px;border-radius:999px;background:#84cc16;box-shadow:0 0 0 4px rgba(132,204,22,.12)}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-status-date-v02682{min-width:58px;display:grid;place-items:center;padding:10px 8px;border:1px solid #dfe7f1;border-radius:13px;background:#f8fbff;color:#0b2a63}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-status-date-v02682 strong{font-size:1.1rem;line-height:1;font-weight:900}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-status-date-v02682 span{margin-top:4px;font-size:.62rem;font-weight:900;text-transform:uppercase}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-summary-grid-v02682{order:2!important;gap:12px!important}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-summary-grid-v02682>button{min-height:86px!important;padding:15px!important;border-radius:16px!important}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-operational-v02682{order:3!important;gap:16px!important}
-body[data-nexlab-page="dashboard"] .dashboard-teams-v02650{order:4!important;margin-top:0!important}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-hide-subtitle-v02682{display:none!important}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-feed-header p{display:none!important}
-body[data-nexlab-page="dashboard"] .nexlab-dashboard-switcher{margin-bottom:16px!important}
-@media(max-width:980px){
-  body[data-nexlab-page="dashboard"] .nexlab-dashboard-top-row-v02682{grid-template-columns:minmax(0,1fr) 220px}
-  body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-summary{grid-template-columns:1fr!important;gap:13px!important}
-  body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-stats{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;width:100%!important}
-  body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-stat{min-width:0!important}
-  body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-open{width:100%!important}
-}
-@media(max-width:720px){
-  body[data-nexlab-page="dashboard"] .nexlab-dashboard-top-row-v02682{grid-template-columns:1fr!important}
-  body[data-nexlab-page="dashboard"] .nexlab-dashboard-status-v02682{min-height:auto!important}
-  body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}
-  body[data-nexlab-page="dashboard"] .nexlab-dashboard-summary-grid-v02682{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-  body[data-nexlab-page="dashboard"] .nexlab-dashboard-operational-v02682{grid-template-columns:1fr!important}
-}
-@media(max-width:420px){
-  body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-summary{padding:15px!important}
-  body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-stat{padding:9px 6px!important}
-  body[data-nexlab-page="dashboard"] .nexlab-myday-dashboard-stat span{font-size:.6rem!important}
-}
-@media(prefers-reduced-motion:reduce){body[data-nexlab-page="dashboard"] *{scroll-behavior:auto!important}}
+const svg=name=>ICONS[name]||ICONS.file;
+const num=value=>Number.isFinite(Number(value))?Number(value):0;
+const text=value=>String(value??'').trim();
+const isActiveProject=project=>!['finalizado','arquivado'].includes(text(project?.status).toLowerCase());
+const isArchivedTeam=team=>Boolean(team?.archived_at);
+function localDateKey(date){const d=new Date(date);if(Number.isNaN(d.getTime()))return null;return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function addDays(date,days){const d=new Date(date);d.setDate(d.getDate()+days);return d;}
+function meetingTime(row){const d=new Date(`${text(row?.data)}T${text(row?.hora||row?.horario||'00:00:00').slice(0,8)}`);return Number.isNaN(d.getTime())?0:d.getTime();}
+function eventTime(row){const d=new Date(`${text(row?.data)}T${text(row?.hora||row?.horario||'00:00:00').slice(0,8)}`);return Number.isNaN(d.getTime())?0:d.getTime();}
+function formatDate(value){const d=new Date(value);if(Number.isNaN(d.getTime()))return '';return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}).replace('.','');}
+function formatDayMonth(){const d=new Date();return{day:String(d.getDate()),month:d.toLocaleDateString('pt-BR',{month:'short'}).replace('.','').toUpperCase()};}
+
+function navigate(tabId,extra={}){try{globalThis.dispatchEvent(new CustomEvent('nexlab:navigate-record',{detail:{tabId,id:'',entityType:'dashboard_link',groupLabel:'Dashboard',source:'dashboard-reference',...extra}}));}catch{}}
+function navigatePending(tab='overview'){try{sessionStorage.setItem('nexlab.pending.active-tab',tab);}catch{}navigate('pendencias',{entityType:'my_day'});}
+
+function ensureStyle(){
+  if(document.getElementById(STYLE_ID))return;
+  const style=document.createElement('style');style.id=STYLE_ID;style.textContent=`
+body[data-nexlab-page="dashboard"] .${LEGACY_CLASS}{display:none!important}
+body[data-nexlab-page="dashboard"] #${HOST_ID}{--nxl-navy:#082650;--nxl-text:#0c2851;--nxl-muted:#6480a7;--nxl-border:#dbe5f0;--nxl-shadow:0 10px 30px rgba(24,57,99,.055);display:grid;gap:17px;width:100%;min-width:0;padding:0 1px 4px}
+body[data-nexlab-page="dashboard"] #${HOST_ID} *{box-sizing:border-box}
+body[data-nexlab-page="dashboard"] #${HOST_ID} button{font:inherit}
+body[data-nexlab-page="dashboard"] #${HOST_ID} svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#${HOST_ID} section,#${HOST_ID} article,#${HOST_ID} button{transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease,background .16s ease}
+#${HOST_ID} button:focus-visible{outline:2px solid #f28a1a;outline-offset:2px}
+.nxl-dash-top-v02682{display:grid;grid-template-columns:minmax(0,4.2fr) minmax(240px,1.08fr);gap:17px}
+.nxl-dash-myday-v02682,.nxl-dash-status-v02682,.nxl-dash-card-v02682,.nxl-dash-projects-v02682,.nxl-dash-actions-v02682,.nxl-dash-teams-v02682{background:linear-gradient(180deg,rgba(255,255,255,.985),rgba(253,254,255,.965));border:1px solid var(--nxl-border);border-radius:18px;box-shadow:var(--nxl-shadow)}
+.nxl-dash-myday-v02682{min-height:116px;padding:17px 18px 17px 21px;display:grid;grid-template-columns:minmax(150px,1fr) auto auto;gap:18px;align-items:center}
+.nxl-dash-myday-copy-v02682{min-width:0}.nxl-dash-myday-title-v02682{margin:0;color:#ef710c;font-size:13px;font-weight:950;line-height:1;text-transform:uppercase;letter-spacing:.035em}
+.nxl-dash-myday-stats-v02682{display:flex;gap:10px;align-items:stretch}.nxl-dash-myday-stat-v02682{min-width:118px;min-height:65px;border:1px solid #dee7f1;border-radius:15px;background:#fff;padding:9px 12px;display:grid;grid-template-columns:34px auto;grid-template-rows:auto auto;column-gap:10px;align-content:center;text-align:left;color:#153961;cursor:pointer;box-shadow:0 3px 12px rgba(38,72,112,.025)}
+.nxl-dash-myday-stat-v02682:hover{border-color:#bfd0e4;box-shadow:0 6px 16px rgba(38,72,112,.07);transform:translateY(-1px)}.nxl-dash-myday-stat-icon-v02682{grid-row:1/3;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;align-self:center}.nxl-dash-myday-stat-icon-v02682 svg{width:17px!important;height:17px!important}.nxl-dash-myday-stat-v02682 strong{font-size:18px;line-height:1;color:var(--nxl-text)}.nxl-dash-myday-stat-v02682>span:last-child{margin-top:3px;font-size:10px;font-weight:800;color:#5b7292}.nxl-dash-myday-stat-v02682.is-danger strong,.nxl-dash-myday-stat-v02682.is-danger>span:last-child{color:#e63b4d}
+.nxl-dash-primary-v02682{min-height:54px;border:1px solid #082650;border-radius:13px;background:linear-gradient(180deg,#0a315f,#082650);color:#fff;padding:0 19px;font-size:11px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:11px;white-space:nowrap;box-shadow:0 8px 18px rgba(8,38,80,.15)}.nxl-dash-primary-v02682:hover{background:#0b3568;transform:translateY(-1px)}.nxl-dash-primary-v02682 svg{width:16px!important;height:16px!important}
+.nxl-dash-status-v02682{min-height:116px;padding:16px 16px 16px 17px;display:flex;align-items:center;justify-content:space-between;gap:14px}.nxl-dash-status-main-v02682{display:flex;align-items:center;gap:12px;min-width:0;flex:1}.nxl-dash-status-icon-v02682{width:44px;height:44px;border-radius:13px;background:#f3f7fb;color:#5578a7;display:grid;place-items:center;flex:0 0 auto;border:1px solid #e4ebf3}.nxl-dash-status-copy-v02682{min-width:0}.nxl-dash-status-copy-v02682 small{display:block;color:#5b78a2;font-size:9px;font-weight:850;text-transform:uppercase;letter-spacing:.055em}.nxl-dash-status-copy-v02682 strong{display:flex;align-items:center;gap:8px;margin-top:7px;color:var(--nxl-text);font-size:13px;white-space:nowrap}.nxl-dash-status-dot-v02682{width:8px;height:8px;border-radius:50%;background:#86d414;box-shadow:0 0 0 4px rgba(134,212,20,.12)}.nxl-dash-status-dot-v02682.is-attention{background:#f97316;box-shadow:0 0 0 4px rgba(249,115,22,.12)}.nxl-dash-status-dot-v02682.is-offline{background:#94a3b8;box-shadow:0 0 0 4px rgba(148,163,184,.12)}
+.nxl-dash-date-v02682{position:relative;width:59px;height:59px;border:1px solid #dfe7f1;border-radius:14px;background:#f7f9fc;display:grid;place-items:center;align-content:center;color:#082650;flex:0 0 auto;margin-left:4px}.nxl-dash-date-v02682:before{content:"";position:absolute;left:-13px;top:9px;bottom:9px;width:1px;background:#e4ebf3}.nxl-dash-date-v02682 strong{font-size:17px;line-height:1}.nxl-dash-date-v02682 span{font-size:9px;font-weight:900;margin-top:4px}
+.nxl-dash-summary-v02682{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.nxl-dash-card-v02682{min-height:96px;padding:14px 16px;display:grid;grid-template-columns:46px minmax(0,1fr) 18px;align-items:center;gap:12px;text-align:left;cursor:pointer;color:var(--nxl-text)}.nxl-dash-card-v02682:hover{border-color:#c7d5e6;box-shadow:0 12px 28px rgba(24,57,99,.075);transform:translateY(-1px)}.nxl-dash-card-copy-v02682{min-width:0}.nxl-dash-card-v02682 small{display:block;color:#5b78a2;font-size:9px;font-weight:850;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nxl-dash-card-v02682 strong{display:block;margin-top:7px;font-size:21px;line-height:1}.nxl-dash-card-icon-v02682{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;flex:0 0 auto;border:1px solid transparent}.nxl-dash-card-chevron-v02682{color:#3f6c9e;display:grid;place-items:center}.nxl-dash-card-chevron-v02682 svg{width:15px!important;height:15px!important}
+#${HOST_ID} .is-blue{background:#f2f7ff;color:#2878ef;border-color:#e3edfb}#${HOST_ID} .is-orange{background:#fff6eb;color:#f17712;border-color:#faead6}#${HOST_ID} .is-green{background:#f4faeb;color:#70b719;border-color:#e5f0d5}#${HOST_ID} .is-red{background:#fff1f3;color:#ef3c4d;border-color:#f8dde1}
+.nxl-dash-main-v02682{display:grid;grid-template-columns:minmax(0,2.12fr) minmax(295px,1fr);gap:17px;align-items:stretch}.nxl-dash-projects-v02682,.nxl-dash-actions-v02682{padding:18px 21px;min-height:286px}.nxl-dash-section-title-v02682{margin:0;color:var(--nxl-text);font-size:16px;font-weight:900;line-height:1.2}.nxl-dash-inner-label-v02682{margin:16px 0 9px;color:#506f99;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.045em}
+.nxl-dash-project-list-v02682{display:grid;gap:8px}.nxl-dash-project-row-v02682{min-height:54px;border:1px dashed #d3dfec;border-radius:12px;padding:10px 12px;display:grid;grid-template-columns:34px minmax(0,1fr) auto auto;align-items:center;gap:10px;color:#4c6484;font-size:10px;background:rgba(252,253,255,.72)}.nxl-dash-project-row-icon-v02682{width:34px;height:34px;border-radius:9px;background:#f3f7fc;color:#58779f;display:grid;place-items:center}.nxl-dash-project-row-icon-v02682 svg{width:17px!important;height:17px!important}.nxl-dash-project-row-v02682 strong{color:#17385f;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.nxl-dash-project-row-v02682 button{border:0;background:transparent;color:#2a619e;cursor:pointer;font-weight:850;font-size:10px;padding:5px}.nxl-dash-project-empty-v02682{min-height:58px;border:1px dashed #d5e0ec;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:10px;color:#7187a5;font-size:10px;background:rgba(252,253,255,.64)}.nxl-dash-project-empty-v02682 svg{width:18px!important;height:18px!important}
+.nxl-dash-upcoming-v02682{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:12px;padding-top:12px;border-top:1px solid #e6edf4}.nxl-dash-upcoming-col-v02682+.nxl-dash-upcoming-col-v02682{border-left:1px solid #e6edf4;padding-left:18px}.nxl-dash-mini-list-v02682{display:grid;gap:6px}.nxl-dash-mini-item-v02682{display:flex;align-items:center;gap:8px;color:#657b98;font-size:10px;min-height:24px}.nxl-dash-mini-item-v02682 svg{width:15px!important;height:15px!important;flex:0 0 auto}.nxl-dash-mini-item-v02682 strong{color:#2d4d74;font-weight:750}.nxl-dash-empty-v02682{color:#8092aa;font-size:10px}.nxl-dash-project-footer-v02682{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:12px}.nxl-dash-project-footer-v02682 button{border:0;background:transparent;color:#0b2c58;font-size:10px;font-weight:900;cursor:pointer;padding:5px 2px}.nxl-dash-project-footer-v02682 button+button{color:#e76d10;border-left:1px solid #e2e8f0;padding-left:11px}
+.nxl-dash-actions-list-v02682{display:grid;gap:9px;margin-top:17px}.nxl-dash-action-v02682{min-height:58px;border:1px solid #dce6f0;border-radius:13px;background:#fff;padding:8px 11px;display:grid;grid-template-columns:minmax(0,1fr) 17px;align-items:center;gap:10px;text-align:left;cursor:pointer;color:#0c2a51;font-size:11px;font-weight:850}.nxl-dash-action-v02682:hover{border-color:#c9d7e7;box-shadow:0 7px 18px rgba(24,57,99,.055);transform:translateY(-1px)}.nxl-dash-action-left-v02682{display:flex;align-items:center;gap:11px}.nxl-dash-action-icon-v02682{width:39px;height:39px;border-radius:10px;display:grid;place-items:center}.nxl-dash-action-arrow-v02682{display:grid;place-items:center;color:#47709c}.nxl-dash-action-arrow-v02682 svg{width:14px!important;height:14px!important}
+.nxl-dash-teams-v02682{padding:16px 20px}.nxl-dash-teams-head-v02682{display:flex;align-items:center;justify-content:space-between;gap:12px}.nxl-dash-outline-v02682{height:40px;border:1px solid #f4a25a;border-radius:12px;background:#fff;color:#e66a0d;padding:0 14px;font-size:10px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;gap:8px}.nxl-dash-outline-v02682:hover{background:#fff9f4;transform:translateY(-1px)}.nxl-dash-outline-v02682 svg{width:14px!important;height:14px!important}.nxl-dash-team-metrics-v02682{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:13px;border:1px solid #e0e8f1;border-radius:14px;overflow:hidden;background:#fff}.nxl-dash-team-metric-v02682{min-height:76px;padding:12px 16px;display:flex;align-items:center;gap:12px;background:#fff}.nxl-dash-team-metric-v02682+.nxl-dash-team-metric-v02682{border-left:1px solid #e2e8f0}.nxl-dash-team-metric-icon-v02682{width:39px;height:39px;border-radius:10px;background:#f5f8fc;color:#5173a0;display:grid;place-items:center;border:1px solid #e6edf5}.nxl-dash-team-metric-v02682 strong{display:block;color:var(--nxl-text);font-size:19px;line-height:1}.nxl-dash-team-metric-v02682 span{display:block;margin-top:5px;color:#46658c;font-size:9px;font-weight:900;text-transform:uppercase}
+@media(max-width:1100px){.nxl-dash-top-v02682{grid-template-columns:1fr}.nxl-dash-myday-v02682{grid-template-columns:1fr}.nxl-dash-myday-stats-v02682{flex-wrap:wrap}.nxl-dash-main-v02682{grid-template-columns:1fr}.nxl-dash-summary-v02682{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){body[data-nexlab-page="dashboard"] #${HOST_ID}{gap:12px}.nxl-dash-top-v02682{gap:12px}.nxl-dash-myday-v02682,.nxl-dash-status-v02682,.nxl-dash-projects-v02682,.nxl-dash-actions-v02682,.nxl-dash-teams-v02682{border-radius:15px}.nxl-dash-myday-v02682{padding:15px}.nxl-dash-myday-stats-v02682{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}.nxl-dash-myday-stat-v02682{min-width:0;padding:9px;grid-template-columns:30px auto}.nxl-dash-myday-stat-icon-v02682{width:30px;height:30px}.nxl-dash-primary-v02682{width:100%}.nxl-dash-status-v02682{min-height:88px}.nxl-dash-summary-v02682{gap:9px}.nxl-dash-card-v02682{min-height:84px;padding:11px;grid-template-columns:38px minmax(0,1fr) 14px;gap:9px}.nxl-dash-card-icon-v02682{width:38px;height:38px}.nxl-dash-card-v02682 strong{font-size:19px}.nxl-dash-card-v02682 small{font-size:8px}.nxl-dash-main-v02682{gap:12px}.nxl-dash-projects-v02682,.nxl-dash-actions-v02682{padding:15px}.nxl-dash-project-row-v02682{grid-template-columns:32px minmax(0,1fr) auto}.nxl-dash-project-row-v02682>span:nth-of-type(2){display:none}.nxl-dash-upcoming-v02682{grid-template-columns:1fr}.nxl-dash-upcoming-col-v02682+.nxl-dash-upcoming-col-v02682{border-left:0;border-top:1px solid #e6edf4;padding-left:0;padding-top:11px}.nxl-dash-team-metrics-v02682{grid-template-columns:repeat(2,minmax(0,1fr))}.nxl-dash-team-metric-v02682+.nxl-dash-team-metric-v02682{border-left:0}.nxl-dash-team-metric-v02682:nth-child(even){border-left:1px solid #e2e8f0}.nxl-dash-team-metric-v02682:nth-child(n+3){border-top:1px solid #e2e8f0}}
 `;
   document.head.appendChild(style);
 }
 
-function findOverviewShell() {
-  if (document.body?.dataset?.nexlabPage !== "dashboard") return null;
-  return document.querySelector("#nexlab-main-content .nexlab-dashboard-overview > .module-shell")
-    || document.querySelector("#nexlab-main-content .nexlab-dashboard-overview .module-shell")
-    || document.querySelector("main .nexlab-dashboard-overview > .module-shell");
+function createIcon(name,className=''){const span=document.createElement('span');span.className=className;span.innerHTML=svg(name);return span;}
+function button(label,className,onClick){const el=document.createElement('button');el.type='button';el.className=className;el.textContent=label;if(onClick)el.addEventListener('click',onClick);return el;}
+function metricButton(label,value,icon,tone,onClick){
+  const el=document.createElement('button');el.type='button';el.className='nxl-dash-card-v02682';if(onClick)el.addEventListener('click',onClick);
+  const iconWrap=createIcon(icon,`nxl-dash-card-icon-v02682 ${tone}`);
+  const copy=document.createElement('div');copy.className='nxl-dash-card-copy-v02682';const small=document.createElement('small');small.textContent=label;const strong=document.createElement('strong');strong.dataset.metric=label;strong.textContent=String(num(value));copy.append(small,strong);
+  el.append(iconWrap,copy,createIcon('chevron','nxl-dash-card-chevron-v02682'));return el;
+}
+function myDayStat(label,value,tab,icon,tone,danger=false){
+  const el=document.createElement('button');el.type='button';el.className=`nxl-dash-myday-stat-v02682${danger?' is-danger':''}`;el.addEventListener('click',()=>navigatePending(tab));
+  el.append(createIcon(icon,`nxl-dash-myday-stat-icon-v02682 ${tone}`));const strong=document.createElement('strong');strong.dataset.myday=label;strong.textContent=String(num(value));const span=document.createElement('span');span.textContent=label;el.append(strong,span);return el;
+}
+function actionButton(label,icon,tone,tab){const el=document.createElement('button');el.type='button';el.className='nxl-dash-action-v02682';el.addEventListener('click',()=>navigate(tab));const left=document.createElement('span');left.className='nxl-dash-action-left-v02682';left.append(createIcon(icon,`nxl-dash-action-icon-v02682 ${tone}`),document.createTextNode(label));el.append(left,createIcon('chevron','nxl-dash-action-arrow-v02682'));return el;}
+function miniItem(icon,label,dateValue){const row=document.createElement('div');row.className='nxl-dash-mini-item-v02682';row.append(createIcon(icon));const strong=document.createElement('strong');strong.textContent=label;row.append(strong);if(dateValue){const date=document.createElement('span');date.textContent=formatDate(dateValue);row.append(date);}return row;}
+function emptyItem(label){const row=document.createElement('div');row.className='nxl-dash-empty-v02682';row.textContent=label;return row;}
+function projectEmpty(label){const row=document.createElement('div');row.className='nxl-dash-project-empty-v02682';row.append(createIcon('file'),document.createTextNode(label));return row;}
+
+function buildStructure(slide){
+  let host=slide.querySelector(`#${HOST_ID}`);if(host)return host;
+  const legacy=slide.querySelector(':scope > .module-shell');if(legacy)legacy.classList.add(LEGACY_CLASS);
+  host=document.createElement('section');host.id=HOST_ID;host.setAttribute('aria-label','Visão geral do Dashboard');
+
+  const top=document.createElement('div');top.className='nxl-dash-top-v02682';
+  const myday=document.createElement('section');myday.className='nxl-dash-myday-v02682';myday.id='nexlab-dashboard-myday-slot';
+  const mydayCopy=document.createElement('div');mydayCopy.className='nxl-dash-myday-copy-v02682';const title=document.createElement('h2');title.className='nxl-dash-myday-title-v02682';title.textContent='Meu Dia';mydayCopy.append(title);
+  const stats=document.createElement('div');stats.className='nxl-dash-myday-stats-v02682';stats.append(myDayStat('Tarefas',0,'tasks','clipboard','is-blue'),myDayStat('Reuniões',0,'meetings','calendar','is-blue'),myDayStat('Atrasados',0,'overdue','bell','is-red'));
+  const open=button('Abrir Meu Dia','nxl-dash-primary-v02682',()=>navigatePending('overview'));open.append(createIcon('arrow'));myday.append(mydayCopy,stats,open);
+
+  const status=document.createElement('section');status.className='nxl-dash-status-v02682';const statusMain=document.createElement('div');statusMain.className='nxl-dash-status-main-v02682';statusMain.append(createIcon('server','nxl-dash-status-icon-v02682'));
+  const statusCopy=document.createElement('div');statusCopy.className='nxl-dash-status-copy-v02682';const statusLabel=document.createElement('small');statusLabel.textContent='Status do Lab';const statusStrong=document.createElement('strong');statusStrong.id='nexlab-dashboard-reference-status';const dot=document.createElement('span');dot.className='nxl-dash-status-dot-v02682';const statusText=document.createElement('span');statusText.textContent='Operacional';statusStrong.append(dot,statusText);statusCopy.append(statusLabel,statusStrong);statusMain.append(statusCopy);
+  const dm=formatDayMonth();const date=document.createElement('div');date.className='nxl-dash-date-v02682';const day=document.createElement('strong');day.textContent=dm.day;const month=document.createElement('span');month.textContent=dm.month;date.append(day,month);status.append(statusMain,date);top.append(myday,status);
+
+  const summary=document.createElement('div');summary.className='nxl-dash-summary-v02682';summary.append(
+    metricButton('Minhas equipes',0,'users','is-blue',()=>navigate('equipes')),
+    metricButton('Meus projetos ativos',0,'folder','is-orange',()=>navigate('projetos')),
+    metricButton('Minhas reuniões',0,'calendar','is-green',()=>navigate('agenda')),
+    metricButton('Pendências',0,'bell','is-red',()=>navigatePending('overview'))
+  );
+
+  const main=document.createElement('div');main.className='nxl-dash-main-v02682';
+  const projects=document.createElement('section');projects.className='nxl-dash-projects-v02682';const ptitle=document.createElement('h2');ptitle.className='nxl-dash-section-title-v02682';ptitle.textContent='Projetos em andamento';projects.append(ptitle);
+  const pLabel=document.createElement('div');pLabel.className='nxl-dash-inner-label-v02682';pLabel.textContent='Últimos projetos modificados';const pList=document.createElement('div');pList.className='nxl-dash-project-list-v02682';pList.id='nexlab-dashboard-reference-projects';pList.append(projectEmpty('Nenhum projeto em andamento.'));projects.append(pLabel,pList);
+  const upcoming=document.createElement('div');upcoming.className='nxl-dash-upcoming-v02682';const meetings=document.createElement('div');meetings.className='nxl-dash-upcoming-col-v02682';const mLabel=document.createElement('div');mLabel.className='nxl-dash-inner-label-v02682';mLabel.textContent='Próximas reuniões';const mList=document.createElement('div');mList.className='nxl-dash-mini-list-v02682';mList.id='nexlab-dashboard-reference-meetings';mList.append(emptyItem('Nenhuma reunião agendada.'));meetings.append(mLabel,mList);
+  const events=document.createElement('div');events.className='nxl-dash-upcoming-col-v02682';const eLabel=document.createElement('div');eLabel.className='nxl-dash-inner-label-v02682';eLabel.textContent='Próximos eventos';const eList=document.createElement('div');eList.className='nxl-dash-mini-list-v02682';eList.id='nexlab-dashboard-reference-events';eList.append(emptyItem('Nenhum evento agendado.'));events.append(eLabel,eList);upcoming.append(meetings,events);projects.append(upcoming);
+  const pFooter=document.createElement('div');pFooter.className='nxl-dash-project-footer-v02682';pFooter.append(button('Ver Projetos','',()=>navigate('projetos')),button('Ver Eventos','',()=>navigate('eventos')));projects.append(pFooter);
+
+  const actions=document.createElement('section');actions.className='nxl-dash-actions-v02682';const atitle=document.createElement('h2');atitle.className='nxl-dash-section-title-v02682';atitle.textContent='Ações recomendadas';const actionList=document.createElement('div');actionList.className='nxl-dash-actions-list-v02682';actionList.append(actionButton('Gerenciar Equipes','users','is-blue','equipes'),actionButton('Visualizar Projetos','folder','is-green','projetos'),actionButton('Reservas e Reuniões','calendar','is-orange','reserva'));actions.append(atitle,actionList);main.append(projects,actions);
+
+  const teams=document.createElement('section');teams.className='nxl-dash-teams-v02682';const thead=document.createElement('div');thead.className='nxl-dash-teams-head-v02682';const ttitle=document.createElement('h2');ttitle.className='nxl-dash-section-title-v02682';ttitle.textContent='Equipes';const openTeams=button('Abrir equipes','nxl-dash-outline-v02682',()=>navigate('equipes'));openTeams.append(createIcon('arrow'));thead.append(ttitle,openTeams);
+  const metrics=document.createElement('div');metrics.className='nxl-dash-team-metrics-v02682';metrics.id='nexlab-dashboard-reference-team-metrics';for(const [label,icon] of [['Ativas','users'],['Integrantes','question'],['Arquivadas','archive'],['Sem projeto','folder']]){const item=document.createElement('article');item.className='nxl-dash-team-metric-v02682';item.append(createIcon(icon,'nxl-dash-team-metric-icon-v02682'));const copy=document.createElement('div');const strong=document.createElement('strong');strong.dataset.teammetric=label;strong.textContent='0';const span=document.createElement('span');span.textContent=label;copy.append(strong,span);item.append(copy);metrics.append(item);}teams.append(thead,metrics);
+
+  host.append(top,summary,main,teams);slide.append(host);return host;
 }
 
-function extractStatus(hero) {
-  if (!hero) return "—";
-  const labels = [...hero.querySelectorAll("span")];
-  const marker = labels.find(el => el.textContent?.trim().toLowerCase() === "status do lab");
-  const parent = marker?.parentElement;
-  if (parent) {
-    const candidates = [...parent.querySelectorAll("span")]
-      .map(el => el.textContent?.trim() || "")
-      .filter(text => text && text.toLowerCase() !== "status do lab");
-    if (candidates.length) return candidates[candidates.length - 1];
-  }
-  const raw = hero.innerText || "";
-  const match = raw.match(/Status do Lab\s*\n?\s*([^\n]+)/i);
-  return match?.[1]?.trim() || "—";
+function findOverviewSlide(){if(document.body?.dataset?.nexlabPage!=='dashboard')return null;return document.querySelector('#nexlab-main-content .nexlab-dashboard-slide.is-overview')||document.querySelector('main .nexlab-dashboard-slide.is-overview');}
+function ensureDashboard(){if(document.body?.dataset?.nexlabPage!=='dashboard')return false;ensureStyle();const slide=findOverviewSlide();if(!slide)return false;const host=buildStructure(slide);if(!host)return false;if(!currentData||Date.now()-lastLoadAt>DATA_TTL_MS)void loadData();else applyData(currentData);return true;}
+function setMetric(label,value){const host=document.getElementById(HOST_ID);if(!host)return;const node=[...host.querySelectorAll('[data-metric]')].find(n=>n.dataset.metric===label);if(node)node.textContent=String(num(value));}
+function setMyDay(label,value){const host=document.getElementById(HOST_ID);if(!host)return;const node=[...host.querySelectorAll('[data-myday]')].find(n=>n.dataset.myday===label);if(node)node.textContent=String(num(value));const parent=node?.closest('.nxl-dash-myday-stat-v02682');if(parent&&label==='Atrasados')parent.classList.toggle('is-danger',num(value)>0);}
+function setTeamMetric(label,value){const host=document.getElementById(HOST_ID);if(!host)return;const node=[...host.querySelectorAll('[data-teammetric]')].find(n=>n.dataset.teammetric===label);if(node)node.textContent=String(num(value));}
+function healthLabel(){if(navigator.onLine===false)return{label:'Sem conexão',state:'offline'};const h=globalThis.__NEXLAB_DASHBOARD_HEALTH__||{};const state=text(h.state||'operational').toLowerCase();if(state==='offline')return{label:'Sem conexão',state:'offline'};if(['attention','unavailable'].includes(state))return{label:state==='attention'?'Atenção':'Indisponível',state:'attention'};return{label:'Operacional',state:'operational'};}
+function updateHealth(){const root=document.getElementById('nexlab-dashboard-reference-status');if(!root)return;const dot=root.querySelector('.nxl-dash-status-dot-v02682');const label=root.querySelector('span:last-child');const h=healthLabel();if(label)label.textContent=h.label;if(dot){dot.classList.toggle('is-attention',h.state==='attention');dot.classList.toggle('is-offline',h.state==='offline');}}
+
+function applyData(data){
+  if(!document.getElementById(HOST_ID))return;const myday=data?.myday||{};setMyDay('Tarefas',myday.tasks);setMyDay('Reuniões',myday.meetings);setMyDay('Atrasados',myday.overdue);setMetric('Minhas equipes',data?.myTeamsCount);setMetric('Meus projetos ativos',data?.myProjectsCount);setMetric('Minhas reuniões',data?.myMeetingsCount);setMetric('Pendências',num(myday.tasks)+num(myday.approvals));
+  const tm=data?.teamMetrics||{};setTeamMetric('Ativas',tm.active_count);setTeamMetric('Integrantes',tm.unique_member_count);setTeamMetric('Arquivadas',tm.archived_count);setTeamMetric('Sem projeto',tm.without_projects_count);
+  const pList=document.getElementById('nexlab-dashboard-reference-projects');if(pList){pList.replaceChildren();const rows=(data?.activeProjects||[]).slice(0,3);if(!rows.length)pList.append(projectEmpty('Nenhum projeto em andamento.'));else rows.forEach(row=>{const item=document.createElement('div');item.className='nxl-dash-project-row-v02682';item.append(createIcon('file','nxl-dash-project-row-icon-v02682'));const strong=document.createElement('strong');strong.textContent=text(row.nome)||'Projeto';const meta=document.createElement('span');meta.textContent=formatDate(row.last_activity_at||row.updated_at||row.created_at);const open=button('Abrir','',()=>navigate('projetos',{id:text(row.id),entityType:'project',groupLabel:text(row.nome)||'Projeto'}));item.append(strong,meta,open);pList.append(item);});}
+  const mList=document.getElementById('nexlab-dashboard-reference-meetings');if(mList){mList.replaceChildren();const rows=(data?.personalMeetings||[]).slice(0,2);if(!rows.length)mList.append(emptyItem('Nenhuma reunião agendada.'));else rows.forEach(row=>mList.append(miniItem('calendar',text(row.titulo)||'Reunião',row.data)));}
+  const eList=document.getElementById('nexlab-dashboard-reference-events');if(eList){eList.replaceChildren();const rows=(data?.events||[]).slice(0,2);if(!rows.length)eList.append(emptyItem('Nenhum evento agendado.'));else rows.forEach(row=>eList.append(miniItem('calendar',text(row.titulo)||'Evento',row.data)));}updateHealth();
 }
 
-function ensureTopRow(shell, hero) {
-  let row = shell.querySelector(":scope > .nexlab-dashboard-top-row-v02682");
-  if (!row) {
-    row = document.createElement("section");
-    row.className = "nexlab-dashboard-top-row-v02682";
-    row.setAttribute("aria-label", "Resumo do Dashboard");
-    shell.prepend(row);
-  }
-  let status = row.querySelector(".nexlab-dashboard-status-v02682");
-  if (!status) {
-    status = document.createElement("aside");
-    status.className = "nexlab-dashboard-status-v02682";
-    row.append(status);
-  }
-  const now = new Date();
-  const value = extractStatus(hero);
-  status.innerHTML = `<div class="nexlab-dashboard-status-copy-v02682"><span class="nexlab-dashboard-status-label-v02682">Status do Lab</span><strong class="nexlab-dashboard-status-value-v02682"><i class="nexlab-dashboard-status-dot-v02682" aria-hidden="true"></i><span></span></strong></div><div class="nexlab-dashboard-status-date-v02682"><strong>${now.getDate()}</strong><span>${now.toLocaleDateString("pt-BR", { month: "short" }).replace(".", "")}</span></div>`;
-  status.querySelector(".nexlab-dashboard-status-value-v02682 span").textContent = value;
-  return row;
+async function loadData(){
+  const host=document.getElementById(HOST_ID);if(!host||document.body?.dataset?.nexlabPage!=='dashboard')return;lastLoadAt=Date.now();try{const now=new Date(),from=localDateKey(now),to=localDateKey(addDays(now,120));const[userResult,bundleResult,myDayResult]=await Promise.all([supabase.auth.getUser(),supabase.rpc('nexlab_get_dashboard_bundle_v02656',{p_date_from:from,p_date_to:to}),supabase.rpc('nexlab_get_my_day_summary_v1',{p_horizon_days:7})]);const uid=text(userResult?.data?.user?.id),bundle=bundleResult?.data||{},sections=bundle?.sections||{},summary=bundle?.summary||{},myday=myDayResult?.data||{};const projects=Array.isArray(summary?.projects)?summary.projects:(Array.isArray(sections?.projects)?sections.projects:[]),activeProjects=projects.filter(isActiveProject).sort((a,b)=>new Date(b?.last_activity_at||b?.updated_at||b?.created_at||0)-new Date(a?.last_activity_at||a?.updated_at||a?.created_at||0));const myProjects=activeProjects.filter(project=>{const reasons=Array.isArray(project?.access_reasons)?project.access_reasons.map(text):[];return reasons.some(reason=>['author','responsible','team','task'].includes(reason));});const teams=Array.isArray(sections?.teams)?sections.teams:[],teamMembers=Array.isArray(sections?.team_members)?sections.team_members:[],myTeamIds=new Set(teamMembers.filter(row=>text(row?.user_id)===uid).map(row=>text(row?.team_id)));teams.filter(team=>text(team?.lider_id)===uid).forEach(team=>myTeamIds.add(text(team?.id)));const myTeamsCount=teams.filter(team=>myTeamIds.has(text(team?.id))&&!isArchivedTeam(team)).length;const meetings=Array.isArray(sections?.meetings)?sections.meetings:[],nowMs=Date.now(),personalMeetings=meetings.filter(row=>{const ids=Array.isArray(row?.participant_ids)?row.participant_ids.map(text):[];return text(row?.autor_id)===uid||ids.includes(uid);}).filter(row=>meetingTime(row)>=nowMs).sort((a,b)=>meetingTime(a)-meetingTime(b));const events=Array.isArray(sections?.events)?sections.events:[],futureEvents=events.filter(row=>eventTime(row)>=nowMs).sort((a,b)=>eventTime(a)-eventTime(b));currentData={myday,myTeamsCount,myProjectsCount:myProjects.length,myMeetingsCount:personalMeetings.length,teamMetrics:summary?.team_metrics||{},activeProjects,personalMeetings,events:futureEvents};applyData(currentData);}catch{updateHealth();}
 }
 
-function markSubtitleNodes(shell) {
-  const patterns = [
-    /^Visão geral da estrutura/i,
-    /^Acompanhamento de projetos/i,
-    /^Histórico recente de operações/i,
-    /^Acompanhe seus projetos/i,
-    /^Painel operacional para o perfil/i
-  ];
-  shell.querySelectorAll("p").forEach(node => {
-    const text = node.textContent?.trim() || "";
-    if (patterns.some(pattern => pattern.test(text))) node.classList.add("nexlab-dashboard-hide-subtitle-v02682");
-  });
-}
+function schedule(delay=100){clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>ensureDashboard(),delay);}
+function observeMain(){if(mainObserver)return;const main=document.getElementById('nexlab-main-content')||document.querySelector('main');if(!main)return;mainObserver=new MutationObserver(()=>schedule(80));mainObserver.observe(main,{childList:true,subtree:true});}
+function start(){if(!document.body)return;ensureStyle();observeMain();if(!pageObserver){pageObserver=new MutationObserver(records=>{if(records.some(r=>r.type==='attributes'&&r.attributeName==='data-nexlab-page'))schedule(60);});pageObserver.observe(document.body,{attributes:true,attributeFilter:['data-nexlab-page']});}schedule(120);}
 
-function enhanceLayout() {
-  injectStyles();
-  const shell = findOverviewShell();
-  if (!shell) return false;
-  shell.classList.add("nexlab-dashboard-isolated-v02682");
-  const children = [...shell.children];
-  const hero = children.find(el => el.textContent?.includes("Status do Lab") && (el.querySelector("h1") || el.textContent?.includes("Olá,")));
-  if (hero) hero.classList.add("nexlab-dashboard-legacy-hero-v02682");
-  const row = ensureTopRow(shell, hero);
-  const myDay = document.getElementById(CARD_ID);
-  if (myDay && myDay.parentElement !== row) row.prepend(myDay);
-
-  const currentChildren = [...shell.children].filter(el => el !== row && el !== hero);
-  const summary = currentChildren.find(el => {
-    const text = el.textContent || "";
-    return el.tagName === "DIV" && el.querySelectorAll(":scope > button").length >= 3 && /equipes|projetos|reuniões|pendências/i.test(text);
-  });
-  if (summary) summary.classList.add("nexlab-dashboard-summary-grid-v02682");
-
-  const operational = currentChildren.find(el => /Ações recomendadas/i.test(el.textContent || ""));
-  if (operational) operational.classList.add("nexlab-dashboard-operational-v02682");
-
-  const teams = shell.querySelector(":scope > .dashboard-teams-v02650");
-  if (teams) teams.classList.add("nexlab-dashboard-teams-isolated-v02682");
-  markSubtitleNodes(shell);
-  return true;
-}
-
-function createStat(label, value, tab, danger = false) {
-  const button = document.createElement("button");
-  button.type = "button";
-  button.className = `nexlab-myday-dashboard-stat${danger ? " is-danger" : ""}`;
-  button.innerHTML = `<strong>${value}</strong><span>${label}</span>`;
-  button.addEventListener("click", () => navigate("pendencias", tab));
-  return button;
-}
-
-function render(summary) {
-  const shell = findOverviewShell();
-  if (!shell) return false;
-  let card = document.getElementById(CARD_ID);
-  if (!card) {
-    card = document.createElement("section");
-    card.id = CARD_ID;
-    card.className = "nexlab-myday-dashboard-summary";
-    card.setAttribute("aria-labelledby", `${CARD_ID}-title`);
-  }
-
-  const tasks = Number(summary?.tasks || 0);
-  const meetings = Number(summary?.meetings || 0);
-  const overdue = Number(summary?.overdue || 0);
-  const signature = [tasks, meetings, overdue].join(":");
-  if (card.dataset.signature !== signature) {
-    card.dataset.signature = signature;
-    card.replaceChildren();
-    const copy = document.createElement("div");
-    copy.className = "nexlab-myday-dashboard-copy";
-    const title = document.createElement("h2");
-    title.id = `${CARD_ID}-title`;
-    title.textContent = "Meu Dia";
-    copy.append(title);
-    const stats = document.createElement("div");
-    stats.className = "nexlab-myday-dashboard-stats";
-    stats.append(
-      createStat("Tarefas", tasks, "tasks"),
-      createStat("Reuniões", meetings, "meetings"),
-      createStat("Atrasados", overdue, "overdue", overdue > 0)
-    );
-    const action = document.createElement("button");
-    action.type = "button";
-    action.className = "nexlab-myday-dashboard-open";
-    action.textContent = "Abrir Meu Dia →";
-    action.addEventListener("click", () => navigate("pendencias", "overview"));
-    card.append(copy, stats, action);
-    lastSignature = signature;
-  }
-  enhanceLayout();
-  return true;
-}
-
-function renderUnavailable() {
-  const shell = findOverviewShell();
-  if (!shell) return;
-  render({ tasks: "—", meetings: "—", overdue: "—" });
-  const card = document.getElementById(CARD_ID);
-  if (!card) return;
-  card.querySelectorAll(".nexlab-myday-dashboard-stat strong").forEach(node => node.textContent = "—");
-}
-
-async function loadSummary() {
-  if (document.body?.dataset?.nexlabPage !== "dashboard") return;
-  if (!findOverviewShell()) return;
-  try {
-    const { data, error } = await supabase.rpc("nexlab_get_my_day_summary_v1", { p_horizon_days: 7 });
-    if (error || !data?.ok) throw error || new Error("Resumo indisponível");
-    render(data);
-  } catch {
-    if (!lastSignature) renderUnavailable();
-    else enhanceLayout();
-  }
-}
-
-function schedule(delay = 120) {
-  clearTimeout(refreshTimer);
-  refreshTimer = setTimeout(() => { void loadSummary(); }, delay);
-}
-
-function scheduleLayout(delay = 60) {
-  clearTimeout(layoutTimer);
-  layoutTimer = setTimeout(() => { try { enhanceLayout(); } catch {} }, delay);
-}
-
-function observeMainContent() {
-  if (mainObserver) return;
-  const main = document.getElementById("nexlab-main-content");
-  if (!main) return;
-  mainObserver = new MutationObserver(() => {
-    if (document.body?.dataset?.nexlabPage === "dashboard") {
-      scheduleLayout(50);
-      schedule(120);
-    }
-  });
-  mainObserver.observe(main, { childList: true, subtree: true });
-}
-
-function startObservers() {
-  injectStyles();
-  if (!document.body || pageObserver) return;
-  pageObserver = new MutationObserver(records => {
-    if (!records.some(record => record.type === "attributes" && record.attributeName === "data-nexlab-page")) return;
-    observeMainContent();
-    if (document.body?.dataset?.nexlabPage === "dashboard") { scheduleLayout(30); schedule(90); }
-  });
-  pageObserver.observe(document.body, { attributes: true, attributeFilter: ["data-nexlab-page"] });
-  observeMainContent();
-  if (document.body?.dataset?.nexlabPage === "dashboard") { scheduleLayout(30); schedule(120); }
-}
-
-globalThis.addEventListener("nexlab:myday-updated", event => {
-  if (document.body?.dataset?.nexlabPage === "dashboard" && event?.detail) render(event.detail);
-});
-globalThis.addEventListener("nexlab:network-status", () => schedule(250));
-globalThis.addEventListener("nexlab:application-ready", () => { scheduleLayout(40); schedule(120); });
-globalThis.addEventListener("popstate", () => { scheduleLayout(50); schedule(100); });
-globalThis.addEventListener("hashchange", () => { scheduleLayout(50); schedule(100); });
-
-document.readyState === "loading"
-  ? document.addEventListener("DOMContentLoaded", startObservers, { once: true })
-  : startObservers();
+globalThis.addEventListener('nexlab:myday-updated',event=>{if(document.body?.dataset?.nexlabPage!=='dashboard')return;currentData={...(currentData||{}),myday:event?.detail||{}};applyData(currentData);});
+globalThis.addEventListener('nexlab:dashboard-health',updateHealth);globalThis.addEventListener('nexlab:network-status',updateHealth);globalThis.addEventListener('popstate',()=>schedule(80));globalThis.addEventListener('hashchange',()=>schedule(80));
+document.readyState==='loading'?document.addEventListener('DOMContentLoaded',start,{once:true}):start();
