@@ -278,7 +278,7 @@ function buildOverview() {
   const desc=document.createElement('p'); desc.className='nxl-clean-myday-description'; desc.textContent=myDaySentence(state.myDay); copy.append(kicker,heading,desc);
   const stats=document.createElement('div'); stats.className='nxl-clean-myday-stats';
   stats.append(stat('Tarefas','file',state.myDay.tasks,'task','pendencias'),stat('Reuniões','calendar',state.myDay.meetings,'meeting','pendencias'),stat('Atrasados','bell',state.myDay.overdue,'overdue','pendencias'));
-  const openDay=button('Abrir Meu Dia','nxl-clean-primary',()=>{try{sessionStorage.setItem('nexlab.pending.active-tab','overview')}catch{} nav('pendencias')}); openDay.append(icon('arrow'));
+  const openDay=button('Abrir','nxl-clean-primary',()=>{try{sessionStorage.setItem('nexlab.pending.active-tab','overview')}catch{} nav('pendencias')}); openDay.append(icon('arrow'));
   myday.append(copy,stats,openDay);
 
   const status=document.createElement('section'); status.className='nxl-clean-status nxl-clean-panel';
@@ -300,11 +300,11 @@ function buildOverview() {
   const bottom=document.createElement('div'); bottom.className='nxl-clean-project-bottom';
   const mb1=document.createElement('div'); mb1.className='nxl-clean-mini-block'; const mt1=document.createElement('div'); mt1.className='nxl-clean-mini-title'; mt1.textContent='Próximas reuniões'; mb1.append(mt1,miniList('meeting',state.myMeetings,'Nenhuma reunião agendada.'));
   const mb2=document.createElement('div'); mb2.className='nxl-clean-mini-block'; const mt2=document.createElement('div'); mt2.className='nxl-clean-mini-title'; mt2.textContent='Próximos eventos'; mb2.append(mt2,miniList('event',state.events,'Nenhum evento agendado.')); bottom.append(mb1,mb2); projects.append(bottom);
-  const links=document.createElement('div'); links.className='nxl-clean-project-links'; const lp=button('Ver Projetos','nxl-clean-link',()=>nav('projetos')); const sep=document.createElement('span'); sep.className='nxl-clean-link-sep'; const le=button('Ver Eventos','nxl-clean-link is-orange',()=>nav('eventos')); links.append(lp,sep,le); projects.append(links);
+  const links=document.createElement('div'); links.className='nxl-clean-project-links'; const lp=button('Projetos','nxl-clean-link',()=>nav('projetos')); lp.append(icon('arrow')); const sep=document.createElement('span'); sep.className='nxl-clean-link-sep'; const le=button('Eventos','nxl-clean-link is-orange',()=>nav('eventos')); le.append(icon('arrow')); links.append(lp,sep,le); projects.append(links);
 
   const actions=document.createElement('section'); actions.className='nxl-clean-actions nxl-clean-panel'; const ahead=document.createElement('div'); const at=document.createElement('h2'); at.className='nxl-clean-section-title'; at.textContent='Ações recomendadas'; const ad=document.createElement('p'); ad.className='nxl-clean-section-desc'; ad.textContent='Atalhos para as principais funcionalidades.'; ahead.append(at,ad); const list=document.createElement('div'); list.className='nxl-clean-actions-list'; list.append(action('Gerenciar Equipes','Gerencie membros e permissões','users','equipes','blue'),action('Visualizar Projetos','Acesse todos os seus projetos','folder','projetos','green'),action('Reservas e Reuniões','Agende e gerencie espaços','calendar','reserva','orange')); actions.append(ahead,list); main.append(projects,actions); overview.append(main);
 
-  const teams=document.createElement('section'); teams.className='nxl-clean-teams nxl-clean-panel'; const head=document.createElement('div'); head.className='nxl-clean-teams-head'; const hcopy=document.createElement('div'); const tt=document.createElement('h2'); tt.className='nxl-clean-section-title'; tt.textContent='Equipes'; const td=document.createElement('p'); td.className='nxl-clean-section-desc'; td.textContent='Visão geral da estrutura e participação.'; hcopy.append(tt,td); const openTeams=button('Abrir equipes','nxl-clean-outline',()=>nav('equipes')); openTeams.append(icon('arrow')); head.append(hcopy,openTeams);
+  const teams=document.createElement('section'); teams.className='nxl-clean-teams nxl-clean-panel'; const head=document.createElement('div'); head.className='nxl-clean-teams-head'; const hcopy=document.createElement('div'); const tt=document.createElement('h2'); tt.className='nxl-clean-section-title'; tt.textContent='Equipes'; const td=document.createElement('p'); td.className='nxl-clean-section-desc'; td.textContent='Visão geral da estrutura e participação.'; hcopy.append(tt,td); const openTeams=button('Abrir','nxl-clean-outline',()=>nav('equipes')); openTeams.append(icon('arrow')); head.append(hcopy,openTeams);
   const metrics=document.createElement('div'); metrics.className='nxl-clean-team-metrics'; metrics.append(teamMetric('Ativas','users',state.teamMetrics.active_count),teamMetric('Integrantes','users',state.teamMetrics.unique_member_count),teamMetric('Arquivadas','archive',state.teamMetrics.archived_count),teamMetric('Sem projeto','folder',state.teamMetrics.without_projects_count)); teams.append(head,metrics); overview.append(teams);
 
   return overview;
@@ -331,7 +331,7 @@ function buildMural() {
   const page=document.createElement('div'); page.className='nxl-clean-mural-page';
   const head=document.createElement('section'); head.className='nxl-clean-mural-head nxl-clean-panel';
   const title=document.createElement('h2'); title.textContent='Mural interno';
-  const open=button('Abrir mural','nxl-clean-outline',()=>nav('mural')); open.append(icon('arrow'));
+  const open=button('Abrir','nxl-clean-outline',()=>nav('mural')); open.append(icon('arrow'));
   head.append(title,open); page.append(head);
   const list=document.createElement('div'); list.className='nxl-clean-mural-list';
   const rows=array(state.mural);
