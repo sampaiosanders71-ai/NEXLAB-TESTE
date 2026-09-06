@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-acessibilidade-fontes-corrigidas",
-  "asset_revision": "app-beta-0-26-82-acessibilidade-fontes-corrigidas",
-  "generated_at": "2026-09-06T01:06:00Z",
+  "revision": "beta-0-26-82-notificacoes-filtros-responsivos",
+  "asset_revision": "app-beta-0-26-82-notificacoes-filtros-responsivos",
+  "generated_at": "2026-09-06T02:12:00Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "202f3a8f1b0fe04c1026becce869912a96211c854674c78f601040bb626a6567",
-  "essential_count": 55,
-  "essential_bytes": 2342374,
-  "cache_name": "nexlab-app-beta-0-26-82-acessibilidade-fontes-corrigidas"
+  "manifest_sha256": "b3570a287279416272b53b0f5071086e12302232d9f727b2cc639162d86dff9d",
+  "essential_count": 57,
+  "essential_bytes": 2330279,
+  "cache_name": "nexlab-app-beta-0-26-82-notificacoes-filtros-responsivos"
 }

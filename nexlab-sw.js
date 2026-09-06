@@ -1,9 +1,9 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
-const APP_REVISION='beta-0-26-82-acessibilidade-fontes-corrigidas';
-const GENERATED_AT='2026-09-06T01:06:00Z';
-const ASSET_REVISION='app-beta-0-26-82-acessibilidade-fontes-corrigidas';
-const CACHE_NAME='nexlab-app-beta-0-26-82-acessibilidade-fontes-corrigidas';
+const APP_REVISION='beta-0-26-82-notificacoes-filtros-responsivos';
+const GENERATED_AT='2026-09-06T02:12:00Z';
+const ASSET_REVISION='app-beta-0-26-82-notificacoes-filtros-responsivos';
+const CACHE_NAME='nexlab-app-beta-0-26-82-notificacoes-filtros-responsivos';
 const STAGING_CACHE_NAME='nexlab-stage-'+APP_REVISION;
 const META_CACHE_NAME='nexlab-update-meta';
 const CACHE_PREFIX='nexlab-';
