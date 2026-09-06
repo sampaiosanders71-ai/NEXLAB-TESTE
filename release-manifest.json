@@ -4,7 +4,7 @@
   "release": "Beta",
   "revision": "beta-0-26-82-dashboard-finalizado",
   "asset_revision": "app-beta-0-26-82-dashboard-finalizado",
-  "generated_at": "2026-09-06T03:08:42Z",
+  "generated_at": "2026-09-06T03:24:30Z",
   "cache_name": "nexlab-app-beta-0-26-82-dashboard-finalizado",
   "essential_files": [
     {
@@ -25,7 +25,7 @@
     {
       "path": "assets/nexlab-release-identity.js",
       "size": 9409,
-      "sha256": "29ba40715233db18fad45d1c16f49ef7f29b899c29510a96781a7ab90c31e200"
+      "sha256": "2e8f9118828c4ba4af9686a652ab7ad40e3815613f47032906d500e741e2abe1"
     },
     {
       "path": "assets/nexlab-module-recovery.js",
@@ -154,8 +154,8 @@
     },
     {
       "path": "assets/nexlab-update-manager.js",
-      "size": 17149,
-      "sha256": "0aa082d10aeb1a90d9a9daaa33812bf185a39a96dcaed655f2fc25d394b82d9b"
+      "size": 17683,
+      "sha256": "e9896f1a1e10924b5d5c802e9a8f7406e96d740b985dfa9bf5ccf2bc3002af11"
     },
     {
       "path": "assets/nexlab-runtime-realtime-hub.js",
@@ -325,5 +325,5 @@
     "automatic_skip_waiting": false
   },
   "essential_count": 57,
-  "essential_bytes": 2328309
+  "essential_bytes": 2328843
 }
