@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-atualizacao-estavel',generatedAt:'2026-09-06T22:30:00Z',cacheName:'nexlab-app-beta-0-26-82-atualizacao-estavel-20260906T223000Z'});
+  const BUILD=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-backup-recuperacao-etapas-3-4',generatedAt:'2026-09-11T01:14:06Z',cacheName:'nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260911T011406Z'});
   const CURRENT={version:String(BUILD.version||''),release:String(BUILD.release||''),revision:String(BUILD.revision||''),generatedAt:String(BUILD.generatedAt||'')};
   const HEAD_URL='./release-head.json';
   const WORKER_URL='./nexlab-sw.js';

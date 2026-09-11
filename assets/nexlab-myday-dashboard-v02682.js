@@ -1,5 +1,5 @@
 /* NEXLAB 0.26.82 — Dashboard reconstruído do zero — etapas 1 a 9. */
-import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-recuperacao-app";
+import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-backup-recuperacao-etapas-3-4";
 
 const HOST_ID = 'nexlab-dashboard-clean-v02682';
 const STYLE_ID = 'nexlab-dashboard-clean-style-v02682';
