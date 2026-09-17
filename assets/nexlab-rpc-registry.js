@@ -73,7 +73,8 @@
       "nexlab_prepare_project_delete_v2690",
       "nexlab_resolve_booking_target_v26170",
       "nexlab_resolve_notification_target_v02682",
-      "nexlab_resolve_notification_target_v26190"
+      "nexlab_resolve_notification_target_v26190",
+      "nexlab_username_available_v1"
   ]);
   const MUTATING=Object.freeze([
       "admin_cleanup_system_data",
