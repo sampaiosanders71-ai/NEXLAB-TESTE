@@ -1,9 +1,9 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
 const APP_REVISION='beta-0-26-82-backup-recuperacao-etapas-3-4';
-const GENERATED_AT="2026-09-11T01:14:06Z";
+const GENERATED_AT="2026-09-17T21:01:23Z";
 const ASSET_REVISION='app-beta-0-26-82-backup-recuperacao-etapas-3-4';
-const CACHE_NAME="nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260911T011406Z";
+const CACHE_NAME="nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260917T210123Z";
 const GENERATION_KEY=GENERATED_AT.replace(/[^0-9A-Za-z]/g,'');
 const STAGING_CACHE_NAME='nxl-stage-'+APP_REVISION+'-'+GENERATION_KEY;
 const META_CACHE_NAME='nexlab-update-meta';

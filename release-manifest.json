@@ -4,8 +4,8 @@
   "release": "Beta",
   "revision": "beta-0-26-82-backup-recuperacao-etapas-3-4",
   "asset_revision": "app-beta-0-26-82-backup-recuperacao-etapas-3-4",
-  "generated_at": "2026-09-11T01:14:06Z",
-  "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260911T011406Z",
+  "generated_at": "2026-09-17T21:01:23Z",
+  "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260917T210123Z",
   "essential_files": [
     {
       "path": "index.html",
@@ -24,8 +24,8 @@
     },
     {
       "path": "assets/nexlab-release-identity.js",
-      "size": 9462,
-      "sha256": "e8fb60255ffa324d75384d843c2fe14284f22eae6f44f037a1615cc938c939f2"
+      "size": 9570,
+      "sha256": "3378855f54b77373a875da463d9fbe5e7ffaa6b6b1836b6545daa50d14bbdb68"
     },
     {
       "path": "assets/nexlab-module-recovery.js",
@@ -34,8 +34,8 @@
     },
     {
       "path": "assets/nexlab-rpc-registry.js",
-      "size": 9869,
-      "sha256": "8fb55d95af343815403ea1080f820834aab374005071374ae9b0e8b4d43f7b3b"
+      "size": 9907,
+      "sha256": "30c0fd0666b9c415e46562d9503f7aaea85e1f0f2d18548c734a3b65ec229f36"
     },
     {
       "path": "assets/nexlab-profile-preview.js",
@@ -61,6 +61,11 @@
       "path": "assets/nexlab-runtime-shared.js",
       "size": 223340,
       "sha256": "70df0ca2154def34b61c8c4981cb1fe67dc5511f2c5836d095405b51877374d6"
+    },
+    {
+      "path": "assets/nexlab-auth-flow-v02682.js",
+      "size": 3824,
+      "sha256": "41c937c3d959c1f494eec96edc5fc1756e6d3f3bae0b1f766e46b39db9fb4403"
     },
     {
       "path": "assets/nexlab-user-preferences.js",
@@ -179,8 +184,8 @@
     },
     {
       "path": "assets/nexlab-runtime-app.js",
-      "size": 63953,
-      "sha256": "e71811ae0a3d55a80a8914419211d74d2aee8e7393b02d3e4d312018dd98789f"
+      "size": 65544,
+      "sha256": "bb1b829e780b38df818a21dda9834c7992d67d24b92dc78321a4a59b601b17b5"
     },
     {
       "path": "assets/nexlab-myday-dashboard-v02682.js",
@@ -279,8 +284,8 @@
     },
     {
       "path": "assets/modules/settings.js",
-      "size": 57842,
-      "sha256": "1679bb54c4875a4ffd14ee26054b3ef8bb3eab8d0ef866f3d6bfea61e5fe9c13"
+      "size": 57987,
+      "sha256": "50751efc80ed619b35db829e4cacc483f975d53aa6341ad3c6f0e72f1980d59e"
     },
     {
       "path": "assets/nexlab-notifications-history-v02682.css",
