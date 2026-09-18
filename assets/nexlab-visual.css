@@ -24,10 +24,7 @@ body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"H
 h1,h2,h3,.module-title,.font-extrabold,.font-black{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif!important;letter-spacing:-.02em;}
 main{background:transparent!important;color:var(--nexlab-ink)!important;}
 .nexlab-bg{
-  background:
-    radial-gradient(circle at -10% -10%,rgba(142,209,26,.12),transparent 24rem),
-    radial-gradient(circle at 110% 0%,rgba(10,107,255,.10),transparent 26rem),
-    linear-gradient(135deg,#F8FAFC 0%,#F5F6F8 55%,#EEF4FF 100%)!important;
+  background:var(--nexlab-bg)!important;
 }
 
 main :where(h1,h2,h3,h4,.module-title,.text-blue-dark,.text-slate-900,.text-slate-800){color:var(--nexlab-navy)!important;}
