@@ -5,10 +5,10 @@
   "channel": "beta",
   "revision": "beta-0-26-82-google-calendar-integracao",
   "asset_revision": "app-beta-0-26-82-google-calendar-integracao",
-  "generated_at": "2026-09-27T18:53:46Z",
+  "generated_at": "2026-09-27T20:43:53Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "d48382634da63c9e861644e7d149002f9af8b656dbd5e2b3c71d5d2eddcc9782",
+  "manifest_sha256": "6c7b354fb6cafb023b3f896b1f0500cd879d633e46b512c6ef1aa522fb0f910b",
   "essential_count": 58,
-  "essential_bytes": 2404050,
-  "cache_name": "nexlab-app-beta-0-26-82-google-calendar-integracao-20260927T185346Z"
+  "essential_bytes": 2421154,
+  "cache_name": "nexlab-app-beta-0-26-82-google-calendar-integracao-20260927T204353Z"
 }

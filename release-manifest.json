@@ -4,8 +4,8 @@
   "release": "Beta",
   "revision": "beta-0-26-82-google-calendar-integracao",
   "asset_revision": "app-beta-0-26-82-google-calendar-integracao",
-  "generated_at": "2026-09-27T18:53:46Z",
-  "cache_name": "nexlab-app-beta-0-26-82-google-calendar-integracao-20260927T185346Z",
+  "generated_at": "2026-09-27T20:43:53Z",
+  "cache_name": "nexlab-app-beta-0-26-82-google-calendar-integracao-20260927T204353Z",
   "essential_files": [
     {
       "path": "index.html",
@@ -25,7 +25,7 @@
     {
       "path": "assets/nexlab-release-identity.js",
       "size": 9695,
-      "sha256": "3a275bf3824dda7df532dd4a14e0c6959b6073362875cdbd5b9abb0436f3e80c"
+      "sha256": "a5d4057114955429237de5fea1f098650b057ba35cb71c5005c5205e10bccfbd"
     },
     {
       "path": "assets/nexlab-module-recovery.js",
@@ -279,8 +279,8 @@
     },
     {
       "path": "assets/nexlab-settings.css",
-      "size": 28169,
-      "sha256": "3d6b349632d82ced99f30a2baa01530c4321a00ed2ada8f851b39bbd33fe7709"
+      "size": 45273,
+      "sha256": "d0320ce89c9d2c533fe3ff8282bbe6b99b5bd67210f9e109cc26c25d37218a85"
     },
     {
       "path": "assets/modules/settings.js",
@@ -330,5 +330,5 @@
     "automatic_skip_waiting": false
   },
   "essential_count": 58,
-  "essential_bytes": 2404050
+  "essential_bytes": 2421154
 }

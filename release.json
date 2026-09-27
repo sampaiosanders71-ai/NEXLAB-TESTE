@@ -5,9 +5,9 @@
   "channel": "beta",
   "revision": "beta-0-26-82-google-calendar-integracao",
   "asset_revision": "app-beta-0-26-82-google-calendar-integracao",
-  "generated_at": "2026-09-27T18:53:46Z",
-  "title": "NEXLAB Beta 0.26.82 — Integração com Google Calendar",
-  "cache_name": "nexlab-app-beta-0-26-82-google-calendar-integracao-20260927T185346Z",
+  "generated_at": "2026-09-27T20:43:53Z",
+  "title": "NEXLAB Beta 0.26.82 — Google Calendar + Configurações redesenhadas",
+  "cache_name": "nexlab-app-beta-0-26-82-google-calendar-integracao-20260927T204353Z",
   "entry": "index.html",
   "core_files": [
     "index.html",
@@ -325,13 +325,13 @@
     "version": "0.26.82",
     "revision": "beta-0-26-82-google-calendar-integracao",
     "asset_revision": "app-beta-0-26-82-google-calendar-integracao",
-    "generated_at": "2026-09-27T18:53:46Z",
+    "generated_at": "2026-09-27T20:43:53Z",
     "cloudflare_d1": "deferred_by_project_decision",
     "physical_device_test": "pending_for_google_calendar_revision",
     "technical_homologation": "candidate_requires_new_physical_receipt",
     "essential_count": 58,
     "essential_bytes": 2404050,
-    "manifest_sha256": "d48382634da63c9e861644e7d149002f9af8b656dbd5e2b3c71d5d2eddcc9782",
+    "manifest_sha256": "6c7b354fb6cafb023b3f896b1f0500cd879d633e46b512c6ef1aa522fb0f910b",
     "javascript": "55/55",
     "json_webmanifest": "4/4",
     "css": "17/17",
@@ -472,9 +472,9 @@
     "release": "Beta",
     "revision": "beta-0-26-82-google-calendar-integracao",
     "asset_revision": "app-beta-0-26-82-google-calendar-integracao",
-    "cache_name": "nexlab-app-beta-0-26-82-google-calendar-integracao-20260927T185346Z",
-    "generated_at": "2026-09-27T18:53:46Z",
-    "manifest_sha256": "d48382634da63c9e861644e7d149002f9af8b656dbd5e2b3c71d5d2eddcc9782"
+    "cache_name": "nexlab-app-beta-0-26-82-google-calendar-integracao-20260927T204353Z",
+    "generated_at": "2026-09-27T20:43:53Z",
+    "manifest_sha256": "6c7b354fb6cafb023b3f896b1f0500cd879d633e46b512c6ef1aa522fb0f910b"
   },
   "external_feedback_evidence": {
     "provider": "cloudflare_r2",
@@ -1335,7 +1335,7 @@
     {
       "path": "release-manifest.json",
       "size": 11010,
-      "sha256": "d48382634da63c9e861644e7d149002f9af8b656dbd5e2b3c71d5d2eddcc9782"
+      "sha256": "6c7b354fb6cafb023b3f896b1f0500cd879d633e46b512c6ef1aa522fb0f910b"
     }
   ],
   "inventory_files": [
@@ -1819,7 +1819,7 @@
     "offline.html": "d76cbf611242031655d7ddab7e11bb66763a43315ce7f13de3faaedc4253ed14",
     "pwa-check.html": "0a4e9178a4d11530f91def718e6bc5d8b6111e15451b21e52100ecb60dd7f7ce",
     "release-head.json": "a4f1fc5795349c2a8167c15538515bc1ba9392d2fd4d847a1cf4a75f98c54005",
-    "release-manifest.json": "d48382634da63c9e861644e7d149002f9af8b656dbd5e2b3c71d5d2eddcc9782"
+    "release-manifest.json": "6c7b354fb6cafb023b3f896b1f0500cd879d633e46b512c6ef1aa522fb0f910b"
   },
   "corrections_0_26_41": {
     "marketing_creation_only_in_header": true,
