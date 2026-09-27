@@ -468,7 +468,7 @@
       const rpcRegistryTest=window.__NEXLAB_RPC_REGISTRY__?.selfTest?.()||{ok:false,cases:[],counts:{}};
       const checks=[];
       checks.push({label:'Identidade da versão',ok:String(identity.version||'')===VERSION,detail:String(identity.version||'não identificada')});
-      checks.push({label:'Manifesto PWA',ok:String(manifest?.name||'').includes(VERSION),detail:manifest?.name||'não carregado'});
+      checks.push({label:'Manifesto PWA isolado',ok:manifest?.name==='NexLab'&&manifest?.id==='./nexlab-pwa'&&manifest?.scope==='./'&&String(manifest?.start_url||'').startsWith('./'),detail:manifest?`${manifest.name} · id ${manifest.id} · scope ${manifest.scope}`:'não carregado'});
       checks.push({label:'Inventário release.json',ok:String(release?.version||'')===VERSION,detail:String(release?.version||'não carregado')});
       checks.push({label:'Matriz de cinco perfis',ok:Boolean(matrix?.summary?.matrix_complete)&&Number(matrix?.summary?.actual_pairs)===Number(matrix?.summary?.expected_pairs),detail:matrix?`${matrix.summary.actual_pairs}/${matrix.summary.expected_pairs} pares`:'indisponível'});
       checks.push({label:'Bloqueio somente leitura funcional',ok:guardTest.ok===true,detail:`${guardTest.cases?.filter(item=>item.ok).length||0}/${guardTest.cases?.length||0} cenários; inclui RPC desconhecida, REST, Storage, Edge Function e domínio próprio`});

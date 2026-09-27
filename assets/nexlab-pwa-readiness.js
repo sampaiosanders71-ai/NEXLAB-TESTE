@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-backup-recuperacao-etapas-3-4',assetRevision:'app-beta-0-26-82-backup-recuperacao-etapas-3-4',cacheName:'nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260911T011406Z'});
+  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-backup-recuperacao-etapas-3-4',assetRevision:'app-beta-0-26-82-backup-recuperacao-etapas-3-4',cacheName:'nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260926T212958Z',pwa:{identity:{id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'}}});
   if (window.__NEXLAB_PWA_READINESS__?.revision === BUILD_IDENTITY.revision) return;
 
   const VERSION=BUILD_IDENTITY.version;
@@ -9,6 +9,9 @@
   const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-82-backup-recuperacao-etapas-3-4';
   const ASSET_REVISION=BUILD_IDENTITY.assetRevision;
   const CACHE_NAME=BUILD_IDENTITY.cacheName;
+  const PWA_IDENTITY=BUILD_IDENTITY.pwa?.identity||Object.freeze({id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'});
+  const EXPECTED_SCOPE_URL=new URL(String(PWA_IDENTITY.scope||'./'),document.baseURI).href;
+  const EXPECTED_WORKER_PATH=new URL(String(PWA_IDENTITY.workerPath||'nexlab-sw.js'),document.baseURI).pathname;
   const STORAGE_KEY='nexlab:pwa-readiness:'+VERSION;
   const DEVICE_EVIDENCE_KEY='nexlab:device-homologation:'+VERSION+':'+REVISION;
   const RESOURCE_ENTRY=BUILD_IDENTITY.resources?.entry||Object.freeze({main:'assets/nexlab-runtime-app.js',vendor:'assets/nexlab-runtime-vendor.js',shared:'assets/nexlab-runtime-shared.js',feature:'assets/nexlab-runtime-features.js',export:'assets/nexlab-runtime-export.js'});
@@ -92,8 +95,13 @@
     const manifest=network.json||{};
     const icons=Array.isArray(manifest.icons)?manifest.icons:[];
     const iconResults=await Promise.all(icons.map(async(icon)=>({src:icon.src,sizes:icon.sizes,purpose:icon.purpose||'any',...(await verifyUrl(new URL(icon.src,link.href).href,release))})));
-    const displayOk=['standalone','fullscreen','minimal-ui','window-controls-overlay'].includes(manifest.display)||Array.isArray(manifest.display_override)&&manifest.display_override.some(mode=>['standalone','fullscreen','minimal-ui','window-controls-overlay'].includes(mode));
-    return {ok:Boolean(manifest.name&&manifest.start_url&&manifest.scope&&displayOk&&iconResults.length>=2&&iconResults.every(item=>item.ok)),href:link.href,name:manifest.name||'',startUrl:manifest.start_url||'',scope:manifest.scope||'',display:manifest.display||'',displayOverride:manifest.display_override||[],icons:iconResults,allIconsAvailable:iconResults.length>=2&&iconResults.every(item=>item.ok)};
+    const displayOk=['standalone','fullscreen','minimal-ui'].includes(manifest.display)||Array.isArray(manifest.display_override)&&manifest.display_override.some(mode=>['standalone','fullscreen','minimal-ui'].includes(mode));
+    const resolvedId=manifest.id?new URL(manifest.id,link.href).href:'';
+    const expectedId=new URL(String(PWA_IDENTITY.id||'./nexlab-pwa'),link.href).href;
+    const resolvedScope=manifest.scope?new URL(manifest.scope,link.href).href:'';
+    const resolvedStart=manifest.start_url?new URL(manifest.start_url,link.href).href:'';
+    const identityOk=manifest.name===String(PWA_IDENTITY.name||'NexLab')&&resolvedId===expectedId&&resolvedScope===EXPECTED_SCOPE_URL&&resolvedStart.startsWith(EXPECTED_SCOPE_URL);
+    return {ok:Boolean(identityOk&&displayOk&&iconResults.length>=2&&iconResults.every(item=>item.ok)),href:link.href,id:manifest.id||'',resolvedId,expectedId,identityOk,name:manifest.name||'',startUrl:manifest.start_url||'',resolvedStart,scope:manifest.scope||'',resolvedScope,display:manifest.display||'',displayOverride:manifest.display_override||[],icons:iconResults,allIconsAvailable:iconResults.length>=2&&iconResults.every(item=>item.ok)};
   }
   async function workerIdentity(worker){
     if(!worker)return {ok:false,error:'Worker ativo não encontrado.'};
@@ -108,10 +116,15 @@
   async function serviceWorkerState(){
     if(!('serviceWorker' in navigator))return {supported:false,registered:false,controlled:false,active:false,identity:{ok:false},error:'Navegador sem Service Worker.'};
     try{
-      const registration=await navigator.serviceWorker.getRegistration();
+      const registration=await navigator.serviceWorker.getRegistration('./');
       const active=registration?.active||null;
-      const identity=await workerIdentity(navigator.serviceWorker.controller||active);
-      return {supported:true,registered:Boolean(registration),controlled:Boolean(navigator.serviceWorker.controller),installing:Boolean(registration?.installing),waiting:Boolean(registration?.waiting),active:Boolean(active),scope:registration?.scope||'',scriptURL:active?.scriptURL||registration?.waiting?.scriptURL||'',identity};
+      const controller=navigator.serviceWorker.controller||null;
+      const identity=await workerIdentity(controller||active);
+      const scriptURL=controller?.scriptURL||active?.scriptURL||registration?.waiting?.scriptURL||'';
+      const workerPath=scriptURL?new URL(scriptURL).pathname:'';
+      const scopeOk=Boolean(registration)&&registration.scope===EXPECTED_SCOPE_URL;
+      const ownerOk=Boolean(scriptURL)&&workerPath===EXPECTED_WORKER_PATH;
+      return {supported:true,registered:Boolean(registration),controlled:Boolean(controller),installing:Boolean(registration?.installing),waiting:Boolean(registration?.waiting),active:Boolean(active),scope:registration?.scope||'',scopeOk,scriptURL,workerPath,ownerOk,identity:{...identity,ok:Boolean(identity?.ok&&scopeOk&&ownerOk)}};
     }catch(error){return {supported:true,registered:false,controlled:false,active:false,identity:{ok:false},error:String(error?.message||error)};}
   }
   async function verifyCachedResponse(request,response,release){

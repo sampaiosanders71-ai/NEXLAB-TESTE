@@ -1,9 +1,13 @@
 (function(){
   'use strict';
-  const BUILD=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-backup-recuperacao-etapas-3-4',generatedAt:'2026-09-11T01:14:06Z',cacheName:'nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260911T011406Z'});
+  const BUILD=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-backup-recuperacao-etapas-3-4',generatedAt:'2026-09-26T21:29:58Z',cacheName:'nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260926T212958Z',pwa:{identity:{id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',worker:'./nexlab-sw.js?pwa=nexlab-identity-v2-20260926',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'}}});
   const CURRENT={version:String(BUILD.version||''),release:String(BUILD.release||''),revision:String(BUILD.revision||''),generatedAt:String(BUILD.generatedAt||'')};
   const HEAD_URL='./release-head.json';
-  const WORKER_URL='./nexlab-sw.js';
+  const PWA_IDENTITY=BUILD.pwa?.identity||Object.freeze({id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',worker:'./nexlab-sw.js',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'});
+  const WORKER_URL=String(PWA_IDENTITY.worker||'./nexlab-sw.js');
+  const WORKER_SCOPE=String(PWA_IDENTITY.scope||'./');
+  const EXPECTED_SCOPE_URL=new URL(WORKER_SCOPE,document.baseURI).href;
+  const EXPECTED_WORKER_PATH=new URL(String(PWA_IDENTITY.workerPath||'nexlab-sw.js'),document.baseURI).pathname;
   const CHECK_INTERVAL_MS=15*60*1000;
   const VISIBILITY_MIN_INTERVAL_MS=2*60*1000;
   const MESSAGE_TIMEOUT_MS=5000;
@@ -27,7 +31,22 @@
   function setProgress(message){if(bannerText)bannerText.textContent=message;if(bannerNow){bannerNow.disabled=true;bannerNow.textContent='Atualizando...';}}
   function restoreAction(message){if(bannerText)bannerText.textContent=message||'Não foi possível ativar a atualização. Tente novamente.';if(bannerNow){bannerNow.disabled=false;bannerNow.textContent='Tentar novamente';}}
   async function fetchHead(){const url=new URL(HEAD_URL,location.href);url.searchParams.set('check',String(Date.now()));const response=await fetch(url,{cache:'no-store',credentials:'same-origin',headers:{Accept:'application/json'}});if(!response.ok)throw new Error(`Cabeçalho de atualização indisponível (${response.status}).`);const data=await response.json();return id(data)||{};}
-  async function getRegistration(){if(!('serviceWorker'in navigator)||location.protocol==='file:')return null;let registration=await navigator.serviceWorker.getRegistration('./');if(!registration)registration=await navigator.serviceWorker.register(WORKER_URL,{scope:'./',updateViaCache:'none'});observeRegistration(registration);return registration;}
+  function workerScriptOwned(worker){if(!worker?.scriptURL)return true;try{return new URL(worker.scriptURL).pathname===EXPECTED_WORKER_PATH;}catch{return false;}}
+  function registrationOwned(registration){if(!registration||registration.scope!==EXPECTED_SCOPE_URL)return false;return [registration.active,registration.waiting,registration.installing].filter(Boolean).every(workerScriptOwned);}
+  async function getRegistration(){
+    if(!('serviceWorker'in navigator)||location.protocol==='file:')return null;
+    const registrations=await navigator.serviceWorker.getRegistrations();
+    let registration=registrations.find(item=>item.scope===EXPECTED_SCOPE_URL)||null;
+    if(registration&&!registrationOwned(registration)){
+      await registration.unregister();
+      registration=null;
+      dispatch('nexlab:pwa-scope-reclaimed',{scope:EXPECTED_SCOPE_URL,reason:'foreign-worker-on-nexlab-scope'});
+    }
+    registration=await navigator.serviceWorker.register(WORKER_URL,{scope:WORKER_SCOPE,updateViaCache:'none'});
+    if(registration.scope!==EXPECTED_SCOPE_URL)throw new Error('O Service Worker do NexLab foi registrado fora do escopo exclusivo do aplicativo.');
+    observeRegistration(registration);
+    return registration;
+  }
   async function workerMessage(worker,payload,timeoutMs=MESSAGE_TIMEOUT_MS){if(!worker||typeof MessageChannel==='undefined')return null;return withTimeout(new Promise((resolve,reject)=>{const channel=new MessageChannel();channel.port1.onmessage=(event)=>{const data=event.data||{};data.ok===false?reject(new Error(data.error||'O Service Worker recusou a operação.')):resolve(data);};worker.postMessage(payload,[channel.port2]);}),timeoutMs,'O Service Worker não respondeu no tempo esperado.');}
   async function workerIdentity(worker){try{return id(await workerMessage(worker,{type:'NEXLAB_GET_VERSION'}));}catch{return null;}}
   async function validateWaiting(worker){return workerMessage(worker,{type:'NEXLAB_VALIDATE_INSTALL'},10000);}
