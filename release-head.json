@@ -5,10 +5,10 @@
   "channel": "beta",
   "revision": "beta-0-26-82-backup-recuperacao-etapas-3-4",
   "asset_revision": "app-beta-0-26-82-backup-recuperacao-etapas-3-4",
-  "generated_at": "2026-09-27T02:41:01Z",
+  "generated_at": "2026-09-27T03:46:14Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "477a0f5c3d6d501d189976f6c599c84de89b8b836e39fb64ab1feca5f8c38f15",
+  "manifest_sha256": "0b4f5b18c830365892d7a034a6212a4f84ea6c759ea5bdcaa4fb65d215994b68",
   "essential_count": 58,
   "essential_bytes": 2390097,
-  "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T024101Z"
+  "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T034614Z"
 }

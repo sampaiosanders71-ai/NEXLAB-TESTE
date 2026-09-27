@@ -5,9 +5,9 @@
   "channel": "beta",
   "revision": "beta-0-26-82-backup-recuperacao-etapas-3-4",
   "asset_revision": "app-beta-0-26-82-backup-recuperacao-etapas-3-4",
-  "generated_at": "2026-09-27T02:41:01Z",
-  "title": "NEXLAB Beta 0.26.82 — dashboard institucional reconstruído",
-  "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T024101Z",
+  "generated_at": "2026-09-27T03:46:14Z",
+  "title": "NEXLAB Beta 0.26.82 — exclusão de Coordenador corrigida",
+  "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T034614Z",
   "entry": "index.html",
   "core_files": [
     "index.html",
@@ -472,8 +472,9 @@
     "release": "Beta",
     "revision": "beta-0-26-82-backup-recuperacao-etapas-3-4",
     "asset_revision": "app-beta-0-26-82-backup-recuperacao-etapas-3-4",
-    "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T012523Z",
-    "generated_at": "2026-09-27T01:25:23Z"
+    "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T034614Z",
+    "generated_at": "2026-09-27T03:46:14Z",
+    "manifest_sha256": "0b4f5b18c830365892d7a034a6212a4f84ea6c759ea5bdcaa4fb65d215994b68"
   },
   "external_feedback_evidence": {
     "provider": "cloudflare_r2",
@@ -650,7 +651,7 @@
     "marketing_database_constraints": true,
     "physical_homologation": "pending_real_installed_device_after_publication"
   },
-  "package_uncompressed_bytes": 4000915,
+  "package_uncompressed_bytes": 4203461,
   "corrections_0_26_30": {
     "activity_search_width_controlled": true,
     "activity_filters_aligned_desktop": true,
@@ -1334,7 +1335,7 @@
     {
       "path": "release-manifest.json",
       "size": 10964,
-      "sha256": "477a0f5c3d6d501d189976f6c599c84de89b8b836e39fb64ab1feca5f8c38f15"
+      "sha256": "0b4f5b18c830365892d7a034a6212a4f84ea6c759ea5bdcaa4fb65d215994b68"
     }
   ],
   "inventory_files": [
@@ -1760,16 +1761,16 @@
     "assets/nexlab-projects-v02667.css": "2acb7de318fd87447ffe82995710f92db27e311a38e3bf68c17fb0f29b0327c2",
     "assets/nexlab-push-consent.js": "a7a238e4e50b072bd6a2fc7e3476523308f2e70773835bc3059271914c6cdab6",
     "assets/nexlab-push-navigation.js": "36f5ff81d12fe30f0f1904f327caf20d3f74da5a2117d14407bca00a8de9bc77",
-    "assets/nexlab-pwa-readiness.js": "724d962a569d1b2014991967861072ed3df99eb49e1ae3674a8e47888fa0f26c",
+    "assets/nexlab-pwa-readiness.js": "190e04d4c142abfd595114862c6ad92cae875aa8d9ad536cf603be40c0c6eb9a",
     "assets/nexlab-release-gate.js": "5d24d890134efefbda865f5c5c68527dba444ec2406987309bbf491ba9d895fd",
-    "assets/nexlab-release-identity.js": "6e9c3934996d10c6d7ba8dd9078ab568be2caff7f1cdee16de77bd97265c6eba",
+    "assets/nexlab-release-identity.js": "ba0d2eca36c9c5858d60f660f0fd9e7f0f4e56c9027555db8bc1bcbfccbf1f2a",
     "assets/nexlab-reports-v02682.css": "8c01471ddefc553d0d01999cbdaffafedb72e2c3e1b812e262d4c4cce094ebb4",
     "assets/nexlab-responsive-v02671.css": "1d793319a9669259df02b5f03c447f7e51a932e86d7f458e51593c55a530b069",
     "assets/nexlab-responsive-v02671.js": "344e32b46829fae952e34be01655cbc4f3f5d45dbffd4443cee3cd5caf8e9714",
     "assets/nexlab-rpc-registry.js": "30c0fd0666b9c415e46562d9503f7aaea85e1f0f2d18548c734a3b65ec229f36",
     "assets/nexlab-runtime-app.js": "bb1b829e780b38df818a21dda9834c7992d67d24b92dc78321a4a59b601b17b5",
     "assets/nexlab-runtime-export.js": "723549b2303cfa783cccec8de5b580aa5296c888abb6554906de68c0a2ed7735",
-    "assets/nexlab-runtime-features.js": "b72f209c7640f2b511afdfcd8d22405e35274d73f2f81132e3a8acedd2d985ee",
+    "assets/nexlab-runtime-features.js": "74312bf90cb848f9f4d1cf6c9403e1b480f4f63b4b9c5a1f8f27f4a7ce3601ef",
     "assets/nexlab-runtime-realtime-core.js": "bcefa782947d26df6f71ec12589d039ee71dd50bf04bf73b4edd380e25fe887f",
     "assets/nexlab-runtime-realtime-hub.js": "f523959ea07e01185ec59750bbdae0740d8374c3faed73389ae337ea8679d040",
     "assets/nexlab-runtime-shared.js": "70df0ca2154def34b61c8c4981cb1fe67dc5511f2c5836d095405b51877374d6",
@@ -1778,7 +1779,7 @@
     "assets/nexlab-team-chat-v02682.css": "3343ba3d6e87028770964aa23f28792caef14917b07e350bd1b82b3cdce94dbc",
     "assets/nexlab-team-chat-v02682.js": "970c1f4473417dbf7ec457e77d7c1eb9b1e9872b17fc5c672757f3c85015d9e5",
     "assets/nexlab-team-tasks-v02682.css": "bd49342a00423803f64d7fb964640504c3f0180d36ea41c6a866da3d8af10bab",
-    "assets/nexlab-update-manager.js": "c86f412e6a534fbe74532e9098ecb038457dc6d122ff7224faebd81485517052",
+    "assets/nexlab-update-manager.js": "d0cbacc90363fa68a6acf9b272909c68b78aefe54d5af67da17a689e54d237a8",
     "assets/nexlab-user-preferences.js": "8e4900d841737b0c87ae161f255b251040eea5e2f208553ec450d09de567470e",
     "assets/nexlab-vapid-rotation.js": "fc338511aef1f7973e4f8cc12b14ed749780117dc0d08a88a3abd93aa7158a36",
     "assets/nexlab-visual.css": "2c9c8871bfa181e7d1c3320eb1e56c925adabfd1aec6cbe856bec8052e79f3a4",
@@ -1814,11 +1815,11 @@
     "icons/nexlab-maskable-512.png": "c55135cbb263a64178443e06221f956f075fc8ce03d10dcd640d296f068723f5",
     "index.html": "a83f60d73852960aa474855d2776733e7274f2a252c7df58753154b179f08898",
     "manifest.webmanifest": "c993f0387091b30955a2613d17aa3ce9cd9611cb44d5e4cb6f0d4d5479a32c24",
-    "nexlab-sw.js": "7ab5caa7f98d218aef5be7e929426dd65438b8fd3ddf213dffa87544456cae71",
+    "nexlab-sw.js": "3b8b0106dbdd8a2670fc212bd61aa9ee9dda78788e338db5793c4b30ea29198b",
     "offline.html": "d76cbf611242031655d7ddab7e11bb66763a43315ce7f13de3faaedc4253ed14",
     "pwa-check.html": "d38d1f80e245778240dbd2ca61af50e99418fc8b29bc94bea095ee62b897c1e9",
-    "release-head.json": "d6007a6a86174c0bbf4303446e1e262dbb1820999835df4cef92da2af7575648",
-    "release-manifest.json": "477a0f5c3d6d501d189976f6c599c84de89b8b836e39fb64ab1feca5f8c38f15"
+    "release-head.json": "2e70041df11e3428e855bfdef48ddb8db187c454f0a9edfe119cd57e23e71a06",
+    "release-manifest.json": "0b4f5b18c830365892d7a034a6212a4f84ea6c759ea5bdcaa4fb65d215994b68"
   },
   "corrections_0_26_41": {
     "marketing_creation_only_in_header": true,
@@ -3581,7 +3582,7 @@
     "assets/nexlab-rpc-registry.js": 9907,
     "assets/nexlab-runtime-app.js": 65544,
     "assets/nexlab-runtime-export.js": 853192,
-    "assets/nexlab-runtime-features.js": 582007,
+    "assets/nexlab-runtime-features.js": 582339,
     "assets/nexlab-runtime-realtime-core.js": 11147,
     "assets/nexlab-runtime-realtime-hub.js": 3500,
     "assets/nexlab-runtime-shared.js": 223340,
@@ -4494,8 +4495,8 @@
     "head": "release-head.json",
     "manifest": "release-manifest.json",
     "check_interval_minutes": 15,
-    "essential_files": 57,
-    "essential_bytes": 2396376,
+    "essential_files": 58,
+    "essential_bytes": 2390097,
     "staging_cache": true,
     "hash_validation": true,
     "automatic_activation": false,
@@ -4759,7 +4760,7 @@
       "nexlab_get_my_day_summary_v1"
     ],
     "public_version_unchanged": true,
-    "generated_at": "2026-09-27T02:41:01Z",
+    "generated_at": "2026-09-27T03:46:14Z",
     "static_validation": {
       "javascript": "55/55",
       "relative_imports": "52/52",
@@ -4985,5 +4986,16 @@
     "removed_title": "Resumo do que precisa da sua atenção",
     "public_version_unchanged": true,
     "generated_at": "2026-09-27T01:25:23Z"
+  },
+  "admin_coordinator_delete_fix_0_26_82": {
+    "status": "implemented",
+    "public_version_unchanged": true,
+    "backend_preflight_revision": "0.26.82-admin-native-fk",
+    "frontend_behavior": "ADM pode excluir qualquer outro perfil, inclusive Coordenador, desde que o preflight confirme ausência de bloqueio real.",
+    "target_role_restriction_removed": true,
+    "self_delete_blocked": true,
+    "last_active_admin_protected": true,
+    "explicit_preflight_before_edge_delete": true,
+    "generated_at": "2026-09-27T03:46:14Z"
   }
 }
