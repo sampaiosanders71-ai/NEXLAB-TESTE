@@ -31,6 +31,7 @@ const ICONS = Object.freeze({
   folder:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>',
   calendar:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="m9 16 2 2 4-4"/></svg>',
   bell:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>',
+  alert:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.75 2.9 19.5h18.2L12 3.75Z"/><path d="M12 9v4.75"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg>',
   server:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><path d="M6 6h.01M6 17h.01"/></svg>',
   file:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>',
   archive:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M5 6v14h14V6M9 10h6"/><path d="M4 3h16l1 3H3Z"/></svg>',
@@ -67,8 +68,9 @@ body:not([data-nexlab-page="dashboard"]) #${HOST_ID}{display:none!important}
 .nxl-clean-myday{min-height:116px;padding:18px 20px;display:grid;grid-template-columns:minmax(340px,1.7fr) auto auto;gap:16px;align-items:center}
 .nxl-clean-myday-copy{min-width:0;padding-right:18px;border-right:1px solid #e5edf5}
 .nxl-clean-myday-kicker{font-size:13px;font-weight:950;color:#ef710c;text-transform:uppercase;letter-spacing:.025em}
-.nxl-clean-myday-heading{margin:5px 0 2px;font-size:21px;line-height:1.12;font-weight:950;color:#082650}
-.nxl-clean-myday-description{margin:0;font-size:11px;line-height:1.45;color:#547099}
+.nxl-clean-myday-heading{margin:5px 0 0;font-size:21px;line-height:1.12;font-weight:950;color:#082650;display:flex;align-items:center;gap:8px}
+
+.nxl-clean-myday-alert-icon{display:grid;place-items:center;color:#ef710c;flex:0 0 auto}.nxl-clean-myday-alert-icon svg{width:21px!important;height:21px!important}
 .nxl-clean-myday-stats{display:flex;gap:9px}
 .nxl-clean-stat{min-width:126px;min-height:67px;border:1px solid #e0e8f2;border-radius:14px;background:#fff;padding:9px 12px;display:grid;grid-template-columns:36px auto;grid-template-rows:auto auto;column-gap:10px;align-content:center;text-align:left;color:var(--nxl-text);cursor:pointer}
 .nxl-clean-stat-icon{grid-row:1/3;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:#f3f7ff;color:#2076eb;border:1px solid #e7eef8}
@@ -115,7 +117,7 @@ body:not([data-nexlab-page="dashboard"]) #${HOST_ID}{display:none!important}
 @media(max-width:1020px){.nxl-clean-top{grid-template-columns:1fr}.nxl-clean-myday{grid-template-columns:1fr auto}.nxl-clean-myday-copy{grid-row:auto;border-right:0;border-bottom:1px solid #e5edf5;padding:0 0 13px;grid-column:1/-1}.nxl-clean-myday .nxl-clean-primary{grid-column:auto}.nxl-clean-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.nxl-clean-main{grid-template-columns:1fr}}
 @media(max-width:680px){#${HOST_ID}{gap:12px}.nxl-clean-tabs{justify-content:stretch}.nxl-clean-tabs-wrap{width:100%}.nxl-clean-tab{flex:1;min-width:0;padding-inline:10px}.nxl-clean-myday,.nxl-clean-status,.nxl-clean-projects,.nxl-clean-actions,.nxl-clean-teams,.nxl-clean-card{border-radius:15px}.nxl-clean-myday{grid-template-columns:1fr;padding:15px}.nxl-clean-myday-copy{grid-column:auto}.nxl-clean-myday-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}.nxl-clean-stat{min-width:0;padding:8px;grid-template-columns:1fr;text-align:center}.nxl-clean-stat-icon{display:none}.nxl-clean-primary{width:100%;justify-content:center}.nxl-clean-summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.nxl-clean-card{min-height:86px;padding:11px;grid-template-columns:39px minmax(0,1fr)}.nxl-clean-card-icon{width:39px;height:39px}.nxl-clean-card .nxl-clean-chevron{display:none}.nxl-clean-projects,.nxl-clean-actions{padding:15px}.nxl-clean-project-bottom{grid-template-columns:1fr}.nxl-clean-team-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.nxl-clean-team-metric:nth-child(2){border-right:0}.nxl-clean-team-metric:nth-child(-n+2){border-bottom:1px solid #e4ebf2}.nxl-clean-section-head{align-items:center}.nxl-clean-section-desc{font-size:9.5px}}
 @media(max-width:820px){#${HOST_ID}{gap:13px}.nxl-clean-main{gap:13px}.nxl-clean-status{min-height:96px}.nxl-clean-projects,.nxl-clean-actions{min-height:auto}.nxl-clean-mural-head{padding:14px 15px}.nxl-clean-mural-card{padding:14px 15px}}
-@media(max-width:520px){#${HOST_ID}{gap:10px}.nxl-clean-tabs-wrap{border-radius:11px}.nxl-clean-tab{min-height:36px;font-size:9.5px}.nxl-clean-myday-heading{font-size:18px}.nxl-clean-myday-description{font-size:10px}.nxl-clean-myday-stats{gap:6px}.nxl-clean-stat{min-height:58px;border-radius:11px}.nxl-clean-stat strong{font-size:16px}.nxl-clean-stat span:last-child{font-size:8.5px}.nxl-clean-status{padding:13px}.nxl-clean-status-icon{width:38px;height:38px}.nxl-clean-date{width:52px;height:52px}.nxl-clean-card{min-height:82px}.nxl-clean-card small{font-size:8px}.nxl-clean-card strong{font-size:19px}.nxl-clean-section-title{font-size:14px}.nxl-clean-gestion{padding:6px 9px}.nxl-clean-project-links{justify-content:center}.nxl-clean-teams-head{align-items:center}.nxl-clean-outline{min-height:32px}.nxl-clean-team-metric{min-height:72px;padding:10px}.nxl-clean-team-metric-icon{width:34px;height:34px}.nxl-clean-team-metric strong{font-size:17px}.nxl-clean-mural-head{align-items:center}.nxl-clean-mural-side{gap:5px}.nxl-clean-mural-date{font-size:7.5px}.nxl-clean-mural-card{border-radius:14px}.nxl-clean-mural-content h3{font-size:11px}.nxl-clean-mural-content p{font-size:10px}.nxl-clean-mural-avatar{width:32px;height:32px}.nxl-clean-action{min-height:60px}}
+@media(max-width:520px){#${HOST_ID}{gap:10px}.nxl-clean-tabs-wrap{border-radius:11px}.nxl-clean-tab{min-height:36px;font-size:9.5px}.nxl-clean-myday-heading{font-size:18px}.nxl-clean-myday-stats{gap:6px}.nxl-clean-stat{min-height:58px;border-radius:11px}.nxl-clean-stat strong{font-size:16px}.nxl-clean-stat span:last-child{font-size:8.5px}.nxl-clean-status{padding:13px}.nxl-clean-status-icon{width:38px;height:38px}.nxl-clean-date{width:52px;height:52px}.nxl-clean-card{min-height:82px}.nxl-clean-card small{font-size:8px}.nxl-clean-card strong{font-size:19px}.nxl-clean-section-title{font-size:14px}.nxl-clean-gestion{padding:6px 9px}.nxl-clean-project-links{justify-content:center}.nxl-clean-teams-head{align-items:center}.nxl-clean-outline{min-height:32px}.nxl-clean-team-metric{min-height:72px;padding:10px}.nxl-clean-team-metric-icon{width:34px;height:34px}.nxl-clean-team-metric strong{font-size:17px}.nxl-clean-mural-head{align-items:center}.nxl-clean-mural-side{gap:5px}.nxl-clean-mural-date{font-size:7.5px}.nxl-clean-mural-card{border-radius:14px}.nxl-clean-mural-content h3{font-size:11px}.nxl-clean-mural-content p{font-size:10px}.nxl-clean-mural-avatar{width:32px;height:32px}.nxl-clean-action{min-height:60px}}
 @media(max-width:390px){.nxl-clean-summary{grid-template-columns:1fr}.nxl-clean-team-metrics{grid-template-columns:1fr}.nxl-clean-team-metric{border-right:0!important;border-bottom:1px solid #e4ebf2!important}.nxl-clean-team-metric:last-child{border-bottom:0!important}.nxl-clean-mural-meta{align-items:flex-start}.nxl-clean-mural-side{flex-direction:column;align-items:flex-end}.nxl-clean-pin{font-size:7px}}
 
 /* NEXLAB 0.26.82 — Dashboard compacto para desktop/notebook. */
@@ -125,8 +127,8 @@ body:not([data-nexlab-page="dashboard"]) #${HOST_ID}{display:none!important}
 .nxl-clean-view,.nxl-clean-overview{gap:11px}.nxl-clean-panel{border-radius:15px}
 .nxl-clean-top{gap:11px;grid-template-columns:minmax(0,3.9fr) minmax(245px,1.05fr)}
 .nxl-clean-myday{min-height:90px;padding:12px 16px;grid-template-columns:minmax(300px,1.65fr) auto auto;gap:11px}
-.nxl-clean-myday-copy{padding-right:14px}.nxl-clean-myday-kicker{font-size:11px}.nxl-clean-myday-heading{margin:3px 0 1px;font-size:17px}.nxl-clean-myday-description{font-size:9.5px;line-height:1.35}
-.nxl-clean-myday-stats{gap:7px}.nxl-clean-stat{min-width:108px;min-height:55px;padding:7px 9px;grid-template-columns:30px auto;column-gap:8px;border-radius:11px}.nxl-clean-stat-icon{width:30px;height:30px;border-radius:8px}.nxl-clean-stat-icon svg{width:17px!important;height:17px!important}.nxl-clean-stat strong{font-size:15px}.nxl-clean-stat span:last-child{font-size:8.5px;margin-top:3px}
+.nxl-clean-myday-copy{padding-right:14px}.nxl-clean-myday-kicker{font-size:11px}.nxl-clean-myday-heading{margin:3px 0 0;font-size:17px}
+.nxl-clean-myday-alert-icon svg{width:17px!important;height:17px!important}.nxl-clean-myday-stats{gap:7px}.nxl-clean-stat{min-width:108px;min-height:55px;padding:7px 9px;grid-template-columns:30px auto;column-gap:8px;border-radius:11px}.nxl-clean-stat-icon{width:30px;height:30px;border-radius:8px}.nxl-clean-stat-icon svg{width:17px!important;height:17px!important}.nxl-clean-stat strong{font-size:15px}.nxl-clean-stat span:last-child{font-size:8.5px;margin-top:3px}
 .nxl-clean-primary{min-height:36px;padding:0 11px;font-size:9px;border-radius:9px;gap:7px}
 .nxl-clean-status{min-height:90px;padding:12px 13px;gap:11px}.nxl-clean-status-main{gap:10px}.nxl-clean-status-icon{width:36px;height:36px;border-radius:10px}.nxl-clean-status-icon svg{width:18px!important;height:18px!important}.nxl-clean-status-copy small{font-size:8px}.nxl-clean-status-copy strong{margin-top:5px;font-size:11px;gap:6px}.nxl-clean-dot{width:7px;height:7px}.nxl-clean-date{width:50px;height:50px;border-radius:11px}.nxl-clean-date strong{font-size:16px}.nxl-clean-date span{font-size:8px;margin-top:3px}
 .nxl-clean-summary{gap:10px}.nxl-clean-card{min-height:76px;padding:10px 14px;grid-template-columns:38px minmax(0,1fr) 16px;gap:10px}.nxl-clean-card-icon{width:38px;height:38px;border-radius:10px}.nxl-clean-card-icon svg{width:18px!important;height:18px!important}.nxl-clean-card small{font-size:8px}.nxl-clean-card strong{font-size:18px;margin-top:5px}
@@ -145,8 +147,8 @@ body:not([data-nexlab-page="dashboard"]) #${HOST_ID}{display:none!important}
 .nxl-clean-panel{border-radius:16px}
 .nxl-clean-top{gap:12px}
 .nxl-clean-myday{min-height:98px;padding:14px 17px;gap:12px}
-.nxl-clean-myday-copy{padding-right:15px}.nxl-clean-myday-kicker{font-size:12px}.nxl-clean-myday-heading{margin:4px 0 2px;font-size:18.5px}.nxl-clean-myday-description{font-size:10px;line-height:1.38}
-.nxl-clean-myday-stats{gap:8px}.nxl-clean-stat{min-width:114px;min-height:59px;padding:8px 10px;grid-template-columns:32px auto;column-gap:9px;border-radius:12px}.nxl-clean-stat-icon{width:32px;height:32px;border-radius:9px}.nxl-clean-stat-icon svg{width:18px!important;height:18px!important}.nxl-clean-stat strong{font-size:16px}.nxl-clean-stat span:last-child{font-size:9px;margin-top:3px}
+.nxl-clean-myday-copy{padding-right:15px}.nxl-clean-myday-kicker{font-size:12px}.nxl-clean-myday-heading{margin:4px 0 0;font-size:18.5px}
+.nxl-clean-myday-alert-icon svg{width:19px!important;height:19px!important}.nxl-clean-myday-stats{gap:8px}.nxl-clean-stat{min-width:114px;min-height:59px;padding:8px 10px;grid-template-columns:32px auto;column-gap:9px;border-radius:12px}.nxl-clean-stat-icon{width:32px;height:32px;border-radius:9px}.nxl-clean-stat-icon svg{width:18px!important;height:18px!important}.nxl-clean-stat strong{font-size:16px}.nxl-clean-stat span:last-child{font-size:9px;margin-top:3px}
 .nxl-clean-status{min-height:98px;padding:13px 14px;gap:12px}.nxl-clean-status-main{gap:11px}.nxl-clean-status-icon{width:39px;height:39px;border-radius:11px}.nxl-clean-status-icon svg{width:19px!important;height:19px!important}.nxl-clean-status-copy small{font-size:8.5px}.nxl-clean-status-copy strong{margin-top:6px;font-size:12px;gap:7px}.nxl-clean-date{width:54px;height:54px;border-radius:12px}.nxl-clean-date strong{font-size:17px}.nxl-clean-date span{font-size:8.5px;margin-top:3px}
 .nxl-clean-summary{gap:11px}.nxl-clean-card{min-height:83px;padding:11px 15px;grid-template-columns:41px minmax(0,1fr) 17px;gap:11px}.nxl-clean-card-icon{width:41px;height:41px;border-radius:11px}.nxl-clean-card-icon svg{width:19px!important;height:19px!important}.nxl-clean-card small{font-size:8.5px}.nxl-clean-card strong{font-size:19.5px;margin-top:6px}
 .nxl-clean-main{gap:12px}.nxl-clean-projects,.nxl-clean-actions{min-height:250px;padding:14px 17px}.nxl-clean-section-title{font-size:15px}.nxl-clean-section-desc{margin-top:4px;font-size:9.2px}.nxl-clean-gestion{padding:5.5px 10px;font-size:8.5px}.nxl-clean-project-subtitle{margin:13px 0 8px;font-size:8.5px}.nxl-clean-empty{min-height:52px;font-size:10px}.nxl-clean-project-row{min-height:43px;padding:8px 10px}.nxl-clean-project-row-icon{width:29px;height:29px}.nxl-clean-project-row-copy strong{font-size:10px}.nxl-clean-project-row-copy span{font-size:8.5px}
@@ -209,12 +211,6 @@ function statusLabel(v) {
   const key=String(v||'').toLowerCase();
   return ({ideia:'Ideia',analise:'Análise',aprovacao:'Aprovação',execucao:'Em andamento',finalizado:'Finalizado',arquivado:'Arquivado'})[key]||String(v||'Em andamento');
 }
-function myDaySentence(summary) {
-  const tasks=n(summary?.tasks), meetings=n(summary?.meetings), overdue=n(summary?.overdue);
-  const first=`Hoje você tem ${tasks} ${tasks===1?'tarefa':'tarefas'}, ${meetings} ${meetings===1?'reunião':'reuniões'}.`;
-  return overdue>0?`${first} ${overdue} ${overdue===1?'item está atrasado':'itens estão atrasados'}.`:`${first} Nenhum item está atrasado.`;
-}
-
 function stat(label, iconName, value, kind, target) {
   const el = document.createElement('button');
   el.type = 'button';
@@ -294,8 +290,10 @@ function buildOverview() {
   const myday=document.createElement('section'); myday.className='nxl-clean-myday nxl-clean-panel';
   const copy=document.createElement('div'); copy.className='nxl-clean-myday-copy';
   const kicker=document.createElement('div'); kicker.className='nxl-clean-myday-kicker'; kicker.textContent='Meu Dia';
-  const heading=document.createElement('h2'); heading.className='nxl-clean-myday-heading'; heading.textContent='Resumo do que precisa da sua atenção';
-  const desc=document.createElement('p'); desc.className='nxl-clean-myday-description'; desc.textContent=myDaySentence(state.myDay); copy.append(kicker,heading,desc);
+  const heading=document.createElement('h2'); heading.className='nxl-clean-myday-heading';
+  const attentionLabel=document.createElement('span'); attentionLabel.textContent='ATENÇÃO';
+  heading.append(icon('alert','nxl-clean-myday-alert-icon'),attentionLabel);
+  copy.append(kicker,heading);
   const stats=document.createElement('div'); stats.className='nxl-clean-myday-stats';
   stats.append(stat('Tarefas','file',state.myDay.tasks,'task','pendencias'),stat('Reuniões','calendar',state.myDay.meetings,'meeting','pendencias'),stat('Atrasados','bell',state.myDay.overdue,'overdue','pendencias'));
   const openDay=button('Abrir','nxl-clean-primary',()=>{try{sessionStorage.setItem('nexlab.pending.active-tab','overview')}catch{} nav('pendencias')}); openDay.append(icon('arrow'));
