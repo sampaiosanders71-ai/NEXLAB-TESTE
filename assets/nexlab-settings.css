@@ -681,20 +681,155 @@ html[data-nexlab-reduce-motion="true"] *,html[data-nexlab-reduce-motion="true"] 
   .nexlab-settings-integration-rules{grid-template-columns:1fr}
 }
 
-/* Configurações · Google Calendar — correção visual do card de integração */
-.nexlab-settings-integration-hero{
-  height:auto!important;
-  min-height:0!important;
-  overflow:hidden!important;
-  background:#fff!important;
-  isolation:isolate;
+
+/* Configurações · Google Calendar — reconstrução visual isolada */
+.nexlab-settings-google-connect-card{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:18px;
+  min-height:0;
+  height:auto;
+  overflow:visible;
+  padding:18px;
+  background:#fff;
 }
-.nexlab-settings-integration-hero::after{
-  content:none!important;
-  display:none!important;
+.nexlab-settings-google-connect-main{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:13px;
 }
-.nexlab-settings-integration-brand,
-.nexlab-settings-integration-actions{
-  position:relative;
-  z-index:1;
+.nexlab-settings-google-mark{
+  width:44px;
+  height:44px;
+  flex:0 0 44px;
+  display:grid;
+  place-items:center;
+  border:1px solid #d8e5ef;
+  border-radius:12px;
+  background:#f7fafc;
+  color:#1d5d8f;
+}
+.nexlab-settings-google-connect-copy{
+  min-width:0;
+}
+.nexlab-settings-google-title-row{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  flex-wrap:wrap;
+  min-width:0;
+}
+.nexlab-settings-google-title-row h3{
+  margin:0;
+  color:#173653;
+  font-size:.875rem;
+  line-height:1.25;
+  font-weight:900;
+}
+.nexlab-settings-google-connect-copy p{
+  margin:5px 0 0;
+  color:#718196;
+  font-size:.65625rem;
+  line-height:1.5;
+  overflow-wrap:anywhere;
+}
+.nexlab-settings-google-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.nexlab-settings-google-actions .nexlab-settings-btn{
+  white-space:nowrap;
+}
+.nexlab-settings-google-callback{
+  display:grid;
+  gap:5px;
+  min-width:0;
+  padding:11px 12px;
+  border:1px solid #e0e7ee;
+  border-radius:12px;
+  background:#f8fafc;
+}
+.nexlab-settings-google-callback span{
+  color:#8695a7;
+  font-size:.5625rem;
+  font-weight:850;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.nexlab-settings-google-callback code{
+  display:block;
+  min-width:0;
+  color:#35506d;
+  font-size:.625rem;
+  line-height:1.45;
+  overflow-wrap:anywhere;
+  white-space:normal;
+}
+.nexlab-settings-google-scope-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:9px;
+}
+.nexlab-settings-google-scope-grid article{
+  min-width:0;
+  padding:12px 13px;
+  border:1px solid #e1e8ef;
+  border-radius:12px;
+  background:#fbfcfd;
+}
+.nexlab-settings-google-scope-grid strong{
+  display:block;
+  margin:0 0 4px;
+  color:#29445f;
+  font-size:.6875rem;
+  font-weight:900;
+}
+.nexlab-settings-google-scope-grid span{
+  display:block;
+  color:#78899b;
+  font-size:.609375rem;
+  line-height:1.45;
+}
+.nexlab-settings-google-state .nexlab-settings-status-warning{
+  margin-top:11px;
+}
+
+@media(max-width:980px){
+  .nexlab-settings-google-connect-card{
+    grid-template-columns:1fr;
+    align-items:start;
+  }
+  .nexlab-settings-google-actions{
+    justify-content:flex-start;
+  }
+}
+@media(max-width:767px){
+  .nexlab-settings-google-connect-card{
+    padding:14px;
+    gap:14px;
+  }
+  .nexlab-settings-google-connect-main{
+    align-items:flex-start;
+  }
+  .nexlab-settings-google-title-row{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:6px;
+  }
+  .nexlab-settings-google-actions{
+    display:grid;
+    grid-template-columns:1fr;
+    width:100%;
+  }
+  .nexlab-settings-google-actions .nexlab-settings-btn{
+    width:100%;
+  }
+  .nexlab-settings-google-scope-grid{
+    grid-template-columns:1fr;
+  }
 }
