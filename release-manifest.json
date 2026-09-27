@@ -4,8 +4,8 @@
   "release": "Beta",
   "revision": "beta-0-26-82-backup-recuperacao-etapas-3-4",
   "asset_revision": "app-beta-0-26-82-backup-recuperacao-etapas-3-4",
-  "generated_at": "2026-09-27T03:46:14Z",
-  "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T034614Z",
+  "generated_at": "2026-09-27T17:13:59Z",
+  "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T171359Z",
   "essential_files": [
     {
       "path": "index.html",
@@ -25,7 +25,7 @@
     {
       "path": "assets/nexlab-release-identity.js",
       "size": 9707,
-      "sha256": "ba0d2eca36c9c5858d60f660f0fd9e7f0f4e56c9027555db8bc1bcbfccbf1f2a"
+      "sha256": "db823b4129a0ae57580748db6d80406a5ed2d140480bfaa3905db4123fa1b65f"
     },
     {
       "path": "assets/nexlab-module-recovery.js",
@@ -160,7 +160,7 @@
     {
       "path": "assets/nexlab-update-manager.js",
       "size": 18897,
-      "sha256": "d0cbacc90363fa68a6acf9b272909c68b78aefe54d5af67da17a689e54d237a8"
+      "sha256": "7d4e73c21b2ee363d517afd1a943f22f26ececaf8006495c3e57ad971c5a206f"
     },
     {
       "path": "assets/nexlab-runtime-realtime-hub.js",
@@ -189,8 +189,8 @@
     },
     {
       "path": "assets/nexlab-myday-dashboard-v02682.js",
-      "size": 39545,
-      "sha256": "693cf433bbc15437cb4debb2b7cec244ef830568307c32a07e7783dc44e00ac2"
+      "size": 40193,
+      "sha256": "2d4936b5b19b7f704824c2257180c3f472ecebeceaa941091f8ccabaad37a184"
     },
     {
       "path": "assets/nexlab-visual.js",
