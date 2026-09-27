@@ -6832,3 +6832,7 @@ body:has(.nexlab-privacy-gate){overflow:hidden!important;}
     margin:0!important;
   }
 }
+
+/* Privacidade/Termos — isolamento estrutural do Dashboard */
+body:has(.nexlab-privacy-gate) #nexlab-dashboard-clean-v02682{display:none!important;}
+body[data-nexlab-page="privacy-gate"] #nexlab-dashboard-clean-v02682{display:none!important;}

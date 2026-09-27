@@ -5,6 +5,7 @@ const HOST_ID = 'nexlab-dashboard-clean-v02682';
 const STYLE_ID = 'nexlab-dashboard-rebuild-style-v02682';
 const RESET_ATTR = 'data-nexlab-dashboard-reset';
 let pageObserver = null;
+let gateObserver = null;
 let mainObserver = null;
 let scheduled = 0;
 let refreshTimer = 0;
@@ -56,6 +57,8 @@ function n(value) {
   return Number.isFinite(number) && number > 0 ? Math.trunc(number) : 0;
 }
 function array(value) { return Array.isArray(value) ? value : []; }
+function privacyGateActive(){ return !!document.querySelector('.nexlab-privacy-gate'); }
+function dashboardAllowed(){ return document.body?.dataset?.nexlabPage==='dashboard' && !privacyGateActive(); }
 function normId(value) { return String(value || '').trim(); }
 function dateValue(value) { const d = new Date(value); return Number.isFinite(d.getTime()) ? d : null; }
 function shortDate(value) {
@@ -448,7 +451,7 @@ function upcoming(item) {
 }
 
 async function loadData() {
-  if(document.body?.dataset?.nexlabPage!=='dashboard') return;
+  if(!dashboardAllowed()) return;
   const token=++loadingToken; state.loading=true;
   const existing=document.getElementById(HOST_ID); if(existing) render(existing);
   const today=new Date(); const until=new Date(today); until.setDate(until.getDate()+120); const iso=d=>d.toISOString().slice(0,10); const errors=[];
@@ -489,15 +492,15 @@ const LEGACY_STYLE_IDS=new Set(['nexlab-dashboard-legacy-overview-hidden-v02682'
 function purgeLegacyArtifacts(){for(const id of LEGACY_STYLE_IDS) document.getElementById(id)?.remove();document.querySelectorAll('[data-nexlab-dashboard-transient="true"]').forEach(node=>node.remove());}
 function suppressLegacy(main,host){for(const child of [...main.children]){if(child===host||child.dataset.nexlabDashboardLegacySuppressed==='true')continue;child.dataset.nexlabDashboardLegacySuppressed='true';child.dataset.nexlabDashboardPrevAriaHidden=child.hasAttribute('aria-hidden')?String(child.getAttribute('aria-hidden')):'__none__';child.dataset.nexlabDashboardPrevInert=child.hasAttribute('inert')?'true':'false';child.setAttribute('aria-hidden','true');try{child.inert=true}catch{child.setAttribute('inert','')}}}
 function restoreLegacy(main){if(!main)return;main.querySelectorAll(':scope > [data-nexlab-dashboard-legacy-suppressed="true"]').forEach(child=>{const aria=child.dataset.nexlabDashboardPrevAriaHidden;if(aria==='__none__')child.removeAttribute('aria-hidden');else if(aria!=null)child.setAttribute('aria-hidden',aria);if(child.dataset.nexlabDashboardPrevInert!=='true'){try{child.inert=false}catch{}child.removeAttribute('inert')}delete child.dataset.nexlabDashboardLegacySuppressed;delete child.dataset.nexlabDashboardPrevAriaHidden;delete child.dataset.nexlabDashboardPrevInert;});}
-function observeMain(main){if(mainObserver?.target===main)return;if(mainObserver)mainObserver.disconnect();mainObserver=new MutationObserver(()=>{if(document.body?.dataset?.nexlabPage!=='dashboard')return;const host=document.getElementById(HOST_ID);if(!host||host.parentElement!==main)return schedule(25);suppressLegacy(main,host);});mainObserver.observe(main,{childList:true});mainObserver.target=main;}
-function activate(){if(document.body?.dataset?.nexlabPage!=='dashboard')return cleanup();ensureStyle();purgeLegacyArtifacts();const main=document.getElementById('nexlab-main-content')||document.querySelector('main');if(!main)return;const host=buildHost(main);suppressLegacy(main,host);document.body.setAttribute(RESET_ATTR,'true');observeMain(main);clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>void loadData(),90);}
+function observeMain(main){if(mainObserver?.target===main)return;if(mainObserver)mainObserver.disconnect();mainObserver=new MutationObserver(()=>{if(!dashboardAllowed())return cleanup();const host=document.getElementById(HOST_ID);if(!host||host.parentElement!==main)return schedule(25);suppressLegacy(main,host);});mainObserver.observe(main,{childList:true});mainObserver.target=main;}
+function activate(){if(!dashboardAllowed())return cleanup();ensureStyle();purgeLegacyArtifacts();const main=document.getElementById('nexlab-main-content')||document.querySelector('main');if(!main)return;const host=buildHost(main);suppressLegacy(main,host);document.body.setAttribute(RESET_ATTR,'true');observeMain(main);clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>void loadData(),90);}
 function cleanup(){document.body?.removeAttribute(RESET_ATTR);const main=document.getElementById('nexlab-main-content')||document.querySelector('main');restoreLegacy(main);document.getElementById(HOST_ID)?.remove();clearTimeout(refreshTimer);}
 function schedule(delay=60){clearTimeout(scheduled);scheduled=setTimeout(activate,delay);}
-function start(){if(!document.body)return;ensureStyle();if(!pageObserver){pageObserver=new MutationObserver(records=>{if(records.some(record=>record.type==='attributes'&&record.attributeName==='data-nexlab-page'))schedule(20);});pageObserver.observe(document.body,{attributes:true,attributeFilter:['data-nexlab-page']});}schedule(60);}
+function start(){if(!document.body)return;ensureStyle();if(!pageObserver){pageObserver=new MutationObserver(records=>{if(records.some(record=>record.type==='attributes'&&record.attributeName==='data-nexlab-page'))schedule(20);});pageObserver.observe(document.body,{attributes:true,attributeFilter:['data-nexlab-page']});}if(!gateObserver){const root=document.getElementById('root')||document.body;gateObserver=new MutationObserver(()=>{privacyGateActive()?cleanup():schedule(20);});gateObserver.observe(root,{childList:true,subtree:true});}privacyGateActive()?cleanup():schedule(60);}
 
-globalThis.addEventListener('nexlab:myday-updated',event=>{if(document.body?.dataset?.nexlabPage!=='dashboard'||!event?.detail)return;state.myDay={tasks:n(event.detail.tasks),meetings:n(event.detail.meetings),approvals:n(event.detail.approvals),overdue:n(event.detail.overdue)};const host=document.getElementById(HOST_ID);if(host)render(host);});
-globalThis.addEventListener('nexlab:network-status',()=>{if(document.body?.dataset?.nexlabPage==='dashboard')void loadData();});
+globalThis.addEventListener('nexlab:myday-updated',event=>{if(!dashboardAllowed()||!event?.detail)return;state.myDay={tasks:n(event.detail.tasks),meetings:n(event.detail.meetings),approvals:n(event.detail.approvals),overdue:n(event.detail.overdue)};const host=document.getElementById(HOST_ID);if(host)render(host);});
+globalThis.addEventListener('nexlab:network-status',()=>{if(dashboardAllowed())void loadData();});
 globalThis.addEventListener('popstate',()=>schedule(20));
 globalThis.addEventListener('hashchange',()=>schedule(20));
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&document.body?.dataset?.nexlabPage==='dashboard')void loadData();});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&dashboardAllowed())void loadData();});
 document.readyState==='loading'?document.addEventListener('DOMContentLoaded',start,{once:true}):start();
