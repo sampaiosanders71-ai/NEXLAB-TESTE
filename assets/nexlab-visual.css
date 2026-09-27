@@ -6739,3 +6739,45 @@ body[data-nexlab-page="inventario"] main .nexlab-inventory-sectionbar .nexlab-mo
   }
 }
 @media (max-width:767px){body>.nexlab-sidebar-collapse-toggle{display:none!important;}}
+
+/* Sidebar — contraste reforçado dos rótulos de navegação */
+#mobile-sidebar nav a,
+#mobile-sidebar nav button,
+aside#mobile-sidebar nav a,
+aside#mobile-sidebar nav button{
+  color:rgba(248,250,252,.96)!important;
+  font-weight:650!important;
+  opacity:1!important;
+}
+#mobile-sidebar nav a span,
+#mobile-sidebar nav button span,
+aside#mobile-sidebar nav a span,
+aside#mobile-sidebar nav button span{
+  color:inherit!important;
+  opacity:1!important;
+  -webkit-text-fill-color:currentColor!important;
+}
+#mobile-sidebar nav h3,
+aside#mobile-sidebar nav h3{
+  color:rgba(226,232,240,.90)!important;
+  font-weight:800!important;
+  opacity:1!important;
+}
+#mobile-sidebar nav a:hover,
+#mobile-sidebar nav button:hover,
+aside#mobile-sidebar nav a:hover,
+aside#mobile-sidebar nav button:hover{
+  color:#fff!important;
+}
+#mobile-sidebar nav a[aria-current='page'],
+#mobile-sidebar nav button[aria-current='page'],
+#mobile-sidebar nav .active,
+#mobile-sidebar nav [data-active='true'],
+aside#mobile-sidebar nav a[aria-current='page'],
+aside#mobile-sidebar nav button[aria-current='page'],
+aside#mobile-sidebar nav .active,
+aside#mobile-sidebar nav [data-active='true']{
+  color:#fff!important;
+  font-weight:750!important;
+}
+
