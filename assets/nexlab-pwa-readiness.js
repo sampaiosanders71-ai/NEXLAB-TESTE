@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-backup-recuperacao-etapas-3-4',assetRevision:'app-beta-0-26-82-backup-recuperacao-etapas-3-4',cacheName:'nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T034614Z',pwa:{identity:{id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'}}});
+  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-backup-recuperacao-etapas-3-4',assetRevision:'app-beta-0-26-82-backup-recuperacao-etapas-3-4',cacheName:'nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T171359Z',pwa:{identity:{id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'}}});
   if (window.__NEXLAB_PWA_READINESS__?.revision === BUILD_IDENTITY.revision) return;
 
   const VERSION=BUILD_IDENTITY.version;
