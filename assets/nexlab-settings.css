@@ -833,3 +833,226 @@ html[data-nexlab-reduce-motion="true"] *,html[data-nexlab-reduce-motion="true"] 
     grid-template-columns:1fr;
   }
 }
+
+/* Configurações — Aba Integrações / reconstrução completa isolada */
+.nexlab-integrations-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.55fr) minmax(280px,.85fr);
+  gap:16px;
+  align-items:stretch;
+}
+.nexlab-integrations-overview,
+.nexlab-integrations-actions-card,
+.nexlab-integrations-details,
+.nexlab-integrations-sync,
+.nexlab-integrations-setup{
+  overflow:hidden;
+}
+.nexlab-integrations-overview{
+  padding:0;
+  background:linear-gradient(135deg,#ffffff 0%,#fbfcfe 65%,#f3f7fb 100%);
+}
+.nexlab-integrations-overview-main{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding:22px;
+  min-height:100%;
+}
+.nexlab-integrations-mark{
+  width:52px;
+  height:52px;
+  border-radius:17px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(180deg,#eef5fb,#e3edf7);
+  border:1px solid #d8e6f2;
+  color:#184677;
+  flex:0 0 auto;
+}
+.nexlab-integrations-copy{min-width:0;display:grid;gap:12px}
+.nexlab-integrations-topline{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+.nexlab-integrations-topline h3{
+  margin:1px 0 0;
+  font-size:1.02rem;
+  line-height:1.15;
+  font-weight:900;
+  color:#0f2745;
+}
+.nexlab-integrations-copy>p{
+  margin:0;
+  color:#61738a;
+  font-size:.75rem;
+  line-height:1.58;
+  max-width:760px;
+}
+.nexlab-integrations-points{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+.nexlab-integrations-points>div,
+.nexlab-integrations-note-list>div,
+.nexlab-integrations-sync-item{
+  border:1px solid #e4ebf3;
+  background:#f9fbfd;
+  border-radius:16px;
+  padding:13px 14px;
+}
+.nexlab-integrations-points strong,
+.nexlab-integrations-note-list strong,
+.nexlab-integrations-sync-item strong{
+  display:block;
+  color:#213754;
+  font-size:.6875rem;
+  font-weight:900;
+}
+.nexlab-integrations-points span,
+.nexlab-integrations-note-list span,
+.nexlab-integrations-sync-item span{
+  display:block;
+  margin-top:4px;
+  color:#6f8095;
+  font-size:.625rem;
+  line-height:1.52;
+}
+.nexlab-integrations-actions-card{
+  display:grid;
+  align-content:start;
+  gap:15px;
+  background:linear-gradient(180deg,#0e294b 0%,#0b223f 100%);
+  border-color:#102f54;
+  color:#fff;
+}
+.nexlab-integrations-actions-head{
+  display:grid;
+  gap:6px;
+}
+.nexlab-integrations-actions-kicker{
+  display:block;
+  font-size:.5625rem;
+  font-weight:900;
+  letter-spacing:.16em;
+  color:#8db2da;
+}
+.nexlab-integrations-actions-head h3{
+  margin:0;
+  color:#fff;
+  font-size:.95rem;
+  line-height:1.15;
+  font-weight:900;
+}
+.nexlab-integrations-actions-head p{
+  margin:0;
+  color:rgba(255,255,255,.78);
+  font-size:.6875rem;
+  line-height:1.55;
+}
+.nexlab-integrations-actions{
+  display:grid;
+  gap:8px;
+}
+.nexlab-integrations-actions .nexlab-settings-btn{
+  width:100%;
+}
+.nexlab-integrations-actions-card .nexlab-settings-btn.primary{
+  background:#fff;
+  color:#10325a;
+}
+.nexlab-integrations-actions-card .nexlab-settings-btn.danger-outline{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.18);
+  color:#fff;
+}
+.nexlab-integrations-action-note{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  color:rgba(255,255,255,.8);
+  font-size:.625rem;
+  line-height:1.5;
+  padding:10px 11px;
+  border-radius:14px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+}
+.nexlab-integrations-stats{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.nexlab-integrations-stats>div{
+  border:1px solid #e4ebf3;
+  background:#f9fbfd;
+  border-radius:16px;
+  padding:13px 14px;
+}
+.nexlab-integrations-stats strong{
+  display:block;
+  color:#213754;
+  font-size:.6875rem;
+  font-weight:900;
+}
+.nexlab-integrations-stats span{
+  display:block;
+  margin-top:4px;
+  color:#6f8095;
+  font-size:.65625rem;
+  line-height:1.52;
+  overflow-wrap:anywhere;
+}
+.nexlab-integrations-sync-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+.nexlab-integrations-note-list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:12px;
+}
+.nexlab-integrations-callback-box{
+  border:1px solid #e1e8f0;
+  background:#f8fafc;
+  border-radius:16px;
+  padding:13px 14px;
+}
+.nexlab-integrations-callback-box span{
+  display:block;
+  font-size:.5625rem;
+  font-weight:850;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#94a3b8;
+}
+.nexlab-integrations-callback-box code{
+  display:block;
+  margin-top:7px;
+  color:#35506d;
+  font-size:.625rem;
+  line-height:1.5;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+@media(max-width:1100px){
+  .nexlab-integrations-layout{grid-template-columns:1fr}
+  .nexlab-integrations-actions-card{order:2}
+  .nexlab-integrations-overview{order:1}
+}
+@media(max-width:900px){
+  .nexlab-integrations-points,
+  .nexlab-integrations-sync-grid,
+  .nexlab-integrations-note-list,
+  .nexlab-integrations-stats{grid-template-columns:1fr}
+}
+@media(max-width:767px){
+  .nexlab-integrations-overview-main{padding:18px;gap:14px}
+  .nexlab-integrations-topline{flex-direction:column;align-items:flex-start}
+  .nexlab-integrations-mark{width:46px;height:46px;border-radius:15px}
+}

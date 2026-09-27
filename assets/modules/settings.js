@@ -165,53 +165,77 @@ function GoogleCalendarPanel({addToast}){
   async function sync(){setBusy('sync');try{const data=await invokeGoogleCalendar('sync');const c=data?.counters||{};const text=`Sincronização concluída: ${Number(c.created||0)} criado(s), ${Number(c.updated||0)} atualizado(s), ${Number(c.deleted||0)} removido(s) e ${Number(c.unchanged||0)} sem alteração.`;toast(addToast,text,data?.partial?'info':'ok');await load();}catch(error){toast(addToast,error?.message||'Não foi possível sincronizar com o Google Calendar.','err');await load();}finally{setBusy('');}}
   async function disconnect(){setBusy('disconnect');try{await invokeGoogleCalendar('disconnect');setConfirmDisconnect(false);toast(addToast,'Google Calendar desconectado. Os eventos já enviados ao Google foram preservados.','ok');await load();}catch(error){toast(addToast,error?.message||'Não foi possível desconectar o Google Calendar.','err');}finally{setBusy('');}}
   const configured=!!status?.configured,connected=!!status?.connected,connection=status?.connection||null;
+  const summaryBadge=loading?'VERIFICANDO':connected?'CONECTADO':configured?'PRONTO PARA CONECTAR':'CONFIGURAÇÃO PENDENTE';
+  const summaryBadgeClass=connected?'success':configured?'neutral':'warning';
+  const actionTitle=connected?'Sincronização disponível':configured?'Pronto para conectar':'Configuração pendente';
+  const actionText=connected?'A conta já está autorizada. Você pode sincronizar agora ou desconectar esta integração.':configured?'A integração está preparada no backend. Falta apenas autorizar a Conta Google deste usuário.':'O backend está instalado, mas as credenciais OAuth do projeto Google ainda não foram cadastradas no Supabase.';
   return h(React.Fragment,null,
     h('div',{className:'nexlab-settings-panel-head'},
       h('span',{className:'nexlab-settings-kicker'},'INTEGRAÇÕES'),
       h('h2',null,'Google Calendar'),
       h('p',null,'Conecte a agenda do NexLab ao calendário principal da sua Conta Google sem importar compromissos pessoais para o sistema.')
     ),
-    h('section',{className:'nexlab-settings-card nexlab-settings-google-connect-card'},
-      h('div',{className:'nexlab-settings-google-connect-main'},
-        h('div',{className:'nexlab-settings-google-mark'},h(Icon,{name:'calendar',size:24})),
-        h('div',{className:'nexlab-settings-google-connect-copy'},
-          h('div',{className:'nexlab-settings-google-title-row'},
-            h('h3',null,'Google Calendar'),
-            h('span',{className:'nexlab-settings-badge '+(connected?'success':configured?'neutral':'warning')},loading?'VERIFICANDO':connected?'CONECTADO':configured?'PRONTO PARA CONECTAR':'CONFIGURAÇÃO PENDENTE')
-          ),
-          h('p',null,connected?(connection?.google_email?`Conectado como ${connection.google_email}.`:'Conta Google conectada ao NexLab.'):'Sincronização unidirecional do NexLab para o Google Calendar.')
+    h('div',{className:'nexlab-integrations-layout'},
+      h('section',{className:'nexlab-settings-card nexlab-integrations-overview'},
+        h('div',{className:'nexlab-integrations-overview-main'},
+          h('div',{className:'nexlab-integrations-mark'},h(Icon,{name:'calendar',size:26})),
+          h('div',{className:'nexlab-integrations-copy'},
+            h('div',{className:'nexlab-integrations-topline'},
+              h('div',null,h('h3',null,'Google Calendar'),h('p',null,connected?(connection?.google_email?`Conectado como ${connection.google_email}.`:'Conta Google conectada ao NexLab.'):'Sincronização unidirecional do NexLab para o Google Calendar.')),
+              h('span',{className:'nexlab-settings-badge '+summaryBadgeClass},summaryBadge)
+            ),
+            h('p',null,'A integração envia apenas compromissos que você pode visualizar no NexLab. O fluxo é NexLab → Google, sem importar eventos pessoais para dentro do sistema.'),
+            h('div',{className:'nexlab-integrations-points'},
+              h('div',null,h('strong',null,'Fluxo controlado'),h('span',null,'Os dados saem do NexLab para o Google Calendar, sem criar uma agenda paralela dentro do sistema.')),
+              h('div',null,h('strong',null,'Segurança'),h('span',null,'A autorização acontece no backend e o refresh token permanece protegido no Supabase Vault.')),
+              h('div',null,h('strong',null,'Escopo'),h('span',null,'Somente eventos, reuniões ativas e reservas aprovadas entram na sincronização.'))
+            )
+          )
         )
       ),
-      h('div',{className:'nexlab-settings-google-actions'},
-        connected
-          ?h('button',{type:'button',className:'nexlab-settings-btn primary',disabled:!!busy,onClick:sync},h(Icon,{name:'refresh',size:15}),busy==='sync'?'Sincronizando...':'Sincronizar agora')
-          :h('button',{type:'button',className:'nexlab-settings-btn primary',disabled:loading||!configured||!!busy,onClick:connect},h(Icon,{name:'external',size:15}),busy==='connect'?'Abrindo Google...':'Conectar Google Calendar'),
-        connected?h('button',{type:'button',className:'nexlab-settings-btn danger-outline',disabled:!!busy,onClick:()=>setConfirmDisconnect(true)},'Desconectar'):null
+      h('aside',{className:'nexlab-settings-card nexlab-integrations-actions-card'},
+        h('div',{className:'nexlab-integrations-actions-head'},
+          h('span',{className:'nexlab-integrations-actions-kicker'},'CONEXÃO'),
+          h('h3',null,actionTitle),
+          h('p',null,actionText)
+        ),
+        h('div',{className:'nexlab-integrations-actions'},
+          connected
+            ?h('button',{type:'button',className:'nexlab-settings-btn primary',disabled:!!busy,onClick:sync},h(Icon,{name:'refresh',size:15}),busy==='sync'?'Sincronizando...':'Sincronizar agora')
+            :h('button',{type:'button',className:'nexlab-settings-btn primary',disabled:loading||!configured||!!busy,onClick:connect},h(Icon,{name:'external',size:15}),busy==='connect'?'Abrindo Google...':'Conectar Google Calendar'),
+          connected?h('button',{type:'button',className:'nexlab-settings-btn danger-outline',disabled:!!busy,onClick:()=>setConfirmDisconnect(true)},'Desconectar'):null
+        ),
+        h('div',{className:'nexlab-integrations-action-note'},h(Icon,{name:'info',size:16}),h('span',null,connected?'Ao desconectar, a autorização do Google será revogada, mas os eventos já criados no Google Calendar serão preservados.':'A conexão é individual por usuário. Depois que o backend é configurado uma vez, cada pessoa só precisa autorizar sua própria conta Google.'))
       )
     ),
-    !configured&&!loading?h('section',{className:'nexlab-settings-card nexlab-settings-google-setup'},
-      h('div',{className:'nexlab-settings-card-head'},h('div',{className:'nexlab-settings-card-icon'},h(Icon,{name:'shield'})),h('div',null,h('h3',null,'Backend preparado'),h('p',null,'A integração já está instalada no Supabase, mas as credenciais OAuth do projeto Google ainda precisam ser cadastradas como secrets.'))),
-      h('div',{className:'nexlab-settings-google-callback'},h('span',null,'URI de redirecionamento autorizada'),h('code',null,status?.callback_url||'Indisponível')),
-      h('div',{className:'nexlab-settings-inline-note'},h(Icon,{name:'info',size:17}),h('span',null,'Secrets necessários: GOOGLE_CALENDAR_CLIENT_ID e GOOGLE_CALENDAR_CLIENT_SECRET. Eles não ficam no código público do NexLab.'))
-    ):null,
-    connected?h('section',{className:'nexlab-settings-card nexlab-settings-google-state'},
-      h('div',{className:'nexlab-settings-card-head'},h('div',{className:'nexlab-settings-card-icon'},h(Icon,{name:'refresh'})),h('div',null,h('h3',null,'Estado da sincronização'),h('p',null,'A conexão usa o calendário principal da conta autorizada.'))),
-      h('div',{className:'nexlab-settings-fields-grid'},
-        h(Field,{label:'Conta Google',value:connection?.google_email||'Conta conectada'}),
-        h(Field,{label:'Calendário',value:connection?.calendar_id==='primary'?'Calendário principal':connection?.calendar_id||'Principal'}),
-        h(Field,{label:'Última sincronização',value:connection?.last_sync_at?fmtDate(connection.last_sync_at):'Ainda não sincronizado',muted:!connection?.last_sync_at}),
-        h(Field,{label:'Estado',value:connection?.last_error?'Conectado com aviso':'Conectado'})
+    connected?h('section',{className:'nexlab-settings-card nexlab-integrations-details'},
+      h('div',{className:'nexlab-settings-card-head'},h('div',{className:'nexlab-settings-card-icon'},h(Icon,{name:'refresh'})),h('div',null,h('h3',null,'Estado da conexão'),h('p',null,'Resumo da conta autorizada e do calendário usado pela integração.'))),
+      h('div',{className:'nexlab-integrations-stats'},
+        h('div',null,h('strong',null,'Conta Google'),h('span',null,connection?.google_email||'Conta conectada')),
+        h('div',null,h('strong',null,'Calendário'),h('span',null,connection?.calendar_id==='primary'?'Calendário principal':connection?.calendar_id||'Principal')),
+        h('div',null,h('strong',null,'Última sincronização'),h('span',null,connection?.last_sync_at?fmtDate(connection.last_sync_at):'Ainda não sincronizado')),
+        h('div',null,h('strong',null,'Estado'),h('span',null,connection?.last_error?'Conectado com aviso':'Conectado'))
       ),
       connection?.last_error?h('div',{className:'nexlab-settings-status-warning'},h(Icon,{name:'info',size:18}),h('span',null,connection.last_error)):null
+    ):!configured&&!loading?h('section',{className:'nexlab-settings-card nexlab-integrations-setup'},
+      h('div',{className:'nexlab-settings-card-head'},h('div',{className:'nexlab-settings-card-icon'},h(Icon,{name:'shield'})),h('div',null,h('h3',null,'Backend preparado'),h('p',null,'A integração já está instalada no Supabase, mas as credenciais OAuth do projeto Google ainda precisam ser cadastradas como secrets.'))),
+      h('div',{className:'nexlab-integrations-callback-box'},h('span',null,'URI de redirecionamento autorizada'),h('code',null,status?.callback_url||'Indisponível')),
+      h('div',{className:'nexlab-integrations-note-list'},
+        h('div',null,h('strong',null,'Secrets necessários'),h('span',null,'GOOGLE_CALENDAR_CLIENT_ID e GOOGLE_CALENDAR_CLIENT_SECRET devem ficar apenas no backend.')),
+        h('div',null,h('strong',null,'Sem exposição pública'),h('span',null,'As credenciais não devem ser colocadas no código público do NexLab nem em arquivos distribuídos aos usuários.'))
+      )
     ):null,
-    h('section',{className:'nexlab-settings-card nexlab-settings-google-scope'},
-      h('div',{className:'nexlab-settings-card-head'},h('div',{className:'nexlab-settings-card-icon'},h(Icon,{name:'calendar'})),h('div',null,h('h3',null,'O que será sincronizado'),h('p',null,'O Google recebe apenas compromissos que o usuário pode visualizar no NexLab.'))),
-      h('div',{className:'nexlab-settings-google-scope-grid'},
-        h('article',null,h('strong',null,'Eventos'),h('span',null,'Eventos institucionais visíveis na Agenda.')),
-        h('article',null,h('strong',null,'Reuniões'),h('span',null,'Reuniões ativas e acessíveis ao usuário.')),
-        h('article',null,h('strong',null,'Reservas'),h('span',null,'Somente reservas aprovadas.'))
+    h('section',{className:'nexlab-settings-card nexlab-integrations-sync'},
+      h('div',{className:'nexlab-settings-card-head'},h('div',{className:'nexlab-settings-card-icon'},h(Icon,{name:'calendar'})),h('div',null,h('h3',null,'O que será sincronizado'),h('p',null,'A integração envia apenas compromissos visíveis ao usuário dentro do NexLab.'))),
+      h('div',{className:'nexlab-integrations-sync-grid'},
+        h('div',{className:'nexlab-integrations-sync-item'},h('strong',null,'Eventos'),h('span',null,'Eventos institucionais exibidos na Agenda do NexLab.')),
+        h('div',{className:'nexlab-integrations-sync-item'},h('strong',null,'Reuniões'),h('span',null,'Reuniões ativas e acessíveis ao usuário no momento da sincronização.')),
+        h('div',{className:'nexlab-integrations-sync-item'},h('strong',null,'Reservas'),h('span',null,'Somente reservas aprovadas entram no Google Calendar.'))
       ),
-      h('div',{className:'nexlab-settings-inline-note'},h(Icon,{name:'info',size:17}),h('span',null,'A sincronização é NexLab → Google. Compromissos pessoais do Google não entram no NexLab, e o NexLab não adiciona convidados automaticamente.'))
+      h('div',{className:'nexlab-integrations-note-list'},
+        h('div',null,h('strong',null,'Sem importação inversa'),h('span',null,'Compromissos pessoais do Google não entram no NexLab e não alteram a agenda interna do sistema.')),
+        h('div',null,h('strong',null,'Sem convidados automáticos'),h('span',null,'O NexLab não adiciona convidados automaticamente aos eventos enviados para o Google Calendar.'))
+      )
     ),
     status?.error?h('div',{className:'nexlab-settings-status-warning'},h(Icon,{name:'info',size:18}),h('span',null,status.error)):null,
     confirmDisconnect?h(ConfirmDialog,{title:'Desconectar Google Calendar',message:'A autorização do Google será revogada. Os eventos que já foram enviados ao Google Calendar serão mantidos, mas deixarão de ser atualizados pelo NexLab.',confirmLabel:'Desconectar',danger:true,busy:busy==='disconnect',onCancel:()=>setConfirmDisconnect(false),onConfirm:disconnect}):null
