@@ -680,3 +680,21 @@ html[data-nexlab-reduce-motion="true"] *,html[data-nexlab-reduce-motion="true"] 
   .nexlab-settings-backup-hero-actions .nexlab-settings-btn{width:100%}
   .nexlab-settings-integration-rules{grid-template-columns:1fr}
 }
+
+/* Configurações · Google Calendar — correção visual do card de integração */
+.nexlab-settings-integration-hero{
+  height:auto!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  background:#fff!important;
+  isolation:isolate;
+}
+.nexlab-settings-integration-hero::after{
+  content:none!important;
+  display:none!important;
+}
+.nexlab-settings-integration-brand,
+.nexlab-settings-integration-actions{
+  position:relative;
+  z-index:1;
+}
