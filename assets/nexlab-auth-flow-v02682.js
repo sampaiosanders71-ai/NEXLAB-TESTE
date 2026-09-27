@@ -61,9 +61,13 @@ export async function registerAccount({username,email,password,nome}){
   if(!/^\S+@\S+\.\S+$/.test(recoveryEmail)) throw authError('invalid_email','Informe um e-mail válido para recuperação de senha.');
   if(secret.length<8) throw authError('weak_password','A senha deve ter pelo menos 8 caracteres.');
 
-  const {data:available,error:availabilityError}=await supabase.rpc('nexlab_username_available_v1',{p_username:normalized});
-  if(availabilityError) throw authError('availability_failed','Não foi possível validar o usuário agora. Tente novamente.');
-  if(available!==true) throw authError('username_taken','Esse usuário já está em uso. Escolha outro.');
+  const {data:availability,error:availabilityError}=await supabase.functions.invoke('nexlab-login-username',{
+    body:{action:'username_available',username:normalized}
+  });
+  if(availabilityError||!availability?.ok){
+    throw authError('availability_failed','Não foi possível validar o usuário agora. Tente novamente.');
+  }
+  if(availability.available!==true) throw authError('username_taken','Esse usuário já está em uso. Escolha outro.');
 
   const {data,error}=await supabase.auth.signUp({
     email:recoveryEmail,
