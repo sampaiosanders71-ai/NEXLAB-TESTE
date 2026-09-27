@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-backup-recuperacao-etapas-3-4",
-  "asset_revision": "app-beta-0-26-82-backup-recuperacao-etapas-3-4",
-  "generated_at": "2026-09-27T18:13:00Z",
+  "revision": "beta-0-26-82-google-calendar-integracao",
+  "asset_revision": "app-beta-0-26-82-google-calendar-integracao",
+  "generated_at": "2026-09-27T18:53:46Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "6d4c89056cb9127ac5ceb97dd82402bcee04a42aa1139fbe0bb387da87ca4859",
+  "manifest_sha256": "d48382634da63c9e861644e7d149002f9af8b656dbd5e2b3c71d5d2eddcc9782",
   "essential_count": 58,
-  "essential_bytes": 2393228,
-  "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T181300Z"
+  "essential_bytes": 2404050,
+  "cache_name": "nexlab-app-beta-0-26-82-google-calendar-integracao-20260927T185346Z"
 }
