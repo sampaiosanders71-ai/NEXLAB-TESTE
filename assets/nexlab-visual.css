@@ -426,21 +426,6 @@ aside#mobile-sidebar [data-active='true'] svg{
 @keyframes nexlabSpin{to{transform:rotate(360deg)}}
 @keyframes nexlabLoaderBar{0%{transform:scaleX(.10)}45%{transform:scaleX(.72)}100%{transform:scaleX(1)}}
 
-.nexlab-update-banner{
-  position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:2147482450;
-  width:min(430px,calc(100vw - 36px));display:flex;align-items:center;justify-content:space-between;
-  gap:14px;background:#fff;color:#0E1F3D;border:1px solid rgba(14,31,61,.12);
-  border-radius:20px;padding:14px;box-shadow:0 22px 70px rgba(2,8,23,.22);
-}
-.nexlab-update-banner strong{display:block;font-size:.84rem;font-weight:950;margin-bottom:.16rem;}
-.nexlab-update-banner span{display:block;color:#64748B;font-size:.72rem;line-height:1.35;}
-.nexlab-update-actions{display:flex;gap:.5rem;flex:none;}
-.nexlab-update-actions button{
-  border:0;border-radius:13px;padding:.68rem .78rem;font-size:.72rem;font-weight:950;cursor:pointer;box-shadow:none!important;
-}
-.nexlab-update-later{background:#f1f5f9;color:#334155;}
-.nexlab-update-now{background:linear-gradient(135deg,#0E1F3D,#0A6BFF);color:#fff;}
-
 [data-nexlab-module-subtitle-hidden='true']{display:none!important;}
 .nexlab-help-launcher,.nexlab-help-backdrop,.nexlab-module-transition,.nexlab-module-timeout-note,.nexlab-marketing-agenda-board{display:none!important;}
 
@@ -452,8 +437,6 @@ aside#mobile-sidebar [data-active='true'] svg{
   .nexlab-connection-actions,.nexlab-modal-actions{flex-direction:column-reverse;}
   .nexlab-connection-btn,.nexlab-modal-btn{width:100%;padding:13px 14px;}
   .nexlab-action-loader-pill{top:auto;bottom:calc(18px + env(safe-area-inset-bottom));font-size:.68rem;}
-  .nexlab-update-banner{left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));width:auto;align-items:stretch;flex-direction:column;}
-  .nexlab-update-actions{display:grid;grid-template-columns:1fr 1fr;}
 }
 @media(prefers-reduced-motion:reduce){
   .nexlab-action-loader-bar,.nexlab-action-spinner{animation:none!important;}

@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-backup-recuperacao-etapas-3-4',generatedAt:'2026-09-27T17:13:59Z',cacheName:'nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T171359Z',pwa:{identity:{id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',worker:'./nexlab-sw.js?pwa=nexlab-identity-v2-20260926',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'}}});
+  const BUILD=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-backup-recuperacao-etapas-3-4',generatedAt:'2026-09-27T17:59:00Z',cacheName:'nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T175900Z',pwa:{identity:{id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',worker:'./nexlab-sw.js?pwa=nexlab-identity-v2-20260926',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'}}});
   const CURRENT={version:String(BUILD.version||''),release:String(BUILD.release||''),revision:String(BUILD.revision||''),generatedAt:String(BUILD.generatedAt||'')};
   const HEAD_URL='./release-head.json';
   const PWA_IDENTITY=BUILD.pwa?.identity||Object.freeze({id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',worker:'./nexlab-sw.js',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'});
@@ -25,9 +25,72 @@
   function buildKey(value){const remote=id(value);return remote?.revision?`${remote.revision}@${remote.generatedAt||''}`:'';}
   function deferred(){try{return sessionStorage.getItem(DEFERRED_KEY)||'';}catch{return '';}}
   function clearDeferred(){try{sessionStorage.removeItem(DEFERRED_KEY);}catch{}}
-  function ensureStyle(){if(document.getElementById('nexlab-update-manager-style'))return;const style=document.createElement('style');style.id='nexlab-update-manager-style';style.textContent='.nexlab-update-banner{position:fixed!important;right:18px!important;bottom:18px!important;z-index:2147483000!important;width:min(410px,calc(100vw - 36px))!important;box-sizing:border-box!important;padding:16px!important;border:1px solid #b9c8de!important;border-radius:16px!important;background:#fff!important;color:#10233f!important;box-shadow:0 18px 48px rgba(15,35,65,.24)!important;font:14px/1.45 Arial,sans-serif!important}.nexlab-update-banner strong{display:block!important;margin:0 0 5px!important;font-size:0.9375rem!important}.nexlab-update-banner p{margin:0 0 12px!important;white-space:normal!important}.nexlab-update-actions{display:flex!important;gap:8px!important;justify-content:flex-end!important;flex-wrap:wrap!important}.nexlab-update-actions button{border-radius:10px!important;border:1px solid #b9c8de!important;padding:8px 12px!important;font-weight:700!important;cursor:pointer!important}.nexlab-update-now{background:#0b2a63!important;color:#fff!important;border-color:#0b2a63!important}.nexlab-update-later{background:#fff!important;color:#263b58!important}@media(max-width:520px){.nexlab-update-banner{left:12px!important;right:12px!important;bottom:12px!important;width:auto!important}}';document.head.appendChild(style);}
+  function ensureStyle(){
+    if(document.getElementById('nexlab-update-manager-style'))return;
+    const style=document.createElement('style');
+    style.id='nexlab-update-manager-style';
+    style.textContent=`
+#nexlab-update-notice{position:fixed;top:50%;left:50%;right:auto;bottom:auto;transform:translate(-50%,-50%);z-index:2147483000;display:block;width:min(440px,calc(100% - 32px));max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain;margin:0;padding:22px;box-sizing:border-box;border:1px solid #d5dfed;border-top:4px solid var(--nexlab-orange,#FF8A00);border-radius:18px;background:#fff;color:var(--nexlab-navy,#0E1F3D);box-shadow:0 18px 56px rgba(14,31,61,.24);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-align:left}
+#nexlab-update-notice *{box-sizing:border-box}
+#nexlab-update-notice .nexlab-update-heading{display:flex;align-items:center;gap:12px}
+#nexlab-update-notice .nexlab-update-icon{display:grid;place-items:center;flex:0 0 42px;height:42px;border-radius:12px;background:#fff1df;color:#b35b00}
+#nexlab-update-notice .nexlab-update-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round}
+#nexlab-update-notice .nexlab-update-title{display:block;min-width:0;margin:0;color:var(--nexlab-navy,#0E1F3D);font-size:1.3125rem;font-weight:750;line-height:1.3;letter-spacing:-.025em;overflow-wrap:anywhere}
+#nexlab-update-notice .nexlab-update-message{display:block;margin:15px 0 21px;color:#4e6079;font-size:.875rem;line-height:1.6;white-space:normal;overflow-wrap:anywhere}
+#nexlab-update-notice .nexlab-update-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+#nexlab-update-notice .nexlab-update-actions button{appearance:none;min-height:44px;max-width:100%;padding:10px 17px;border:1px solid #d5dfed;border-radius:10px;background:#fff;color:var(--nexlab-navy,#0E1F3D);font-family:inherit;font-size:.8125rem;font-weight:650;line-height:1.4;white-space:normal;cursor:pointer}
+#nexlab-update-notice .nexlab-update-actions .nexlab-update-now{background:var(--nexlab-navy,#0E1F3D);border-color:var(--nexlab-navy,#0E1F3D);color:#fff}
+#nexlab-update-notice button:focus-visible{outline:3px solid var(--nexlab-orange,#FF8A00);outline-offset:3px}
+#nexlab-update-notice button:disabled{opacity:.65;cursor:wait}
+@media(hover:hover){#nexlab-update-notice button:hover:not(:disabled){filter:brightness(.96)}}
+@media(max-width:380px){#nexlab-update-notice{padding:18px 16px}#nexlab-update-notice .nexlab-update-title{font-size:1.25rem}#nexlab-update-notice .nexlab-update-actions button{flex:1;padding:10px 12px}}
+`;
+    document.head.appendChild(style);
+  }
   function hideBanner(){banner?.remove();banner=null;bannerText=null;bannerNow=null;}
-  function showBanner(identity,validation){if(!document.body)return;const remote=id(identity);if(!remote?.revision)return;if(deferred()===buildKey(remote))return;ensureStyle();hideBanner();const box=document.createElement('section');box.className='nexlab-update-banner';box.setAttribute('role','status');box.setAttribute('aria-live','polite');const title=document.createElement('strong');title.textContent='Atualização do NEXLAB pronta';const text=document.createElement('p');text.textContent=`Uma atualização da Beta ${remote.version||CURRENT.version} já foi baixada e validada (${Number(validation?.essentialCount||0)} arquivos essenciais). Atualize quando puder.`;const actions=document.createElement('div');actions.className='nexlab-update-actions';const later=document.createElement('button');later.type='button';later.className='nexlab-update-later';later.textContent='Depois';later.onclick=()=>{try{sessionStorage.setItem(DEFERRED_KEY,buildKey(remote));}catch{}hideBanner();state.status='deferred';dispatch('nexlab:update-deferred',{...state});};const now=document.createElement('button');now.type='button';now.className='nexlab-update-now';now.textContent='Atualizar agora';now.onclick=()=>void applyUpdate();actions.append(later,now);box.append(title,text,actions);document.body.appendChild(box);banner=box;bannerText=text;bannerNow=now;}
+  function showBanner(identity,validation){
+    if(!document.body)return;
+    const remote=id(identity);
+    if(!remote?.revision||deferred()===buildKey(remote))return;
+    ensureStyle();
+    hideBanner();
+    const box=document.createElement('section');
+    box.id='nexlab-update-notice';
+    box.className='nexlab-update-banner';
+    box.setAttribute('role','status');
+    box.setAttribute('aria-live','polite');
+    box.setAttribute('aria-labelledby','nexlab-update-notice-title');
+    const heading=document.createElement('div');
+    heading.className='nexlab-update-heading';
+    const icon=document.createElement('span');
+    icon.className='nexlab-update-icon';
+    icon.setAttribute('aria-hidden','true');
+    icon.innerHTML='<svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>';
+    const title=document.createElement('strong');
+    title.id='nexlab-update-notice-title';
+    title.className='nexlab-update-title';
+    title.textContent='Nova atualização';
+    heading.append(icon,title);
+    const text=document.createElement('p');
+    text.className='nexlab-update-message';
+    text.textContent='A nova atualização do NexLab está pronta para instalar. Atualize quando for melhor para você.';
+    const actions=document.createElement('div');
+    actions.className='nexlab-update-actions';
+    const later=document.createElement('button');
+    later.type='button';
+    later.className='nexlab-update-later';
+    later.textContent='Depois';
+    later.onclick=()=>{try{sessionStorage.setItem(DEFERRED_KEY,buildKey(remote));}catch{}hideBanner();state.status='deferred';dispatch('nexlab:update-deferred',{...state});};
+    const now=document.createElement('button');
+    now.type='button';
+    now.className='nexlab-update-now';
+    now.textContent='Atualizar agora';
+    now.onclick=()=>void applyUpdate();
+    actions.append(later,now);
+    box.append(heading,text,actions);
+    document.body.appendChild(box);
+    banner=box;bannerText=text;bannerNow=now;
+  }
   function setProgress(message){if(bannerText)bannerText.textContent=message;if(bannerNow){bannerNow.disabled=true;bannerNow.textContent='Atualizando...';}}
   function restoreAction(message){if(bannerText)bannerText.textContent=message||'Não foi possível ativar a atualização. Tente novamente.';if(bannerNow){bannerNow.disabled=false;bannerNow.textContent='Tentar novamente';}}
   async function fetchHead(){const url=new URL(HEAD_URL,location.href);url.searchParams.set('check',String(Date.now()));const response=await fetch(url,{cache:'no-store',credentials:'same-origin',headers:{Accept:'application/json'}});if(!response.ok)throw new Error(`Cabeçalho de atualização indisponível (${response.status}).`);const data=await response.json();return id(data)||{};}
