@@ -1,5 +1,5 @@
 /* NEXLAB Beta 0.26.82 — Dashboard reconstruído do zero — face institucional. */
-import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-backup-recuperacao-etapas-3-4";
+import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-google-calendar-integracao";
 
 const HOST_ID = 'nexlab-dashboard-clean-v02682';
 const STYLE_ID = 'nexlab-dashboard-rebuild-style-v02682';
