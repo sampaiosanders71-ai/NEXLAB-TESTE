@@ -5,9 +5,9 @@
   "channel": "beta",
   "revision": "beta-0-26-82-backup-recuperacao-etapas-3-4",
   "asset_revision": "app-beta-0-26-82-backup-recuperacao-etapas-3-4",
-  "generated_at": "2026-09-27T17:59:00Z",
-  "title": "NEXLAB Beta 0.26.82 — Aviso central e Acesso rápido reconstruídos",
-  "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T175900Z",
+  "generated_at": "2026-09-27T18:13:00Z",
+  "title": "NEXLAB Beta 0.26.82 — Sidebar com contraste reforçado",
+  "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T181300Z",
   "entry": "index.html",
   "core_files": [
     "index.html",
