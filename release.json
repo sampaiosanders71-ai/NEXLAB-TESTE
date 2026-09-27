@@ -5,9 +5,9 @@
   "channel": "beta",
   "revision": "beta-0-26-82-backup-recuperacao-etapas-3-4",
   "asset_revision": "app-beta-0-26-82-backup-recuperacao-etapas-3-4",
-  "generated_at": "2026-09-26T21:29:58Z",
+  "generated_at": "2026-09-27T01:08:46Z",
   "title": "NEXLAB Beta 0.26.82 — identidade PWA isolada",
-  "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260926T212958Z",
+  "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T010846Z",
   "entry": "index.html",
   "core_files": [
     "index.html",
@@ -325,7 +325,7 @@
     "version": "0.26.82",
     "revision": "beta-0-26-82-backup-recuperacao-etapas-3-4",
     "asset_revision": "app-beta-0-26-82-backup-recuperacao-etapas-3-4",
-    "generated_at": "2026-09-26T21:29:58Z",
+    "generated_at": "2026-09-27T01:08:46Z",
     "cloudflare_d1": "deferred_by_project_decision",
     "physical_device_test": "pending",
     "technical_homologation": "passed",
@@ -473,8 +473,8 @@
     "release": "Beta",
     "revision": "beta-0-26-82-backup-recuperacao-etapas-3-4",
     "asset_revision": "app-beta-0-26-82-backup-recuperacao-etapas-3-4",
-    "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260926T212958Z",
-    "generated_at": "2026-09-26T21:29:58Z"
+    "cache_name": "nexlab-app-beta-0-26-82-backup-recuperacao-etapas-3-4-20260927T010846Z",
+    "generated_at": "2026-09-27T01:08:46Z"
   },
   "external_feedback_evidence": {
     "provider": "cloudflare_r2",
@@ -651,7 +651,7 @@
     "marketing_database_constraints": true,
     "physical_homologation": "pending_real_installed_device_after_publication"
   },
-  "package_uncompressed_bytes": 4218562,
+  "package_uncompressed_bytes": 4219828,
   "corrections_0_26_30": {
     "activity_search_width_controlled": true,
     "activity_filters_aligned_desktop": true,
@@ -1761,9 +1761,9 @@
     "assets/nexlab-projects-v02667.css": "2acb7de318fd87447ffe82995710f92db27e311a38e3bf68c17fb0f29b0327c2",
     "assets/nexlab-push-consent.js": "a7a238e4e50b072bd6a2fc7e3476523308f2e70773835bc3059271914c6cdab6",
     "assets/nexlab-push-navigation.js": "36f5ff81d12fe30f0f1904f327caf20d3f74da5a2117d14407bca00a8de9bc77",
-    "assets/nexlab-pwa-readiness.js": "bbbe34ee8362a141e8198fab08112e70a5b6f8368b3638ecc629cd6696012818",
+    "assets/nexlab-pwa-readiness.js": "d5d2d99e1ac79b939c7c1e30190c82cf1f28e2798a5b6ea48d5104d972523ec7",
     "assets/nexlab-release-gate.js": "5d24d890134efefbda865f5c5c68527dba444ec2406987309bbf491ba9d895fd",
-    "assets/nexlab-release-identity.js": "c00984bce55777fa3018346159b543d5cc02cd03c5de8df25825ca3e736562ad",
+    "assets/nexlab-release-identity.js": "4bc041a6b2255f08c72f2d1ee224122f63e66978be2b1c7480baa2838bf90401",
     "assets/nexlab-reports-v02682.css": "8c01471ddefc553d0d01999cbdaffafedb72e2c3e1b812e262d4c4cce094ebb4",
     "assets/nexlab-responsive-v02671.css": "1d793319a9669259df02b5f03c447f7e51a932e86d7f458e51593c55a530b069",
     "assets/nexlab-responsive-v02671.js": "344e32b46829fae952e34be01655cbc4f3f5d45dbffd4443cee3cd5caf8e9714",
@@ -1779,7 +1779,7 @@
     "assets/nexlab-team-chat-v02682.css": "3343ba3d6e87028770964aa23f28792caef14917b07e350bd1b82b3cdce94dbc",
     "assets/nexlab-team-chat-v02682.js": "970c1f4473417dbf7ec457e77d7c1eb9b1e9872b17fc5c672757f3c85015d9e5",
     "assets/nexlab-team-tasks-v02682.css": "bd49342a00423803f64d7fb964640504c3f0180d36ea41c6a866da3d8af10bab",
-    "assets/nexlab-update-manager.js": "566b4d8e708c0aff583875b0d6b117fbc0472335f847a64993a4351d041ee5d8",
+    "assets/nexlab-update-manager.js": "4062a8d7c5d6a82e5b229bf4aa48b7c4707810fd857151dc605cbf6607adb3d5",
     "assets/nexlab-user-preferences.js": "8e4900d841737b0c87ae161f255b251040eea5e2f208553ec450d09de567470e",
     "assets/nexlab-vapid-rotation.js": "fc338511aef1f7973e4f8cc12b14ed749780117dc0d08a88a3abd93aa7158a36",
     "assets/nexlab-visual.css": "2c9c8871bfa181e7d1c3320eb1e56c925adabfd1aec6cbe856bec8052e79f3a4",
@@ -1815,11 +1815,11 @@
     "icons/nexlab-maskable-512.png": "c55135cbb263a64178443e06221f956f075fc8ce03d10dcd640d296f068723f5",
     "index.html": "a83f60d73852960aa474855d2776733e7274f2a252c7df58753154b179f08898",
     "manifest.webmanifest": "c993f0387091b30955a2613d17aa3ce9cd9611cb44d5e4cb6f0d4d5479a32c24",
-    "nexlab-sw.js": "4d9bf95f84d4d0f650378d6526ab3b2b42f72e08f7da6662a59e562d09defed3",
+    "nexlab-sw.js": "d0a3bf18b7d56eda1d0a1cb354192efb443af8dea1f33f904f77991d8a95f9b4",
     "offline.html": "d76cbf611242031655d7ddab7e11bb66763a43315ce7f13de3faaedc4253ed14",
     "pwa-check.html": "d38d1f80e245778240dbd2ca61af50e99418fc8b29bc94bea095ee62b897c1e9",
-    "release-head.json": "0571e9ddd6892a8f7180daedc453b49eb3562cb26539e88728603e34ef0674a6",
-    "release-manifest.json": "4a633f9580b18054f7a28158b5d237b2069318a5e74571480ac29e6f4394cf15"
+    "release-head.json": "a7bf1d39352212e0273bbf55450e7b9d5426b0e772a77f81f9f230407745afaa",
+    "release-manifest.json": "c7c087adc5d8c2b3fb535551e1e1b30f5cd48c94ad9d7e5a56a44ed5dc1b1727"
   },
   "corrections_0_26_41": {
     "marketing_creation_only_in_header": true,
@@ -3591,7 +3591,7 @@
     "assets/nexlab-team-chat-v02682.css": 43218,
     "assets/nexlab-team-chat-v02682.js": 90092,
     "assets/nexlab-team-tasks-v02682.css": 28483,
-    "assets/nexlab-update-manager.js": 18897,
+    "assets/nexlab-update-manager.js": 19880,
     "assets/nexlab-user-preferences.js": 2160,
     "assets/nexlab-vapid-rotation.js": 5125,
     "assets/nexlab-visual.css": 211646,
@@ -4948,7 +4948,7 @@
     "foreign_worker_exact_scope_reclaimed_only": true,
     "cross_app_root_worker_unregistration": false,
     "cache_namespace": "nexlab-",
-    "generated_at": "2026-09-26T21:29:58Z",
+    "generated_at": "2026-09-27T01:08:46Z",
     "manifest_sha256": "4a633f9580b18054f7a28158b5d237b2069318a5e74571480ac29e6f4394cf15",
     "essential_count": 58,
     "essential_bytes": 2407129,
@@ -4967,5 +4967,14 @@
       "local_http_failures": 0,
       "physical_browser_reinstall_required_to_replace_legacy_installed_app_identity": true
     }
+  },
+  "update_banner_refinement_0_26_82": {
+    "status": "implemented",
+    "title": "Atenção",
+    "warning_icon": true,
+    "initial_subtitle_removed": true,
+    "progress_text_only_after_user_action": true,
+    "version": "0.26.82",
+    "generated_at": "2026-09-27T01:08:46Z"
   }
 }
