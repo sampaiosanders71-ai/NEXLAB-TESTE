@@ -1,14 +1,1 @@
-{
-  "protocol": 2,
-  "version": "0.26.82",
-  "release": "Beta",
-  "channel": "beta",
-  "revision": "beta-0-26-82-google-calendar-integracao",
-  "asset_revision": "app-beta-0-26-82-google-calendar-integracao",
-  "generated_at": "2026-09-27T21:16:30Z",
-  "manifest": "release-manifest.json",
-  "manifest_sha256": "d5f337df5a1f377cdff3361e70aaa506845f22c5903f2392f617db0016bb4234",
-  "essential_count": 58,
-  "essential_bytes": 2421615,
-  "cache_name": "nexlab-app-beta-0-26-82-google-calendar-integracao-20260927T211630Z"
-}
+{"protocol":2,"version":"0.26.82","release":"Beta","channel":"beta","revision":"beta-0-26-82-google-calendar-integracao","asset_revision":"app-beta-0-26-82-google-calendar-integracao","generated_at":"2026-09-27T21:29:13Z","manifest":"release-manifest.json","manifest_sha256":"ed06c92c6f01920713efa57b2869116fec8e0076022c441ddff73e2788730f06","essential_count":58,"essential_bytes":2424727,"cache_name":"nexlab-app-beta-0-26-82-google-calendar-integracao-20260927T212913Z"}
