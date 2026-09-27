@@ -6781,3 +6781,18 @@ aside#mobile-sidebar nav [data-active='true']{
   font-weight:750!important;
 }
 
+
+
+/* Login — botão mostrar/ocultar senha */
+.nexlab-auth-password-control{position:relative;width:100%;}
+.nexlab-auth-password-input{padding-right:3rem!important;}
+.nexlab-auth-password-toggle{
+  position:absolute;right:.45rem;top:50%;transform:translateY(-50%);
+  width:2.15rem;height:2.15rem;display:grid;place-items:center;
+  border:0;border-radius:.65rem;background:transparent;color:#64748b;
+  cursor:pointer;transition:background .15s ease,color .15s ease;
+}
+.nexlab-auth-password-toggle:hover{background:#f1f5f9;color:#0f2745;}
+.nexlab-auth-password-toggle:focus-visible{outline:2px solid #f97316!important;outline-offset:1px!important;box-shadow:none!important;}
+.nexlab-auth-password-toggle svg{width:1.18rem;height:1.18rem;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;pointer-events:none;}
+@media (pointer:coarse){.nexlab-auth-password-toggle{width:2.4rem;height:2.4rem;right:.3rem;}}
