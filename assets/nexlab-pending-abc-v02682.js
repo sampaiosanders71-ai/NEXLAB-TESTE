@@ -358,6 +358,17 @@ export default function PendingModuleAE({ profile, addToast, onNavigate, onCount
     const currentRequest = ++requestId.current;
     append || notify ? setRefreshing(true) : setLoading(true);
     try {
+      const sessionResult = window.nexlabAuthSessionWithTimeout
+        ? await window.nexlabAuthSessionWithTimeout(supabase.auth, 4500)
+        : await supabase.auth.getSession();
+      const session = sessionResult?.data?.session || null;
+      if (!session?.user?.id || !profile?.id || String(session.user.id) !== String(profile.id)) {
+        if (currentRequest === requestId.current) {
+          setLoading(false);
+          setRefreshing(false);
+        }
+        return;
+      }
       const [baseResult, meetingsResult, approvalsResult, summaryResult, communicationResult] = await Promise.allSettled([
         loadPendingCenter(profile, { page, pageSize: PAGE_SIZE }),
         supabase.rpc("nexlab_get_my_day_meetings_v1", { p_horizon_days: 7 }),

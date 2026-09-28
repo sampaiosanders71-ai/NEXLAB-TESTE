@@ -456,8 +456,23 @@ async function loadData() {
   const existing=document.getElementById(HOST_ID); if(existing) render(existing);
   const today=new Date(); const until=new Date(today); until.setDate(until.getDate()+120); const iso=d=>d.toISOString().slice(0,10); const errors=[];
   try {
+    const sessionResult=window.nexlabAuthSessionWithTimeout
+      ? await window.nexlabAuthSessionWithTimeout(supabase.auth,4500)
+      : await supabase.auth.getSession();
+    const session=sessionResult?.data?.session||null;
+    if(!session?.user?.id||!dashboardAllowed()){
+      state.uid=''; state.errors=[]; state.loading=false;
+      const host=document.getElementById(HOST_ID); if(host) render(host);
+      return;
+    }
     const userResult=await supabase.auth.getUser();
-    const uid=normId(userResult?.data?.user?.id); state.uid=uid;
+    const uid=normId(userResult?.data?.user?.id);
+    if(userResult?.error||!uid||uid!==normId(session.user.id)||!dashboardAllowed()){
+      state.uid=''; state.errors=[]; state.loading=false;
+      const host=document.getElementById(HOST_ID); if(host) render(host);
+      return;
+    }
+    state.uid=uid;
     const [bundleResult,myDayResult]=await Promise.allSettled([
       supabase.rpc('nexlab_get_dashboard_bundle_v02656',{p_date_from:iso(today),p_date_to:iso(until)}),
       supabase.rpc('nexlab_get_my_day_summary_v1',{p_horizon_days:7})
