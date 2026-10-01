@@ -129,13 +129,9 @@
   }
   function removeCoordinatorUi(){document.getElementById('nexlab-validation-trigger')?.remove();document.getElementById('nexlab-coordinator-preview-trigger')?.remove();document.querySelectorAll('.nexlab-validation-overlay').forEach(node=>node.remove());}
   function mount(roleHint=''){
-    if(window.__NEXLAB_PROFILE_PREVIEW__?.active){removeCoordinatorUi();return;}
-    const guardState=window.NexlabAdministrativeUiGuard?.getState?.()||{};
-    const role=String(roleHint||guardState.role||'').toLowerCase();
-    if(guardState.verification&&guardState.verification!=='authorized'&&!roleHint){removeCoordinatorUi();return;}
-    if(role!=='coordenador'){removeCoordinatorUi();return;}
-    if(!document.getElementById('nexlab-validation-trigger')){const button=document.createElement('button');button.id='nexlab-validation-trigger';button.type='button';button.textContent='Validar versão';button.title='Validação dos coordenadores';button.setAttribute('aria-label','Abrir validação dos coordenadores');button.onclick=()=>openValidation();document.body.appendChild(button);}
-    if(!document.getElementById('nexlab-coordinator-preview-trigger')){const preview=document.createElement('button');preview.id='nexlab-coordinator-preview-trigger';preview.type='button';preview.textContent='Visualizar perfis';preview.title='Visualizar o aplicativo como outro perfil, em modo somente leitura';preview.setAttribute('aria-label','Visualizar o aplicativo como outro perfil');preview.onclick=openProfilePreview;document.body.appendChild(preview);}
+    // Ferramentas de homologação permanecem internas. Nenhum atalho flutuante é
+    // exposto na interface pública do NEXLAB, inclusive para Coordenadores.
+    removeCoordinatorUi();
   }
 
   window.NexlabCoordinatorValidation=Object.freeze({version:VERSION,open:openValidation,openValidation,openPromotion,openProfilePreview,load:()=>rpc('nexlab_get_validation_cycle_v02657')});
