@@ -11,6 +11,7 @@ let scheduled = 0;
 let refreshTimer = 0;
 let loadingToken = 0;
 let activeView = 'overview';
+let lastPrivacyGateState = null;
 
 const state = {
   loading: true,
@@ -90,6 +91,7 @@ body:not([data-nexlab-page="dashboard"]) #${HOST_ID}{display:none!important}
 .nx-dash-tab.is-active{background:var(--nx-navy);color:#fff}
 .nx-dash-live{display:inline-flex;align-items:center;gap:8px;color:#60758f;font-size:10px;font-weight:800;white-space:nowrap}
 .nx-dash-live-dot{width:8px;height:8px;border-radius:50%;background:#63b37b;box-shadow:0 0 0 4px rgba(99,179,123,.12)}
+.nx-dash-live-dot.is-checking{background:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.12)}
 .nx-dash-live-dot.is-warning{background:#e7a53b;box-shadow:0 0 0 4px rgba(231,165,59,.12)}
 .nx-dash-live-dot.is-offline{background:#94a3b8;box-shadow:0 0 0 4px rgba(148,163,184,.12)}
 .nx-dash-panel{border:1px solid var(--nx-border);border-radius:16px;background:var(--nx-panel);box-shadow:var(--nx-shadow)}
@@ -175,7 +177,7 @@ body:not([data-nexlab-page="dashboard"]) #${HOST_ID}{display:none!important}
 .nx-mural-side{display:flex;align-items:center;gap:7px}.nx-mural-pin{border-radius:999px;background:#fff3e7;color:#c76714;padding:4px 7px;font-size:7.5px;font-weight:900;text-transform:uppercase}.nx-mural-date{color:#94a0af;font-size:8px}
 .nx-mural-content{padding:11px 0 2px}.nx-mural-content h3{margin:0;font-size:12px;font-weight:900}.nx-mural-content p{margin:6px 0 0;color:#60738e;font-size:9.5px;line-height:1.55;white-space:pre-wrap}
 .nx-mural-empty{display:flex;align-items:center;justify-content:center;min-height:220px;color:#8291a4;font-size:10px}
-.nx-loading{opacity:.62;pointer-events:none}
+.nx-loading{opacity:1;pointer-events:auto}
 @media(hover:hover){.nx-day-stat:hover,.nx-kpi:hover,.nx-project-row:hover{border-color:#c7d4e1;background:#fbfdff}.nx-quick-link:hover{border-color:var(--nx-quick-accent);background:#1c3150}.nx-dash-tab:hover:not(.is-active){background:#f4f7fa}.nx-dash-button.is-ghost:hover{background:#f7f9fc}}
 @media(max-width:1180px){.nx-day{grid-template-columns:minmax(210px,.8fr) minmax(0,1.5fr) auto;gap:14px}.nx-day-grid{grid-template-columns:repeat(4,minmax(70px,1fr))}.nx-day-stat{padding:11px 9px}.nx-workspace{grid-template-columns:minmax(0,1.35fr) minmax(250px,.8fr)}}
 @media(max-width:900px){.nx-day{grid-template-columns:1fr auto}.nx-day-grid{grid-column:1/-1;order:3}.nx-kpis{grid-template-columns:1fr 1fr}.nx-workspace{grid-template-columns:1fr}.nx-team-metrics{grid-template-columns:1fr 1fr}.nx-team-metric:nth-child(2){border-right:0}.nx-team-metric:nth-child(-n+2){border-bottom:1px solid #e5eaf0}}
@@ -217,6 +219,7 @@ function buildToolbar(host) {
   live.className = 'nx-dash-live';
   const dot = document.createElement('span');
   dot.className = 'nx-dash-live-dot';
+  if (state.lab.status === 'checking') dot.classList.add('is-checking');
   if (state.lab.status === 'warning') dot.classList.add('is-warning');
   if (state.lab.status === 'offline') dot.classList.add('is-offline');
   const text = document.createElement('span');
@@ -511,7 +514,7 @@ function observeMain(main){if(mainObserver?.target===main)return;if(mainObserver
 function activate(){if(!dashboardAllowed())return cleanup();ensureStyle();purgeLegacyArtifacts();const main=document.getElementById('nexlab-main-content')||document.querySelector('main');if(!main)return;const host=buildHost(main);suppressLegacy(main,host);document.body.setAttribute(RESET_ATTR,'true');observeMain(main);clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>void loadData(),90);}
 function cleanup(){document.body?.removeAttribute(RESET_ATTR);const main=document.getElementById('nexlab-main-content')||document.querySelector('main');restoreLegacy(main);document.getElementById(HOST_ID)?.remove();clearTimeout(refreshTimer);}
 function schedule(delay=60){clearTimeout(scheduled);scheduled=setTimeout(activate,delay);}
-function start(){if(!document.body)return;ensureStyle();if(!pageObserver){pageObserver=new MutationObserver(records=>{if(records.some(record=>record.type==='attributes'&&record.attributeName==='data-nexlab-page'))schedule(20);});pageObserver.observe(document.body,{attributes:true,attributeFilter:['data-nexlab-page']});}if(!gateObserver){const root=document.getElementById('root')||document.body;gateObserver=new MutationObserver(()=>{privacyGateActive()?cleanup():schedule(20);});gateObserver.observe(root,{childList:true,subtree:true});}privacyGateActive()?cleanup():schedule(60);}
+function start(){if(!document.body)return;ensureStyle();if(!pageObserver){pageObserver=new MutationObserver(records=>{if(records.some(record=>record.type==='attributes'&&record.attributeName==='data-nexlab-page'))schedule(20);});pageObserver.observe(document.body,{attributes:true,attributeFilter:['data-nexlab-page']});}if(!gateObserver){const root=document.getElementById('root')||document.body;lastPrivacyGateState=privacyGateActive();gateObserver=new MutationObserver(()=>{const currentGateState=privacyGateActive();if(currentGateState===lastPrivacyGateState)return;lastPrivacyGateState=currentGateState;currentGateState?cleanup():schedule(20);});gateObserver.observe(root,{childList:true,subtree:true});}privacyGateActive()?cleanup():schedule(60);}
 
 globalThis.addEventListener('nexlab:myday-updated',event=>{if(!dashboardAllowed()||!event?.detail)return;state.myDay={tasks:n(event.detail.tasks),meetings:n(event.detail.meetings),approvals:n(event.detail.approvals),overdue:n(event.detail.overdue)};const host=document.getElementById(HOST_ID);if(host)render(host);});
 globalThis.addEventListener('nexlab:network-status',()=>{if(dashboardAllowed())void loadData();});
