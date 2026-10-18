@@ -208,6 +208,7 @@
       if(child.classList.contains('nexlab-project-tab-empty-v054'))continue;
       let group='overview';
       if(child.classList.contains('project-tasks-v2690')||child.classList.contains('project-details-tasks-pane-v02667'))group='tasks';
+      else if(child.classList.contains('project-team-pane-v02682'))group='team';
       else if(child.classList.contains('project-external-links-v02682')||child.classList.contains('project-links-v2690'))group='links';
       else{
         const heading=clean(child.querySelector?.('h3')?.textContent,120).toLocaleLowerCase('pt-BR');
@@ -249,8 +250,10 @@
     if(body)body.dataset.nexlabProjectActiveTab=state.activeTab;
     if(comments){
       const canView=state.access?.can_view_comments!==false && !state.accessError;
-      comments.hidden=!canView;
-      if(canView&&comments.open) void ensureCommentsReady(state);
+      const primary=state.panel.querySelector('.project-overview-primary');
+      if(primary&&comments.parentElement!==primary)primary.appendChild(comments);
+      comments.hidden=!canView||state.activeTab!=='overview';
+      if(canView&&comments.open&&state.activeTab==='overview') void ensureCommentsReady(state);
     }
     if(body){
       body.hidden=false;
@@ -307,6 +310,7 @@
       if(String(data.entity_id||'')!==state.projectId)return;
       if(data.metadata?.open_section==='comments'){
         state.targetContentId=String(data.metadata?.communication_content_id||'');
+        activateTab(state,'overview');
         state.commentsPanel.open=true;
         void ensureCommentsReady(state);
         requestAnimationFrame(()=>state.commentsPanel?.scrollIntoView?.({block:'nearest',behavior:'smooth'}));
@@ -397,9 +401,12 @@
     const list=state.commentsPanel.querySelector('.nexlab-project-comments-list-v054');
     const count=state.commentsPanel.querySelector('.nexlab-project-comments-count-v02682');
     if(count)count.textContent=String(state.comments.length);
+    renderComposer(state);
     list.replaceChildren();
     if(!state.comments.length){
-      const empty=node('div','nexlab-project-comments-empty-v054');empty.append(iconText('💬'),node('strong','', 'Nenhum comentário ainda'),node('p','', state.access?.can_comment?'Inicie a discussão deste projeto pelo campo abaixo.':'Ainda não há discussões registradas neste projeto.'));list.appendChild(empty);syncOlderButton(state);return;
+      const empty=node('div','nexlab-project-comments-empty-v054');empty.append(iconText('💬'),node('strong','', 'Ainda não há comentários neste projeto.'),node('p','', state.access?.can_comment?'Seja o primeiro a comentar e compartilhar informações.':'Ainda não há discussões registradas neste projeto.'));
+      if(state.access?.can_comment){const add=node('button','project-design-primary','Adicionar comentário');add.type='button';add.addEventListener('click',()=>{state.composing=true;renderComposer(state);state.commentsPanel.querySelector('.nexlab-project-composer-v054 textarea')?.focus();});empty.appendChild(add);}
+      list.appendChild(empty);syncOlderButton(state);return;
     }
     for(const comment of state.comments)list.appendChild(renderCommentCard(state,comment));
     syncOlderButton(state);
@@ -569,6 +576,7 @@
 
   function renderComposer(state){
     const slot=state.commentsPanel.querySelector('.nexlab-project-comments-composer-slot-v054');if(!slot)return;
+    slot.hidden=state.loaded&&!state.comments.length&&!state.composing;
     const key=state.accessError?'error':state.access?.can_comment?'write':'read';
     if(slot.firstChild&&slot.dataset.composerAccess===key)return;
     slot.dataset.composerAccess=key;slot.replaceChildren();
@@ -649,7 +657,7 @@
   globalThis.__NEXLAB_PROJECT_COMMENTS__=Object.freeze({
     version:BUILD.version,revision:REVISION,workerUrl:workerUrl(),
     refreshCurrent(){const panel=document.querySelector(PANEL_SELECTOR);const state=panel&&states.get(panel);if(state)return loadComments(state,{force:true});return Promise.resolve(null);},
-    openCurrent(){const panel=document.querySelector(PANEL_SELECTOR);const state=panel&&states.get(panel);if(state){state.commentsPanel.open=true;void ensureCommentsReady(state);state.commentsPanel?.scrollIntoView?.({block:'nearest',behavior:'smooth'});return true;}return false;},
+    openCurrent(){const panel=document.querySelector(PANEL_SELECTOR);const state=panel&&states.get(panel);if(state){activateTab(state,'overview');state.commentsPanel.open=true;void ensureCommentsReady(state);state.commentsPanel?.scrollIntoView?.({block:'nearest',behavior:'smooth'});return true;}return false;},
     snapshot(){const panel=document.querySelector(PANEL_SELECTOR);const state=panel&&states.get(panel);return state?Object.freeze({projectId:state.projectId,activeTab:state.activeTab,loaded:state.loaded,comments:state.comments.length,nextCursor:!!state.nextCursor,canView:state.access?.can_view_comments??null,canComment:state.access?.can_comment??null,canReply:state.access?.can_reply_comment??null}):null;}
   });
 })();
