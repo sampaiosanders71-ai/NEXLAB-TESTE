@@ -1,6 +1,6 @@
 /* NEXLAB 0.26.82 - Pendencias / Meu Dia - etapas A-G. */
-import { g as React, o as jsxRuntime, Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-google-calendar-integracao-cache-integridade";
-import { Do as ModuleHeader, Qn as loadPendingCenter, Jn as isPendingItem, Vn as readableError } from "./nexlab-runtime-shared.js?v=app-beta-0-26-82-google-calendar-integracao-cache-integridade";
+import { g as React, o as jsxRuntime, Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-google-calendar-integracao-sem-chat-projetos-pagina";
+import { Do as ModuleHeader, Qn as loadPendingCenter, Jn as isPendingItem, Vn as readableError } from "./nexlab-runtime-shared.js?v=app-beta-0-26-82-google-calendar-integracao-sem-chat-projetos-pagina";
 
 const { Fragment, jsx, jsxs } = jsxRuntime;
 const PAGE_SIZE = 8;
@@ -157,17 +157,17 @@ function normalizeApprovalRows(rows) {
 }
 
 function normalizeCommunicationRows(rows) {
-  return (Array.isArray(rows) ? rows : []).map(row => {
+  return (Array.isArray(rows) ? rows : []).filter(row => String(row?.entity_type || "").toLowerCase() !== "team").map(row => {
     const kind = row?.kind === "official_reply" ? "official_reply" : "communication_mention";
     const entityType = String(row?.entity_type || "").toLowerCase();
     const recordId = row?.entity_id || null;
     const actorName = row?.actor_name || null;
-    const destination = entityType === "team" ? "equipes" : "projetos";
+    const destination = "projetos";
     return {
       id: `communication-${row?.notification_id || recordId || Math.random().toString(36).slice(2)}`,
       kind,
       title: row?.title || (kind === "official_reply" ? "Seu comentário recebeu uma resposta" : "Você foi mencionado"),
-      description: row?.message || (entityType === "team" ? "Abra a conversa da equipe para responder." : "Abra os comentários do projeto para responder."),
+      description: row?.message || "Abra os comentários do projeto para responder.",
       priority: String(row?.priority || "alta").toLowerCase() === "normal" ? "media" : "alta",
       date: null,
       createdAt: row?.created_at || null,
@@ -179,7 +179,7 @@ function normalizeCommunicationRows(rows) {
         notificationId: row?.notification_id || null,
         recordId, entityType, contentId: row?.content_id || null,
         communicationEvent: row?.communication_event || null,
-        openSection: row?.open_section || (entityType === "team" ? "conversation" : "comments")
+        openSection: row?.open_section || "comments"
       }
     };
   });
@@ -313,7 +313,7 @@ function PendingCard({ item, busy, profile, canApprove, onOpen, onComplete, onRe
               jsx("button", { type: "button", disabled: busy, className: "nexlab-myday-action is-primary", onClick: () => onFeedback(item, "resolve"), children: "Resolver" })
             ]
           }) : null,
-          jsx("button", { type: "button", className: "nexlab-myday-action is-open", onClick: () => onOpen(item), children: isCommunication(item) ? (item.metadata?.entityType === "team" ? "Abrir conversa" : "Abrir comentário") : "Abrir" })
+          jsx("button", { type: "button", className: "nexlab-myday-action is-open", onClick: () => onOpen(item), children: isCommunication(item) ? "Abrir comentário" : "Abrir" })
         ]
       })
     ]

@@ -1,6 +1,6 @@
 /* NEXLAB Beta 0.26.82 — Configurações: Conta, Acessibilidade, Notificações, Privacidade e Segurança. */
-import { g as React, Ln as supabase } from "../nexlab-runtime-vendor.js?v=app-beta-0-26-82-google-calendar-integracao-cache-integridade";
-import { Po as PrivacyCenter, Eo as OPTIONAL_CONSENT_VERSION, Si as saveNotificationPreference, Ci as getPushSubscription, Ei as disablePushSubscription, ki as pushSupported, Ni as vapidToBytes, Vn as readableError } from "../nexlab-runtime-shared.js?v=app-beta-0-26-82-google-calendar-integracao-cache-integridade";
+import { g as React, Ln as supabase } from "../nexlab-runtime-vendor.js?v=app-beta-0-26-82-google-calendar-integracao-sem-chat-projetos-pagina";
+import { Po as PrivacyCenter, Eo as OPTIONAL_CONSENT_VERSION, Si as saveNotificationPreference, Ci as getPushSubscription, Ei as disablePushSubscription, ki as pushSupported, Ni as vapidToBytes, Vn as readableError } from "../nexlab-runtime-shared.js?v=app-beta-0-26-82-google-calendar-integracao-sem-chat-projetos-pagina";
 
 const h=React.createElement;
 const ROLE_LABELS={admin:'Admin',administrador:'Admin',coordenador:'Coordenador',bolsista:'Bolsista',voluntario:'Voluntário',coworking_junior:'Coworking Júnior'};
@@ -58,8 +58,7 @@ function AccessibilityPanel({addToast}){
 }
 
 const NOTIFICATION_GROUPS=[
-  {id:'team',label:'Mensagens de equipe',description:'Novas mensagens nas equipes das quais você participa.',keys:['team_messages']},
-  {id:'mentions',label:'Menções',description:'Quando alguém mencionar você em conversas ou comentários.',keys:['mentions']},
+  {id:'mentions',label:'Menções',description:'Quando alguém mencionar você nos comentários de projetos.',keys:['mentions']},
   {id:'comments',label:'Comentários de projetos',description:'Interações nos comentários dos projetos vinculados.',keys:['project_comments']},
   {id:'tasks',label:'Tarefas',description:'Atribuições e alterações relevantes nas suas tarefas.',keys:['tasks']},
   {id:'meetings',label:'Reuniões',description:'Convites, alterações e lembretes de reuniões.',keys:['meetings','meeting_reminder']},
@@ -141,7 +140,7 @@ function DataProtectionPanel({addToast,onNavigate}){
     h('section',{className:'nexlab-settings-card'},h('div',{className:'nexlab-settings-card-head'},h('div',{className:'nexlab-settings-card-icon'},h(Icon,{name:'refresh'})),h('div',null,h('h3',null,'Recuperação controlada'),h('p',null,'O NexLab exige validação e cria um backup preventivo antes de aplicar qualquer recuperação.'))),h('ol',{className:'nexlab-settings-recovery-steps'},h('li',null,h('strong',null,'Validar'),'Confere hash do banco, estrutura do snapshot e disponibilidade dos arquivos.'),h('li',null,h('strong',null,'Confirmar'),'A restauração só é liberada após a confirmação explícita do Administrador.'),h('li',null,h('strong',null,'Proteger o estado atual'),'Um novo backup preventivo é criado automaticamente antes da recuperação.'),h('li',null,h('strong',null,'Recuperar logicamente'),'Registros do snapshot são recriados ou atualizados e arquivos armazenados são repostos.'),h('li',null,h('strong',null,'Preservar dados novos'),'O restore não apaga registros criados depois do snapshot e não altera credenciais de autenticação.'))),
     restores.length?h('section',{className:'nexlab-settings-card'},h('div',{className:'nexlab-settings-card-head'},h('div',{className:'nexlab-settings-card-icon'},h(Icon,{name:'shield'})),h('div',null,h('h3',null,'Recuperações recentes'),h('p',null,'Registro administrativo das últimas tentativas de restauração.'))),h('div',{className:'nexlab-settings-restore-history'},...restores.slice(0,6).map(item=>h('div',{key:item.id},h('span',null,fmtDate(item.completed_at||item.created_at)),h('strong',null,item.status==='completed'?'Concluída':item.status==='failed'?'Falhou':'Em andamento'),h('small',null,item.preventive_backup_id?'Backup preventivo registrado':'Sem backup preventivo registrado'))))):null,
     h('section',{className:'nexlab-settings-card nexlab-settings-reset-card'},h('div',null,h('strong',null,'Diagnóstico adicional'),h('span',null,`Banco ${data?.database?.reachable?'acessível':'indisponível'} · prontidão ${readiness.status||'não informada'} · ${Number(logical.audit_entries||0)} registros de auditoria.`)),h('button',{type:'button',className:'nexlab-settings-btn secondary',onClick:()=>onNavigate?.('saude-sistema')},'Abrir Saúde do Sistema',h(Icon,{name:'external',size:14}))),
-    !d1Included?h('div',{className:'nexlab-settings-status-warning nexlab-settings-backup-d1-warning'},h(Icon,{name:'info',size:18}),h('span',null,'Mensagens das equipes e comentários de projetos continuam no Cloudflare D1 e ainda não fazem parte destes backups. O restante do banco Supabase e os arquivos configurados já estão protegidos pelo sistema atual.')):null,
+    !d1Included?h('div',{className:'nexlab-settings-status-warning nexlab-settings-backup-d1-warning'},h(Icon,{name:'info',size:18}),h('span',null,'Comentários de projetos continuam no Cloudflare D1 e ainda não fazem parte destes backups. O restante do banco Supabase e os arquivos configurados já estão protegidos pelo sistema atual.')):null,
     restoreTarget?h(BackupRestoreDialog,{backup:restoreTarget,busy:busy===`restore:${restoreTarget.id}`,onCancel:()=>!busy&&setRestoreTarget(null),onConfirm:restoreBackup}):null
   );
 }

@@ -111,6 +111,8 @@
 
   async function loadAccess(state){
     if(state.accessLoading)return state.accessLoading;
+    if(state.accessAttempted)return state.access;
+    state.accessAttempted=true;
     state.accessLoading=(async()=>{
       const c=await waitClient();
       const [{data,error},profiles,current]=await Promise.all([
@@ -156,10 +158,12 @@
   function buildTabs(state){
     const nav=node('nav','nexlab-project-tabs-v054');
     nav.setAttribute('aria-label','Áreas do projeto');
+    nav.setAttribute('role','tablist');
     const tabs=[
       ['overview','Visão geral'],
       ['tasks','Tarefas'],
-      ['team','Equipe']
+      ['team','Equipe'],
+      ['links','Links e anexos']
     ];
     for(const [key,label] of tabs){
       const button=node('button','nexlab-project-tab-v054',label);
@@ -171,9 +175,14 @@
   }
 
   function buildCommentsPanel(state){
-    const section=node('section','nexlab-project-comments-v054');
+    const section=node('details','nexlab-project-comments-v054');
     section.hidden=false;
+    section.open=!window.matchMedia('(max-width:767px)').matches;
     section.setAttribute('aria-label','Comentários do projeto');
+    const summary=node('summary','nexlab-project-comments-toggle-v02682');
+    summary.append(node('span','','Comentários'),node('span','nexlab-project-comments-count-v02682',''));
+    section.appendChild(summary);
+    section.addEventListener('toggle',()=>{if(section.open)void ensureCommentsReady(state);});
 
     const head=node('div','nexlab-project-comments-head-v054');
     const titleWrap=node('div');
@@ -199,6 +208,7 @@
       if(child.classList.contains('nexlab-project-tab-empty-v054'))continue;
       let group='overview';
       if(child.classList.contains('project-tasks-v2690')||child.classList.contains('project-details-tasks-pane-v02667'))group='tasks';
+      else if(child.classList.contains('project-external-links-v02682')||child.classList.contains('project-links-v2690'))group='links';
       else{
         const heading=clean(child.querySelector?.('h3')?.textContent,120).toLocaleLowerCase('pt-BR');
         if(heading.includes('equipe participante')||heading.includes('agenda da equipe'))group='team';
@@ -240,7 +250,7 @@
     if(comments){
       const canView=state.access?.can_view_comments!==false && !state.accessError;
       comments.hidden=!canView;
-      if(canView) void ensureCommentsReady(state);
+      if(canView&&comments.open) void ensureCommentsReady(state);
     }
     if(body){
       body.hidden=false;
@@ -273,7 +283,7 @@
   }
 
   function activateTab(state,key){
-    if(!['overview','tasks','team'].includes(key))key='overview';
+    if(!['overview','tasks','team','links'].includes(key))key='overview';
     state.activeTab=key;
     applyTab(state);
   }
@@ -297,6 +307,7 @@
       if(String(data.entity_id||'')!==state.projectId)return;
       if(data.metadata?.open_section==='comments'){
         state.targetContentId=String(data.metadata?.communication_content_id||'');
+        state.commentsPanel.open=true;
         void ensureCommentsReady(state);
         requestAnimationFrame(()=>state.commentsPanel?.scrollIntoView?.({block:'nearest',behavior:'smooth'}));
       }
@@ -384,6 +395,8 @@
 
   function renderComments(state){
     const list=state.commentsPanel.querySelector('.nexlab-project-comments-list-v054');
+    const count=state.commentsPanel.querySelector('.nexlab-project-comments-count-v02682');
+    if(count)count.textContent=String(state.comments.length);
     list.replaceChildren();
     if(!state.comments.length){
       const empty=node('div','nexlab-project-comments-empty-v054');empty.append(iconText('💬'),node('strong','', 'Nenhum comentário ainda'),node('p','', state.access?.can_comment?'Inicie a discussão deste projeto pelo campo abaixo.':'Ainda não há discussões registradas neste projeto.'));list.appendChild(empty);syncOlderButton(state);return;
@@ -544,7 +557,8 @@
       const text=textarea.value.trim();if(!text){textarea.focus();return;}
       textarea.disabled=submit.disabled=true;for(const button of actions.querySelectorAll('button'))button.disabled=true;submit.textContent='Enviando...';
       try{await onSubmit(text,[...selected]);textarea.value='';selected.clear();refreshChips();counter.textContent='0/4000';}
-      catch(error){setInlineMessage(state,error.message||'Não foi possível enviar.','err');textarea.disabled=false;for(const button of actions.querySelectorAll('button'))button.disabled=false;submit.textContent=submitLabel;textarea.focus();}
+      catch(error){setInlineMessage(state,error.message||'Não foi possível enviar.','err');textarea.focus();}
+      finally{textarea.disabled=false;for(const button of actions.querySelectorAll('button'))button.disabled=false;submit.textContent=submitLabel;}
     });
 
     const inputWrap=node('div','nexlab-project-composer-input-v054');inputWrap.append(textarea,suggestions);
@@ -554,7 +568,10 @@
   }
 
   function renderComposer(state){
-    const slot=state.commentsPanel.querySelector('.nexlab-project-comments-composer-slot-v054');if(!slot)return;slot.replaceChildren();
+    const slot=state.commentsPanel.querySelector('.nexlab-project-comments-composer-slot-v054');if(!slot)return;
+    const key=state.accessError?'error':state.access?.can_comment?'write':'read';
+    if(slot.firstChild&&slot.dataset.composerAccess===key)return;
+    slot.dataset.composerAccess=key;slot.replaceChildren();
     if(state.accessError){slot.appendChild(node('p','nexlab-project-comments-readonly-v054','Não foi possível verificar sua permissão para comentar.'));return;}
     if(!state.access?.can_comment){slot.appendChild(node('p','nexlab-project-comments-readonly-v054','Você pode acompanhar esta discussão, mas seu perfil não possui permissão para comentar neste projeto.'));return;}
     const composer=buildComposer(state,{onSubmit:async(text,mentions)=>{
@@ -577,7 +594,7 @@
     const header=panel.querySelector(HEADER_SELECTOR);
     const nav=buildTabs(state);
     const comments=buildCommentsPanel(state);state.commentsPanel=comments;
-    if(header){header.insertAdjacentElement('afterend',nav);nav.insertAdjacentElement('afterend',comments);}else{panel.prepend(comments);panel.prepend(nav);}
+    if(header){header.insertAdjacentElement('afterend',nav);panel.insertBefore(comments,panel.querySelector(FOOTER_SELECTOR));}else{panel.appendChild(comments);panel.prepend(nav);}
     states.set(panel,state);stateByProjectId.set(projectId,state);
     void loadAccess(state).then(()=>{renderComposer(state);void maybeOpenFromNotification(state);});
     applyTab(state);
@@ -589,7 +606,7 @@
     state.panel=panel;state.body=panel.querySelector(BODY_SELECTOR);
     panel.querySelector('.nexlab-project-tabs-v054')?.remove();panel.querySelector('.nexlab-project-comments-v054')?.remove();
     const header=panel.querySelector(HEADER_SELECTOR);const nav=buildTabs(state);const comments=buildCommentsPanel(state);state.commentsPanel=comments;
-    if(header){header.insertAdjacentElement('afterend',nav);nav.insertAdjacentElement('afterend',comments);}else{panel.prepend(comments);panel.prepend(nav);}
+    if(header){header.insertAdjacentElement('afterend',nav);panel.insertBefore(comments,panel.querySelector(FOOTER_SELECTOR));}else{panel.appendChild(comments);panel.prepend(nav);}
     states.set(panel,state);
     if(state.loaded)renderComments(state);renderComposer(state);syncOlderButton(state);applyTab(state);
     if(state.activeTab==='comments'&&!state.loaded)void loadComments(state,{force:true});
@@ -615,7 +632,7 @@
         const header=panel.querySelector(HEADER_SELECTOR);const nav=buildTabs(state);header?.insertAdjacentElement('afterend',nav);
       }
       if(!panel.querySelector('.nexlab-project-comments-v054')){
-        const nav=panel.querySelector('.nexlab-project-tabs-v054');const comments=buildCommentsPanel(state);state.commentsPanel=comments;nav?.insertAdjacentElement('afterend',comments);if(state.loaded)renderComments(state);renderComposer(state);syncOlderButton(state);
+        const nav=panel.querySelector('.nexlab-project-tabs-v054');const comments=buildCommentsPanel(state);state.commentsPanel=comments;panel.insertBefore(comments,panel.querySelector(FOOTER_SELECTOR));if(state.loaded)renderComments(state);renderComposer(state);syncOlderButton(state);
       }
       applyTab(state);
     }
@@ -632,7 +649,7 @@
   globalThis.__NEXLAB_PROJECT_COMMENTS__=Object.freeze({
     version:BUILD.version,revision:REVISION,workerUrl:workerUrl(),
     refreshCurrent(){const panel=document.querySelector(PANEL_SELECTOR);const state=panel&&states.get(panel);if(state)return loadComments(state,{force:true});return Promise.resolve(null);},
-    openCurrent(){const panel=document.querySelector(PANEL_SELECTOR);const state=panel&&states.get(panel);if(state){void ensureCommentsReady(state);state.commentsPanel?.scrollIntoView?.({block:'nearest',behavior:'smooth'});return true;}return false;},
+    openCurrent(){const panel=document.querySelector(PANEL_SELECTOR);const state=panel&&states.get(panel);if(state){state.commentsPanel.open=true;void ensureCommentsReady(state);state.commentsPanel?.scrollIntoView?.({block:'nearest',behavior:'smooth'});return true;}return false;},
     snapshot(){const panel=document.querySelector(PANEL_SELECTOR);const state=panel&&states.get(panel);return state?Object.freeze({projectId:state.projectId,activeTab:state.activeTab,loaded:state.loaded,comments:state.comments.length,nextCursor:!!state.nextCursor,canView:state.access?.can_view_comments??null,canComment:state.access?.can_comment??null,canReply:state.access?.can_reply_comment??null}):null;}
   });
 })();
