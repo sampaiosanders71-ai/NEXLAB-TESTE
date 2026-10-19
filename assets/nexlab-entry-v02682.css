@@ -1276,3 +1276,16 @@ body main .events-interface-v02682 .ev-hero .module-actions>button{background:#f
 @media(max-width:520px){.mural-interface-v02682 dialog.editor-dialog,.mural-interface-v02682 .editor-shell{height:var(--mb-height,100dvh);max-height:var(--mb-height,100dvh)!important}.mural-interface-v02682 .filters .search{flex-basis:calc(100% - 125px)}}
 @container mural (max-width:740px){.mural-interface-v02682 .posts-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mural-interface-v02682 .results-label{width:100%;margin-left:0}.mural-interface-v02682 .filters{flex-wrap:wrap}}
 @container mural (max-width:520px){.mural-interface-v02682 .posts-grid{grid-template-columns:minmax(0,1fr)}.mural-interface-v02682 .toolbar-top{flex-wrap:wrap}.mural-interface-v02682 .hero{padding:24px 18px}.mural-interface-v02682 .hero h1{font-size:27px;overflow-wrap:normal}.mural-interface-v02682 .hero-art{opacity:.22}.mural-interface-v02682 .pagination{flex-wrap:wrap}.mural-interface-v02682 .filters{gap:7px}}
+
+/* Centralização explícita: o reset global do app remove a margem nativa de dialog. */
+.mural-interface-v02682 dialog.editor-dialog,
+.mural-interface-v02682 dialog.confirm-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+}
+@media (max-width: 520px) {
+  .mural-interface-v02682 dialog.editor-dialog {
+    margin: 0;
+  }
+}
