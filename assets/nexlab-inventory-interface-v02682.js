@@ -1,4 +1,4 @@
-import { g as React, Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-eventos-ajuste-cores";
+import { g as React, Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-mural-links-validade";
 const money = (value) => Number(value || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const count = (value) => Number(value || 0).toLocaleString("pt-BR");
 const date = (value) => value ? new Date(String(value).length === 10 ? value + "T12:00:00" : value).toLocaleDateString("pt-BR") : "N\xE3o informada";
