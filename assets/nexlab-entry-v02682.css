@@ -403,7 +403,8 @@ button.project-design-property:hover{filter:brightness(.985);box-shadow:0 2px 8p
 /* Layout responsivo: cabeçalhos usam o espaço disponível, inclusive com texto ampliado. */
 body main .module-header{flex-direction:row!important;flex-wrap:wrap!important}
 body main .module-header__copy{flex-wrap:wrap!important;flex:1 1 17rem!important;max-width:100%;min-width:0}
-body main .module-header__copy>div{flex:1 1 12rem;min-width:0;max-width:100%}
+body main .module-header__copy>div:not(.module-header__icon){flex:1 1 12rem;min-width:0;max-width:100%}
+body main .module-header__copy>.module-header__icon{flex:0 0 auto!important}
 body main .module-actions{flex:0 1 auto;max-width:100%;min-width:0}
 body main .module-actions>*{min-width:0;max-width:100%}
 body main .module-header :is(.module-title,.module-eyebrow){word-break:normal;overflow-wrap:break-word}
