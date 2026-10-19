@@ -1,5 +1,5 @@
 /* NEXLAB Beta 0.26.82 — fluxo de autenticação reconstruído: usuário + senha. */
-import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-marketing-calendario-contraste";
+import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-eventos-workshops-interface";
 
 export function normalizeUsername(value){
   return String(value||'')
