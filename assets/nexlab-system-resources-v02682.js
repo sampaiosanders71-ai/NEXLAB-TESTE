@@ -1,4 +1,4 @@
-import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-preservacao-manual';
+import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-monitor-recursos';
 const h=React.createElement;
 const number=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:1});
 const integer=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:0});
@@ -61,5 +61,5 @@ export function StorageHistoryNotice({database,stale=false}){
   if(!value.partition||value.history===0)return null;
   return h('aside',{className:'nxl-system-storage-notice '+(value.share>=50?'is-attention':'is-info')},
     h('span',{'aria-hidden':true},'i'),
-    h('div',null,h('strong',null,'O histórico das rotinas ocupa '+number.format(value.share)+'% do banco'+(stale?' na última leitura':'')),h('p',null,'Esse espaço inclui registros técnicos de execução, separados dos registros dos módulos. A manutenção desses históricos deve ser avaliada à parte; os relatórios dos módulos não reduzem esse espaço.')));
+    h('div',null,h('strong',null,'O histórico das rotinas ocupa '+number.format(value.share)+'% do banco'+(stale?' na última leitura':'')),h('p',null,'Esse espaço inclui registros técnicos de execução. Uma política de retenção pode controlar o crescimento e preservar os registros recentes.')));
 }
