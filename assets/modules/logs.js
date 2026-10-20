@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: LogsModule. */
-export { LogsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-mural-cascata-data";
+export { LogsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-interface-atualizacao";
