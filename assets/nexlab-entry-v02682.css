@@ -1034,7 +1034,7 @@ body main .events-interface-v02682 .ev-hero .module-actions>button{background:#f
 .mural-interface-v02682 .pin-filter[aria-pressed=true]{background:#fff0e0;border-color:#eab989;color:#974600}
 .mural-interface-v02682 .pin-filter svg{height:15px;width:15px}
 .mural-interface-v02682 .results-label{font-size:11px;color:#5c7494;margin-left:auto;white-space:nowrap}
-.mural-interface-v02682 .posts-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;align-items:start}
+.mural-interface-v02682 .posts-grid{display:grid;--mural-columns:3;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;align-items:start}
 .mural-interface-v02682 .post{min-width:0;background:white;border:1px solid #dde6f0;border-radius:16px;padding:16px;box-shadow:0 3px 13px #15365d06;overflow:visible}
 .mural-interface-v02682 .post-header{display:flex;align-items:center;gap:9px;position:relative;margin-bottom:13px;min-width:0}
 .mural-interface-v02682 .post-header .avatar{height:34px;width:34px;font-size:10px;background:#e2ecf9;color:#285789}
@@ -1057,9 +1057,9 @@ body main .events-interface-v02682 .ev-hero .module-actions>button{background:#f
 .mural-interface-v02682 .kind-label{color:#2c62a9;background:#eaf2ff}
 .mural-interface-v02682 .pinned-label{color:#a04b08;background:#fff0df}
 .mural-interface-v02682 .kind-label svg,.mural-interface-v02682 .pinned-label svg{height:12px;width:12px}
-.mural-interface-v02682 .post-cover{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;border-radius:10px;background:#f1f6fb;margin-bottom:14px}
-.mural-interface-v02682 .post h2{font-size:15px;line-height:1.45;letter-spacing:-.2px;font-weight:800;overflow-wrap:anywhere;color:#173455;margin:0 0 8px}
-.mural-interface-v02682 .post-excerpt{font-size:11px;line-height:1.8;color:#536c8b;overflow-wrap:anywhere}
+.mural-interface-v02682 .post-cover{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain;border-radius:10px;background:transparent;margin-bottom:14px}
+.mural-interface-v02682 .post h2{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:15px;line-height:1.45;letter-spacing:-.2px;font-weight:800;overflow-wrap:anywhere;color:#173455;margin:0 0 8px}
+.mural-interface-v02682 .post-excerpt{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;font-size:11px;line-height:1.8;color:#536c8b;overflow-wrap:anywhere}
 .mural-interface-v02682 .post.has-cover .post-excerpt{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
 .mural-interface-v02682 .post.no-cover .post-excerpt{white-space:pre-line}
 .mural-interface-v02682 .post.no-cover .post-labels{margin-bottom:14px}
@@ -1096,7 +1096,7 @@ body main .events-interface-v02682 .ev-hero .module-actions>button{background:#f
 .mural-interface-v02682 .detail-meta .avatar{height:30px;width:30px;font-size:9px;background:#e6eef9;color:#274b76}
 .mural-interface-v02682 .detail-meta .pinned-label{margin-left:auto;background:#ffe7cb;color:#844000}
 .mural-interface-v02682 .detail-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:21px 24px;scrollbar-width:thin;scrollbar-color:#b7c9df #f5f8fc}
-.mural-interface-v02682 .detail-cover{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;border-radius:12px;background:#eef3fa;margin-bottom:18px}
+.mural-interface-v02682 .detail-cover{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain;border-radius:12px;background:transparent;margin-bottom:18px}
 .mural-interface-v02682 .detail-section{padding:18px;background:#fff;border:1px solid #dce6f2;border-radius:13px;margin-bottom:15px}
 .mural-interface-v02682 .detail-section h3{display:flex;align-items:center;gap:8px;font-size:13px;color:#244971;margin-bottom:12px}
 .mural-interface-v02682 .detail-section h3 svg{color:#2e6cb7;width:17px;height:17px}
@@ -1166,7 +1166,7 @@ body main .events-interface-v02682 .ev-hero .module-actions>button{background:#f
 .mural-interface-v02682 .read-button{font-size:11px}
 .mural-interface-v02682 .post.no-cover .post-excerpt{line-height:1.9}
 }@media(max-width:1160px){.mural-interface-v02682 .brand{width:173px}
-.mural-interface-v02682 .posts-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.mural-interface-v02682 .posts-grid{--mural-columns:2;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
 .mural-interface-v02682 .hero h1{font-size:29px}
 .mural-interface-v02682 .hero p{max-width:470px}
 .mural-interface-v02682 .hero-art{right:-65px;opacity:.35}
@@ -1198,7 +1198,7 @@ body main .events-interface-v02682 .ev-hero .module-actions>button{background:#f
 .mural-interface-v02682 .search svg{left:10px;top:13px;width:14px;height:14px}
 .mural-interface-v02682 .pin-filter{font-size:10px;padding:8px;gap:4px}
 .mural-interface-v02682 .results-label{width:100%;margin:1px 0 0;font-size:10px}
-.mural-interface-v02682 .posts-grid{grid-template-columns:minmax(0,1fr);gap:15px}
+.mural-interface-v02682 .posts-grid{--mural-columns:1;grid-template-columns:minmax(0,1fr);gap:15px}
 .mural-interface-v02682 .post{padding:16px;border-radius:15px}
 .mural-interface-v02682 .post-header .avatar{width:35px;height:35px}
 .mural-interface-v02682 .author-copy strong{font-size:11px}
@@ -1274,8 +1274,8 @@ body main .events-interface-v02682 .ev-hero .module-actions>button{background:#f
 .mural-interface-v02682 .post-menu summary{min-height:40px;width:36px}
 .mural-interface-v02682 .post-menu>div{top:40px}
 @media(max-width:520px){.mural-interface-v02682 dialog.editor-dialog,.mural-interface-v02682 .editor-shell{height:var(--mb-height,100dvh);max-height:var(--mb-height,100dvh)!important}.mural-interface-v02682 .filters .search{flex-basis:calc(100% - 125px)}}
-@container mural (max-width:740px){.mural-interface-v02682 .posts-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mural-interface-v02682 .results-label{width:100%;margin-left:0}.mural-interface-v02682 .filters{flex-wrap:wrap}}
-@container mural (max-width:520px){.mural-interface-v02682 .posts-grid{grid-template-columns:minmax(0,1fr)}.mural-interface-v02682 .toolbar-top{flex-wrap:wrap}.mural-interface-v02682 .hero{padding:24px 18px}.mural-interface-v02682 .hero h1{font-size:27px;overflow-wrap:normal}.mural-interface-v02682 .hero-art{opacity:.22}.mural-interface-v02682 .pagination{flex-wrap:wrap}.mural-interface-v02682 .filters{gap:7px}}
+@container mural (max-width:740px){.mural-interface-v02682 .posts-grid{--mural-columns:2;grid-template-columns:repeat(2,minmax(0,1fr))}.mural-interface-v02682 .results-label{width:100%;margin-left:0}.mural-interface-v02682 .filters{flex-wrap:wrap}}
+@container mural (max-width:520px){.mural-interface-v02682 .posts-grid{--mural-columns:1;grid-template-columns:minmax(0,1fr)}.mural-interface-v02682 .toolbar-top{flex-wrap:wrap}.mural-interface-v02682 .hero{padding:24px 18px}.mural-interface-v02682 .hero h1{font-size:27px;overflow-wrap:normal}.mural-interface-v02682 .hero-art{opacity:.22}.mural-interface-v02682 .pagination{flex-wrap:wrap}.mural-interface-v02682 .filters{gap:7px}}
 
 /* Centralização explícita: o reset global do app remove a margem nativa de dialog. */
 .mural-interface-v02682 dialog.editor-dialog,
@@ -1289,3 +1289,13 @@ body main .events-interface-v02682 .ev-hero .module-actions>button{background:#f
     margin: 0;
   }
 }
+
+/* Cascata conserva a ordem de leitura; no celular os cards seguem o fluxo normal. */
+.mural-interface-v02682 .posts-grid[data-cascade]{position:relative;display:block;height:var(--mural-height)}
+.mural-interface-v02682 .posts-grid[data-cascade]>.post{position:absolute;box-sizing:border-box;width:var(--post-width);left:var(--post-left,0);top:var(--post-top,0)}
+.mural-interface-v02682 .post:has(.post-menu[open]){z-index:5}
+.mural-interface-v02682 .author-copy .publication-date{display:inline-flex;align-items:center;gap:6px;max-width:100%;margin-top:6px;padding:4px 6px;border:1px solid #d4e2f1;border-radius:6px;background:#edf3fb;color:#244e7b;font-size:11px;line-height:1.5;font-weight:700;overflow-wrap:anywhere}
+.mural-interface-v02682 .publication-date svg{width:13px;height:13px;flex:none}
+.mural-interface-v02682 .detail-meta .author-copy strong{color:#fff}
+.mural-interface-v02682 .detail-meta .author-copy small{color:#c5d8ed}
+.mural-interface-v02682 .detail-meta .publication-date{background:#ffffff14;border-color:#ffffff35;color:#fff}

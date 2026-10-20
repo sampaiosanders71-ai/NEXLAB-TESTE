@@ -1,4 +1,4 @@
-import { g as React, Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-mural-imagens-corrigidas";
+import { g as React, Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-mural-cascata-data";
 const paths = { megaphone: ["m3 9 12-4v14L3 15V9Zm12-4 6-2v18l-6-2M5 16l2 5h4l-2-4"], search: ["M16 10a6 6 0 1 1-12 0 6 6 0 0 1 12 0", "m15 15 6 6"], pin: ["m9 3 10 4-4 4-1 5-3-1-6 6 1-8-3-3 5-2 1-5Z"], grid: ["M3 3h7v7H3ZM14 3h7v7h-7ZM3 14h7v7H3ZM14 14h7v7h-7Z"], archive: ["M4 9v12h16V9M3 3h18v6H3ZM10 13h4"], plus: ["M12 5v14M5 12h14"], arrow: ["M4 12h16m-6-6 6 6-6 6"], left: ["m15 6-6 6 6 6"], right: ["m9 6 6 6-6 6"], clock: ["M12 7v5l3 2", "M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0"], calendar: ["M3 10h18M8 2v4m8-4v4", "M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"], close: ["m6 6 12 12M6 18 18 6"], edit: ["m14 5 5 5M4 20l5-1L21 7a3.5 3.5 0 0 0-5-5L4 14l-1 7 6-2"], trash: ["M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7"], external: ["M14 3h7v7M21 3 10 14M10 3H5v18h14v-7"], link: ["M10 13a5 5 0 0 0 7 .5l4-4a5 5 0 0 0-7-7l-2 2", "M14 11a5 5 0 0 0-7-.5l-4 4a5 5 0 0 0 7 7l2-2"], file: ["M14 3H5v18h14V8l-5-5Zm0 0v5h5M8 12h8m-8 4h8"], refresh: ["M20 7V3l-3 3a8 8 0 1 0 3 10M20 3h-5"] };
 function Icon({ kind }) {
   return /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.7", strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": "true" }, kind === "more" ? [4, 12, 20].map((y) => /* @__PURE__ */ React.createElement("circle", { key: y, cx: "12", cy: y, r: "1.6", fill: "currentColor", stroke: "none" })) : (paths[kind] || paths.file).map((d, i) => /* @__PURE__ */ React.createElement("path", { key: i, d })));
@@ -23,13 +23,69 @@ const api = async (action, payload = {}) => {
 const dateOnly = (value) => new Date(value).toLocaleDateString("sv-SE", { timeZone: "America/Sao_Paulo" });
 const longDate = (value) => new Date(value).toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric", timeZone: "America/Sao_Paulo" });
 const shortDate = (value) => new Date(value).toLocaleDateString("pt-BR", { day: "numeric", month: "short", year: "numeric", timeZone: "America/Sao_Paulo" }).replaceAll(" de ", " ");
-const expiryLabel = (p) => p.expires_at ? "At\xE9 " + shortDate(p.expires_at) : "Sem vencimento";
+const expiryLabel = (p) => p.expires_at ? "V\xE1lido at\xE9 " + shortDate(p.expires_at) : "Sem vencimento";
 const cleanBody = (p) => String(p.conteudo || "").replace(/\[BANNER_IMAGE:[^\]]*\]/g, "").trim();
 const initials = (s) => String(s || "?").split(/\s+/).filter(Boolean).slice(0, 2).map((s2) => s2[0]).join("").toUpperCase();
 const roleLabel = (s) => ({ admin: "Admin", administrador: "Admin", coordenador: "Coordenador", bolsista: "Bolsista", voluntario: "Volunt\xE1rio", coworking_junior: "Coworking J\xFAnior" })[s] || "Comunidade";
 function relativeDate(s) {
   const days = Math.max(0, Math.floor((Date.now() - new Date(s)) / 864e5));
   return days === 0 ? "Hoje" : days === 1 ? "H\xE1 1 dia" : "H\xE1 " + days + " dias";
+}
+function PostsGrid({ children, loading }) {
+  const ref = React.useRef(null);
+  React.useLayoutEffect(() => {
+    const grid = ref.current, cards = Array.from(grid.children).filter((e) => e.classList.contains("post"));
+    let frame = 0, active = true;
+    const set = (node, key, value) => {
+      if (node.style.getPropertyValue(key) !== value) node.style.setProperty(key, value);
+    };
+    const reset = () => {
+      delete grid.dataset.cascade;
+      grid.style.removeProperty("--mural-height");
+      grid.style.removeProperty("--post-width");
+    };
+    const layout = () => {
+      frame = 0;
+      if (!active) return;
+      const css = getComputedStyle(grid), columns = Math.max(1, Math.min(3, Number(css.getPropertyValue("--mural-columns")) || 1));
+      const width = parseFloat(css.width), gap = parseFloat(css.columnGap) || 0;
+      if (!cards.length || columns === 1 || !width) {
+        reset();
+        return;
+      }
+      grid.dataset.cascade = "true";
+      set(grid, "--post-width", (width - gap * (columns - 1)) / columns + "px");
+      const scale = grid.getBoundingClientRect().width / width || 1, heights = Array(columns).fill(0);
+      const sizes = cards.map((card) => Math.ceil(card.getBoundingClientRect().height / scale));
+      cards.forEach((card, i) => {
+        const col = heights.indexOf(Math.min(...heights));
+        set(card, "--post-left", col * ((width - gap * (columns - 1)) / columns + gap) + "px");
+        set(card, "--post-top", heights[col] + "px");
+        heights[col] += sizes[i] + gap;
+      });
+      set(grid, "--mural-height", Math.max(...heights) - gap + "px");
+    };
+    const schedule = () => {
+      if (active && !frame) frame = requestAnimationFrame(layout);
+    };
+    const observer = typeof ResizeObserver === "function" ? new ResizeObserver(schedule) : null;
+    observer?.observe(grid);
+    cards.forEach((card) => observer?.observe(card));
+    grid.addEventListener("load", schedule, true);
+    grid.addEventListener("error", schedule, true);
+    window.addEventListener("resize", schedule);
+    document.fonts?.ready.then(schedule);
+    layout();
+    return () => {
+      active = false;
+      cancelAnimationFrame(frame);
+      observer?.disconnect();
+      grid.removeEventListener("load", schedule, true);
+      grid.removeEventListener("error", schedule, true);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [children]);
+  return /* @__PURE__ */ React.createElement("div", { className: "posts-grid", ref, tabIndex: -1, "aria-busy": loading }, children);
 }
 function Cover({ post, detail = false, eager = false, onImage, onStatus }) {
   const [signed, setSigned] = React.useState(null), [failed, setFailed] = React.useState(""), [loaded, setLoaded] = React.useState("");
@@ -55,7 +111,7 @@ function Cover({ post, detail = false, eager = false, onImage, onStatus }) {
 }
 function Author({ post, profile, users = [] }) {
   const user = users.find((u) => u.id === post.autor_id), name = post.author_name || user?.nome || (post.autor_id === profile?.id ? profile.nome : "Usu\xE1rio removido"), role = post.author_role || user?.role;
-  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", { className: "avatar" }, initials(name)), /* @__PURE__ */ React.createElement("div", { className: "author-copy" }, /* @__PURE__ */ React.createElement("strong", null, name), /* @__PURE__ */ React.createElement("small", null, roleLabel(role), " \xB7 ", relativeDate(post.created_at))));
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", { className: "avatar" }, initials(name)), /* @__PURE__ */ React.createElement("div", { className: "author-copy" }, /* @__PURE__ */ React.createElement("strong", null, name), /* @__PURE__ */ React.createElement("small", null, roleLabel(role), " \xB7 ", relativeDate(post.created_at)), /* @__PURE__ */ React.createElement("time", { className: "publication-date", dateTime: post.created_at }, /* @__PURE__ */ React.createElement(Icon, { kind: "calendar" }), /* @__PURE__ */ React.createElement("span", null, "Publicado em ", new Date(post.created_at).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", timeZone: "America/Sao_Paulo" })))));
 }
 function Card({ post, profile, users, onOpen, onAction, canEdit, canModerate, canDelete, busy, preview = false, onImageStatus }) {
   const [hasImage, setHasImage] = React.useState(!!(post.link_image_url || post.capa_url || /\[BANNER_IMAGE:/.test(post.conteudo || "")));
@@ -324,7 +380,7 @@ function MuralWorkspace({ profile, allUsers = [], addToast, onPostCreated, onPos
   }, "aria-label": "Buscar comunicados", placeholder: "Buscar comunicados\u2026" })), /* @__PURE__ */ React.createElement("button", { type: "button", className: "pin-filter", "aria-pressed": pinned, onClick: () => {
     setPinned((v) => !v);
     setPage(1);
-  } }, /* @__PURE__ */ React.createElement(Icon, { kind: "pin" }), "Fixados"), /* @__PURE__ */ React.createElement("button", { type: "button", className: "mural-refresh", onClick: load, disabled: loading || busy, "aria-label": "Atualizar comunicados" }, /* @__PURE__ */ React.createElement(Icon, { kind: "refresh" })), /* @__PURE__ */ React.createElement("span", { className: "results-label", role: "status" }, loading ? "Atualizando\u2026" : rows.length + " " + (rows.length === 1 ? "comunicado" : "comunicados"))), error && /* @__PURE__ */ React.createElement("p", { className: "form-error", role: "alert" }, error, " ", /* @__PURE__ */ React.createElement("button", { type: "button", onClick: load, disabled: busy || loading }, "Tentar novamente")), /* @__PURE__ */ React.createElement("section", { "aria-label": archived ? "Publica\xE7\xF5es arquivadas" : "Publica\xE7\xF5es do Mural" }, /* @__PURE__ */ React.createElement("div", { className: "posts-grid", tabIndex: -1, "aria-busy": loading }, rows.slice(start, start + 6).map((p) => /* @__PURE__ */ React.createElement(Card, { key: p.id, post: p, users: allUsers, profile, canEdit: canEdit(p), canModerate, canDelete, busy, onAction: action, onOpen: (p2) => setSelected(p2.id) })), !rows.length && !error && /* @__PURE__ */ React.createElement("div", { className: "empty" }, /* @__PURE__ */ React.createElement(Icon, { kind: archived ? "archive" : "megaphone" }), /* @__PURE__ */ React.createElement("strong", null, loading ? "Carregando comunicados\u2026" : filtered ? "Nenhum comunicado encontrado" : archived ? "Nenhuma publica\xE7\xE3o arquivada" : "Nenhum comunicado por aqui"), !loading && /* @__PURE__ */ React.createElement("p", null, filtered ? "Ajuste a busca ou o filtro para encontrar publica\xE7\xF5es." : archived ? "Os comunicados arquivados ficam aqui at\xE9 serem restaurados, exclu\xEDdos ou vencerem." : "Novas publica\xE7\xF5es aparecer\xE3o neste espa\xE7o."))), /* @__PURE__ */ React.createElement("footer", { className: "list-footer" }, /* @__PURE__ */ React.createElement("p", { role: "status", "aria-live": "polite" }, rows.length ? `Mostrando ${start + 1}\u2013${Math.min(start + 6, rows.length)} de ${rows.length}` : "0 publica\xE7\xF5es"), pages > 1 && /* @__PURE__ */ React.createElement("nav", { className: "pagination", "aria-label": "Pagina\xE7\xE3o do Mural" }, /* @__PURE__ */ React.createElement("button", { type: "button", disabled: current === 1, "aria-label": "P\xE1gina anterior do Mural", onClick: () => changePage(current - 1) }, /* @__PURE__ */ React.createElement(Icon, { kind: "left" })), /* @__PURE__ */ React.createElement("span", { role: "status" }, "P\xE1gina ", current, " de ", pages), [.../* @__PURE__ */ new Set([1, ...[current - 1, current, current + 1].filter((n) => n > 1 && n < pages), pages])].map((n, i, a) => /* @__PURE__ */ React.createElement(React.Fragment, { key: n }, i > 0 && n - a[i - 1] > 1 && /* @__PURE__ */ React.createElement("span", { "aria-hidden": "true" }, "\u2026"), /* @__PURE__ */ React.createElement("button", { type: "button", "aria-label": "P\xE1gina " + n + " do Mural", "aria-current": current === n ? "page" : void 0, onClick: () => changePage(n) }, n))), /* @__PURE__ */ React.createElement("button", { type: "button", disabled: current === pages, "aria-label": "Pr\xF3xima p\xE1gina do Mural", onClick: () => changePage(current + 1) }, /* @__PURE__ */ React.createElement(Icon, { kind: "right" }))))), post && /* @__PURE__ */ React.createElement(Details, { post, profile, users: allUsers, canEdit: canEdit(post), canModerate, canDelete, busy, onClose: () => setSelected(null), onAction: action }), " ", editor && /* @__PURE__ */ React.createElement(Editor, { key: editor.id || "new", record: editor.new ? null : editor, profile, users: allUsers, canModerate, onClose: () => setEditor(null), onSave: (payload) => mutate("save", payload) }), " ", deleting && /* @__PURE__ */ React.createElement(ConfirmDelete, { post: deleting, busy, error: deleteError, onClose: () => setDeleting(null), onConfirm: () => mutate("delete", { id: deleting.id }).then(() => setDeleting(null)).catch((e) => setDeleteError(e?.message || "N\xE3o foi poss\xEDvel excluir.")) }));
+  } }, /* @__PURE__ */ React.createElement(Icon, { kind: "pin" }), "Fixados"), /* @__PURE__ */ React.createElement("button", { type: "button", className: "mural-refresh", onClick: load, disabled: loading || busy, "aria-label": "Atualizar comunicados" }, /* @__PURE__ */ React.createElement(Icon, { kind: "refresh" })), /* @__PURE__ */ React.createElement("span", { className: "results-label", role: "status" }, loading ? "Atualizando\u2026" : rows.length + " " + (rows.length === 1 ? "comunicado" : "comunicados"))), error && /* @__PURE__ */ React.createElement("p", { className: "form-error", role: "alert" }, error, " ", /* @__PURE__ */ React.createElement("button", { type: "button", onClick: load, disabled: busy || loading }, "Tentar novamente")), /* @__PURE__ */ React.createElement("section", { "aria-label": archived ? "Publica\xE7\xF5es arquivadas" : "Publica\xE7\xF5es do Mural" }, /* @__PURE__ */ React.createElement(PostsGrid, { loading }, rows.slice(start, start + 6).map((p) => /* @__PURE__ */ React.createElement(Card, { key: p.id, post: p, users: allUsers, profile, canEdit: canEdit(p), canModerate, canDelete, busy, onAction: action, onOpen: (p2) => setSelected(p2.id) })), !rows.length && !error && /* @__PURE__ */ React.createElement("div", { className: "empty" }, /* @__PURE__ */ React.createElement(Icon, { kind: archived ? "archive" : "megaphone" }), /* @__PURE__ */ React.createElement("strong", null, loading ? "Carregando comunicados\u2026" : filtered ? "Nenhum comunicado encontrado" : archived ? "Nenhuma publica\xE7\xE3o arquivada" : "Nenhum comunicado por aqui"), !loading && /* @__PURE__ */ React.createElement("p", null, filtered ? "Ajuste a busca ou o filtro para encontrar publica\xE7\xF5es." : archived ? "Os comunicados arquivados ficam aqui at\xE9 serem restaurados, exclu\xEDdos ou vencerem." : "Novas publica\xE7\xF5es aparecer\xE3o neste espa\xE7o."))), /* @__PURE__ */ React.createElement("footer", { className: "list-footer" }, /* @__PURE__ */ React.createElement("p", { role: "status", "aria-live": "polite" }, rows.length ? `Mostrando ${start + 1}\u2013${Math.min(start + 6, rows.length)} de ${rows.length}` : "0 publica\xE7\xF5es"), pages > 1 && /* @__PURE__ */ React.createElement("nav", { className: "pagination", "aria-label": "Pagina\xE7\xE3o do Mural" }, /* @__PURE__ */ React.createElement("button", { type: "button", disabled: current === 1, "aria-label": "P\xE1gina anterior do Mural", onClick: () => changePage(current - 1) }, /* @__PURE__ */ React.createElement(Icon, { kind: "left" })), /* @__PURE__ */ React.createElement("span", { role: "status" }, "P\xE1gina ", current, " de ", pages), [.../* @__PURE__ */ new Set([1, ...[current - 1, current, current + 1].filter((n) => n > 1 && n < pages), pages])].map((n, i, a) => /* @__PURE__ */ React.createElement(React.Fragment, { key: n }, i > 0 && n - a[i - 1] > 1 && /* @__PURE__ */ React.createElement("span", { "aria-hidden": "true" }, "\u2026"), /* @__PURE__ */ React.createElement("button", { type: "button", "aria-label": "P\xE1gina " + n + " do Mural", "aria-current": current === n ? "page" : void 0, onClick: () => changePage(n) }, n))), /* @__PURE__ */ React.createElement("button", { type: "button", disabled: current === pages, "aria-label": "Pr\xF3xima p\xE1gina do Mural", onClick: () => changePage(current + 1) }, /* @__PURE__ */ React.createElement(Icon, { kind: "right" }))))), post && /* @__PURE__ */ React.createElement(Details, { post, profile, users: allUsers, canEdit: canEdit(post), canModerate, canDelete, busy, onClose: () => setSelected(null), onAction: action }), " ", editor && /* @__PURE__ */ React.createElement(Editor, { key: editor.id || "new", record: editor.new ? null : editor, profile, users: allUsers, canModerate, onClose: () => setEditor(null), onSave: (payload) => mutate("save", payload) }), " ", deleting && /* @__PURE__ */ React.createElement(ConfirmDelete, { post: deleting, busy, error: deleteError, onClose: () => setDeleting(null), onConfirm: () => mutate("delete", { id: deleting.id }).then(() => setDeleting(null)).catch((e) => setDeleteError(e?.message || "N\xE3o foi poss\xEDvel excluir.")) }));
 }
 export {
   MuralWorkspace as default,
