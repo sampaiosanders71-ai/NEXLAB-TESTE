@@ -1,5 +1,5 @@
 /* NexLab — animação dos cards associada ao fluxo real de exportação. */
-import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-monitor-recursos';
+import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-preservacao-manual';
 const h=React.createElement;
 const FINISH_MS=1000;
 function reducedMotion(){return document.documentElement.dataset.nexlabReduceMotion==='true'||!!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches}
@@ -25,7 +25,7 @@ export function useReportDownload(){
     return()=>{const r=ref.current;r.mounted=false;r.sequence++;cancelTimers(r)};
   },[]);
   const clear=()=>{const r=ref.current;if(!r.busy){cancelTimers(r);r.sequence++;if(r.mounted)setState(null)}};
-  function begin(scope,type){
+  function begin(scope,type,onHandoff){
     const r=ref.current;if(r.busy||!r.mounted)return null;
     cancelTimers(r);r.busy=true;const id=++r.sequence;
     let phase='preparing',handedOff=false;
@@ -35,6 +35,7 @@ export function useReportDownload(){
     const started=()=>{
       if(handedOff)return;
       handedOff=true;
+      if(r.mounted&&r.sequence===id&&typeof onHandoff==='function'){try{onHandoff()}catch{/* The file has already been handed to the browser. */}}
       // The file has already been handed to the browser. This is a visual
       // completion, never a delay on the export or a simulated generation %.
       if(reducedMotion()){phase='complete';publish();return}

@@ -1374,3 +1374,40 @@ body main .events-interface-v02682 .ev-hero .module-actions>button{background:#f
 .nexlab-system-monitor .nxl-system-storage-notice.is-info{background:#eef5fd;border-color:#d3e4f8;color:#305c86}
 .nexlab-system-monitor .nxl-system-storage-notice.is-info>span{background:#dceafa}
 .nexlab-system-monitor .nxl-system-storage-notice.is-info p{color:#527697}
+
+/* Preservação manual de informações. */
+.nxl-preservation-guide,.nxl-preservation-entry{border:1px solid #cdddef;border-radius:20px;background:#f6f9fd;color:#153452;min-width:0;margin:18px 0;overflow:hidden}
+.nxl-preservation-guide summary{cursor:pointer;padding:20px 24px;background:#edf3fb;color:#102d4a;list-style:disclosure-closed;display:list-item;list-style-position:inside}
+.nxl-preservation-guide[open] summary{list-style-type:disclosure-open;border-bottom:1px solid #dbe5f1}
+.nxl-preservation-guide summary>span{display:inline-block;vertical-align:middle;max-width:calc(100% - 28px)}
+.nxl-preservation-guide summary strong{display:block;font-size:16px;line-height:1.5}
+.nxl-preservation-guide summary small{display:block;font-size:12px;line-height:1.6;color:#4c6581;margin-top:3px}
+.nxl-preservation-guide__body{padding:24px}
+.nxl-preservation-explanation{font-size:13px;line-height:1.7;margin:0 0 22px;max-width:85ch}
+.nxl-preservation-steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.nxl-preservation-steps>li{background:white;border:1px solid #d5e1ef;border-radius:16px;padding:18px;min-width:0;display:flex;align-items:flex-start;gap:12px}
+.nxl-preservation-step{display:flex;align-items:center;justify-content:center;flex:0 0 28px;height:28px;border-radius:9px;background:#fff0df;color:#a64500;font-size:13px;font-weight:800}
+.nxl-preservation-steps>li>div{min-width:0;flex:1}
+.nxl-preservation-steps h3{font-size:14px;line-height:1.5;font-weight:800;margin:3px 0 12px;color:#0d2c49}
+.nxl-preservation-steps p,.nxl-preservation-steps label{font-size:12px;line-height:1.7;color:#405c78;overflow-wrap:anywhere}
+.nxl-preservation-steps p{margin:10px 0 14px}
+.nxl-preservation-steps select{width:100%;max-width:100%;background:#fff;border:1px solid #829cb9;border-radius:10px;padding:10px 12px;color:#153452;font-size:12px;min-height:44px;margin-top:6px}
+.nxl-preservation-formats{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.nxl-preservation-guide button,.nxl-preservation-entry button{min-height:44px;border-radius:10px;border:1px solid #c4d6ea;background:#edf3fb;color:#123c66;font-size:12px;font-weight:700;padding:10px 14px;white-space:normal;overflow-wrap:anywhere;cursor:pointer}
+.nxl-preservation-guide button.nxl-preservation-review,.nxl-preservation-entry button{background:#ff880a;color:#1a2738;border-color:#fa7900}
+.nxl-preservation-guide button:disabled,.nxl-preservation-guide select:disabled{opacity:.55;cursor:not-allowed}
+.nxl-preservation-guide :is(button,select,input):focus-visible,.nxl-preservation-entry button:focus-visible,.nxl-preservation-guide summary:focus-visible{outline:3px solid #1767b5;outline-offset:3px}
+.nxl-preservation-confirm{display:flex;align-items:flex-start;gap:10px;padding:12px;background:#f0f5fc;border-radius:10px;cursor:pointer}
+.nxl-preservation-confirm input{appearance:auto;width:18px;height:18px;min-width:18px;margin:2px 0 0;accent-color:#164e80}
+.nxl-preservation-footnote{font-size:11px;line-height:1.8;color:#496480;margin:20px 0 0;padding-top:16px;border-top:1px solid #dbe5f1}
+.nxl-preservation-entry{padding:24px;background:#fff}
+.nxl-preservation-kicker{color:#a54d00;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em}
+.nxl-preservation-entry h2{font-size:16px;font-weight:800;line-height:1.5;margin:5px 0}
+.nxl-preservation-entry p{font-size:12px;line-height:1.8;color:#405c78;margin:6px 0 14px}
+.nxl-preservation-entry__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}
+.nxl-preservation-entry__grid article{padding:18px;border:1px solid #d2e1f1;border-radius:14px;background:#f2f7fd;min-width:0}
+.nxl-preservation-entry__grid article.is-technical{background:#fff7ed;border-color:#f3d5ae}
+.nxl-preservation-entry h3{font-size:13px;font-weight:800;line-height:1.5}
+.nxl-preservation-entry>small{font-size:11px;line-height:1.8;color:#4c6581;display:block}
+@media(max-width:1100px){.nxl-preservation-steps{grid-template-columns:1fr}.nxl-preservation-steps>li{padding:18px}.nxl-preservation-steps select{max-width:440px;display:block}}
+@media(max-width:640px){.nxl-preservation-guide summary{padding:16px}.nxl-preservation-guide__body,.nxl-preservation-entry{padding:16px}.nxl-preservation-entry__grid{grid-template-columns:1fr}.nxl-preservation-steps>li{padding:14px;gap:9px}.nxl-preservation-guide button{width:100%}.nxl-preservation-step{flex-basis:24px;height:24px}.nxl-preservation-guide summary strong{font-size:14px}}
