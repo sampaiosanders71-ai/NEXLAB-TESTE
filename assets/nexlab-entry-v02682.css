@@ -1299,3 +1299,37 @@ body main .events-interface-v02682 .ev-hero .module-actions>button{background:#f
 .mural-interface-v02682 .detail-meta .author-copy strong{color:#fff}
 .mural-interface-v02682 .detail-meta .author-copy small{color:#c5d8ed}
 .mural-interface-v02682 .detail-meta .publication-date{background:#ffffff14;border-color:#ffffff35;color:#fff}
+
+/* Download dos relatórios: conteúdo sobreposto, sem alterar as dimensões dos cards. */
+.nexlab-reports-module-card-v02682{position:relative}
+.nexlab-reports-module-card-v02682:has([aria-haspopup="menu"][aria-expanded="true"]){z-index:20}
+.nexlab-reports-module-card-v02682[data-download-phase]>*:not(.nexlab-report-download-v02682){visibility:hidden}
+.nexlab-report-download-v02682{--download-base:#2e65ab;--download-fill:#3e7dcf;position:absolute;z-index:4;inset:-1px;overflow:hidden;border-radius:inherit;background:var(--download-base);color:#fff;animation:nexlab-report-download-enter .2s ease-out}
+[data-report-scope="patrimonio"]>.nexlab-report-download-v02682,[data-report-scope="agendamentos"]>.nexlab-report-download-v02682{--download-base:#44418e;--download-fill:#6254bc}
+[data-report-scope="eventos"]>.nexlab-report-download-v02682{--download-base:#206d56;--download-fill:#2a976e}
+[data-report-scope="equipes"]>.nexlab-report-download-v02682{--download-base:#9b521f;--download-fill:#c56c27}
+[data-report-scope="estoque"]>.nexlab-report-download-v02682{--download-base:#744093;--download-fill:#9a55bc}
+[data-report-scope^="feedback"]>.nexlab-report-download-v02682{--download-base:#165f76;--download-fill:#217d94}
+.nexlab-report-download-v02682 .report-download-sweep{position:absolute;inset:0 auto 0 0;width:48%;background:var(--download-fill);border-right:1px solid #ffffff24;animation:nexlab-report-download-sweep 1.8s ease-in-out infinite}
+.nexlab-report-download-v02682 .report-download-caption{position:absolute;inset:9px 12px auto;display:flex;align-items:center;gap:6px;font-size:9px;font-weight:750;line-height:1.2}
+.nexlab-report-download-v02682 .report-download-caption>svg{width:13px;height:13px;flex:none}
+.nexlab-report-download-v02682 .report-download-caption>span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.nexlab-report-download-v02682 .report-download-caption>small{font-size:8px;margin-left:auto;opacity:.85}
+.nexlab-report-download-v02682 .report-download-body{position:absolute;inset:27px 8px 6px;display:flex;align-items:center;align-content:center;justify-content:center;flex-wrap:wrap;gap:3px 7px;text-align:center}
+.nexlab-report-download-v02682 .report-download-symbol{display:flex}
+.nexlab-report-download-v02682 .report-download-symbol>svg{width:20px;height:20px}
+.nexlab-report-download-v02682 .report-download-message{font-size:13px;line-height:1.2;font-weight:750}
+.nexlab-report-download-v02682 .report-download-body>small{flex-basis:100%;font-size:8px;line-height:1.3}
+.nexlab-report-download-v02682 .report-download-indeterminate{position:absolute;inset:0;pointer-events:none}
+.nexlab-report-download-v02682.is-complete{background:#edf8f2;color:#167250}
+.nexlab-report-download-v02682.is-complete .report-download-symbol{animation:nexlab-report-download-check .3s ease-out}
+.nexlab-report-download-v02682.is-error{background:#fff4eb;color:#9a4a19}
+.nexlab-report-download-v02682 .report-download-error-actions{flex-basis:100%;display:flex;justify-content:center;gap:8px}
+.nexlab-report-download-v02682 .report-download-error-actions>button{border:1px solid #d6a47e;border-radius:5px;min-height:22px;padding:1px 8px;background:#fff;color:#853b13;font-size:9px;font-weight:700;cursor:pointer}
+.nexlab-report-download-v02682 .report-download-error-actions>button:focus-visible{outline:2px solid #214c84;outline-offset:2px}
+.nexlab-report-download-v02682 .report-download-error-actions>button:disabled{opacity:.5;cursor:wait}
+@keyframes nexlab-report-download-sweep{0%{transform:translateX(-100%)}100%{transform:translateX(310%)}}
+@keyframes nexlab-report-download-enter{from{opacity:0}to{opacity:1}}
+@keyframes nexlab-report-download-check{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+@media(max-width:560px){.nexlab-report-download-v02682 .report-download-caption{inset:12px 13px auto;font-size:10px}.nexlab-report-download-v02682 .report-download-body{inset:33px 10px 14px;gap:5px 7px}.nexlab-report-download-v02682 .report-download-symbol>svg{width:24px;height:24px}.nexlab-report-download-v02682 .report-download-message{font-size:15px}.nexlab-report-download-v02682 .report-download-body>small{font-size:10px}.nexlab-report-download-v02682 .report-download-error-actions{margin-top:4px}.nexlab-report-download-v02682 .report-download-error-actions>button{min-height:29px;font-size:10px;padding:3px 10px}}
+@media(prefers-reduced-motion:reduce){.nexlab-report-download-v02682,.nexlab-report-download-v02682 .report-download-symbol,.nexlab-report-download-v02682 .report-download-sweep{animation:none}.nexlab-report-download-v02682 .report-download-sweep{transform:none;width:100%;opacity:.45}}
