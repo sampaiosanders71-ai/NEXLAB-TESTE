@@ -17,7 +17,7 @@
     return;
   }
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-google-calendar-integracao',assetRevision:'app-beta-0-26-82-animacao-relatorios',cacheName:'nexlab-app-beta-0-26-82-animacao-relatorios-20260928T022407Z',generatedAt:'2026-09-11T01:14:06Z'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-google-calendar-integracao',assetRevision:'app-beta-0-26-82-monitor-recursos',cacheName:'nexlab-app-beta-0-26-82-monitor-recursos-20260928T022407Z',generatedAt:'2026-09-11T01:14:06Z'});
   const APP_VERSION = BUILD_IDENTITY.version;
   const APP_RELEASE = BUILD_IDENTITY.release;
   const APP_REVISION = BUILD_IDENTITY.revision;
@@ -446,7 +446,9 @@
     assetRevision: 'string',
     module_asset_url: 'string',
     module_error_source: 'string',
-    requested_build_revision: 'string'
+    requested_build_revision: 'string',
+    resourceTag: 'string',
+    resourcePath: 'pathname'
   });
 
   function observabilitySanitizeMetadata(value){
@@ -456,6 +458,16 @@
     for (const [key, type] of Object.entries(OBSERVABILITY_METADATA_FIELDS)) {
       const item = value[key];
       if (item === undefined || item === null) continue;
+
+      if (type === 'pathname' && typeof item === 'string') {
+        try {
+          const resource = new URL(item, location.href);
+          if (resource.protocol === 'http:' || resource.protocol === 'https:') {
+            result[key] = observabilitySanitize(resource.pathname, 300);
+          }
+        } catch {}
+        continue;
+      }
 
       if (type === 'string' && typeof item === 'string') {
         result[key] = observabilitySanitize(item, 300);
@@ -745,7 +757,7 @@
 
   function userErrorReference(fingerprint){
     const cleanVersion = String(APP_VERSION || '0').replace(/\D/g,'').slice(-6).padStart(3,'0');
-    return `NXL-${cleanVersion}-${String(fingerprint || '00000000').slice(0,8).toUpperCase()}`;
+    return `NXL-${cleanVersion}-${String(fingerprint || '00000000').toUpperCase()}`;
   }
 
   function userErrorActionLabel(input){
@@ -1342,7 +1354,7 @@
     'assets/nexlab-vapid-rotation.js',
     'assets/nexlab-push-consent.js',
     'assets/nexlab-feedback-evidence.js'
-  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-82-animacao-relatorios'));
+  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-82-monitor-recursos'));
   const state={version:VERSION,revision:REVISION,status:'scheduled',loaded:[],errors:[],attempts:{},lastReason:'',startedAt:null,completedAt:null};
   const sourceState=new Map(sources.map(src=>[src,{status:'pending',attempts:0,lastError:''}]));
   let active=null;
