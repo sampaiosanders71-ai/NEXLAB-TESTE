@@ -1,5 +1,6 @@
+import {renderApprovedDashboard,unmountApprovedDashboard} from "./nexlab-profile-dashboard-feedback-v02682.js?v=app-beta-0-26-82-perfil-dashboard-feedback";
 /* NEXLAB Beta 0.26.82 — Dashboard reconstruído do zero — face institucional. */
-import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-monitor-recursos";
+import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-perfil-dashboard-feedback";
 
 const HOST_ID = 'nexlab-dashboard-clean-v02682';
 const STYLE_ID = 'nexlab-dashboard-rebuild-style-v02682';
@@ -423,11 +424,7 @@ function buildMural() {
 }
 
 function render(host) {
-  host.replaceChildren();
-  host.append(buildToolbar(host));
-  const view=document.createElement('div'); view.className='nx-dash-view';
-  view.append(activeView==='overview'?buildOverview():buildMural());
-  host.append(view);
+  renderApprovedDashboard(host,{state,activeView,nav,onView:value=>{activeView=value;render(host)}});
 }
 
 function buildHost(main) {
@@ -453,6 +450,7 @@ function upcoming(item) {
   const today=new Date(); today.setHours(0,0,0,0); d.setHours(0,0,0,0); return d>=today;
 }
 
+function resetAccountData(){state.uid='';state.myTeams=[];state.myProjects=[];state.myMeetings=[];state.events=[];state.profiles=[];state.mural=[];state.myDay={tasks:0,meetings:0,approvals:0,overdue:0};state.teamMetrics={active_count:0,unique_member_count:0,archived_count:0,without_projects_count:0};}
 async function loadData() {
   if(!dashboardAllowed()) return;
   const token=++loadingToken; state.loading=true;
@@ -464,18 +462,18 @@ async function loadData() {
       : await supabase.auth.getSession();
     const session=sessionResult?.data?.session||null;
     if(!session?.user?.id||!dashboardAllowed()){
-      state.uid=''; state.errors=[]; state.loading=false;
+      resetAccountData(); state.errors=[]; state.loading=false;
       const host=document.getElementById(HOST_ID); if(host) render(host);
       return;
     }
     const userResult=await supabase.auth.getUser();
     const uid=normId(userResult?.data?.user?.id);
     if(userResult?.error||!uid||uid!==normId(session.user.id)||!dashboardAllowed()){
-      state.uid=''; state.errors=[]; state.loading=false;
+      resetAccountData(); state.errors=[]; state.loading=false;
       const host=document.getElementById(HOST_ID); if(host) render(host);
       return;
     }
-    state.uid=uid;
+    if(state.uid!==uid)resetAccountData();state.uid=uid;
     const [bundleResult,myDayResult]=await Promise.allSettled([
       supabase.rpc('nexlab_get_dashboard_bundle_v02656',{p_date_from:iso(today),p_date_to:iso(until)}),
       supabase.rpc('nexlab_get_my_day_summary_v1',{p_horizon_days:7})
@@ -497,6 +495,7 @@ async function loadData() {
     state.teamMetrics={active_count:n(summary?.team_metrics?.active_count),unique_member_count:n(summary?.team_metrics?.unique_member_count),archived_count:n(summary?.team_metrics?.archived_count),without_projects_count:n(summary?.team_metrics?.without_projects_count)};
     state.lab=navigator.onLine===false?{status:'offline',label:'Offline'}:errors.length?{status:'warning',label:'Dados parciais'}:{status:'ok',label:'Operacional'};
   } catch(error) {
+    resetAccountData();
     errors.push(String(error?.message||error||'load_error'));
     state.lab=navigator.onLine===false?{status:'offline',label:'Offline'}:{status:'warning',label:'Dados parciais'};
   } finally {
@@ -512,9 +511,11 @@ function suppressLegacy(main,host){for(const child of [...main.children]){if(chi
 function restoreLegacy(main){if(!main)return;main.querySelectorAll(':scope > [data-nexlab-dashboard-legacy-suppressed="true"]').forEach(child=>{const aria=child.dataset.nexlabDashboardPrevAriaHidden;if(aria==='__none__')child.removeAttribute('aria-hidden');else if(aria!=null)child.setAttribute('aria-hidden',aria);if(child.dataset.nexlabDashboardPrevInert!=='true'){try{child.inert=false}catch{}child.removeAttribute('inert')}delete child.dataset.nexlabDashboardLegacySuppressed;delete child.dataset.nexlabDashboardPrevAriaHidden;delete child.dataset.nexlabDashboardPrevInert;});}
 function observeMain(main){if(mainObserver?.target===main)return;if(mainObserver)mainObserver.disconnect();mainObserver=new MutationObserver(()=>{if(!dashboardAllowed())return cleanup();const host=document.getElementById(HOST_ID);if(!host||host.parentElement!==main)return schedule(25);suppressLegacy(main,host);});mainObserver.observe(main,{childList:true});mainObserver.target=main;}
 function activate(){if(!dashboardAllowed())return cleanup();ensureStyle();purgeLegacyArtifacts();const main=document.getElementById('nexlab-main-content')||document.querySelector('main');if(!main)return;const host=buildHost(main);suppressLegacy(main,host);document.body.setAttribute(RESET_ATTR,'true');observeMain(main);clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>void loadData(),90);}
-function cleanup(){document.body?.removeAttribute(RESET_ATTR);const main=document.getElementById('nexlab-main-content')||document.querySelector('main');restoreLegacy(main);document.getElementById(HOST_ID)?.remove();clearTimeout(refreshTimer);}
+function cleanup(){loadingToken++;unmountApprovedDashboard(document.getElementById(HOST_ID));document.body?.removeAttribute(RESET_ATTR);const main=document.getElementById('nexlab-main-content')||document.querySelector('main');restoreLegacy(main);document.getElementById(HOST_ID)?.remove();clearTimeout(refreshTimer);}
 function schedule(delay=60){clearTimeout(scheduled);scheduled=setTimeout(activate,delay);}
 function start(){if(!document.body)return;ensureStyle();if(!pageObserver){pageObserver=new MutationObserver(records=>{if(records.some(record=>record.type==='attributes'&&record.attributeName==='data-nexlab-page'))schedule(20);});pageObserver.observe(document.body,{attributes:true,attributeFilter:['data-nexlab-page']});}if(!gateObserver){const root=document.getElementById('root')||document.body;lastPrivacyGateState=privacyGateActive();gateObserver=new MutationObserver(()=>{const currentGateState=privacyGateActive();if(currentGateState===lastPrivacyGateState)return;lastPrivacyGateState=currentGateState;currentGateState?cleanup():schedule(20);});gateObserver.observe(root,{childList:true,subtree:true});}privacyGateActive()?cleanup():schedule(60);}
+
+supabase.auth.onAuthStateChange?.((event,session)=>{if(event==='SIGNED_OUT'||event==='USER_UPDATED'||normId(session?.user?.id)!==state.uid){loadingToken++;resetAccountData();state.loading=true;const host=document.getElementById(HOST_ID);if(host&&dashboardAllowed())render(host);if(dashboardAllowed()){clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>void loadData(),60);}}});
 
 globalThis.addEventListener('nexlab:myday-updated',event=>{if(!dashboardAllowed()||!event?.detail)return;state.myDay={tasks:n(event.detail.tasks),meetings:n(event.detail.meetings),approvals:n(event.detail.approvals),overdue:n(event.detail.overdue)};const host=document.getElementById(HOST_ID);if(host)render(host);});
 globalThis.addEventListener('nexlab:network-status',()=>{if(dashboardAllowed())void loadData();});
