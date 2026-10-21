@@ -1,4 +1,4 @@
-import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-dashboard-abertura-inicial';
+import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-kanban-legivel';
 const h=React.createElement;
 const number=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:1});
 const integer=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:0});

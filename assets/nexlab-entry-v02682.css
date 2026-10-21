@@ -104,21 +104,23 @@ body[data-nexlab-page="marketing"] .nexlab-marketing-reset .nexlab-mkt-agenda{ d
 .projects-redesign-v02682 .project-design-filter-toggle{display:none}
 .projects-redesign-v02682 .nexlab-project-kanban-hint{font-size:11px;line-height:1.5;margin:0!important;color:#6d8097}
 .projects-redesign-v02682 .nexlab-project-kanban{display:flex!important;gap:12px!important;overflow-x:auto!important;max-width:100%!important;min-width:0!important;align-items:stretch;padding:0 0 10px!important;overscroll-behavior-x:contain;scrollbar-width:thin;scroll-snap-type:x proximity}
-.projects-redesign-v02682 .nexlab-project-kanban__column{flex:1 0 176px!important;min-width:176px!important;width:auto!important;max-width:none!important;padding:12px!important;min-height:340px;border:1px solid #e7edf5!important;border-radius:15px!important;box-shadow:none!important;background:#ffffffcf!important;scroll-snap-align:start}
-.projects-redesign-v02682 .nexlab-project-kanban__column>div:first-child{padding:10px 8px!important;border:0!important;border-radius:10px;gap:5px;background:#f1f5fa}
+.projects-redesign-v02682 .nexlab-project-kanban__column{flex:1 0 288px!important;min-width:288px!important;width:auto!important;max-width:none!important;padding:12px!important;min-height:340px;border:1px solid #e7edf5!important;border-radius:15px!important;box-shadow:none!important;background:#ffffffcf!important;scroll-snap-align:start}
+.projects-redesign-v02682 .nexlab-project-kanban__column>div:first-child{flex:0 0 auto!important;padding:10px 8px!important;border:0!important;border-radius:10px;gap:5px;background:#f1f5fa}
 .projects-redesign-v02682 .nexlab-project-kanban__column>div:first-child>div{gap:5px!important;min-width:0}
 .projects-redesign-v02682 .nexlab-project-kanban__column>div:first-child>div>div{padding:0!important;border:0!important;background:transparent!important}
-.projects-redesign-v02682 .nexlab-project-kanban__column>div:first-child span{font-size:10px!important;white-space:normal!important}
+.projects-redesign-v02682 .nexlab-project-kanban__column>div:first-child span{font-size:10px!important;white-space:normal!important;overflow-wrap:normal;word-break:normal}
+.projects-redesign-v02682 .nexlab-project-kanban__column>div:first-child>span{flex:none!important;white-space:nowrap!important;min-width:2rem;text-align:center}
+.projects-redesign-v02682 .nexlab-project-kanban__column>div:last-child{flex:0 1 auto!important;min-height:0!important;max-height:32rem!important;max-height:min(32rem,65dvh)!important;overflow-y:auto!important;overflow-x:hidden!important;scrollbar-gutter:stable;overscroll-behavior-y:contain;scroll-padding-block:8px;display:flex!important;flex-direction:column!important;align-items:stretch!important}
 .projects-redesign-v02682 [data-kanban-status=ideia]>div:first-child{background:#f0f4ff;color:#2e5ebc}
 .projects-redesign-v02682 [data-kanban-status=analise]>div:first-child{background:#eef6ff;color:#2474ed}
 .projects-redesign-v02682 [data-kanban-status=aprovacao]>div:first-child{background:#f5faef;color:#65a323}
 .projects-redesign-v02682 [data-kanban-status=execucao]>div:first-child{background:#fff4e6;color:#ed7900}
 .projects-redesign-v02682 [data-kanban-status=finalizado]>div:first-child{background:#eefaF5;color:#20aa84}
 .projects-redesign-v02682 [data-kanban-status=arquivado]>div:first-child{background:#f1f4f8;color:#6f8197}
-.projects-redesign-v02682 .nexlab-project-kanban__card{background:white!important;border:1px solid #e1e8f1!important;border-radius:12px!important;padding:12px!important;box-shadow:0 2px 6px #102b4c08!important}
+.projects-redesign-v02682 .nexlab-project-kanban__card{flex:0 0 auto!important;min-height:10rem!important;height:auto!important;background:white!important;border:1px solid #e1e8f1!important;border-radius:12px!important;padding:12px!important;box-shadow:0 2px 6px #102b4c08!important}
 .projects-redesign-v02682 .nexlab-project-kanban__card.is-dragging{opacity:.45}
 .projects-redesign-v02682 .nexlab-project-kanban__column.is-drag-over{background:#fff6ea!important;border-color:#ff8200!important;box-shadow:inset 0 0 0 2px #ff82004d!important}
-.projects-redesign-v02682 .nexlab-project-kanban__grip{touch-action:none!important;min-width:28px;min-height:30px;display:inline-grid;place-items:center}
+.projects-redesign-v02682 .nexlab-project-kanban__grip{pointer-events:auto!important;cursor:grab;touch-action:none!important;min-width:28px;min-height:30px;display:inline-grid;place-items:center}
 .projects-redesign-v02682 .project-card-title-v02667{font-size:13px!important;line-height:1.5!important}
 .projects-redesign-v02682 .project-page-v02682{border-radius:18px!important;box-shadow:none!important}
 .projects-redesign-v02682 .project-page-v02682 .project-design-page-header{padding:22px 25px!important;align-items:center!important;background:linear-gradient(120deg,#fff 80%,#fff8f0)!important}
