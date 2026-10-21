@@ -1,6 +1,7 @@
-import {renderApprovedDashboard,unmountApprovedDashboard} from "./nexlab-profile-dashboard-feedback-v02682.js?v=app-beta-0-26-82-perfil-dashboard-feedback";
+import {renderApprovedDashboard,unmountApprovedDashboard} from "./nexlab-profile-dashboard-feedback-v02682.js?v=app-beta-0-26-82-correcoes-restantes";
+import {nexlabDateKey,nexlabAddCalendarDays,formatNexlabDate} from "./nexlab-calendar-date-v02682.js?v=app-beta-0-26-82-correcoes-restantes";
 /* NEXLAB Beta 0.26.82 — Dashboard reconstruído do zero — face institucional. */
-import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-perfil-dashboard-feedback";
+import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-correcoes-restantes";
 
 const HOST_ID = 'nexlab-dashboard-clean-v02682';
 const STYLE_ID = 'nexlab-dashboard-rebuild-style-v02682';
@@ -13,9 +14,14 @@ let refreshTimer = 0;
 let loadingToken = 0;
 let activeView = 'overview';
 let lastPrivacyGateState = null;
+let currentLoad = null;
+let lastObservedPage = null;
 
 const state = {
   loading: true,
+  ready: false,
+  pendingTotal: null,
+  availability: {},
   uid: '',
   myDay: { tasks: 0, meetings: 0, approvals: 0, overdue: 0 },
   myTeams: [],
@@ -65,7 +71,7 @@ function normId(value) { return String(value || '').trim(); }
 function dateValue(value) { const d = new Date(value); return Number.isFinite(d.getTime()) ? d : null; }
 function shortDate(value) {
   const d = dateValue(value);
-  return d ? d.toLocaleDateString('pt-BR', { day:'2-digit', month:'short' }).replace('.','') : '';
+  return d ? formatNexlabDate(value, { day:'2-digit', month:'short' }).replace('.','') : '';
 }
 function activeProject(project) {
   return !['finalizado','arquivado'].includes(String(project?.status || '').toLowerCase());
@@ -191,6 +197,9 @@ body:not([data-nexlab-page="dashboard"]) #${HOST_ID}{display:none!important}
 
 function nav(tabId, extra={}) {
   try {
+    if(tabId==='reserva'&&extra?.id&&['meeting','reservation'].includes(extra.entityType)){
+      try{sessionStorage.setItem('nexlabBookingTarget',JSON.stringify({kind:extra.entityType,id:String(extra.id)}));}catch{}
+    }
     globalThis.dispatchEvent(new CustomEvent('nexlab:navigate-record', {
       detail: { tabId, id:'', entityType:'dashboard_link', groupLabel:'Dashboard', source:'dashboard-rebuild', ...extra }
     }));
@@ -424,7 +433,7 @@ function buildMural() {
 }
 
 function render(host) {
-  renderApprovedDashboard(host,{state,activeView,nav,onView:value=>{activeView=value;render(host)}});
+  renderApprovedDashboard(host,{state,activeView,nav,onRefresh:()=>void loadData(),onView:value=>{activeView=value;render(host)}});
 }
 
 function buildHost(main) {
@@ -445,21 +454,29 @@ function userMeeting(meeting,uid) {
 function upcoming(item) {
   const status=String(item?.status||'').toLowerCase();
   if(['cancelada','cancelado','recusado','arquivado'].includes(status)) return false;
-  const d=dateValue(item?.data||item?.date||item?.inicio);
-  if(!d) return true;
-  const today=new Date(); today.setHours(0,0,0,0); d.setHours(0,0,0,0); return d>=today;
+  const day=nexlabDateKey(item?.data||item?.date||item?.inicio||'');
+  if(!day) return true;
+  return day>=nexlabDateKey();
 }
 
-function resetAccountData(){state.uid='';state.myTeams=[];state.myProjects=[];state.myMeetings=[];state.events=[];state.profiles=[];state.mural=[];state.myDay={tasks:0,meetings:0,approvals:0,overdue:0};state.teamMetrics={active_count:0,unique_member_count:0,archived_count:0,without_projects_count:0};}
-async function loadData() {
+function resetAccountData(){state.ready=false;state.pendingTotal=null;state.availability={};state.uid='';state.myTeams=[];state.myProjects=[];state.myMeetings=[];state.events=[];state.profiles=[];state.mural=[];state.myDay={tasks:0,meetings:0,approvals:0,overdue:0};state.teamMetrics={active_count:0,unique_member_count:0,archived_count:0,without_projects_count:0};}
+function loadData() {
   if(!dashboardAllowed()) return;
-  const token=++loadingToken; state.loading=true;
+  if(currentLoad) return currentLoad.promise;
+  const request={token:++loadingToken,promise:null};
+  currentLoad=request;
+  request.promise=performLoad(request.token).finally(()=>{if(currentLoad===request)currentLoad=null;});
+  return request.promise;
+}
+async function performLoad(token) {
+  state.loading=true;
   const existing=document.getElementById(HOST_ID); if(existing) render(existing);
-  const today=new Date(); const until=new Date(today); until.setDate(until.getDate()+120); const iso=d=>d.toISOString().slice(0,10); const errors=[];
+  const today=nexlabDateKey(),until=nexlabAddCalendarDays(today,120),errors=[];
   try {
     const sessionResult=window.nexlabAuthSessionWithTimeout
       ? await window.nexlabAuthSessionWithTimeout(supabase.auth,4500)
       : await supabase.auth.getSession();
+    if(token!==loadingToken) return;
     const session=sessionResult?.data?.session||null;
     if(!session?.user?.id||!dashboardAllowed()){
       resetAccountData(); state.errors=[]; state.loading=false;
@@ -467,6 +484,7 @@ async function loadData() {
       return;
     }
     const userResult=await supabase.auth.getUser();
+    if(token!==loadingToken) return;
     const uid=normId(userResult?.data?.user?.id);
     if(userResult?.error||!uid||uid!==normId(session.user.id)||!dashboardAllowed()){
       resetAccountData(); state.errors=[]; state.loading=false;
@@ -474,16 +492,23 @@ async function loadData() {
       return;
     }
     if(state.uid!==uid)resetAccountData();state.uid=uid;
-    const [bundleResult,myDayResult]=await Promise.allSettled([
-      supabase.rpc('nexlab_get_dashboard_bundle_v02656',{p_date_from:iso(today),p_date_to:iso(until)}),
-      supabase.rpc('nexlab_get_my_day_summary_v1',{p_horizon_days:7})
+    const [bundleResult,myDayResult,pendingResult]=await Promise.allSettled([
+      supabase.rpc('nexlab_get_dashboard_bundle_v02656',{p_date_from:today,p_date_to:until}),
+      supabase.rpc('nexlab_get_my_day_summary_v1',{p_horizon_days:7}),
+      supabase.rpc('nexlab_get_pending_center_v2703',{p_page:1,p_page_size:1})
     ]);
     if(token!==loadingToken) return;
-    const rpcData=(result,label)=>{if(result.status!=='fulfilled'){errors.push(label);return null;}if(result.value?.error){errors.push(label);return null;}return result.value?.data??null;};
+    const rpcData=(result,label)=>{if(result.status!=='fulfilled'||result.value?.error){errors.push(label);return null;}const data=result.value?.data;if(!data||typeof data!=='object'||Array.isArray(data)){errors.push(label);return null;}if(data.ok===false||data.partial===true||array(data.failures).length||array(data.warnings).length)errors.push(label);return data;};
     const bundle=rpcData(bundleResult,'dashboard_bundle')||{};
-    const myDay=rpcData(myDayResult,'my_day')||{};
+    const myDayData=rpcData(myDayResult,'my_day'),myDay=myDayData||{};
+    const pending=rpcData(pendingResult,'pending');
     const sections=bundle?.sections||{}; const summary=bundle?.summary||{};
     const teams=array(sections.teams); const teamMembers=array(sections.team_members); const projects=array(sections.projects).length?array(sections.projects):array(summary.projects); const meetings=array(sections.meetings); const events=array(sections.events); const profiles=array(sections.profiles); const mural=array(sections.mural);
+    const pendingValue=pending?.metrics?.total;
+    const pendingValid=!!pending&&pending.ok!==false&&pending.partial!==true&&!array(pending.failures).length&&!array(pending.warnings).length&&(typeof pendingValue==='number'||typeof pendingValue==='string')&&String(pendingValue).trim()!==''&&Number.isSafeInteger(Number(pendingValue))&&Number(pendingValue)>=0;
+    state.pendingTotal=pendingValid?Number(pendingValue):null;
+    state.availability={teams:Array.isArray(sections.teams)&&Array.isArray(sections.team_members),projects:Array.isArray(sections.projects)||Array.isArray(summary.projects),meetings:Array.isArray(sections.meetings),events:Array.isArray(sections.events),myDay:!!myDayData&&myDay.ok!==false&&['tasks','meetings','approvals','overdue'].every(key=>myDay[key]!=null&&Number.isFinite(Number(myDay[key]))&&Number(myDay[key])>=0),pending:pendingValid,teamMetrics:!!summary.team_metrics&&typeof summary.team_metrics==='object'&&['active_count','unique_member_count','archived_count','without_projects_count'].every(key=>summary.team_metrics[key]!=null&&Number.isFinite(Number(summary.team_metrics[key])))};
+    for(const [section,available] of Object.entries(state.availability))if(!available)errors.push(section);
     const myTeamIds=new Set(teamMembers.filter(member=>normId(member?.user_id)===uid).map(member=>normId(member?.team_id)).filter(Boolean));
     state.myTeams=teams.filter(team=>myTeamIds.has(normId(team?.id))&&!team?.archived_at);
     state.myProjects=projects.filter(project=>activeProject(project)&&userRelatedProject(project,uid,myTeamIds)).sort((a,b)=>(dateValue(b?.last_activity_at||b?.updated_at||b?.created_at)?.getTime()||0)-(dateValue(a?.last_activity_at||a?.updated_at||a?.created_at)?.getTime()||0));
@@ -494,13 +519,15 @@ async function loadData() {
     state.myDay={tasks:n(myDay?.tasks),meetings:n(myDay?.meetings),approvals:n(myDay?.approvals),overdue:n(myDay?.overdue)};
     state.teamMetrics={active_count:n(summary?.team_metrics?.active_count),unique_member_count:n(summary?.team_metrics?.unique_member_count),archived_count:n(summary?.team_metrics?.archived_count),without_projects_count:n(summary?.team_metrics?.without_projects_count)};
     state.lab=navigator.onLine===false?{status:'offline',label:'Offline'}:errors.length?{status:'warning',label:'Dados parciais'}:{status:'ok',label:'Operacional'};
+    state.ready=true;
   } catch(error) {
+    if(token!==loadingToken) return;
     resetAccountData();
     errors.push(String(error?.message||error||'load_error'));
     state.lab=navigator.onLine===false?{status:'offline',label:'Offline'}:{status:'warning',label:'Dados parciais'};
   } finally {
     if(token!==loadingToken) return;
-    state.errors=errors; state.loading=false;
+    state.errors=[...new Set(errors)]; state.loading=false;
     const host=document.getElementById(HOST_ID); if(host) render(host);
   }
 }
@@ -510,12 +537,12 @@ function purgeLegacyArtifacts(){for(const id of LEGACY_STYLE_IDS) document.getEl
 function suppressLegacy(main,host){for(const child of [...main.children]){if(child===host||child.dataset.nexlabDashboardLegacySuppressed==='true')continue;child.dataset.nexlabDashboardLegacySuppressed='true';child.dataset.nexlabDashboardPrevAriaHidden=child.hasAttribute('aria-hidden')?String(child.getAttribute('aria-hidden')):'__none__';child.dataset.nexlabDashboardPrevInert=child.hasAttribute('inert')?'true':'false';child.setAttribute('aria-hidden','true');try{child.inert=true}catch{child.setAttribute('inert','')}}}
 function restoreLegacy(main){if(!main)return;main.querySelectorAll(':scope > [data-nexlab-dashboard-legacy-suppressed="true"]').forEach(child=>{const aria=child.dataset.nexlabDashboardPrevAriaHidden;if(aria==='__none__')child.removeAttribute('aria-hidden');else if(aria!=null)child.setAttribute('aria-hidden',aria);if(child.dataset.nexlabDashboardPrevInert!=='true'){try{child.inert=false}catch{}child.removeAttribute('inert')}delete child.dataset.nexlabDashboardLegacySuppressed;delete child.dataset.nexlabDashboardPrevAriaHidden;delete child.dataset.nexlabDashboardPrevInert;});}
 function observeMain(main){if(mainObserver?.target===main)return;if(mainObserver)mainObserver.disconnect();mainObserver=new MutationObserver(()=>{if(!dashboardAllowed())return cleanup();const host=document.getElementById(HOST_ID);if(!host||host.parentElement!==main)return schedule(25);suppressLegacy(main,host);});mainObserver.observe(main,{childList:true});mainObserver.target=main;}
-function activate(){if(!dashboardAllowed())return cleanup();ensureStyle();purgeLegacyArtifacts();const main=document.getElementById('nexlab-main-content')||document.querySelector('main');if(!main)return;const host=buildHost(main);suppressLegacy(main,host);document.body.setAttribute(RESET_ATTR,'true');observeMain(main);clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>void loadData(),90);}
-function cleanup(){loadingToken++;unmountApprovedDashboard(document.getElementById(HOST_ID));document.body?.removeAttribute(RESET_ATTR);const main=document.getElementById('nexlab-main-content')||document.querySelector('main');restoreLegacy(main);document.getElementById(HOST_ID)?.remove();clearTimeout(refreshTimer);}
+function activate(){if(!dashboardAllowed())return cleanup();ensureStyle();purgeLegacyArtifacts();const main=document.getElementById('nexlab-main-content')||document.querySelector('main');if(!main)return;const existing=document.getElementById(HOST_ID),alreadyActive=existing?.parentElement===main;const host=alreadyActive?existing:buildHost(main);suppressLegacy(main,host);document.body.setAttribute(RESET_ATTR,'true');observeMain(main);if(!alreadyActive){clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>void loadData(),90);}}
+function cleanup(){loadingToken++;currentLoad=null;unmountApprovedDashboard(document.getElementById(HOST_ID));document.body?.removeAttribute(RESET_ATTR);const main=document.getElementById('nexlab-main-content')||document.querySelector('main');restoreLegacy(main);document.getElementById(HOST_ID)?.remove();clearTimeout(refreshTimer);}
 function schedule(delay=60){clearTimeout(scheduled);scheduled=setTimeout(activate,delay);}
-function start(){if(!document.body)return;ensureStyle();if(!pageObserver){pageObserver=new MutationObserver(records=>{if(records.some(record=>record.type==='attributes'&&record.attributeName==='data-nexlab-page'))schedule(20);});pageObserver.observe(document.body,{attributes:true,attributeFilter:['data-nexlab-page']});}if(!gateObserver){const root=document.getElementById('root')||document.body;lastPrivacyGateState=privacyGateActive();gateObserver=new MutationObserver(()=>{const currentGateState=privacyGateActive();if(currentGateState===lastPrivacyGateState)return;lastPrivacyGateState=currentGateState;currentGateState?cleanup():schedule(20);});gateObserver.observe(root,{childList:true,subtree:true});}privacyGateActive()?cleanup():schedule(60);}
+function start(){if(!document.body)return;ensureStyle();if(!pageObserver){lastObservedPage=document.body.dataset.nexlabPage;pageObserver=new MutationObserver(()=>{const page=document.body.dataset.nexlabPage;if(page!==lastObservedPage){lastObservedPage=page;schedule(20);}});pageObserver.observe(document.body,{attributes:true,attributeFilter:['data-nexlab-page']});}if(!gateObserver){const root=document.getElementById('root')||document.body;lastPrivacyGateState=privacyGateActive();gateObserver=new MutationObserver(()=>{const currentGateState=privacyGateActive();if(currentGateState===lastPrivacyGateState)return;lastPrivacyGateState=currentGateState;currentGateState?cleanup():schedule(20);});gateObserver.observe(root,{childList:true,subtree:true});}privacyGateActive()?cleanup():schedule(60);}
 
-supabase.auth.onAuthStateChange?.((event,session)=>{if(event==='SIGNED_OUT'||event==='USER_UPDATED'||normId(session?.user?.id)!==state.uid){loadingToken++;resetAccountData();state.loading=true;const host=document.getElementById(HOST_ID);if(host&&dashboardAllowed())render(host);if(dashboardAllowed()){clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>void loadData(),60);}}});
+supabase.auth.onAuthStateChange?.((event,session)=>{if(event==='SIGNED_OUT'||event==='USER_UPDATED'||normId(session?.user?.id)!==state.uid){loadingToken++;currentLoad=null;resetAccountData();state.loading=true;const host=document.getElementById(HOST_ID);if(host&&dashboardAllowed())render(host);if(dashboardAllowed()){clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>void loadData(),60);}}});
 
 globalThis.addEventListener('nexlab:myday-updated',event=>{if(!dashboardAllowed()||!event?.detail)return;state.myDay={tasks:n(event.detail.tasks),meetings:n(event.detail.meetings),approvals:n(event.detail.approvals),overdue:n(event.detail.overdue)};const host=document.getElementById(HOST_ID);if(host)render(host);});
 globalThis.addEventListener('nexlab:network-status',()=>{if(dashboardAllowed())void loadData();});

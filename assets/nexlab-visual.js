@@ -69,7 +69,7 @@
       page = PAGE_LABELS.get(normalized(activeSidebar?.textContent)) || '';
     }
     const resolved = page || document.body.dataset.nexlabPage || 'carregamento';
-    document.body.dataset.nexlabPage = resolved;
+    if (document.body.dataset.nexlabPage !== resolved) document.body.dataset.nexlabPage = resolved;
     return resolved;
   }
 

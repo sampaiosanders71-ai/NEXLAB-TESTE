@@ -1,4 +1,44 @@
-import { g as React, Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-perfil-dashboard-feedback";
+import { g as React, Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-correcoes-restantes";
+export function InventoryModal({ title, onClose, panelClassName = 'max-w-2xl', children }) {
+  const overlay = React.useRef(null), close = React.useRef(onClose), titleId = React.useId();
+  close.current = onClose;
+  React.useLayoutEffect(() => {
+    const root = overlay.current, origin = document.activeElement, previousOverflow = document.body.style.overflow;
+    const selector = 'button:not([disabled]),a[href],input:not([disabled]):not([type="hidden"]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+    const focusable = () => [...root.querySelectorAll(selector)].filter(node => node.getClientRects().length && !node.closest('[inert]'));
+    const topmost = () => {
+      const dialogs = [...document.querySelectorAll('[role="dialog"][aria-modal="true"],dialog[open]')].filter(node => node.getClientRects().length);
+      const last = dialogs[dialogs.length - 1];
+      return last === root;
+    };
+    const focusFirst = () => (focusable().find(node => node.hasAttribute('autofocus')) || focusable().find(node => node.matches('input,select,textarea')) || focusable()[0] || root).focus({ preventScroll: true });
+    const onKey = event => {
+      if (!topmost()) return;
+      if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); close.current?.(); return; }
+      if (event.key !== 'Tab' || event.defaultPrevented) return;
+      const items = focusable(), first = items[0], last = items[items.length - 1];
+      if (!first) { event.preventDefault(); root.focus({ preventScroll: true }); return; }
+      if (!root.contains(document.activeElement)) { event.preventDefault(); (event.shiftKey ? last : first).focus(); }
+      else if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    const onFocus = event => { if (topmost() && !root.contains(event.target)) focusFirst(); };
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', onKey, true);
+    document.addEventListener('focusin', onFocus, true);
+    focusFirst();
+    return () => {
+      document.removeEventListener('keydown', onKey, true);
+      document.removeEventListener('focusin', onFocus, true);
+      if (document.body.style.overflow === 'hidden') document.body.style.overflow = previousOverflow;
+      requestAnimationFrame(() => { if (origin?.isConnected && origin.getClientRects().length && !origin.closest('[inert]')) origin.focus({ preventScroll: true }); });
+    };
+  }, []);
+  return React.createElement('div', { ref: overlay, role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': titleId, tabIndex: -1, className: 'nexlab-inventory-modal-overlay', onMouseDown: event => { if (event.target === event.currentTarget) close.current?.(); } },
+    React.createElement('div', { className: `nexlab-inventory-modal-panel ${panelClassName}` },
+      React.createElement('div', { className: 'nexlab-inventory-modal-header' }, React.createElement('h3', { id: titleId, className: 'font-extrabold text-lg text-blue-dark' }, title), React.createElement('button', { type: 'button', onClick: () => close.current?.(), 'aria-label': 'Fechar', className: 'nexlab-inventory-modal-close' }, '×')),
+      React.createElement('div', { className: 'nexlab-inventory-modal-body' }, children)));
+}
 const money = (value) => Number(value || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const count = (value) => Number(value || 0).toLocaleString("pt-BR");
 const date = (value) => value ? new Date(String(value).length === 10 ? value + "T12:00:00" : value).toLocaleDateString("pt-BR") : "N\xE3o informada";
