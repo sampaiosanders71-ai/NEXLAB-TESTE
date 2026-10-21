@@ -1,7 +1,7 @@
-import {renderApprovedDashboard,unmountApprovedDashboard} from "./nexlab-profile-dashboard-feedback-v02682.js?v=app-beta-0-26-82-pendencias-interface";
-import {nexlabDateKey,nexlabAddCalendarDays,formatNexlabDate} from "./nexlab-calendar-date-v02682.js?v=app-beta-0-26-82-pendencias-interface";
+import {renderApprovedDashboard,unmountApprovedDashboard} from "./nexlab-profile-dashboard-feedback-v02682.js?v=app-beta-0-26-82-notificacoes-interface";
+import {nexlabDateKey,nexlabAddCalendarDays,formatNexlabDate} from "./nexlab-calendar-date-v02682.js?v=app-beta-0-26-82-notificacoes-interface";
 /* NEXLAB Beta 0.26.82 — Dashboard reconstruído do zero — face institucional. */
-import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-pendencias-interface";
+import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-notificacoes-interface";
 
 const HOST_ID = 'nexlab-dashboard-clean-v02682';
 const STYLE_ID = 'nexlab-dashboard-rebuild-style-v02682';
@@ -240,18 +240,6 @@ function buildToolbar(host) {
   return toolbar;
 }
 
-function myDayStat(label, value, tone='normal') {
-  const el = document.createElement('button');
-  el.type = 'button';
-  el.className = 'nx-day-stat';
-  if (tone !== 'normal') el.dataset.tone = tone;
-  el.addEventListener('click', () => nav('pendencias'));
-  const strong = document.createElement('strong'); strong.textContent = String(n(value));
-  const span = document.createElement('span'); span.textContent = label;
-  el.append(strong,span);
-  return el;
-}
-
 function kpi(label, value, iconName, target) {
   const el = document.createElement('button');
   el.type = 'button';
@@ -323,21 +311,6 @@ function teamMetric(label, value, iconName) {
 
 function buildOverview() {
   const overview=document.createElement('div'); overview.className=`nx-dash-overview${state.loading?' nx-loading':''}`;
-
-  const day=document.createElement('section'); day.className='nx-day nx-dash-panel';
-  const head=document.createElement('div'); head.className='nx-day-head';
-  const kicker=document.createElement('div'); kicker.className='nx-day-kicker'; kicker.textContent='Meu Dia';
-  const title=document.createElement('h2'); title.className='nx-day-title'; title.append(icon('alert','nx-day-title-icon'),document.createTextNode('ATENÇÃO'));
-  head.append(kicker,title);
-  const stats=document.createElement('div'); stats.className='nx-day-grid';
-  stats.append(
-    myDayStat('Tarefas',state.myDay.tasks),
-    myDayStat('Reuniões',state.myDay.meetings),
-    myDayStat('Aprovações',state.myDay.approvals),
-    myDayStat('Atrasados',state.myDay.overdue,state.myDay.overdue>0?'danger':'normal')
-  );
-  const open=button('Ver pendências','nx-dash-button',()=>{try{sessionStorage.setItem('nexlab.pending.active-tab','overview')}catch{} nav('pendencias')}); open.append(icon('arrow'));
-  day.append(head,stats,open); overview.append(day);
 
   const kpis=document.createElement('div'); kpis.className='nx-kpis';
   kpis.append(
