@@ -1,13 +1,13 @@
-import {renderApprovedDashboard,unmountApprovedDashboard} from "./nexlab-profile-dashboard-feedback-v02682.js?v=app-beta-0-26-82-correcoes-restantes";
-import {nexlabDateKey,nexlabAddCalendarDays,formatNexlabDate} from "./nexlab-calendar-date-v02682.js?v=app-beta-0-26-82-correcoes-restantes";
+import {renderApprovedDashboard,unmountApprovedDashboard} from "./nexlab-profile-dashboard-feedback-v02682.js?v=app-beta-0-26-82-dashboard-abertura-inicial";
+import {nexlabDateKey,nexlabAddCalendarDays,formatNexlabDate} from "./nexlab-calendar-date-v02682.js?v=app-beta-0-26-82-dashboard-abertura-inicial";
 /* NEXLAB Beta 0.26.82 — Dashboard reconstruído do zero — face institucional. */
-import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-correcoes-restantes";
+import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-dashboard-abertura-inicial";
 
 const HOST_ID = 'nexlab-dashboard-clean-v02682';
 const STYLE_ID = 'nexlab-dashboard-rebuild-style-v02682';
 const RESET_ATTR = 'data-nexlab-dashboard-reset';
 let pageObserver = null;
-let gateObserver = null;
+let lifecycleObserver = null;
 let mainObserver = null;
 let scheduled = 0;
 let refreshTimer = 0;
@@ -67,6 +67,7 @@ function n(value) {
 function array(value) { return Array.isArray(value) ? value : []; }
 function privacyGateActive(){ return !!document.querySelector('.nexlab-privacy-gate'); }
 function dashboardAllowed(){ return document.body?.dataset?.nexlabPage==='dashboard' && !privacyGateActive(); }
+function dashboardMain(){ return document.getElementById('nexlab-main-content') || document.querySelector('main:not(#nexlab-startup-shell)'); }
 function normId(value) { return String(value || '').trim(); }
 function dateValue(value) { const d = new Date(value); return Number.isFinite(d.getTime()) ? d : null; }
 function shortDate(value) {
@@ -537,10 +538,25 @@ function purgeLegacyArtifacts(){for(const id of LEGACY_STYLE_IDS) document.getEl
 function suppressLegacy(main,host){for(const child of [...main.children]){if(child===host||child.dataset.nexlabDashboardLegacySuppressed==='true')continue;child.dataset.nexlabDashboardLegacySuppressed='true';child.dataset.nexlabDashboardPrevAriaHidden=child.hasAttribute('aria-hidden')?String(child.getAttribute('aria-hidden')):'__none__';child.dataset.nexlabDashboardPrevInert=child.hasAttribute('inert')?'true':'false';child.setAttribute('aria-hidden','true');try{child.inert=true}catch{child.setAttribute('inert','')}}}
 function restoreLegacy(main){if(!main)return;main.querySelectorAll(':scope > [data-nexlab-dashboard-legacy-suppressed="true"]').forEach(child=>{const aria=child.dataset.nexlabDashboardPrevAriaHidden;if(aria==='__none__')child.removeAttribute('aria-hidden');else if(aria!=null)child.setAttribute('aria-hidden',aria);if(child.dataset.nexlabDashboardPrevInert!=='true'){try{child.inert=false}catch{}child.removeAttribute('inert')}delete child.dataset.nexlabDashboardLegacySuppressed;delete child.dataset.nexlabDashboardPrevAriaHidden;delete child.dataset.nexlabDashboardPrevInert;});}
 function observeMain(main){if(mainObserver?.target===main)return;if(mainObserver)mainObserver.disconnect();mainObserver=new MutationObserver(()=>{if(!dashboardAllowed())return cleanup();const host=document.getElementById(HOST_ID);if(!host||host.parentElement!==main)return schedule(25);suppressLegacy(main,host);});mainObserver.observe(main,{childList:true});mainObserver.target=main;}
-function activate(){if(!dashboardAllowed())return cleanup();ensureStyle();purgeLegacyArtifacts();const main=document.getElementById('nexlab-main-content')||document.querySelector('main');if(!main)return;const existing=document.getElementById(HOST_ID),alreadyActive=existing?.parentElement===main;const host=alreadyActive?existing:buildHost(main);suppressLegacy(main,host);document.body.setAttribute(RESET_ATTR,'true');observeMain(main);if(!alreadyActive){clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>void loadData(),90);}}
-function cleanup(){loadingToken++;currentLoad=null;unmountApprovedDashboard(document.getElementById(HOST_ID));document.body?.removeAttribute(RESET_ATTR);const main=document.getElementById('nexlab-main-content')||document.querySelector('main');restoreLegacy(main);document.getElementById(HOST_ID)?.remove();clearTimeout(refreshTimer);}
+function activate(){if(!dashboardAllowed())return cleanup();ensureStyle();purgeLegacyArtifacts();const main=dashboardMain();if(!main)return;const existing=document.getElementById(HOST_ID),alreadyActive=existing?.parentElement===main;const host=alreadyActive?existing:buildHost(main);suppressLegacy(main,host);document.body.setAttribute(RESET_ATTR,'true');observeMain(main);if(!alreadyActive){clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>void loadData(),90);}}
+function cleanup(){loadingToken++;currentLoad=null;if(mainObserver){mainObserver.disconnect();mainObserver=null;}unmountApprovedDashboard(document.getElementById(HOST_ID));document.body?.removeAttribute(RESET_ATTR);restoreLegacy(dashboardMain());document.getElementById(HOST_ID)?.remove();clearTimeout(refreshTimer);}
 function schedule(delay=60){clearTimeout(scheduled);scheduled=setTimeout(activate,delay);}
-function start(){if(!document.body)return;ensureStyle();if(!pageObserver){lastObservedPage=document.body.dataset.nexlabPage;pageObserver=new MutationObserver(()=>{const page=document.body.dataset.nexlabPage;if(page!==lastObservedPage){lastObservedPage=page;schedule(20);}});pageObserver.observe(document.body,{attributes:true,attributeFilter:['data-nexlab-page']});}if(!gateObserver){const root=document.getElementById('root')||document.body;lastPrivacyGateState=privacyGateActive();gateObserver=new MutationObserver(()=>{const currentGateState=privacyGateActive();if(currentGateState===lastPrivacyGateState)return;lastPrivacyGateState=currentGateState;currentGateState?cleanup():schedule(20);});gateObserver.observe(root,{childList:true,subtree:true});}privacyGateActive()?cleanup():schedule(60);}
+function observeLifecycle(){
+  if(lifecycleObserver)return;
+  lastPrivacyGateState=privacyGateActive();
+  lifecycleObserver=new MutationObserver(()=>{
+    const gateActive=privacyGateActive(),gateChanged=gateActive!==lastPrivacyGateState;
+    lastPrivacyGateState=gateActive;
+    if(gateChanged&&gateActive)return cleanup();
+    if(!dashboardAllowed())return;
+    const main=dashboardMain(),host=document.getElementById(HOST_ID);
+    if(main&&(gateChanged||mainObserver?.target!==main||host?.parentElement!==main))schedule(20);
+  });
+  // The app can replace #root or create its main area after this module starts.
+  // Reconcile only a missing/replaced Dashboard; ordinary renders keep their data.
+  lifecycleObserver.observe(document.body,{childList:true,subtree:true});
+}
+function start(){if(!document.body)return;ensureStyle();if(!pageObserver){lastObservedPage=document.body.dataset.nexlabPage;pageObserver=new MutationObserver(()=>{const page=document.body.dataset.nexlabPage;if(page!==lastObservedPage){lastObservedPage=page;schedule(20);}});pageObserver.observe(document.body,{attributes:true,attributeFilter:['data-nexlab-page']});}observeLifecycle();privacyGateActive()?cleanup():schedule(60);}
 
 supabase.auth.onAuthStateChange?.((event,session)=>{if(event==='SIGNED_OUT'||event==='USER_UPDATED'||normId(session?.user?.id)!==state.uid){loadingToken++;currentLoad=null;resetAccountData();state.loading=true;const host=document.getElementById(HOST_ID);if(host&&dashboardAllowed())render(host);if(dashboardAllowed()){clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>void loadData(),60);}}});
 
