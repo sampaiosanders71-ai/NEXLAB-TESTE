@@ -1,5 +1,5 @@
 /* NEXLAB — página de projeto e links externos. Usa o contrato existente de attachments. */
-import { g as React, Ln as supabase } from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-matriz-permissoes-interface';
+import { g as React, Ln as supabase } from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-correcao-agenda-mes-inteiro';
 
 const h=React.createElement;
 const PROJECT_PARAM='nexlabProject';
