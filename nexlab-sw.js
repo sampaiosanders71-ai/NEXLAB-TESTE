@@ -1,9 +1,9 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
 const APP_REVISION='beta-0-26-82-google-calendar-integracao';
-const GENERATED_AT="2026-10-22T01:33:56Z";
-const ASSET_REVISION="app-beta-0-26-82-agenda-padronizada-marketing";
-const CACHE_NAME="nexlab-app-agenda-padronizada-marketing-20261022T013356Z";
+const GENERATED_AT="2026-10-22T13:58:17Z";
+const ASSET_REVISION="app-beta-0-26-82-agenda-integrada-compacta";
+const CACHE_NAME="nexlab-app-agenda-integrada-compacta-20261022T135817Z";
 const GENERATION_KEY=GENERATED_AT.replace(/[^0-9A-Za-z]/g,'');
 const STAGING_CACHE_NAME='nxl-stage-'+APP_REVISION+'-'+GENERATION_KEY;
 const META_CACHE_NAME='nexlab-update-meta';
