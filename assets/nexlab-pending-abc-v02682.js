@@ -1,5 +1,5 @@
-import { g as React, o as jsxRuntime, Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-agenda-integrada-compacta";
-import { Do as ModuleHeader, Qn as loadPendingCenter, Jn as isPendingItem, Vn as readableError } from "./nexlab-runtime-shared.js?v=app-beta-0-26-82-agenda-integrada-compacta";
+import { g as React, o as jsxRuntime, Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-marketing-lista-agenda";
+import { Do as ModuleHeader, Qn as loadPendingCenter, Jn as isPendingItem, Vn as readableError } from "./nexlab-runtime-shared.js?v=app-beta-0-26-82-marketing-lista-agenda";
 const { Fragment, jsx, jsxs } = jsxRuntime;
 const PAGE_SIZE = 8;
 const TYPE_LABELS = {
