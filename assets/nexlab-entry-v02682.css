@@ -2795,3 +2795,199 @@ body[data-nexlab-page="pendencias"] #nexlab-main-content .nxl-pending>.nexlab-mo
 .nxl-permission-matrix .ref-details-head h2{font-size:15px}
 .nxl-permission-matrix .ref-meta-row{font-size:11px}
 }
+
+/* NEXLAB_AGENDA_MARKETING_VISUAL_BEGIN */
+/* Agenda: the Marketing calendar palette and surfaces; existing controls and data remain intact. */
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-integrated-grid-v02682{
+ display:grid!important;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)!important;
+ align-items:start!important;gap:18px!important;padding:0!important;border:0!important;border-radius:0!important;
+ background:transparent!important;box-shadow:none!important;min-width:0!important;overflow:visible!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-calendar-panel-v02682{
+ position:sticky!important;top:12px!important;align-self:start!important;min-width:0!important;
+ background:#fff!important;border:1px solid #b7c7da!important;border-radius:15px!important;
+ padding:14px!important;box-shadow:0 3px 12px #102e5305!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-month-nav-v02682{
+ display:grid!important;grid-template-columns:42px minmax(0,1fr) 42px!important;align-items:center!important;
+ gap:6px!important;width:100%!important;max-width:none!important;min-width:0!important;min-height:52px!important;padding:5px!important;margin:0 0 14px!important;
+ background:#113255!important;border:0!important;border-radius:12px!important;box-shadow:none!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-month-arrow-v02682{
+ width:40px!important;min-width:40px!important;max-width:40px!important;height:40px!important;min-height:40px!important;
+ padding:0!important;background:#fff!important;border:0!important;border-radius:9px!important;color:#315475!important;
+ box-shadow:none!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-month-arrow-v02682 svg{width:16px!important;height:16px!important}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-month-title-v02682 h3{
+ font-size:13px!important;line-height:1.4!important;font-weight:800!important;text-transform:capitalize!important;
+ color:#fff!important;-webkit-text-fill-color:#fff!important;white-space:normal!important;overflow-wrap:normal!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-month-title-v02682 button{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ min-height:30px!important;margin:5px auto 0!important;padding:5px 9px!important;
+ font-size:10px!important;font-weight:700!important;line-height:1.5!important;
+ background:#f1f5fb!important;border:1px solid #b7c7da!important;border-radius:8px!important;color:#314b6b!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-calendar-grid-v02682{
+ display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;gap:3px!important;
+ padding:0!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;overflow:visible!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-weekday-v02682{
+ min-height:32px!important;padding:8px 0!important;margin:0 0 1px!important;background:#e5edf7!important;
+ border:0!important;border-radius:0!important;color:#314b6b!important;font-size:10px!important;
+ font-weight:700!important;line-height:1.5!important;letter-spacing:0!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-weekday-v02682:first-child{border-radius:8px 0 0 8px!important}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-weekday-v02682:nth-child(7){border-radius:0 8px 8px 0!important}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-v02682{
+ position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;
+ min-height:58px!important;height:auto!important;padding:8px 3px 14px!important;margin:0!important;
+ border:1px solid #b7c7da!important;border-radius:8px!important;background:#fff!important;
+ color:#17365b!important;box-shadow:none!important;text-align:center!important;gap:0!important;
+ transition:background-color .15s,border-color .15s!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-v02682.is-outside-month{
+ color:#5d6c82!important;background:#edf2f8!important;opacity:1!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-v02682.is-today{
+ background:#ffebd1!important;color:#924000!important;border-color:#d97a13!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-v02682.is-selected{
+ background:#1958b8!important;border-color:#1958b8!important;color:#fff!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-head-v02682{
+ display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-number-v02682{
+ display:inline!important;width:auto!important;min-width:0!important;height:auto!important;min-height:0!important;
+ padding:0!important;margin:0!important;border:0!important;border-radius:0!important;background:none!important;
+ box-shadow:none!important;color:inherit!important;-webkit-text-fill-color:currentColor!important;
+ font-size:13px!important;font-weight:700!important;line-height:1.4!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-indicators-v02682{
+ position:absolute!important;bottom:8px!important;left:0!important;right:0!important;display:flex!important;
+ align-items:center!important;justify-content:center!important;gap:3px!important;width:100%!important;min-height:5px!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-dot-v02682{
+ width:5px!important;min-width:5px!important;height:5px!important;min-height:5px!important;border-radius:50%!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .is-selected .nexlab-agenda-day-dot-v02682{box-shadow:0 0 0 1px #fff!important}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-list-panel-v02682{
+ background:#fff!important;border:1px solid #e1e8f2!important;border-radius:15px!important;padding:14px!important;
+ min-width:0!important;max-height:none!important;box-shadow:0 3px 12px #102e5305!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-list-header-v02682{
+ padding:0 0 13px!important;margin:0!important;gap:10px!important;border:0!important;background:transparent!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-list-header-v02682>div>span{
+ font-size:14px!important;line-height:1.5!important;font-weight:800!important;color:#163454!important;
+ text-transform:none!important;letter-spacing:0!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-list-header-v02682 h3{
+ font-size:11px!important;font-weight:500!important;line-height:1.5!important;color:#607994!important;margin:3px 0 0!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-list-summary-v02682{
+ font-size:10px!important;font-weight:700!important;line-height:1.5!important;background:#fff4e7!important;
+ color:#8b4b08!important;border:1px solid #ffe2bd!important;border-radius:7px!important;
+ padding:5px 7px!important;min-height:26px!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-side-list-v02682{
+ padding:0!important;max-height:750px!important;overflow-y:auto!important;overflow-x:hidden!important;
+ scrollbar-width:thin;scrollbar-color:#bfcedf transparent;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-group-v02682{
+ border:0!important;border-radius:0!important;background:transparent!important;overflow:visible!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-group-v02682+.nexlab-agenda-day-group-v02682{margin-top:16px!important}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-group-head-v02682{
+ border:0!important;border-radius:8px!important;background:#f1f5fb!important;padding:9px 10px!important;
+ display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-group-head-v02682 strong{
+ color:#294b6e!important;font-size:11px!important;line-height:1.5!important;font-weight:700!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-group-head-v02682 span{color:#647b95!important;font-size:10px!important}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-group-items-v02682{
+ display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:10px!important;padding:10px 0 0!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-activity-preview-v02682{
+ height:auto!important;min-height:0!important;flex-shrink:0!important;border:1px solid #e0e8f3!important;
+ border-left:4px solid var(--nexlab-agenda-module-color,#64748b)!important;border-radius:13px!important;
+ background:#fff!important;box-shadow:0 3px 9px #102e5303!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-activity-toggle-v02682{
+ padding:12px!important;min-height:66px!important;border:0!important;background:transparent!important;border-radius:12px!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-activity-summary-v02682{
+ grid-template-columns:34px minmax(0,1fr) auto auto!important;gap:9px!important;align-items:center!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-activity-type-v02682{
+ width:34px!important;min-width:34px!important;height:34px!important;min-height:34px!important;
+ border-radius:9px!important;font-size:10px!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-activity-copy-v02682 strong{
+ display:block!important;font-size:13px!important;font-weight:800!important;line-height:1.5!important;
+ color:#183658!important;white-space:normal!important;overflow-wrap:anywhere!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-activity-copy-v02682>span{
+ font-size:11px!important;line-height:1.5!important;color:#607994!important;margin-top:4px!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-expand-mark-v02682{
+ width:28px!important;min-width:28px!important;height:28px!important;min-height:28px!important;
+ border:1px solid #d7e3ef!important;border-radius:8px!important;background:#f5f8fc!important;color:#315475!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-activity-details-v02682{
+ padding:0 12px 12px!important;gap:12px!important;grid-template-columns:minmax(0,1fr)!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-detail-grid-v02682{
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-detail-grid-v02682>div{
+ padding:9px 10px!important;border:1px solid #e4ebf4!important;border-radius:9px!important;background:#f5f8fc!important;
+}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-detail-grid-v02682 strong{font-size:12px!important;line-height:1.5!important;overflow-wrap:anywhere!important}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-detail-description-v02682 p{font-size:12px!important;line-height:1.7!important;color:#486581!important;overflow-wrap:anywhere!important}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-detail-meta-v02682 span{font-size:11px!important;line-height:1.5!important}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-open-source-v02682{min-height:40px!important;border-radius:9px!important;font-size:11px!important;font-weight:700!important}
+body[data-nexlab-page="agenda"] .module-shell>section:has(#nexlab-agenda-search){border:1px solid #dbe5f1!important;border-radius:15px!important;background:#fff!important;box-shadow:none!important}
+body[data-nexlab-page="agenda"] #nexlab-agenda-search{border:1px solid #bdcde1!important;border-radius:9px!important;background:#fff!important;color:#284c70!important;min-height:42px!important}
+body[data-nexlab-page="agenda"] #nexlab-agenda-results button:focus-visible{outline:3px solid #ff8d24!important;outline-offset:2px!important}
+@media(hover:hover){
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-v02682:not(.is-selected):hover{background:#e9f1ff!important;border-color:#7192bf!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-v02682.is-today:not(.is-selected):hover{background:#ffdfb3!important;border-color:#b85e00!important}
+}
+@media(max-width:1100px){
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-integrated-grid-v02682{grid-template-columns:minmax(0,1fr)!important;gap:14px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-calendar-panel-v02682{position:static!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-side-list-v02682{max-height:none!important;overflow:visible!important}
+}
+@media(max-width:767px){
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-calendar-panel-v02682,
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-list-panel-v02682{padding:12px!important;border-radius:13px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-month-nav-v02682{grid-template-columns:44px minmax(0,1fr) 44px!important;padding:5px!important;min-height:54px!important;margin-bottom:10px!important;border-radius:10px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-month-arrow-v02682{width:44px!important;min-width:44px!important;max-width:44px!important;height:44px!important;min-height:44px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-month-title-v02682 h3{font-size:12px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-month-title-v02682 button{font-size:9px!important;padding:4px 6px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-weekday-v02682{font-size:9px!important;min-height:28px!important;padding:5px 0!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-v02682{min-height:44px!important;padding:6px 2px 12px!important;border-radius:8px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-number-v02682{font-size:12px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-indicators-v02682{bottom:5px!important;gap:2px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-dot-v02682{width:4px!important;min-width:4px!important;height:4px!important;min-height:4px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-activity-toggle-v02682{padding:11px 9px!important;min-height:64px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-activity-summary-v02682{grid-template-columns:30px minmax(0,1fr) auto auto!important;gap:6px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-activity-type-v02682{width:30px!important;min-width:30px!important;height:30px!important;min-height:30px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-activity-copy-v02682 strong{font-size:12px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-activity-copy-v02682>span{font-size:10px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-group-head-v02682{flex-direction:row!important;align-items:center!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-group-head-v02682 strong{font-size:10px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-group-head-v02682 span{font-size:9px!important}
+}
+@media(max-width:360px){
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-calendar-panel-v02682,
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-list-panel-v02682{padding:9px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-v02682{min-height:42px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-number-v02682{font-size:11px!important}
+ body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-detail-grid-v02682{grid-template-columns:minmax(0,1fr)!important}
+}
+@media(prefers-reduced-motion:reduce){body[data-nexlab-page="agenda"] #nexlab-agenda-results .nexlab-agenda-day-v02682{transition:none!important}}
