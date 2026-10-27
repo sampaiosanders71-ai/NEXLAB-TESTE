@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: TeamsModule. */
-export { TeamsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-sincronizacao-historicos-manual";
+export { TeamsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-mural-card-acompanha-imagem";

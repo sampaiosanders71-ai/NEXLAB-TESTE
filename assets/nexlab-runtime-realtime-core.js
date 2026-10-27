@@ -17,7 +17,8 @@
     'nexlab_notification_provider_health','nexlab_production_snapshots',
     'reservations','reservation_participants','meeting_participants','booking_history',
     'profile_role_requests','notification_user_settings','logs','security_audit_logs',
-    'nexlab_permission_matrix_state','nexlab_role_permission_defaults','nexlab_user_permission_overrides'
+    'nexlab_permission_matrix_state','nexlab_role_permission_defaults','nexlab_user_permission_overrides',
+    'nexlab_history_revision_v02682'
   ]);
   const virtualChannels=new Set();
   let client=null;
@@ -190,7 +191,7 @@
       }
     }
     const channel=new VirtualChannel('nexlab-live-'+(options.scope||'module'));
-    for(const table of names)channel.on('postgres_changes',{event:'*',schema:'public',table},()=>queue(table));
+    for(const table of names)channel.on('postgres_changes',{event:'*',schema:'public',table,...(options.filters?.[table]?{filter:String(options.filters[table])}:{})},()=>queue(table));
     // Subscribe first, then query again: closes the initial fetch/join gap and
     // also recovers changes missed while the transport was disconnected.
     channel.subscribe(status=>{options.onStatus?.(status);if(status==='SUBSCRIBED')queue('subscribed');});

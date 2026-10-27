@@ -1,5 +1,6 @@
 /* NEXLAB — página de projeto e links externos. Usa o contrato existente de attachments. */
-import { g as React, Ln as supabase } from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-sincronizacao-historicos-manual';
+import { g as React, Ln as supabase } from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-mural-card-acompanha-imagem';
+import {internalAttachmentPath,PrivateAttachmentLink} from './nexlab-attachment-access-v02682.js?v=app-beta-0-26-82-mural-card-acompanha-imagem';
 
 const h=React.createElement;
 const PROJECT_PARAM='nexlabProject';
@@ -204,7 +205,7 @@ export function ProjectExternalLinks({projectId,attachments=[],canManage=false,c
     !attachments.length?h(EmptyState,{icon:'link',title:'Nenhum link anexado a este projeto',description:'Adicione links úteis, como sites, repositórios e documentos.'}):h('ul',{className:'project-external-link-list-v02682'},...sortRecords(attachments,sort).map(row=>{
       const safe=projectLinkUrl(row.url),label=row.title||row.titulo||'Link do projeto';
       return h('li',{key:row.id},h('div',null,h('strong',null,label),h('small',null,safe?new URL(safe).hostname:'Endereço indisponível')),
-        safe?h('a',{href:safe,target:'_blank',rel:'noopener noreferrer',className:'project-open-link-v02682','aria-label':`Abrir projeto: ${label} (nova aba)`},'Abrir projeto ↗'):h('span',{role:'status'},'Link inválido'),
+        safe?(internalAttachmentPath(safe)!==null?h(PrivateAttachmentLink,{url:safe,label:`Abrir anexo: ${label} (nova aba)`,className:'project-open-link-v02682'},'Abrir arquivo ↗'):h('a',{href:safe,target:'_blank',rel:'noopener noreferrer',className:'project-open-link-v02682','aria-label':`Abrir projeto: ${label} (nova aba)`},'Abrir projeto ↗')):h('span',{role:'status'},'Link inválido'),
         canManage&&(row.type||row.tipo)==='link'&&(canDeleteAll||owners[row.id]===currentUserId)?h('button',{type:'button',disabled:!!busy,onClick:()=>remove(row),'aria-label':`Remover link ${label}`,className:'project-remove-link-v02682'},busy===row.id?'Removendo…':'Remover'):null);
     }))));
 }

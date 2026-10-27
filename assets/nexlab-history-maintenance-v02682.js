@@ -1,9 +1,9 @@
-import { g as React, S as ReactDOM, Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-sincronizacao-historicos-manual";
+import { g as React, S as ReactDOM, Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-mural-card-acompanha-imagem";
 const CATEGORIES = { operational: [["projects", "Projetos"], ["teams", "Equipes"], ["asset_changes", "Altera\xE7\xF5es de patrim\xF4nio"], ["asset_movements", "Movimenta\xE7\xF5es de patrim\xF4nio"], ["asset_maintenance", "Manuten\xE7\xF5es conclu\xEDdas"], ["stock", "Movimenta\xE7\xF5es de estoque"], ["bookings", "Reservas e reuni\xF5es"], ["feedback", "Feedbacks"], ["users", "V\xEDnculos de usu\xE1rios"], ["permissions", "Permiss\xF5es"], ["reports", "Exporta\xE7\xF5es de relat\xF3rios"], ["activities", "Atividades operacionais"]], technical: [["system", "Eventos do sistema"], ["errors", "Ocorr\xEAncias de erros"], ["cron", "Execu\xE7\xF5es conclu\xEDdas de rotinas"]] };
 const DEFAULT_CATEGORY = { projetos: "projects", planejamentos: "projects", equipes: "teams", inventario: "asset_movements", estoque: "stock", patrimonio: "asset_movements", reserva: "bookings", feedback: "feedback", participantes: "users", permissoes: "permissions", relatorios: "reports" };
 const dateText = (value) => {
   const d = new Date(value);
-  return Number.isNaN(d.getTime()) ? "Data indispon\xEDvel" : d.toLocaleString("pt-BR");
+  return Number.isNaN(d.getTime()) ? "Data indispon\xEDvel" : d.toLocaleString("pt-BR", { timeZone: "America/Fortaleza" });
 };
 async function rpc(name, payload) {
   const { data, error } = await supabase.rpc(name, payload);
@@ -54,7 +54,10 @@ function HistoryPanel({ initialMode, initialCategory, onClose }) {
     load();
   }, [load]);
   live.current = { load, blocked: () => loading || lock.current || selected.length > 0 || !!confirmation };
-  React.useEffect(() => globalThis.__NEXLAB_REALTIME_CORE__?.watch?.(["project_history", "team_history", "asset_movements", "booking_history", "nexlab_system_events", "nexlab_client_errors", "nexlab_permission_matrix_state"], () => live.current.load(true), { scope: "manual-history", blocked: () => live.current.blocked() }), []);
+  React.useEffect(() => {
+    if (mode !== "history") return;
+    return globalThis.__NEXLAB_REALTIME_CORE__?.watch?.(["nexlab_history_revision_v02682"], () => live.current.load(true), { scope: "manual-history-" + category, filters: { nexlab_history_revision_v02682: "category=eq." + category }, blocked: () => live.current.blocked() });
+  }, [category, mode]);
   React.useEffect(() => {
     if (selectionBox.current) selectionBox.current.indeterminate = selected.length > 0 && selected.length < data.rows.length;
   }, [selected, data.rows]);
