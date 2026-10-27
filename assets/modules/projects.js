@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: ProjectsModule. */
-export { ProjectsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-marketing-lista-agenda";
+export { ProjectsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-sincronizacao-historicos-manual";

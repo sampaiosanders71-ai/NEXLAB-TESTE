@@ -77,6 +77,8 @@
       "nexlab_username_available_v1"
   ]);
   const MUTATING=Object.freeze([
+      "nexlab_history_maintenance_v02682",
+      "nexlab_deleted_residue_maintenance_v02682",
       "admin_cleanup_system_data",
       "admin_create_channel_test",
       "admin_delete_activity_logs",

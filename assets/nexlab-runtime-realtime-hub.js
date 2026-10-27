@@ -11,6 +11,8 @@
   let connecting=null;
   let eventTimer=null;
   let idleTimer=null;
+  let reconcileTimer=null;
+  let firstEventAt=0;
 
   const wait=(ms)=>new Promise(resolve=>setTimeout(resolve,ms));
 
@@ -25,12 +27,13 @@
 
   function notify(detail={}){
     if(eventTimer)clearTimeout(eventTimer);
+    if(!firstEventAt)firstEventAt=Date.now();
     eventTimer=setTimeout(()=>{
-      eventTimer=null;
+      eventTimer=null;firstEventAt=0;
       for(const listener of [...listeners]){
         try{listener(detail);}catch(error){console.error('Falha ao atualizar Pendências:',error);}
       }
-    },300);
+    },Math.min(300,Math.max(0,1200-(Date.now()-firstEventAt))));
   }
 
   async function connect(){
@@ -43,9 +46,11 @@
         for(const table of TABLES){
           next=next.on('postgres_changes',{event:'*',schema:'public',table},payload=>{const row=payload?.new&&typeof payload.new==='object'?payload.new:payload?.old&&typeof payload.old==='object'?payload.old:{};const detail={table,eventType:payload?.eventType||''};if(table==='team_history'&&row.team_id)detail.teamId=String(row.team_id);notify(detail);});
         }
-        channel=next.subscribe(status=>{
+        channel=next;
+        next.subscribe(status=>{
           if(channel!==next)return;
-          if(['CHANNEL_ERROR','TIMED_OUT','CLOSED'].includes(status)){channel=null;setTimeout(connect,1000);}
+          // The shared transport reconnects this virtual channel in place.
+          if(status==='SUBSCRIBED')notify({table:'team_history',reason:'subscribed'});
         });
       }catch(error){
         console.warn('Realtime de Pendências indisponível; nova tentativa agendada.',error);
@@ -59,9 +64,11 @@
     if(typeof listener!=='function')return null;
     if(idleTimer){clearTimeout(idleTimer);idleTimer=null;}
     listeners.add(listener);connect();
+    if(!reconcileTimer)reconcileTimer=setInterval(resume,90000);
     return function unsubscribe(){
       listeners.delete(listener);
       if(listeners.size===0){
+        if(reconcileTimer){clearInterval(reconcileTimer);reconcileTimer=null;}
         if(eventTimer){clearTimeout(eventTimer);eventTimer=null;}
         idleTimer=setTimeout(async()=>{
           idleTimer=null;
@@ -73,10 +80,18 @@
 
   function reset(){
     listeners.clear();
+    if(reconcileTimer){clearInterval(reconcileTimer);reconcileTimer=null;}
     if(eventTimer){clearTimeout(eventTimer);eventTimer=null;}
     if(idleTimer){clearTimeout(idleTimer);idleTimer=null;}
     if(channel){const old=channel;channel=null;globalThis.__NEXLAB_SUPABASE__?.removeChannel?.(old);}
   }
+
+  function resume(){
+    if(listeners.size&&document.visibilityState!=='hidden'&&navigator.onLine!==false)notify({table:'team_history',reason:'resume'});
+  }
+  document.addEventListener('visibilitychange',resume);
+  globalThis.addEventListener('online',resume);
+  globalThis.addEventListener('focus',resume);
 
   globalThis.__NEXLAB_PENDING_REALTIME_HUB__=Object.freeze({
     version:VERSION,revision:REVISION,subscribe,refresh:notify,reset,

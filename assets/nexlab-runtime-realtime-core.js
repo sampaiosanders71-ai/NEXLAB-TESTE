@@ -14,7 +14,10 @@
     'notifications','notification_deliveries','notification_reminders',
     'nexlab_system_events','nexlab_client_errors','nexlab_client_error_incidents',
     'nexlab_system_settings','nexlab_app_versions','nexlab_notification_worker_runs',
-    'nexlab_notification_provider_health','nexlab_production_snapshots'
+    'nexlab_notification_provider_health','nexlab_production_snapshots',
+    'reservations','reservation_participants','meeting_participants','booking_history',
+    'profile_role_requests','notification_user_settings','logs','security_audit_logs',
+    'nexlab_permission_matrix_state','nexlab_role_permission_defaults','nexlab_user_permission_overrides'
   ]);
   const virtualChannels=new Set();
   let client=null;
@@ -147,11 +150,69 @@
     client=value;dispatch('nexlab:realtime-core-ready',{version:VERSION,release:RELEASE,revision:REVISION,tables:CANONICAL_TABLES.size});return value;
   }
   async function reset(){
-    resetGeneration+=1;if(retryTimer){clearTimeout(retryTimer);retryTimer=null;}if(idleTimer){clearTimeout(idleTimer);idleTimer=null;}
+    resetGeneration+=1;for(const stop of [...refreshWatchers])stop();if(retryTimer){clearTimeout(retryTimer);retryTimer=null;}if(idleTimer){clearTimeout(idleTimer);idleTimer=null;}
     for(const channel of [...virtualChannels]){channel.active=false;channel.status='CLOSED';}virtualChannels.clear();retryAttempt=0;await disconnectPhysical('reset');dispatch('nexlab:realtime-core-reset',{generation:resetGeneration,version:VERSION,revision:REVISION});
   }
+  // NEXLAB_LIVE_REFRESH_BEGIN
+  // Events invalidate queries; their payloads never become application data.
+  const refreshWatchers=new Set();
+  function watch(tables,refresh,options={}){
+    if(typeof refresh!=='function')return ()=>{};
+    const names=[...new Set(tables||[])].filter(table=>CANONICAL_TABLES.has(table));
+    if(!names.length)return ()=>{};
+    let stopped=false,running=false,timer=null,firstQueuedAt=0,failures=0;
+    const dirty=new Set(),controller=new AbortController();
+    const visible=()=>document.visibilityState!=='hidden'&&navigator.onLine!==false;
+    const later=(delay)=>{if(stopped)return;if(timer)clearTimeout(timer);timer=setTimeout(run,delay);};
+    const queue=(reason='change')=>{
+      if(stopped)return;
+      dirty.add(reason);
+      if(!firstQueuedAt)firstQueuedAt=Date.now();
+      if(!running)later(Math.min(350,Math.max(0,1200-(Date.now()-firstQueuedAt))));
+    };
+    async function run(){
+      timer=null;
+      if(stopped||running||!dirty.size)return;
+      if(!visible())return;
+      if(options.blocked?.()){later(500);return;}
+      const reasons=[...dirty];dirty.clear();firstQueuedAt=0;running=true;
+      try{
+        await refresh({signal:controller.signal,reasons});
+        failures=0;
+      }catch(error){
+        if(!stopped&&error?.name!=='AbortError'){
+          dirty.add('retry');failures++;
+          dispatch('nexlab:live-refresh-error',{scope:options.scope||'',message:String(error?.message||error)});
+        }
+      }finally{
+        running=false;
+        if(!stopped&&dirty.size)later(failures?Math.min(30000,1000*2**Math.min(failures,5)):100);
+      }
+    }
+    const channel=new VirtualChannel('nexlab-live-'+(options.scope||'module'));
+    for(const table of names)channel.on('postgres_changes',{event:'*',schema:'public',table},()=>queue(table));
+    // Subscribe first, then query again: closes the initial fetch/join gap and
+    // also recovers changes missed while the transport was disconnected.
+    channel.subscribe(status=>{options.onStatus?.(status);if(status==='SUBSCRIBED')queue('subscribed');});
+    const resume=()=>{if(visible())queue('resume');};
+    document.addEventListener('visibilitychange',resume);
+    globalThis.addEventListener('online',resume);
+    globalThis.addEventListener('focus',resume);
+    const poll=setInterval(()=>{if(visible())queue('reconcile');},Math.max(30000,options.interval||90000));
+    function stop(){
+      if(stopped)return;stopped=true;controller.abort();
+      if(timer)clearTimeout(timer);clearInterval(poll);dirty.clear();
+      document.removeEventListener('visibilitychange',resume);
+      globalThis.removeEventListener('online',resume);globalThis.removeEventListener('focus',resume);
+      channel.unsubscribe();refreshWatchers.delete(stop);
+    }
+    refreshWatchers.add(stop);
+    return stop;
+  }
+  // NEXLAB_LIVE_REFRESH_END
+
   const api=Object.freeze({
-    version:VERSION,release:RELEASE,revision:REVISION,patchClient,reset,
+    version:VERSION,release:RELEASE,revision:REVISION,patchClient,reset,watch,
     refresh:async()=>{await disconnectPhysical('manual-refresh');if(activeChannels().length)await connectPhysical();},
     snapshot:()=>Object.freeze({version:VERSION,release:RELEASE,revision:REVISION,status:currentStatus,virtualChannels:activeChannels().length,subscriptions:subscriptionCount(),physicalChannels:physicalChannel?1:0,canonicalTables:CANONICAL_TABLES.size,retries:retryAttempt,generation:resetGeneration})
   });

@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 - facade ESM: Pendencias / Meu Dia A-G. */
-export { default } from "../nexlab-pending-abc-v02682.js?v=app-beta-0-26-82-marketing-lista-agenda";
+export { default } from "../nexlab-pending-abc-v02682.js?v=app-beta-0-26-82-sincronizacao-historicos-manual";
