@@ -1,5 +1,5 @@
 /* NexLab — animação dos cards associada ao fluxo real de exportação. */
-import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-mural-card-acompanha-imagem';
+import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-ajuda-historicos-interface';
 const h=React.createElement;
 const FINISH_MS=1000;
 function reducedMotion(){return document.documentElement.dataset.nexlabReduceMotion==='true'||!!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches}
