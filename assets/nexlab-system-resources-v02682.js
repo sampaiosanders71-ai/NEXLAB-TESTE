@@ -1,4 +1,4 @@
-import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-central-notificacoes-unificada';
+import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-armazenamento-integrado';
 const h=React.createElement;
 const number=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:1});
 const integer=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:0});
@@ -48,18 +48,11 @@ export function DatabaseResourceCards({database,refreshing=false,stale=false}){
     h('article',{className:'nexlab-system-monitor__resource nxl-system-resource is-storage','aria-busy':refreshing,'data-resource':'storage'},
       heading('database','Armazenamento do Supabase','Espaço ocupado pelo banco em disco'),
       h('div',{className:'nxl-system-metric'},h('strong',null,value.total===null?(pretty||'—'):total.value),total.unit&&h('span',{className:'unit'},total.unit)),
-      h('p',{className:'nxl-system-caption'},stale?'Última leitura disponível':refreshing?'Atualizando o armazenamento…':'Distribuição do espaço ocupado'),
+      h('p',{className:'nxl-system-caption'},stale?'Última leitura disponível':refreshing?'Atualizando o armazenamento…':'Composição do espaço ocupado'),
       value.partition?h(React.Fragment,null,
-        h('div',{className:'nxl-system-storage-track',role:'img','aria-label':'Distribuição do banco: '+byteLabel(value.history)+' de histórico de rotinas e '+byteLabel(value.other)+' de outros dados e estrutura'},h('span',{className:'history',style:{width:value.share+'%'}}),h('span',{className:'others',style:{width:(100-value.share)+'%'}})),
         h('div',{className:'nxl-system-legend'},legend('Histórico de rotinas',value.history),legend('Outros dados e estrutura',value.other,'others'))):
         h('p',{className:'nxl-system-unavailable'},refreshing?'Consultando a distribuição…':'Distribuição do armazenamento indisponível.'),
-      h('p',{className:'nxl-system-storage-foot'},'A divisão representa o uso atual, sem estimar o limite do plano.')));
+      h('button',{type:'button',className:'nxl-storage-manage','data-nexlab-no-guard':'true',onClick:event=>globalThis.dispatchEvent(new CustomEvent('nexlab:open-storage-manager',{detail:{trigger:event.currentTarget}}))},'Gerenciar armazenamento',h('span',{'aria-hidden':'true'},'→'))));
 }
 
-export function StorageHistoryNotice({database,stale=false}){
-  const value=resourceValues(database);
-  if(!value.partition||value.history===0)return null;
-  return h('aside',{className:'nxl-system-storage-notice '+(value.share>=50?'is-attention':'is-info')},
-    h('span',{'aria-hidden':true},'i'),
-    h('div',null,h('strong',null,'O histórico das rotinas ocupa '+number.format(value.share)+'% do banco'+(stale?' na última leitura':'')),h('p',null,'Esse espaço inclui registros técnicos de execução. Use a seleção manual dos históricos técnicos para revisar os registros que podem ser excluídos.')));
-}
+export function StorageHistoryNotice(){return null;}

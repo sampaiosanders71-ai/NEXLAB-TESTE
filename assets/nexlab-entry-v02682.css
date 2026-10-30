@@ -3190,3 +3190,60 @@ body:has([aria-modal="true"]:not([aria-hidden="true"]):not([hidden]),dialog[open
 .nexlab-module-help-body>.nexlab-module-help-rules{margin:3px 0 14px;padding:14px;border:1px solid #ffe4c6;border-radius:10px;background:linear-gradient(110deg,#fff9ed,#fff5e6)}
 .nexlab-module-help-rules h3>svg{color:#fa840c}.nexlab-module-help-rules+section{border-top:1px solid #e4ebf3}
 @media(max-width:640px){.nexlab-module-help-backdrop{padding:8px;align-items:center}.nexlab-module-help-card{width:100%;max-height:94dvh;border-radius:15px;border-bottom:1px solid #c9d9eb}.nexlab-module-help-head{min-height:65px;padding:15px;gap:9px}.nexlab-module-help-head h2{font-size:17px!important}.nexlab-module-help-symbol>svg{width:20px;height:20px}.nexlab-module-help-body{padding:0 15px calc(13px + env(safe-area-inset-bottom))}.nexlab-module-help-purpose,.nexlab-module-help-section{padding:16px 0}.nexlab-module-help-purpose h3,.nexlab-module-help-section h3{font-size:13px!important;gap:9px}.nexlab-module-help-purpose p,.nexlab-module-help-section p{margin-left:29px!important}.nexlab-module-help-section ol,.nexlab-module-help-section ul,.nexlab-module-help-legend{margin-left:29px!important}.nexlab-module-help-legend>div{grid-template-columns:minmax(80px,.9fr) minmax(0,1.5fr);gap:8px}.nexlab-module-help-legend dd{padding-left:8px}.nexlab-module-help-body>.nexlab-module-help-rules{padding:12px}.nexlab-module-help-steps ol>li{padding-left:28px}}
+
+/* Armazenamento integrado ao monitoramento existente. */
+.nexlab-system-monitor .is-storage{display:flex;flex-direction:column}
+.nexlab-system-monitor .is-storage .nxl-system-legend{margin:1px 0 14px}
+#nexlab-main-content .nxl-storage-manage{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:38px;padding:9px 12px;margin-top:auto;border:1px solid #c7d9ed;border-radius:10px;background:#fff;color:#285a86;font-size:11px;font-weight:750;box-shadow:none;cursor:pointer}
+#nexlab-main-content .nxl-storage-manage:hover{background:#eaf3ff;border-color:#adc9e6}
+.nxl-storage-dialog{position:fixed;inset:0;margin:auto;width:calc(100% - 36px);max-width:1040px;max-height:calc(100dvh - 40px);overflow:auto;padding:0;border:1px solid #d3e1ef;border-radius:20px;background:#f7faff;color:#173b5d;box-shadow:0 25px 100px #031a3540}
+.nxl-storage-dialog::backdrop{background:#0a213c80;backdrop-filter:blur(4px)}
+.nxl-storage-dialog>header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:20px 24px;background:#fff;border-bottom:1px solid #dce7f2}
+.nxl-storage-dialog>header>div{display:flex;align-items:center;gap:11px}
+.nxl-storage-dialog>header svg{width:21px;height:21px;color:#3975a9}
+.nxl-storage-dialog h2{margin:0;font-size:20px;font-weight:850;line-height:1.3;letter-spacing:-.35px}
+.nxl-storage-dialog>header>button{display:grid;place-items:center;width:31px;height:31px;flex:none;border:1px solid #dbe5ef;border-radius:9px;background:#fff;cursor:pointer}
+.nxl-storage-dialog>header>button svg{width:16px;height:16px;color:#7a92a9}
+.nxl-storage-tabs{display:flex;align-items:center;gap:23px;padding:0 24px;border-bottom:1px solid #dce7f2;background:#fff}
+.nxl-storage-tabs button{position:relative;min-height:48px;padding:0 2px;border:0;background:transparent;color:#8295a9;font-size:12px;font-weight:750;box-shadow:none;cursor:pointer}
+.nxl-storage-tabs button[aria-pressed=true]{color:#285b86}
+.nxl-storage-tabs button[aria-pressed=true]:after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:3px;border-radius:3px;background:#ff8a0a}
+.nxl-storage-dialog button:disabled{opacity:.5;cursor:default}
+.nxl-storage-dialog button:focus-visible,.nxl-storage-dialog input:focus-visible,.nxl-storage-dialog select:focus-visible{outline:3px solid #ff9c3866;outline-offset:2px}
+.nxl-storage-history>.nxl-history-dialog{position:static!important;inset:auto!important;display:block!important;width:auto!important;max-width:none!important;max-height:none!important;min-height:0!important;margin:0!important;padding:0!important;overflow:visible!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important}
+.nxl-storage-history>.nxl-history-dialog>header,.nxl-storage-history .nxl-history-topbar>nav:first-child{display:none!important}
+.nxl-storage-history .nxl-history-body{padding:18px 24px 22px}
+.nxl-storage-history .nxl-history-topbar{padding:0 0 12px}
+.nxl-storage-history .nxl-history-table-wrap{overflow-x:auto}
+.nxl-storage-maintenance{padding:22px 24px}
+.nxl-storage-analysis-head{display:flex;align-items:flex-start;justify-content:space-between;gap:13px;margin-bottom:16px}
+.nxl-storage-analysis h3{margin:0;font-size:16px;font-weight:800}
+.nxl-storage-analysis-head p{margin:5px 0 0;font-size:11px;color:#7c94aa;line-height:1.7}
+.nxl-storage-action,.nxl-storage-plan button{display:inline-flex;align-items:center;justify-content:center;min-height:37px;padding:9px 13px;border:1px solid #183e63;border-radius:9px;background:#183e63;color:#fff;font-size:11px;font-weight:750;white-space:nowrap;cursor:pointer}
+.nxl-storage-loading,.nxl-storage-empty{padding:24px 16px;text-align:center;border:1px dashed #ccdbeb;border-radius:12px;background:#fff;color:#7c93a8;font-size:12px}
+.nxl-storage-empty>svg{width:24px;height:24px;display:block;margin:0 auto 10px;color:#88a5bd}
+.nxl-storage-empty strong{display:block;font-size:13px;color:#577997}
+.nxl-storage-empty p{margin:6px 0 0;font-size:11px}
+.nxl-storage-results{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:18px}
+.nxl-storage-results>div{padding:17px;border:1px solid #dce6f1;background:#fff;border-radius:12px}
+.nxl-storage-results small{display:block;color:#8195a9;font-size:10px;margin-bottom:6px}
+.nxl-storage-results strong{display:block;font-size:24px;color:#285a83;font-weight:800}
+.nxl-storage-results p{margin:5px 0 0;font-size:10px;color:#8b9daf;line-height:1.6}
+.nxl-storage-table-wrap{overflow-x:auto;border:1px solid #dce7f1;border-radius:11px;background:#fff}
+.nxl-storage-table{width:100%;border-collapse:collapse;font-size:11px;min-width:460px}
+.nxl-storage-table caption{text-align:left;font-size:12px;font-weight:750;color:#416a8c;padding:14px;background:#f1f6fc}
+.nxl-storage-table th,.nxl-storage-table td{text-align:left;padding:11px 13px;border-bottom:1px solid #e7eef6;white-space:nowrap}
+.nxl-storage-table th{color:#7892aa;font-size:10px;font-weight:700}
+.nxl-storage-table td:first-child{white-space:normal;min-width:170px}
+.nxl-storage-read-at{font-size:10px;color:#8a9eb0;margin:10px 0 17px}
+.nxl-storage-explanation{padding:14px 15px;margin-top:17px;border:1px solid #eee1c5;border-radius:11px;background:#fff8eb;color:#8b795b}
+.nxl-storage-explanation strong{font-size:11px;color:#7e6a4d}
+.nxl-storage-explanation p{font-size:10px;line-height:1.8;margin:5px 0 0}
+.nxl-storage-plan{display:flex;align-items:center;justify-content:space-between;gap:13px;margin-top:17px}
+.nxl-storage-plan>span{font-size:10px;color:#8499ab}
+.nxl-storage-residue{margin-top:22px;border-top:1px solid #dce7f2;padding-top:17px}
+.nxl-storage-residue-toggle{display:flex;justify-content:space-between;align-items:center;gap:13px;width:100%;padding:11px 12px;border:1px solid #d8e5f2;background:#eef5fd;border-radius:9px;text-align:left;color:#587d9f;font-size:11px;font-weight:700;cursor:pointer}
+.nxl-storage-residue .nxl-history-body{padding:15px 0 0}
+@media(max-width:700px){.nxl-storage-dialog{width:calc(100% - 22px);max-height:calc(100dvh - 24px);border-radius:16px}.nxl-storage-dialog>header{padding:17px 16px}.nxl-storage-dialog h2{font-size:17px}.nxl-storage-dialog>header>div{gap:9px}.nxl-storage-tabs{gap:20px;padding:0 16px}.nxl-storage-tabs button{font-size:11px;min-height:46px}.nxl-storage-history .nxl-history-body{padding:16px}.nxl-storage-maintenance{padding:18px 16px}.nxl-storage-analysis-head{flex-wrap:wrap}.nxl-storage-analysis-head h3{font-size:15px}.nxl-storage-analysis-head p{font-size:10px}.nxl-storage-results{grid-template-columns:1fr;gap:10px}.nxl-storage-results strong{font-size:23px}.nxl-storage-plan{flex-wrap:wrap;justify-content:flex-end}.nxl-storage-plan>span{width:100%}.nxl-storage-residue .nxl-history-body{padding:15px 0 0}}
+
+.nxl-storage-relation{display:block;margin-top:4px;font-size:9px;color:#879caf;overflow-wrap:anywhere}

@@ -1,5 +1,5 @@
 /* NEXLAB Beta 0.26.82 — fluxo de autenticação reconstruído: usuário + senha. */
-import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-central-notificacoes-unificada";
+import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-armazenamento-integrado";
 
 export function normalizeUsername(value){
   return String(value||'')
