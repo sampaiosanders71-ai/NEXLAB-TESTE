@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: AssetsModule. */
-export { AssetsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-comunicacao-tempos";
+export { AssetsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-atividades-interface";

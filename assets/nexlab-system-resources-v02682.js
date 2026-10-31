@@ -1,4 +1,4 @@
-import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-comunicacao-tempos';
+import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-atividades-interface';
 const h=React.createElement;
 const number=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:1});
 const integer=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:0});
@@ -36,7 +36,7 @@ export function DatabaseResourceCards({database,refreshing=false,stale=false}){
   const pretty=typeof database?.size_pretty==='string'?database.size_pretty:null;
   const tone=stale?'neutral':value.percentage>=85?'danger':value.percentage>=70?'warning':'success';
   return h(React.Fragment,null,
-    h('article',{className:'nexlab-system-monitor__resource nxl-system-resource is-connections','aria-busy':refreshing,'data-resource':'connections'},
+    h('article',{className:'nexlab-system-monitor__resource nxl-system-resource is-connections'+(stale?' is-stale':''),'aria-busy':refreshing,'data-resource':'connections'},
       heading('plug','Conexões do Supabase','Ligações abertas com o banco'),
       h('div',{className:'nxl-system-metric'},h('strong',null,value.connections===null?'—':integer.format(value.connections)),h('span',null,value.limit!==null&&value.limit>0?'/ '+integer.format(value.limit):'')),
       h('p',{className:'nxl-system-caption'},stale?'Última leitura disponível':refreshing?'Atualizando as conexões…':'conexões abertas no momento da consulta'),
@@ -44,8 +44,8 @@ export function DatabaseResourceCards({database,refreshing=false,stale=false}){
         h('div',{className:'nexlab-system-monitor__resource-track',role:'meter','aria-label':'Uso das conexões configuradas','aria-valuemin':0,'aria-valuemax':100,'aria-valuenow':Math.min(100,value.percentage),'aria-valuetext':integer.format(value.connections)+' de '+integer.format(value.limit)+' conexões'},h('div',{className:'nexlab-system-monitor__resource-fill is-'+tone,style:{width:Math.min(100,value.percentage)+'%'}})),
         h('strong',{className:'nxl-system-track-label'},number.format(value.percentage)+'% do limite configurado')):
         h('p',{className:'nxl-system-unavailable'},refreshing?'Consultando as métricas…':value.connections!==null?'Limite de conexões não informado.':'Métricas de conexões indisponíveis.'),
-      h('p',{className:'nxl-system-note'},stale?'Atualize para conferir as conexões atuais.':'Inclui os serviços internos. Não corresponde ao número de usuários online.')),
-    h('article',{className:'nexlab-system-monitor__resource nxl-system-resource is-storage','aria-busy':refreshing,'data-resource':'storage'},
+      h('p',{className:'nxl-system-note'},stale?'Atualize para conferir as conexões atuais.':'Inclui serviços internos; não indica usuários online.')),
+    h('article',{className:'nexlab-system-monitor__resource nxl-system-resource is-storage'+(stale?' is-stale':''),'aria-busy':refreshing,'data-resource':'storage'},
       heading('database','Armazenamento do Supabase','Espaço ocupado pelo banco em disco'),
       h('div',{className:'nxl-system-metric'},h('strong',null,value.total===null?(pretty||'—'):total.value),total.unit&&h('span',{className:'unit'},total.unit)),
       h('p',{className:'nxl-system-caption'},stale?'Última leitura disponível':refreshing?'Atualizando o armazenamento…':'Composição do espaço ocupado'),
