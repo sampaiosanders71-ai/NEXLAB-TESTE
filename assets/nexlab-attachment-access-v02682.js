@@ -1,4 +1,4 @@
-import {g as React,Ln as supabase} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-correcao-timeout-historicos';
+import {g as React,Ln as supabase} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-backups-expirados';
 
 export function internalAttachmentPath(value,client=supabase){
   try{
