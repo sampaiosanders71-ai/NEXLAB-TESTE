@@ -1,4 +1,4 @@
-import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-esvaziar-rotinas';
+import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-comunicacao-tempos';
 const h=React.createElement;
 const number=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:1});
 const integer=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:0});

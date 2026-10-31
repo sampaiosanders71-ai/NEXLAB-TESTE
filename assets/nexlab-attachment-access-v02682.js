@@ -1,4 +1,4 @@
-import {g as React,Ln as supabase} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-esvaziar-rotinas';
+import {g as React,Ln as supabase} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-comunicacao-tempos';
 
 export function internalAttachmentPath(value,client=supabase){
   try{
