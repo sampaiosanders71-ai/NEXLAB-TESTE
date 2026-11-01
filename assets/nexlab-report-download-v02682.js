@@ -1,6 +1,15 @@
 /* NexLab — animação dos cards associada ao fluxo real de exportação. */
-import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-atividades-interface';
+import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-interface-legivel';
 const h=React.createElement;
+export function DownloadIcon({size=16,className=''}){
+  return h('svg',{
+    width:size,height:size,viewBox:'0 0 24 24',preserveAspectRatio:'xMidYMid meet',
+    className:'nxl-download-icon '+className,style:{'--nxl-download-size':`${size}px`},
+    fill:'none',stroke:'currentColor',strokeWidth:1.8,strokeLinecap:'round',strokeLinejoin:'round',
+    'aria-hidden':true,focusable:false
+  },h('path',{d:'M12 3v12'}),h('path',{d:'m7 10 5 5 5-5'}),h('path',{d:'M5 17v4h14v-4'}));
+}
+
 const FINISH_MS=1000;
 function reducedMotion(){return document.documentElement.dataset.nexlabReduceMotion==='true'||!!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches}
 function cancelTimers(r){clearTimeout(r.timer);clearTimeout(r.finishTimer)}
@@ -74,7 +83,7 @@ function glyph(kind){
   const props={viewBox:'0 0 24 24',fill:'none',stroke:'currentColor',strokeWidth:1.8,strokeLinecap:'round',strokeLinejoin:'round','aria-hidden':true};
   if(kind==='check')return h('svg',props,h('circle',{cx:12,cy:12,r:9}),h('path',{d:'m8 12 3 3 5-6'}));
   if(kind==='error')return h('svg',props,h('circle',{cx:12,cy:12,r:9}),h('path',{d:'M12 7v6m0 4h.01'}));
-  return h('svg',props,h('path',{d:'M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5'}));
+  return h(DownloadIcon,{size:24});
 }
 
 export function ReportDownloadOverlay({state,scope,title,icon,onRetry,onDismiss,onProfile,disabled=false}){
