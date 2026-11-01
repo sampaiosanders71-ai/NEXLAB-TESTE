@@ -1,7 +1,7 @@
-import {DownloadIcon} from '../nexlab-report-download-v02682.js?v=app-beta-0-26-82-configuracoes-contraste-rolagem';
+import {DownloadIcon} from '../nexlab-report-download-v02682.js?v=app-beta-0-26-82-acabamento-discreto';
 /* NEXLAB Beta 0.26.82 — Configurações: Conta, Acessibilidade, Notificações, Privacidade e Segurança. */
-import { g as React, Ln as supabase } from "../nexlab-runtime-vendor.js?v=app-beta-0-26-82-configuracoes-contraste-rolagem";
-import { Ai as NotificationHistory, hi as notificationHub, zn as canAccessModule, Po as PrivacyCenter, Eo as OPTIONAL_CONSENT_VERSION, Si as saveNotificationPreference, Ci as getPushSubscription, Ei as disablePushSubscription, ki as pushSupported, Ni as vapidToBytes, Vn as readableError } from "../nexlab-runtime-shared.js?v=app-beta-0-26-82-configuracoes-contraste-rolagem";
+import { g as React, Ln as supabase } from "../nexlab-runtime-vendor.js?v=app-beta-0-26-82-acabamento-discreto";
+import { Ai as NotificationHistory, hi as notificationHub, zn as canAccessModule, Po as PrivacyCenter, Eo as OPTIONAL_CONSENT_VERSION, Si as saveNotificationPreference, Ci as getPushSubscription, Ei as disablePushSubscription, ki as pushSupported, Ni as vapidToBytes, Vn as readableError } from "../nexlab-runtime-shared.js?v=app-beta-0-26-82-acabamento-discreto";
 
 const h=React.createElement;
 const ROLE_LABELS={admin:'Admin',administrador:'Admin',coordenador:'Coordenador',bolsista:'Bolsista',voluntario:'Voluntário',coworking_junior:'Coworking Júnior'};

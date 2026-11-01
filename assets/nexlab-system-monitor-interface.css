@@ -96,3 +96,15 @@
  .nexlab-system-monitor.nxl-system-overview .nxl-system-metric strong{font-size:42px!important}
  .nexlab-system-monitor.nxl-system-overview .nexlab-system-monitor__section-title{align-items:flex-start;gap:4px}
 }
+
+/* Mesmos cards e indicadores, com profundidade leve e um detalhe geométrico. */
+.nexlab-system-monitor.nxl-system-overview :is(.nexlab-system-monitor__service,.nexlab-system-monitor__operational-item),
+.nexlab-system-monitor.nxl-system-overview .nexlab-system-monitor__resources>article{box-shadow:0 6px 20px rgba(13,43,70,.055),inset 0 1px 0 rgba(255,255,255,.9)}
+:root:not([data-nexlab-high-contrast=true]) .nexlab-system-monitor.nxl-system-overview :is(.nexlab-system-monitor__service-icon,.nexlab-system-monitor__resource-icon,.nxl-monitor-operational-icon){background-image:linear-gradient(145deg,rgba(255,255,255,.45),rgba(255,255,255,0));box-shadow:inset 0 0 0 1px rgba(13,43,70,.035)}
+:root:not([data-nexlab-high-contrast=true]) .nexlab-system-monitor.nxl-system-overview .nexlab-system-monitor__resources>article{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='72' viewBox='0 0 96 80'%3E%3Cg fill='none' stroke='%23195072' stroke-opacity='.065' stroke-width='1'%3E%3Cpath d='M50-6 84 14v39L50 73 16 53V14Z'/%3E%3Cpath d='m84 14 34 20v39L84 93 50 73V34Z'/%3E%3C/g%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-size:88px 72px!important;background-position:right top!important}
+@media(forced-colors:active){
+ .nexlab-system-monitor.nxl-system-overview :is(.nexlab-system-monitor__service,.nexlab-system-monitor__operational-item),.nexlab-system-monitor.nxl-system-overview .nexlab-system-monitor__resources>article{box-shadow:none}
+ .nexlab-system-monitor.nxl-system-overview .nexlab-system-monitor__resources>article{background-image:none!important}
+ :root:not([data-nexlab-high-contrast=true]) .nexlab-system-monitor.nxl-system-overview .nexlab-system-monitor__resources>article{background-image:none!important}
+ :root:not([data-nexlab-high-contrast=true]) .nexlab-system-monitor.nxl-system-overview :is(.nexlab-system-monitor__service-icon,.nexlab-system-monitor__resource-icon,.nxl-monitor-operational-icon){background-image:none;box-shadow:none}
+}
