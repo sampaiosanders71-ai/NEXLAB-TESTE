@@ -1,7 +1,7 @@
-import {DownloadIcon} from '../nexlab-report-download-v02682.js?v=app-beta-0-26-82-configuracoes-aprovadas';
+import {DownloadIcon} from '../nexlab-report-download-v02682.js?v=app-beta-0-26-82-configuracoes-contraste-rolagem';
 /* NEXLAB Beta 0.26.82 — Configurações: Conta, Acessibilidade, Notificações, Privacidade e Segurança. */
-import { g as React, Ln as supabase } from "../nexlab-runtime-vendor.js?v=app-beta-0-26-82-configuracoes-aprovadas";
-import { Ai as NotificationHistory, hi as notificationHub, zn as canAccessModule, Po as PrivacyCenter, Eo as OPTIONAL_CONSENT_VERSION, Si as saveNotificationPreference, Ci as getPushSubscription, Ei as disablePushSubscription, ki as pushSupported, Ni as vapidToBytes, Vn as readableError } from "../nexlab-runtime-shared.js?v=app-beta-0-26-82-configuracoes-aprovadas";
+import { g as React, Ln as supabase } from "../nexlab-runtime-vendor.js?v=app-beta-0-26-82-configuracoes-contraste-rolagem";
+import { Ai as NotificationHistory, hi as notificationHub, zn as canAccessModule, Po as PrivacyCenter, Eo as OPTIONAL_CONSENT_VERSION, Si as saveNotificationPreference, Ci as getPushSubscription, Ei as disablePushSubscription, ki as pushSupported, Ni as vapidToBytes, Vn as readableError } from "../nexlab-runtime-shared.js?v=app-beta-0-26-82-configuracoes-contraste-rolagem";
 
 const h=React.createElement;
 const ROLE_LABELS={admin:'Admin',administrador:'Admin',coordenador:'Coordenador',bolsista:'Bolsista',voluntario:'Voluntário',coworking_junior:'Coworking Júnior'};
@@ -52,7 +52,8 @@ function SettingsVisualPanel({kind,children,mfaStatus,mfaConfigured}){
     const mfaChildren=React.Children.toArray(mfa.props.children);
     content=h('div',{className:'nxl-settings-columns'},column([stateCard,accountCard],'account'),React.cloneElement(mfa,{className:classOf(mfa)+' nxl-settings-mfa'},mfaChildren[0],h('span',{className:'nexlab-settings-badge '+(mfaConfigured?'success':'warning')},mfaStatus),...mfaChildren.slice(1)));
   }else if(kind==='about'){
-    content=h('div',{className:'nxl-settings-columns nxl-settings-about'},...items);
+    const cards=items.map((item,index)=>React.cloneElement(item,{'data-settings-about':['identity','environment','updates','policies'][index]}));
+    content=h('div',{className:'nxl-settings-columns nxl-settings-about'},column([cards[0],cards[2]],'identity'),column([cards[1],cards[3]],'environment'));
   }else if(kind==='notifications-preferences'){
     const [channels,topics,quiet,note]=items;
     const topicChildren=React.Children.toArray(topics.props.children);
@@ -273,7 +274,7 @@ export default function SettingsModule({profile,addToast,onNavigate,onProfileUpd
   const admin=['admin','administrador'].includes(String(profile?.role||'').toLowerCase()),visibleGroups=SECTIONS.filter(group=>!group.adminOnly||admin),visibleIds=new Set(visibleGroups.flatMap(group=>group.items.map(item=>item.id)));
   const [active,setActive]=React.useState('account'),[mobileDetail,setMobileDetail]=React.useState(false);
   React.useEffect(()=>{if(!visibleIds.has(active))setActive('account');},[admin]);
-  function select(id){if(!visibleIds.has(id))return;setActive(id);setMobileDetail(true);try{sessionStorage.setItem('nexlab.settings.section',id);const url=new URL(location.href);url.searchParams.set('nexlabSettings',id);if(id!=='notifications')url.searchParams.delete('nexlabNotificationTab');history.replaceState(history.state,'',url);}catch{}requestAnimationFrame(()=>{const content=document.querySelector('.nexlab-settings-content');if(content)content.scrollTop=0;});}
+  function select(id){if(!visibleIds.has(id))return;setActive(id);setMobileDetail(true);try{sessionStorage.setItem('nexlab.settings.section',id);const url=new URL(location.href);url.searchParams.set('nexlabSettings',id);if(id!=='notifications')url.searchParams.delete('nexlabNotificationTab');history.replaceState(history.state,'',url);}catch{}requestAnimationFrame(()=>{const content=document.querySelector('.nexlab-settings-content');if(content){content.scrollTop=0;const scroller=document.getElementById('nexlab-main-content');if(scroller?.contains(content))scroller.scrollTop=0;}});}
   React.useEffect(()=>{const restore=()=>{try{const requested=new URLSearchParams(location.search).get('nexlabSettings');const saved=sessionStorage.getItem('nexlab.settings.section');const next=initialSection==='notifications'?'notifications':requested&&visibleIds.has(requested)?requested:saved&&visibleIds.has(saved)?saved:null;if(next){setActive(next);if(requested||initialSection)setMobileDetail(true);}}catch{}};restore();const open=()=>select('notifications');window.addEventListener('nexlab:notification-central',open);window.addEventListener('popstate',restore);return()=>{window.removeEventListener('nexlab:notification-central',open);window.removeEventListener('popstate',restore);};},[admin,initialSection]);
   const activeItem=visibleGroups.flatMap(g=>g.items).find(item=>item.id===active)||visibleGroups[0]?.items[0];
   let panel=null;if(active==='account')panel=h(AccountPanel,{profile,addToast,onNavigate});else if(active==='accessibility')panel=h(AccessibilityPanel,{addToast});else if(active==='notifications')panel=h(NotificationCentral,{profile,addToast,onNavigate,forceReceived:initialSection==='notifications'});else if(active==='integrations')panel=h(GoogleCalendarPanel,{addToast});else if(active==='privacy')panel=h(PrivacyCenter,{profile,addToast,onProfileUpdate});else if(active==='security')panel=h(SecurityPanel,{addToast,onOpenAccount:()=>select('account')});else if(active==='backup'&&admin)panel=h(DataProtectionPanel,{addToast,onNavigate});else if(active==='about')panel=h(AboutPanel,{onOpenSection:select});else panel=null;

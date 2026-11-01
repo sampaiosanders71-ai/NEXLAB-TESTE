@@ -157,3 +157,33 @@ body main .nexlab-settings-shell .nexlab-settings-nav,body main .nexlab-settings
 @media(min-width:1650px){body main .nexlab-settings-shell .nexlab-settings-layout{grid-template-columns:264px minmax(0,1fr);gap:28px}}
 @media(max-width:767px){body main .nexlab-settings-shell .nexlab-settings-layout{display:block}.nexlab-settings-shell .nexlab-settings-page-head{min-height:95px;padding:20px;margin-bottom:20px}.nexlab-settings-shell .nexlab-settings-page-head h1{font-size:1.75rem}.nexlab-settings-shell .nexlab-settings-card{padding:20px}.nexlab-settings-shell .nexlab-settings-mobile-back{font-size:var(--settings-info-size)}.nexlab-settings-shell .nxl-text-size-selector{grid-template-columns:repeat(3,minmax(0,1fr))}.nexlab-settings-shell .nxl-text-size-choice{padding:10px;min-height:104px}.nexlab-settings-shell .nexlab-settings-nav{margin-bottom:20px}.nexlab-settings-shell .nexlab-settings-nav button{min-height:54px}.nexlab-settings-shell .nexlab-settings-backup-actions{width:100%}}
 @media(forced-colors:active){.nexlab-settings-shell .nxl-text-size-choice.is-active{background:Highlight!important;border-color:Highlight!important}.nexlab-settings-shell .nxl-text-size-choice.is-active .nxl-text-size-copy>strong,.nexlab-settings-shell .nxl-text-size-choice.is-active .nxl-text-size-copy>small{color:HighlightText!important;-webkit-text-fill-color:HighlightText!important}.nexlab-settings-shell .nexlab-settings-nav button.is-active{outline:2px solid Highlight}.nexlab-settings-shell .nxl-text-size-choice.is-active .nxl-text-size-indicator{background:HighlightText;color:Highlight;border-color:HighlightText}}
+
+/* A página de Configurações rola dentro da área de trabalho no computador. */
+#nexlab-main-content .nexlab-settings-shell .nexlab-settings-layout{margin-top:0}
+@media(min-width:768px){
+ #root>.nexlab-bg:has(.nexlab-settings-shell){height:100dvh;max-height:100dvh;min-height:0;overflow:hidden}
+ #root>.nexlab-bg:has(.nexlab-settings-shell)>.flex-1{height:100%;min-height:0;overflow:hidden}
+ #root>.nexlab-bg:has(.nexlab-settings-shell)>.flex-1>.nexlab-app-header{flex-shrink:0}
+ #nexlab-main-content:has(.nexlab-settings-shell){flex:1 1 0%;min-height:0;height:auto;overflow-y:auto!important;overflow-x:hidden;overscroll-behavior:contain;scrollbar-gutter:stable}
+ @container nexlab-settings-width (min-width:641px){
+  #nexlab-main-content .nexlab-settings-shell .nexlab-settings-nav{position:sticky!important;top:16px!important;max-height:calc(100dvh - 6rem - 32px);overflow-y:auto!important;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#c1cedb transparent;align-self:start}
+ }
+}
+/* Cores iguais em todas as seções, inclusive seleção, hover e foco. */
+.nexlab-settings-shell .nexlab-settings-nav{background:#fff;color:#102b46}
+.nexlab-settings-shell .nexlab-settings-nav button{color:#102b46}
+.nexlab-settings-shell .nexlab-settings-nav button:is(:hover,:focus-visible){color:#10507e}
+.nexlab-settings-shell .nexlab-settings-nav button.is-active{color:#10507e}
+.nexlab-settings-shell .nexlab-settings-nav button:is(.is-active,:hover,:focus-visible) .nexlab-settings-nav-copy strong{color:inherit}
+/* A altura de um card não afasta os cards da outra coluna. */
+.nexlab-settings-shell .nxl-settings-about>.nxl-settings-stack{align-content:start}
+@container nxl-settings-panel (max-width:46rem){
+ .nexlab-settings-shell .nxl-settings-about>.nxl-settings-stack{display:contents}
+ .nexlab-settings-shell .nxl-settings-about [data-settings-about=identity]{order:0}
+ .nexlab-settings-shell .nxl-settings-about [data-settings-about=environment]{order:1}
+ .nexlab-settings-shell .nxl-settings-about [data-settings-about=updates]{order:2}
+ .nexlab-settings-shell .nxl-settings-about [data-settings-about=policies]{order:3}
+}
+@media(forced-colors:active){
+ .nexlab-settings-shell .nexlab-settings-nav button.is-active{color:HighlightText;background:Highlight!important;forced-color-adjust:none}
+}
