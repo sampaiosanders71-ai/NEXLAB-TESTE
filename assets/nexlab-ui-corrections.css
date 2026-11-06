@@ -78,3 +78,13 @@ svg.nxl-download-icon{display:inline-block!important;position:static!important;f
  .nexlab-settings-shell .nexlab-settings-backup-row-main{flex-basis:100%}
  .nexlab-settings-shell .nexlab-settings-backup-actions{width:100%}
 }
+
+/* Approved quick access: original sidebar glyphs and module accents. */
+:where(.nxl-approved) .ux-quick>div>button{
+ background:#183c60!important;border-color:color-mix(in srgb,var(--tone) 70%,#416483)!important;color:#fff!important;
+}
+:where(.nxl-approved) .ux-quick button>span{background:var(--tone)!important;color:#fff!important}
+:where(.nxl-approved) .ux-quick button>span>svg{fill:none;stroke:currentColor;stroke-width:2}
+:where(.nxl-approved) .ux-quick h2>svg{fill:none;stroke:#fff;stroke-width:2}
+:where(.nxl-approved) .ux-quick>div>button:hover{background:#20496f!important;border-color:var(--tone)!important}
+:where(.nxl-approved) .ux-quick>div>button:focus-visible{outline:2px solid white!important;outline-offset:3px}

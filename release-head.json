@@ -1,1 +1,14 @@
-{"protocol":2,"version":"0.26.82","release":"Beta","channel":"beta","revision":"beta-0-26-82-google-calendar-integracao","asset_revision":"app-beta-0-26-82-acabamento-discreto","generated_at":"2026-11-01T02:08:39Z","manifest":"release-manifest.json","manifest_sha256":"e91d6325dcca587db8cf6190528eb3baba2f38ae47e9641dd5f9d585ef4eeaf6","essential_count":64,"essential_bytes":3187384,"cache_name":"nexlab-app-acabamento-discreto-20261101T020839Z"}
+{
+  "protocol": 2,
+  "version": "0.26.82",
+  "release": "Beta",
+  "channel": "beta",
+  "revision": "beta-0-26-82-teste-icones-acesso-rapido",
+  "asset_revision": "app-beta-0-26-82-teste-icones-acesso-rapido",
+  "generated_at": "2026-11-06T11:45:19Z",
+  "manifest": "release-manifest.json",
+  "manifest_sha256": "736cd7b95db02df6824ccb85455988172277b1108ddbbd601e9abb4a09da6c9c",
+  "essential_count": 64,
+  "essential_bytes": 3189171,
+  "cache_name": "nexlab-app-teste-icones-acesso-rapido-20261106T114519Z"
+}
