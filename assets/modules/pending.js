@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 - facade ESM: Pendencias / Meu Dia A-G. */
-export { default } from "../nexlab-pending-abc-v02682.js?v=app-beta-0-26-82-teste-relatorios-por-modulo";
+export { default } from "../nexlab-pending-abc-v02682.js?v=app-beta-0-26-82-teste-patrimonio-grupos";

@@ -2,6 +2,8 @@
   'use strict';
 
   const READ_ONLY=Object.freeze([
+      "nexlab_get_asset_workspace_v02682",
+      "nexlab_get_asset_workspace_history_v02682",
       "get_notification_metrics",
       "get_system_health_snapshot",
       "is_admin",
@@ -138,6 +140,10 @@
       "nexlab_resubmit_own_profile_request_v02652",
       "nexlab_review_profile_request_v02652",
       "nexlab_review_reservation_v26160",
+      "nexlab_save_asset_group_v02682",
+      "nexlab_save_asset_workspace_v02682",
+      "nexlab_move_assets_to_group_v02682",
+      "nexlab_delete_asset_group_v02682",
       "nexlab_save_asset_v26120",
       "nexlab_save_booking_v263116",
       "nexlab_save_interface_settings_v02682",

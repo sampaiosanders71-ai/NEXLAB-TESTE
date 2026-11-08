@@ -1,2 +1,2 @@
-/* NEXLAB 0.26.82 — facade ESM: AssetsModule. */
-export { AssetsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-teste-relatorios-por-modulo";
+/* NEXLAB 0.26.82 — Patrimônio por grupos. */
+export {default} from "../nexlab-asset-groups-v02682.js?v=app-beta-0-26-82-teste-patrimonio-grupos";

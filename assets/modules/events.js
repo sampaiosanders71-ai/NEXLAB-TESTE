@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: EventsModule. */
-export { EventsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-teste-relatorios-por-modulo";
+export { EventsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-teste-patrimonio-grupos";

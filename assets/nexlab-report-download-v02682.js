@@ -1,5 +1,5 @@
 /* NexLab — animação dos cards associada ao fluxo real de exportação. */
-import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-teste-relatorios-por-modulo';
+import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-teste-patrimonio-grupos';
 const h=React.createElement;
 export function DownloadIcon({size=16,className=''}){
   return h('svg',{
