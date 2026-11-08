@@ -3,7 +3,7 @@
 
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({
     version:'0.26.82',
-    revision:'beta-0-26-82-teste-icones-acesso-rapido'
+    revision:'beta-0-26-82-teste-contador-resiliente'
   });
   if(globalThis.__NEXLAB_PUSH_CONSENT__?.revision===BUILD.revision)return;
 

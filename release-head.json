@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-teste-icones-acesso-rapido",
-  "asset_revision": "app-beta-0-26-82-teste-icones-acesso-rapido",
-  "generated_at": "2026-11-06T11:45:19Z",
+  "revision": "beta-0-26-82-teste-contador-resiliente",
+  "asset_revision": "app-beta-0-26-82-teste-contador-resiliente",
+  "generated_at": "2026-11-08T02:42:33Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "736cd7b95db02df6824ccb85455988172277b1108ddbbd601e9abb4a09da6c9c",
-  "essential_count": 64,
-  "essential_bytes": 3189171,
-  "cache_name": "nexlab-app-teste-icones-acesso-rapido-20261106T114519Z"
+  "manifest_sha256": "993abf757f474a6588414e64eda0b154f17581a833a4130b87d8114e8bbdad01",
+  "essential_count": 65,
+  "essential_bytes": 3194077,
+  "cache_name": "nexlab-app-teste-contador-resiliente-20261108T024233Z"
 }

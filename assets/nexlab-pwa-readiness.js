@@ -1,12 +1,12 @@
 (function(){
   'use strict';
-  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-teste-icones-acesso-rapido',assetRevision:'app-beta-0-26-82-teste-icones-acesso-rapido',cacheName:'nexlab-app-beta-0-26-82-teste-icones-acesso-rapido-20260928T022407Z',pwa:{identity:{id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'}}});
+  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-teste-contador-resiliente',assetRevision:'app-beta-0-26-82-teste-contador-resiliente',cacheName:'nexlab-app-beta-0-26-82-teste-contador-resiliente-20260928T022407Z',pwa:{identity:{id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'}}});
   if (window.__NEXLAB_PWA_READINESS__?.revision === BUILD_IDENTITY.revision) return;
 
   const VERSION=BUILD_IDENTITY.version;
   const RELEASE=BUILD_IDENTITY.release;
   const REVISION=BUILD_IDENTITY.revision;
-  const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-82-teste-icones-acesso-rapido';
+  const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-82-teste-contador-resiliente';
   const ASSET_REVISION=BUILD_IDENTITY.assetRevision;
   const CACHE_NAME=BUILD_IDENTITY.cacheName;
   const PWA_IDENTITY=BUILD_IDENTITY.pwa?.identity||Object.freeze({id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'});
