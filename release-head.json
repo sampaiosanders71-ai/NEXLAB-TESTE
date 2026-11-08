@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-teste-contador-resiliente",
-  "asset_revision": "app-beta-0-26-82-teste-contador-resiliente",
-  "generated_at": "2026-11-08T02:42:33Z",
+  "revision": "beta-0-26-82-teste-relatorios-por-modulo",
+  "asset_revision": "app-beta-0-26-82-teste-relatorios-por-modulo",
+  "generated_at": "2026-11-08T04:47:50Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "993abf757f474a6588414e64eda0b154f17581a833a4130b87d8114e8bbdad01",
-  "essential_count": 65,
-  "essential_bytes": 3194077,
-  "cache_name": "nexlab-app-teste-contador-resiliente-20261108T024233Z"
+  "manifest_sha256": "0c5ef3274d166161b6680236179cdc2a4c86736b4c3736137ef19c19deaa0db6",
+  "essential_count": 69,
+  "essential_bytes": 3246367,
+  "cache_name": "nexlab-app-teste-relatorios-por-modulo-20261108T044750Z"
 }

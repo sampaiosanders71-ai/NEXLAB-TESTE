@@ -1,11 +1,11 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
-const APP_REVISION='beta-0-26-82-teste-contador-resiliente';
-const GENERATED_AT="2026-11-08T02:42:33Z";
-const ASSET_REVISION="app-beta-0-26-82-teste-contador-resiliente";
-const CACHE_NAME="nexlab-app-teste-contador-resiliente-20261108T024233Z";
+const APP_REVISION='beta-0-26-82-teste-relatorios-por-modulo';
+const GENERATED_AT="2026-11-08T04:47:50Z";
+const ASSET_REVISION="app-beta-0-26-82-teste-relatorios-por-modulo";
+const CACHE_NAME="nexlab-app-teste-relatorios-por-modulo-20261108T044750Z";
 const GENERATION_KEY=GENERATED_AT.replace(/[^0-9A-Za-z]/g,'');
-const STAGING_CACHE_NAME="nxl-stage-teste-contador-resiliente-20261108T024233Z";
+const STAGING_CACHE_NAME="nxl-stage-teste-relatorios-por-modulo-20261108T044750Z";
 const META_CACHE_NAME='nexlab-update-meta';
 const CACHE_PREFIX='nexlab-';
 const PWA_ID='./nexlab-pwa';

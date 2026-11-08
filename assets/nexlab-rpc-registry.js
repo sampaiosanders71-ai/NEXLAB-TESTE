@@ -21,6 +21,7 @@
       "nexlab_get_dashboard_summary_v2690",
       "nexlab_get_database_health_v02682",
       "nexlab_get_general_report_v26320",
+      "nexlab_get_module_reports_v02682",
       "nexlab_get_health_observability_v26220",
       "nexlab_get_homologation_diagnostics_v02667",
       "nexlab_get_homologation_diagnostics_v02682",
