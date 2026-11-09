@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-teste-patrimonio-grupos'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-teste-patrimonio-codigo-manual'});
   if(globalThis.__NEXLAB_RESPONSIVE_V02671__?.revision===BUILD.revision)return;
 
   const root=document.documentElement;

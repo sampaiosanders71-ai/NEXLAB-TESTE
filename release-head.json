@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-teste-patrimonio-grupos",
-  "asset_revision": "app-beta-0-26-82-teste-patrimonio-grupos",
-  "generated_at": "2026-11-08T23:28:09Z",
+  "revision": "beta-0-26-82-teste-patrimonio-codigo-manual",
+  "asset_revision": "app-beta-0-26-82-teste-patrimonio-codigo-manual",
+  "generated_at": "2026-11-08T23:57:39Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "9b6042d488f3856946df35591dff3dc766872b9ddd42f14838895b1897427cfb",
+  "manifest_sha256": "045d2ac661a96f94602e7aed824097ae0000e9502e4d3a14efe27a7f581a3c0f",
   "essential_count": 72,
-  "essential_bytes": 3344173,
-  "cache_name": "nexlab-app-teste-patrimonio-grupos-20261108T232809Z"
+  "essential_bytes": 3345541,
+  "cache_name": "nexlab-app-teste-patrimonio-codigo-manual-20261108T235739Z"
 }

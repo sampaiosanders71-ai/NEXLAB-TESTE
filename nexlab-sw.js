@@ -1,11 +1,11 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
-const APP_REVISION='beta-0-26-82-teste-patrimonio-grupos';
-const GENERATED_AT="2026-11-08T23:28:09Z";
-const ASSET_REVISION="app-beta-0-26-82-teste-patrimonio-grupos";
-const CACHE_NAME="nexlab-app-teste-patrimonio-grupos-20261108T232809Z";
+const APP_REVISION='beta-0-26-82-teste-patrimonio-codigo-manual';
+const GENERATED_AT="2026-11-08T23:57:39Z";
+const ASSET_REVISION="app-beta-0-26-82-teste-patrimonio-codigo-manual";
+const CACHE_NAME="nexlab-app-teste-patrimonio-codigo-manual-20261108T235739Z";
 const GENERATION_KEY=GENERATED_AT.replace(/[^0-9A-Za-z]/g,'');
-const STAGING_CACHE_NAME="nxl-stage-teste-patrimonio-grupos-20261108T232809Z";
+const STAGING_CACHE_NAME="nxl-stage-teste-patrimonio-codigo-manual-20261108T235739Z";
 const META_CACHE_NAME='nexlab-update-meta';
 const CACHE_PREFIX='nexlab-';
 const PWA_ID='./nexlab-pwa';

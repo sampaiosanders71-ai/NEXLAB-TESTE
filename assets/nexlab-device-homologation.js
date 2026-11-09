@@ -1,9 +1,9 @@
 (function(){
   'use strict';
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-teste-patrimonio-grupos',homologationRevision:'beta-0-26-82-teste-patrimonio-grupos'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-teste-patrimonio-codigo-manual',homologationRevision:'beta-0-26-82-teste-patrimonio-codigo-manual'});
   const VERSION=BUILD.version;
   const BUILD_REVISION=BUILD.revision;
-  const REVISION=BUILD.homologationRevision||'beta-0-26-82-teste-patrimonio-grupos';
+  const REVISION=BUILD.homologationRevision||'beta-0-26-82-teste-patrimonio-codigo-manual';
   if(globalThis.__NEXLAB_DEVICE_HOMOLOGATION__?.revision===REVISION)return;
   const EVIDENCE_KEY='nexlab:device-homologation:'+VERSION+':'+BUILD_REVISION;
   const RPC='nexlab_record_device_homologation_v02682';
