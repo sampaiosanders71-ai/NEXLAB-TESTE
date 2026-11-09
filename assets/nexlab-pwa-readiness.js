@@ -1,12 +1,12 @@
 (function(){
   'use strict';
-  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-teste-patrimonio-contraste',assetRevision:'app-beta-0-26-82-teste-patrimonio-contraste',cacheName:'nexlab-app-beta-0-26-82-teste-patrimonio-contraste-20260928T022407Z',pwa:{identity:{id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'}}});
+  const BUILD_IDENTITY=window.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-teste-patrimonio-cabecalho-grupo',assetRevision:'app-beta-0-26-82-teste-patrimonio-cabecalho-grupo',cacheName:'nexlab-app-beta-0-26-82-teste-patrimonio-cabecalho-grupo-20260928T022407Z',pwa:{identity:{id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'}}});
   if (window.__NEXLAB_PWA_READINESS__?.revision === BUILD_IDENTITY.revision) return;
 
   const VERSION=BUILD_IDENTITY.version;
   const RELEASE=BUILD_IDENTITY.release;
   const REVISION=BUILD_IDENTITY.revision;
-  const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-82-teste-patrimonio-contraste';
+  const HOMOLOGATION_REVISION=BUILD_IDENTITY.homologationRevision||'beta-0-26-82-teste-patrimonio-cabecalho-grupo';
   const ASSET_REVISION=BUILD_IDENTITY.assetRevision;
   const CACHE_NAME=BUILD_IDENTITY.cacheName;
   const PWA_IDENTITY=BUILD_IDENTITY.pwa?.identity||Object.freeze({id:'./nexlab-pwa',name:'NexLab',scope:'./',startUrl:'./?source=pwa',workerPath:'nexlab-sw.js',namespace:'nexlab-pwa-v2'});

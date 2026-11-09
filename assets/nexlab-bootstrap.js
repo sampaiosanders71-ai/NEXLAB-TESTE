@@ -17,7 +17,7 @@
     return;
   }
 
-  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-teste-patrimonio-contraste',assetRevision:'app-beta-0-26-82-teste-patrimonio-contraste',cacheName:'nexlab-app-beta-0-26-82-teste-patrimonio-contraste-20260928T022407Z',generatedAt:'2026-09-11T01:14:06Z'});
+  const BUILD_IDENTITY = window.__NEXLAB_BUILD_IDENTITY__ || Object.freeze({version:'0.26.82',release:'Beta',revision:'beta-0-26-82-teste-patrimonio-cabecalho-grupo',assetRevision:'app-beta-0-26-82-teste-patrimonio-cabecalho-grupo',cacheName:'nexlab-app-beta-0-26-82-teste-patrimonio-cabecalho-grupo-20260928T022407Z',generatedAt:'2026-09-11T01:14:06Z'});
   const APP_VERSION = BUILD_IDENTITY.version;
   const APP_RELEASE = BUILD_IDENTITY.release;
   const APP_REVISION = BUILD_IDENTITY.revision;
@@ -1357,14 +1357,14 @@
   'use strict';
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||{};
   const VERSION=BUILD.version||'0.26.82';
-  const REVISION=BUILD.revision||'beta-0-26-82-teste-patrimonio-contraste';
+  const REVISION=BUILD.revision||'beta-0-26-82-teste-patrimonio-cabecalho-grupo';
   if(globalThis.__NEXLAB_POST_STARTUP__?.revision===REVISION)return;
   const MAX_ATTEMPTS=3;
   const sources=(BUILD.resources?.postStartup||[
     'assets/nexlab-vapid-rotation.js',
     'assets/nexlab-push-consent.js',
     'assets/nexlab-feedback-evidence.js'
-  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-82-teste-patrimonio-contraste'));
+  ]).map(path=>'./'+String(path).replace(/^\.\//,'')+'?v='+(BUILD.assetRevision||'app-beta-0-26-82-teste-patrimonio-cabecalho-grupo'));
   const state={version:VERSION,revision:REVISION,status:'scheduled',loaded:[],errors:[],attempts:{},lastReason:'',startedAt:null,completedAt:null};
   const sourceState=new Map(sources.map(src=>[src,{status:'pending',attempts:0,lastError:''}]));
   let active=null;

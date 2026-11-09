@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-teste-patrimonio-contraste",
-  "asset_revision": "app-beta-0-26-82-teste-patrimonio-contraste",
-  "generated_at": "2026-11-09T00:57:54Z",
+  "revision": "beta-0-26-82-teste-patrimonio-cabecalho-grupo",
+  "asset_revision": "app-beta-0-26-82-teste-patrimonio-cabecalho-grupo",
+  "generated_at": "2026-11-09T01:24:36Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "3fed87c6e1af4f1905da377c1e3d6c566abfaf7726326bcaba30093089d21bbf",
+  "manifest_sha256": "9ef6a72bb0e1a0781b3a186b3b69a83b5f592c7fddfe2da33980d802350f24ca",
   "essential_count": 72,
-  "essential_bytes": 3357357,
-  "cache_name": "nexlab-app-teste-patrimonio-contraste-20261109T005754Z"
+  "essential_bytes": 3365157,
+  "cache_name": "nexlab-app-teste-patrimonio-cabecalho-grupo-20261109T012436Z"
 }
