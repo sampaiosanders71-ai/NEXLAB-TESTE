@@ -1,5 +1,5 @@
-import {g as React,Ln as supabase} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-teste-patrimonio-cabecalho-grupo';
-import {AssetsModule as LegacyAssetsModule} from './nexlab-runtime-features.js?v=app-beta-0-26-82-teste-patrimonio-cabecalho-grupo';
+import {g as React,Ln as supabase} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-teste-pendencias-patrimonio';
+import {AssetsModule as LegacyAssetsModule} from './nexlab-runtime-features.js?v=app-beta-0-26-82-teste-pendencias-patrimonio';
 const colors=[['Roxo','#8754c7'],['Azul','#287cbe'],['Turquesa','#229da6'],['Verde','#4c953e'],['Laranja','#cb8a28'],['Vermelho','#bd5353'],['Rosa','#bb638d'],['Cinza','#738293']];
 const iconLabels={chair:'Cadeira',table:'Mesa',cabinet:'Armário',monitor:'Equipamento',inbox:'Caixa',tool:'Ferramentas',book:'Livro',package:'Bens diversos'};
 export default function AssetGroupsModule(props){

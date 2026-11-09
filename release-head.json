@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-teste-patrimonio-cabecalho-grupo",
-  "asset_revision": "app-beta-0-26-82-teste-patrimonio-cabecalho-grupo",
-  "generated_at": "2026-11-09T01:24:36Z",
+  "revision": "beta-0-26-82-teste-pendencias-patrimonio",
+  "asset_revision": "app-beta-0-26-82-teste-pendencias-patrimonio",
+  "generated_at": "2026-11-09T01:57:52Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "9ef6a72bb0e1a0781b3a186b3b69a83b5f592c7fddfe2da33980d802350f24ca",
+  "manifest_sha256": "cedf15a663ebbe943df7193e9677a16fa1ea080963b82990e9030a3a68e72053",
   "essential_count": 72,
-  "essential_bytes": 3365157,
-  "cache_name": "nexlab-app-teste-patrimonio-cabecalho-grupo-20261109T012436Z"
+  "essential_bytes": 3364630,
+  "cache_name": "nexlab-app-teste-beta-0-26-82-teste-pendencias-patrimonio-20261109T015752Z"
 }
