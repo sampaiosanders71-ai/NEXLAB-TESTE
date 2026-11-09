@@ -1,2 +1,2 @@
 /* NexLab — central de relatórios por módulo. */
-export {default} from "../nexlab-reports-module-v02682.js?v=app-beta-0-26-82-teste-patrimonio-codigo-manual";
+export {default} from "../nexlab-reports-module-v02682.js?v=app-beta-0-26-82-teste-patrimonio-contraste";
