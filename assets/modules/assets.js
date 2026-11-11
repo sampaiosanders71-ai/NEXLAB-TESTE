@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — Patrimônio por grupos. */
-export {default} from "../nexlab-asset-groups-v02682.js?v=app-beta-0-26-82-teste-patrimonio-pagina-detalhes";
+export {default} from "../nexlab-asset-groups-v02682.js?v=app-beta-0-26-82-teste-kanban-navegacao-colunas";
