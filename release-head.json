@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-teste-pendencias-patrimonio",
-  "asset_revision": "app-beta-0-26-82-teste-pendencias-patrimonio",
-  "generated_at": "2026-11-09T01:57:52Z",
+  "revision": "beta-0-26-82-teste-patrimonio-pagina-detalhes",
+  "asset_revision": "app-beta-0-26-82-teste-patrimonio-pagina-detalhes",
+  "generated_at": "2026-11-11T22:14:28Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "cedf15a663ebbe943df7193e9677a16fa1ea080963b82990e9030a3a68e72053",
+  "manifest_sha256": "2af27dbd59828c818595d1c0e0e23231396010ad90b2037054fd9bf0096cfd04",
   "essential_count": 72,
-  "essential_bytes": 3364630,
-  "cache_name": "nexlab-app-teste-beta-0-26-82-teste-pendencias-patrimonio-20261109T015752Z"
+  "essential_bytes": 3390501,
+  "cache_name": "nexlab-app-teste-beta-0-26-82-teste-patrimonio-pagina-detalhes-20261111T221428Z"
 }
