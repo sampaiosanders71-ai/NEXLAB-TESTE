@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: ProjectsModule. */
-export { ProjectsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-teste-kanban-navegacao-colunas";
+export { ProjectsModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-teste-modo-de-uso";

@@ -1,5 +1,5 @@
 /* NexLab — animação dos cards associada ao fluxo real de exportação. */
-import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-teste-kanban-navegacao-colunas';
+import {g as React} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-teste-modo-de-uso';
 const h=React.createElement;
 export function DownloadIcon({size=16,className=''}){
   return h('svg',{

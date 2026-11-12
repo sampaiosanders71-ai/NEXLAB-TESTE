@@ -1,11 +1,11 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
-const APP_REVISION='beta-0-26-82-teste-kanban-navegacao-colunas';
-const GENERATED_AT="2026-11-11T22:45:50Z";
-const ASSET_REVISION="app-beta-0-26-82-teste-kanban-navegacao-colunas";
-const CACHE_NAME="nexlab-app-teste-beta-0-26-82-teste-kanban-navegacao-colunas-20261111T224550Z";
+const APP_REVISION='beta-0-26-82-teste-modo-de-uso';
+const GENERATED_AT="2026-11-12T22:21:47Z";
+const ASSET_REVISION="app-beta-0-26-82-teste-modo-de-uso";
+const CACHE_NAME="nexlab-app-teste-beta-0-26-82-teste-modo-de-uso-20261112T222147Z";
 const GENERATION_KEY=GENERATED_AT.replace(/[^0-9A-Za-z]/g,'');
-const STAGING_CACHE_NAME="nxl-stage-teste-beta-0-26-82-teste-kanban-navegacao-colunas-20261111T224550Z";
+const STAGING_CACHE_NAME="nxl-stage-teste-beta-0-26-82-teste-modo-de-uso-20261112T222147Z";
 const META_CACHE_NAME='nexlab-update-meta';
 const CACHE_PREFIX='nexlab-';
 const PWA_ID='./nexlab-pwa';

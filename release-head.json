@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-teste-kanban-navegacao-colunas",
-  "asset_revision": "app-beta-0-26-82-teste-kanban-navegacao-colunas",
-  "generated_at": "2026-11-11T22:45:50Z",
+  "revision": "beta-0-26-82-teste-modo-de-uso",
+  "asset_revision": "app-beta-0-26-82-teste-modo-de-uso",
+  "generated_at": "2026-11-12T22:21:47Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "0fc2a807fd7f8742d3f3052dcd4317de3e31a4815fb8a26f76a0f564af110dda",
-  "essential_count": 72,
-  "essential_bytes": 3392766,
-  "cache_name": "nexlab-app-teste-beta-0-26-82-teste-kanban-navegacao-colunas-20261111T224550Z"
+  "manifest_sha256": "4549a7839cb136ac75541cacac629fd519b5013ae573345e5b6ed55deb682021",
+  "essential_count": 76,
+  "essential_bytes": 3470782,
+  "cache_name": "nexlab-app-teste-beta-0-26-82-teste-modo-de-uso-20261112T222147Z"
 }
