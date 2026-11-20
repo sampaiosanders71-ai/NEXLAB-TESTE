@@ -1,0 +1,17 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+const source=await readFile(new URL('../assets/nexlab-marketing-pending-v02682.js',import.meta.url),'utf8');
+const {normalizeMarketingPending,readMarketingPending}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const profile={id:'user-1',nome:'Pessoa',effective_permissions:['module_marketing']};
+const day='2026-11-20';
+const row=(id,status='Agendado',data='2026-11-19')=>({id:String(id),titulo:'Publicação '+id,status,data,responsavel_id:profile.id,descricao:'Descrição preservada'});
+function client(rows,error){const calls=[];return {calls,from(table){calls.push(table);let start=0,end=0,date='',excluded=[];const q={select(){return q},lt(_k,v){date=v;return q},not(_k,operator,v){assert.equal(operator,'in');excluded=JSON.parse('['+v.slice(1,-1)+']');return q},order(){return q},range(a,b){start=a;end=b;return q},then(resolve){const result=error?{error}:{data:rows.filter(x=>x.data<date&&!excluded.includes(x.status)).slice(start,end+1),error:null};return Promise.resolve(result).then(resolve);}};return q;}};}
+test('matches Marketing: only past dates in unfinished supported statuses; descriptions survive',()=>{const result=normalizeMarketingPending([row(1),row(2,'Publicado'),row(3,'Arquivado'),row(4,'Cancelado'),row(5,'Em revisão',day),row(6,'Agendado','2026-11-21'),row(7,'planejado'),row(8,'desconhecido'),row(9,'IDEIA'),row(10,'Em Produção'),row(11,'PLANEJADO')],profile,day);assert.deepEqual(result.map(x=>x.id),['marketing-1','marketing-7','marketing-9','marketing-10','marketing-11']);assert.equal(result[0].description,'Descrição preservada');assert.equal(result[0].metadata.isOverdue,true);assert.equal(result[0].ownerName,profile.nome);assert.equal(result[0].metadata.recordId,'1');});
+test('reads every page rather than dropping old records after the API row limit',async()=>{const db=client(Array.from({length:1001},(_,i)=>row(i)));const result=await readMarketingPending(db,profile,day);assert.equal(result.items.length,1001);assert.equal(db.calls.length,6);assert.equal(new Set(result.items.map(x=>x.id)).size,1001);});
+test('active mode without Marketing permission makes no query',async()=>{const db=client([row(1)]);const result=await readMarketingPending(db,{...profile,effective_permissions:[]},day);assert.equal(result.skipped,true);assert.deepEqual(result.items,[]);assert.equal(db.calls.length,0);});
+test('publishing a campaign removes that same record from subsequent pending reads',async()=>{const rows=[row(1),row(2)],db=client(rows);assert.equal((await readMarketingPending(db,profile,day)).items.length,2);rows[0].status='Publicado';assert.deepEqual((await readMarketingPending(db,profile,day)).items.map(x=>x.id),['marketing-2']);});
+test('source failures reject instead of inventing a zero pending count',async()=>{await assert.rejects(()=>readMarketingPending(client([],{message:'Sem conexão'}),profile,day),{message:'Sem conexão'});});
+test('discard a read invalidated by a mode/session change',async()=>{const db=client([row(1)]);let checked=0;const result=await readMarketingPending(db,profile,day,()=>++checked===1);assert.equal(result.skipped,true);assert.deepEqual(result.items,[]);});
+
+test('legacy case variants visible in Marketing are also queried by the Central',async()=>{const result=await readMarketingPending(client([row(1,'IDEIA'),row(2,'Em Produção'),row(3,'PLANEJADO')]),profile,day);assert.equal(result.items.length,3);});

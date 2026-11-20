@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-teste-modo-de-uso",
-  "asset_revision": "app-beta-0-26-82-teste-modo-de-uso",
-  "generated_at": "2026-11-12T22:21:47Z",
+  "revision": "beta-0-26-82-teste-resumos-pendencias",
+  "asset_revision": "app-beta-0-26-82-teste-resumos-pendencias",
+  "generated_at": "2026-11-20T23:22:12Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "4549a7839cb136ac75541cacac629fd519b5013ae573345e5b6ed55deb682021",
-  "essential_count": 76,
-  "essential_bytes": 3470782,
-  "cache_name": "nexlab-app-teste-beta-0-26-82-teste-modo-de-uso-20261112T222147Z"
+  "manifest_sha256": "106461d9269b0670a2db6940ffc542a495a1691e72c9155145804bb30bc584ed",
+  "essential_count": 78,
+  "essential_bytes": 3503871,
+  "cache_name": "nexlab-app-teste-beta-0-26-82-teste-resumos-pendencias-20261120T232212Z"
 }

@@ -1,4 +1,4 @@
-import {usageMode} from './nexlab-usage-mode-api-v02682.js?v=app-beta-0-26-82-teste-modo-de-uso';
+import {usageMode} from './nexlab-usage-mode-api-v02682.js?v=app-beta-0-26-82-teste-resumos-pendencias';
 (() => {
  const paths={user:'M20 21v-2a7 7 0 0 0-14 0v2M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0',switch:'M3 7h17m-4-4 4 4-4 4M21 17H4m4-4-4 4 4 4',exit:'M10 17l5-5-5-5M15 12H3M13 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6',down:'m6 9 6 6 6-6',close:'m6 6 12 12M6 18 18 6'};
  const icon=name=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+paths[name]+'"/></svg>';
