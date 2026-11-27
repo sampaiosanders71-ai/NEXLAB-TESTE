@@ -1,2 +1,2 @@
 /* NexLab — central de relatórios por módulo. */
-export {default} from "../nexlab-reports-module-v02682.js?v=app-beta-0-26-82-teste-resumos-pendencias";
+export {default} from "../nexlab-reports-module-v02682.js?v=app-beta-0-26-82-teste-correcao-auditoria-20261126";

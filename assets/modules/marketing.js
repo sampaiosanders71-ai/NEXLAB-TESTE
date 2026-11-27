@@ -1,2 +1,2 @@
 /* NEXLAB 0.26.82 — facade ESM: MarketingModule. */
-export { MarketingModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-teste-resumos-pendencias";
+export { MarketingModule as default } from "../nexlab-runtime-features.js?v=app-beta-0-26-82-teste-correcao-auditoria-20261126";

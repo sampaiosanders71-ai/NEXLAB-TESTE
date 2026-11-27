@@ -1,18 +1,18 @@
-import {reportModules,reportValue} from './nexlab-reports-schema-v02682.js?v=app-beta-0-26-82-teste-resumos-pendencias';
+import {reportModules,reportValue} from './nexlab-reports-schema-v02682.js?v=app-beta-0-26-82-teste-correcao-auditoria-20261126';
 const title=id=>reportModules.find(m=>m.id===id)?.title||id;
 const dateKey=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
 const slug=text=>String(text).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9]+/g,'_').toLowerCase();
 export async function exportModuleReport({packets,scope,format,period,profile,purpose,transfer,checkActive}){
- const libraries=await import('./nexlab-runtime-export.js?v=app-beta-0-26-82-teste-resumos-pendencias');
+ const libraries=await import('./nexlab-runtime-export.js?v=app-beta-0-26-82-teste-correcao-auditoria-20261126');
  checkActive();
  const reportTitle=scope==='geral'?'Relatório geral':title(scope),confidential=packets.some(p=>p.sheets.some(s=>s.confidential)),by=profile?.nome||'Usuário autorizado',at=new Date().toLocaleString('pt-BR'),file='nexlab_'+slug(reportTitle)+'_'+dateKey()+'.'+format;
  const note='Período aplicado a cadastros, agenda e publicações. Estoque e patrimônio refletem a posição atual; o período filtra suas movimentações. Publicações sem data permanecem incluídas.';
  if(format==='pdf'){
   const {jsPDF}=libraries.jsPDFModule,autoTable=libraries.autoTableModule.default,doc=new jsPDF({orientation:'landscape',format:'a4',unit:'mm'});
   const header=(module,section)=>{
-   doc.setFillColor(15,43,70);doc.rect(14,11,269,21,'F');doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(255,255,255);doc.text(doc.splitTextToSize(reportTitle+' | NexLab',255).slice(0,1),19,20);
+   const pageWidth=doc.internal.pageSize.getWidth();doc.setFillColor(15,43,70);doc.rect(14,11,pageWidth-28,21,'F');doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(255,255,255);doc.text(doc.splitTextToSize(reportTitle+' | NexLab',pageWidth-42).slice(0,1),19,20);
    doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(208,223,237);doc.text('Gerado por: '+by+' | '+at,19,27);
-   doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(19,51,80);doc.text(doc.splitTextToSize(module+' / '+section,266).slice(0,2),15,43);
+   doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(19,51,80);doc.text(doc.splitTextToSize(module+' / '+section,pageWidth-31).slice(0,2),15,43);
    doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(91,112,133);doc.text('Período: '+period,15,52);
    if(confidential){doc.setTextColor(164,69,18);doc.text('CONFIDENCIAL - dados pessoais autorizados. Finalidade: '+String(purpose||'').slice(0,110),15,58);}
   };
@@ -23,13 +23,24 @@ export async function exportModuleReport({packets,scope,format,period,profile,pu
    doc.setFontSize(8);doc.setTextColor(91,112,133);doc.text(doc.splitTextToSize(note,262),15,Math.min(180,(doc.lastAutoTable?.finalY||120)+12));used=true;
   }
   for(const packet of packets)for(const sheet of packet.sheets){
-   checkActive();if(used)doc.addPage();used=true;
+   checkActive();
+   if(sheet.layout==='records'&&sheet.rows.length){
+    for(const row of sheet.rows){
+     checkActive();if(used)doc.addPage('a4','portrait');used=true;
+     const record=[row.codigo_patrimonial,row.nome||row.bem].filter(Boolean).join(' - '),section=sheet.name+(record?' | '+record:'');
+     const rows=sheet.columns.filter(c=>row[c.key]!==null&&row[c.key]!==undefined&&row[c.key]!=='').map(c=>[c.label||c.key,reportValue(row[c.key])]);
+     header(title(packet.id),section);
+     autoTable(doc,{startY:66,head:[['Campo','Informação registrada']],body:rows,theme:'striped',headStyles:{fillColor:[19,51,80],textColor:255},styles:{fontSize:9,cellPadding:2.4,overflow:'linebreak',valign:'top'},columnStyles:{0:{cellWidth:51,fontStyle:'bold'}},rowPageBreak:'avoid',margin:{left:15,right:15,top:65,bottom:18},didDrawPage:()=>header(title(packet.id),section)});
+    }
+    continue;
+   }
+   if(used)doc.addPage('a4','landscape');used=true;
    header(title(packet.id),sheet.name);
-   if(sheet.rows.length)autoTable(doc,{startY:65,head:[sheet.columns.map(c=>c.label||c.key)],body:sheet.rows.map(r=>sheet.columns.map(c=>reportValue(r[c.key]))),theme:'striped',headStyles:{fillColor:[19,51,80],textColor:255,fontSize:8,halign:'left'},styles:{fontSize:7.8,cellPadding:2.1,overflow:'linebreak'},margin:{left:15,right:15,top:18,bottom:18}});
+   if(sheet.rows.length)autoTable(doc,{startY:65,head:[sheet.columns.map(c=>c.label||c.key)],body:sheet.rows.map(r=>sheet.columns.map(c=>reportValue(r[c.key]))),theme:'striped',headStyles:{fillColor:[19,51,80],textColor:255,fontSize:8,halign:'left'},styles:{fontSize:7.8,cellPadding:2.1,overflow:'linebreak'},margin:{left:15,right:15,top:65,bottom:18},didDrawPage:()=>header(title(packet.id),sheet.name)});
    else{doc.setFontSize(10);doc.setTextColor(100,116,139);doc.text('Nenhum registro disponível para esta seção no período selecionado.',15,73);}
-   if(packet.period_note){doc.setFontSize(7.5);doc.setTextColor(100,116,139);let noteY=(sheet.rows.length?doc.lastAutoTable?.finalY:80)||80;if(noteY>174){doc.addPage();header(title(packet.id),sheet.name);noteY=60;}doc.text(doc.splitTextToSize(packet.period_note,260),15,noteY+12);}
+   if(packet.period_note){doc.setFontSize(7.5);doc.setTextColor(100,116,139);let noteY=(sheet.rows.length?doc.lastAutoTable?.finalY:80)||80;if(noteY>doc.internal.pageSize.getHeight()-36){doc.addPage('a4','landscape');header(title(packet.id),sheet.name);noteY=60;}doc.text(doc.splitTextToSize(packet.period_note,260),15,noteY+12);}
   }
-  const pages=doc.getNumberOfPages();for(let p=1;p<=pages;p++){doc.setPage(p);doc.setFontSize(7.5);doc.setTextColor(120,135,150);doc.text('NexLab | '+(confidential?'Confidencial | ':'')+'Página '+p+' de '+pages,282,203,{align:'right'});}
+  const pages=doc.getNumberOfPages();for(let p=1;p<=pages;p++){doc.setPage(p);doc.setFontSize(7.5);doc.setTextColor(120,135,150);doc.text('NexLab | '+(confidential?'Confidencial | ':'')+'Página '+p+' de '+pages,doc.internal.pageSize.getWidth()-15,doc.internal.pageSize.getHeight()-7,{align:'right'});}
   checkActive();await transfer.pdfSave(doc,file);
  }else{
   const excel=libraries.excelModule.default,cell=value=>typeof value==='number'&&Number.isFinite(value)?{value,type:Number,format:Number.isInteger(value)?'#,##0':'#,##0.00'}:{value:String(reportValue(value)),type:String,wrap:true};

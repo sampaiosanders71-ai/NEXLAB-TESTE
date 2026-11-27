@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-teste-resumos-pendencias'});
+  const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({version:'0.26.82',revision:'beta-0-26-82-teste-correcao-auditoria-20261126'});
   if(globalThis.__NEXLAB_AUTH_SECURITY__?.revision===BUILD.revision)return;
 
   const CARD_ID='nexlab-auth-security-card';
@@ -56,8 +56,56 @@
     if(text.includes('same password')||text.includes('different from the old'))return 'A nova senha deve ser diferente da senha atual.';
     if(text.includes('weak')||text.includes('least')||text.includes('characters'))return 'A nova senha não atende aos requisitos de segurança.';
     if(text.includes('session')||text.includes('jwt')||text.includes('expired'))return 'Sua sessão expirou. Entre novamente e repita a alteração.';
+    if(text.includes('senha atual')||text.includes('muitas tentativas')||text.includes('verificar a senha'))return error.message;
     if(navigator.onLine===false)return 'Sem conexão com a internet. Reconecte e tente novamente.';
     return 'Não foi possível alterar a senha. Verifique os dados e tente novamente.';
+  }
+
+
+  let passwordChangeRunning=false;
+  async function changePasswordVerified(currentPassword,newPassword){
+    if(passwordChangeRunning)throw new Error('Uma alteração de senha já está em andamento.');
+    if(!currentPassword)throw new Error('Informe a senha atual.');
+    if(newPassword.length<8||newPassword===currentPassword)throw new Error('A nova senha deve ser diferente da atual e ter pelo menos 8 caracteres.');
+    const supabase=client(),config=globalThis.__NEXLAB_CONFIG__?.assert?.();
+    if(!supabase?.auth||!config)throw new Error('O serviço de autenticação ainda não está disponível.');
+    passwordChangeRunning=true;
+    let verificationToken='';
+    try{
+      const {data,error}=await supabase.auth.getUser();
+      if(error||!data?.user?.id||!data.user.email)throw error||new Error('session expired');
+      const originalId=data.user.id;
+      const session=await supabase.auth.getSession();
+      if(session.error||session.data?.session?.user?.id!==originalId)throw new Error('session changed');
+      const originalToken=session.data.session.access_token;
+      // Check the password with Auth in an isolated request. Do not replace
+      // the application's session, assurance level or active usage mode.
+      const response=await fetch(config.endpoints.auth+'/token?grant_type=password',{
+        method:'POST',cache:'no-store',credentials:'omit',
+        headers:{apikey:config.supabaseAnonKey,'Content-Type':'application/json'},
+        body:JSON.stringify({email:data.user.email,password:currentPassword}),
+        signal:AbortSignal.timeout(20000)
+      });
+      const verified=await response.json().catch(()=>({}));
+      if(!response.ok){
+        if(response.status===400||response.status===401)throw Object.assign(new Error('A senha atual está incorreta.'),{code:'invalid_credentials'});
+        throw new Error(response.status===429?'Muitas tentativas. Aguarde alguns minutos.':'Não foi possível verificar a senha atual. Tente novamente.');
+      }
+      verificationToken=verified.access_token||'';
+      if(!verificationToken||verified.user?.id!==originalId)throw new Error('Não foi possível confirmar a identidade da conta.');
+      const current=await supabase.auth.getUser();
+      if(current.error||current.data?.user?.id!==originalId)throw new Error('session changed');
+      const update=await fetch(config.endpoints.auth+'/user',{method:'PUT',cache:'no-store',credentials:'omit',headers:{apikey:config.supabaseAnonKey,Authorization:'Bearer '+originalToken,'Content-Type':'application/json'},body:JSON.stringify({password:newPassword}),signal:AbortSignal.timeout(20000)});
+      const updated=await update.json().catch(()=>({}));
+      if(!update.ok)throw new Error(updated.msg||updated.message||'Não foi possível atualizar a senha.');
+      if(updated.id!==originalId)throw new Error('Não foi possível confirmar a atualização da conta.');
+      let otherSessionsClosed=false;
+      try{const result=await fetch(config.endpoints.auth+'/logout?scope=others',{method:'POST',cache:'no-store',credentials:'omit',headers:{apikey:config.supabaseAnonKey,Authorization:'Bearer '+originalToken},signal:AbortSignal.timeout(10000)});otherSessionsClosed=result.ok;}catch{}
+      return {otherSessionsClosed};
+    }finally{
+      if(verificationToken)try{await fetch(config.endpoints.auth+'/logout?scope=local',{method:'POST',cache:'no-store',credentials:'omit',headers:{apikey:config.supabaseAnonKey,Authorization:'Bearer '+verificationToken},signal:AbortSignal.timeout(10000)});}catch{}
+      passwordChangeRunning=false;
+    }
   }
 
   function closeModal(value=false){
@@ -114,16 +162,7 @@
       if(!supabase?.auth?.updateUser)return setError('O serviço de autenticação ainda não está disponível.');
       setBusy(true);
       try{
-        const sessionResult=await supabase.auth.getSession();
-        if(sessionResult?.error)throw sessionResult.error;
-        if(!sessionResult?.data?.session)throw new Error('session expired');
-        const result=await supabase.auth.updateUser({password:newPassword,current_password:currentPassword});
-        if(result?.error)throw result.error;
-        let otherSessionsClosed=true;
-        try{
-          const signOutResult=await supabase.auth.signOut({scope:'others'});
-          if(signOutResult?.error)otherSessionsClosed=false;
-        }catch{otherSessionsClosed=false;}
+        const {otherSessionsClosed}=await changePasswordVerified(currentPassword,newPassword);
         closeModal(true);
         await showMessage(
           'Senha alterada',
@@ -182,6 +221,6 @@
     globalThis.addEventListener('nexlab:push-navigation',configureObservers);
     globalThis.addEventListener('popstate',configureObservers);
   }
-  globalThis.__NEXLAB_AUTH_SECURITY__=Object.freeze({version:BUILD.version,revision:BUILD.revision,openChangePassword});
+  globalThis.__NEXLAB_AUTH_SECURITY__=Object.freeze({version:BUILD.version,revision:BUILD.revision,openChangePassword,changePasswordVerified});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();

@@ -1,11 +1,11 @@
 const APP_VERSION='0.26.82';
 const APP_RELEASE='Beta';
-const APP_REVISION='beta-0-26-82-teste-resumos-pendencias';
-const GENERATED_AT="2026-11-20T23:22:12Z";
-const ASSET_REVISION="app-beta-0-26-82-teste-resumos-pendencias";
-const CACHE_NAME="nexlab-app-teste-beta-0-26-82-teste-resumos-pendencias-20261120T232212Z";
+const APP_REVISION='beta-0-26-82-teste-correcao-auditoria-20261126';
+const GENERATED_AT="2026-11-26T23:50:24Z";
+const ASSET_REVISION="app-beta-0-26-82-teste-correcao-auditoria-20261126";
+const CACHE_NAME="nexlab-app-teste-beta-0-26-82-teste-correcao-auditoria-20261126-20261126T235024Z";
 const GENERATION_KEY=GENERATED_AT.replace(/[^0-9A-Za-z]/g,'');
-const STAGING_CACHE_NAME="nxl-stage-teste-beta-0-26-82-teste-resumos-pendencias-20261120T232212Z";
+const STAGING_CACHE_NAME="nxl-stage-teste-beta-0-26-82-teste-correcao-auditoria-20261126-20261126T235024Z";
 const META_CACHE_NAME='nexlab-update-meta';
 const CACHE_PREFIX='nexlab-';
 const PWA_ID='./nexlab-pwa';
@@ -22,6 +22,21 @@ const ALLOWED_TABS=new Set(['dashboard','pendencias','agenda','notificacoes','pa
 const SCOPE_URL=new URL(self.registration.scope);
 const INDEX_URL=new URL('./index.html',self.registration.scope).href;
 const OFFLINE_URL=new URL('./offline.html',self.registration.scope).href;
+
+const PUSH_IDENTITY_CACHE='nxl-device-context-v1';
+const PUSH_IDENTITY_URL=new URL('./__push_identity__',self.registration.scope).href;
+async function pushIdentity(userId){
+ const cache=await caches.open(PUSH_IDENTITY_CACHE);
+ if(userId===undefined){const response=await cache.match(PUSH_IDENTITY_URL);return response?(await response.json()).userId:'';}
+ await cache.put(PUSH_IDENTITY_URL,new Response(JSON.stringify({userId:String(userId||'')}),{headers:{'Content-Type':'application/json'}}));
+}
+self.addEventListener('message',event=>{
+ if(event.data?.type!=='NEXLAB_PUSH_IDENTITY')return;
+ try{const url=new URL(event.source?.url||'');if(url.origin!==SCOPE_URL.origin||!url.pathname.startsWith(SCOPE_URL.pathname))return;}catch{return;}
+ const userId=String(event.data.userId||'');if(userId&&!/^[0-9a-f-]{36}$/i.test(userId))return;
+ event.waitUntil(pushIdentity(userId));
+});
+
 let installManifest=null;
 let activeAssetIndex=null;
 
@@ -171,13 +186,17 @@ self.addEventListener('push',(event)=>{
   const entityId=String(source.entityId||source.entity_id||'').trim().slice(0,100);
   const entityType=String(source.entityType||source.entity_type||'').trim().slice(0,80);
   const url=safePushDestination(source.url,targetTab,notificationId,entityId,entityType,'');
-  event.waitUntil(self.registration.showNotification(String(payload.title||'NEXLAB').slice(0,120),{
+  event.waitUntil((async()=>{
+    const recipient=String(source.recipientId||'');
+    if(recipient&&recipient!==await pushIdentity().catch(()=>''))return;
+    return self.registration.showNotification(String(payload.title||'NEXLAB').slice(0,120),{
     body:String(payload.body||'Você recebeu uma nova notificação.').slice(0,500),
     icon:'./icons/nexlab-192.png?v=brand-r50',
     badge:'./icons/nexlab-192.png?v=brand-r50',
     tag:String(payload.tag||`nexlab-${notificationId||Date.now()}`).slice(0,160),
     data:{url,targetTab,notificationId,entityId,entityType}
-  }));
+  });
+  })());
 });
 
 self.addEventListener('notificationclick',(event)=>{

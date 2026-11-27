@@ -1,7 +1,7 @@
-import {renderApprovedDashboard,unmountApprovedDashboard} from "./nexlab-profile-dashboard-feedback-v02682.js?v=app-beta-0-26-82-teste-resumos-pendencias";
-import {nexlabDateKey,nexlabAddCalendarDays,formatNexlabDate} from "./nexlab-calendar-date-v02682.js?v=app-beta-0-26-82-teste-resumos-pendencias";
+import {renderApprovedDashboard,unmountApprovedDashboard} from "./nexlab-profile-dashboard-feedback-v02682.js?v=app-beta-0-26-82-teste-correcao-auditoria-20261126";
+import {nexlabDateKey,nexlabAddCalendarDays,formatNexlabDate} from "./nexlab-calendar-date-v02682.js?v=app-beta-0-26-82-teste-correcao-auditoria-20261126";
 /* NEXLAB Beta 0.26.82 — Dashboard reconstruído do zero — face institucional. */
-import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-teste-resumos-pendencias";
+import { Ln as supabase } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-teste-correcao-auditoria-20261126";
 
 const HOST_ID = 'nexlab-dashboard-clean-v02682';
 const STYLE_ID = 'nexlab-dashboard-rebuild-style-v02682';
@@ -469,7 +469,7 @@ async function performLoad(token) {
     const [bundleResult,myDayResult,pendingResult]=await Promise.allSettled([
       supabase.rpc('nexlab_get_dashboard_bundle_v02656',{p_date_from:today,p_date_to:until}),
       supabase.rpc('nexlab_get_my_day_summary_v1',{p_horizon_days:7}),
-      supabase.rpc('nexlab_get_pending_center_v2703',{p_page:1,p_page_size:1})
+      Promise.resolve({data:{ok:true,metrics:{}}})
     ]);
     if(token!==loadingToken) return;
     const rpcData=(result,label)=>{if(result.status!=='fulfilled'||result.value?.error){errors.push(label);return null;}const data=result.value?.data;if(!data||typeof data!=='object'||Array.isArray(data)){errors.push(label);return null;}if(data.ok===false||data.partial===true||array(data.failures).length||array(data.warnings).length)errors.push(label);return data;};
@@ -478,11 +478,12 @@ async function performLoad(token) {
     const pending=rpcData(pendingResult,'pending');
     const sections=bundle?.sections||{}; const summary=bundle?.summary||{};
     const teams=array(sections.teams); const teamMembers=array(sections.team_members); const projects=array(sections.projects).length?array(sections.projects):array(summary.projects); const meetings=array(sections.meetings); const events=array(sections.events); const profiles=array(sections.profiles); const mural=array(sections.mural);
-    const pendingValue=pending?.metrics?.total;
+    const sharedPending=globalThis.__NEXLAB_PENDING_COUNT__;
+    const pendingValue=sharedPending?.userId===uid?sharedPending.count:null;
     const pendingValid=!!pending&&pending.ok!==false&&pending.partial!==true&&!array(pending.failures).length&&!array(pending.warnings).length&&(typeof pendingValue==='number'||typeof pendingValue==='string')&&String(pendingValue).trim()!==''&&Number.isSafeInteger(Number(pendingValue))&&Number(pendingValue)>=0;
     state.pendingTotal=pendingValid?Number(pendingValue):null;
     state.availability={teams:Array.isArray(sections.teams)&&Array.isArray(sections.team_members),projects:Array.isArray(sections.projects)||Array.isArray(summary.projects),meetings:Array.isArray(sections.meetings),events:Array.isArray(sections.events),myDay:!!myDayData&&myDay.ok!==false&&['tasks','meetings','approvals','overdue'].every(key=>myDay[key]!=null&&Number.isFinite(Number(myDay[key]))&&Number(myDay[key])>=0),pending:pendingValid,teamMetrics:!!summary.team_metrics&&typeof summary.team_metrics==='object'&&['active_count','unique_member_count','archived_count','without_projects_count'].every(key=>summary.team_metrics[key]!=null&&Number.isFinite(Number(summary.team_metrics[key])))};
-    for(const [section,available] of Object.entries(state.availability))if(!available)errors.push(section);
+    for(const [section,available] of Object.entries(state.availability))if(!available&&section!=='pending')errors.push(section);
     const myTeamIds=new Set(teamMembers.filter(member=>normId(member?.user_id)===uid).map(member=>normId(member?.team_id)).filter(Boolean));
     state.myTeams=teams.filter(team=>myTeamIds.has(normId(team?.id))&&!team?.archived_at);
     state.myProjects=projects.filter(project=>activeProject(project)&&userRelatedProject(project,uid,myTeamIds)).sort((a,b)=>(dateValue(b?.last_activity_at||b?.updated_at||b?.created_at)?.getTime()||0)-(dateValue(a?.last_activity_at||a?.updated_at||a?.created_at)?.getTime()||0));
@@ -532,6 +533,13 @@ function observeLifecycle(){
 function start(){if(!document.body)return;ensureStyle();if(!pageObserver){lastObservedPage=document.body.dataset.nexlabPage;pageObserver=new MutationObserver(()=>{const page=document.body.dataset.nexlabPage;if(page!==lastObservedPage){lastObservedPage=page;schedule(20);}});pageObserver.observe(document.body,{attributes:true,attributeFilter:['data-nexlab-page']});}observeLifecycle();privacyGateActive()?cleanup():schedule(60);}
 
 supabase.auth.onAuthStateChange?.((event,session)=>{if(event==='SIGNED_OUT'||event==='USER_UPDATED'||normId(session?.user?.id)!==state.uid){loadingToken++;currentLoad=null;resetAccountData();state.loading=true;const host=document.getElementById(HOST_ID);if(host&&dashboardAllowed())render(host);if(dashboardAllowed()){clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>void loadData(),60);}}});
+
+globalThis.addEventListener('nexlab:pending-count-changed',event=>{
+ const d=event?.detail;if(!d||d.userId!==state.uid)return;
+ state.pendingTotal=Number.isSafeInteger(d.count)&&d.count>=0?d.count:null;
+ state.availability.pending=state.pendingTotal!==null;
+ const host=document.getElementById(HOST_ID);if(host&&dashboardAllowed())render(host);
+});
 
 globalThis.addEventListener('nexlab:myday-updated',event=>{if(!dashboardAllowed()||!event?.detail)return;state.myDay={tasks:n(event.detail.tasks),meetings:n(event.detail.meetings),approvals:n(event.detail.approvals),overdue:n(event.detail.overdue)};const host=document.getElementById(HOST_ID);if(host)render(host);});
 globalThis.addEventListener('nexlab:network-status',()=>{if(dashboardAllowed())void loadData();});

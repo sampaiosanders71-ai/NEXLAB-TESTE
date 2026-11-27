@@ -1,7 +1,7 @@
-import { g as React, Ln as supabase, bt as Users, Fe as Network, ge as FolderKanban, Ve as Package, V as CalendarClock, ze as Megaphone, H as CalendarDays, K as CalendarRange, Ge as RefreshCw, J as ChartColumn, D as ArrowRight, wt as X } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-teste-resumos-pendencias";
-import { DownloadIcon, useReportDownload, reportMfaSetupRequired } from "./nexlab-report-download-v02682.js?v=app-beta-0-26-82-teste-resumos-pendencias";
-import { reportModules, fold, validPeriod, periodLabel, validatePacket, appendSensitiveUsers } from "./nexlab-reports-schema-v02682.js?v=app-beta-0-26-82-teste-resumos-pendencias";
-import { exportModuleReport } from "./nexlab-reports-export-v02682.js?v=app-beta-0-26-82-teste-resumos-pendencias";
+import { g as React, Ln as supabase, bt as Users, Fe as Network, ge as FolderKanban, Ve as Package, V as CalendarClock, ze as Megaphone, H as CalendarDays, K as CalendarRange, Ge as RefreshCw, J as ChartColumn, D as ArrowRight, wt as X } from "./nexlab-runtime-vendor.js?v=app-beta-0-26-82-teste-correcao-auditoria-20261126";
+import { DownloadIcon, useReportDownload, reportMfaSetupRequired } from "./nexlab-report-download-v02682.js?v=app-beta-0-26-82-teste-correcao-auditoria-20261126";
+import { reportModules, fold, validPeriod, periodLabel, validatePacket, appendSensitiveUsers } from "./nexlab-reports-schema-v02682.js?v=app-beta-0-26-82-teste-correcao-auditoria-20261126";
+import { exportModuleReport } from "./nexlab-reports-export-v02682.js?v=app-beta-0-26-82-teste-correcao-auditoria-20261126";
 const icons = { users: Users, network: Network, folder: FolderKanban, package: Package, calendar: CalendarClock, megaphone: Megaphone, events: CalendarDays };
 const num = (value) => new Intl.NumberFormat("pt-BR").format(value);
 const message = (error) => error?.code === "42501" ? error.message : error?.code === "NEXLAB_MFA_SETUP_REQUIRED" ? error.message : error?.name === "TimeoutError" ? "A consulta demorou mais que o esperado. Tente novamente." : "N\xE3o foi poss\xEDvel concluir a consulta. Tente novamente.";
@@ -48,7 +48,7 @@ export default function ReportsByModule({ profile, addToast = () => {
     const timer = setTimeout(async () => {
       deadline = setTimeout(() => controller.abort(new DOMException("Tempo de consulta excedido.", "TimeoutError")), 25e3);
       try {
-        const { data, error } = await supabase.rpc("nexlab_get_module_reports_v02682", { p_scope: "catalog", p_start: start || null, p_end: end || null }).abortSignal(controller.signal);
+        const { data, error } = await supabase.rpc("nexlab_get_module_reports_teste_v02682", { p_scope: "catalog", p_start: start || null, p_end: end || null }).abortSignal(controller.signal);
         if (error) throw error;
         if (!data?.ok || !Array.isArray(data.modules) || data.modules.length !== 7 || new Set(data.modules.map((m) => m.id)).size !== 7 || data.modules.some((m) => !reportModules.some((d) => d.id === m.id) || typeof m.authorized !== "boolean" || m.authorized && (!Number.isInteger(m.record_count) || m.record_count < 0 || !Array.isArray(m.sections)))) throw new Error("Cat\xE1logo de relat\xF3rios incompleto.");
         if (seq === loadSequence.current && !controller.signal.aborted) setCatalog(data);
@@ -142,7 +142,7 @@ export default function ReportsByModule({ profile, addToast = () => {
       checkActive();
       if (sensitive && !await ensureMfa()) return;
       checkActive();
-      const { data, error } = await supabase.rpc("nexlab_get_module_reports_v02682", { p_scope: scope, p_start: start || null, p_end: end || null }).abortSignal(controller.signal);
+      const { data, error } = await supabase.rpc("nexlab_get_module_reports_teste_v02682", { p_scope: scope, p_start: start || null, p_end: end || null }).abortSignal(controller.signal);
       if (error) throw error;
       checkActive();
       const packets = validatePacket(data, scope);

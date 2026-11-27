@@ -3,7 +3,7 @@
 
   const BUILD=globalThis.__NEXLAB_BUILD_IDENTITY__||Object.freeze({
     version:'0.26.82',
-    revision:'beta-0-26-82-teste-resumos-pendencias'
+    revision:'beta-0-26-82-teste-correcao-auditoria-20261126'
   });
   if(globalThis.__NEXLAB_PUSH_CONSENT__?.revision===BUILD.revision)return;
 
@@ -162,7 +162,7 @@
     if(!force&&lastSyncUserId===userId&&now-state.lastSyncAt<SYNC_MIN_INTERVAL_MS){state.skippedSyncs+=1;dispatch('nexlab:push-sync-skipped',{reason});return false;}
     globalThis.dispatchEvent(new CustomEvent('nexlab:push-permission-granted',{detail:{version:BUILD.version,revision:BUILD.revision,reason}}));
     const sync=globalThis.__NEXLAB_VAPID_ROTATION_BETA_0264__?.sync;
-    if(typeof sync==='function')await sync();
+    if(typeof sync!=='function'||await sync()!==true)throw new Error('Não foi possível confirmar a sincronização deste aparelho.');
     state.lastSyncAt=now;lastSyncUserId=userId||null;
     dispatch('nexlab:push-subscription-synced',{reason});
     return true;

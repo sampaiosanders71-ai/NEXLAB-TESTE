@@ -1,6 +1,6 @@
 /* NEXLAB — página de projeto e links externos. Usa o contrato existente de attachments. */
-import { g as React, Ln as supabase } from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-teste-resumos-pendencias';
-import {internalAttachmentPath,PrivateAttachmentLink} from './nexlab-attachment-access-v02682.js?v=app-beta-0-26-82-teste-resumos-pendencias';
+import { g as React, Ln as supabase } from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-teste-correcao-auditoria-20261126';
+import {internalAttachmentPath,PrivateAttachmentLink} from './nexlab-attachment-access-v02682.js?v=app-beta-0-26-82-teste-correcao-auditoria-20261126';
 
 const h=React.createElement;
 const PROJECT_PARAM='nexlabProject';

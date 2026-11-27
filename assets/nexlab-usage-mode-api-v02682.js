@@ -1,4 +1,4 @@
-import {Ln as supabase} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-teste-resumos-pendencias';
+import {Ln as supabase} from './nexlab-runtime-vendor.js?v=app-beta-0-26-82-teste-correcao-auditoria-20261126';
 const labels={admin:'Administrador',coordenador:'Coordenador',bolsista:'Bolsista',voluntario:'Voluntário',coworking_junior:'Coworking Júnior'};
 let current=null,updateProfile=null,choices=[],lastIdentity='',inFlight=false;
 function notify(){window.dispatchEvent(new CustomEvent('nexlab:usage-mode-changed'));}

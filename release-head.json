@@ -3,12 +3,12 @@
   "version": "0.26.82",
   "release": "Beta",
   "channel": "beta",
-  "revision": "beta-0-26-82-teste-resumos-pendencias",
-  "asset_revision": "app-beta-0-26-82-teste-resumos-pendencias",
-  "generated_at": "2026-11-20T23:22:12Z",
+  "revision": "beta-0-26-82-teste-correcao-auditoria-20261126",
+  "asset_revision": "app-beta-0-26-82-teste-correcao-auditoria-20261126",
+  "generated_at": "2026-11-26T23:50:24Z",
   "manifest": "release-manifest.json",
-  "manifest_sha256": "106461d9269b0670a2db6940ffc542a495a1691e72c9155145804bb30bc584ed",
+  "manifest_sha256": "19882b9931fcf697151ba69cfad16f05bc98fbe75d580be6a69211fc4fabd3a8",
   "essential_count": 78,
-  "essential_bytes": 3503871,
-  "cache_name": "nexlab-app-teste-beta-0-26-82-teste-resumos-pendencias-20261120T232212Z"
+  "essential_bytes": 3515293,
+  "cache_name": "nexlab-app-teste-beta-0-26-82-teste-correcao-auditoria-20261126-20261126T235024Z"
 }
